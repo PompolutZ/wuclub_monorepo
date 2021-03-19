@@ -39,6 +39,8 @@ export const setsIndex = [
     "arena-mortis", // 28
 
     "direchasm-core",
+    "khagras-ravagers", // 29
+    "the-starblood-stalkers", // 30
 ]
 
 export const setsNames = [
@@ -82,7 +84,8 @@ export const setsNames = [
     
     // DIRECHASM
     "Direchasm core set", // 29
-    "Khagra's Ravagers expansion", // 30
+    "Khagra's Ravagers expansion",
+    "The Starblood Stalkers expansion", // 30
 ]
 
 export const sets = {
@@ -269,7 +272,7 @@ export const factionIndexes = [
     "myaris-purifiers", // 27
     "dread-pageant", // 28
     "khagras-ravagers", // 29
-    // "starblood-stalkers", // 30
+    "the-starblood-stalkers", // 30
 ]
 
 export const factionIdPrefix = {
@@ -313,5 +316,5 @@ export const factionIdPrefix = {
     "myaris-purifiers": "mp",
     "dread-pageant": "dp",
     "khagras-ravagers": "kr", // 29
-    // "starblood-stalkers": "sts", // 30
+    "the-starblood-stalkers": "tss", // 30
 }
