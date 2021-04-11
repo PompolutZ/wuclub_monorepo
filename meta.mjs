@@ -41,6 +41,12 @@ export const setsIndex = [
     "direchasm-core",
     "khagras-ravagers", // 29
     "the-starblood-stalkers", // 30
+    "the-crimson-court", // 30
+    "orks", // 30
+    "death", // 30
+    "idoneth", // 30
+    "starter-set", // 30
+    "essential-cards-pack", // 30
 ]
 
 export const setsNames = [
@@ -86,6 +92,12 @@ export const setsNames = [
     "Direchasm core set", // 29
     "Khagra's Ravagers expansion",
     "The Starblood Stalkers expansion", // 30
+    "The Crimson Court expansion", // 30
+    "Orks", // 30
+    "Death", // 30
+    "Idoneth", // 30
+    "Starter Set", // 30
+    "Essential Cards Pack",
 ]
 
 export const sets = {
@@ -273,6 +285,12 @@ export const factionIndexes = [
     "dread-pageant", // 28
     "khagras-ravagers", // 29
     "the-starblood-stalkers", // 30
+    "the-crimson-court", // 30
+    "orks", // 30
+    "death", // 30
+    "idoneth", // 30
+    "storm-of-celestus", // 30
+    "storm-of-celestus", // 30
 ]
 
 export const factionIdPrefix = {
@@ -317,4 +335,5 @@ export const factionIdPrefix = {
     "dread-pageant": "dp",
     "khagras-ravagers": "kr", // 29
     "the-starblood-stalkers": "tss", // 30
+    "the-crimson-court": "tcc", // 30
 }

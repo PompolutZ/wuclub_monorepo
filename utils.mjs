@@ -52,7 +52,13 @@ export const getFaction = text => {
         case "Myari's Purifiers": return 27;
         case "The Dread Pageant": return 28;
         case "Khagra's Ravagers": return 29;
-        case "Starblood Stalkers": return 30;
+        case "The Starblood Stalkers": return 30;
+        case "The Crimson Court": return 31;
+        case "orks": return 31;
+        case "death": return 32;
+        case "idoneth": return 33;
+        case "Storm of Celestus": return 34;
+        case "Drepur's Wraithcreepers": return 35;
         default: return -1;
     }
 }
@@ -66,6 +72,8 @@ export const decodeUDB = card => {
     if(card.toUpperCase().startsWith('B')) return 6000 + Number(card.slice(1));
     if(card.toUpperCase().startsWith('G')) return 7000 + Number(card.slice(1));
     if(card.toUpperCase().startsWith('A')) return 8000 + Number(card.slice(1));
+    if(card.toUpperCase().startsWith('S')) return 10000 + Number(card.slice(1));
+    if(card.toUpperCase().startsWith('E')) return 11000 + Number(card.slice(1));
     return 1000 + Number(card);
 }
 

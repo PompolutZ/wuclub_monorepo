@@ -14,7 +14,7 @@ let parsed;
 if(hasClubFlag) {
     parsed = parseAsClub(tsvFile);
     let data = "export const cardsDb = " + JSON.stringify(parsed, null, 4);
-    writeFileSync(new URL('cardsDb.js', import.meta.url), data);
+    writeFileSync(new URL('dist/cardsDb.js', import.meta.url), data);
 } else {
     const { sets, factions, cards } = parse(tsvFile)
     let setsStr = serialize(sets, "sets");
