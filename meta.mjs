@@ -42,8 +42,8 @@ export const setsIndex = [
     "khagras-ravagers", // 29
     "the-starblood-stalkers", // 30
     "the-crimson-court", // 30
-    "orks", // 30
-    "death", // 30
+    "hedkrakkas-madmob", // 32
+    "kainans-reapers", // 
     "idoneth", // 30
     "starter-set", // 30
     "essential-cards-pack", // 30
@@ -93,8 +93,8 @@ export const setsNames = [
     "Khagra's Ravagers expansion",
     "The Starblood Stalkers expansion", // 30
     "The Crimson Court expansion", // 30
-    "Orks", // 30
-    "Death", // 30
+    "Hedkrakka's Madmob", // 32
+    "Kainan's Reapers", // 
     "Idoneth", // 30
     "Starter Set", // 30
     "Essential Cards Pack",
@@ -285,12 +285,12 @@ export const factionIndexes = [
     "dread-pageant", // 28
     "khagras-ravagers", // 29
     "the-starblood-stalkers", // 30
-    "the-crimson-court", // 30
-    "orks", // 30
-    "death", // 30
+    "the-crimson-court", // 31
+    "hedkrakkas-madmob", // 32
+    "kainans-reapers", // 
     "idoneth", // 30
     "storm-of-celestus", // 30
-    "storm-of-celestus", // 30
+    "drepurs-wraithcreepers", // 30
 ]
 
 export const factionIdPrefix = {
@@ -336,4 +336,8 @@ export const factionIdPrefix = {
     "khagras-ravagers": "kr", // 29
     "the-starblood-stalkers": "tss", // 30
     "the-crimson-court": "tcc", // 30
+    "storm-of-celestus": "soc", // 30
+    "drepurs-wraithcreepers": "dw", // 30
+    "hedkrakkas-madmob": "hem", // 32
+    "kainans-reapers": "kar", // 
 }

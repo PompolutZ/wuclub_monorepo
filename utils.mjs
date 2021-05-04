@@ -54,11 +54,11 @@ export const getFaction = text => {
         case "Khagra's Ravagers": return 29;
         case "The Starblood Stalkers": return 30;
         case "The Crimson Court": return 31;
-        case "orks": return 31;
-        case "death": return 32;
-        case "idoneth": return 33;
-        case "Storm of Celestus": return 34;
-        case "Drepur's Wraithcreepers": return 35;
+        case "Hedkrakka's Madmob": return 32;
+        case "Kainan's Reapers": return 33;
+        case "idoneth": return 34;
+        case "Storm of Celestus": return 35;
+        case "Drepur's Wraithcreepers": return 36;
         default: return -1;
     }
 }
