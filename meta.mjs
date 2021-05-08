@@ -47,6 +47,7 @@ export const setsIndex = [
     "idoneth", // 30
     "starter-set", // 30
     "essential-cards-pack", // 30
+    "silent-menace-universal-deck",
 ]
 
 export const setsNames = [
@@ -93,155 +94,13 @@ export const setsNames = [
     "Khagra's Ravagers expansion",
     "The Starblood Stalkers expansion", // 30
     "The Crimson Court expansion", // 30
-    "Hedkrakka's Madmob", // 32
-    "Kainan's Reapers", // 
+    "Hedkrakka's Madmob expansion", // 32
+    "Kainan's Reapers expansion", // 
     "Idoneth", // 30
     "Starter Set", // 30
     "Essential Cards Pack",
+    "Silent Menace Universal Deck expansion",
 ]
-
-export const sets = {
-    "Core set": {
-        "id": 1,
-        "name": "shadespire-core",
-        "displayName": "Core set"
-    },
-    "Sepulchral Guard expansion": {
-        "id": 2,
-        "name": "sepulchral-guard",
-        "displayName": "Sepulchral Guard expansion"
-    },
-    "Ironskull's Boyz expansion": {
-        "id": 3,
-        "name": "ironskulls-boyz",
-        "displayName": "Ironskull's Boyz expansion"
-    },
-    "The Chosen Axes expansion": {
-        "id": 4,
-        "name": "the-chosen-axes",
-        "displayName": "The Chosen Axes expansion"
-    },
-    "Spiteclaw's Swarm expansion": {
-        "id": 5,
-        "name": "spiteclaws-swarm",
-        "displayName": "Spiteclaw's Swarm expansion"
-    },
-    "Magore's Fiends expansion": {
-        "id": 6,
-        "name": "magores-fiends",
-        "displayName": "Magore's Fiends expansion"
-    },
-    "The Farstriders expansion": {
-        "id": 7,
-        "name": "the-farstriders",
-        "displayName": "The Farstriders expansion"
-    },
-    "Leaders": {
-        "id": 8,
-        "name": "leaders",
-        "displayName": "Leaders"
-    },
-    "Nightvault core set": {
-        "id": 9,
-        "name": "nightvault-core",
-        "displayName": "Nightvault core set"
-    },
-    "The Eyes of the Nine expansion": {
-        "id": 10,
-        "name": "the-eyes-of-the-nine",
-        "displayName": "The Eyes of the Nine expansion"
-    },
-    "Zarbag's Gitz expansion": {
-        "id": 11,
-        "name": "zarbags-gitz",
-        "displayName": "Zarbag's Gitz expansion"
-    },
-    "Garrek's Reavers expansion": {
-        "id": 12,
-        "name": "garreks-reavers",
-        "displayName": "Garrek's Reavers expansion"
-    },
-    "Steelheart's Champions expansion": {
-        "id": 13,
-        "name": "steelhearts-champions",
-        "displayName": "Steelheart's Champions expansion"
-    },
-    "Godsworn Hunt expansion": {
-        "id": 15,
-        "name": "godsworn-hunt",
-        "displayName": "Godsworn Hunt expansion"
-    },
-    "Mollog's Mob expansion": {
-        "id": 16,
-        "name": "mollogs-mob",
-        "displayName": "Mollog's Mob expansion"
-    },
-    "Thundrik's Profiteers expansion": {
-        "id": 17,
-        "name": "thundriks-profiteers",
-        "displayName": "Thundrik's Profiteers expansion"
-    },
-    "Ylthari's Guardians expansion": {
-        "id": 18,
-        "name": "yltharis-guardians",
-        "displayName": "Ylthari's Guardians expansion"
-    },
-    "Power Unbound": {
-        "id": 19,
-        "name": "powers-unbound",
-        "displayName": "Power Unbound"
-    },
-    "Dreadfane": {
-        "id": 20,
-        "name": "dreadfane",
-        "displayName": "Dreadfane"
-    },
-    "Beastgrave core set": {
-        "id": 21,
-        "name": "beastgrave-core",
-        "displayName": "Beastgrave core set"
-    },
-    "The Grymwatch expansion": {
-        "id": 22,
-        "name": "the-grymwatch",
-        "displayName": "The Grymwatch expansion"
-    },
-    "Rippa's Snarlfangs expansion": {
-        "id": 23,
-        "name": "rippas-snarlfangs",
-        "displayName": "Rippa's Snarlfangs expansion"
-    },
-    "The Wurmspat expansion": {
-        "id": 24,
-        "name": "beastgrave-gift-pack",
-        "displayName": "The Wurmspat expansion"
-    },
-    "Hrothgorn's Mantrappers expansion": {
-        "id": 25,
-        "name": "hrothgorns-mantrappers",
-        "displayName": "Hrothgorn's Mantrappers expansion"
-    },
-    "Morgwaeth's Blade Coven expansion": {
-        "id": 26,
-        "name": "the-wurmspat",
-        "displayName": "Morgwaeth's Blade Coven expansion"
-    },
-    "Morgok's Krushas expansion": {
-        "id": 27,
-        "name": "morgwaeths-blade-coven",
-        "displayName": "Morgok's Krushas expansion"
-    },
-    "Beastgrave Gift Pack expansion": {
-        "id": 28,
-        "name": "morgoks-krushas",
-        "displayName": "Beastgrave Gift Pack expansion"
-    },
-    "Arena Mortis expansion": {
-        "id": 29,
-        "name": "arena-mortis",
-        "displayName": "Arena Mortis expansion"
-    }
-}
 
 export const factionIndexes = [
     "universal",

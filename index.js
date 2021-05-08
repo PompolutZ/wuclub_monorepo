@@ -5,18 +5,44 @@ import { getFaction, findDuplicatesByName, decodeUDB } from './utils.mjs';
 
 
 const [,,fileName] = process.argv;
+console.log(fileName);
 const hasClubFlag = process.argv?.includes("--club");
-const tsvFile = readFileSync(new URL(fileName, import.meta.url), "utf-8");
+const fileNames = fileName.split(',');
+
+//const tsvFile = readFileSync(new URL(fileName, import.meta.url), "utf-8");
 
 const toLines = str => str.split('\n');
 
 let parsed;
 if(hasClubFlag) {
-    parsed = parseAsClub(tsvFile);
-    let data = "export const cardsDb = " + JSON.stringify(parsed, null, 4);
-    writeFileSync(new URL('dist/cardsDb.js', import.meta.url), data);
+    // parsed = parseAsClub(tsvFile);
+    // let data = "export const cardsDb = " + JSON.stringify(parsed, null, 4);
+    // writeFileSync(new URL('dist/cardsDb.js', import.meta.url), data);
 } else {
-    const { sets, factions, cards } = parse(tsvFile)
+    let sets = {};
+    let factions = {};
+    let cards = {};
+    
+    fileNames.forEach(fileName => {
+        const tsvFile = readFileSync(new URL(fileName, import.meta.url), "utf-8");
+        const parsed = parse(tsvFile);
+        sets = {
+            ...sets,
+            ...parsed.sets,
+        }
+
+        factions = {
+            ...factions,
+            ...parsed.factions,
+        }
+
+        cards = {
+            ...cards,
+            ...parsed.cards,
+        }
+
+    })
+    // const { sets, factions, cards } = parse(tsvFile)
     let setsStr = serialize(sets, "sets");
     let factionsStr = serialize(factions, "factions");
     let cardsStr = serialize(cards, "cards");
@@ -91,7 +117,7 @@ function parse(text) {
     }
 
     return toLines(text).slice(1).map(line => line.split('\t')).reduce(
-        (acc, [release,,number,,,,,name,faction,type,glory,description,,otype,,set,status, OP,,F,R,FR,rotated, ...rest], i) => {
+        (acc, [release,,number,,,,,name,faction,type,glory,description,,otype,,set,status,OP,,F,R,FR,rotated, ...rest], i) => {
             console.log("Parsing line > ", i);
             if(name == '-') return acc;
             // populate sets table
