@@ -99,7 +99,7 @@ export const setsNames = [
     "Idoneth", // 30
     "Starter Set", // 30
     "Essential Cards Pack",
-    "Silent Menace Universal Deck expansion",
+    "Silent Menace Universal Deck",
 ]
 
 export const factionIndexes = [
