@@ -15,9 +15,10 @@ const toLines = str => str.split('\n');
 
 let parsed;
 if(hasClubFlag) {
-    // parsed = parseAsClub(tsvFile);
-    // let data = "export const cardsDb = " + JSON.stringify(parsed, null, 4);
-    // writeFileSync(new URL('dist/cardsDb.js', import.meta.url), data);
+    const tsvFile = readFileSync(new URL(fileNames[0], import.meta.url), "utf-8");
+    parsed = parseAsClub(tsvFile);
+    let data = "export const cardsDb = " + JSON.stringify(parsed, null, 4);
+    writeFileSync(new URL('dist/cardsDb.js', import.meta.url), data);
 } else {
     let sets = {};
     let factions = {};
