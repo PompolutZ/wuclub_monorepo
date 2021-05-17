@@ -47,7 +47,21 @@ if(hasClubFlag) {
     let setsStr = serialize(sets, "sets");
     let factionsStr = serialize(factions, "factions");
     let cardsStr = serialize(cards, "cards");
-    const cardsWithOldIds = Object.entries(cards).reduce((acc, [k, v]) => ({ ...acc, [k.padStart(5, "0")]: v }), {})
+    const cardsWithOldIds = Object.entries(cards).reduce((acc, [k, { factionId, rule, ...rest}]) => {
+        const primacy = rule.toUpperCase().includes("PRIMACY");
+        const faction = Object.values(factions).find(f => f.id === factionId).name;
+        const oldFormatId = k.padStart(5, "0");
+        return {
+            ...acc,
+            [oldFormatId]: {
+                ...rest,
+                factionId,
+                rule,
+                primacy,
+                faction,
+            }
+        }
+    }, {})
     let cardsClub = serialize(cardsWithOldIds, "cardsDb");
     writeFileSync(new URL('dist/wudb.js', import.meta.url), `${setsStr}\n${factionsStr}\n${cardsStr}\n`);
     writeFileSync(new URL('dist/cardsDb.js', import.meta.url), cardsClub);
