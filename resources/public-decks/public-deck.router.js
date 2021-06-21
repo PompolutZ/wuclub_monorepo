@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { getAllPublicDecks } from "./public-deck.controller.js";
+import { getAllPublicDecks, getPublicDecksStats } from "./public-deck.controller.js";
 
 const router = Router();
 
 router.get('/', getAllPublicDecks);
+router.get('/stats', getPublicDecksStats);
 
 export default router;

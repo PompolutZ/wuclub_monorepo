@@ -3,7 +3,6 @@ import express, { json, urlencoded } from "express";
 import cors from "cors";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
-
 import publicDecksRouter from "./resources/public-decks/public-deck.router.js";
 
 config();

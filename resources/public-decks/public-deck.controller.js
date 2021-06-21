@@ -5,7 +5,6 @@ export async function getAllPublicDecks(req, res) {
   let cursor;
   try {
     connection = await connect();
-    console.log(connection);
     cursor = await connection
       .db(DATABASE_NAME)
       .collection(DECKS)
@@ -21,4 +20,22 @@ export async function getAllPublicDecks(req, res) {
   }
 }
 
-export function getPublicDecksStats() {}
+export async function getPublicDecksStats(req, res) {
+    let connection; 
+    try {
+        connection = await connect();
+        const payload = await connection
+            .db(DATABASE_NAME)
+            .collection(DECKS)
+            .aggregate([
+                { $match: { private: false } },
+                { $group: { _id: '$faction', count: { $sum: 1 }} },
+            ]).toArray();
+            
+        return res.status(200).json(payload);
+    } catch (e) {
+        console.error(e);
+    } finally {
+        connection.close();
+    }
+}
