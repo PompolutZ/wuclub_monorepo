@@ -1,16 +1,24 @@
-const dotenv = require("dotenv");
-const express = require("express");
-const cors = require("cors");
+import { config } from "dotenv";
+import express, { json, urlencoded } from "express";
+import cors from "cors";
+import logger from "morgan";
+import cookieParser from "cookie-parser";
 
-dotenv.config();
+import publicDecksRouter from "./resources/public-decks/public-deck.router.js";
+
+config();
 
 const app = express();
 const port = process.env.PORT;
 
-app.use(cors());
+app.disable('x-powered-by');
 
-app.get('/', (req, res) => {
-	res.send('Hello World, Again!');
-});
+app.use(cors());
+app.use(logger("dev"));
+app.use(json());
+app.use(urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use('/api/v1/public-decks', publicDecksRouter);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}`));
