@@ -66,3 +66,27 @@ export async function createDeck(req, res) {
     console.error(e);
   }
 }
+
+export async function updateDeck(req, res) {
+  try {
+    const deckId = validateDeckId(req.params.id);
+    if (!deckId) {
+      return res.status(400).send("Deck missing id.");
+    }
+
+    const now = new Date();
+
+    const deckToUpload = {
+      name: sanitizeString(req.body.name),
+      deck: sanitizeNumbersArray(req.body.deck),
+      private: Boolean(req.body.private),
+      sets: sanitizeNumbersArray(req.body.sets),
+      updatedutc: now.getTime(),
+    };
+
+    const result = await decks().findOneAndUpdate({ fuid: req.firebaseUID, deckId }, { $set: deckToUpload }, { projection: { _id: 0, fuid: 0 }})
+    return res.send(result.value);
+  } catch (e) {
+    console.error(e);
+  }
+}

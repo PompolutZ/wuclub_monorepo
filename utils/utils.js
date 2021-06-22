@@ -2,7 +2,7 @@ export function sanitizeString(str) {
     if (typeof str !== 'string') return null;
 
     return str.split('').reduce((acc, char) => {
-        return [...acc, char === '-' ? char : char.replace(/[^\w]/, '')]
+        return [...acc, char === '-' || char === ' ' ? char : char.replace(/\{|\}|\$|\:|\n/, '')]
     }, []).join('');
 }
 
