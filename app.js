@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 
 import publicDecksRouter from "./resources/public-decks/public-deck.router.js";
 import decksRouter from "./resources/decks/deck.router.js";
+import userDecksRouter from "./resources/user-decks/user-decks.router.js";
 import { initializeFirebase } from "./middleware/firebase/fbadmin.js";
 import { connect } from "./utils/db.js";
 
@@ -28,6 +29,7 @@ async function init() {
     await connect();
     app.use("/api/v1/public-decks", publicDecksRouter);
     app.use("/api/v1/decks", decksRouter);
+    app.use("/api/v1/user-decks", userDecksRouter);
 
     app.listen(port, () => console.log(`Example app listening on port ${port}`));
 }
