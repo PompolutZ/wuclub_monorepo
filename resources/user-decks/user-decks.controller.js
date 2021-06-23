@@ -90,3 +90,17 @@ export async function updateDeck(req, res) {
     console.error(e);
   }
 }
+
+export async function deleteDeck(req, res) {
+  try {
+    const deckId = validateDeckId(req.params.id);
+    if (!deckId) {
+      return res.status(400).send("Deck missing id.");
+    }
+
+    const result = await decks().deleteOne({ fuid: req.firebaseUID, deckId });
+    return res.status(204).send(result);
+  } catch (e) {
+    console.error(e);
+  }
+}
