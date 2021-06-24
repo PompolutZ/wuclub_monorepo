@@ -3,7 +3,7 @@ import { getAllPublicDecks, getPublicDecksStats } from "./public-deck.controller
 
 const router = Router();
 
-router.get('/', getAllPublicDecks);
+router.post('/', getAllPublicDecks);
 router.get('/stats', getPublicDecksStats);
 
 export default router;
