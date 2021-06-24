@@ -34,8 +34,3 @@ export async function getPrivateDeckById(req, res) {
         console.error(e);
     }
 }
-
-export async function createDeck(req, res) {
-    console.log('Before post', req);
-    return res.send('Ok');
-}

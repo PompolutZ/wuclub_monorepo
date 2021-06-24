@@ -22,7 +22,6 @@ export async function verifyFirebaseToken(req, res, next) {
         if (req.headers.authtoken) {
             const decoded = await admin.auth().verifyIdToken(req.headers.authtoken);
             if (decoded && decoded.uid) {
-                console.log(decoded.uid);
                 req.firebaseUID = decoded.uid;
                 next();
             } else {
