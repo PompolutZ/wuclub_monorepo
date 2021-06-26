@@ -1,4 +1,4 @@
-import { card_ratings } from "../../utils/db.js";
+import { card_ratings, users } from "../../utils/db.js";
 import { sanitizeString } from "../../utils/utils.js";
 
 export async function getAllRatings(req, res) {
@@ -28,4 +28,18 @@ export async function getRatingsForSingleFaction(req, res) {
   }
 
   return res.json(payload);
+}
+
+export async function updateRatingsForSingleFaction(req, res) {
+  const faction = sanitizeString(req.params.faction);
+
+  const admins = await users().find({ fuid: req.firebaseUID, role: "ADMIN" }).toArray();
+  if (admins.length === 0) {
+    return res.status(403).send('You cannot perform requested operation.');
+  }
+
+  const success = await card_ratings().updateOne({ faction }, { $set: req.body });
+  console.log(success);
+  
+  return res.send('OK');
 }
