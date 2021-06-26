@@ -5,7 +5,35 @@ import { validateDeckId } from "../../utils/validator.js";
 export async function getAllDecks(req, res) {
   try {
     const payload = await decks()
-      .find({ fuid: req.firebaseUID }, { projection: { _id: 0 } })
+      .aggregate([
+        {
+          $match: {
+            fuid: req.firebaseUID,
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "fuid",
+            foreignField: "fuid",
+            as: "userInfo",
+          },
+        },
+        {
+          $sort: {
+            updatedutc: -1,
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            fuid: 0,
+            "userInfo._id": 0,
+            "userInfo.role": 0,
+            "userInfo.fuid": 0,
+          },
+        },
+      ])
       .toArray();
     return res.json(payload);
   } catch (e) {
@@ -53,14 +81,20 @@ export async function createDeck(req, res) {
     const result = await decks().insertOne(deckToUpload);
     const [payload] = result.ops;
     if (payload) {
-        const {
-            deckId, deck, faction, name, sets, createdutc, updatedutc
-        } = payload;
-        return res.status(201).send({
-            deckId, deck, faction, name, sets, createdutc, updatedutc, private: payload.private,
-        });
+      const { deckId, deck, faction, name, sets, createdutc, updatedutc } =
+        payload;
+      return res.status(201).send({
+        deckId,
+        deck,
+        faction,
+        name,
+        sets,
+        createdutc,
+        updatedutc,
+        private: payload.private,
+      });
     } else {
-        return res.status(500).send('Cannot create deck.')
+      return res.status(500).send("Cannot create deck.");
     }
   } catch (e) {
     console.error(e);
@@ -84,7 +118,11 @@ export async function updateDeck(req, res) {
       updatedutc: now.getTime(),
     };
 
-    const result = await decks().findOneAndUpdate({ fuid: req.firebaseUID, deckId }, { $set: deckToUpload }, { projection: { _id: 0, fuid: 0 }})
+    const result = await decks().findOneAndUpdate(
+      { fuid: req.firebaseUID, deckId },
+      { $set: deckToUpload },
+      { projection: { _id: 0, fuid: 0 } }
+    );
     return res.send(result.value);
   } catch (e) {
     console.error(e);
