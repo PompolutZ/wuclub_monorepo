@@ -1,21 +1,87 @@
 import { decks } from "../../utils/db.js";
 import { sanitizeString } from "../../utils/utils.js";
 
+function buildPipeline({ faction, skip, limit } = {}) {
+  const pipe = [];
+
+  if (faction) {
+    pipe.push({
+      $match: {
+        private: false,
+        faction,
+      },
+    });
+  } else {
+    pipe.push({
+      $match: {
+        private: false,
+      },
+    });
+  }
+
+  pipe.push({
+    $sort: { updatedutc: -1 },
+  });
+
+  if (skip) {
+    pipe.push({
+      $skip: skip,
+    });
+  } else {
+    pipe.push({
+      $skip: 0,
+    });
+  }
+
+  if (limit) {
+    pipe.push({
+      $limit: limit,
+    });
+  } else {
+    pipe.push({
+      $limit: 30,
+    });
+  }
+
+  pipe.push({
+    $lookup: {
+      from: "users",
+      localField: "fuid",
+      foreignField: "fuid",
+      as: "userInfo",
+    },
+  });
+
+  pipe.push({
+    $project: {
+      _id: 0,
+      fuid: 0,
+      "userInfo._id": 0,
+      "userInfo.role": 0,
+      "userInfo.fuid": 0,
+    },
+  });
+
+  return pipe;
+}
+
 export async function getAllPublicDecks(req, res) {
   let cursor;
   try {
     let { faction } = req.body;
     console.log(faction, req.body);
     if (faction) {
-      cursor = decks().find(
-        { private: false, faction: sanitizeString(faction) },
-        { projection: { _id: 0, fuid: 0, private: 0 } }
-      ).sort({ updatedutc: -1 });
+      cursor = decks().aggregate(
+        buildPipeline({ faction: sanitizeString(faction) })
+      );
     } else {
-      cursor = decks().find(
-        { private: false },
-        { projection: { _id: 0, fuid: 0, private: 0 } }
-      ).sort({ updatedutc: -1 }).skip(30).limit(30);
+      let { skip, limit } = req.body;
+      const pipeline = buildPipeline({
+        skip: Number(skip),
+        limit: Number(limit),
+      });
+      console.log(pipeline);
+      cursor = decks().aggregate(pipeline);
     }
 
     const payload = await cursor.toArray();
