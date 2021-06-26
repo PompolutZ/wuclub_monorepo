@@ -3,6 +3,8 @@ const MongoClient = mongodb.MongoClient;
 
 export const DATABASE_NAME = "wunderworldsdb";
 export const DECKS = "decks";
+export const USERS = "users";
+export const CARD_RATINGS = "card_ratings";
 
 let connection;
 
@@ -24,6 +26,16 @@ const decks = () => {
     return connection.db(DATABASE_NAME).collection(DECKS);
 }
 
+const users = () => {
+    return connection.db(DATABASE_NAME).collection(USERS);
+}
+
+const card_ratings = () => {
+    return connection.db(DATABASE_NAME).collection(CARD_RATINGS);
+}
+
 export {
     decks,
+    users,
+    card_ratings,
 }
