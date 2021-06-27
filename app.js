@@ -8,6 +8,8 @@ import publicDecksRouter from "./resources/public-decks/public-deck.router.js";
 import decksRouter from "./resources/decks/deck.router.js";
 import userDecksRouter from "./resources/user-decks/user-decks.router.js";
 import cardRatingsRouter from "./resources/cards-ratings/cards-ratings.router.js";
+import userRouter from "./resources/users/user.router.js";
+
 import { initializeFirebase } from "./middleware/firebase/fbadmin.js";
 import { connect } from "./utils/db.js";
 
@@ -32,6 +34,7 @@ async function init() {
     app.use("/api/v1/decks", decksRouter);
     app.use("/api/v1/user-decks", userDecksRouter);
     app.use("/api/v1/cards-ratings", cardRatingsRouter);
+    app.use("/api/v1/users", userRouter);
 
     app.listen(port, () => console.log(`Example app listening on port ${port}`));
 }
