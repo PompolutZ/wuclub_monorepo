@@ -12,6 +12,7 @@ import userRouter from "./resources/users/user.router.js";
 
 import { initializeFirebase } from "./middleware/firebase/fbadmin.js";
 import { connect } from "./utils/db.js";
+import { migrateUsers } from "./migrations/index.js";
 
 config();
 
@@ -30,6 +31,9 @@ app.use(cookieParser());
 
 async function init() {
     await connect();
+
+    await migrateUsers();
+
     app.use("/api/v1/public-decks", publicDecksRouter);
     app.use("/api/v1/decks", decksRouter);
     app.use("/api/v1/user-decks", userDecksRouter);

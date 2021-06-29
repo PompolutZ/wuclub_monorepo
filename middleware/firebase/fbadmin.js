@@ -34,3 +34,7 @@ export async function verifyFirebaseToken(req, res, next) {
         console.error(e);
     }
 }
+
+export async function getFirestore() {
+  return admin.firestore;
+}
