@@ -24,5 +24,9 @@
   "devDependencies": {
     "jest": "^27.0.4",
     "nodemon": "^2.0.7"
+  },
+  "volta": {
+    "node": "16.13.0",
+    "npm": "8.1.3"
   }
 }
