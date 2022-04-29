@@ -32,7 +32,7 @@ export const getFaction = text => {
         case "The Farstriders": return 8;
         case "Stormsire's Cursebreakers": return 9;
         case "Thorns of the Briar Queen": return 10;
-        case "The Eyes of the Nine": return 11;
+        case "Eyes of the Nine": return 11;
         case "Zarbag's Gitz": return 12;
         case "Godsworn Hunt": return 13;
         case "Mollog's Mob": return 14;
@@ -56,24 +56,37 @@ export const getFaction = text => {
         case "The Crimson Court": return 31;
         case "Hedkrakka's Madmob": return 32;
         case "Kainan's Reapers": return 33;
-        case "idoneth": return 34;
+        case "Elathain's Soulraid": return 34;
         case "Storm of Celestus": return 35;
         case "Drepur's Wraithcreepers": return 36;
+        case "Order": return 37;
+        case "Chaos": return 38;
+        case "Death": return 39;
+        case "Destruction": return 40;
+        case "Xandire's Truthseekers": return 41;
+        case "Da Kunnin' Krew": return 42;
+        case "Blackpowder's Buccaneers": return 43;
+        case "The Exiled Dead": return 44;
+        case "Skittershank's Clawpack": return 45;
+        case "The Shadeborn": return 46;
         default: return -1;
     }
 }
 
 export const decodeUDB = card => {
     if(card.toUpperCase().startsWith('L')) return 2000 + Number(card.slice(1));
+    if(card.toUpperCase().startsWith('NM')) return 14000 + Number(card.slice(2));
     if(card.toUpperCase().startsWith('N')) return 3000 + Number(card.slice(1));
     if(card.toUpperCase().startsWith('P')) return 4000 + Number(card.slice(1));
     if(card.toUpperCase().startsWith('DC')) return 9000 + Number(card.slice(2));
     if(card.toUpperCase().startsWith('D')) return 5000 + Number(card.slice(1));
     if(card.toUpperCase().startsWith('B')) return 6000 + Number(card.slice(1));
     if(card.toUpperCase().startsWith('G')) return 7000 + Number(card.slice(1));
+    if(card.toUpperCase().startsWith('AM')) return 12000 + Number(card.slice(2));
     if(card.toUpperCase().startsWith('A')) return 8000 + Number(card.slice(1));
     if(card.toUpperCase().startsWith('S')) return 10000 + Number(card.slice(1));
     if(card.toUpperCase().startsWith('E')) return 11000 + Number(card.slice(1));
+    if(card.toUpperCase().startsWith('H')) return 13000 + Number(card.slice(1));
     return 1000 + Number(card);
 }
 

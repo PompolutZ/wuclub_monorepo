@@ -31,8 +31,8 @@ export const setsIndex = [
     "beastgrave-core", // 20
     "the-grymwatch", // 21
     "rippas-snarlfangs", // 22
-    "hrothgorns-mantrappers", // 24
     "the-wurmspat", // 25
+    "hrothgorns-mantrappers", // 24
     "morgwaeths-blade-coven", // 26
     "morgoks-krushas", // 27
     "beastgrave-gift-pack", // 23
@@ -44,10 +44,18 @@ export const setsIndex = [
     "the-crimson-court", // 30
     "hedkrakkas-madmob", // 32
     "kainans-reapers", // 
-    "idoneth", // 30
+    "elathains-soulreapers", // 30
     "starter-set", // 30
     "essential-cards-pack", // 30
     "silent-menace-universal-deck",
+    "arena-mortis-2",
+    
+    "harrowdeep-core",
+    "blackpowders-buccaneers",
+    "illusory-might-universal-deck",
+    "the-exiled-dead-expansion",
+
+    "nethermaze-core-set",
 ]
 
 export const setsNames = [
@@ -64,7 +72,7 @@ export const setsNames = [
     // NIGHTVAULT
 
     "Nightvault core set", // 8
-    "The Eyes of the Nine expansion",
+    "Eyes of the Nine expansion",
     "Zarbag's Gitz expansion",
     "Garrek's Reavers expansion",
     "Steelheart's Champions expansion",
@@ -96,11 +104,80 @@ export const setsNames = [
     "The Crimson Court expansion", // 30
     "Hedkrakka's Madmob expansion", // 32
     "Kainan's Reapers expansion", // 
-    "Idoneth", // 30
+    "Elathain's Soulraid expansion", // 30
     "Starter Set", // 30
     "Essential Cards Pack",
     "Silent Menace Universal Deck",
+    "Arena Mortis 2 expansion",
+    
+    // Harrowdeep
+    "Harrowdeep core set",
+    "Blackpowder's Buccaneers expansion",
+    "Illusory Might Universal Deck",
+    "The Exiled Dead expansion",
+
+    "Nethermaze core set",
 ]
+
+// case "Order": return 38;
+//         case "Chaos": return 39;
+//         case "Death": return 40;
+//         case "Destruction": return 41;
+export const factionToGrandAlianceId = {
+    "garreks-reavers" : 39,
+    "steelhearts-champions" : 38,
+    "sepulchral-guard" : 40,
+    "ironskulls-boyz" : 41,
+    "the-chosen-axes" : 38,
+    "spiteclaws-swarm" : 39,
+    "magores-fiends" : 39,
+    "the-farstriders" : 38,
+
+    // NIGHTVAULT
+
+    "stormsires-cursebreakers": 38,
+    "thorns-of-the-briar-queen": 40,
+    "the-eyes-of-the-nine": 39,
+    "zarbags-gitz": 41,
+    "godsworn-hunt": 39,
+    "mollogs-mob": 41,
+    "thundriks-profiteers": 38,
+    "yltharis-guardians": 38,
+
+    // DREADFANE
+
+    "ironsouls-condemners": 38,
+    "lady-harrows-mournflight": 40,
+
+    // BEASTGRAVE
+
+    "grashraks-despoilers": 39,
+    "skaeths-wild-hunt": 38,
+    "the-grymwatch": 40,
+    "rippas-snarlfangs" : 41,
+    "hrothgorns-mantrappers": 41,
+    "the-wurmspat": 39,
+    "morgwaeths-blade-coven": 38,
+    "morgoks-krushas": 41,
+
+    "myaris-purifiers": 38,
+    "dread-pageant": 39,
+    "khagras-ravagers": 39, // 29
+    "the-starblood-stalkers": 38, // 30
+    "the-crimson-court": 40, // 30
+    "storm-of-celestus": 38, // 30
+    "drepurs-wraithcreepers": 40, // 30
+    "hedkrakkas-madmob": 41, // 32
+    "kainans-reapers": 40, // 
+    "elathains-soulreapers": 38,
+    
+    "xandires-truthseekers": 38,
+    "da-kunnin-krew": 41,
+    "blackpowders-buccaneers": 41,
+    'the-exiled-dead': 40,
+    'skittershanks-clawpack': 39,
+    'the-shadeborn': 38,
+}
 
 export const factionIndexes = [
     "universal",
@@ -147,9 +224,20 @@ export const factionIndexes = [
     "the-crimson-court", // 31
     "hedkrakkas-madmob", // 32
     "kainans-reapers", // 
-    "idoneth", // 30
+    "elathains-soulreapers", // 30
     "storm-of-celestus", // 30
     "drepurs-wraithcreepers", // 30
+
+    "grand-aliance-order",
+    "grand-aliance-chaos",
+    "grand-aliance-death",
+    "grand-aliance-destruction",
+    "xandires-truthseekers",
+    "da-kunnin-krew",
+    "blackpowders-buccaneers",
+    'the-exiled-dead',
+    'skittershanks-clawpack',
+    'the-shadeborn',
 ]
 
 export const factionIdPrefix = {
@@ -199,4 +287,16 @@ export const factionIdPrefix = {
     "drepurs-wraithcreepers": "dw", // 30
     "hedkrakkas-madmob": "hem", // 32
     "kainans-reapers": "kar", // 
+    "elathains-soulreapers": "es",
+    
+    "grand-aliance-order": "gao",
+    "grand-aliance-chaos": "gac",
+    "grand-aliance-death": "gad",
+    "grand-aliance-destruction": "gads",
+    "xandires-truthseekers": "xt",
+    "da-kunnin-krew": "dkk",
+    "blackpowders-buccaneers": "bb",
+    'the-exiled-dead': "ted",
+    'skittershanks-clawpack': "skc",
+    'the-shadeborn': "ts"
 }
