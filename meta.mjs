@@ -56,6 +56,9 @@ export const setsIndex = [
     "the-exiled-dead-expansion",
 
     "nethermaze-core-set",
+    "hexbanes-hunters-expansion",
+    "gorechosen-of-dromm-expansion",
+    "deadly-depths-rivals-deck",
 ]
 
 export const setsNames = [
@@ -117,6 +120,9 @@ export const setsNames = [
     "The Exiled Dead expansion",
 
     "Nethermaze core set",
+    "Hexbane's Hunters expansion",
+    "Gorechosen of Dromm expansion",
+    "Deadly Depths Rivals Deck",
 ]
 
 // case "Order": return 38;
@@ -177,6 +183,8 @@ export const factionToGrandAlianceId = {
     'the-exiled-dead': 40,
     'skittershanks-clawpack': 39,
     'the-shadeborn': 38,
+    'hexbanes-hunters': 38,
+    'gorechosen-of-dromm': 39,
 }
 
 export const factionIndexes = [
@@ -238,6 +246,8 @@ export const factionIndexes = [
     'the-exiled-dead',
     'skittershanks-clawpack',
     'the-shadeborn',
+    'hexbanes-hunters',
+    'gorechosen-of-dromm'
 ]
 
 export const factionIdPrefix = {
@@ -298,5 +308,7 @@ export const factionIdPrefix = {
     "blackpowders-buccaneers": "bb",
     'the-exiled-dead': "ted",
     'skittershanks-clawpack': "skc",
-    'the-shadeborn': "ts"
+    'the-shadeborn': "ts",
+    'hexbanes-hunters': "hh",
+    'gorechosen-of-dromm': "god"
 }

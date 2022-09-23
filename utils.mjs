@@ -69,6 +69,8 @@ export const getFaction = text => {
         case "The Exiled Dead": return 44;
         case "Skittershank's Clawpack": return 45;
         case "The Shadeborn": return 46;
+        case "Hexbane's Hunters": return 47;
+        case "Gorechosen of Dromm": return 48;
         default: return -1;
     }
 }

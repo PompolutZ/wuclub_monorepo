@@ -1,6 +1,5 @@
-import {readFileSync, writeFileSync} from 'fs';
+import {writeFileSync} from 'fs';
 import { readdir, readFile } from 'fs/promises';
-import path from 'path';
 import { setsNames, setsIndex, factionIndexes, factionIdPrefix, factionToGrandAlianceId } from './meta.mjs';
 import { getFaction, findDuplicatesByName, decodeUDB } from './utils.mjs';
 
@@ -69,83 +68,11 @@ async function readFiles() {
 
 readFiles();
 
-// const [,,fileName] = process.argv;
-// console.log(fileName);
-// const hasClubFlag = process.argv?.includes("--club");
-// const fileNames = fileName.split(',');
-
-// //const tsvFile = readFileSync(new URL(fileName, import.meta.url), "utf-8");
-
 const toLines = str => str.split('\n');
-
-// let parsed;
-// if(hasClubFlag) {
-//     const tsvFile = readFileSync(new URL(fileNames[0], import.meta.url), "utf-8");
-//     parsed = parseAsClub(tsvFile);
-//     let data = "export const cardsDb = " + JSON.stringify(parsed, null, 4);
-//     writeFileSync(new URL('dist/cardsDb.js', import.meta.url), data);
-// } else {
-// }
 
 function serialize(data, name) {
     return `export const ${name} = ` + JSON.stringify(data, null, 4);
 }
-
-// function parseAsClub(text) {
-//     return toLines(text).slice(1).map(line => line.split('\t')).reduce(
-//         (acc, [release,,number,,,,,name,faction,type,glory,description,,otype,,set,status, OP,,F,R,FR,rotated, ...rest], i) => {
-//             console.log("Parsing line > ", i);
-//             if(name == '-') return acc;
-//             // populate sets table
-//             // const duplicates = findDuplicatesByName(name, acc);
-//             let data;
-
-//             const index = getFaction(faction);
-//             if(index < 0) throw Error(`Cannot find faction for > ${faction}`);
-//             const factionKebab = factionIndexes[index];
-
-//             const primacy = description.toUpperCase().includes("PRIMACY");
-            
-//             let id = decodeUDB(number);
-//             let oldId = String(id).padStart(5, "0");
-            
-//             if(!acc[oldId]) {
-//                 const factionId = getFaction(faction) + 1;
-//                 const setId = setsNames.indexOf(set) + 1;
-
-//                 data = {
-//                     id,
-//                     factionId,
-//                     faction: factionKebab,
-//                     setId,
-//                     name,
-//                     type,
-//                     glory: Number(glory) || NaN,
-//                     rule: description,
-//                     scoreType: otype,
-//                     status: `${OP[0]}${F != '-' ? 'Y' : '-'}${R != '-' ? 'Y' : '-'}_${OP[1]}${FR != '-' ? 'Y' : '-'}_${OP[2]}`,
-//                     rotated: rotated != '-',
-//                     primacy,
-//                 };
-
-//                 acc[oldId] = data
-//             }
-
-//             // if(duplicates.length > 0) {
-//             //     const updatedWithDuplicatesInfo = 
-//             //         [...duplicates, [id, data]].reduce((update, [cardKey, cardData]) => ({
-//             //             ...update,
-//             //             [cardKey]: {
-//             //                 ...cardData,
-//             //                 duplicates: [...duplicates.map(([,data]) => data.id), id]
-//             //             }
-//             //         }), {})
-//             //     acc = {...acc, ...updatedWithDuplicatesInfo}
-//             // }
-
-//             return acc;
-//         }, {});
-// }
 
 function parse(text) {
     const wudb = {
