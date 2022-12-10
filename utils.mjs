@@ -71,25 +71,50 @@ export const getFaction = text => {
         case "The Shadeborn": return 46;
         case "Hexbane's Hunters": return 47;
         case "Gorechosen of Dromm": return 48;
+        case "Gnarlspirit Pack": return 49;
+        case "Sons of Velmorn": return 50;
         default: return -1;
     }
 }
 
+const udbPrefexes = {
+    'L': 2, 
+    'NM': 14,
+    'N': 3, 
+    'P': 4, 
+    'DC': 9,
+    'D': 5, 
+    'B': 6, 
+    'G': 7, 
+    'AM': 12,
+    'A': 8, 
+    'S': 10, 
+    'E': 11, 
+    'H': 13, 
+    'GP': 15,
+    'SV': 16,
+    'DD': 17,
+    'TC': 18,
+}
+
 export const decodeUDB = card => {
-    if(card.toUpperCase().startsWith('L')) return 2000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('NM')) return 14000 + Number(card.slice(2));
-    if(card.toUpperCase().startsWith('N')) return 3000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('P')) return 4000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('DC')) return 9000 + Number(card.slice(2));
-    if(card.toUpperCase().startsWith('D')) return 5000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('B')) return 6000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('G')) return 7000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('AM')) return 12000 + Number(card.slice(2));
-    if(card.toUpperCase().startsWith('A')) return 8000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('S')) return 10000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('E')) return 11000 + Number(card.slice(1));
-    if(card.toUpperCase().startsWith('H')) return 13000 + Number(card.slice(1));
-    return 1000 + Number(card);
+    const [,prefix, cardNumber] = card.match(/([A-Z]+)?(\d+)?/);
+
+    return prefix ? udbPrefexes[prefix] * 1000 + Number(cardNumber) : 1000 + Number(cardNumber);
+    // if(card.toUpperCase().startsWith('L')) return 2000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('NM')) return 14000 + Number(card.slice(2));
+    // if(card.toUpperCase().startsWith('N')) return 3000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('P')) return 4000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('DC')) return 9000 + Number(card.slice(2));
+    // if(card.toUpperCase().startsWith('D')) return 5000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('B')) return 6000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('G')) return 7000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('AM')) return 12000 + Number(card.slice(2));
+    // if(card.toUpperCase().startsWith('A')) return 8000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('S')) return 10000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('E')) return 11000 + Number(card.slice(1));
+    // if(card.toUpperCase().startsWith('H')) return 13000 + Number(card.slice(1));
+    // return 1000 + Number(card);
 }
 
 export function findDuplicatesByName(name, source) {

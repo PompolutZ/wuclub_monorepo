@@ -47,11 +47,11 @@ export const setsIndex = [
     "elathains-soulreapers", // 30
     "starter-set", // 30
     "essential-cards-pack", // 30
-    "silent-menace-universal-deck",
-    "arena-mortis-2",
+    "silent-menace-universal-deck", // 31
+    "arena-mortis-2", //32
     
-    "harrowdeep-core",
-    "blackpowders-buccaneers",
+    "harrowdeep-core", // 33
+    "blackpowders-buccaneers", // 34
     "illusory-might-universal-deck",
     "the-exiled-dead-expansion",
 
@@ -59,6 +59,10 @@ export const setsIndex = [
     "hexbanes-hunters-expansion",
     "gorechosen-of-dromm-expansion",
     "deadly-depths-rivals-deck",
+    
+    "gnarlwood-core-set",
+    'daring-delvers-rivals-deck',
+    'tooth-and-claw-rivals-deck',
 ]
 
 export const setsNames = [
@@ -123,6 +127,10 @@ export const setsNames = [
     "Hexbane's Hunters expansion",
     "Gorechosen of Dromm expansion",
     "Deadly Depths Rivals Deck",
+    
+    "Gnarlwood core set",
+    "Daring Delvers Rivals Deck",
+    "Tooth and Claw Rivals Deck",
 ]
 
 // case "Order": return 38;
@@ -185,6 +193,8 @@ export const factionToGrandAlianceId = {
     'the-shadeborn': 38,
     'hexbanes-hunters': 38,
     'gorechosen-of-dromm': 39,
+    'gnarlspirit-pack': 39,
+    'sons-of-velmorn': 40,
 }
 
 export const factionIndexes = [
@@ -247,7 +257,9 @@ export const factionIndexes = [
     'skittershanks-clawpack',
     'the-shadeborn',
     'hexbanes-hunters',
-    'gorechosen-of-dromm'
+    'gorechosen-of-dromm',
+    'gnarlspirit-pack',
+    'sons-of-velmorn',
 ]
 
 export const factionIdPrefix = {
@@ -310,5 +322,7 @@ export const factionIdPrefix = {
     'skittershanks-clawpack': "skc",
     'the-shadeborn': "ts",
     'hexbanes-hunters': "hh",
-    'gorechosen-of-dromm': "god"
+    'gorechosen-of-dromm': "god",
+    'gnarlspirit-pack': "gp",
+    'sons-of-velmorn': "sov"
 }
