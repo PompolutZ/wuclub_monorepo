@@ -84,11 +84,14 @@ function parse(text) {
     return toLines(text).slice(1).map(line => line.split('\t')).reduce(
         (acc, line, i) => {
             let [release,,number,,,,,name,faction,type,glory,description,,otype,,set,status,OP,,F,R,FR,rotated, ...rest] = []
-            if(line.length > 22) {
+            if (i > 3155) {
+                [release,,number,name,faction,type,glory,,,,,description,,otype,,set,status,OP,,F,R,FR,rotated, ...rest] = line;
+            } else if(line.length > 22) {
                 [release,,number,,,,,name,faction,type,glory,description,,otype,,set,status,OP,,F,R,FR,rotated, ...rest] = line;
             } else {
                 [release,,number,name,faction,type,glory,description,,otype,,set,status,OP,,F,R,FR,rotated, ...rest] = line;
             }
+
             console.log("Parsing line > ", i);
             if(name == '-') return acc;
             // populate sets table
@@ -109,7 +112,7 @@ function parse(text) {
             if(!acc.factions[faction]) {
                 const index = getFaction(faction);
                 console.log(faction, index, factionIndexes[index])
-                if(index < 0) throw Error(`Cannot find faction for > ${faction}`);
+                if(index < 0) throw Error(`Cannot find faction for > ${faction} in line: ${JSON.stringify(line)}`);
                 const factionKebab = factionIndexes[index];
 
                 acc.factions[faction] = {

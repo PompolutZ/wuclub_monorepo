@@ -73,6 +73,8 @@ export const getFaction = text => {
         case "Gorechosen of Dromm": return 48;
         case "Gnarlspirit Pack": return 49;
         case "Sons of Velmorn": return 50;
+        case "Grinkrak's Looncourt": return 51;
+        case "Gryselle's Arenai": return 52;
         default: return -1;
     }
 }
@@ -95,26 +97,16 @@ const udbPrefexes = {
     'SV': 16,
     'DD': 17,
     'TC': 18,
+    GL: 19,
+    FF: 20,
+    GA: 21,
+    BA: 22,
 }
 
 export const decodeUDB = card => {
     const [,prefix, cardNumber] = card.match(/([A-Z]+)?(\d+)?/);
 
     return prefix ? udbPrefexes[prefix] * 1000 + Number(cardNumber) : 1000 + Number(cardNumber);
-    // if(card.toUpperCase().startsWith('L')) return 2000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('NM')) return 14000 + Number(card.slice(2));
-    // if(card.toUpperCase().startsWith('N')) return 3000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('P')) return 4000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('DC')) return 9000 + Number(card.slice(2));
-    // if(card.toUpperCase().startsWith('D')) return 5000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('B')) return 6000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('G')) return 7000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('AM')) return 12000 + Number(card.slice(2));
-    // if(card.toUpperCase().startsWith('A')) return 8000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('S')) return 10000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('E')) return 11000 + Number(card.slice(1));
-    // if(card.toUpperCase().startsWith('H')) return 13000 + Number(card.slice(1));
-    // return 1000 + Number(card);
 }
 
 export function findDuplicatesByName(name, source) {

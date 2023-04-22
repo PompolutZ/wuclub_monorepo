@@ -63,6 +63,10 @@ export const setsIndex = [
     "gnarlwood-core-set",
     'daring-delvers-rivals-deck',
     'tooth-and-claw-rivals-deck',
+    "grinkraks-looncourt-expansion",
+    "fearsome-fortress-rivals-deck",
+    "gryselles-arenai-expansion",
+    "beastbound-assault-rivals-deck",
 ]
 
 export const setsNames = [
@@ -131,6 +135,10 @@ export const setsNames = [
     "Gnarlwood core set",
     "Daring Delvers Rivals Deck",
     "Tooth and Claw Rivals Deck",
+    "Grinkrak's Looncourt expansion",
+    "Fearsome Fortress Rivals Deck",
+    "Gryselle's Arenai expansion",
+    "Beastbound Assault Rivals Deck",
 ]
 
 // case "Order": return 38;
@@ -195,6 +203,8 @@ export const factionToGrandAlianceId = {
     'gorechosen-of-dromm': 39,
     'gnarlspirit-pack': 39,
     'sons-of-velmorn': 40,
+    'grinkraks-looncourt': 41,
+    "gryselles-arenai": 38,
 }
 
 export const factionIndexes = [
@@ -260,6 +270,8 @@ export const factionIndexes = [
     'gorechosen-of-dromm',
     'gnarlspirit-pack',
     'sons-of-velmorn',
+    'grinkraks-looncourt',
+    "gryselles-arenai"
 ]
 
 export const factionIdPrefix = {
@@ -324,5 +336,7 @@ export const factionIdPrefix = {
     'hexbanes-hunters': "hh",
     'gorechosen-of-dromm': "god",
     'gnarlspirit-pack': "gp",
-    'sons-of-velmorn': "sov"
+    'sons-of-velmorn': "sov",
+    'grinkraks-looncourt': "gl",
+    "gryselles-arenai": "ga"
 }
