@@ -95,8 +95,9 @@ function parse(text) {
             console.log("Parsing line > ", i);
             if(name == '-') return acc;
             // populate sets table
+
             if(!acc.sets[set]) {
-                const index = setsNames.indexOf(set);
+                const index = getSetIndex(set);
                 if(index < 0) {
                     console.log(line);
                     throw Error(`Cannot find index for > ${set}`);
@@ -171,6 +172,20 @@ function parse(text) {
 
             return acc;
         }, wudb);
+}
+
+const getSetIndex = (name) => {
+    switch(name) {
+        case "Gnarlspirit Pack Rivals Deck":
+        case "Sons of Velmorn Rivals Deck":
+            return setsNames.indexOf("Gnarlwood core set");
+        case "Grinkrak's Looncourt Rivals Deck":
+            return setsNames.indexOf("Grinkrak's Looncourt expansion");
+        case "Gryselle's Arenai Rivals Deck":
+            return setsNames.indexOf("Gryselle's Arenai expansion");
+        default:
+            return setsNames.indexOf(name);
+    }
 }
 
 // //

@@ -67,6 +67,10 @@ export const setsIndex = [
     "fearsome-fortress-rivals-deck",
     "gryselles-arenai-expansion",
     "beastbound-assault-rivals-deck",
+    "domitans-stormcoven-rivals-deck",
+    "ephilims-pandaemonium-rivals-deck",
+    "seismic-shock-rivals-deck",
+    "toxic-terrors-rivals-deck",
 ]
 
 export const setsNames = [
@@ -139,6 +143,11 @@ export const setsNames = [
     "Fearsome Fortress Rivals Deck",
     "Gryselle's Arenai expansion",
     "Beastbound Assault Rivals Deck",
+    
+    "Domitan's Stormcoven Rivals Deck",
+    "Ephilim's Pandaemonium Rivals Deck",
+    "Seismic Shock Rivals Deck",
+    "Toxic Terrors Rivals Deck",
 ]
 
 // case "Order": return 38;
@@ -205,6 +214,9 @@ export const factionToGrandAlianceId = {
     'sons-of-velmorn': 40,
     'grinkraks-looncourt': 41,
     "gryselles-arenai": 38,
+
+    "domitans-stormcoven": 38,
+    "ephilims-pandaemonium": 39,
 }
 
 export const factionIndexes = [
@@ -271,7 +283,10 @@ export const factionIndexes = [
     'gnarlspirit-pack',
     'sons-of-velmorn',
     'grinkraks-looncourt',
-    "gryselles-arenai"
+    "gryselles-arenai",
+    
+    "domitans-stormcoven",
+    "ephilims-pandaemonium",
 ]
 
 export const factionIdPrefix = {
@@ -338,5 +353,8 @@ export const factionIdPrefix = {
     'gnarlspirit-pack': "gp",
     'sons-of-velmorn': "sov",
     'grinkraks-looncourt': "gl",
-    "gryselles-arenai": "ga"
+    "gryselles-arenai": "ga",
+    
+    "domitans-stormcoven": "ds",
+    "ephilims-pandaemonium": "ep"
 }
