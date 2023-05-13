@@ -1,0 +1,45 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [{
+      "source": "/assets/cards/*.@(jpg|jpeg|gif|png)",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=2592000"
+      } ]
+    },
+    {
+      "source": "/assets/icons/*.@(jpg|jpeg|gif|png)",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=259200"
+      } ]
+    },
+    {
+      "source": "**/*.@(js|css)",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "no-cache, max-age=0"
+      } ]
+    }
+  ],
+  "database": {
+    "rules": "database.rules.json"
+    }
+  }
+}
