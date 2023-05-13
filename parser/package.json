@@ -1,0 +1,10 @@
+{
+  "name": "parser",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "wudb": "node index.js UnderworldsDB.tsv "
+  }
+}
