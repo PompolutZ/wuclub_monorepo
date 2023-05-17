@@ -9,7 +9,7 @@ import {
     wucards,
     wufactions,
 } from "../../data/wudb";
-import { AutoSizer } from "react-virtualized";
+// import { AutoSizer } from "react-virtualized";
 import { useBreakpoint } from "../../hooks/useMediaQuery";
 import SectionTitle from "../../v2/components/SectionTitle";
 import { DeckPlayFormatToggle } from "../../v2/components/DeckPlayFormatToggle";
@@ -148,11 +148,9 @@ function Library() {
                     )}
                     <div className="flex-1" ref={cardsContainerRef}>
                         {filteredCards.length > 0 && (
-                            <AutoSizer>
-                                {({ width, height }) => (
                                     <VirtualizedCardsList
-                                        width={width}
-                                        height={height}
+                                        // width={width}
+                                        // height={height}
                                         cards={filteredCards}
                                         containerRef={cardsContainerRef.current}
                                     >
@@ -171,8 +169,10 @@ function Library() {
                                             ) : null
                                         }
                                     </VirtualizedCardsList>
-                                )}
-                            </AutoSizer>
+                            // <AutoSizer>
+                            //     {({ width, height }) => (
+                            //     )}
+                            // </AutoSizer>
                         )}
                     </div>
                 </div>

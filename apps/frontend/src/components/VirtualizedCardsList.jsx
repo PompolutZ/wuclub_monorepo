@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Grid } from "react-virtualized";
+// import { Grid } from "react-virtualized";
 import PropTypes from 'prop-types';
 
 const ratio = 744 / 532;
@@ -56,19 +56,19 @@ function VirtualizedCardsList({ width, height, cards, children, variant = 'grid'
         return children(cardRows[rowIndex][columnIndex], key, style, rowIndex, columnIndex)
     };
 
-    return (
-            <Grid
-                className="outline-none scrollbar scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
-                ref={listRef}
-                width={width}
-                height={height}
-                columnCount={cardRows[0].length}
-                columnWidth={columnWidth}
-                rowCount={cardRows.length}
-                rowHeight={rowHeight}
-                cellRenderer={rowRenderer}
-                scrollToIndex={scrollIndex}
-            />
+    return ( null
+            // <Grid
+            //     className="outline-none scrollbar scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
+            //     ref={listRef}
+            //     width={width}
+            //     height={height}
+            //     columnCount={cardRows[0].length}
+            //     columnWidth={columnWidth}
+            //     rowCount={cardRows.length}
+            //     rowHeight={rowHeight}
+            //     cellRenderer={rowRenderer}
+            //     scrollToIndex={scrollIndex}
+            // />
     );
 }
 

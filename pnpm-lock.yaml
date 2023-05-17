@@ -42,19 +42,22 @@ importers:
         version: 1.2.0(react@17.0.0)
       '@material-ui/core':
         specifier: ^4.11.0
-        version: 4.11.0(react-dom@17.0.0)(react@17.0.0)
+        version: 4.11.0(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0)
       '@material-ui/icons':
         specifier: ^4.9.1
-        version: 4.9.1(@material-ui/core@4.11.0)(react-dom@17.0.0)(react@17.0.0)
+        version: 4.9.1(@material-ui/core@4.11.0)(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0)
       '@material-ui/lab':
         specifier: ^4.0.0-alpha.56
-        version: 4.0.0-alpha.56(@material-ui/core@4.11.0)(react-dom@17.0.0)(react@17.0.0)
+        version: 4.0.0-alpha.56(@material-ui/core@4.11.0)(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0)
       '@react-spring/web':
         specifier: ^9.5.5
         version: 9.5.5(react-dom@17.0.0)(react@17.0.0)
       '@tailwindcss/forms':
         specifier: ^0.5.3
         version: 0.5.3(tailwindcss@3.2.1)
+      '@tanstack/react-virtual':
+        specifier: 3.0.0-beta.54
+        version: 3.0.0-beta.54(react@17.0.0)
       autosuggest-highlight:
         specifier: ^3.1.1
         version: 3.1.1
@@ -158,6 +161,9 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
     devDependencies:
+      '@types/react':
+        specifier: ^18.2.6
+        version: 18.2.6
       '@types/react-dom':
         specifier: ^18.0.9
         version: 18.0.9
@@ -2589,7 +2595,7 @@ packages:
       lodash: 4.17.21
     dev: true
 
-  /@material-ui/core@4.11.0(react-dom@17.0.0)(react@17.0.0):
+  /@material-ui/core@4.11.0(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0):
     resolution: {integrity: sha512-bYo9uIub8wGhZySHqLQ833zi4ZML+XCBE1XwJ8EuUVSpTWWG57Pm+YugQToJNFsEyiKFhPh8DPD0bgupz8n01g==}
     engines: {node: '>=8.0.0'}
     deprecated: Material UI v4 doesn't receive active development since September 2021. See the guide https://mui.com/material-ui/migration/migration-v4/ to upgrade to v5.
@@ -2602,10 +2608,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.21.5
-      '@material-ui/styles': 4.11.5(react-dom@17.0.0)(react@17.0.0)
-      '@material-ui/system': 4.12.2(react-dom@17.0.0)(react@17.0.0)
-      '@material-ui/types': 5.1.0
+      '@material-ui/styles': 4.11.5(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0)
+      '@material-ui/system': 4.12.2(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0)
+      '@material-ui/types': 5.1.0(@types/react@18.2.6)
       '@material-ui/utils': 4.11.3(react-dom@17.0.0)(react@17.0.0)
+      '@types/react': 18.2.6
       '@types/react-transition-group': 4.4.6
       clsx: 1.2.1
       hoist-non-react-statics: 3.3.2
@@ -2617,7 +2624,7 @@ packages:
       react-transition-group: 4.4.5(react-dom@17.0.0)(react@17.0.0)
     dev: false
 
-  /@material-ui/icons@4.9.1(@material-ui/core@4.11.0)(react-dom@17.0.0)(react@17.0.0):
+  /@material-ui/icons@4.9.1(@material-ui/core@4.11.0)(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0):
     resolution: {integrity: sha512-GBitL3oBWO0hzBhvA9KxqcowRUsA0qzwKkURyC8nppnC3fw54KPKZ+d4V1Eeg/UnDRSzDaI9nGCdel/eh9AQMg==}
     engines: {node: '>=8.0.0'}
     deprecated: 'You can now upgrade to @mui/icons. See the guide: https://mui.com/guides/migration-v4/'
@@ -2631,12 +2638,13 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.21.5
-      '@material-ui/core': 4.11.0(react-dom@17.0.0)(react@17.0.0)
+      '@material-ui/core': 4.11.0(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0)
+      '@types/react': 18.2.6
       react: 17.0.0
       react-dom: 17.0.0(react@17.0.0)
     dev: false
 
-  /@material-ui/lab@4.0.0-alpha.56(@material-ui/core@4.11.0)(react-dom@17.0.0)(react@17.0.0):
+  /@material-ui/lab@4.0.0-alpha.56(@material-ui/core@4.11.0)(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0):
     resolution: {integrity: sha512-xPlkK+z/6y/24ka4gVJgwPfoCF4RCh8dXb1BNE7MtF9bXEBLN/lBxNTK8VAa0qm3V2oinA6xtUIdcRh0aeRtVw==}
     engines: {node: '>=8.0.0'}
     deprecated: Material UI v4 doesn't receive active development since September 2021. See the guide https://mui.com/material-ui/migration/migration-v4/ to upgrade to v5.
@@ -2650,8 +2658,9 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.21.5
-      '@material-ui/core': 4.11.0(react-dom@17.0.0)(react@17.0.0)
+      '@material-ui/core': 4.11.0(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0)
       '@material-ui/utils': 4.11.3(react-dom@17.0.0)(react@17.0.0)
+      '@types/react': 18.2.6
       clsx: 1.2.1
       prop-types: 15.7.2
       react: 17.0.0
@@ -2659,7 +2668,7 @@ packages:
       react-is: 16.13.1
     dev: false
 
-  /@material-ui/styles@4.11.5(react-dom@17.0.0)(react@17.0.0):
+  /@material-ui/styles@4.11.5(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0):
     resolution: {integrity: sha512-o/41ot5JJiUsIETME9wVLAJrmIWL3j0R0Bj2kCOLbSfqEkKf0fmaPt+5vtblUh5eXr2S+J/8J3DaCb10+CzPGA==}
     engines: {node: '>=8.0.0'}
     deprecated: Material UI v4 doesn't receive active development since September 2021. See the guide https://mui.com/material-ui/migration/migration-v4/ to upgrade to v5.
@@ -2673,8 +2682,9 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.5
       '@emotion/hash': 0.8.0
-      '@material-ui/types': 5.1.0
+      '@material-ui/types': 5.1.0(@types/react@18.2.6)
       '@material-ui/utils': 4.11.3(react-dom@17.0.0)(react@17.0.0)
+      '@types/react': 18.2.6
       clsx: 1.2.1
       csstype: 2.6.21
       hoist-non-react-statics: 3.3.2
@@ -2691,7 +2701,7 @@ packages:
       react-dom: 17.0.0(react@17.0.0)
     dev: false
 
-  /@material-ui/system@4.12.2(react-dom@17.0.0)(react@17.0.0):
+  /@material-ui/system@4.12.2(@types/react@18.2.6)(react-dom@17.0.0)(react@17.0.0):
     resolution: {integrity: sha512-6CSKu2MtmiJgcCGf6nBQpM8fLkuB9F55EKfbdTC80NND5wpTmKzwdhLYLH3zL4cLlK0gVaaltW7/wMuyTnN0Lw==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
@@ -2704,19 +2714,22 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.5
       '@material-ui/utils': 4.11.3(react-dom@17.0.0)(react@17.0.0)
+      '@types/react': 18.2.6
       csstype: 2.6.21
       prop-types: 15.7.2
       react: 17.0.0
       react-dom: 17.0.0(react@17.0.0)
     dev: false
 
-  /@material-ui/types@5.1.0:
+  /@material-ui/types@5.1.0(@types/react@18.2.6):
     resolution: {integrity: sha512-7cqRjrY50b8QzRSYyhSpx4WRw2YuO0KKIGQEVk5J8uoz2BanawykgZGoWEqKm7pVIbzFDN0SpPcVV4IhOFkl8A==}
     peerDependencies:
       '@types/react': '*'
     peerDependenciesMeta:
       '@types/react':
         optional: true
+    dependencies:
+      '@types/react': 18.2.6
     dev: false
 
   /@material-ui/utils@4.11.3(react-dom@17.0.0)(react@17.0.0):
@@ -3495,6 +3508,19 @@ packages:
     dependencies:
       mini-svg-data-uri: 1.4.4
       tailwindcss: 3.2.1(postcss@8.4.18)
+    dev: false
+
+  /@tanstack/react-virtual@3.0.0-beta.54(react@17.0.0):
+    resolution: {integrity: sha512-D1mDMf4UPbrtHRZZriCly5bXTBMhylslm4dhcHqTtDJ6brQcgGmk8YD9JdWBGWfGSWPKoh2x1H3e7eh+hgPXtQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tanstack/virtual-core': 3.0.0-beta.54
+      react: 17.0.0
+    dev: false
+
+  /@tanstack/virtual-core@3.0.0-beta.54:
+    resolution: {integrity: sha512-jtkwqdP2rY2iCCDVAFuaNBH3fiEi29aTn2RhtIoky8DTTiCdc48plpHHreLwmv1PICJ4AJUUESaq3xa8fZH8+g==}
     dev: false
 
   /@tootallnate/once@1.1.2:

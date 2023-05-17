@@ -1,5 +1,5 @@
 import React from "react";
-import { List, AutoSizer } from "react-virtualized";
+// import { List, AutoSizer } from "react-virtualized";
 import PublicDeckLink from "./PublicDeckLink";
 
 function VirtualizedDecksList({ source = [] }) {
@@ -30,19 +30,19 @@ function VirtualizedDecksList({ source = [] }) {
         return 120;
     };
 
-    return (
-        <AutoSizer>
-            {({ width, height}) => (
-                <List
-                    width={width}
-                    height={height}
-                    rowCount={data.length}
-                    rowHeight={calcRowHeight}
-                    rowRenderer={renderRow}
-                    scrollToIndex={scrollIndex}
-                />
-            )}
-        </AutoSizer>
+    return (null
+            // <List
+            //     // width={width}
+            //     // height={height}
+            //     rowCount={data.length}
+            //     rowHeight={calcRowHeight}
+            //     rowRenderer={renderRow}
+            //     scrollToIndex={scrollIndex}
+            // />
+        // <AutoSizer>
+        //     {({ width, height}) => (
+        //     )}
+        // </AutoSizer>
     );
 }
 

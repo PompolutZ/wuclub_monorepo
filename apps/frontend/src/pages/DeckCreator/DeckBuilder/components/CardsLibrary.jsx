@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { AutoSizer } from "react-virtualized";
+// import { AutoSizer } from "react-virtualized";
 import {
     validateCardForPlayFormat,
     VANGUARD_FORMAT,
     wucards,
 } from "../../../../data/wudb";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
-import VirtualizedCardsList from "../../../../components/VirtualizedCardsList";
+// import VirtualizedCardsList from "../../../../components/VirtualizedCardsList";
 import { useCardsRatings } from "../../../../hooks/wunderworldsAPIHooks";
 import CardInDeck from "./Card";
 import { toggleCardAction } from "../../reducer";
 import { useMemo } from "react";
+import { FixedVirtualizedList } from "@components/FixedVirtualizedList";
 
 function stringTypeToNumber(type) {
     switch (type) {
@@ -95,7 +96,8 @@ function FilterableCardLibrary(props) {
             ...Object.values(wucards).filter(
                 (card) =>
                     !!state.sets.find((set) => set.id == card.setId) &&
-                    (card.factionId === 1  || card.factionId === state.faction.gaId) &&
+                    (card.factionId === 1 ||
+                        card.factionId === state.faction.gaId) &&
                     (card.duplicates
                         ? card.id === Math.max(...card.duplicates)
                         : true)
@@ -162,46 +164,40 @@ function FilterableCardLibrary(props) {
                 </div>
             )}
             {!loading && (
-                <AutoSizer>
-                    {({ width, height }) => (
-                        <VirtualizedCardsList
-                            width={width}
-                            height={height}
-                            cards={filteredCards}
-                            variant="list"
-                        >
-                            {({ card, expanded }, key, style, rowIndex) =>
-                                card ? (
-                                    <div
-                                        key={key}
-                                        className={`flex flex-col justify-center pr-2 ${
-                                            rowIndex % 2 === 0
-                                                ? "bg-purple-100"
-                                                : "bg-white"
-                                        }`}
-                                        style={style}
-                                    >
-                                        <CardInDeck
-                                            showType
-                                            key={card.id}
-                                            cardId={card.id}
-                                            ranking={card.ranking}
-                                            expanded={expanded}
-                                            inDeck={!!deck.find(({ id }) => id === card.id )}
-                                            format={state.format}
-                                            toggleCard={() =>
-                                                dispatch(toggleCardAction(card))
-                                            }
-                                            withAnimation={false}
-                                        />
-                                    </div>
-                                ) : (
-                                    <span>NONE</span>
-                                )
-                            }
-                        </VirtualizedCardsList>
-                    )}
-                </AutoSizer>
+                <FixedVirtualizedList items={filteredCards}>
+                    {({ card, expanded }, { key, index }) => {
+                        return card ? (
+                            <div
+                                key={key}
+                                className={`flex flex-col justify-center pr-2 ${
+                                    index % 2 === 0
+                                        ? "bg-purple-100"
+                                        : "bg-white"
+                                }`}
+                            >
+                                <CardInDeck
+                                    showType
+                                    key={card.id}
+                                    cardId={card.id}
+                                    ranking={card.ranking}
+                                    expanded={expanded}
+                                    inDeck={
+                                        !!deck.find(({ id }) => id === card.id)
+                                    }
+                                    format={state.format}
+                                    toggleCard={() =>
+                                        dispatch(toggleCardAction(card))
+                                    }
+                                    withAnimation={false}
+                                />
+                            </div>
+                        ) : (
+                            <span>NONE</span>
+                        )
+                    }
+                        
+                    }
+                </FixedVirtualizedList>
             )}
         </div>
     );
