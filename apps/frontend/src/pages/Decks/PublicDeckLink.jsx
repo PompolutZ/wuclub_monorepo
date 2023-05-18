@@ -11,7 +11,6 @@ import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
-import { ReactComponent as CompassIcon } from "@icons/compass.svg";
 import { DeckTitle } from "@components/DeckTitle";
 
 const getPlotKeywords = (faction, sets) => {
@@ -31,7 +30,6 @@ const getPlotKeywords = (faction, sets) => {
 };
 
 export default function PublicDeckLink({ ...props }) {
-    console.log(props);
     const [cards, setCards] = useState([]);
 
     useEffect(() => {

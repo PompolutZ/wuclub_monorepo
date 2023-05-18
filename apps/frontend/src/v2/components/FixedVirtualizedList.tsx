@@ -8,18 +8,20 @@ const optimalHeight = 16 * 3;
 interface FixedVirtualizedListProps<T> {
     items: T[];
     children: (item: T, row: VirtualItem) => JSX.Element;
+    estimateItemSize: number;
 }
 
 export const FixedVirtualizedList = <T,>({
     items,
     children,
+    estimateItemSize = optimalHeight,
 }: FixedVirtualizedListProps<T>) => {
     const parentRef = useRef<HTMLDivElement>(null);
 
     const virtual = useVirtualizer({
         count: items.length,
         getScrollElement: () => parentRef.current,
-        estimateSize: () => optimalHeight,
+        estimateSize: () => estimateItemSize,
         overscan: 5,
     });
 

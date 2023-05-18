@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import VirtualizedDecksList from "./VirtualizedDecksList";
 import { useParams } from "react-router-dom";
 import { useListAllPublicDecks } from "../../hooks/wunderworldsAPIHooks";
+import { FixedVirtualizedList } from "../../v2/components/FixedVirtualizedList";
+import PublicDeckLink from "./PublicDeckLink";
 
 export default function Deck() {
     const { faction } = useParams();
@@ -20,11 +22,18 @@ export default function Deck() {
     }, [faction, refetch]);
 
     return (
-        <div className="flex-1 lg:max-w-xl lg:mx-auto group">
+        <div className="flex-1 flex lg:max-w-xl lg:mx-auto group">
             {data && (
-                <VirtualizedDecksList
-                    source={data.map((deck) => ({ ...deck, cards: deck.deck }))}
-                />
+                <FixedVirtualizedList
+                    estimateItemSize={120}
+                    items={data.map((deck) => ({ ...deck, cards: deck.deck }))}
+                >
+                    {(deck, { key }) => (
+                        <div className="grid" key={key}>
+                            <PublicDeckLink {...deck} />
+                        </div>
+                    )}
+                </FixedVirtualizedList>
             )}
         </div>
     );
