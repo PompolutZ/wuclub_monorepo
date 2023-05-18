@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import VirtualizedDecksList from "./VirtualizedDecksList";
 import { useParams } from "react-router-dom";
 import { useListAllPublicDecks } from "../../hooks/wunderworldsAPIHooks";
 import { FixedVirtualizedList } from "../../v2/components/FixedVirtualizedList";
@@ -7,7 +6,7 @@ import PublicDeckLink from "./PublicDeckLink";
 
 export default function Deck() {
     const { faction } = useParams();
-    const [{ data, loading, error }, refetch] = useListAllPublicDecks(true);
+    const [{ data }, refetch] = useListAllPublicDecks(true);
 
     useEffect(() => {
         if (faction === "all") {
