@@ -13,10 +13,17 @@ const createExpansionGroups = () => {
     const season4 = [30, 31, 32, 33, 34, 35, 36, 39, 40];
     const season5 = [41, 42, 43, 44];
     const season6 = [45, 46, 47, 48];
-    const season7 = [49, 50, 51];
+    const season7 = [49, 50, 51, wusets["Fearsome Fortress Rivals Deck"].id, wusets["Beastbound Assault Rivals Deck"].id];
+    const season8 = [wusets["Seismic Shock Rivals Deck"].id, wusets["Toxic Terrors Rivals Deck"].id];
     const noSeason = [20, 37, 38];
 
     return [
+        {
+            title: "Season 8",
+            expansions: Object.values(wusets).filter((exp) =>
+                season8.includes(exp.id)
+            ),
+        },
         {
             title: "Season 7",
             expansions: Object.values(wusets).filter((exp) =>
