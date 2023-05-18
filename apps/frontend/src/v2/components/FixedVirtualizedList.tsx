@@ -1,27 +1,49 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useVirtualizer, VirtualItem } from "@tanstack/react-virtual";
 
-const ratio = 744 / 532;
+const MAGICK_HEIGHT = 436;
 const minOptimalWidth = 200;
 const optimalHeight = 16 * 3;
 
 interface FixedVirtualizedListProps<T> {
     items: T[];
-    children: (item: T, row: VirtualItem) => JSX.Element;
+    children: (item: T | T[], row: VirtualItem) => JSX.Element;
     estimateItemSize: number;
+    variant: "list" | "grid",
 }
 
 export const FixedVirtualizedList = <T,>({
     items,
     children,
     estimateItemSize = optimalHeight,
+    variant = "list",
 }: FixedVirtualizedListProps<T>) => {
     const parentRef = useRef<HTMLDivElement>(null);
+    const [rowHeight, setRowHeight] = useState(estimateItemSize);
+    const [rows, setRows] = useState<T[] | T[][]>(items);
+
+    useEffect(() => {
+        if (variant === "list") return;
+
+        const itemsPerRow = Math.floor(700 / minOptimalWidth);
+        let updatedRows;
+
+            updatedRows = items.reduce((result, _, index, array) => {
+                if (index % itemsPerRow === 0) {
+                    result.push(array.slice(index, index + itemsPerRow));
+                }
+    
+                return result;
+            }, [] as T[][])
+            setRowHeight(MAGICK_HEIGHT);
+            setRows(updatedRows);
+            // row height will be according to card's height based on keeping original aspect ratio
+    }, [items, variant]);
 
     const virtual = useVirtualizer({
-        count: items.length,
+        count: rows.length,
         getScrollElement: () => parentRef.current,
-        estimateSize: () => estimateItemSize,
+        estimateSize: () => rowHeight,
         overscan: 5,
     });
 
@@ -43,7 +65,7 @@ export const FixedVirtualizedList = <T,>({
                     }}
                 >
                     {virtualItems.map((virtualRow) =>
-                        children(items[virtualRow.index], virtualRow)
+                        children(rows[virtualRow.index], virtualRow)
                     )}
                 </div>
             </div>

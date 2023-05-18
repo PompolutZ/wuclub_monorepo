@@ -148,9 +148,6 @@ importers:
       react-use-measure:
         specifier: ^2.0.4
         version: 2.0.4(react-dom@17.0.0)(react@17.0.0)
-      react-virtual:
-        specifier: ^2.10.4
-        version: 2.10.4(react@17.0.0)
       unit-to-px:
         specifier: ^1.0.5
         version: 1.0.5
@@ -2851,10 +2848,6 @@ packages:
 
   /@protobufjs/utf8@1.1.0:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
-
-  /@reach/observe-rect@1.2.0:
-    resolution: {integrity: sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==}
-    dev: false
 
   /@react-native-community/cli-clean@10.1.1:
     resolution: {integrity: sha512-iNsrjzjIRv9yb5y309SWJ8NDHdwYtnCpmxZouQDyOljUdC9MwdZ4ChbtA4rwQyAwgOVfS9F/j56ML3Cslmvrxg==}
@@ -11917,15 +11910,6 @@ packages:
       debounce: 1.2.1
       react: 17.0.0
       react-dom: 17.0.0(react@17.0.0)
-    dev: false
-
-  /react-virtual@2.10.4(react@17.0.0):
-    resolution: {integrity: sha512-Ir6+oPQZTVHfa6+JL9M7cvMILstFZH/H3jqeYeKI4MSUX+rIruVwFC6nGVXw9wqAw8L0Kg2KvfXxI85OvYQdpQ==}
-    peerDependencies:
-      react: ^16.6.3 || ^17.0.0
-    dependencies:
-      '@reach/observe-rect': 1.2.0
-      react: 17.0.0
     dev: false
 
   /react-zdog@1.0.11(react-dom@17.0.0)(react@17.0.0)(zdog@1.1.3):

@@ -1,16 +1,11 @@
 import React, { useMemo, useState } from "react";
-import VirtualizedCardsList from "../../components/VirtualizedCardsList";
-import { Helmet } from "react-helmet";
 import {
-    ACTIVE_FORMATS,
     CHAMPIONSHIP_FORMAT,
     getAllSetsValidForFormat,
     RELIC_FORMAT,
     wucards,
     wufactions,
 } from "../../data/wudb";
-// import { AutoSizer } from "react-virtualized";
-import { useBreakpoint } from "../../hooks/useMediaQuery";
 import SectionTitle from "../../v2/components/SectionTitle";
 import { DeckPlayFormatToggle } from "../../v2/components/DeckPlayFormatToggle";
 import { DeckPlayFormatInfo } from "../../v2/components/DeckPlayFormatInfo";
@@ -20,6 +15,7 @@ import { sortByIdAsc } from "../../utils/sort";
 import { GrouppedFactionsToggle } from "../../v2/components/GrouppedFactionsToggle";
 import { GrouppedExpansions } from "../../v2/components/GrouppedExpansions";
 import { useEffect } from "react";
+import { FixedVirtualizedList } from "../../v2/components/FixedVirtualizedList";
 
 function useFilteredCards(factions = [], expansions = []) {
     const [searchText, setSearchText] = useState("");
@@ -53,13 +49,13 @@ function useFilteredCards(factions = [], expansions = []) {
 
 function CardPicture({ name, id }) {
     return (
-        <picture>
+        <picture className="max-h-full max-w-full flex">
             <source
                 type="image/webp"
                 srcSet={`/assets/cards/${String(id).padStart(5, "0")}_xs.webp`}
             />
             <img
-                className="relative w-full rounded-md cursor-pointer transform hover:scale-105 transition-all hover:z-10 filter hover:drop-shadow-lg"
+                className="relative object-contain cursor-pointer transform hover:scale-105 transition-all hover:z-10 filter hover:drop-shadow-lg"
                 alt={name}
                 src={`/assets/cards/${String(id).padStart(5, "0")}.png`}
             />
@@ -84,10 +80,6 @@ function Library() {
     );
     const [showFilters, setShowFilters] = useState(false);
 
-    useEffect(() => {
-        console.log(selectedFormat);
-    }, [selectedFormat])
-
     return (
         <React.Fragment>
             <div className="flex-1 flex flex-col lg:grid lg:grid-cols-4 p-4">
@@ -110,7 +102,10 @@ function Library() {
                         <div className="grid p-4">
                             <div className="">
                                 <DeckPlayFormatToggle
-                                    formats={[CHAMPIONSHIP_FORMAT, RELIC_FORMAT]}
+                                    formats={[
+                                        CHAMPIONSHIP_FORMAT,
+                                        RELIC_FORMAT,
+                                    ]}
                                     selectedFormat={selectedFormat}
                                     onFormatChange={setSelectedFormat}
                                 />
@@ -146,33 +141,33 @@ function Library() {
                             </div>
                         </div>
                     )}
-                    <div className="flex-1" ref={cardsContainerRef}>
+                    <div className="flex-1 flex" ref={cardsContainerRef}>
                         {filteredCards.length > 0 && (
-                                    <VirtualizedCardsList
-                                        // width={width}
-                                        // height={height}
-                                        cards={filteredCards}
-                                        containerRef={cardsContainerRef.current}
-                                    >
-                                        {(card, key, style) =>
-                                            card ? (
+                            <FixedVirtualizedList
+                                items={filteredCards}
+                                variant="grid"
+                            >
+                                {(cards, { key }) => {
+                                    return Array.isArray(cards) ? (
+                                        <div
+                                            className="flex h-[436px]"
+                                            key={key}
+                                        >
+                                            {cards.map((card) => (
                                                 <div
-                                                    key={key}
-                                                    style={style}
-                                                    className="flex-1 p-2 flex items-center "
+                                                    key={card.id}
+                                                    className="flex-1 p-2 flex items-center justify-center"
                                                 >
-                                                    <CardPicture
-                                                        id={card.id}
-                                                        name={card.name}
-                                                    />
+                                                        <CardPicture
+                                                            id={card.id}
+                                                            name={card.name}
+                                                        />
                                                 </div>
-                                            ) : null
-                                        }
-                                    </VirtualizedCardsList>
-                            // <AutoSizer>
-                            //     {({ width, height }) => (
-                            //     )}
-                            // </AutoSizer>
+                                            ))}
+                                        </div>
+                                    ) : null;
+                                }}
+                            </FixedVirtualizedList>
                         )}
                     </div>
                 </div>

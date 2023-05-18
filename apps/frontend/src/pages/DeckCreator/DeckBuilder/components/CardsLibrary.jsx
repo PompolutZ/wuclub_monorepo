@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import { AutoSizer } from "react-virtualized";
 import {
     validateCardForPlayFormat,
     VANGUARD_FORMAT,
     wucards,
 } from "../../../../data/wudb";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
-// import VirtualizedCardsList from "../../../../components/VirtualizedCardsList";
 import { useCardsRatings } from "../../../../hooks/wunderworldsAPIHooks";
 import CardInDeck from "./Card";
 import { toggleCardAction } from "../../reducer";
