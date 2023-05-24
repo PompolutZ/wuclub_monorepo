@@ -23,7 +23,10 @@ export const FixedVirtualizedList = <T,>({
     const [rows, setRows] = useState<T[] | T[][]>(items);
 
     useEffect(() => {
-        if (variant === "list") return;
+        if (variant === "list") {
+            setRows(items);
+            return;
+        };
 
         const itemsPerRow = Math.floor(700 / minOptimalWidth);
         let updatedRows;
