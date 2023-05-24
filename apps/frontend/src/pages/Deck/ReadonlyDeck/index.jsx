@@ -294,23 +294,47 @@ const handleExportToClub = (cards) => () => {
     clipboard.writeText(deck);
 };
 
+const vassalPrefixMap = {
+    23: 230,
+    24: 231,
+    25: 232,
+    26: 233
+}
+
 const handleSaveVassalFiles = (name, cards) => () => {
     const objectives = cards
         .filter(({ type }) => type === "Objective")
-        .map((c) => [`${c.id}`.padStart(5, "0"), c.name])
+        .map((c) => {
+            if (c.id >= 23000) {
+                const prefix = Math.floor(c.id / 1000);
+                const cardIdx = c.id % 100;
+
+                return [vassalPrefixMap[prefix] + `${cardIdx}`.padStart(2, "0"), c.name];
+            }
+
+            return [`${c.id}`.padStart(5, "0"), c.name]
+        })
         .map(
-            ([cardId, name]) =>
-                String.fromCharCode(27) +
-                `+/1600466341244/mark;RealCardName\tmacro;Puts back;;;DeckName = OBJECTIVE CARDS LEFT WIDE || DeckName = OBJECTIVE CARDS RIGHT WIDE;74\\,715;74\\,585;false;;;counted;;;;false;;1;1\\\treport;74\\,585;$PlayerName$ puts back an OBJECTIVE CARD;;;Puts back\\\\\tmacro;Location is not offboard;;;OldLocationName = OBJECTIVE CARDS LEFT WIDE || OldLocationName = OBJECTIVE CARDS RIGHT WIDE;74\\,715;74\\,195;false;;;counted;;;;false;;1;1\\\\\\\tmacro;Make playerside 2;;74,715;PlayerSide = PLAYER 2 && PlayerOwnership = NONE;;40\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\tmacro;Make playerside 1;;74,715;PlayerSide = PLAYER 1 && PlayerOwnership = NONE;;35\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\treport;74\\,195;$PlayerName$ draws an OBJECTIVE CARD;;;\\\\\\\\\\\\\tPROP;PlayerOwnership;false,0,100,false;:35\\,130:P\\,PLAYER1,:40\\,130:P\\,PLAYER2\\\\\\\\\\\\\\\tmacro;p2 return to deck;;72,130;PlayerOwnership = PLAYER2;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\tmacro;p1 return to deck;;72,130;PlayerOwnership = PLAYER1;;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\treturn;;98,130;OBJECTIVE CARDS RIGHT WIDE;Select destination\\\\\\\\\\\\\\\\\\\\\treturn;;97,130;OBJECTIVE CARDS LEFT WIDE;Select destination\\\\\\\\\\\\\\\\\\\\\\\tobs;70,130;Objectives background.png;REVEAL;GHiddnoverlay 2.png;?;player:;Peek\\\\\\\\\\\\\\\\\\\\\\\\\treport;68\\,195;$PlayerName$ Deleted: $PieceName$;;;INFORME TIRADA\\\\\\\\\\\\\\\\\\\\\\\\\\\timmob;g;N\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tmark;MapLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tdelete;Delete;68,195\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tpiece;;;${cardId}.png;${cardId}/${name}\t\\\t-1\\\\\t\\\\\\\t\\\\\\\\\t\\\\\\\\\\\t-1\\\\\\\\\\\\\tNONE\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\\\\\tnull;\\\\\\\\\\\\\\\\\\\\\\\\\t-1\\\\\\\\\\\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tCardsLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tnull;2852;244;0;6;OldZone;;OldLocationName;offboard;OldX;2256;OldY;832;OldBoard;BOARD WIDE;OldMap;MESA - BOARD`
+            ([cardId, name], i) =>
+                '+/1660398120521/mark;RealCardName	restrict;PLAYER 1,PLAYER 2;false;false;\\	hideCmd;P2;Disable;PlayerOwnership = PLAYER1 && PlayerSide = PLAYER 2;70\\,130,44\\,650\\\\	hideCmd;P1;Disable;PlayerOwnership = PLAYER2 && PlayerSide = PLAYER 1;70\\,130,44\\,650\\\\\\	hideCmd;OBSERVER;Disable;{GetProperty("PlayerSide = <observer")>};70\\,130\\\\\\\\	macro;Puts back;;;DeckName = OBJECTIVE CARDS LEFT WIDE || DeckName = OBJECTIVE CARDS RIGHT WIDE;74\\,715;74\\,585;false;;;counted;;;;false;;1;1\\\\\\\\\\	report;74\\,585;$PlayerName$ puts back an OBJECTIVE CARD;;;Puts back;false\\\\\\\\\\\\	macro;Location is not offboard;;;OldLocationName = OBJECTIVE CARDS LEFT WIDE || OldLocationName = OBJECTIVE CARDS RIGHT WIDE;74\\,715;74\\,195;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\	macro;Make playerside 2;;74,715;PlayerSide = PLAYER 2 && PlayerOwnership = NONE;;40\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\	macro;Make playerside 1;;74,715;PlayerSide = PLAYER 1 && PlayerOwnership = NONE;;35\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\	report;74\\,195;`$PlayerName$ draws an OBJECTIVE CARD;;;;false\\\\\\\\\\\\\\\\\\\\	PROP;PlayerOwnership;false,0,100,false;:35\\,130:P\\,PLAYER1,:40\\,130:P\\,PLAYER2;\\\\\\\\\\\\\\\\\\\\\\	macro;p2 Mulligan;;44,650;PlayerOwnership = PLAYER2 && ObscuredToOthers = false;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\	macro;p1 Mulligan;;44,650;{(PlayerOwnership=="PLAYER1") && (ObscuredToOthers==false)};;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\	macro;p2 return to deck;;72,130;PlayerOwnership = PLAYER2;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\\\	macro;p1 return to deck;;72,130;PlayerOwnership = PLAYER1;;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	return;;98,130;OBJECTIVE CARDS RIGHT WIDE;Select destination;;2;false;OBJECTIVE CARDS RIGHT WIDE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	return;;97,130;OBJECTIVE CARDS LEFT WIDE;Select destination;;2;false;OBJECTIVE CARDS LEFT WIDE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	obs;70,130;Objectives background.png;REVEAL;GHiddnoverlay 2.png;?;player:;Peek;;false;;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	report;68\\,195;$PlayerName$ Deleted: $PieceName$;;;INFORME TIRADA;false\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	immob;g;N;R;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	mark;MapLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	delete;Delete;68,195;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	piece;;;' + cardId + '.png;' + cardId + '/' + name + '	\\	\\\\	\\\\\\	\\\\\\\\	\\\\\\\\\\	-1\\\\\\\\\\\\	\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\	-1\\\\\\\\\\\\\\\\\\\\	NONE\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	null;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	CardsLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	null;2852;244;' + i + ';6;OldZone;;OldLocationName;;OldX;2824;OldY;900;OldBoard;BOARD WIDE;OldMap;'
+                
         );
 
     const powers = cards
         .filter(({ type }) => type !== "Objective")
-        .map((c) => [`${c.id}`.padStart(5, "0"), c.name])
+        .map((c) => {
+            if (c.id >= 23000) {
+                const prefix = Math.floor(c.id / 1000);
+                const cardIdx = c.id % 100;
+
+                return [vassalPrefixMap[prefix] + `${cardIdx}`.padStart(2, "0"), c.name];
+            }
+
+            return [`${c.id}`.padStart(5, "0"), c.name]
+        })
         .map(
-            ([cardId, name]) =>
-                String.fromCharCode(27) +
-                `+/1600453884603/mark;RealCardName\tmacro;Puts back;;;DeckName = POWER CARDS LEFT WIDE || DeckName = POWER CARDS RIGHT WIDE;74\\,715;74\\,585;false;;;counted;;;;false;;1;1\\\treport;74\\,585;$PlayerName$ puts back a POWER CARD;;;Puts back\\\\\tmacro;Location is not offboard;;;OldLocationName = POWER CARDS LEFT WIDE || OldLocationName = POWER CARDS RIGHT WIDE;74\\,715;74\\,195;false;;;counted;;;;false;;1;1\\\\\\\tmacro;Make playerside 2;;74,715;PlayerSide = PLAYER 2 && PlayerOwnership = NONE;;40\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\tmacro;Make playerside 1;;74,715;PlayerSide = PLAYER 1 && PlayerOwnership = NONE;;35\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\treport;74\\,195;$PlayerName$ draws a POWER CARD;;;\\\\\\\\\\\\\tPROP;PlayerOwnership;false,0,100,false;:35\\,130:P\\,PLAYER1,:40\\,130:P\\,PLAYER2\\\\\\\\\\\\\\\tmacro;p2 return to deck;;72,130;PlayerOwnership = PLAYER2;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\tmacro;p1 return to deck;;72,130;PlayerOwnership = PLAYER1;;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\treturn;;98,130;POWER CARDS RIGHT WIDE;Select destination\\\\\\\\\\\\\\\\\\\\\treturn;;97,130;POWER CARDS LEFT WIDE;Select destination\\\\\\\\\\\\\\\\\\\\\\\tobs;70,130;powercardsback.png;REVEAL;GHiddnoverlay 2.png;?;player:;Peek\\\\\\\\\\\\\\\\\\\\\\\\\treport;68\\,195;$PlayerName$ Deleted: $PieceName$;;;INFORME TIRADA\\\\\\\\\\\\\\\\\\\\\\\\\\\timmob;g;N\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tmark;MapLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tdelete;Delete;68,195\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tpiece;;;${cardId}.png;${cardId}/${name}\t\\\t-1\\\\\t\\\\\\\t\\\\\\\\\t\\\\\\\\\\\t-1\\\\\\\\\\\\\tNONE\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\\\\\tnull;\\\\\\\\\\\\\\\\\\\\\\\\\t-1\\\\\\\\\\\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tCardsLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\t\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\tnull;2543;244;0;6;OldZone;;OldLocationName;offboard;OldX;2204;OldY;1108;OldBoard;BOARD WIDE;OldMap;MESA - BOARD`
+            ([cardId, name], i) =>
+                '+/1660396530624/mark;RealCardName	restrict;PLAYER 1,PLAYER 2;false;false;\\	hideCmd;P2;Disable;PlayerOwnership = PLAYER1 && PlayerSide = PLAYER 2;70\\,130,44\\,650\\\\	hideCmd;P1;Disable;PlayerOwnership = PLAYER2 && PlayerSide = PLAYER 1;70\\,130,44\\,650\\\\\\	hideCmd;OBSERVER;Disable;{GetProperty("PlayerSide = <observer")>};70\\,130\\\\\\\\	macro;Puts back;;;DeckName = POWER CARDS LEFT WIDE || DeckName = POWER CARDS RIGHT WIDE;74\\,715;74\\,585;false;;;counted;;;;false;;1;1\\\\\\\\\\	report;74\\,585;$PlayerName$ puts back a POWER CARD;;;Puts back;false\\\\\\\\\\\\	macro;Location is not offboard;;;OldLocationName = POWER CARDS LEFT WIDE || OldLocationName = POWER CARDS RIGHT WIDE;74\\,715;74\\,195;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\	macro;Make playerside 2;;74,715;PlayerSide = PLAYER 2 && PlayerOwnership = NONE;;40\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\	macro;Make playerside 1;;74,715;PlayerSide = PLAYER 1 && PlayerOwnership = NONE;;35\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\	report;74\\,195;`$PlayerName$ draws a POWER CARD;;;;false\\\\\\\\\\\\\\\\\\\\	PROP;PlayerOwnership;false,0,100,false;:35\\,130:P\\,PLAYER1,:40\\,130:P\\,PLAYER2;\\\\\\\\\\\\\\\\\\\\\\	macro;p2 Mulligan;;44,650;PlayerOwnership = PLAYER2 && ObscuredToOthers = false;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\	macro;p1 Mulligan;;44,650;{(PlayerOwnership=="PLAYER1") && (ObscuredToOthers==false)};;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\	macro;p2 return to deck;;72,130;PlayerOwnership = PLAYER2;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\\\	macro;p1 return to deck;;72,130;PlayerOwnership = PLAYER1;;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	return;;98,130;POWER CARDS RIGHT WIDE;Select destination;;2;false;POWER CARDS RIGHT WIDE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	return;;97,130;POWER CARDS LEFT WIDE;Select destination;;2;false;POWER CARDS LEFT WIDE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	obs;70,130;powercardsback.png;REVEAL;GHiddnoverlay 2.png;?;player:;Peek;;false;;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	report;68\\,195;$PlayerName$ Deleted: $PieceName$;;;INFORME TIRADA;false\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	immob;g;N;R;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	mark;MapLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	delete;Delete;68,195;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	piece;;;' + cardId + '.png;' + cardId + '/' + name + '	\\	\\\\	\\\\\\	\\\\\\\\	\\\\\\\\\\	-1\\\\\\\\\\\\	\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\	-1\\\\\\\\\\\\\\\\\\\\	NONE\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	asd123;true|0\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	CardsLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	null;2543;244;' + i + ';6;OldZone;;OldLocationName;;OldX;2508;OldY;948;OldBoard;BOARD WIDE;OldMap;'
         );
 
     downloadVassalDeckWithTempLink(objectives, `${name}_OBJECTIVES.txt`);
@@ -321,7 +345,7 @@ const downloadVassalDeckWithTempLink = (deck, fileName) => {
     const tempDownloadLink = document.createElement("a");
     tempDownloadLink.style.display = "none";
     document.body.appendChild(tempDownloadLink);
-    const content = ["DECK\t\r", ...deck];
+    const content = ["DECK\t", ...deck];
 
     const file = new Blob(content, { type: "text/plain" });
     tempDownloadLink.href = URL.createObjectURL(file);
@@ -329,63 +353,6 @@ const downloadVassalDeckWithTempLink = (deck, fileName) => {
     tempDownloadLink.click();
 
     document.body.removeChild(tempDownloadLink);
-};
-
-const downloadProxyDeck = (cards) => async () => {
-    const { default: jsPDF } = await import("jspdf");
-    let doc = new jsPDF({
-        unit: "mm",
-    });
-
-    const w = 64.5;
-    const h = 89.9;
-
-    const pages = cards.reduce((acc, el, index, array) => {
-        if (index % 9 === 0) {
-            acc.push(array.slice(index, index + 9));
-        }
-        return acc;
-    }, []);
-
-    console.log(pages);
-
-    // for (let page of pages) {
-    //     {
-    //         const index = pages.indexOf(page);
-    //         if (index > 0) {
-    //             doc.addPage();
-    //         }
-    //     }
-
-    //     let rowIdx = 0;
-    //     let x = 3;
-    //     let y = 3;
-    //     let idx = 0;
-
-    //     for (let c of page) {
-    //         doc.addImage(
-    //             document.getElementById(c),
-    //             "png",
-    //             x,
-    //             y,
-    //             w,
-    //             h,
-    //             "",
-    //             "SLOW"
-    //         );
-    //         x += w + 3;
-    //         idx += 1;
-
-    //         if (idx % 3 === 0) {
-    //             rowIdx += 1;
-    //             x = 3;
-    //             y = rowIdx * h + rowIdx * 5;
-    //             console.log(x, y);
-    //         }
-    //     }
-    // }
-
-    // doc.save("cards.pdf");
 };
 
 export default ReadonlyDeck;
