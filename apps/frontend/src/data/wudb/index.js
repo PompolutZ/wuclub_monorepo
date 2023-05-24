@@ -339,8 +339,6 @@ const rivalDecksWithPlot = [
     sets["Daring Delvers Rivals Deck"].id,
     sets["Tooth and Claw Rivals Deck"].id,
     sets["Fearsome Fortress Rivals Deck"].id,
-    sets["Seismic Shock Rivals Deck"].id,
-    sets["Toxic Terrors Rivals Deck"].id,
 ];
 
 const warbandHasPlot = (warbandId) => warbandsWithPlot.includes(warbandId);
@@ -360,6 +358,13 @@ const plots = {
         asset: "Primacy",
         id: factions["Hedkrakka's Madmob"].id,
         name: factions["Hedkrakka's Madmob"].name,
+    },
+    Pandaemonium: {
+        keyword: "Pandaemonium",
+        connection: "Warband",
+        asset: "Pandaemonium",
+        id: factions["Ephilim's Pandaemonium"].id,
+        name: factions["Ephilim's Pandaemonium"].name,
     },
     Explorer: {
         keyword: "Explorer",
