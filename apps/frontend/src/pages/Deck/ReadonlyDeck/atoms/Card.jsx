@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { getSetById, totalCardsPerWave } from "../../../../data/wudb/index";
+import { getSetById } from "../../../../data/wudb/index";
 import { pickCardColor2 } from "../../../../utils/functions";
 import AnimateHeight from "react-animate-height";
 import {
     CHAMPIONSHIP_FORMAT,
-    getCardWaveFromId,
     getSetNameById,
     validateCardForPlayFormat,
 } from "../../../../data/wudb";
@@ -13,12 +12,14 @@ import CardRule from "../../../../atoms/CardRule";
 import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
 import { ReactComponent as LockIcon } from "@icons/lock.svg";
 import { ReactComponent as ForsakenIcon } from "@icons/no-symbol.svg";
+import { Waves } from "@wudb/waves";
 
 const idToPrintId = (id) => {
+    const wave = Waves[Math.floor(id / 1000)];
     return (
         <>
             <span className="font-bold">{`${id}`.slice(-3)}</span>
-            <span>/{totalCardsPerWave[parseInt(getCardWaveFromId(id))]}</span>
+            <span>/{wave.cardsCount}</span>
         </>
     );
 };
@@ -98,6 +99,7 @@ const CardAsText = ({ card, cardId }) => {
     const [expanded, setExpanded] = useState(false);
     const [useTextFallback, setUseTextFallback] = useState(false);
     const animateHeight = expanded ? "auto" : 0;
+    const wave = Waves[Math.floor(cardId / 1000)];
 
     return (
         <>
@@ -137,19 +139,13 @@ const CardAsText = ({ card, cardId }) => {
                         <picture>
                             <source
                                 type="image/webp"
-                                srcSet={`/assets/icons/wave-${cardId.substr(
-                                    0,
-                                    2
-                                )}-icon-48.webp`}
+                                srcSet={`/assets/icons/${wave.asset}.webp`}
                             />
                             <img
                                 className="w-3 h-3 ml-1"
                                 id={idToPrintId(cardId)}
-                                alt={`wave-${cardId.substr(0, 2)}`}
-                                src={`/assets/icons/wave-${cardId.substr(
-                                    0,
-                                    2
-                                )}-icon-24.png`}
+                                alt={wave.asset}
+                                src={`/assets/icons/${wave.asset}.png`}
                             />
                         </picture>
                         <div>)</div>

@@ -9,13 +9,12 @@ import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIco
 import {
     getCardById,
     getCardNumberFromId,
-    getCardWaveFromId,
     getSetNameById,
-    totalCardsPerWave,
     validateCardForPlayFormat,
 } from "../../../../data/wudb";
 import { ModalPresenter } from "../../../../main";
 import CardImage from "../../../../v2/components/CardImage";
+import { Waves } from "@wudb/waves";
 
 window.process = { cwd: () => "" };
 
@@ -53,7 +52,7 @@ class WUCardInfo extends PureComponent {
     render() {
         const { scoreType, name, id, glory, onClick } = this.props;
 
-        const wave = getCardWaveFromId(id);
+        const wave = Waves[Math.floor(id / 1000)];
         return (
             <div className="flex-1 self-start cursor-pointer" onClick={onClick}>
                 <div className="flex items-center">
@@ -87,12 +86,12 @@ class WUCardInfo extends PureComponent {
 
                     <span className="font-bold text-xs text-gray-500">{`${getCardNumberFromId(
                         id
-                    )}/${totalCardsPerWave[+wave]}`}</span>
+                    )}/${wave.cardsCount}`}</span>
 
                     <img
                         className="w-3 h-3 ml-1"
-                        alt={`wave-${wave}`}
-                        src={`/assets/icons/wave-${wave}-icon.png`}
+                        alt={wave.asset}
+                        src={`/assets/icons/${wave.asset}.png`}
                     />
                 </div>
             </div>

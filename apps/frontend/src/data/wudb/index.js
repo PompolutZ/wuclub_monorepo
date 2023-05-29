@@ -2,35 +2,6 @@ import { sets, cards, factions } from "./db.js";
 import { sortByIdAsc } from "../../utils/sort";
 import { boards } from "./boards";
 
-export const totalCardsPerWave = {
-    1: 437,
-    2: 60,
-    3: 557,
-    4: 60,
-    5: 124,
-    6: 438,
-    7: 32,
-    8: 40,
-    9: 500,
-    10: 64,
-    11: 60,
-    12: 60,
-    13: 308,
-    14: 308,
-    15: 32,
-    16: 32,
-    17: 32,
-    18: 32,
-    19: 32,
-    20: 32,
-    21: 32,
-    22: 32,
-    23: 32,
-    24: 32,
-    25: 32,
-    26: 32,
-};
-
 export const latestSeasonStartNumber = 15000;
 
 export const sortedFactions = Object.values(factions).sort(sortByIdAsc);
@@ -395,14 +366,6 @@ function getCardNumberFromId(cardId) {
     }
 
     return cardId % 1000;
-}
-
-function getCardWaveFromId(cardId) {
-    if (typeof cardId == "string") {
-        return cardId.slice(0, 2);
-    }
-
-    return `${Math.floor(cardId / 1000)}`.padStart(2, "0");
 }
 
 function getFactionByName(factionName) {
@@ -799,7 +762,6 @@ export {
     getFactionByAbbr,
     getFactionById,
     getCardNumberFromId,
-    getCardWaveFromId,
     getSetNameById,
     getSetById,
     cardTypes,
