@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import react from '@vitejs/plugin-react-swc'
 import svgr from 'vite-plugin-svgr'
 import path from "path"
 // const reactSvgPlugin = require('vite-plugin-react-svg');
@@ -13,5 +13,5 @@ export default defineConfig({
       "@wudb": path.resolve(__dirname, "./src/data/wudb"),
     },
   },
-  plugins: [reactRefresh(), svgr()]
+  plugins: [react(), svgr()]
 })
