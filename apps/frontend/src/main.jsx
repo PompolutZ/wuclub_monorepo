@@ -1,8 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import {
-    BrowserRouter as Router,
     Route,
+    BrowserRouter as Router,
     Switch,
     useLocation,
 } from "react-router-dom";
@@ -10,14 +10,13 @@ import "./index.css";
 
 import { unregister } from "./registerServiceWorker";
 
-import LazyLoading from "./components/LazyLoading";
 import ErrorBoundary from "./components/ErrorBoundary";
-import Firebase, { FirebaseContext } from "./firebase";
+import LazyLoading from "./components/LazyLoading";
 import * as ROUTES from "./constants/routes";
-import NavigationPanel from "./v2/components/NavigationPanel";
-import usePublicDecksSyncronization from "./hooks/usePublicDecksSyncronization";
-import HeroImage from "./v2/components/HeroImage";
+import Firebase, { FirebaseContext } from "./firebase";
 import { AuthContextProvider } from "./hooks/useAuthUser";
+import HeroImage from "./v2/components/HeroImage";
+import NavigationPanel from "./v2/components/NavigationPanel";
 
 const Home = lazy(() => import("./pages/Home"));
 const DeckCreator = lazy(() => import("./pages/DeckCreator"));
@@ -56,7 +55,7 @@ function MainLayout() {
                                         "linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 30%, black 100%)",
                                     width: "100%",
                                     height: "70%",
-                                    position: "absolute",   
+                                    position: "absolute",
                                 }}
                             ></div>
                         </div>
@@ -164,16 +163,6 @@ function MainLayout() {
     );
 }
 
-function App() {
-    usePublicDecksSyncronization();
-
-    return (
-        <Router>
-            <MainLayout />
-        </Router>
-    );
-}
-
 const modalRoot = document.getElementById("modal-root");
 export class ModalPresenter extends React.Component {
     constructor(props) {
@@ -205,7 +194,9 @@ export class ModalPresenter extends React.Component {
 const Root = () => (
     <FirebaseContext.Provider value={Firebase}>
         <AuthContextProvider>
-            <App />
+            <Router>
+                <MainLayout />
+            </Router>
         </AuthContextProvider>
     </FirebaseContext.Provider>
 );
