@@ -146,7 +146,7 @@ function Deck() {
                         title="Delete deck"
                         description={`Are you sure you want to delete deck: '${deck.name}'`}
                         open={isDeleteDialogVisible}
-                        onCloseDialog={handleCloseDeleteDialog}
+                        onCloseDeleteDialog={handleCloseDeleteDialog}
                         onDeleteConfirmed={handleDeleteDeck}
                         onDeleteRejected={handleCloseDeleteDialog}
                     />

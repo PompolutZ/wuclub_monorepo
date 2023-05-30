@@ -24,7 +24,7 @@ export const DeleteConfirmationDialog = ({
     >
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
         <div className="fixed inset-0 flex items-center justify-center p-4">
-            <Dialog.Panel className="w-full max-w-sm rounded-lg bg-white drop-shadow-md p-4 space-y-4">
+            <Dialog.Overlay className="w-full max-w-sm rounded-lg bg-white drop-shadow-md p-4 space-y-4">
                 <Dialog.Title className="text-lg">{title}</Dialog.Title>
                 <Dialog.Description>{description}</Dialog.Description>
                 <div className="flex flex-row-reverse gap-2">
@@ -41,7 +41,7 @@ export const DeleteConfirmationDialog = ({
                         Cancel
                     </button>
                 </div>
-            </Dialog.Panel>
+            </Dialog.Overlay>
         </div>
     </Dialog>
 );
