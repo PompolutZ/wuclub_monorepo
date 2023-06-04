@@ -77,6 +77,7 @@ export const getFaction = text => {
         case "Gryselle's Arenai": return 52;
         case "Domitan's Stormcoven": return 53;
         case "Ephilim's Pandaemonium": return 54;
+        case "The Headsmen's Curse": return 55;
         default: return -1;
     }
 }
@@ -107,6 +108,10 @@ const udbPrefexes = {
     EP: 24,
     SS: 25,
     TT: 26,
+    HC: 27,
+    VT: 28,
+    SG: 29,
+    FS: 30
 }
 
 export const decodeUDB = card => {

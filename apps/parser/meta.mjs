@@ -71,6 +71,10 @@ export const setsIndex = [
     "ephilims-pandaemonium-rivals-deck",
     "seismic-shock-rivals-deck",
     "toxic-terrors-rivals-deck",
+    "the-headsmens-curse-rivals-deck",
+    "voidcursed-thralls-rivals-deck",
+    "sepulchral-guard-rivals-deck",
+    "the-farstriders-rivals-deck",
 ]
 
 export const setsNames = [
@@ -148,6 +152,10 @@ export const setsNames = [
     "Ephilim's Pandaemonium Rivals Deck",
     "Seismic Shock Rivals Deck",
     "Toxic Terrors Rivals Deck",
+    "The Headsmen's Curse Rivals Deck",
+    "Voidcursed Thralls Rivals Deck",
+    "Sepulchral Guard Rivals Deck",
+    "The Farstriders Rivals Deck",
 ]
 
 // case "Order": return 38;
@@ -217,6 +225,7 @@ export const factionToGrandAlianceId = {
 
     "domitans-stormcoven": 38,
     "ephilims-pandaemonium": 39,
+    "the-headsmens-curse": 40,
 }
 
 export const factionIndexes = [
@@ -287,6 +296,7 @@ export const factionIndexes = [
     
     "domitans-stormcoven",
     "ephilims-pandaemonium",
+    "the-headsmens-curse",
 ]
 
 export const factionIdPrefix = {
@@ -356,5 +366,6 @@ export const factionIdPrefix = {
     "gryselles-arenai": "ga",
     
     "domitans-stormcoven": "ds",
-    "ephilims-pandaemonium": "ep"
+    "ephilims-pandaemonium": "ep",
+    "the-headsmens-curse": "thc",
 }
