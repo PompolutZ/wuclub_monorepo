@@ -108,4 +108,20 @@ export const Waves: Record<number, Wave> = {
         cardsCount: 32,
         asset: "toxic-terrors-rivals-deck-icon"
     },
+    27: {
+        cardsCount: 32,
+        asset: "the-headsmens-curse-icon"
+    },
+    28: {
+        cardsCount: 32,
+        asset: "voidcursed-thralls-rivals-deck-icon"
+    },
+    29: {
+        cardsCount: 32,
+        asset: "toxic-terrors-rivals-deck-icon"
+    },
+    30: {
+        cardsCount: 32,
+        asset: "toxic-terrors-rivals-deck-icon"
+    },
 }

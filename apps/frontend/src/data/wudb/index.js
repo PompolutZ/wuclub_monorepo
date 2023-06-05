@@ -14,7 +14,9 @@ export const factionMembers = {
         "Champion",
         "Prince",
         "Harvester",
-        "Petitioner",
+        "Petitioner-1",
+        "Petitioner-2",
+        "Petitioner-3",
     ],
     "ironskulls-boyz": ["Gurzag", "Bonekutta", "Hakka", "Basha"],
     "the-chosen-axes": ["Grimnir", "Tefk", "Vol", "Maegrim"],
@@ -177,6 +179,7 @@ export const factionMembers = {
     "gryselles-arenai": ["1", "2", "3", "4", "5"],
     "domitans-stormcoven": ["1", "2", "3"],
     "ephilims-pandaemonium": ["1", "2", "3", "4", "5"],
+    "the-headsmens-curse": ["1", "2", "3", "4"],
 };
 
 export const udbPrefexes = {
@@ -205,6 +208,10 @@ export const udbPrefexes = {
     EP: 24,
     SS: 25,
     TT: 26,
+    HC: 27,
+    VT: 28,
+    SG: 29,
+    FS: 30,
 };
 
 export const grouppedFactions = () => {
@@ -304,12 +311,14 @@ const warbandsWithPlot = [
     factions["Khagra's Ravagers"].id,
     factions["Hedkrakka's Madmob"].id,
     factions["Ephilim's Pandaemonium"].id,
+    factions["The Headsmen's Curse"].id,
 ];
 
 const rivalDecksWithPlot = [
     sets["Daring Delvers Rivals Deck"].id,
     sets["Tooth and Claw Rivals Deck"].id,
     sets["Fearsome Fortress Rivals Deck"].id,
+    sets["Voidcursed Thralls Rivals Deck"].id,
 ];
 
 const warbandHasPlot = (warbandId) => warbandsWithPlot.includes(warbandId);
@@ -337,6 +346,13 @@ const plots = {
         id: factions["Ephilim's Pandaemonium"].id,
         name: factions["Ephilim's Pandaemonium"].name,
     },
+    HeadsmensCurse: {
+        keyword: "Headsmens Curse",
+        connection: "Warband",
+        asset: "TheHeadsmensCurse",
+        id: factions["The Headsmen's Curse"].id,
+        name: factions["The Headsmen's Curse"].name,
+    },
     Explorer: {
         keyword: "Explorer",
         connection: "Set",
@@ -357,6 +373,13 @@ const plots = {
         asset: "20000",
         id: sets["Fearsome Fortress Rivals Deck"].id,
         name: sets["Fearsome Fortress Rivals Deck"].name,
+    },
+    Voidcursed: {
+        keyword: "Voidcursed",
+        connection: "Set",
+        asset: "voidcursed",
+        id: sets["Voidcursed Thralls Rivals Deck"].id,
+        name: sets["Voidcursed Thralls Rivals Deck"].name,
     },
 };
 
@@ -482,6 +505,7 @@ const nemesis_valid_sets = [
     sets["Beastbound Assault Rivals Deck"].id,
     sets["Seismic Shock Rivals Deck"].id,
     sets["Toxic Terrors Rivals Deck"].id,
+    sets["Voidcursed Thralls Rivals Deck"].id,
 ];
 
 function getAllSetsValidForFormat(format) {
