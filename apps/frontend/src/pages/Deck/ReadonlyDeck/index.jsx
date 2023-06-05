@@ -298,13 +298,23 @@ const vassalPrefixMap = {
     23: 230,
     24: 231,
     25: 232,
-    26: 233
+    26: 233,
+    27: 234,
+    28: 235,
+    29: 240,
 }
 
 const handleSaveVassalFiles = (name, cards) => () => {
     const objectives = cards
         .filter(({ type }) => type === "Objective")
         .map((c) => {
+            if (c.id >= 30000 && c.id <= 31000) {
+                // handle special case:  
+                // Sepulchral Guard REMASTERED = 24001 to 24032
+                // Farstriders REMASTERED = 24033 to 24064
+                const cardIdx = c.id % 100;
+                return [240 + `${32 + cardIdx}`.padStart(2, "0"), c.name];
+            }
             if (c.id >= 23000) {
                 const prefix = Math.floor(c.id / 1000);
                 const cardIdx = c.id % 100;
