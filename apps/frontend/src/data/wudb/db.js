@@ -37764,7 +37764,7 @@ export const cards = {
     "15001": {
         "id": 15001,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Oath of Fortitude",
         "type": "Objective",
         "glory": 1,
@@ -37776,7 +37776,7 @@ export const cards = {
     "15002": {
         "id": 15002,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Oath of Ruin",
         "type": "Objective",
         "glory": 1,
@@ -37788,7 +37788,7 @@ export const cards = {
     "15003": {
         "id": 15003,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Oath of Slaughter",
         "type": "Objective",
         "glory": 1,
@@ -37800,7 +37800,7 @@ export const cards = {
     "15004": {
         "id": 15004,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Oath of the Hunt",
         "type": "Objective",
         "glory": 1,
@@ -37812,7 +37812,7 @@ export const cards = {
     "15005": {
         "id": 15005,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Rapid Raid",
         "type": "Objective",
         "glory": 1,
@@ -37824,7 +37824,7 @@ export const cards = {
     "15006": {
         "id": 15006,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Raze and Pillage",
         "type": "Objective",
         "glory": 2,
@@ -37836,7 +37836,7 @@ export const cards = {
     "15007": {
         "id": 15007,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Return to Ruin",
         "type": "Objective",
         "glory": 3,
@@ -37848,7 +37848,7 @@ export const cards = {
     "15008": {
         "id": 15008,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Savaged",
         "type": "Objective",
         "glory": 1,
@@ -37860,7 +37860,7 @@ export const cards = {
     "15009": {
         "id": 15009,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Shocking Raid",
         "type": "Objective",
         "glory": 1,
@@ -37872,7 +37872,7 @@ export const cards = {
     "15010": {
         "id": 15010,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "True Selves",
         "type": "Objective",
         "glory": 1,
@@ -37884,7 +37884,7 @@ export const cards = {
     "15011": {
         "id": 15011,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Well Rewarded",
         "type": "Objective",
         "glory": 1,
@@ -37896,7 +37896,7 @@ export const cards = {
     "15012": {
         "id": 15012,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Worthy Deed",
         "type": "Objective",
         "glory": 1,
@@ -37908,7 +37908,7 @@ export const cards = {
     "15013": {
         "id": 15013,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Dulling Venom",
         "type": "Ploy",
         "glory": null,
@@ -37920,7 +37920,7 @@ export const cards = {
     "15014": {
         "id": 15014,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Fierce Competition",
         "type": "Ploy",
         "glory": null,
@@ -37932,7 +37932,7 @@ export const cards = {
     "15015": {
         "id": 15015,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Hasty Pillage",
         "type": "Ploy",
         "glory": null,
@@ -37944,7 +37944,7 @@ export const cards = {
     "15016": {
         "id": 15016,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Hunting Aspects",
         "type": "Ploy",
         "glory": null,
@@ -37956,7 +37956,7 @@ export const cards = {
     "15017": {
         "id": 15017,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "In Control",
         "type": "Ploy",
         "glory": null,
@@ -37968,7 +37968,7 @@ export const cards = {
     "15018": {
         "id": 15018,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Self-command",
         "type": "Ploy",
         "glory": null,
@@ -37980,7 +37980,7 @@ export const cards = {
     "15019": {
         "id": 15019,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Spurred Onwards",
         "type": "Ploy",
         "glory": null,
@@ -37992,7 +37992,7 @@ export const cards = {
     "15020": {
         "id": 15020,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "The Binding",
         "type": "Spell",
         "glory": null,
@@ -38004,7 +38004,7 @@ export const cards = {
     "15021": {
         "id": 15021,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Vicious Blow",
         "type": "Ploy",
         "glory": null,
@@ -38016,7 +38016,7 @@ export const cards = {
     "15022": {
         "id": 15022,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Violent Transformation",
         "type": "Ploy",
         "glory": null,
@@ -38028,7 +38028,7 @@ export const cards = {
     "15023": {
         "id": 15023,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Brute Resilience",
         "type": "Upgrade",
         "glory": null,
@@ -38040,7 +38040,7 @@ export const cards = {
     "15024": {
         "id": 15024,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Denbreaker",
         "type": "Upgrade",
         "glory": null,
@@ -38052,7 +38052,7 @@ export const cards = {
     "15025": {
         "id": 15025,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Envenomed Spurs",
         "type": "Upgrade",
         "glory": null,
@@ -38064,7 +38064,7 @@ export const cards = {
     "15026": {
         "id": 15026,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Preternatural Senses",
         "type": "Upgrade",
         "glory": null,
@@ -38076,7 +38076,7 @@ export const cards = {
     "15027": {
         "id": 15027,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Raging Companion",
         "type": "Upgrade",
         "glory": null,
@@ -38088,7 +38088,7 @@ export const cards = {
     "15028": {
         "id": 15028,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Surfaced Instinct",
         "type": "Upgrade",
         "glory": null,
@@ -38100,7 +38100,7 @@ export const cards = {
     "15029": {
         "id": 15029,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Trophy of Fortitude",
         "type": "Upgrade",
         "glory": null,
@@ -38112,7 +38112,7 @@ export const cards = {
     "15030": {
         "id": 15030,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Trophy of Strength",
         "type": "Upgrade",
         "glory": null,
@@ -38124,7 +38124,7 @@ export const cards = {
     "15031": {
         "id": 15031,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Trophy of Vision",
         "type": "Upgrade",
         "glory": null,
@@ -38136,7 +38136,7 @@ export const cards = {
     "15032": {
         "id": 15032,
         "factionId": 50,
-        "setId": 0,
+        "setId": 49,
         "name": "Wily Hunter",
         "type": "Upgrade",
         "glory": null,
@@ -38148,7 +38148,7 @@ export const cards = {
     "16001": {
         "id": 16001,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Absolute Monarch",
         "type": "Objective",
         "glory": 1,
@@ -38160,7 +38160,7 @@ export const cards = {
     "16002": {
         "id": 16002,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Clinical Efficiency",
         "type": "Objective",
         "glory": 1,
@@ -38172,7 +38172,7 @@ export const cards = {
     "16003": {
         "id": 16003,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Dispassionate Slaughter",
         "type": "Objective",
         "glory": 2,
@@ -38184,7 +38184,7 @@ export const cards = {
     "16004": {
         "id": 16004,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Hereditary Claims",
         "type": "Objective",
         "glory": 2,
@@ -38196,7 +38196,7 @@ export const cards = {
     "16005": {
         "id": 16005,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "House Eternal",
         "type": "Objective",
         "glory": 1,
@@ -38208,7 +38208,7 @@ export const cards = {
     "16006": {
         "id": 16006,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Inevitability Itself",
         "type": "Objective",
         "glory": 3,
@@ -38220,7 +38220,7 @@ export const cards = {
     "16007": {
         "id": 16007,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Martial Lord",
         "type": "Objective",
         "glory": 1,
@@ -38232,7 +38232,7 @@ export const cards = {
     "16008": {
         "id": 16008,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Morbid Majesty",
         "type": "Objective",
         "glory": 2,
@@ -38244,7 +38244,7 @@ export const cards = {
     "16009": {
         "id": 16009,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Protected Inheritance",
         "type": "Objective",
         "glory": 2,
@@ -38256,7 +38256,7 @@ export const cards = {
     "16010": {
         "id": 16010,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Regal Riposte",
         "type": "Objective",
         "glory": 1,
@@ -38268,7 +38268,7 @@ export const cards = {
     "16011": {
         "id": 16011,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Relentless Unity",
         "type": "Objective",
         "glory": 1,
@@ -38280,7 +38280,7 @@ export const cards = {
     "16012": {
         "id": 16012,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Vying for Favour",
         "type": "Objective",
         "glory": 1,
@@ -38292,7 +38292,7 @@ export const cards = {
     "16013": {
         "id": 16013,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Deadly Manoeuvre",
         "type": "Ploy",
         "glory": null,
@@ -38304,7 +38304,7 @@ export const cards = {
     "16014": {
         "id": 16014,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Decapitating Blow",
         "type": "Ploy",
         "glory": null,
@@ -38316,7 +38316,7 @@ export const cards = {
     "16015": {
         "id": 16015,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Father's Pride",
         "type": "Ploy",
         "glory": null,
@@ -38328,7 +38328,7 @@ export const cards = {
     "16016": {
         "id": 16016,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Imperious Will",
         "type": "Ploy",
         "glory": null,
@@ -38340,7 +38340,7 @@ export const cards = {
     "16017": {
         "id": 16017,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Redoubled Fervour",
         "type": "Ploy",
         "glory": null,
@@ -38352,7 +38352,7 @@ export const cards = {
     "16018": {
         "id": 16018,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Rise Again",
         "type": "Ploy",
         "glory": null,
@@ -38364,7 +38364,7 @@ export const cards = {
     "16019": {
         "id": 16019,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Shyishan Infusion",
         "type": "Ploy",
         "glory": null,
@@ -38376,7 +38376,7 @@ export const cards = {
     "16020": {
         "id": 16020,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Spike of Terror",
         "type": "Ploy",
         "glory": null,
@@ -38388,7 +38388,7 @@ export const cards = {
     "16021": {
         "id": 16021,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Surprising Swiftness",
         "type": "Ploy",
         "glory": null,
@@ -38400,7 +38400,7 @@ export const cards = {
     "16022": {
         "id": 16022,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Velmorn's Curse",
         "type": "Ploy",
         "glory": null,
@@ -38412,7 +38412,7 @@ export const cards = {
     "16023": {
         "id": 16023,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Experience of Ages",
         "type": "Upgrade",
         "glory": null,
@@ -38424,7 +38424,7 @@ export const cards = {
     "16024": {
         "id": 16024,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Familial Bond",
         "type": "Upgrade",
         "glory": null,
@@ -38436,7 +38436,7 @@ export const cards = {
     "16025": {
         "id": 16025,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Favoured Son",
         "type": "Upgrade",
         "glory": null,
@@ -38448,7 +38448,7 @@ export const cards = {
     "16026": {
         "id": 16026,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Fearless Lunge",
         "type": "Upgrade",
         "glory": null,
@@ -38460,7 +38460,7 @@ export const cards = {
     "16027": {
         "id": 16027,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Fell Enchantments",
         "type": "Upgrade",
         "glory": null,
@@ -38472,7 +38472,7 @@ export const cards = {
     "16028": {
         "id": 16028,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Heirloom Weapon",
         "type": "Upgrade",
         "glory": null,
@@ -38484,7 +38484,7 @@ export const cards = {
     "16029": {
         "id": 16029,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Lord of Bones",
         "type": "Upgrade",
         "glory": null,
@@ -38496,7 +38496,7 @@ export const cards = {
     "16030": {
         "id": 16030,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Praetorian",
         "type": "Upgrade",
         "glory": null,
@@ -38508,7 +38508,7 @@ export const cards = {
     "16031": {
         "id": 16031,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "Proud Son",
         "type": "Upgrade",
         "glory": null,
@@ -38520,7 +38520,7 @@ export const cards = {
     "16032": {
         "id": 16032,
         "factionId": 51,
-        "setId": 0,
+        "setId": 49,
         "name": "The Crown's Curse",
         "type": "Upgrade",
         "glory": null,
@@ -39300,7 +39300,7 @@ export const cards = {
     "19001": {
         "id": 19001,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Arm Yerself!",
         "type": "Objective",
         "glory": 1,
@@ -39312,7 +39312,7 @@ export const cards = {
     "19002": {
         "id": 19002,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Looncourt Conquest",
         "type": "Objective",
         "glory": 3,
@@ -39324,7 +39324,7 @@ export const cards = {
     "19003": {
         "id": 19003,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Looncourt Infestation",
         "type": "Objective",
         "glory": 2,
@@ -39336,7 +39336,7 @@ export const cards = {
     "19004": {
         "id": 19004,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Looncourt, Scrag 'Em!",
         "type": "Objective",
         "glory": 1,
@@ -39348,7 +39348,7 @@ export const cards = {
     "19005": {
         "id": 19005,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Meanest of them All",
         "type": "Objective",
         "glory": 1,
@@ -39360,7 +39360,7 @@ export const cards = {
     "19006": {
         "id": 19006,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Mob 'Em!",
         "type": "Objective",
         "glory": 1,
@@ -39372,7 +39372,7 @@ export const cards = {
     "19007": {
         "id": 19007,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Neh Neh Na-neh Neh!",
         "type": "Objective",
         "glory": 1,
@@ -39384,7 +39384,7 @@ export const cards = {
     "19008": {
         "id": 19008,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Pick On a Git Yer Own Size!",
         "type": "Objective",
         "glory": 2,
@@ -39396,7 +39396,7 @@ export const cards = {
     "19009": {
         "id": 19009,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Questin' Gits",
         "type": "Objective",
         "glory": 1,
@@ -39408,7 +39408,7 @@ export const cards = {
     "19010": {
         "id": 19010,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Run 'Em Down!",
         "type": "Objective",
         "glory": 1,
@@ -39420,7 +39420,7 @@ export const cards = {
     "19011": {
         "id": 19011,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Small Glories",
         "type": "Objective",
         "glory": 2,
@@ -39432,7 +39432,7 @@ export const cards = {
     "19012": {
         "id": 19012,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "That's Ours, That is!",
         "type": "Objective",
         "glory": 1,
@@ -39444,7 +39444,7 @@ export const cards = {
     "19013": {
         "id": 19013,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Bold Pile On",
         "type": "Ploy",
         "glory": null,
@@ -39456,7 +39456,7 @@ export const cards = {
     "19014": {
         "id": 19014,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Enthusiastic Dubbing",
         "type": "Ploy",
         "glory": null,
@@ -39468,7 +39468,7 @@ export const cards = {
     "19015": {
         "id": 19015,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Gittish Celerity",
         "type": "Ploy",
         "glory": null,
@@ -39480,7 +39480,7 @@ export const cards = {
     "19016": {
         "id": 19016,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Gittish Ferocity",
         "type": "Ploy",
         "glory": null,
@@ -39492,7 +39492,7 @@ export const cards = {
     "19017": {
         "id": 19017,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Gittish Resilience",
         "type": "Ploy",
         "glory": null,
@@ -39504,7 +39504,7 @@ export const cards = {
     "19018": {
         "id": 19018,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Healin' Spores",
         "type": "Ploy",
         "glory": null,
@@ -39516,7 +39516,7 @@ export const cards = {
     "19019": {
         "id": 19019,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Pocket Squig",
         "type": "Ploy",
         "glory": null,
@@ -39528,7 +39528,7 @@ export const cards = {
     "19020": {
         "id": 19020,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Sound the Charge",
         "type": "Ploy",
         "glory": null,
@@ -39540,7 +39540,7 @@ export const cards = {
     "19021": {
         "id": 19021,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Stab, Stab and Stab Again",
         "type": "Ploy",
         "glory": null,
@@ -39552,7 +39552,7 @@ export const cards = {
     "19022": {
         "id": 19022,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Stick the Boot In",
         "type": "Ploy",
         "glory": null,
@@ -39564,7 +39564,7 @@ export const cards = {
     "19023": {
         "id": 19023,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Despicable Cad",
         "type": "Upgrade",
         "glory": null,
@@ -39576,7 +39576,7 @@ export const cards = {
     "19024": {
         "id": 19024,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Downtrodden Squire",
         "type": "Upgrade",
         "glory": null,
@@ -39588,7 +39588,7 @@ export const cards = {
     "19025": {
         "id": 19025,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Extra Pointy Boots",
         "type": "Upgrade",
         "glory": null,
@@ -39600,7 +39600,7 @@ export const cards = {
     "19026": {
         "id": 19026,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Fortifying Fungus",
         "type": "Upgrade",
         "glory": null,
@@ -39612,7 +39612,7 @@ export const cards = {
     "19027": {
         "id": 19027,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Kunnin' Advance",
         "type": "Upgrade",
         "glory": null,
@@ -39624,7 +39624,7 @@ export const cards = {
     "19028": {
         "id": 19028,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Kunnin' Knight",
         "type": "Upgrade",
         "glory": null,
@@ -39636,7 +39636,7 @@ export const cards = {
     "19029": {
         "id": 19029,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Legbiter",
         "type": "Upgrade",
         "glory": null,
@@ -39648,7 +39648,7 @@ export const cards = {
     "19030": {
         "id": 19030,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Magnificent Bounda",
         "type": "Upgrade",
         "glory": null,
@@ -39660,7 +39660,7 @@ export const cards = {
     "19031": {
         "id": 19031,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Quest's End",
         "type": "Upgrade",
         "glory": null,
@@ -39672,7 +39672,7 @@ export const cards = {
     "19032": {
         "id": 19032,
         "factionId": 52,
-        "setId": 0,
+        "setId": 52,
         "name": "Wicked Slitta",
         "type": "Upgrade",
         "glory": null,
@@ -40068,7 +40068,7 @@ export const cards = {
     "21001": {
         "id": 21001,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Acrobatic Assault",
         "type": "Objective",
         "glory": 1,
@@ -40080,7 +40080,7 @@ export const cards = {
     "21002": {
         "id": 21002,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Blood on the Sands",
         "type": "Objective",
         "glory": 1,
@@ -40092,7 +40092,7 @@ export const cards = {
     "21003": {
         "id": 21003,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Bloody Show",
         "type": "Objective",
         "glory": 2,
@@ -40104,7 +40104,7 @@ export const cards = {
     "21004": {
         "id": 21004,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Exult in Violence",
         "type": "Objective",
         "glory": 1,
@@ -40116,7 +40116,7 @@ export const cards = {
     "21005": {
         "id": 21005,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Faultless Display",
         "type": "Objective",
         "glory": 1,
@@ -40128,7 +40128,7 @@ export const cards = {
     "21006": {
         "id": 21006,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Grandstand",
         "type": "Objective",
         "glory": 1,
@@ -40140,7 +40140,7 @@ export const cards = {
     "21007": {
         "id": 21007,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Har Kuron Hurricane",
         "type": "Objective",
         "glory": 2,
@@ -40152,7 +40152,7 @@ export const cards = {
     "21008": {
         "id": 21008,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "In Praise of Khaine",
         "type": "Objective",
         "glory": 3,
@@ -40164,7 +40164,7 @@ export const cards = {
     "21009": {
         "id": 21009,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Lethal Spectacle",
         "type": "Objective",
         "glory": 1,
@@ -40176,7 +40176,7 @@ export const cards = {
     "21010": {
         "id": 21010,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Ritual Performance",
         "type": "Objective",
         "glory": 1,
@@ -40188,7 +40188,7 @@ export const cards = {
     "21011": {
         "id": 21011,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Storm of Blades",
         "type": "Objective",
         "glory": 1,
@@ -40200,7 +40200,7 @@ export const cards = {
     "21012": {
         "id": 21012,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Warrior-faithful",
         "type": "Objective",
         "glory": 1,
@@ -40212,7 +40212,7 @@ export const cards = {
     "21013": {
         "id": 21013,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Daring Flourish",
         "type": "Ploy",
         "glory": null,
@@ -40224,7 +40224,7 @@ export const cards = {
     "21014": {
         "id": 21014,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Executioner's Flourish",
         "type": "Ploy",
         "glory": null,
@@ -40236,7 +40236,7 @@ export const cards = {
     "21015": {
         "id": 21015,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Fatal Flourish",
         "type": "Ploy",
         "glory": null,
@@ -40248,7 +40248,7 @@ export const cards = {
     "21016": {
         "id": 21016,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Frenzied Speed",
         "type": "Ploy",
         "glory": null,
@@ -40260,7 +40260,7 @@ export const cards = {
     "21017": {
         "id": 21017,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Gory Reward",
         "type": "Ploy",
         "glory": null,
@@ -40272,7 +40272,7 @@ export const cards = {
     "21018": {
         "id": 21018,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Leaping Flourish",
         "type": "Ploy",
         "glory": null,
@@ -40284,7 +40284,7 @@ export const cards = {
     "21019": {
         "id": 21019,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Moment of Rapture",
         "type": "Ploy",
         "glory": null,
@@ -40296,7 +40296,7 @@ export const cards = {
     "21020": {
         "id": 21020,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Paean of Slaughter",
         "type": "Ploy",
         "glory": null,
@@ -40308,7 +40308,7 @@ export const cards = {
     "21021": {
         "id": 21021,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Spinning Flourish",
         "type": "Ploy",
         "glory": null,
@@ -40320,7 +40320,7 @@ export const cards = {
     "21022": {
         "id": 21022,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Unquenchable Fervour",
         "type": "Ploy",
         "glory": null,
@@ -40332,7 +40332,7 @@ export const cards = {
     "21023": {
         "id": 21023,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Blood Sigil",
         "type": "Upgrade",
         "glory": null,
@@ -40344,7 +40344,7 @@ export const cards = {
     "21024": {
         "id": 21024,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Devotee of Slaughter",
         "type": "Upgrade",
         "glory": null,
@@ -40356,7 +40356,7 @@ export const cards = {
     "21025": {
         "id": 21025,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Devotee of the Blade",
         "type": "Upgrade",
         "glory": null,
@@ -40368,7 +40368,7 @@ export const cards = {
     "21026": {
         "id": 21026,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Gore-drenched",
         "type": "Upgrade",
         "glory": null,
@@ -40380,7 +40380,7 @@ export const cards = {
     "21027": {
         "id": 21027,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Kruiplash",
         "type": "Upgrade",
         "glory": null,
@@ -40392,7 +40392,7 @@ export const cards = {
     "21028": {
         "id": 21028,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Lacerating Blow",
         "type": "Upgrade",
         "glory": null,
@@ -40404,7 +40404,7 @@ export const cards = {
     "21029": {
         "id": 21029,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Mistress of the Bladestorm",
         "type": "Upgrade",
         "glory": null,
@@ -40416,7 +40416,7 @@ export const cards = {
     "21030": {
         "id": 21030,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Paragon of the Arena",
         "type": "Upgrade",
         "glory": null,
@@ -40428,7 +40428,7 @@ export const cards = {
     "21031": {
         "id": 21031,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Piercing Strike",
         "type": "Upgrade",
         "glory": null,
@@ -40440,7 +40440,7 @@ export const cards = {
     "21032": {
         "id": 21032,
         "factionId": 53,
-        "setId": 0,
+        "setId": 54,
         "name": "Star Performer",
         "type": "Upgrade",
         "glory": null,

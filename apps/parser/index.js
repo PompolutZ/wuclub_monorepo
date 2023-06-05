@@ -102,6 +102,9 @@ function parse(text) {
 
             if(!acc.sets[set]) {
                 const index = getSetIndex(set);
+                if (index === 0) {
+                    console.error(set);
+                }
                 if(index < 0) {
                     console.log(line);
                     throw Error(`Cannot find index for > ${set}`);
@@ -136,7 +139,11 @@ function parse(text) {
             
             if(!acc.cards[id]) {
                 const factionId = getFaction(faction) + 1;
-                const setId = setsNames.indexOf(set) + 1;
+                const setId = getSetIndex(set) + 1;
+                if (setId === 0) {
+                    console.error("HELLO", set);
+                    throw new Error();
+                }
 
                 data = {
                     id,
