@@ -14,7 +14,7 @@ const createExpansionGroups = () => {
     const season5 = [41, 42, 43, 44];
     const season6 = [45, 46, 47, 48];
     const season7 = [49, 50, 51, wusets["Fearsome Fortress Rivals Deck"].id, wusets["Beastbound Assault Rivals Deck"].id];
-    const season8 = [wusets["Seismic Shock Rivals Deck"].id, wusets["Toxic Terrors Rivals Deck"].id];
+    const season8 = [wusets["Seismic Shock Rivals Deck"].id, wusets["Toxic Terrors Rivals Deck"].id, wusets["Voidcursed Thralls Rivals Deck"].id, wusets["Paths of Prophecy Rivals Deck"].id];
     const noSeason = [20, 37, 38];
 
     return [

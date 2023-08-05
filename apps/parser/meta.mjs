@@ -75,6 +75,8 @@ export const setsIndex = [
     "voidcursed-thralls-rivals-deck",
     "sepulchral-guard-rivals-deck",
     "the-farstriders-rivals-deck",
+    "skabbiks-plaguepack-rivals-deck",
+    "paths-of-prophecy-rivals-deck",
 ]
 
 export const setsNames = [
@@ -156,6 +158,8 @@ export const setsNames = [
     "Voidcursed Thralls Rivals Deck",
     "Sepulchral Guard Rivals Deck",
     "The Farstriders Rivals Deck",
+    "Skabbik's Plaguepack Rivals Deck",
+    "Paths of Prophecy Rivals Deck",
 ]
 
 // case "Order": return 38;
@@ -297,6 +301,7 @@ export const factionIndexes = [
     "domitans-stormcoven",
     "ephilims-pandaemonium",
     "the-headsmens-curse",
+    "skabbiks-plaguepack"
 ]
 
 export const factionIdPrefix = {
@@ -368,4 +373,5 @@ export const factionIdPrefix = {
     "domitans-stormcoven": "ds",
     "ephilims-pandaemonium": "ep",
     "the-headsmens-curse": "thc",
+    "skabbiks-plaguepack": "sp"
 }

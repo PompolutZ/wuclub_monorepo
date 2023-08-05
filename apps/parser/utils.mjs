@@ -78,6 +78,7 @@ export const getFaction = text => {
         case "Domitan's Stormcoven": return 53;
         case "Ephilim's Pandaemonium": return 54;
         case "The Headsmen's Curse": return 55;
+        case "Skabbik's Plaguepack": return 56;
         default: return -1;
     }
 }
@@ -111,7 +112,9 @@ const udbPrefexes = {
     HC: 27,
     VT: 28,
     SG: 29,
-    FS: 30
+    FS: 30,
+    SP: 31,
+    PP: 32,
 }
 
 export const decodeUDB = card => {
@@ -123,5 +126,9 @@ export const decodeUDB = card => {
 export function findDuplicatesByName(name, source) {
     return Object.entries(source)
         .filter(([number, data]) => data.name == name);        
+}
+
+function dashify(str) {
+    return str.replaceAll(" ", "-").replaceAll("'", "").toLowerCase()
 }
 

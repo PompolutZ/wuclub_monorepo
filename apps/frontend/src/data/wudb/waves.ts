@@ -124,4 +124,12 @@ export const Waves: Record<number, Wave> = {
         cardsCount: 32,
         asset: "toxic-terrors-rivals-deck-icon"
     },
+    31: {
+        cardsCount: 32,
+        asset: "skabbiks-plaguepack-rivals-deck-icon"
+    },
+    32: {
+        cardsCount: 32,
+        asset: "paths-of-prophecy-rivals-deck-icon"
+    },
 }

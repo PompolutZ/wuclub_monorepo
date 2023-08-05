@@ -180,6 +180,7 @@ export const factionMembers = {
     "domitans-stormcoven": ["1", "2", "3"],
     "ephilims-pandaemonium": ["1", "2", "3", "4", "5"],
     "the-headsmens-curse": ["1", "2", "3", "4"],
+    "skabbiks-plaguepack": ["1", "2", "3", "4", "5", "6"],
 };
 
 export const udbPrefexes = {
@@ -212,6 +213,8 @@ export const udbPrefexes = {
     VT: 28,
     SG: 29,
     FS: 30,
+    SP: 31,
+    PP: 32,
 };
 
 export const grouppedFactions = () => {
@@ -312,6 +315,7 @@ const warbandsWithPlot = [
     factions["Hedkrakka's Madmob"].id,
     factions["Ephilim's Pandaemonium"].id,
     factions["The Headsmen's Curse"].id,
+    factions["Skabbik's Plaguepack"].id,
 ];
 
 const rivalDecksWithPlot = [
@@ -352,6 +356,13 @@ const plots = {
         asset: "TheHeadsmensCurse",
         id: factions["The Headsmen's Curse"].id,
         name: factions["The Headsmen's Curse"].name,
+    },
+    Plaguepack: {
+        keyword: "Plaguepack",
+        connection: "Warband",
+        asset: "Plaguepack",
+        id: factions["Skabbik's Plaguepack"].id,
+        name: factions["Skabbik's Plaguepack"].name,
     },
     Explorer: {
         keyword: "Explorer",
