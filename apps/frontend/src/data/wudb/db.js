@@ -717,6 +717,7 @@ export const factions = {
         "id": 57,
         "abbr": "sp",
         "name": "skabbiks-plaguepack",
+        "gaId": 39,
         "displayName": "Skabbik's Plaguepack"
     }
 }

@@ -230,6 +230,7 @@ export const factionToGrandAlianceId = {
     "domitans-stormcoven": 38,
     "ephilims-pandaemonium": 39,
     "the-headsmens-curse": 40,
+    "skabbiks-plaguepack": 39,
 }
 
 export const factionIndexes = [
