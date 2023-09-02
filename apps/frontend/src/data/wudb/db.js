@@ -35421,7 +35421,7 @@ export const cards = {
         "name": "Call of Blood",
         "type": "Ploy",
         "glory": null,
-        "rule": "**Prayer** \\n **Choose** up to two fighters. **Push** each chosen fighter 1 hex towards the nearest fighter from an enemy warband. If a chosen fighter has one or more blood tithe counters, you can **remove** one of that fighter's blood tithe counters. If you do, **push** the chosen fighter up to 2 hexes towards the nearest fighter from an enemy warband instead.",
+        "rule": "*(Errata update)* **Prayer** \\n **Choose** up to two fighters. **Push** each chosen fighter 1 hex towards the nearest fighter from an enemy warband. If a chosen friendly fighter has one or more blood tithe counters, you can **remove** one of that fighter's blood tithe counters. If you do, **push** the chosen fighter up to 2 hexes towards the nearest fighter from an enemy warband instead.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -37343,7 +37343,7 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action** \\n [:Hex: 2 - :atFury: 4 - :boom: 2 ] \\n The **bounty** gained when an enemy fighter is taken out of action by this **Attack action** is spent glory unless this fighter is on a feature token.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "14273": {
@@ -38711,7 +38711,7 @@ export const cards = {
         "glory": null,
         "rule": "**Denizen** \\n **Choose** one friendly fighter and one enemy fighter within 3 hexes of that fighter and **visible** to that fighter. Roll two magic dice, or three magic dice if the chosen friendly fighter is a **wizard**. If you roll two or more matching symbols, **deal** 1 damage to the chosen enemy fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "17015": {
@@ -39189,7 +39189,7 @@ export const cards = {
         "name": "Savage Season",
         "type": "Ploy",
         "glory": null,
-        "rule": "**Choose** one or more friendly fighters. **Heal** (1) and **stagger** each chosen fighter.",
+        "rule": "*(Errata update)* **Choose** one or more friendly fighters. If a chosen fighter has one or more wound counters, **Heal** (1) and **stagger** that fighter. Otherwise, stagger that chosen fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -40871,7 +40871,7 @@ export const cards = {
         "glory": 2,
         "rule": "**Surge:** Score this immediately after your warband **casts** their fourth or subsequent spell in the same round.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "23003": {
@@ -40883,7 +40883,7 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: \\n The same friendly fighter made four or more different actions in the preceding action phase \\n *And:* That fighter is in no one's or enemy territory.",
         "scoreType": "End",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "23004": {
@@ -41085,7 +41085,7 @@ export const cards = {
         "name": "Pillar of Lightning",
         "type": "Spell",
         "glory": null,
-        "rule": "**Gambit Spell (:MagChannel:):** If **cast**, pick a feature token within 4 hexes of this fighter. Enemy fighters treat the hex that feature token is in as a **lethal** hex, in addition to other hex types. This effect **persists** until the end of the round, or this gambit **deals** damage to an enemy fighter.",
+        "rule": "*(Errata update)* **Gambit Spell (:MagChannel:):** If **cast**, pick a feature token within 4 hexes of this fighter. Enemy fighters treat the hex that feature token is in as a **lethal** hex, in addition to other hex types. This effect **persists** until the end of the round, or until that **lethal** hex **deals** damage to an enemy fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -41267,7 +41267,7 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Hybrid:** Score this immediately after an activation step or power step if: \\n A friendly **changer** was taken out of action in that step \\n *Or:* Two or more friendly **changers** are **staggered**.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "24004": {
@@ -41589,7 +41589,7 @@ export const cards = {
         "name": "The Fires of Change",
         "type": "Upgrade",
         "glory": null,
-        "rule": "**Attack action** \\n [:Hex: 4 - :atFury: 3 - :boom: 2] \\n **Reaction:** Use this during this **Attack action**, after the deal damage step. For each fighter within 1 hex of the target, pick one: **deal** 1 damage to that fighter, or **Heal** (1) that fighter.",
+        "rule": "*(Errata update)* **Attack action** \\n [:Hex: 4 - :atFury: 3 - :boom: 2] \\n **Reaction:** Use this during this **Attack action**, after the deal damage step. For each fighter adjacent to the target, pick one: **deal** 1 damage to that fighter, or **Heal** (1) that fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -41639,7 +41639,7 @@ export const cards = {
         "glory": 3,
         "rule": "**Dual:** Score this in an end phase if: \\n Your warband holds each objective in one or more territories (including no one's territory) \\n *And:* Your warband holds two or more objectives in one or more of those territories.",
         "scoreType": "End",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "25003": {
@@ -41771,7 +41771,7 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagChannel:):** If **cast**, pick one feature token within 3 hexes of the caster. Move that feature token 1 hex. After you have done so, if a fighter is on that feature token, **deal** 1 damage to that fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "25014": {
@@ -41867,7 +41867,7 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagChannel:):** If **cast**, **choose** an enemy fighter within 4 hexes of the caster that is on a feature token or in a **hazard** hex. **Deal** 1 damage to the chosen fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "25022": {
@@ -44186,7 +44186,7 @@ export const cards = {
         "id": 31014,
         "factionId": 57,
         "setId": 64,
-        "name": "Festing Sneak",
+        "name": "Festering Sneak",
         "type": "Ploy",
         "glory": null,
         "rule": "**Choose** a friendly **minion**. **Push** the chosen **minion** up to 2 hexes. After that **push**, that **minion** must be adjacent to one or more enemy fighters and/or a friendly **leader**.",
