@@ -79,6 +79,8 @@ export const getFaction = text => {
         case "Ephilim's Pandaemonium": return 54;
         case "The Headsmen's Curse": return 55;
         case "Skabbik's Plaguepack": return 56;
+        case "Cyreni's Razors": return 57;
+        case "The Thricefold Discord": return 57;
         default: return -1;
     }
 }
@@ -115,6 +117,10 @@ const udbPrefexes = {
     FS: 30,
     SP: 31,
     PP: 32,
+    CR: 33,
+    TD: 34,
+    BS: 35,
+    FO: 36,
 }
 
 export const decodeUDB = card => {

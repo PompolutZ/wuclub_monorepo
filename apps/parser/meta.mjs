@@ -77,6 +77,10 @@ export const setsIndex = [
     "the-farstriders-rivals-deck",
     "skabbiks-plaguepack-rivals-deck",
     "paths-of-prophecy-rivals-deck",
+    "cyrenis-razors-rivals-deck",
+    "the-thricefold-discord-rivals-deck",
+    "breakneck-slaughter-rivals-deck",
+    "force-of-frost-rivals-deck",
 ]
 
 export const setsNames = [
@@ -160,6 +164,10 @@ export const setsNames = [
     "The Farstriders Rivals Deck",
     "Skabbik's Plaguepack Rivals Deck",
     "Paths of Prophecy Rivals Deck",
+    "Cyreni's Razors Rivals Deck",
+    "The Thricefold Discord Rivals Deck",
+    "Breakneck Slaughter Rivals Deck",
+    "Force of Frost Rivals Deck",
 ]
 
 // case "Order": return 38;
@@ -231,6 +239,9 @@ export const factionToGrandAlianceId = {
     "ephilims-pandaemonium": 39,
     "the-headsmens-curse": 40,
     "skabbiks-plaguepack": 39,
+    
+    "cyrenis-razors": 38,
+    "the-thricefold-discord": 39,
 }
 
 export const factionIndexes = [
@@ -302,7 +313,9 @@ export const factionIndexes = [
     "domitans-stormcoven",
     "ephilims-pandaemonium",
     "the-headsmens-curse",
-    "skabbiks-plaguepack"
+    "skabbiks-plaguepack",
+    "cyrenis-razors",
+    "the-thricefold-discord",
 ]
 
 export const factionIdPrefix = {
@@ -374,5 +387,7 @@ export const factionIdPrefix = {
     "domitans-stormcoven": "ds",
     "ephilims-pandaemonium": "ep",
     "the-headsmens-curse": "thc",
-    "skabbiks-plaguepack": "sp"
+    "skabbiks-plaguepack": "sp",
+    "cyrenis-razors": "cr",
+    "the-thricefold-discord": "ttd",
 }
