@@ -181,6 +181,8 @@ export const factionMembers = {
     "ephilims-pandaemonium": ["1", "2", "3", "4", "5"],
     "the-headsmens-curse": ["1", "2", "3", "4"],
     "skabbiks-plaguepack": ["1", "2", "3", "4", "5", "6"],
+    "cyrenis-razors": ["1", "2", "3", "4"],
+    "the-thricefold-discord": ["1", "2", "3"],
 };
 
 export const udbPrefexes = {
@@ -215,6 +217,10 @@ export const udbPrefexes = {
     FS: 30,
     SP: 31,
     PP: 32,
+    CR: 33,
+    TD: 34,
+    BS: 35,
+    FO: 36,
 };
 
 export const grouppedFactions = () => {
@@ -230,9 +236,16 @@ export const grouppedFactions = () => {
             ],
         },
         {
+            title: "Deathgorge",
+            factions: sortedFactions.filter(
+                (f) => f.id >= factions["Cyreni's Razors"].id
+            ),
+        },
+        {
             title: "Wyrdhollow",
             factions: sortedFactions.filter(
-                (f) => f.id >= factions["Domitan's Stormcoven"].id
+                (f) => f.id >= factions["Domitan's Stormcoven"].id &&
+                f.id <= factions["Skabbik's Plaguepack"].id
             ),
         },
         {
@@ -323,6 +336,7 @@ const rivalDecksWithPlot = [
     sets["Tooth and Claw Rivals Deck"].id,
     sets["Fearsome Fortress Rivals Deck"].id,
     sets["Voidcursed Thralls Rivals Deck"].id,
+    sets["Breakneck Slaughter Rivals Deck"].id,
 ];
 
 const warbandHasPlot = (warbandId) => warbandsWithPlot.includes(warbandId);
@@ -391,6 +405,13 @@ const plots = {
         asset: "voidcursed",
         id: sets["Voidcursed Thralls Rivals Deck"].id,
         name: sets["Voidcursed Thralls Rivals Deck"].name,
+    },
+    Impetus: {
+        keyword: "Impetus",
+        connection: "Set",
+        asset: "Impetus",
+        id: sets["Breakneck Slaughter Rivals Deck"].id,
+        name: sets["Breakneck Slaughter Rivals Deck"].name,
     },
 };
 

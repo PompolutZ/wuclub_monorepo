@@ -80,7 +80,7 @@ export const getFaction = text => {
         case "The Headsmen's Curse": return 55;
         case "Skabbik's Plaguepack": return 56;
         case "Cyreni's Razors": return 57;
-        case "The Thricefold Discord": return 57;
+        case "The Thricefold Discord": return 58;
         default: return -1;
     }
 }
