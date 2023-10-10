@@ -538,6 +538,9 @@ const nemesis_valid_sets = [
     sets["Seismic Shock Rivals Deck"].id,
     sets["Toxic Terrors Rivals Deck"].id,
     sets["Voidcursed Thralls Rivals Deck"].id,
+    sets["Paths of Prophecy Rivals Deck"].id,
+    sets["Breakneck Slaughter Rivals Deck"].id,
+    sets["Force of Frost Rivals Deck"].id,
 ];
 
 function getAllSetsValidForFormat(format) {
