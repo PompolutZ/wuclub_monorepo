@@ -244,8 +244,9 @@ export const grouppedFactions = () => {
         {
             title: "Wyrdhollow",
             factions: sortedFactions.filter(
-                (f) => f.id >= factions["Domitan's Stormcoven"].id &&
-                f.id <= factions["Skabbik's Plaguepack"].id
+                (f) =>
+                    f.id >= factions["Domitan's Stormcoven"].id &&
+                    f.id <= factions["Skabbik's Plaguepack"].id
             ),
         },
         {
@@ -529,7 +530,6 @@ export const ACTIVE_FORMATS = [
 ];
 
 const nemesis_valid_sets = [
-    sets["Illusory Might Universal Deck"].id,
     sets["Deadly Depths Rivals Deck"].id,
     sets["Tooth and Claw Rivals Deck"].id,
     sets["Daring Delvers Rivals Deck"].id,
@@ -548,9 +548,8 @@ function getAllSetsValidForFormat(format) {
         case CHAMPIONSHIP_FORMAT:
             return Object.values(sets).filter(
                 (set) =>
-                    set.id > sets["Starter Set"].id &&
-                    set.id !== sets["Arena Mortis 2 expansion"].id &&
-                    set.id !== sets["Silent Menace Universal Deck"].id
+                    set.id > sets["Nethermaze core set"].id ||
+                    set.id === sets["Essential Cards Pack"].id
             );
         case NEMESIS_FORMAT:
             return Object.values(sets).filter((set) =>
@@ -810,7 +809,10 @@ const getBoardsValidForFormat = (format) => {
         case CHAMPIONSHIP_FORMAT:
         case RIVALS_FORMAT:
         case NEMESIS_FORMAT:
-            return [1, 2, 7, 9, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
+            return [
+                1, 2, 7, 9, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+                38, 39, 40,
+            ];
         default:
             return Object.keys(boards).map(Number);
     }

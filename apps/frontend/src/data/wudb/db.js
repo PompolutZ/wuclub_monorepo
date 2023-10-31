@@ -24818,7 +24818,7 @@ export const cards = {
         "name": "Tithestone",
         "type": "Upgrade",
         "glory": null,
-        "rule": "At the end of the action phase, if this fighter is in another player's territory, that player picks one: you gain one tithe counter, or that player discards one glory point. /n **Reaction:** During a friendly **Mortek's** Range 1 or Range 2 **Attack action**, before the attack roll, discard one tithe counter. If you do, +1 Dice to that **Attack action** until it has been resolved.",
+        "rule": "At the end of the action phase, if this fighter is in another player's territory, that player picks one: you gain one tithe counter, or that player discards one glory point. \\n **Reaction:** During a friendly **Mortek's** Range 1 or Range 2 **Attack action**, before the attack roll, discard one tithe counter. If you do, +1 Dice to that **Attack action** until it has been resolved.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -31960,8 +31960,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Hybrid:** Score this in the third end phase if: \\n Your **leader** is in enemy territory and has no wound counters \\n *Or:* One or more friendly **priests** is in enemy territory.",
         "scoreType": "Third",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13130": {
         "id": 13130,
@@ -31972,8 +31972,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Hybrid:** Score this immediately after: \\n A friendly **assassin's Attack action** that takes the target out of action \\n *Or:* A friendly fighter's **Attack action** that takes an enemy **leader** out of action, if no other enemy fighters are out of action.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13131": {
         "id": 13131,
@@ -31984,8 +31984,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Hybrid:** Score this in an end phase if: \\n One or more of your opponents' **Illusion** upgrades was **broken** in the preceding phase \\n *Or:* Each surviving friendly fighter has the same number of upgrades (0 is a number).",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13132": {
         "id": 13132,
@@ -31996,8 +31996,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: \\n Your warband holds two or more objectives \\n *And: Two or more* enemy fighters are out of action.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13133": {
         "id": 13133,
@@ -32008,8 +32008,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if your **leader** has two or more wound counters.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13134": {
         "id": 13134,
@@ -32020,8 +32020,8 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagFocus:):** If **cast**, **give** one Guard token to each friendly fighter within 2 hexes of the caster.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13135": {
         "id": 13135,
@@ -32032,8 +32032,8 @@ export const cards = {
         "glory": null,
         "rule": "**Manoeuvre** \\n **Reaction:** Play this after a friendly fighter's **Move action**. **Choose** another friendly fighter that is a **hunter** or is on Guard. That fighter makes a **Move action**. After that **Move action**, the two fighters must be adjacent.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13136": {
         "id": 13136,
@@ -32044,8 +32044,8 @@ export const cards = {
         "glory": null,
         "rule": "**Heal** (1) each friendly fighter that is adjacent to one or more enemy fighters and/or has one or more Guard tokens.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13137": {
         "id": 13137,
@@ -32056,8 +32056,8 @@ export const cards = {
         "glory": null,
         "rule": "**Manoeuvre** \\n **Push** up to two friendly fighters up to 2 hexes. After each **push**, that fighter must be in no one's territory.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13138": {
         "id": 13138,
@@ -32068,8 +32068,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one fighter. **Heal** (1) the chosen fighter, or **heal** (2) the chosen fighter if the chosen fighter had one or more **Illusion** upgrades when you played this card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13139": {
         "id": 13139,
@@ -32080,8 +32080,8 @@ export const cards = {
         "glory": null,
         "rule": "**Action: Give** one Guard token to each friendly fighter within 2 hexes.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13140": {
         "id": 13140,
@@ -32092,8 +32092,8 @@ export const cards = {
         "glory": null,
         "rule": "If this fighter has no Move or Charge tokens, friendly fighters that begin a **Move action** adjacent to this fighter have +1 Move for the duration of that action, and friendly fighters that begin an **Attack action** adjacent to this fighter have +1 Dice for the duration of that action.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13141": {
         "id": 13141,
@@ -32104,8 +32104,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Give this card only to a **vulnerable** fighter. Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n This fighter is Inspired.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13142": {
         "id": 13142,
@@ -32116,8 +32116,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter cannot be **given** Stagger tokens. \\n When this fighter is the target of a Range 1 or Range 2 **Attack action**, this fighter is considered to have one additional **supporting** fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13143": {
         "id": 13143,
@@ -32128,8 +32128,8 @@ export const cards = {
         "glory": null,
         "rule": "When a friendly fighter's **Attack action** takes an enemy fighter out of action, if this fighter was **supporting** that fighter, gain 1 spent glory point.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13144": {
         "id": 13144,
@@ -32140,8 +32140,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Hybrid:** Score this immediately after: \\n A friendly fighter's upgrade **Attack action** that takes the target out of action \\n *Or:* A friendly fighter's successful **Illusion Attack action**.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13145": {
         "id": 13145,
@@ -32152,8 +32152,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Hybrid:** Score this in an end phase if: \\n One or more friendly fighters each have three or more upgrades \\n *Or:* There are one or more surviving friendly **Nurgle** fighters, and enemy fighters have three or more wound counters.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13146": {
         "id": 13146,
@@ -32164,8 +32164,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: \\n Three or more friendly fighters are in enemy territory \\n *And: Two or more* enemy fighters are out of action.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13147": {
         "id": 13147,
@@ -32176,8 +32176,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Dual:** Score this in an end phase if: \\n One or more fighters in each warband are Inspired \\n *And:* One or more fighters in each warband are out of action.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13148": {
         "id": 13148,
@@ -32188,8 +32188,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Hybrid:** Score this in an end phase if: \\n One or more friendly **companions** are each 3 or more hexes away from each other fighter named on their fighter card \\n *Or:* There is one or more surviving friendly **Slaanesh** fighter and a friendly **Slaanesh leader** is out of action.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13149": {
         "id": 13149,
@@ -32200,8 +32200,8 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagFocus:):** If **cast**, **choose** one enemy fighter within 3 hexes of the caster, or within 4 hexes of the caster if the caster is a **Tzeentch** fighter. **Deal** 1 damage to the chosen fighter, or 2 damage if the caster suffered **backlash**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13150": {
         "id": 13150,
@@ -32212,8 +32212,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one enemy fighter with no Move or Charge tokens. The chosen fighter's player picks one: \\n **Deal** 1 damage to that fighter \\n *Or:* You **scatter** 3 from that fighter's hex and **push** that fighter along the **chain** to the **end hex**. If the **chain** is interrupted, or if the fighter would be pushed into a hex that is **blocked** or **occupied**, do not **push** them any further.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13151": {
         "id": 13151,
@@ -32224,8 +32224,8 @@ export const cards = {
         "glory": null,
         "rule": "Flip each feature token that is not an objective token. **Deal** 1 damage to each fighter on an even-numbered objective token revealed in this way. Then flip each objective token revealed in this way.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13152": {
         "id": 13152,
@@ -32236,8 +32236,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this when a friendly fighter is **dealt** damage, after the out of action check, if that fighter is now **vulnerable**. Give that fighter one upgrade from your hand or one **Illusion** upgrade from your discard pile.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13153": {
         "id": 13153,
@@ -32248,8 +32248,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this after a friendly fighter's Range 1 or Range 2 **Attack action** that takes the target out of action. Pick one: \\n **Heal** (2) that friendly fighter \\n *Or:* **Give** that friendly fighter one Guard token. \\n If that fighter is a **Khorne** fighter, pick one or both.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13154": {
         "id": 13154,
@@ -32260,8 +32260,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** After this fighter's activation, put one Devotion token on a feature token within 2 hexes of this fighter. While a feature token has one or more Devotion tokens on it, the hex containing that feature token is a **lethal** hex in addition to its other types. **Remove** all Devotion tokens from the battlefield at the end of the round.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13155": {
         "id": 13155,
@@ -32272,8 +32272,8 @@ export const cards = {
         "glory": null,
         "rule": "**Mutation** \\n +1 Wounds \\n **Reaction:** After a friendly fighter's **Attack action** that takes an enemy fighter out of action, if this card is in your hand, give this upgrade to that friendly fighter. This does not cost any glory points.",
         "scoreType": "-",
-        "status": "V-Y_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13156": {
         "id": 13156,
@@ -32284,8 +32284,8 @@ export const cards = {
         "glory": null,
         "rule": "**Mutation** \\n +1 Move \\n **Reaction:** After a friendly fighter's **Attack action** that takes an enemy fighter out of action, if this card is in your hand, give this upgrade to that fighter. This does not cost any glory points.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13157": {
         "id": 13157,
@@ -32296,8 +32296,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter's Range 1 and Range 2 **Attack actions** have **Grievous** if this fighter and/or the target have one or more wound counters.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13158": {
         "id": 13158,
@@ -32308,8 +32308,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n -1 Defence, to a minimum of 1 \\n This fighter's Range 3+ **Attack actions** have +1 Range.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13159": {
         "id": 13159,
@@ -32320,8 +32320,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after an **Attack action** that took an enemy fighter out of action if that fighter had one or more wound counters in the declare Attack action step.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13160": {
         "id": 13160,
@@ -32332,8 +32332,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after a friendly fighter's **Attack action** that takes the target out of action, if the attacker and the target had no upgrades during the declare Attack action step.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13161": {
         "id": 13161,
@@ -32344,8 +32344,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after your **leader's Attack action** that took the target out of action.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13162": {
         "id": 13162,
@@ -32356,8 +32356,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: \\n Two or more friendly fighters are each in a **cover** hex \\n *And:* One or more of those fighters are in enemy territory. \\n After you score this card, pick one opponent. That opponent's warband **deals** 1 damage to one fighter from your warband that is in a **cover** hex.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13163": {
         "id": 13163,
@@ -32368,8 +32368,8 @@ export const cards = {
         "glory": 3,
         "rule": "**Dual:** Score this in an end phase if: \\n Two or more enemy fighters are out of action \\n *And:* There are no enemy fighters in your territory or no one's territory.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13164": {
         "id": 13164,
@@ -32380,8 +32380,8 @@ export const cards = {
         "glory": null,
         "rule": "Pick one player. For each **Illusion** upgrade their surviving fighters have, that player picks one: spend 1 glory point, or **break** that card (if that player cannot spend a glory point, they must **break** that card).",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13165": {
         "id": 13165,
@@ -32392,8 +32392,8 @@ export const cards = {
         "glory": null,
         "rule": "**Place** one friendly fighter that is out of action on a **starting** hex in your territory. **Give** that fighter one Raise token. Then **give** that fighter wound counters until that fighter is **vulnerable**.",
         "scoreType": "-",
-        "status": "V-Y_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13166": {
         "id": 13166,
@@ -32404,8 +32404,8 @@ export const cards = {
         "glory": null,
         "rule": "Shuffle your power discard pile face down, then **draw** the top card. Return that card to your hand.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13167": {
         "id": 13167,
@@ -32416,8 +32416,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this after you **give** a friendly fighter a Raise token. **Place** that fighter in a **cover** hex.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13168": {
         "id": 13168,
@@ -32428,8 +32428,8 @@ export const cards = {
         "glory": null,
         "rule": "The first **Attack action** made by a friendly fighter in the next activation step has **Ensnare**. If that fighter is **flying** or a **hunter**, that **Attack action** also has **Cleave**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13169": {
         "id": 13169,
@@ -32440,8 +32440,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Give this only to a fighter with a Wounds characteristic of 3 or less. Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n +1 Dice to this fighter's Range 1 **Attack actions** \\n +1 Move.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13170": {
         "id": 13170,
@@ -32452,8 +32452,8 @@ export const cards = {
         "glory": null,
         "rule": "**Action:** Spend one glory point. When you do, **draw** two power cards, then **discard** two power cards. This fighter can only make this action once per round.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13171": {
         "id": 13171,
@@ -32464,8 +32464,8 @@ export const cards = {
         "glory": null,
         "rule": "Range 1 **Attack actions** on this fighter's fighter card have **Cleave**. \\n If this fighter is an **assassin**, Range 1 **Attack actions** on this fighter's fighter card also have **Ensnare**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13172": {
         "id": 13172,
@@ -32476,8 +32476,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** After an **Attack action**, if this fighter was the target and is in a **cover** hex, **heal** (1) this fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13173": {
         "id": 13173,
@@ -32488,8 +32488,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter is a **hunter**. \\n [:Hex: 2 - :atFury: 2 - :boom: 2] \\n **Reaction:** During this **Attack action**, after the deal damage step, **heal** (1) this fighter. **Heal** (1) one friendly fighter within 3 hexes of this fighter instead if the target has been **dealt** damage that will take them out of action.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13174": {
         "id": 13174,
@@ -32500,8 +32500,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if you have no power cards in your hand.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13175": {
         "id": 13175,
@@ -32512,8 +32512,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if there are one or more upgrade cards in one or more opponents' discard piles.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13176": {
         "id": 13176,
@@ -32524,8 +32524,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: \\n There are more enemy fighters out of action than there are surviving enemy fighters \\n *And:* There are more enemy fighters out of action than there are friendly fighters out of action.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13177": {
         "id": 13177,
@@ -32536,8 +32536,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Hybrid:** Score this in an end phase if: \\n There are no feature tokens in your territory and in no-one's territory \\n *Or:* There are no objective tokens on the battlefield.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13178": {
         "id": 13178,
@@ -32548,8 +32548,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after a friendly fighter's **Attack action** if that fighter had two or more **supporting** fighters.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13179": {
         "id": 13179,
@@ -32560,8 +32560,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this after a friendly **beast's** Range 1 **Attack action**, if the target is adjacent. **Deal** 1 damage to the target, then **push** the target 1 hex.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13180": {
         "id": 13180,
@@ -32572,8 +32572,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this after a friendly fighter's successful Range 1 **Attack action**. Pick one of the target's upgrades. **Break** that card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13181": {
         "id": 13181,
@@ -32584,8 +32584,8 @@ export const cards = {
         "glory": null,
         "rule": "Pick one objective token in an **empty** hex. **Scatter** 2 from that hex and **place** the objective token in the **end hex**. If the **end hex** is **blocked** or contains a feature token, or if the **chain** is interrupted, leave the objective token where it is. If the **end hex** is **lethal**, **remove** the objective token from the battlefield instead.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13182": {
         "id": 13182,
@@ -32596,8 +32596,8 @@ export const cards = {
         "glory": null,
         "rule": "**Deal** 1 damage to one enemy fighter with one or more **Illusion** upgrades adjacent to one or more friendly fighters \\n *Or:* **Stagger** one enemy fighter adjacent to one or more friendly fighters.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13183": {
         "id": 13183,
@@ -32608,8 +32608,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter. If the chose friendly fighter is a **wizard**, **stagger** each enemy fighter adjacent to the chosen fighter. Otherwise, roll one magic dice for each enemy fighter adjacent to the chosen fighter. On a roll of :MagChannel:, **stagger** that enemy fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13184": {
         "id": 13184,
@@ -32620,8 +32620,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter's Range 1 and Range 2 **Attack actions** have **Knockback** 1. \\n **Reaction:** During this fighter's **Attack action**, after the drive back step, if the target was **driven back** 2 or more hexes, **deal** 1 damage to the target.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13185": {
         "id": 13185,
@@ -32632,8 +32632,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action** \\n [:Hex: 1 - :atSmash: 3 - :boom: 1] \\n If this fighter is a **minion**, this upgrade has the following reaction. \\n **Reaction:** After this **Attack action**, if it succeeded, pick one of the target's upgrades. **Break** that card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13186": {
         "id": 13186,
@@ -32644,8 +32644,8 @@ export const cards = {
         "glory": null,
         "rule": "Give this only to a fighter with a Wounds characteristic of 4 or less. \\n This fighter is a **hunter**. \\n **Reaction:** After this fighter is given an upgrade, **heal** (1) this fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13187": {
         "id": 13187,
@@ -32656,8 +32656,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n This fighter is a **hunter**. \\n -1 Dice from adjacent enemy fighter's **Attack actions** that target this fighter, to a minimum of 1.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13188": {
         "id": 13188,
@@ -32668,8 +32668,8 @@ export const cards = {
         "glory": null,
         "rule": "After you flip a feature token this fighter is on, you can remove that feature token from the battlefield. If you do **break** this card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13189": {
         "id": 13189,
@@ -32680,8 +32680,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after your gambit which chose one or more friendly fighters who each had two or more **Illusion** upgrades.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13190": {
         "id": 13190,
@@ -32692,8 +32692,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if in the previous phase your warband **cast** a number of spells greater than the number of **wizards** in your warband, including out of action fighters.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13191": {
         "id": 13191,
@@ -32704,8 +32704,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after a failed **Attack action** if the attack roll and the defence roll contained the same number of **successes** (including **critical successes**).",
         "scoreType": "Surge",
-        "status": "V-Y_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13192": {
         "id": 13192,
@@ -32716,8 +32716,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: \\n There are two or more surviving friendly fighters \\n *And:* Each of those fighters is on a feature token, in a **cover** hex or in a **lethal** hex.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13193": {
         "id": 13193,
@@ -32728,8 +32728,8 @@ export const cards = {
         "glory": 3,
         "rule": "**Dual:** Score this in the third end phase if: \\n There are two or more surviving friendly fighters \\n *And:* Each of those fighters holds an objective in enemy territory.",
         "scoreType": "Third",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13194": {
         "id": 13194,
@@ -32740,8 +32740,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Hybrid:** Score this immediately after a power step in which: \\n You **delved** three or more times \\n *Or:* You **delved** one or more times, and one of the feature tokens you **delved** was in a hex in enemy territory and occupied by your **leader**.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13195": {
         "id": 13195,
@@ -32752,8 +32752,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if one or more enemy fighters with a Wounds characteristic higher than each surviving friendly fighter's Wounds characteristic is out of action.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13196": {
         "id": 13196,
@@ -32764,8 +32764,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Surge:** Score this immediately after a friendly fighter's **Attack action** that takes an enemy fighter with three or more upgrades out of action.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13197": {
         "id": 13197,
@@ -32776,8 +32776,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in the third end phase if: \\n One or more friendly fighters are **vulnerable** \\n *And:* One or more of those fighters are in enemy territory.",
         "scoreType": "Third",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13198": {
         "id": 13198,
@@ -32788,8 +32788,8 @@ export const cards = {
         "glory": 2,
         "rule": "Score this in an end phase if two or more friendly fighters are on feature tokens in enemy territory.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13199": {
         "id": 13199,
@@ -32800,8 +32800,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Hybrid:** Score this in an end phase if: \\n Two or more friendly fighters are in **edge** hexes that are not in your territory \\n *Or:* One or more friendly **hunters** are in **edge** hexes in enemy territory.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13200": {
         "id": 13200,
@@ -32812,8 +32812,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: Each surviving fighter is in enemy territory \\n *And:* There are more surviving friendly fighters than surviving enemy fighters.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13201": {
         "id": 13201,
@@ -32824,8 +32824,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Hybrid:** Score this immediately after an activation if: \\n Two or more friendly fighters are in **cover** hexes that are not in your territory. \\n *Or:* Two or more friendly fighters hold objectives that are not in your territory.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13202": {
         "id": 13202,
@@ -32836,8 +32836,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Hybrid:** Score this immediately after: \\n A power step if one or more opponents played one or more **Illusion** upgrades in that power step \\n *Or:* You play your third or subsequent **Illusion** upgrade in the same phase.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13203": {
         "id": 13203,
@@ -32848,8 +32848,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Dual:** Score this in an end phase if: \\n Each surviving friendly fighter has no upgrades \\n *And:* There are one or more **Illusion** upgrades in your power discard pile.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13204": {
         "id": 13204,
@@ -32860,8 +32860,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after a friendly fighter's **Attack action** that takes the target out of action, if that friendly fighter has two or more **Illusion** upgrades.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13205": {
         "id": 13205,
@@ -32872,8 +32872,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Dual:** Score this immediately if: \\n A friendly fighter's **Attack action** takes the target out of action \\n *And:* That friendly fighter has no wound counters, or that friendly fighter is an **assassin**.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13206": {
         "id": 13206,
@@ -32884,8 +32884,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after a friendly fighter's **Attack action** that takes an enemy fighter out of action, if that enemy fighter had one or more **Illusion** upgrades at the start of the **Attack action**.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13207": {
         "id": 13207,
@@ -32896,8 +32896,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Dual:** Score this immediately after a friendly fighter's **Attack action** that takes the target out of action, if: \\n The attack roll contained only **successes** (including **critical successes**) \\n *And:* The Damage characteristic was equal to or greater than the target's Wounds characteristic.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13208": {
         "id": 13208,
@@ -32908,8 +32908,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Dual:** Score this in an end phase if: \\n Two or more friendly fighters each have one or more Charge tokens \\n *And:* Those fighters are adjacent.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13209": {
         "id": 13209,
@@ -32920,8 +32920,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: \\n Each friendly fighter is adjacent to one or more friendly fighters \\n *And:* Each friendly fighter is within 2 hexes of one or more enemy fighters.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13210": {
         "id": 13210,
@@ -32932,8 +32932,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if your **leader** is the only friendly fighter in enemy territory.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13211": {
         "id": 13211,
@@ -32944,8 +32944,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Dual:** Score this in an end phase if: \\n Your **leader** is the friendly fighter furthest from each enemy fighter \\n *And:* One or more friendly fighters are in enemy territory or in no one's territory.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13212": {
         "id": 13212,
@@ -32956,8 +32956,8 @@ export const cards = {
         "glory": 2,
         "rule": "Score this in an end phase if there are more friendly fighters in enemy territory than there are enemy fighters in enemy territory.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13213": {
         "id": 13213,
@@ -32968,8 +32968,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if each surviving friendly fighter is 2 or more hexes from the nearest **cover** hex, **blocked** hex and **lethal** hex.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13214": {
         "id": 13214,
@@ -32980,8 +32980,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if two or more friendly fighters are adjacent to the same enemy fighter.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13215": {
         "id": 13215,
@@ -32992,8 +32992,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Dual:** Score this in an end phase if: \\n Your warband holds two or more objectives \\n *And:* One or more enemy fighters are each in a **cover** hex.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13216": {
         "id": 13216,
@@ -33004,8 +33004,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Dual:** Score this in an end phase if: \\n Your **leader** has one or more Charge tokens and is in enemy territory \\n *And:* One or more enemy fighters are out of action.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13217": {
         "id": 13217,
@@ -33016,8 +33016,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after a power step if each surviving friendly fighter has one or more **Illusion** upgrades.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13218": {
         "id": 13218,
@@ -33028,8 +33028,8 @@ export const cards = {
         "glory": 2,
         "rule": "**Hybrid:** Score this in an end phase if: \\n Each surviving enemy fighter is **staggered** \\n *Or:* Three or more enemy fighters are **staggered**.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13219": {
         "id": 13219,
@@ -33040,8 +33040,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Hybrid:** Score this in an end phase if: \\n Your warband holds a number of objectives equal to the round number (e.g. two objectives in the second end phase) \\n *Or:* The number of friendly fighters in **cover** hexes is equal to the round number.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13220": {
         "id": 13220,
@@ -33052,8 +33052,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after an activation step in which a friendly fighter made a Range 1 **Attack action** that targeted a fighter with more **supporting** fighters than the attacker.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13221": {
         "id": 13221,
@@ -33064,8 +33064,8 @@ export const cards = {
         "glory": 2,
         "rule": "Score this in an end phase if one or more **vulnerable** friendly fighters each have three or more upgrades.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13222": {
         "id": 13222,
@@ -33076,8 +33076,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Dual:** Score this in an end phase if: \\n One or more Inspired friendly **wizards** are each in a **cover** hex \\n *And:* There are one or more **Illusion** upgrades in your power discard pile.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13223": {
         "id": 13223,
@@ -33088,8 +33088,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Hybrid:** Score this in an end phase if: \\n There are no **cover** hexes in enemy territory \\n *Or:* There is a friendly fighter in each **cover** hex in enemy territory.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13224": {
         "id": 13224,
@@ -33100,8 +33100,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Hybrid:** Score this in an end phase if: \\n One or more friendly fighters hold an objective that has a number equal to their Wounds characteristic \\n *Or:* One or more friendly fighters each have a number of upgrades equal to their Wounds characteristic.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13225": {
         "id": 13225,
@@ -33112,8 +33112,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge, Hybrid:** Score this immediately after an activation if: \\n One or more friendly fighters hold an objective in enemy territory that has a number equal to the number of that fighter's upgrades \\n *Or:* One or more friendly fighters each have more upgrades than there are surviving enemy fighters.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13226": {
         "id": 13226,
@@ -33124,8 +33124,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if there are more friendly fighters on feature tokens than there are enemy fighters on feature tokens.",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13227": {
         "id": 13227,
@@ -33136,8 +33136,8 @@ export const cards = {
         "glory": 1,
         "rule": "Score this in an end phase if there are X or more friendly fighters within X hexes of an objective that is not held by an enemy fighter, where X is that objective's number (e.g. if there are two or more friendly fighters within 2 hexes of objective 2).",
         "scoreType": "End",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13228": {
         "id": 13228,
@@ -33148,8 +33148,8 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after a friendly fighter's successful **Attack action** if the attack roll contained only **successes** (including **critical successes**).",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13229": {
         "id": 13229,
@@ -33160,8 +33160,8 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagFocus:):** If **cast**, **deal** 1 damage to each fighter on a feature token that is not in enemy territory.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13230": {
         "id": 13230,
@@ -33172,8 +33172,8 @@ export const cards = {
         "glory": null,
         "rule": "+2 Move to friendly fighters in the next activation step, except when making a **Charge action**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13231": {
         "id": 13231,
@@ -33184,8 +33184,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this during an **Attack action**, after the declare Attack action step, if a friendly fighter is the target. **Push** another friendly fighter up to 2 hexes so that they are **supporting** the target. If that other friendly fighter is a **companion**, and the target is named on their fighter card, instead **push** the **companion** by the shortest route so that the **companion** is **supporting** the target.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13232": {
         "id": 13232,
@@ -33196,8 +33196,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this after your **leader** is **dealt** damage that would take them out of action, before the out of action check. Roll one defence dice. If you roll a :dfCrit:, **remove** wound counters from your **leader** until they are **vulnerable**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13233": {
         "id": 13233,
@@ -33208,8 +33208,8 @@ export const cards = {
         "glory": null,
         "rule": "Pick one: \\n Gambits cannot **deal** damage. This effect **persists** until the end of the next power step. \\n *Or:* **Push** one friendly fighter up to 2 hexes into a **cover** hex.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13234": {
         "id": 13234,
@@ -33220,8 +33220,8 @@ export const cards = {
         "glory": null,
         "rule": "Surviving friendly fighters other than your **leader** have the **assassin** keyword. \\n +1 Dice to friendly **assassin's** Range 1 **Attack actions** that target a **leader**. \\n This effect **persists** until the end of the phase.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13235": {
         "id": 13235,
@@ -33232,8 +33232,8 @@ export const cards = {
         "glory": null,
         "rule": "**Draw** one power card for each friendly fighter in a **cover** hex. Then **discard** that many power cards.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13236": {
         "id": 13236,
@@ -33244,8 +33244,8 @@ export const cards = {
         "glory": null,
         "rule": "Play this only if one or more friendly fighters each have three or more upgrades. **Scatter** 3 from one of those fighters' hexes. **Stagger** each enemy fighter in each hex in the **chain**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13237": {
         "id": 13237,
@@ -33256,8 +33256,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter in enemy territory, or up to two friendly **hunters** in enemy territory. **Give** each chosen fighter one Guard token.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13238": {
         "id": 13238,
@@ -33268,8 +33268,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter. **Push** the chosen fighter up to 1 hex towards the nearest enemy fighter. Then **give** the chosen fighter one Guard token if the chosen fighter is a **companion**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13239": {
         "id": 13239,
@@ -33280,8 +33280,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this after a friendly fighter's Range 1 or Range 2 **Attack action**. **Scatter** 4 from that fighter's hex and **push** that fighter up to 3 hexes along the **chain**. If the **chain** is interrupted, or if the fighter would be pushed into a hex that is **blocked** or **occupied**, do not **push** them further.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13240": {
         "id": 13240,
@@ -33292,8 +33292,8 @@ export const cards = {
         "glory": null,
         "rule": "**Waypoint** \\n Rolls of :atSup1: and :atSup2: are **successes** in attack rolls if the target is in a **cover** hex. This effect **persists** until another **Waypoint** is played.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13241": {
         "id": 13241,
@@ -33304,8 +33304,8 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagChannel:):** If **cast**, **choose** one fighter within 3 hexes of the caster. **Push** the chosen fighter 1 hex towards the caster.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13242": {
         "id": 13242,
@@ -33316,8 +33316,8 @@ export const cards = {
         "glory": null,
         "rule": "Reveal cards from the top of your power deck one by one until you reveal an **Illusion** upgrade. Add that card to your hand, then return the revealed cards to your power deck and shuffle your power deck. If you did not reveal an **Illusion** upgrade, return the revealed cards to your power deck and shuffle your power deck.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13243": {
         "id": 13243,
@@ -33328,8 +33328,8 @@ export const cards = {
         "glory": null,
         "rule": "**Trap** \\n **Reaction:** After an enemy fighter's **Move action**, if that fighter has one or more **Illusion** upgrades, **give** that fighter one Charge token. Otherwise, **stagger** that fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13244": {
         "id": 13244,
@@ -33340,8 +33340,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this after a gambit which chose one or more friendly fighters is resolved, if one or more **Illusion** upgrades were **broken** as a result. Pick one of those **broken Illusion** upgrades and give it to a friendly fighter not chosen by that gambit.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13245": {
         "id": 13245,
@@ -33352,8 +33352,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter and one enemy fighter adjacent to that fighter. In the next activation, the chosen friendly fighter's Range 1 **Attack actions** have a Damage characteristic equal to the highest Damage characteristic of the chosen enemy fighter's **Attack actions**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13246": {
         "id": 13246,
@@ -33364,8 +33364,8 @@ export const cards = {
         "glory": null,
         "rule": "The first **Attack action** made in the next activation step has +1 Dice. \\n If that **Attack action** is made by a **brawler**, each **Attack action** made by that fighter in that activation step has +1 Dice instead.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13247": {
         "id": 13247,
@@ -33376,8 +33376,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter, then **scatter** 5 from that fighter's hex. If the **chain** enters one of more **empty** hexes that contain a feature token, **place** the chosen fighter in one of those hexes. Otherwise nothing happens.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13248": {
         "id": 13248,
@@ -33388,8 +33388,8 @@ export const cards = {
         "glory": null,
         "rule": "**Waypoint** \\n At the end of the action phase, **deal** 1 damage to each fighter that is in an **edge** hex. This effect **persists** until another **Waypoint** is played.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13249": {
         "id": 13249,
@@ -33400,8 +33400,8 @@ export const cards = {
         "glory": null,
         "rule": "**Push** each friendly fighter with one or more **Illusion** upgrades up to 1 hex towards the nearest enemy fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13250": {
         "id": 13250,
@@ -33412,8 +33412,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this when an opponent plays a gambit which **chooses** one or more fighters, if one or more of the chosen fighters are friendly fighters with one or more **Illusion** upgrades. **Discard** one power card. When you do, those fighters are not chosen and the gambit is **discarded**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13251": {
         "id": 13251,
@@ -33424,8 +33424,8 @@ export const cards = {
         "glory": null,
         "rule": "Pick one or more **Illusion** upgrades in your discard pile. Then **discard** two power cards for each **Illusion** upgrade you picked. When you do, return the **Illusion** upgrades you picked to your hand.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13252": {
         "id": 13252,
@@ -33436,8 +33436,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this after an enemy fighter is given an **Illusion** upgrade. That fighter's player must pick one: discard one glory point or **break** that card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13253": {
         "id": 13253,
@@ -33448,8 +33448,8 @@ export const cards = {
         "glory": null,
         "rule": "In the next activation, **Attack actions** that target a fighter in a **cover** hex or **edge** hex have **Cleave**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13254": {
         "id": 13254,
@@ -33460,8 +33460,8 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagChannel:):** If **cast**, look at the top card of your objective deck - do not reveal it. You can then add that card to your hand. If you do, **discard** one objective card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13255": {
         "id": 13255,
@@ -33472,8 +33472,8 @@ export const cards = {
         "glory": null,
         "rule": "-2 from each fighter's Move characteristic, to a minimum of 0, in the next activation step.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13256": {
         "id": 13256,
@@ -33484,8 +33484,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one fighter. **Heal** (1) that fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13257": {
         "id": 13257,
@@ -33496,8 +33496,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter. Pick one: \\n **Push** that fighter 1 hex towards the nearest **cover** hex \\n *Or:* Pick the nearest feature token in an **empty** hex and move that token 1 hex towards that fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13258": {
         "id": 13258,
@@ -33508,8 +33508,8 @@ export const cards = {
         "glory": null,
         "rule": "Give one upgrade to one friendly fighter without spending any glory points. Then pick one opponent. That opponent may give one upgrade to one of their fighters without spending any glory points.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13259": {
         "id": 13259,
@@ -33520,8 +33520,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter. **Push** that fighter 1 hex towards the nearest enemy fighter, or up to 2 hexes towards the nearest enemy fighter if the chosen fighter is a **beast**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13260": {
         "id": 13260,
@@ -33532,8 +33532,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter. **Heal** the chosen fighter according to the number of upgrades that fighter had when you played this card, as shown below. Then **break** each of the chosen fighter's upgrades. \\n 0-1 upgrades: **Heal** (1) \\n 2-4 upgrades: **Heal** (2) \\n 5+ upgrades: **Heal** (3)",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13261": {
         "id": 13261,
@@ -33544,8 +33544,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter and one enemy fighter adjacent to that fighter. Do the following for each chosen fighter: \\n **Scatter** 1 from the chosen fighter's hex and **push** that fighter along the **chain** to the **end hex**. If the **chain** is interrupted, or if the fighter would be pushed into a hex that is **blocked** or **occupied**, do not **push** them.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13262": {
         "id": 13262,
@@ -33556,8 +33556,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** After an **Attack action** that targeted a friendly fighter, **give** that fighter one Guard token. If that fighter is **vulnerable**, **heal** (1) that fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13263": {
         "id": 13263,
@@ -33568,8 +33568,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** two friendly fighters who each have one or more **Illusion** upgrades and no Charge tokens. **Place** each chosen fighter in the hex that was occupied by the other fighter when you chose them.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13264": {
         "id": 13264,
@@ -33580,8 +33580,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Play this during a friendly fighter's **Attack action**, after the declare Attack action step, if that friendly fighter has one or more **supporting** fighters. **Stagger** the target. That **Attack action** has **Grievous** until it has been resolved.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13265": {
         "id": 13265,
@@ -33592,8 +33592,8 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter. The chosen fighter has the following cumulative benefits: \\n +1 Move \\n +1 Wounds if the chosen fighter has a Wounds characteristic of 2 or less. \\n +1 Damage to the chosen fighter's Range 1 and Range 2 **Attack actions** if the chosen fighter is a **minion**. \\n The effect **persists** until the next power step.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13266": {
         "id": 13266,
@@ -33604,8 +33604,8 @@ export const cards = {
         "glory": null,
         "rule": "**Waypoint** \\n +1 wizard level to each **wizard**. A **wizard** suffers **backlash** if their casting roll contains one or more :MagCrit:, and when a **wizard** is **dealt** damage by **backlash**, **backlash deals** 1 additional damage to that **wizard**. This effect **persists** until another **Waypoint** is played.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13267": {
         "id": 13267,
@@ -33616,8 +33616,8 @@ export const cards = {
         "glory": null,
         "rule": "Pick one: \\n You can **re-roll** one attack dice in the attack roll for the first Range 1 or Range 2 **Attack action** in the next activation step \\n *Or:* That **Attack action** has **Cleave**. \\n In either case, if an **assassin** makes that **Attack action**, that **Attack action** also has **Grievous**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13268": {
         "id": 13268,
@@ -33628,8 +33628,8 @@ export const cards = {
         "glory": null,
         "rule": "Pick one: \\n Flip one feature token in an **empty** hex \\n *Or:* Roll one attack dice for each fighter in a **cover** hex and on a roll of :atSmash:, **deal** 1 damage to that fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13269": {
         "id": 13269,
@@ -33640,8 +33640,8 @@ export const cards = {
         "glory": null,
         "rule": "You cannot give this card to a **leader**. \\n This fighter is an **assassin**. \\n **Reaction:** After an enemy fighter's activation, if that fighter is adjacent to this fighter, **place** this fighter on a **cover** hex in your territory. Then **give** this fighter one Charge token and **break** this card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13270": {
         "id": 13270,
@@ -33652,8 +33652,8 @@ export const cards = {
         "glory": null,
         "rule": "You cannot give this card to a **beast**. \\n This fighter is a **priest**. \\n When this fighter is the target of an **Attack action**, enemy fighters cannot provide support.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13271": {
         "id": 13271,
@@ -33664,8 +33664,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n **Reaction:** After an enemy fighter's **Move action**, if that enemy fighter is within 1 hex of this fighter, **deal** 1 damage to that fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13272": {
         "id": 13272,
@@ -33676,8 +33676,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter's Range 1 and Range 2 **Attack actions** that target an adjacent fighter have **Stagger**. \\n **Reaction:** After this fighter's successful Range 1 or Range 2 **Attack action**, **push** the target 1 hex away from this fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13273": {
         "id": 13273,
@@ -33688,8 +33688,8 @@ export const cards = {
         "glory": null,
         "rule": "**Bound Spell** \\n You cannot give this card to a **Khorne** fighter. \\n **Spell action (:MagChannel:):** If **cast**, **deal** 1 damage to one enemy fighter within 3 hexes of the caster. \\n This fighter is a level 1 **wizard** while attempting to cast this spell. and cannot attempt to cast any other spells. After this fighter makes this action, **break** this card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13274": {
         "id": 13274,
@@ -33700,8 +33700,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** After this fighter's activation in which they made one or more failed Range 1 or Range 2 **Attack actions**, **scatter** 2 from this fighter's hex and **push** this fighter along the **chain** to the **end hex**. If the **chain** is interrupted, or if this fighter would be pushed into a hex that is **blocked** or **occupied**, do not **push** them any further.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13275": {
         "id": 13275,
@@ -33712,8 +33712,8 @@ export const cards = {
         "glory": null,
         "rule": "While this fighter is in a **cover** hex, they can make the following action: \\n **Action:** Look at the top card of your objective deck. Pick one: \\n **Draw** that card and **discard** one objective card \\n *Or:* Put that card on the bottom of your objective deck.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13276": {
         "id": 13276,
@@ -33724,8 +33724,8 @@ export const cards = {
         "glory": null,
         "rule": "**Metalith** \\n You cannot give this card to a **leader**. \\n This fighter is an **assassin**. \\n This fighter is considered to be in a **cover** hex.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13277": {
         "id": 13277,
@@ -33736,8 +33736,8 @@ export const cards = {
         "glory": null,
         "rule": "**Cursed Key** \\n If this fighter is in a **cover** hex at the end of the third action phase, gain 1 glory point.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13278": {
         "id": 13278,
@@ -33748,8 +33748,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter has a Wounds characteristic of 4 in rounds 1 and 2, and a Wounds characteristic of 2 in round 3. This fighter's Wounds characteristic cannot be modified.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13279": {
         "id": 13279,
@@ -33760,8 +33760,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n When this card is **broken**, if this fighter is on the battlefield, **place** this fighter in a **starting** hex in your territory.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13280": {
         "id": 13280,
@@ -33772,8 +33772,8 @@ export const cards = {
         "glory": null,
         "rule": "Give this only to a **vulnerable** fighter. \\n +1 Move \\n +1 Defence \\n +1 Damage to this fighter's Range 1 **Attack actions**. \\n This fighter cannot be healed. When this fighter is taken out of action, **break** this card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13281": {
         "id": 13281,
@@ -33784,8 +33784,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n This fighter is on Guard.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13282": {
         "id": 13282,
@@ -33796,8 +33796,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n This fighter's Range 1 **Attack actions** have **Grievous**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13283": {
         "id": 13283,
@@ -33808,8 +33808,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action** \\n [:Hex: 1 - :atSmash: 1 - :boom: 2 -(Knockback 1)-] \\n +2 Dice to this **Attack action** if this fighter is a **minion**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13284": {
         "id": 13284,
@@ -33820,8 +33820,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter is a **hunter**. \\n This fighter's **Attack actions** have **Grievous**. ",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13285": {
         "id": 13285,
@@ -33832,8 +33832,8 @@ export const cards = {
         "glory": null,
         "rule": "When this fighter makes a Range 1 **Attack action** as part of a **Charge action**, that **Attack action** has +1 Damage, **Grievous** and **Knockback** 1. \\n After this fighter makes a **Charge action**, **deal** 1 damage to this fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13286": {
         "id": 13286,
@@ -33844,8 +33844,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter is a **hunter**. \\n You can **re-roll** one dice in this fighter's attack rolls while this fighter is in a **cover** hex.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13287": {
         "id": 13287,
@@ -33856,8 +33856,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** After this fighter's spell action or **spell Attack action**, if that spell was **cast**, pick one: \\n **Give** this fighter one Guard token \\n *Or:* **Heal** (1) this fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13288": {
         "id": 13288,
@@ -33868,8 +33868,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action** \\n This fighter is a **hunter**. \\n [:Hex: 1 - :atFury: 3 - :boom: 2] \\n If the target has one or more upgrades this **Attack action** has **Cleave**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13289": {
         "id": 13289,
@@ -33880,8 +33880,8 @@ export const cards = {
         "glory": null,
         "rule": "This fighter has line of sight to each fighter in a **cover** hex and/or **edge** hex. (This does not change this fighter's distance from those fighters, or the Range of this fighter's **Attack actions**.)",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13290": {
         "id": 13290,
@@ -33892,8 +33892,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action, Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n [:Hex: 3 - :atFury: 3 - :boom: 1 -(Grievous, Seeking)-] \\n **Seeking:** +1 Dice if the target is in a **cover** hex.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13291": {
         "id": 13291,
@@ -33904,8 +33904,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action** \\n [:Hex: 1 - :atSmash: 1 - :boom: 2 -(Grievous)-] \\n This **Attack action** has +1 Dice for each upgrade the target has.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13292": {
         "id": 13292,
@@ -33916,8 +33916,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action, Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n [:Hex: 1 - :atSmash: 3 - :boom: 2 -(Stagger)-]",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13293": {
         "id": 13293,
@@ -33928,8 +33928,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n This fighter's Defence characteristic is :dfBlock: 2 and cannot be modified.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13294": {
         "id": 13294,
@@ -33940,8 +33940,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action, Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n [:Hex: 2 - :atSmash: 2 - :boom: 2 -(Cleave)-]",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13295": {
         "id": 13295,
@@ -33952,8 +33952,8 @@ export const cards = {
         "glory": null,
         "rule": "Give this only to a fighter with a Wounds characteristic of 2 or less on an objective token. Put that token on this card. \\n When this fighter is taken out of action, first place the objective token on this card in the same hex as that fighter, unless that hex is a **lethal** hex, a **cover** hex or a hex that contains another feature token. Then **break** this card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13296": {
         "id": 13296,
@@ -33964,8 +33964,8 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** After a successful **Attack action** that targeted this fighter, if the attacker is adjacent, **deal** 1 damage to that fighter and **give** that fighter one Charge token. Then **break** this card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13297": {
         "id": 13297,
@@ -33976,8 +33976,8 @@ export const cards = {
         "glory": null,
         "rule": "If this fighter's Defence characteristic is :dfDodge:, you can **re-roll** one dice in this fighter's defence rolls.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13298": {
         "id": 13298,
@@ -33988,8 +33988,8 @@ export const cards = {
         "glory": null,
         "rule": "**Bound Spell** \\n You cannot give this card to a **Khorne** fighter. \\n **Spell action (:MagFocus:):** If **cast**, pick one enemy fighter within 3 hexes of the caster. **Deal** 1 damage to that enemy fighter. Then roll one attack dice. On a roll of :atSmash:, **give** that fighter one Move token. \\n This fighter is a level 1 **wizard** while attempting to **cast** this spell, and cannot attempt to **cast** any other spells. After this fighter makes this action, **break** this card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13299": {
         "id": 13299,
@@ -34000,8 +34000,8 @@ export const cards = {
         "glory": null,
         "rule": "*(Errata update)* **Illusion, Denizen** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n This fighter is on Guard. \\n **Reaction:** After an enemy fighter's failed **Attack action**, if this fighter was the target, was adjacent and there was one or more :dfCrit: in the defence roll, **deal** 1 damage to the attacker.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13300": {
         "id": 13300,
@@ -34012,8 +34012,8 @@ export const cards = {
         "glory": null,
         "rule": "**Denizen** \\n +1 Move while this fighter has 1 upgrade \\n +2 Move while this fighter has 2-4 upgrades \\n +3 Move while this fighter has 5+ upgrades",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13301": {
         "id": 13301,
@@ -34024,8 +34024,8 @@ export const cards = {
         "glory": null,
         "rule": "**Denizen** \\n Rolls of :atSup1: are **successes** in this fighter's attack rolls if there are no enemy fighters within 2 hexes of this fighter. \\n Rolls of :dfSup1: are **successes** in this fighter's defence rolls if this fighter is a **hunter** and the attacker is not adjacent.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13302": {
         "id": 13302,
@@ -34036,8 +34036,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action** \\n  [:Hex: 1 - :atSmash: 3 - :boom: 1] \\n **Reaction:** After this **Attack action**, if it was successful, **draw** up to one power card.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13303": {
         "id": 13303,
@@ -34048,8 +34048,8 @@ export const cards = {
         "glory": null,
         "rule": "**Illusion** \\n Do not spend any glory points when you play this card. At the end of the action phase, or when this fighter is chosen by a gambit or is **dealt** damage, **break** this card. \\n -1 Dice from **Attack actions** that target this fighter while this fighter is in a **cover** hex, to a minimum of 1. \\n +1 Defence while this fighter is in a **cover** hex if this fighter is a **minion**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13304": {
         "id": 13304,
@@ -34060,8 +34060,8 @@ export const cards = {
         "glory": null,
         "rule": "+1 Defence while two or more enemy fighters are adjacent to this fighter. \\n +1 Defence while one or more enemy fighters are adjacent to this fighter instead if this fighter is a **brawler**.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13305": {
         "id": 13305,
@@ -34072,8 +34072,8 @@ export const cards = {
         "glory": null,
         "rule": "In this fighter's casting rolls, rolls of :MagChannel: are considered to be rolls of :MagFocus:, and vice versa. \\n If this fighter's casting roll contains two or more :MagCrit:, this spell fails (this fighter suffers **backlash** as normal).",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13306": {
         "id": 13306,
@@ -34084,8 +34084,8 @@ export const cards = {
         "glory": null,
         "rule": "*(Errata update)* **Map** \\n If this fighter is in enemy territory at the end of the third action phase, gain 1 glory point.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13307": {
         "id": 13307,
@@ -34096,8 +34096,8 @@ export const cards = {
         "glory": null,
         "rule": "+1 Damage to this fighter's Range 1 and Range 2 **Attack actions** while this fighter has three or more upgrades.",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "13308": {
         "id": 13308,
@@ -34108,8 +34108,8 @@ export const cards = {
         "glory": null,
         "rule": "**Attack action** \\n You cannot give this card to a **leader**. \\n This fighter is an **assassin**. \\n [:Hex: 1 - :atFury: 3 - :boom: 2 -(Stagger)-]",
         "scoreType": "-",
-        "status": "V--_V-_V",
-        "rotated": false
+        "status": "R--_R-_V",
+        "rotated": true
     },
     "14001": {
         "id": 14001,
@@ -46015,7 +46015,7 @@ export const cards = {
         "id": 36004,
         "factionId": 1,
         "setId": 69,
-        "name": "Chill on the Grave",
+        "name": "Chill of the Grave",
         "type": "Objective",
         "glory": 2,
         "rule": "Score this in an end phase if two or more enemy fighters are out of action.",
