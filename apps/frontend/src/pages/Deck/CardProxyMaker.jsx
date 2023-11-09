@@ -1,8 +1,13 @@
-import React from "react";
+import { factionMembers } from "@wudb/index";
 import { useState } from "react";
 
-const CardProxyMaker = ({ cards = [], onExit }) => {
-    const [selectedCardIds, setSelectedCardIds] = useState(cards.map(c => c.id));
+const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
+    const [selectedCardIds, setSelectedCardIds] = useState(
+        cards.map((c) => c.id)
+    );
+    const [selectedFighters, setSelectedFighters] = useState(
+        factionMembers[factionId]
+    );
 
     const handleDownload = async () => {
         const { default: jsPDF } = await import("jspdf");
@@ -13,12 +18,22 @@ const CardProxyMaker = ({ cards = [], onExit }) => {
         const w = 64.5;
         const h = 89.9;
 
-        const cardsToPrint = cards.filter(card => selectedCardIds.includes(card.id));
+        const cardsToPrint = cards.filter((card) =>
+            selectedCardIds.includes(card.id)
+        );
 
         const pages = cardsToPrint.reduce((acc, el, index, array) => {
             if (index % 9 === 0) {
                 acc.push(array.slice(index, index + 9));
             }
+            return acc;
+        }, []);
+
+        const fighterPages = selectedFighters.reduce((acc, el, index, array) => {
+            if (index % 3 === 0) {
+                acc.push(array.slice(index, index+3));
+            }
+
             return acc;
         }, []);
 
@@ -46,15 +61,50 @@ const CardProxyMaker = ({ cards = [], onExit }) => {
                     "",
                     "SLOW"
                 );
-                x += w + 3;
+                x += w;
                 idx += 1;
 
                 if (idx % 3 === 0) {
                     rowIdx += 1;
                     x = 3;
-                    y = rowIdx * h + rowIdx * 5;
-                    console.log(x, y);
+                    y = rowIdx * h + 3;
                 }
+            }
+        }
+        
+        for (let page of fighterPages) {
+            doc.addPage();
+
+            let rowIdx = 0;
+            let x = 3;
+            let y = 3;
+
+            for (let f of page) {
+                doc.addImage(
+                    document.getElementById(`proxy ${f}`),
+                    "png",
+                    x,
+                    y,
+                    w,
+                    h,
+                    "",
+                    "SLOW"
+                );
+                x += w;                
+                doc.addImage(
+                    document.getElementById(`proxy ${f}-inspired`),
+                    "png",
+                    x,
+                    y,
+                    w,
+                    h,
+                    "",
+                    "SLOW"
+                );
+
+                rowIdx += 1;
+                x = 3;
+                y = rowIdx * h + 3;
             }
         }
 
@@ -62,28 +112,73 @@ const CardProxyMaker = ({ cards = [], onExit }) => {
         onExit();
     };
 
-    const handleToggleCardSelected = cardId => () => {
+    const handleToggleCardSelected = (cardId) => () => {
         const selectedCardIndex = selectedCardIds.indexOf(cardId);
 
         if (selectedCardIndex >= 0) {
-            setSelectedCardIds(selectedCardIds.filter(id => id !== cardId));
+            setSelectedCardIds(selectedCardIds.filter((id) => id !== cardId));
         } else {
             setSelectedCardIds([...selectedCardIds, cardId]);
         }
-    }
+    };
+
+    const handleToggleFighterSelected = (fighter) => () => {
+        const selectedCardIndex = selectedFighters.indexOf(fighter);
+
+        if (selectedCardIndex >= 0) {
+            setSelectedFighters(
+                selectedFighters.filter((id) => id !== fighter)
+            );
+        } else {
+            setSelectedFighters([...selectedFighters, fighter]);
+        }
+    };
 
     const toggleAll = () => {
-        if (selectedCardIds.length > 0) {
+        if (selectedCardIds.length > 0 || selectedFighters.length > 0) {
             setSelectedCardIds([]);
+            setSelectedFighters([]);
         } else {
-            setSelectedCardIds(cards.map(({ id }) => id ));
+            setSelectedCardIds(cards.map(({ id }) => id));
+            setSelectedFighters(factionMembers[factionId])
         }
-    }
+    };
 
     return (
         <div className="fixed inset-0 z-10 p-8 backdrop-blur">
             <div className="flex w-full h-full flex-col">
                 <div className="flex-1 overflow-y-auto grid grid-cols-6 gap-y-2 p-4">
+                    {factionMembers[factionId].map((fighter, index) => (
+                        <>
+                            <img
+                                id={`proxy ${fighter}`}
+                                key={fighter}
+                                src={`/assets/cards/fighters/${factionId}-${
+                                    index + 1
+                                }.png`}
+                                className={`w-[64.5mm] h-[89.9mm] filter ${
+                                    selectedFighters.includes(fighter)
+                                        ? "grayscale-0"
+                                        : "grayscale"
+                                }`}
+                                onClick={handleToggleFighterSelected(fighter)}
+                            />
+                            <img
+                                id={`proxy ${fighter}-inspired`}
+                                key={`${fighter}-inspired`}
+                                src={`/assets/cards/fighters/${factionId}-${
+                                    index + 1
+                                }-inspired.png`}
+                                className={`w-[64.5mm] h-[89.9mm] filter ${
+                                    selectedFighters.includes(fighter)
+                                        ? "grayscale-0"
+                                        : "grayscale"
+                                }`}
+                                onClick={handleToggleFighterSelected(fighter)}
+                            />
+                        </>
+                    ))}
+
                     {cards.map((card) => (
                         <img
                             id={`proxy ${card.id}`}
@@ -92,7 +187,11 @@ const CardProxyMaker = ({ cards = [], onExit }) => {
                                 5,
                                 "0"
                             )}.png`}
-                            className={`w-[64.5mm] h-[89.9mm] filter ${selectedCardIds.includes(card.id) ? 'grayscale-0' : 'grayscale'}`}
+                            className={`w-[64.5mm] h-[89.9mm] filter ${
+                                selectedCardIds.includes(card.id)
+                                    ? "grayscale-0"
+                                    : "grayscale"
+                            }`}
                             onClick={handleToggleCardSelected(card.id)}
                         />
                     ))}
