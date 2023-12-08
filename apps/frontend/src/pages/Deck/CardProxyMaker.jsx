@@ -46,8 +46,8 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
             }
 
             let rowIdx = 0;
-            let x = 3;
-            let y = 3;
+            let x = 0;
+            let y = 0;
             let idx = 0;
 
             for (let c of page) {
@@ -66,7 +66,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
 
                 if (idx % 3 === 0) {
                     rowIdx += 1;
-                    x = 3;
+                    x = 0;
                     y = rowIdx * h + 3;
                 }
             }
@@ -144,6 +144,14 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
         }
     };
 
+    const toggleWarband = () => {
+        if (selectedFighters.length > 0) {
+            setSelectedFighters([]);
+        } else {
+            setSelectedFighters(factionMembers[factionId]);
+        }
+    }
+
     return (
         <div className="fixed inset-0 z-10 p-8 backdrop-blur">
             <div className="flex w-full h-full flex-col">
@@ -208,6 +216,12 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
                         onClick={toggleAll}
                     >
                         Toggle All
+                    </button>
+                    <button
+                        className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+                        onClick={toggleWarband}
+                    >
+                        Toggle Warband
                     </button>
                     <button
                         className="ml-auto btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
