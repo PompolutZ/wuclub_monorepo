@@ -61,6 +61,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "firebase-tools": "^11.15.0",
     "lint-staged": "^13.0.3",
+    "node-gyp": "^10.0.1",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "tailwind-scrollbar": "^2.0.1",
