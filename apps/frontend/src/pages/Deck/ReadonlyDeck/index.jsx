@@ -309,6 +309,8 @@ const vassalPrefixMap = {
     34: 250,    
     35: 252,    
     36: 253,    
+    37: 254,
+    38: 255,
 }
 
 const handleSaveVassalFiles = (name, cards) => () => {
