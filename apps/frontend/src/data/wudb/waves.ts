@@ -148,4 +148,12 @@ export const Waves: Record<number, Wave> = {
         cardsCount: 32,
         asset: "force-of-frost-rivals-deck-icon"
     },
+    37: {
+        cardsCount: 32,
+        asset: "daggoks-stab-ladz-rivals-deck-icon"
+    },
+    38: {
+        cardsCount: 32,
+        asset: "malevolent-masks-rivals-deck-icon"
+    },
 }

@@ -183,6 +183,7 @@ export const factionMembers = {
     "skabbiks-plaguepack": ["1", "2", "3", "4", "5", "6"],
     "cyrenis-razors": ["1", "2", "3", "4"],
     "the-thricefold-discord": ["1", "2", "3"],
+    "daggoks-stab-ladz": ["1", "2", "3", "4"],
 };
 
 export const udbPrefexes = {
@@ -330,6 +331,7 @@ const warbandsWithPlot = [
     factions["Ephilim's Pandaemonium"].id,
     factions["The Headsmen's Curse"].id,
     factions["Skabbik's Plaguepack"].id,
+    factions["Daggok's Stab-Ladz"].id,
 ];
 
 const rivalDecksWithPlot = [
@@ -414,6 +416,13 @@ const plots = {
         id: sets["Breakneck Slaughter Rivals Deck"].id,
         name: sets["Breakneck Slaughter Rivals Deck"].name,
     },
+    Schemes: {
+        keyword: "Schemes",
+        connection: "Warband",
+        asset: "25433",
+        id: sets["Daggok's Stab-Ladz Rivals Deck"].id,
+        name: sets["Daggok's Stab-Ladz Rivals Deck"].name
+    }
 };
 
 function getCardNumberFromId(cardId) {
@@ -541,6 +550,7 @@ const nemesis_valid_sets = [
     sets["Paths of Prophecy Rivals Deck"].id,
     sets["Breakneck Slaughter Rivals Deck"].id,
     sets["Force of Frost Rivals Deck"].id,
+    sets["Malevolent Masks Rivals Deck"].id,
 ];
 
 function getAllSetsValidForFormat(format) {

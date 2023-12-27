@@ -81,6 +81,7 @@ export const getFaction = text => {
         case "Skabbik's Plaguepack": return 56;
         case "Cyreni's Razors": return 57;
         case "The Thricefold Discord": return 58;
+        case "Daggok's Stab-Ladz": return 59;
         default: return -1;
     }
 }
@@ -121,6 +122,8 @@ const udbPrefexes = {
     TD: 34,
     BS: 35,
     FO: 36,
+    DL: 37,
+    MM: 38
 }
 
 export const decodeUDB = card => {

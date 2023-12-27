@@ -81,6 +81,8 @@ export const setsIndex = [
     "the-thricefold-discord-rivals-deck",
     "breakneck-slaughter-rivals-deck",
     "force-of-frost-rivals-deck",
+    "daggoks-stab-ladz-rivals-deck",
+    "malevolent-masks-rivals-deck",
 ]
 
 export const setsNames = [
@@ -168,6 +170,8 @@ export const setsNames = [
     "The Thricefold Discord Rivals Deck",
     "Breakneck Slaughter Rivals Deck",
     "Force of Frost Rivals Deck",
+    "Daggok's Stab-Ladz Rivals Deck",
+    "Malevolent Masks Rivals Deck"
 ]
 
 // case "Order": return 38;
@@ -242,6 +246,7 @@ export const factionToGrandAlianceId = {
     
     "cyrenis-razors": 38,
     "the-thricefold-discord": 39,
+    "daggoks-stab-ladz": 41,
 }
 
 export const factionIndexes = [
@@ -316,6 +321,7 @@ export const factionIndexes = [
     "skabbiks-plaguepack",
     "cyrenis-razors",
     "the-thricefold-discord",
+    "daggoks-stab-ladz",
 ]
 
 export const factionIdPrefix = {
@@ -390,4 +396,5 @@ export const factionIdPrefix = {
     "skabbiks-plaguepack": "sp",
     "cyrenis-razors": "cr",
     "the-thricefold-discord": "ttd",
+    "daggoks-stab-ladz": "dsl",
 }
