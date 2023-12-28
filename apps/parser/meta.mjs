@@ -170,7 +170,7 @@ export const setsNames = [
     "The Thricefold Discord Rivals Deck",
     "Breakneck Slaughter Rivals Deck",
     "Force of Frost Rivals Deck",
-    "Daggok's Stab-Ladz Rivals Deck",
+    "Daggok's Stab-ladz Rivals Deck",
     "Malevolent Masks Rivals Deck"
 ]
 

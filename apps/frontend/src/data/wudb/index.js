@@ -222,6 +222,8 @@ export const udbPrefexes = {
     TD: 34,
     BS: 35,
     FO: 36,
+    SL: 37,
+    MM: 38
 };
 
 export const grouppedFactions = () => {
@@ -331,7 +333,7 @@ const warbandsWithPlot = [
     factions["Ephilim's Pandaemonium"].id,
     factions["The Headsmen's Curse"].id,
     factions["Skabbik's Plaguepack"].id,
-    factions["Daggok's Stab-Ladz"].id,
+    factions["Daggok's Stab-ladz"].id,
 ];
 
 const rivalDecksWithPlot = [
@@ -420,8 +422,8 @@ const plots = {
         keyword: "Schemes",
         connection: "Warband",
         asset: "25433",
-        id: sets["Daggok's Stab-Ladz Rivals Deck"].id,
-        name: sets["Daggok's Stab-Ladz Rivals Deck"].name
+        id: sets["Daggok's Stab-ladz Rivals Deck"].id,
+        name: sets["Daggok's Stab-ladz Rivals Deck"].name
     }
 };
 

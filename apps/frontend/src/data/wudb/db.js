@@ -339,10 +339,10 @@ export const sets = {
         "name": "force-of-frost-rivals-deck",
         "displayName": "Force of Frost Rivals Deck"
     },
-    "Daggok's Stab-Ladz Rivals Deck": {
+    "Daggok's Stab-ladz Rivals Deck": {
         "id": 70,
         "name": "daggoks-stab-ladz-rivals-deck",
-        "displayName": "Daggok's Stab-Ladz Rivals Deck"
+        "displayName": "Daggok's Stab-ladz Rivals Deck"
     },
     "Malevolent Masks Rivals Deck": {
         "id": 71,
@@ -759,12 +759,12 @@ export const factions = {
         "gaId": 39,
         "displayName": "The Thricefold Discord"
     },
-    "Daggok's Stab-Ladz": {
+    "Daggok's Stab-ladz": {
         "id": 60,
         "abbr": "dsl",
         "name": "daggoks-stab-ladz",
         "gaId": 41,
-        "displayName": "Daggok's Stab-Ladz"
+        "displayName": "Daggok's Stab-ladz"
     }
 }
 export const cards = {
@@ -2096,7 +2096,7 @@ export const cards = {
         "id": 1088,
         "factionId": 5,
         "setId": 3,
-        "name": "Ard as Iron",
+        "name": "'Ard as Iron",
         "type": "Objective",
         "glory": 3,
         "rule": "Score this in the third end phase if none of your fighters are out of action.",
@@ -2204,7 +2204,7 @@ export const cards = {
         "id": 1097,
         "factionId": 5,
         "setId": 3,
-        "name": "Avin' a Good Time",
+        "name": "'Avin' a Good Time",
         "type": "Ploy",
         "glory": null,
         "rule": "Choose a fighter and roll an attack dice. If you roll a :atSmash: or :atCrit: the can make an Attack action.",
@@ -2324,7 +2324,7 @@ export const cards = {
         "id": 1107,
         "factionId": 5,
         "setId": 3,
-        "name": "Ard Head",
+        "name": "'Ard Head",
         "type": "Upgrade",
         "glory": null,
         "rule": "When this fighter suffers damage, reduce that damage by 1 to a minimum of 1.",
@@ -2396,7 +2396,7 @@ export const cards = {
         "id": 1113,
         "factionId": 5,
         "setId": 3,
-        "name": "Eadbutt",
+        "name": "'Eadbutt",
         "type": "Upgrade",
         "glory": null,
         "rule": "[:Hex: 1 - :atSmash: 2 - :boom: 2] \\n If this Attack action succeeds, the target cannot be activated for the rest of the phase.",
@@ -8520,7 +8520,7 @@ export const cards = {
         "id": 3103,
         "factionId": 13,
         "setId": 11,
-        "name": "Orrible Leer",
+        "name": "'Orrible Leer",
         "type": "Spell",
         "glory": null,
         "rule": "**Gambit Spell (:MagFocus:):** If this spell is cast, push each enemy fighter adjacent to the caster up to one hex.",
@@ -13413,7 +13413,7 @@ export const cards = {
         "name": "Blessing of Vytrix",
         "type": "Upgrade",
         "glory": null,
-        "rule": "**Innate (:MagChannel:)**",
+        "rule": " **Innate (:MagChannel:)**",
         "scoreType": "-",
         "status": "R--_R-_V",
         "rotated": true
@@ -20601,7 +20601,7 @@ export const cards = {
         "name": "Binding Chain",
         "type": "Upgrade",
         "glory": null,
-        "rule": "[:Hex: 1 - :atSmash: 2 - :boom: 2 -(Combo)-]",
+        "rule": "[:Hex: 1 - :atSmash: 2 - :boom: 2 -(Combo)-] ",
         "scoreType": "-",
         "status": "R--_R-_V",
         "rotated": true
@@ -33835,7 +33835,7 @@ export const cards = {
         "name": "Keen Sense",
         "type": "Upgrade",
         "glory": null,
-        "rule": "This fighter is a **hunter**. \\n This fighter's **Attack actions** have **Grievous**.",
+        "rule": "This fighter is a **hunter**. \\n This fighter's **Attack actions** have **Grievous**. ",
         "scoreType": "-",
         "status": "R--_R-_V",
         "rotated": true
@@ -40375,7 +40375,7 @@ export const cards = {
         "name": "Spinning Flourish",
         "type": "Ploy",
         "glory": null,
-        "rule": "**Flourish** \\n Friendly fighters' Range 1 **Attack actions** are not considered to have **Combo**. \\n Friendly fighters' Range 1 **Attack actions** have **Scything**. \\n This effect **persists** until the end of the phase or until after a friendly fighter's **Scything superaction** in which one or more **Attack actions** succeeded.",
+        "rule": "**Flourish** \\n Friendly fighters' Range 1 **Attack actions** are not considered to have **Combo**. \\n Friendly fighters' Range 1 **Attack actions** have **Scything**. \\n This effect **persists** until the end of the phase or until after a friendly fighter's **Scything superaction** in which one or more **Attack actions** succeeded. ",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -44271,7 +44271,7 @@ export const cards = {
         "name": "Move-move!",
         "type": "Ploy",
         "glory": null,
-        "rule": "**Choose** a friendly **minion**. The chosen **minion** makes a **Move action**.",
+        "rule": "**Choose** a friendly **minion**. The chosen **minion** makes a **Move action**. ",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -46383,10 +46383,10 @@ export const cards = {
         "name": "Aspirin' Killaboss",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Dual:** Score this in an end phase if there is a surviving friendly **leader** \\n *And:* That **leader** is Inspired.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37002": {
         "id": 37002,
@@ -46395,10 +46395,10 @@ export const cards = {
         "name": "Da Plan Wurked",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge:** Score this immediately after you put a second or subsequent **Scheme** under your warband's plot card in the same phase.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37003": {
         "id": 37003,
@@ -46407,10 +46407,10 @@ export const cards = {
         "name": "Deceivin' Destiny",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge, Hybrid:** Score this immediately after an enemy fighter's **Attack action:** \\n That targeted a friendly **leader**, if that **leader** is surviving \\n *Or:* That had a Dice characteristic of 3 or more and failed.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37004": {
         "id": 37004,
@@ -46419,10 +46419,10 @@ export const cards = {
         "name": "Deceptively Brutal",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge:** Score this immediately after your warband's fourth or successive **Attack action** in the same phase.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37005": {
         "id": 37005,
@@ -46431,10 +46431,10 @@ export const cards = {
         "name": "Deceptively Kunnin'",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge:** Score this immediately after your warband's third or successive reaction in the same phase.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37006": {
         "id": 37006,
@@ -46443,10 +46443,10 @@ export const cards = {
         "name": "Finksteala Triumph",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "Score this in an end phase if one or more **Schemes** are under your warband's plot card. When you score this objective card, if you have four or more **Schemes** under your warband's plot card, gain two additional glory points.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37007": {
         "id": 37007,
@@ -46455,22 +46455,22 @@ export const cards = {
         "name": "Krule Tactics",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge, Hybrid:** Score this immediately after a friendly fighter's **Attack action** if: \\n Two or more friendly fighters supported that **Attack action** \\n *Or:* That was your warband's third or subsequent supported **Attack action** in the same phase.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37008": {
         "id": 37008,
         "factionId": 60,
         "setId": 70,
-        "name": "Kruelest of 'em All",
+        "name": "Krulest of 'em All",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge, Hybrid:** Score this immediately after: \\n A friendly **leader's Attack action** takes an enemy fighter out of action \\n *Or:* A friendly fighter's **Attack action** that results in a **critical hit** takes an enemy fighter out of action.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37009": {
         "id": 37009,
@@ -46479,10 +46479,10 @@ export const cards = {
         "name": "Kunnin' Collector",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "Score this in an end phase if one or more enemy **leaders** are out of action.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37010": {
         "id": 37010,
@@ -46491,10 +46491,10 @@ export const cards = {
         "name": "Legendary Krulety",
         "type": "Objective",
         "glory": 2,
-        "rule": "",
+        "rule": "Score this in an end phase if each enemy fighter has one or more wound counters and/or is out of action.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37011": {
         "id": 37011,
@@ -46503,10 +46503,10 @@ export const cards = {
         "name": "Legendary Kunnin'",
         "type": "Objective",
         "glory": 2,
-        "rule": "",
+        "rule": "Score this in an end phase if three or more **Schemes** are under your warband's plot card.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37012": {
         "id": 37012,
@@ -46515,10 +46515,10 @@ export const cards = {
         "name": "Storied Stabbin'",
         "type": "Objective",
         "glory": 2,
-        "rule": "",
+        "rule": "**Dual:** Score this in an end phase if: \\n The number of friendly fighters out of action is lower than the round number \\n *And:* The number of enemy fighters out of action is equal to or greater than the round number.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37013": {
         "id": 37013,
@@ -46527,10 +46527,10 @@ export const cards = {
         "name": "Bust Their Ears",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Scheme** \\n Play this only as described on its plot card. \\n In the turn in which this card is turned face up, friendly fighters supported by Hurrk are considered to have one additional **supporting** fighter. \\n **Condition:** A friendly fighter makes an **Attack action** supported by Hurrk.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37014": {
         "id": 37014,
@@ -46539,10 +46539,10 @@ export const cards = {
         "name": "Gut 'Em",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Scheme** \\n Play this only as described on its plot card. \\n In the turn in which this card is turned face up, friendly fighters' Range 1 and Range 2 **Attack actions** have :atCrit: **Grievous 1**. \\n **Condition:** A friendly fighter's Range 1 or Range 2 **Attack action** takes an enemy fighter our of action.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37015": {
         "id": 37015,
@@ -46551,10 +46551,10 @@ export const cards = {
         "name": "Krule Teamwork",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Choose** two friendly fighters. **Push** each chosen fighter 1 hex.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37016": {
         "id": 37016,
@@ -46563,10 +46563,10 @@ export const cards = {
         "name": "Kunnin' Trap",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Trap** \\n **Reaction:** Play this after an enemy fighter's **Move action** that ends adjacent to one or more friendly fighters. Roll a magic dice. On a roll of :MagChannel:, **deal** 1 damage to that fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37017": {
         "id": 37017,
@@ -46575,10 +46575,10 @@ export const cards = {
         "name": "Outfink 'Em",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Scheme** \\n Play this only as described on its plot card. \\n In the turn in which this card is turned face up, when an opponent plays a power card, **draw** two power cards. \\n **Condition:** You **draw** your second or subsequent card since this card was turned face up, other than by using a player action.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37018": {
         "id": 37018,
@@ -46587,10 +46587,10 @@ export const cards = {
         "name": "Rush 'Em",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Scheme** \\n Play this only as described on its plot card. \\n In the turn in which this card is turned face up, +1 Move to friendly fighters. \\n **Condition:** A friendly fighter's **Move action** ends 5 or more hexes from where it started and adjacent to one or more enemy fighters.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37019": {
         "id": 37019,
@@ -46599,10 +46599,10 @@ export const cards = {
         "name": "Skare 'Em",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Scheme** \\n Play this only as described on its plot card. \\n In the turn in which this card is turned face up, each time your warband **pushes** an enemy fighter, you can **push** that fighter 1 additional hex. \\n **Condition:** You **push** an enemy fighter 2 or more hexes.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37020": {
         "id": 37020,
@@ -46611,10 +46611,10 @@ export const cards = {
         "name": "Stackin' da Odds",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "Pick one: **Draw** an objective card, then put one objective card from your hand on the bottom of your objective deck \\n *Or:* Put two power cards from your hand on the bottom of your power deck, then **draw** two power cards.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37021": {
         "id": 37021,
@@ -46623,10 +46623,10 @@ export const cards = {
         "name": "Stolen Knowwotz",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Reaction:** Play this after a friendly **leader's Attack action** that takes an enemy fighter out of action. **Draw** two power cards.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37022": {
         "id": 37022,
@@ -46635,10 +46635,10 @@ export const cards = {
         "name": "Take dat Head",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Scheme** \\n Play this only as described on its plot card. \\n When this card is turned face up, **choose** an enemy fighter. In the turn in which this card is turned face up, +1 Dice to friendly fighters' **Attack actions** that target the chosen fighter. \\n **Condition:** The chosen fighter is taken out of action.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37023": {
         "id": 37023,
@@ -46647,10 +46647,10 @@ export const cards = {
         "name": "Big Bully",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "+1 Wounds.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37024": {
         "id": 37024,
@@ -46659,10 +46659,10 @@ export const cards = {
         "name": "Deffproof",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "+1 Defence while one or more of your warband's **Schemes** are **persisting**.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37025": {
         "id": 37025,
@@ -46671,10 +46671,10 @@ export const cards = {
         "name": "Extra Kunnin'",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "This fighter's **Attack actions** have **Ensnare**.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37026": {
         "id": 37026,
@@ -46683,10 +46683,10 @@ export const cards = {
         "name": "Extra Skarey",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Reaction:** After this fighter's activation in which this fighter made one or more **Attack actions**, **stagger** one adjacent enemy fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37027": {
         "id": 37027,
@@ -46695,10 +46695,10 @@ export const cards = {
         "name": "Finkin' Muscles",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Reaction:** After your **Pass action**, pick any number of your warband's **Schemes** that are **persisting** and/or in your discard pile. Add those cards to your hand and **break** this card.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37028": {
         "id": 37028,
@@ -46707,22 +46707,22 @@ export const cards = {
         "name": "Intimidatin'",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "-1 Dice, to a minimum of 1, from adjacent enemy fighters' **Attack actions** that target this fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37029": {
         "id": 37029,
         "factionId": 60,
         "setId": 70,
         "name": "Keen Finka",
-        "type": "Upgrade ",
+        "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Action: Discard** a power card, then **draw** two power cards.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37030": {
         "id": 37030,
@@ -46731,10 +46731,10 @@ export const cards = {
         "name": "Krule Braggart",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Reaction:** After you put a **Scheme** under your warband's plot card, gain 1 glory point and **break** this card.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37031": {
         "id": 37031,
@@ -46743,10 +46743,10 @@ export const cards = {
         "name": "Mork's Mangler",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "This fighter's Range 1 and Range 2 **Attack actions** have the following abilities, depending on how many **Schemes** are under your warband's plot card: \\n **1+: Stagger** \\n **2+: Cleave** \\n **3+: :atCrit: Grievous** 1",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "37032": {
         "id": 37032,
@@ -46755,10 +46755,10 @@ export const cards = {
         "name": "Sneaky Git",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Reaction:** After this fighter's activation, **push** this fighter 1 hex.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38001": {
         "id": 38001,
@@ -46767,10 +46767,10 @@ export const cards = {
         "name": "Audacious Aspect",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge, Hybrid:** Score this immediately after an activation step if: \\n One or more friendly fighters with a **Mask** upgrade holds an objective with an odd value *Or:* Your warband holds two or more objectives, each of which is in no one's or enemy territory.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38002": {
         "id": 38002,
@@ -46779,10 +46779,10 @@ export const cards = {
         "name": "Completed Pact",
         "type": "Objective",
         "glory": 3,
-        "rule": "",
+        "rule": "Score this in an end phase if there are more surviving friendly fighters with **Mask** upgrades than there are surviving enemy fighters.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38003": {
         "id": 38003,
@@ -46791,10 +46791,10 @@ export const cards = {
         "name": "Death's Visage",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge, Hybrid:** Score this immediately after: \\n A friendly fighter with a **Mask** upgrade takes an enemy fighter out of ation \\n *Or:* Your warband's third or subsequent successful **Attack action** in the same phase.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38004": {
         "id": 38004,
@@ -46803,10 +46803,10 @@ export const cards = {
         "name": "Domino Dominance",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge:** Score this immediately after a power step if one or more surviving Inspired friendly fighters have a **Mask** upgrade.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38005": {
         "id": 38005,
@@ -46815,10 +46815,10 @@ export const cards = {
         "name": "Feast of Violence",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge, Dual:** Score this immediately after a friendly fighter's **Attack action** if: \\n That was the third or subsequent Range 1 or Range 2 **Attack action** made by a friendly fighter in the same phase \\n *And:* Each of those **Attack actions** was made in a different activation step.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38006": {
         "id": 38006,
@@ -46827,10 +46827,10 @@ export const cards = {
         "name": "Hooded Stranger",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "Score this in an end phase if one or more friendly fighters with a **Mask** upgrade are in enemy territory. When you score this objective, if there are no enemy fighters adjacent to one or more of those friendly fighters, gain 1 additional glory point.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38007": {
         "id": 38007,
@@ -46839,10 +46839,10 @@ export const cards = {
         "name": "Slaughter Satisfied",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge:** Score this immediately after an activation step if there are more enemy fighters out of action than there are suviving enemy fighters.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38008": {
         "id": 38008,
@@ -46851,10 +46851,10 @@ export const cards = {
         "name": "Solid Spread",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "Score this in an end phase if there are one or more friendly fighters in your territory, no one's territory and enemy territory.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38009": {
         "id": 38009,
@@ -46863,10 +46863,10 @@ export const cards = {
         "name": "Stoic Appearance",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "Score this in an end phase if one or more friendly fighters with a **Mask** upgrade are holding an objective.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38010": {
         "id": 38010,
@@ -46875,22 +46875,22 @@ export const cards = {
         "name": "Totally Overpowered",
         "type": "Objective",
         "glory": 2,
-        "rule": "",
+        "rule": "**Dual:** Score this in an end phase if: \\n Your warband holds two or more objectives \\n *And:* More than half of the fighters in one or more enemy warbands are out of action and/or have one or more wound counters.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38011": {
         "id": 38011,
         "factionId": 1,
         "setId": 71,
-        "name": "Victory Veils",
+        "name": "Victorious Veils",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "Score this in an end phase if three or more surviving friendly fighters each have a **Mask** upgrade. \\n When you score this objective, if it is the third end phase, gain 2 additional glory points.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38012": {
         "id": 38012,
@@ -46899,10 +46899,10 @@ export const cards = {
         "name": "Vision of Success",
         "type": "Objective",
         "glory": 1,
-        "rule": "",
+        "rule": "**Surge, Hybrid:** Score this immediately after an activation step if: \\n A friendly fighter with a **Mask** upgrade holds an objective with an even value \\n *Or:* Your warband holds three or more objectives, one or more of which are in no one's and/or enemy territory.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38013": {
         "id": 38013,
@@ -46911,10 +46911,10 @@ export const cards = {
         "name": "Funnelled Soulstuff",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "You can **Heal** (1) each friendly fighter with a **Mask** upgrade. **Deal** 1 damage to each other friendly fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38014": {
         "id": 38014,
@@ -46923,10 +46923,10 @@ export const cards = {
         "name": "Hooded Rush",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Choose** a friendly fighter with one or more upgrades. **Push** the chosen fighter 1 hex. If the chosen fighter has a **Mask** upgrade, you can **push** the chosen fighter up to 2 hexes instead.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38015": {
         "id": 38015,
@@ -46935,10 +46935,10 @@ export const cards = {
         "name": "Maskborn",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Choose** a friendly fighter with a **Mask** upgrade that is out of action. **Place** the chosen fighter on a **starting** hex in your territory. The chosen fighter then makes one action. After the following Surge step, the chosen fighter is taken out of action. When the chosen fighter is taken out of action in this way, the have no **bounty**.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38016": {
         "id": 38016,
@@ -46947,10 +46947,10 @@ export const cards = {
         "name": "Possessive Crouch",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Choose** a friendly fighter. **Give** the chosen fighter a Guard token. If the chosen fighter has a **Mask** upgrade, **stagger** each fighter adjacent to the chosen fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38017": {
         "id": 38017,
@@ -46959,10 +46959,10 @@ export const cards = {
         "name": "Revealed Aspect",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "Pick one: **Draw** one power card \\n *Or:* **Choose** a friendly fighter, including fighters who are out of action, with one or more upgrades. Add one of those upgrades to your hand, then give the chosen fighter one upgrade from your hand or power discard pile. Do not spend any glory points when you do so.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38018": {
         "id": 38018,
@@ -46971,10 +46971,10 @@ export const cards = {
         "name": "Scrabble in the Dirt",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "Pick a gambit with the Malevolent Masks symbol in your power discard pile. Add that card to your hand, then **discard** one power card.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38019": {
         "id": 38019,
@@ -46983,10 +46983,10 @@ export const cards = {
         "name": "Shuddering Violence",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Choose** a friendly fighter. **Stagger** the chosen fighter. +1 Dice to the first Range 1 or Range 2 **Attack action** made by the chosen fighter in the next activation. If the chosen fighter has a **Mask** upgrade, you can **re-roll** one attack dice in the attack roll of that fighter's first **Attack action** made in the next activation.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38020": {
         "id": 38020,
@@ -46995,10 +46995,10 @@ export const cards = {
         "name": "Taking Over",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Choose** a friendly fighter with a **Mask** upgrade that has an action on that **Mask** upgrade. The chosen fighter makes that action.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38021": {
         "id": 38021,
@@ -47007,10 +47007,10 @@ export const cards = {
         "name": "Unexpected Arrival",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "**Choose** two friendly fighters with **Mask** upgrades. **Place** each fighter in the hex that was occupied by the other fighter when you chose them.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38022": {
         "id": 38022,
@@ -47019,10 +47019,10 @@ export const cards = {
         "name": "Unveiled Ambitions",
         "type": "Ploy",
         "glory": null,
-        "rule": "",
+        "rule": "Search your power deck for a **Mask** upgrade. Reveal that card and add it to your hand, then shuffle any remaining cards in your power deck.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38023": {
         "id": 38023,
@@ -47031,10 +47031,10 @@ export const cards = {
         "name": "Dark Humour",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "You can **re-roll** one defence dice in this fighter's defence rolls. \\n If this fighter has a **Mask** upgrade, you can make the following reaction. \\n **Mocking Laugh (Reaction):** Use this after an **Attack action** that targeted this fighter, if this fighter's defence roll contained one or more **critical successes**. **Push** the attacker 1 hex.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38024": {
         "id": 38024,
@@ -47043,10 +47043,10 @@ export const cards = {
         "name": "Displacing Figurine",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Action:** Pick an objective in an **empty** hex. **Place** this fighter on the objective you picked. **Give** this fighter one Charge token, then **break** this card.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38025": {
         "id": 38025,
@@ -47055,10 +47055,10 @@ export const cards = {
         "name": "Envy's Shroud",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Mask** \\n +1 Wounds \\n When you give this to a fighter, if that fighter has other upgrades, **break** those cards. \\n You cannot give this fighter upgrades other than **Mask** upgrades.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38026": {
         "id": 38026,
@@ -47067,10 +47067,10 @@ export const cards = {
         "name": "Menacing Posture",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Reaction:** After this fighter's action that **pushes** one or more enemy fighters, **push** this fighter 1 hex towards one of those fighters.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38027": {
         "id": 38027,
@@ -47079,10 +47079,10 @@ export const cards = {
         "name": "The Echoguise",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Mask** \\n When a fighter has two **Mask** upgrades, **break** one. \\n **Reverberating Call (Action):** Pick two feature tokens, one of which this fighter is on. **Place** each feature token in the hex the other feature token was in when you picked them. Rolls of :dfSup2: are **successes** in this fighter's defence roll until the end of the round in which this action is made.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38028": {
         "id": 38028,
@@ -47091,10 +47091,10 @@ export const cards = {
         "name": "The Eternal Smile",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Mask** \\n When a fighter has two **Mask** upgrades, **break** one. \\n **Rictus of Carnae (Action):** +1 Damage to this fighter's Range 1 and Range 2 **Attack actions**, other than **Scything Attack actions**, until the end of the round.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38029": {
         "id": 38029,
@@ -47103,10 +47103,10 @@ export const cards = {
         "name": "The Frostbitten Veil",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Mask** \\n When a fighter has two **Mask** upgrades, **break** one. \\n **Power Surge (Action):** You can **re-roll** each dice in this fighter's attack rolls until the end of the round.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38030": {
         "id": 38030,
@@ -47115,10 +47115,10 @@ export const cards = {
         "name": "The Howling Hood",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Mask** \\n When a fighter has two **Mask** upgrades, **break** one. \\n **Abyssal Howl (Action): Choose** a fighter adjacent to this fighter. **Push** the chosen fighter up to 2 hexes, then **stagger** the chosen fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38031": {
         "id": 38031,
@@ -47127,10 +47127,10 @@ export const cards = {
         "name": "Unassailable Stance",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "-1 Defence, to a minimum of 1. Rolls of :dfBlock: and :dfDodge: are **successes** in this fighter's defence rolls.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     },
     "38032": {
         "id": 38032,
@@ -47139,9 +47139,9 @@ export const cards = {
         "name": "Vytrix's Eye",
         "type": "Upgrade",
         "glory": null,
-        "rule": "",
+        "rule": "**Mask** \\n When a fighter has two **Mask** upgrades, **break** one. \\n **Piercing Stare (Action):** This fighter makes the following **Attack action**. \\n [:Hex: 3 - :atSmash: 2 - :boom: 1 -(:atCrit: Grievous 1, Cleave)-]",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": true
+        "rotated": false
     }
 }
