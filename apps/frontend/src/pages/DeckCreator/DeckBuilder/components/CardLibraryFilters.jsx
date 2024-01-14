@@ -115,10 +115,6 @@ function CardLibraryFilters(props) {
         });
     };
 
-    // useEffect(() => {
-    //     console.log("TOGGLE!", showFilters);
-    // }, [showFilters]);
-
     return (
         <>
             <div className="flex items-center">

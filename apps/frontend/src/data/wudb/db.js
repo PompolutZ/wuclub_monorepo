@@ -5182,7 +5182,7 @@ export const cards = {
         "glory": null,
         "rule": "Choose a friendly fighter and roll a defence dice. On a roll of :dfBlock: or :dfCrit: remove up to two wound tokens from them. Otherwise remove one wound token from them.",
         "scoreType": "-",
-        "status": "V-Y_V-_V",
+        "status": "V--_V-_V",
         "rotated": false,
         "duplicates": [
             1330,
@@ -16789,7 +16789,7 @@ export const cards = {
         "glory": 1,
         "rule": "**Surge:** Score this immediately after an activation if your warband holds the objective when the same number as the current round (e.g. objective 1 in the first round).",
         "scoreType": "Surge",
-        "status": "V-Y_V-_V",
+        "status": "V--_V-_V",
         "rotated": false
     },
     "6077": {
@@ -23457,7 +23457,7 @@ export const cards = {
         "glory": 3,
         "rule": "**Dual:** Score this in an end phase if: \\n You have scored six or more objective cards \\n *And:* You have scored one or more **Surge** objective cards, one or more **Dual** objective cards and one or more **Hybrid** objective cards.",
         "scoreType": "End",
-        "status": "V-Y_V-_V",
+        "status": "V--_V-_V",
         "rotated": false
     },
     "9107": {
@@ -29454,7 +29454,7 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** one friendly fighter and roll one defence dice. On a roll of :dfBlock: or :dfCrit: **Heal** (2) that fighter. Otherwise **Heal** (1) that fighter.",
         "scoreType": "-",
-        "status": "V-Y_V-_V",
+        "status": "V--_V-_V",
         "rotated": false,
         "duplicates": [
             1330,
@@ -35997,7 +35997,7 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** During this fighter's **Attack action**, after the defence roll, **deal** 0, 1 or 2 damage to this fighter, then **re-roll** X dice in the attack roll, where X is the amount of damage you **dealt** to this fighter. **Re-roll** one additional dice if this fighter is a **Tzeentch** fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "14157": {
@@ -40701,7 +40701,7 @@ export const cards = {
         "glory": null,
         "rule": "**Choose** a friendly fighter with one or more upgrades. **Break** one of the chosen fighter's upgrades. Then **choose** an enemy fighter within 4 hexes of the chosen friendly fighter. **Deal** 1 damage to the chosen fighter. If you broke a **Denizen** card, **stagger** the chosen enemy fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "22017": {
@@ -41241,7 +41241,7 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** Use this after an opponent plays a power card. **Draw** 1 power card, or **Draw** 2 power cards if the power card was a gambit spell. This can only be used once per round.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "23030": {
@@ -41433,7 +41433,7 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagChannel:):** If **cast**, **choose** an enemy fighter within 4 hexes of the caster. **Deal** 1 damage to and **stagger** the chosen fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "24014": {
@@ -41685,7 +41685,7 @@ export const cards = {
         "glory": 3,
         "rule": "**Dual:** Score this in an end phase if: \\n Your warband holds each objective in one or more territories (including no one's territory) \\n *And:* Your warband holds two or more objectives in one or more of those territories.",
         "scoreType": "End",
-        "status": "V-Y_V-_V",
+        "status": "V--_V-_V",
         "rotated": false
     },
     "25003": {
@@ -41961,7 +41961,7 @@ export const cards = {
         "glory": null,
         "rule": "**Reaction:** After this fighter **casts** a spell, **push** this fighter 1 hex.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "25026": {
@@ -42033,7 +42033,7 @@ export const cards = {
         "glory": null,
         "rule": "This fighter's **spell Attack actions** have :MagCrit: **Grievous 1**. This card cannot affect **spell Attack actions** with a Damage characteristic or 3 or greater.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "25032": {
@@ -42237,7 +42237,7 @@ export const cards = {
         "glory": null,
         "rule": "Pick one objective token in the same hex as an enemy fighter. That objective cannot be held. This effect **persists** until the end of the round or until the objective marker is flipped.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "26017": {
@@ -44621,7 +44621,7 @@ export const cards = {
         "glory": null,
         "rule": "Pick an objective token. Roll one magic dice for each fighter within 1 hex of that objective token. On a roll of :MagChannel:, **deal** 1 damage to that fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "32015": {
@@ -44753,7 +44753,7 @@ export const cards = {
         "glory": null,
         "rule": "+1 Dice to this fighter's **Attack actions** if this fighter and/or the target is on a feature token.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "32026": {
@@ -45437,7 +45437,7 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagChannel:):** If **cast**, **deal** 1 damage to an enemy fighter that is furthest from the caster.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "34019": {
@@ -46013,7 +46013,7 @@ export const cards = {
         "glory": 2,
         "rule": "**Surge:** Score this immediately after your warband **casts** its fourth or subsequent spell in the same phase.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "36003": {
@@ -46169,7 +46169,7 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell Reaction (:MagFocus:):** Play this during an **Attack action** that targets a friendly **wizard**, after the deal damage step, if that **wizard** will be taken out of action. That **wizard** must be the caster. If **cast**, **deal** 2 damage to the attacker.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "36016": {
@@ -46193,7 +46193,7 @@ export const cards = {
         "glory": null,
         "rule": "**Gambit Spell (:MagFocus:):** If **cast**, **place** up to one available feature token in an **empty** hex within 3 hexes of the caster, then **choose** an enemy fighter within 1 hex of one or more **blocked** hexes and/or feature tokens. **Deal** 1 damage to the chosen fighter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "36018": {
@@ -46325,7 +46325,7 @@ export const cards = {
         "glory": null,
         "rule": "You cannot give this to a **Large** fighter. \\n -1 Damage, to a minimum of 1, from **Attack actions** that target this fighter while this fighter has one or more Ice counters. \\n **Reaction:** After this fighter's activation, **give** this fighter one Ice counter.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "36029": {

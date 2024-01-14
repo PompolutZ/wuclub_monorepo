@@ -560,7 +560,7 @@ function getAllSetsValidForFormat(format) {
         case CHAMPIONSHIP_FORMAT:
             return Object.values(sets).filter(
                 (set) =>
-                    set.id > sets["Nethermaze core set"].id ||
+                    set.id >= sets["Nethermaze core set"].id ||
                     set.id === sets["Essential Cards Pack"].id
             );
         case NEMESIS_FORMAT:
