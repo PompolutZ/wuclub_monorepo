@@ -1,6 +1,7 @@
 {
   "name": "wunderworlds",
   "version": "2.32.4",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
