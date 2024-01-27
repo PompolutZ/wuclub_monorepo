@@ -25,20 +25,18 @@ export default function NavigationPanel() {
                 </Link>
             </div>
             <Menu
-                classes={`hidden text-sm lg:flex flex-1 lg:items-center ${
-                    new RegExp(/^\/$/).test(pathname)
+                classes={`hidden text-sm lg:flex flex-1 lg:items-center ${new RegExp(/^\/$/).test(pathname)
                         ? "text-white"
                         : "text-gray-900"
-                }`}
+                    }`}
             >
                 <UserMenu />
             </Menu>
             <MobileMenu
-                className={`text-2xl stroke-current stroke-2 ml-auto lg:hidden ${
-                    new RegExp(/^\/$/).test(pathname)
+                className={`text-2xl stroke-current stroke-2 ml-auto lg:hidden ${new RegExp(/^\/$/).test(pathname)
                         ? "text-white"
                         : "text-gray-900"
-                }`}
+                    }`}
             />
         </header>
     );
@@ -152,6 +150,17 @@ const MobileMenu = ({ className }) => {
                                 <Divider />
 
                                 <UserMenu />
+
+                                <Divider />
+
+                                <div className="text-xs text-black-500 self-end italic">If you want to support me, consider to...</div>
+                                <a
+                                    href="https://www.buymeacoffee.com/olehlutsenl"
+                                    className="block lg:ml-auto mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+                                >
+                                    Buy Me A ☕️
+                                </a>
+                                <div className="text-xs text-black-500 italic self-end">Thank you and lots of 💜!</div>
                             </Menu>
                         </animated.div>
                     )
