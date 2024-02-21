@@ -13,7 +13,8 @@
         "dsznajder.es7-react-js-snippets",
         "sleistner.vscode-fileutils",
         "wix.vscode-import-cost",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "adpyke.codesnap"
       ]
     }
   },
