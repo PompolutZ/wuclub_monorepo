@@ -14,7 +14,8 @@
         "sleistner.vscode-fileutils",
         "wix.vscode-import-cost",
         "bradlc.vscode-tailwindcss",
-        "adpyke.codesnap"
+        "adpyke.codesnap",
+        "esbenp.prettier-vscode"
       ]
     }
   },

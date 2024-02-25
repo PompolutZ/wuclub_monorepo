@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { animated, useSpring, useTransition, config } from "react-spring";
 import { ReactComponent as MenuIcon } from "../../svgs/menu.svg";
+import { ReactComponent as CoffeeIcon } from "@icons/coffee.svg";
 import Divider from "./Divider";
 import { FirebaseContext } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
@@ -92,6 +93,10 @@ function UserMenu() {
                     >
                         Profile
                     </AnimatedLink>
+                    <a href="https://www.buymeacoffee.com/olehlutsenl" className="flex items-center gap-2 mr-8 cursor-pointer uppercase font-bold lg:text-xs text-purple-400">
+                        <CoffeeIcon className="w-4 h-4 text-purple-400 stroke-current" />
+                        Support
+                    </a>
                     <a
                         href="#"
                         className="block lg:ml-auto mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
