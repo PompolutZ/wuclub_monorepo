@@ -93,7 +93,10 @@ function UserMenu() {
                     >
                         Profile
                     </AnimatedLink>
-                    <a href="https://www.buymeacoffee.com/olehlutsenl" className="flex items-center gap-2 mr-8 cursor-pointer uppercase font-bold lg:text-xs text-purple-400">
+                    <a
+                        href="https://www.buymeacoffee.com/olehlutsenl"
+                        className="flex items-center gap-2 mr-8 cursor-pointer uppercase font-bold lg:text-xs text-purple-400"
+                    >
                         <CoffeeIcon className="w-4 h-4 text-purple-400 stroke-current" />
                         Support
                     </a>
@@ -158,14 +161,18 @@ const MobileMenu = ({ className }) => {
 
                                 <Divider />
 
-                                <div className="text-xs text-black-500 self-end italic">If you want to support me, consider to...</div>
+                                <div className="text-xs text-black-500 self-end italic">
+                                    If you want to support me, consider to...
+                                </div>
                                 <a
                                     href="https://www.buymeacoffee.com/olehlutsenl"
                                     className="block lg:ml-auto mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
                                 >
                                     Buy Me A ☕️
                                 </a>
-                                <div className="text-xs text-black-500 italic self-end">Thank you and lots of 💜!</div>
+                                <div className="text-xs text-black-500 italic self-end">
+                                    Thank you and lots of 💜!
+                                </div>
                             </Menu>
                         </animated.div>
                     )
