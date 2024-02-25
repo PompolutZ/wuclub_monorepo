@@ -1,5 +1,7 @@
 import { useLocation, useParams } from "react-router-dom";
 import {
+    CHAMPIONSHIP_FORMAT,
+    NEMESIS_FORMAT,
     checkCardIsObjective,
     checkCardIsPloy,
     checkCardIsUpgrade,
@@ -7,7 +9,8 @@ import {
     getCardById,
     getFactionById,
     getFactionByName,
-    udbPrefexes
+    getSetById,
+    udbPrefexes,
 } from "../../data/wudb";
 import { INITIAL_STATE } from "./reducer";
 
@@ -53,11 +56,23 @@ export function useStateCreator() {
             );
             const faction = getFactionById(factionId);
 
+            const sets = decodedCards.reduce(
+                (sets, { setId }) => sets.add(setId),
+                new Set()
+            );
+
+            const selectedSets = [...sets.values()];
+
             return {
                 action,
                 state: {
                     ...INITIAL_STATE,
+                    format:
+                        selectedSets.length === 2
+                            ? NEMESIS_FORMAT
+                            : CHAMPIONSHIP_FORMAT,
                     faction,
+                    sets: selectedSets.map((setId) => getSetById(setId)),
                     selectedObjectives:
                         decodedCards.filter(checkCardIsObjective),
                     selectedGambits: decodedCards.filter(checkCardIsPloy),

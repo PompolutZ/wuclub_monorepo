@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import { ReactComponent as TogglesIcon } from "../../../../svgs/sliders.svg";
 import { ReactComponent as CloseIcon } from "../../../../svgs/x.svg";
 import { ReactComponent as CompassIcon } from "@icons/compass.svg";
@@ -84,19 +84,10 @@ function CardLibraryFilters(props) {
     );
     const [warband, setWarband] = useState(state.faction);
     const [hideDuplicates, setHideDuplicates] = useState(true);
-    const [selectedSets, setSelectedSets] = useState(state.sets);
-
-    useEffect(() => {
-        setWarband(state.faction);
-    }, [state.faction]);
-
-    useEffect(() => {
-        setSelectedSets(
-            selectedFormat === NEMESIS_FORMAT
-                ? [wusets["Illusory Might Universal Deck"]]
-                : validSets
-        );
-    }, [selectedFormat, validSets]);
+    const [selectedSets, setSelectedSets] = useState(state.sets.length > 0 ? state.sets : selectedFormat === NEMESIS_FORMAT
+        ? [wusets["Illusory Might Universal Deck"]]
+        : validSets
+    );
 
     const handleFormatChange = (format) => {
         setSelectedFormat(format);
@@ -201,17 +192,6 @@ function CardLibraryFilters(props) {
                     </section>
                 </div>
             </Overlay>
-            {/* <Slide
-                className={classes.filtersPanel}
-                mountOnEnter
-                in={showFilters}
-                direction="right"
-                timeout={{
-                    enter: 300,
-                    exit: 175,
-                }}
-            >
-            </Slide> */}
         </>
     );
 }

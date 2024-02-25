@@ -444,7 +444,6 @@ function getFactionByAbbr(factionAbbr) {
 }
 
 function getFactionById(factionId) {
-    console.log(factionId);
     return Object.values(factions).find((f) => f.id === factionId);
 }
 
