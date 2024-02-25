@@ -67,7 +67,7 @@ const MobileLayout = ({ children }) => {
     );
 };
 
-function DeckBuilder({ currentDeckName, existingDeckId, isPrivate, action }) {
+function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
     const isMobile = useBreakpoint("mobile");
     const [deckId, setDeckId] = useState(existingDeckId || "");
     const [deckName, setDeckName] = useState(currentDeckName || "");
