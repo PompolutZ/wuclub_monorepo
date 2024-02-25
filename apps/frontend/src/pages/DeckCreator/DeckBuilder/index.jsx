@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Children } from "react";
 import Deck from "./components/Deck";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import CardLibraryToggles from "./components/CardLibraryFilters";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "..";
 import useAuthUser from "../../../hooks/useAuthUser";
@@ -51,8 +51,9 @@ const tabs = [
 ];
 
 const MobileLayout = ({ children }) => {
+    const { action } = useParams();
     const childrenArray = Children.toArray(children);
-    const [activeTabIndex, setActiveTabIndex] = useState(0);
+    const [activeTabIndex, setActiveTabIndex] = useState(action && action !== "create" ? 1 : 0);
 
     return (
         <div className="flex flex-col">
