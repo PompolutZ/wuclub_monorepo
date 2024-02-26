@@ -15,7 +15,8 @@
         "wix.vscode-import-cost",
         "bradlc.vscode-tailwindcss",
         "adpyke.codesnap",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "github.copilot"
       ]
     }
   },
