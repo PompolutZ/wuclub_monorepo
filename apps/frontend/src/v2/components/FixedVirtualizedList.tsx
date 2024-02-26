@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useVirtualizer, VirtualItem } from "@tanstack/react-virtual";
+import InView from "react-intersection-observer";
 
 const MAGICK_HEIGHT = 436;
 const minOptimalWidth = 200;
@@ -9,7 +10,8 @@ interface FixedVirtualizedListProps<T> {
     items: T[];
     children: (item: T | T[], row: VirtualItem) => JSX.Element;
     estimateItemSize: number;
-    variant: "list" | "grid",
+    variant: "list" | "grid";
+    onLoadMore: () => void;
 }
 
 export const FixedVirtualizedList = <T,>({
@@ -17,6 +19,7 @@ export const FixedVirtualizedList = <T,>({
     children,
     estimateItemSize = optimalHeight,
     variant = "list",
+    onLoadMore,
 }: FixedVirtualizedListProps<T>) => {
     const parentRef = useRef<HTMLDivElement>(null);
     const [rowHeight, setRowHeight] = useState(estimateItemSize);
@@ -26,21 +29,21 @@ export const FixedVirtualizedList = <T,>({
         if (variant === "list") {
             setRows(items);
             return;
-        };
+        }
 
         const itemsPerRow = Math.floor(700 / minOptimalWidth);
         let updatedRows;
 
-            updatedRows = items.reduce((result, _, index, array) => {
-                if (index % itemsPerRow === 0) {
-                    result.push(array.slice(index, index + itemsPerRow));
-                }
-    
-                return result;
-            }, [] as T[][])
-            setRowHeight(MAGICK_HEIGHT);
-            setRows(updatedRows);
-            // row height will be according to card's height based on keeping original aspect ratio
+        updatedRows = items.reduce((result, _, index, array) => {
+            if (index % itemsPerRow === 0) {
+                result.push(array.slice(index, index + itemsPerRow));
+            }
+
+            return result;
+        }, [] as T[][]);
+        setRowHeight(MAGICK_HEIGHT);
+        setRows(updatedRows);
+        // row height will be according to card's height based on keeping original aspect ratio
     }, [items, variant]);
 
     const virtual = useVirtualizer({
@@ -70,6 +73,15 @@ export const FixedVirtualizedList = <T,>({
                     {virtualItems.map((virtualRow) =>
                         children(rows[virtualRow.index], virtualRow)
                     )}
+                    <InView
+                        onChange={(inView, entry) => {
+                            if (inView) {
+                                onLoadMore();
+                            }
+                        }}
+                    >
+                        Loading...
+                    </InView>
                 </div>
             </div>
         </div>

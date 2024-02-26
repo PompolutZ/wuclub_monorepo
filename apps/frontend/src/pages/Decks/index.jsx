@@ -4,13 +4,29 @@ import { useListAllPublicDecks } from "../../hooks/wunderworldsAPIHooks";
 import { FixedVirtualizedList } from "../../v2/components/FixedVirtualizedList";
 import PublicDeckLink from "./PublicDeckLink";
 
+const BATCH = 30;
+let SKIP = 0;
+
+let prev = [];
+
+function getAllDecks(newItems) {
+    prev = prev.concat(newItems);
+    return prev.map((deck) => ({ ...deck, cards: deck.deck }))
+}
+
 export default function Deck() {
     const { faction } = useParams();
     const [{ data }, refetch] = useListAllPublicDecks(true);
 
     useEffect(() => {
+        // this is basically on initial load
         if (faction === "all") {
-            refetch();
+            refetch({
+                data: {
+                    skip: SKIP,
+                    limit: BATCH
+                }
+            });
         } else {
             refetch({
                 data: {
@@ -25,7 +41,16 @@ export default function Deck() {
             {data && (
                 <FixedVirtualizedList
                     estimateItemSize={120}
-                    items={data.map((deck) => ({ ...deck, cards: deck.deck }))}
+                    items={getAllDecks(data)}
+                    onLoadMore={() => {
+                        SKIP += BATCH;
+                        refetch({
+                            data: {
+                                skip: SKIP,
+                                limit: BATCH
+                            }
+                        })
+                    }}
                 >
                     {(deck, { key }) => (
                         <div className="grid" key={key}>
