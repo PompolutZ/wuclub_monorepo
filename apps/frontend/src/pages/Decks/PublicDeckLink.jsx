@@ -30,43 +30,29 @@ const getPlotKeywords = (faction, sets) => {
 };
 
 export default function PublicDeckLink({ ...props }) {
-    const [cards, setCards] = useState([]);
+    const cards = props.cards.map((x) => getCardById(x));
+    const totalGlory = cards
+        .filter(checkCardIsObjective)
+        .reduce((total, { glory }) => (total += glory), 0);
 
-    useEffect(() => {
-        const cards = props.cards.map((x) => getCardById(x));
-        setCards(cards);
-    }, [props.cards]);
-
-    const totalGlory = useMemo(
-        () =>
-            cards
-                .filter(checkCardIsObjective)
-                .reduce((total, { glory }) => (total += glory), 0),
-        [cards]
-    );
-
-    const objectiveSummary = useMemo(
-        () =>
-            cards.filter(checkCardIsObjective).reduce(
-                (acc, c) => {
-                    acc[c.scoreType] += 1;
-                    return acc;
-                },
-                { Surge: 0, End: 0, Third: 0 }
-            ),
-        [cards]
+    const objectiveSummary = cards.filter(checkCardIsObjective).reduce(
+        (acc, c) => {
+            acc[c.scoreType] += 1;
+            return acc;
+        },
+        { Surge: 0, End: 0, Third: 0 }
     );
 
     return (
-        <div className="flex px-4 items-center border-t border-gray-500">
-            <div className="flex flex-col items-center space-y-2">
+        <div className="flex p-2 items-center border-gray-400 border-b last:border-none">
+            <div className="flex flex-col items-center space-y-2 w-24">
                 <FactionDeckPicture faction={props.faction} />
                 <DeckPlayFormatsValidity cards={cards} />
             </div>
             <div className="flex-1 space-y-1 ml-8">
                 <DeckTitle factionName={props.faction} sets={props.sets}>
                     <Link
-                        className="text-xl hover:text-purple-700"
+                        className="text-xl truncate hover:text-purple-700"
                         to={{
                             pathname: `${VIEW_DECK}/${props.deckId}`,
                             state: {
@@ -82,8 +68,8 @@ export default function PublicDeckLink({ ...props }) {
                     </Link>
                 </DeckTitle>
 
-                <div className="flex space-x-1 items-center">
-                    <h3 className="text-sm text-gray-700">
+                <div className="flex space-x-1 items-baseline">
+                    <h3 className="text-xs text-gray-700">
                         {new Date(props.updatedutc).toLocaleDateString()}
                     </h3>
                     {getPlotKeywords(props.faction, props.sets).map(

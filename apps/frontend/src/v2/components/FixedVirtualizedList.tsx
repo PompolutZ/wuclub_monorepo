@@ -12,6 +12,7 @@ interface FixedVirtualizedListProps<T> {
     estimateItemSize: number;
     variant: "list" | "grid";
     onLoadMore: () => void;
+    lazy?: boolean;
 }
 
 export const FixedVirtualizedList = <T,>({
@@ -20,6 +21,7 @@ export const FixedVirtualizedList = <T,>({
     estimateItemSize = optimalHeight,
     variant = "list",
     onLoadMore,
+    lazy = false,
 }: FixedVirtualizedListProps<T>) => {
     const parentRef = useRef<HTMLDivElement>(null);
     const [rowHeight, setRowHeight] = useState(estimateItemSize);
@@ -73,15 +75,16 @@ export const FixedVirtualizedList = <T,>({
                     {virtualItems.map((virtualRow) =>
                         children(rows[virtualRow.index], virtualRow)
                     )}
-                    <InView
-                        onChange={(inView, entry) => {
-                            if (inView) {
-                                onLoadMore();
-                            }
-                        }}
-                    >
-                        Loading...
-                    </InView>
+
+                    {lazy && (
+                        <InView
+                            onChange={(inView) => {
+                                if (inView) {
+                                    onLoadMore();
+                                }
+                            }}
+                        />
+                    )}
                 </div>
             </div>
         </div>

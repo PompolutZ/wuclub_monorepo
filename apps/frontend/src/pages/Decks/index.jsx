@@ -37,11 +37,12 @@ export default function Deck() {
     }, [faction, refetch]);
 
     return (
-        <div className="flex-1 flex lg:max-w-xl lg:mx-auto group">
+        <div className="flex-1 flex lg:max-w-xl lg:mx-auto group mb-8">
             {data && (
                 <FixedVirtualizedList
-                    estimateItemSize={120}
+                    estimateItemSize={101}
                     items={getAllDecks(data)}
+                    lazy={true}
                     onLoadMore={() => {
                         SKIP += BATCH;
                         refetch({
@@ -52,11 +53,7 @@ export default function Deck() {
                         })
                     }}
                 >
-                    {(deck, { key }) => (
-                        <div className="grid" key={key}>
-                            <PublicDeckLink {...deck} />
-                        </div>
-                    )}
+                    {(deck, { key }) => <PublicDeckLink key={key} {...deck} />}
                 </FixedVirtualizedList>
             )}
         </div>
