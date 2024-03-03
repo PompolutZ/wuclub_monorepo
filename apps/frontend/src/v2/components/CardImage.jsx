@@ -1,11 +1,13 @@
 import React from "react";
+import { getCardPathByCardId } from "../../utils/helpers";
 
 function CardImage({ id, ...rest }) {
     const cardId = typeof id !== "string" ? String(id).padStart(5, "0") : id;
+    console.log(getCardPathByCardId(cardId, "webp"));
     return (
         <picture>
-            <source type="image/webp" srcSet={`/assets/cards/${cardId}_xs.webp`} />
-            <img src={`/assets/cards/${cardId}.png`} {...rest} />
+            <source type="image/webp" srcSet={getCardPathByCardId(cardId, "webp")} />
+            <img src={getCardPathByCardId(cardId, "png")} {...rest} />
         </picture>
     );
 }
