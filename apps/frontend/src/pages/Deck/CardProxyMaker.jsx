@@ -161,7 +161,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
                             <img
                                 id={`proxy ${fighter}`}
                                 key={fighter}
-                                src={`/assets/cards/fighters/${factionId}-${
+                                src={`/assets/fighters/${faction}/${factionId}-${
                                     index + 1
                                 }.png`}
                                 className={`w-[64.5mm] h-[89.9mm] filter ${
@@ -174,7 +174,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
                             <img
                                 id={`proxy ${fighter}-inspired`}
                                 key={`${fighter}-inspired`}
-                                src={`/assets/cards/fighters/${factionId}-${
+                                src={`/assets/fighters/${faction}/${factionId}-${
                                     index + 1
                                 }-inspired.png`}
                                 className={`w-[64.5mm] h-[89.9mm] filter ${

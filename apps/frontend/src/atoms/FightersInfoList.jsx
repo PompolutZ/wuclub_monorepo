@@ -71,7 +71,7 @@ function FighterCard({ faction, index }) {
         >
             <a.img
                 className="w-full rounded-sm sm:w-3/4 row-start-1 col-start-1 sm:mx-auto cursor-pointer hover:shadow-lg"
-                src={`/assets/cards/fighters/${faction}-${index}.png`}
+                src={`/assets/fighters/${faction}/${faction}-${index}.png`}
                 style={{
                     opacity: opacity.to((o) => 1 - o),
                     transform,
@@ -79,7 +79,7 @@ function FighterCard({ faction, index }) {
             />
             <a.img
                 className="w-full rounded-sm sm:w-3/4 row-start-1 col-start-1 sm:mx-auto cursor-pointer hover:shadow-lg"
-                src={`/assets/cards/fighters/${faction}-${index}-inspired.png`}
+                src={`/assets/fighters/${faction}/${faction}-${index}-inspired.png`}
                 style={{
                     opacity,
                     transform: transform.to((t) => `${t} rotateY(180deg)`),
