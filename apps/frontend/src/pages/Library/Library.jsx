@@ -14,8 +14,8 @@ import { ReactComponent as TogglesIcon } from "../../svgs/sliders.svg";
 import { sortByIdAsc } from "../../utils/sort";
 import { GrouppedFactionsToggle } from "../../v2/components/GrouppedFactionsToggle";
 import { GrouppedExpansions } from "../../v2/components/GrouppedExpansions";
-import { useEffect } from "react";
 import { FixedVirtualizedList } from "../../v2/components/FixedVirtualizedList";
+import { getCardPathByCardId } from "../../utils/helpers";
 
 function useFilteredCards(factions = [], expansions = []) {
     const [searchText, setSearchText] = useState("");
@@ -52,12 +52,12 @@ function CardPicture({ name, id }) {
         <picture className="max-h-full max-w-full flex">
             <source
                 type="image/webp"
-                srcSet={`/assets/cards/${String(id).padStart(5, "0")}_xs.webp`}
+                srcSet={getCardPathByCardId(id, "webp")}
             />
             <img
                 className="relative object-contain cursor-pointer transform hover:scale-105 transition-all hover:z-10 filter hover:drop-shadow-lg"
                 alt={name}
-                src={`/assets/cards/${String(id).padStart(5, "0")}.png`}
+                src={getCardPathByCardId(id, "png")}
             />
         </picture>
     );

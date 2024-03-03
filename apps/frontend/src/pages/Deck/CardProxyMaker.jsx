@@ -1,5 +1,6 @@
 import { factionMembers } from "@wudb/index";
 import { useState } from "react";
+import { getCardPathByCardId } from "../../utils/helpers";
 
 const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
     const [selectedCardIds, setSelectedCardIds] = useState(
@@ -161,7 +162,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
                             <img
                                 id={`proxy ${fighter}`}
                                 key={fighter}
-                                src={`/assets/fighters/${faction}/${factionId}-${
+                                src={`/assets/fighters/${factionId}/${factionId}-${
                                     index + 1
                                 }.png`}
                                 className={`w-[64.5mm] h-[89.9mm] filter ${
@@ -174,7 +175,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
                             <img
                                 id={`proxy ${fighter}-inspired`}
                                 key={`${fighter}-inspired`}
-                                src={`/assets/fighters/${faction}/${factionId}-${
+                                src={`/assets/fighters/${factionId}/${factionId}-${
                                     index + 1
                                 }-inspired.png`}
                                 className={`w-[64.5mm] h-[89.9mm] filter ${
@@ -191,10 +192,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
                         <img
                             id={`proxy ${card.id}`}
                             key={card.id}
-                            src={`/assets/cards/${String(card.id).padStart(
-                                5,
-                                "0"
-                            )}.png`}
+                            src={getCardPathByCardId(card.id, "png")}
                             className={`w-[64.5mm] h-[89.9mm] filter ${
                                 selectedCardIds.includes(card.id)
                                     ? "grayscale-0"
