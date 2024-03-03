@@ -49,7 +49,7 @@ export default function PublicDeckLink({ ...props }) {
                 <FactionDeckPicture faction={props.faction} />
                 <DeckPlayFormatsValidity cards={cards} />
             </div>
-            <div className="flex-1 space-y-1 ml-8">
+            <div className="flex-1 ml-8">
                 <DeckTitle factionName={props.faction} sets={props.sets}>
                     <Link
                         className="text-xl truncate hover:text-purple-700"

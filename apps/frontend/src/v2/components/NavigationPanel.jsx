@@ -112,13 +112,23 @@ function UserMenu() {
                 </>
             )}
             {!auth && (
-                <AnimatedLink
-                    className="cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-                    container="block mr-8 lg:ml-auto"
-                    to={ROUTES.SIGN_IN}
-                >
-                    Sign In
-                </AnimatedLink>
+                <>
+                    <a
+                        href="https://www.buymeacoffee.com/olehlutsenl"
+                        className="flex items-center gap-2 mr-8 cursor-pointer uppercase font-bold lg:text-xs text-purple-400"
+                    >
+                        <CoffeeIcon className="w-4 h-4 text-purple-400 stroke-current" />
+                        Support
+                    </a>
+
+                    <AnimatedLink
+                        className="cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+                        container="block mr-8 lg:ml-auto"
+                        to={ROUTES.SIGN_IN}
+                    >
+                        Sign In
+                    </AnimatedLink>
+                </>
             )}
             <Link
                 className="hidden lg:block focus:bg-purple-500 hover:bg-purple-500 btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
