@@ -95,7 +95,7 @@ function UserMenu() {
                     </AnimatedLink>
                     <a
                         href="https://www.buymeacoffee.com/olehlutsenl"
-                        className="flex items-center gap-2 mr-8 cursor-pointer uppercase font-bold lg:text-xs text-purple-400"
+                        className="hidden lg:flex items-center gap-2 mr-8 cursor-pointer uppercase font-bold lg:text-xs text-purple-400"
                     >
                         <CoffeeIcon className="w-4 h-4 text-purple-400 stroke-current" />
                         Support
@@ -115,7 +115,7 @@ function UserMenu() {
                 <>
                     <a
                         href="https://www.buymeacoffee.com/olehlutsenl"
-                        className="flex items-center gap-2 mr-8 cursor-pointer uppercase font-bold lg:text-xs text-purple-400"
+                        className="hidden lg:flex items-center gap-2 mr-8 cursor-pointer uppercase font-bold lg:text-xs text-purple-400"
                     >
                         <CoffeeIcon className="w-4 h-4 text-purple-400 stroke-current" />
                         Support

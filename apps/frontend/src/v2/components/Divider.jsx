@@ -6,9 +6,9 @@ function Divider({ className }) {
         <div
             className={`w-full flex items-center space-x-2 ${className}`}
         >
-            <hr className="flex-1 border-accent" />
-            <Logo className="fill-current text-accent text-2xl" />
-            <hr className="flex-1 border-accent" />
+            <hr className="flex-1 border-gray-400" />
+            <Logo className="fill-current text-gray-400 text-2xl" />
+            <hr className="flex-1 border-gray-400" />
         </div>
     );
 }
