@@ -16,7 +16,8 @@
         "bradlc.vscode-tailwindcss",
         "adpyke.codesnap",
         "esbenp.prettier-vscode",
-        "github.copilot"
+        "github.copilot",
+        "eamodio.gitlens"
       ]
     }
   },
