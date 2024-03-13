@@ -69,7 +69,6 @@ export async function getAllPublicDecks(req, res) {
   let cursor;
   try {
     let { faction } = req.body;
-    console.log(faction, req.body);
     if (faction) {
       cursor = decks().aggregate(
         buildPipeline({ faction: sanitizeString(faction) })
@@ -80,7 +79,6 @@ export async function getAllPublicDecks(req, res) {
         skip: Number(skip),
         limit: Number(limit),
       });
-      console.log(pipeline);
       cursor = decks().aggregate(pipeline);
     }
 
