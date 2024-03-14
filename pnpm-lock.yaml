@@ -143,9 +143,6 @@ importers:
       react-tooltip:
         specifier: ^4.5.0
         version: 4.5.1(react-dom@17.0.2)(react@17.0.2)
-      react-use-gesture:
-        specifier: ^7.0.15
-        version: 7.0.16(react@17.0.2)
       react-use-measure:
         specifier: ^2.0.4
         version: 2.1.1(react-dom@17.0.2)(react@17.0.2)
@@ -12255,15 +12252,6 @@ packages:
       prop-types: 15.8.1
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
-    dev: false
-
-  /react-use-gesture@7.0.16(react@17.0.2):
-    resolution: {integrity: sha512-gwgX+E+WQG0T1uFVl3z8j3ZwH3QQGIgVl7VtQEC2m0IscSs668sSps4Ss3CFp3Vns8xx0j9TVK4aBXH6+YrpEg==}
-    deprecated: This package is no longer maintained. Please use @use-gesture/react instead
-    peerDependencies:
-      react: '>= 16.8.0'
-    dependencies:
-      react: 17.0.2
     dev: false
 
   /react-use-measure@2.1.1(react-dom@17.0.2)(react@17.0.2):

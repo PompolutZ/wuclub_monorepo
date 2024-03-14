@@ -42,7 +42,6 @@
         "react-social-login-buttons": "^2.1.2",
         "react-spring": "^9.5.5",
         "react-tooltip": "^4.5.0",
-        "react-use-gesture": "^7.0.15",
         "react-use-measure": "^2.0.4",
         "unit-to-px": "^1.0.5",
         "use-effect-reducer": "^0.7.0",
