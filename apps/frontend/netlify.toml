@@ -10,18 +10,15 @@
   status = 200
 
 [[headers]]
-  # Define which paths this specific [[headers]] block will cover.
   for = "/assets/*"
 
   [headers.values]
     # Multi-value headers are expressed with multi-line strings.
-	cache-control = '''public, max-age=604800''' 
+    cache-control = '''public, max-age=2628000''' 
 
 [[headers]]
-  # Define which paths this specific [[headers]] block will cover.
   for = "index.html"
 
   [headers.values]
-    # Multi-value headers are expressed with multi-line strings.
-	cache-control = '''
-  no-store'''
+    cache-control = '''
+    no-store'''
