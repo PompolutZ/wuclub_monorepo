@@ -1,7 +1,7 @@
 import React from 'react';
-import { ReactComponent as PrimacyIcon } from "../../../../../../svgs/Primacy.svg";
-import { ReactComponent as HunterIcon } from "../../../../../../svgs/Hunter.svg";
-import { ReactComponent as QuarryIcon } from "../../../../../../svgs/Quarry.svg";
+import PrimacyIcon from "@icons/Primacy.svg?react";
+import HunterIcon from "@icons/Hunter.svg?react";
+import QuarryIcon from "@icons/Quarry.svg?react";
 
 export const KEYWORD_FILTERS = [
     {

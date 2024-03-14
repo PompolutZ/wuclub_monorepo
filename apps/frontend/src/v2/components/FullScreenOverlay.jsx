@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { animated, useTransition } from "react-spring";
-import { ReactComponent as CloseIcon } from "../../svgs/x.svg";
+import CloseIcon from "@icons/x.svg?react";
 
 const FullScreenOverlay = ({
     icon: Icon,

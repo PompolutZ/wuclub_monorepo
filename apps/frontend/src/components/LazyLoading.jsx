@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as Logo } from "@icons/underworlds_logo.svg";
+import Logo from "@icons/underworlds_logo.svg?react";
 
 const LazyLoading = () => (
     <div style={{ width: "100%", height: "100vh", display: "flex" }}>

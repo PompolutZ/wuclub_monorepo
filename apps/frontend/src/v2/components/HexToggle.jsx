@@ -1,6 +1,6 @@
 import React from 'react'
-import { ReactComponent as Logo } from "@icons/underworlds_logo.svg";
-import { ReactComponent as Hex } from "../../svgs/hexagon.svg";
+import Logo from "@icons/underworlds_logo.svg?react";
+import Hex from "@icons/hexagon.svg?react";
 
 function HexToggle({ checked, onChange }) {
 

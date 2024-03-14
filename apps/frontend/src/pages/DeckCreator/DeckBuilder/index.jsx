@@ -5,7 +5,7 @@ import CardLibraryToggles from "./components/CardLibraryFilters";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "..";
 import useAuthUser from "../../../hooks/useAuthUser";
 import { resetDeckAction, saveDeckAction, updateDeckAction } from "../reducer";
-import uuid4 from "uuid/v4";
+import { v4 as uuid4 } from "uuid";
 import { DeleteConfirmationDialog } from "@components/DeleteConfirmationDialog";
 import CardsLibrary from "./components/CardsLibrary";
 import LibraryFilters from "./components/LibraryFilters";
@@ -13,9 +13,9 @@ import FightersInfoList from "../../../atoms/FightersInfoList";
 import { Transition } from "@headlessui/react";
 import useMeasure from "react-use-measure";
 import BottomPanelNavigation from "./components/BottomPanelNavigation";
-import { ReactComponent as AddCardIcon } from "@icons/add-card.svg";
-import { ReactComponent as DeckIcon } from "@icons/deck.svg";
-import { ReactComponent as WarbandIcon } from "@icons/warband.svg";
+import AddCardIcon from "@icons/add-card.svg?react";
+import DeckIcon from "@icons/deck.svg?react";
+import WarbandIcon from "@icons/warband.svg?react";
 import { useBreakpoint } from "../../../hooks/useMediaQuery";
 
 function CardsLibraryWithFilters() {

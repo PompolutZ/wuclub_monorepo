@@ -9,9 +9,9 @@ import {
     validateDeckForPlayFormat,
     VANGUARD_FORMAT,
 } from "../data/wudb";
-import { ReactComponent as ChampionshipLogo } from "../svgs/championship_logo.svg";
-import { ReactComponent as RelicLogo } from "../svgs/relic_logo.svg";
-import { ReactComponent as VanguardLogo } from "../svgs/vanguard_logo.svg";
+import ChampionshipLogo from "@icons/championship_logo.svg?react";
+import RelicLogo from "@icons/relic_logo.svg?react";
+import VanguardLogo from "@icons/vanguard_logo.svg?react";
 
 function DetailedPlayStyleValidity({ cards, className = "" }) {
     const allCards = cards.map((cid) => getCardById(cid));

@@ -1,7 +1,7 @@
 import React from 'react'
-import { ReactComponent as ClockIcon } from "../../svgs/clock.svg";
-import { ReactComponent as HourglassIcon } from "../../svgs/hourglass-2.svg";
-import { ReactComponent as ZapIcon } from "../../svgs/zap.svg";
+import ClockIcon from "@icons/clock.svg?react";
+import HourglassIcon from "@icons/hourglass-2.svg?react";
+import ZapIcon from "@icons/zap.svg?react";
 
 function ScoreIcon({ scoreType, classes, ...rest }) {
     switch (scoreType) {

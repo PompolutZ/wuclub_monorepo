@@ -1,6 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { ReactComponent as GloryIcon } from "../svgs/wu-glory.svg";
+import GloryIcon from "@icons/wu-glory.svg?react";
 
 window.process = { cwd: () => "" };
 

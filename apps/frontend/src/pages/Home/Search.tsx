@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCombobox } from "downshift";
 import { Card } from "../../data/wudb/types";
-import { ReactComponent as SearchIcon } from "@icons/magnifying-glass.svg";
+import SearchIcon from "@icons/magnifying-glass.svg?react";
 
 export function AutosuggestSearch() {
     const [inputItems, setInputItems] = useState<Card[]>([]);

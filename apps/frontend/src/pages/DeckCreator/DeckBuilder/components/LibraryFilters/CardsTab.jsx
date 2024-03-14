@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
-import { ReactComponent as LockIcon } from "../../../../../svgs/lock.svg";
-import { ReactComponent as SurgeIcon } from "../../../../../svgs/zap.svg";
+import LockIcon from "@icons/lock.svg?react";
+import SurgeIcon from "@icons/zap.svg?react";
+import FilterIcon from "@icons/filter.svg?react";
 import {
     validateCardForPlayFormat,
     CHAMPIONSHIP_FORMAT,
 } from "../../../../../data/wudb";
-import { ReactComponent as FilterIcon } from "../../../../../svgs/filter.svg";
 import ToggleButton from "../ToggleButton";
 import { useDeckBuilderState } from "../../..";
 import IconButton from "../../../../../v2/components/IconButton";

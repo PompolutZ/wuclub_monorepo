@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as StarIcon } from "../../svgs/star.svg";
+import StarIcon from "@icons/star.svg?react";
 
 function Rank({ rank, classes, ...rest }) {
     const fullStars = new Array(5).fill(1);

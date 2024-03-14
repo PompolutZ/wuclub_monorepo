@@ -2,9 +2,9 @@ import React, { PureComponent, useState, memo } from "react";
 import ReactMarkdown from "react-markdown";
 import LockIcon from "@material-ui/icons/Lock";
 import NotInterestedIcon from "@material-ui/icons/NotInterested";
-import { ReactComponent as GloryIcon } from "../../../../svgs/wu-glory.svg";
-import { ReactComponent as CloseIcon } from "../../../../svgs/x.svg";
-import { ReactComponent as RankIcon } from "../../../../svgs/wu-glory.svg";
+import GloryIcon from "@icons/wu-glory.svg?react";
+import CloseIcon from "@icons/x.svg?react";
+import RankIcon from "@icons/wu-glory.svg?react";
 import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
 import {
     getCardById,

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
-import { ReactComponent as TogglesIcon } from "../../../../svgs/sliders.svg";
-import { ReactComponent as CloseIcon } from "../../../../svgs/x.svg";
-import { ReactComponent as CompassIcon } from "@icons/compass.svg";
+import TogglesIcon from "@icons/sliders.svg?react";
+import CloseIcon from "@icons/x.svg?react";
+import CompassIcon from "@icons/compass.svg?react";
 import ExpansionsToggle from "../../../../components/ExpansionsToggle";
 import SectionTitle from "../../../../v2/components/SectionTitle";
 import Toggle from "../../../../v2/components/HexToggle";

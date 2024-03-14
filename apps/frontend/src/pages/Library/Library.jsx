@@ -10,7 +10,7 @@ import SectionTitle from "../../v2/components/SectionTitle";
 import { DeckPlayFormatToggle } from "../../v2/components/DeckPlayFormatToggle";
 import { DeckPlayFormatInfo } from "../../v2/components/DeckPlayFormatInfo";
 import IconButton from "../../v2/components/IconButton";
-import { ReactComponent as TogglesIcon } from "../../svgs/sliders.svg";
+import TogglesIcon from "@icons/sliders.svg?react";
 import { sortByIdAsc } from "../../utils/sort";
 import { GrouppedFactionsToggle } from "../../v2/components/GrouppedFactionsToggle";
 import { GrouppedExpansions } from "../../v2/components/GrouppedExpansions";

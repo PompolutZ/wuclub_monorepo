@@ -10,8 +10,8 @@ import {
 import CardImage from "../../../../v2/components/CardImage";
 import CardRule from "../../../../atoms/CardRule";
 import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
-import { ReactComponent as LockIcon } from "@icons/lock.svg";
-import { ReactComponent as ForsakenIcon } from "@icons/no-symbol.svg";
+import LockIcon from "@icons/lock.svg?react";
+import ForsakenIcon from "@icons/no-symbol.svg?react";
 import { Waves } from "@wudb/waves";
 
 const idToPrintId = (id) => {

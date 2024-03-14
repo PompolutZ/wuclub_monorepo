@@ -1,7 +1,7 @@
 import React from 'react';
 import ObjectiveScoreTypeIcon from "../../../../../../components/ObjectiveScoreTypeIcon";
-import { ReactComponent as DualIcon } from "../../../../../../svgs/Dual.svg";
-import { ReactComponent as HybridIcon } from "../../../../../../svgs/Hybrid.svg";
+import DualIcon from "@icons/Dual.svg?react";
+import HybridIcon from "@icons/Hybrid.svg?react";
 
 export const OBJECTIVE_SCORE_TYPE_FILTERS = [
     {

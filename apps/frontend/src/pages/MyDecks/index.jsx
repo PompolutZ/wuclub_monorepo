@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { VIEW_DECK } from "../../constants/routes";
 import { checkCardIsObjective, getCardById } from "../../data/wudb";
-import { ReactComponent as TrashIcon } from "../../svgs/trash.svg";
+import TrashIcon from "@icons/trash.svg?react";
 import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
 import { DeleteConfirmationDialog } from "@components/DeleteConfirmationDialog";

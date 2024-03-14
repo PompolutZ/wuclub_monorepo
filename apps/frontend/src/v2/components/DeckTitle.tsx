@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ReactComponent as CompassIcon } from "@icons/compass.svg";
+import CompassIcon from "@icons/compass.svg?react";
 import { checkDeckHasPlots } from "@wudb";
 
 export interface DeckTitleProps {

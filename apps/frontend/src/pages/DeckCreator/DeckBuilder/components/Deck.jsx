@@ -3,13 +3,13 @@ import DebouncedInput from "../../../../v2/components/DebouncedInput";
 import ObjectivesList from "./ObjectivesList";
 import GambitsList from "./GambitsList";
 import UpgradesList from "./UpgradesList";
-import { ReactComponent as SaveIcon } from "../../../../svgs/save.svg";
-import { ReactComponent as CloseIcon } from "../../../../svgs/x.svg";
+import SaveIcon from "@icons/save.svg?react";
+import CloseIcon from "@icons/x.svg?react";
 import {
     validateCardForPlayFormat,
     validateDeckForPlayFormat,
 } from "../../../../data/wudb";
-import uuid4 from "uuid";
+import { v4 as uuid4 } from "uuid";
 import { useDeckBuilderState } from "../..";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 
