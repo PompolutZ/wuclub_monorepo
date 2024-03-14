@@ -14,8 +14,6 @@ parserOptions:
   sourceType: module
 plugins:
   - react
-rules:
-  'react/prop-types': 'warn'
 settings:
   react:
     version: 'detect'

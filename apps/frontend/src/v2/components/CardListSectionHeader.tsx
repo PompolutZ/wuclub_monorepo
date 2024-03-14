@@ -1,9 +1,20 @@
 import React, { useMemo } from "react";
 import { cardTypes } from "../../data/wudb";
 import toLower from "lodash/toLower";
-import PropTypes from "prop-types";
 
-function CardListSectionHeader({ type, amount, children, className = "" }) {
+type CardListSectionHeaderProps = {
+    type: "Objectives" | "Gambits" | "Upgrades";
+    amount: number;
+    children?: React.ReactNode;
+    className?: string;
+};
+
+function CardListSectionHeader({
+    type,
+    amount,
+    children,
+    className = "",
+}: CardListSectionHeaderProps) {
     const listTypes = useMemo(() => {
         switch (type) {
             case "Objectives":
@@ -18,7 +29,9 @@ function CardListSectionHeader({ type, amount, children, className = "" }) {
     }, [type]);
 
     return (
-        <div className={`flex items-center border-b border-gray-500 pb-2 ${className}`}>
+        <div
+            className={`flex items-center border-b border-gray-500 pb-2 ${className}`}
+        >
             <div className="mr-2 flex">
                 {listTypes.map((t) => (
                     <img
@@ -34,12 +47,5 @@ function CardListSectionHeader({ type, amount, children, className = "" }) {
         </div>
     );
 }
-
-CardListSectionHeader.propTypes = {
-    type: PropTypes.string.isRequired,
-    amount: PropTypes.number,
-    children: PropTypes.object,
-    className: PropTypes.string,
-};
 
 export default CardListSectionHeader;
