@@ -10,29 +10,40 @@ let SKIP = 0;
 let prev = [];
 
 function getAllDecks(newItems) {
-    prev = prev.concat(newItems);
+    // because React renders the same component twice, we need to check if the last item is the same
+    if (newItems.at(-1)?.deckId !== prev.at(-1)?.deckId) {
+        prev = prev.concat(newItems);
+    }
+
     return prev.map((deck) => ({ ...deck, cards: deck.deck }))
+}
+
+const getRefetchPayload = (faction, limit, skip) => {
+    const payload = {
+        data: {
+            skip,
+            limit
+        }
+    };
+
+    if (faction !== "all") {
+        payload.data.faction = faction;
+    }
+
+    return payload;
 }
 
 export default function Deck() {
     const { faction } = useParams();
     const [{ data }, refetch] = useListAllPublicDecks(true);
+    const cancelFurtherFetch = data && (data.length === 0 || data.length < BATCH);
 
     useEffect(() => {
-        // this is basically on initial load
-        if (faction === "all") {
-            refetch({
-                data: {
-                    skip: SKIP,
-                    limit: BATCH
-                }
-            });
-        } else {
-            refetch({
-                data: {
-                    faction,
-                },
-            });
+        refetch(getRefetchPayload(faction, BATCH, SKIP));
+
+        return () => {
+            SKIP = 0;
+            prev = [];
         }
     }, [faction, refetch]);
 
@@ -44,13 +55,10 @@ export default function Deck() {
                     items={getAllDecks(data)}
                     lazy={true}
                     onLoadMore={() => {
+                        if (cancelFurtherFetch) return;
+
                         SKIP += BATCH;
-                        refetch({
-                            data: {
-                                skip: SKIP,
-                                limit: BATCH
-                            }
-                        })
+                        refetch(getRefetchPayload(faction, BATCH, SKIP));
                     }}
                 >
                     {(deck, { key }) => <PublicDeckLink key={key} {...deck} />}
