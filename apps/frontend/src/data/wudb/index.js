@@ -184,6 +184,7 @@ export const factionMembers = {
     "cyrenis-razors": ["1", "2", "3", "4"],
     "the-thricefold-discord": ["1", "2", "3"],
     "daggoks-stab-ladz": ["1", "2", "3", "4"],
+    "zonadaras-gravebreakers": ["1", "2", "3", "4", "5"],
 };
 
 export const udbPrefexes = {
@@ -223,7 +224,13 @@ export const udbPrefexes = {
     BS: 35,
     FO: 36,
     SL: 37,
-    MM: 38
+    MM: 38,
+    ZG: 39,
+    RR: 40,
+    SW: 41,
+    BQ: 42,
+    ZA: 43,
+    MO: 44,
 };
 
 export const grouppedFactions = () => {
@@ -342,6 +349,7 @@ const rivalDecksWithPlot = [
     sets["Fearsome Fortress Rivals Deck"].id,
     sets["Voidcursed Thralls Rivals Deck"].id,
     sets["Breakneck Slaughter Rivals Deck"].id,
+    sets["Rimelocked Relics Rivals Deck"].id,
 ];
 
 const warbandHasPlot = (warbandId) => warbandsWithPlot.includes(warbandId);
@@ -423,8 +431,15 @@ const plots = {
         connection: "Warband",
         asset: "25433",
         id: sets["Daggok's Stab-ladz Rivals Deck"].id,
-        name: sets["Daggok's Stab-ladz Rivals Deck"].name
-    }
+        name: sets["Daggok's Stab-ladz Rivals Deck"].name,
+    },
+    Rimelocked: {
+        keyword: "Rimelocked",
+        connection: "Set",
+        asset: "Rimelocked",
+        id: sets["Rimelocked Relics Rivals Deck"].id,
+        name: sets["Rimelocked Relics Rivals Deck"].name,
+    },
 };
 
 function getCardNumberFromId(cardId) {
@@ -552,6 +567,7 @@ const nemesis_valid_sets = [
     sets["Breakneck Slaughter Rivals Deck"].id,
     sets["Force of Frost Rivals Deck"].id,
     sets["Malevolent Masks Rivals Deck"].id,
+    sets["Rimelocked Relics Rivals Deck"].id,
 ];
 
 function getAllSetsValidForFormat(format) {

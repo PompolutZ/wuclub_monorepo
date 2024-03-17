@@ -5,6 +5,7 @@ import IconButton from "./IconButton";
 import SectionTitle from "./SectionTitle";
 
 function FactionPicture({ faction, ...rest }) {
+    console.log("Faction", faction)
     return (
         <picture>
             <source
