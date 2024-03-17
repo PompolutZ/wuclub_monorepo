@@ -68,6 +68,8 @@ function FilterableCardLibrary(props) {
                     : true)
         );
 
+        console.log("Faction cards", factionCards);
+
         const ranks =
             (data &&
                 data
