@@ -158,7 +158,7 @@ export const Waves: Record<number, Wave> = {
     },
     39: {
         cardsCount: 32,
-        asset: "zonadaras-gravebreakers-rivals-deck-icon",
+        asset: "zondaras-gravebreakers-rivals-deck-icon",
     },
     40: {
         cardsCount: 32,
