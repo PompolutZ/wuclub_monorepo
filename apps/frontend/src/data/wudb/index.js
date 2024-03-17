@@ -224,7 +224,13 @@ export const udbPrefexes = {
     BS: 35,
     FO: 36,
     SL: 37,
-    MM: 38
+    MM: 38,
+    ZG: 39,
+    RR: 40,
+    SW: 41,
+    BQ: 42,
+    ZA: 43,
+    MO: 44,
 };
 
 export const grouppedFactions = () => {
