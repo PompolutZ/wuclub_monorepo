@@ -25,6 +25,7 @@
         "dexie-relationships": "^1.2.11",
         "downshift": "^7.0.5",
         "firebase": "9.0.0-beta.2",
+        "fuse.js": "^7.0.0",
         "immer": "^9.0.6",
         "immutable": "^3.8.2",
         "jspdf": "^2.3.1",
