@@ -1,6 +1,6 @@
 import React, { PureComponent, useState, memo } from "react";
 import ReactMarkdown from "react-markdown";
-import LockIcon from "@material-ui/icons/Lock";
+import LockIcon from "@icons/lock.svg?react";
 import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import CloseIcon from "@icons/x.svg?react";
@@ -157,11 +157,7 @@ const CardInDeck = memo(
 
                         {isRestricted && (
                             <LockIcon
-                                className="absolute w-8 h-8 opacity-75 top-1/2 -mt-3 left-1/2 -ml-3"
-                                style={{
-                                    stroke: "white",
-                                    fill: "goldenrod",
-                                }}
+                                className="absolute stroke-2 stroke-objective-gold w-8 h-8 opacity-75 top-1/2 -mt-4 left-1/2 -ml-3"
                             />
                         )}
                         {isBanned && (
