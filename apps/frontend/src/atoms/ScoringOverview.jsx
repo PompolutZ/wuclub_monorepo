@@ -1,7 +1,8 @@
 import React from "react";
-import SheduleIcon from "@material-ui/icons/Schedule";
-import FlashOnIcon from "@material-ui/icons/FlashOn";
-import HourglassFullIcon from "@material-ui/icons/HourglassFull";
+import SheduleIcon from "@icons/clock.svg?react";
+import FlashOnIcon from "@icons/zap.svg?react";
+import HourglassFullIcon from "@icons/hourglass-2.svg?react";
+
 import GloryIcon from '@icons/wu-glory.svg?react';
 
 function ScoringOverview({ summary: { Surge, End, Third }, glory }) {

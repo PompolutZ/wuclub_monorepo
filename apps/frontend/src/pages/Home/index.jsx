@@ -1,11 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import DeckMetaSummary from "../../molecules/DecksMetaSummary";
-import AutosuggestSearch from "../../components/AutosuggestSearch";
 import Footer from "../../components/Footer";
 import { useFetch } from "../../hooks/useFetch";
 import { grouppedFactions } from "../../data/wudb";
-// import { AutosuggestSearch } from "./Search";
+import { AutosuggestSearch } from "./Search";
 
 const Home = () => {
     const history = useHistory();
@@ -23,7 +22,6 @@ const Home = () => {
 
             <div className="mb-16 justify-center">
                 <div className="mx-4 sm:mx-auto sm:w-1/2 lg:w-1/3">
-                    {/* <AutosuggestSearch /> */}
                     <AutosuggestSearch onClick={handleGlobalSearchClick} />
                 </div>
             </div>
