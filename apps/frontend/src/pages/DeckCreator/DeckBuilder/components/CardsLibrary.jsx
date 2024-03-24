@@ -105,13 +105,15 @@ function FilterableCardLibrary(props) {
         ]
             .filter((card) => {
                 return props.filter.test ? props.filter.test(card) : true;
+            }).filter((card) => {
+                const [isValid] = validateCardForPlayFormat(card, state.format);
+                return isValid;
             })
             .map((c) => {
                 // previously cards were in format '00000' where first two digits were wave
                 // (e.g. Shadespire, Beastgrave or Power Unbound) and then card number
                 // =========
                 // new format has cards as numbers, which requires padding 0s for now for backward compatibility.
-
                 const [, isForsaken, isRestricted] = validateCardForPlayFormat(
                     c,
                     state.format
