@@ -1,8 +1,8 @@
 import React from "react";
-import SheduleIcon from "@material-ui/icons/Schedule";
-import FlashOnIcon from "@material-ui/icons/FlashOn";
-import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
-import HourglassFullIcon from "@material-ui/icons/HourglassFull";
+import SheduleIcon from "@icons/clock.svg?react";
+import FlashOnIcon from "@icons/zap.svg?react";
+import HourglassEmptyIcon from "@icons/hourglass-2.svg?react";
+import HourglassFullIcon from "@icons/hourglass-2.svg?react";
 
 const ObjectiveScoreTypeIcon = ({ type, style }) => {
     switch (type) {

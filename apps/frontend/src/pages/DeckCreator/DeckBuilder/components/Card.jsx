@@ -1,7 +1,7 @@
 import React, { PureComponent, useState, memo } from "react";
 import ReactMarkdown from "react-markdown";
 import LockIcon from "@icons/lock.svg?react";
-import NotInterestedIcon from "@material-ui/icons/NotInterested";
+import NotInterestedIcon from "@icons/no-symbol.svg?react";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import CloseIcon from "@icons/x.svg?react";
 import RankIcon from "@icons/wu-glory.svg?react";
@@ -148,7 +148,7 @@ const CardInDeck = memo(
                             />
                         )}
                         <img
-                            className="w-8 h-8"
+                            className={`w-8 h-8 ${isRestricted || isBanned ? "opacity-50" : ""}`}
                             alt={`${getSetNameById(setId)}`}
                             src={`/assets/icons/${getSetNameById(
                                 setId
@@ -157,15 +157,12 @@ const CardInDeck = memo(
 
                         {isRestricted && (
                             <LockIcon
-                                className="absolute stroke-2 stroke-objective-gold w-8 h-8 opacity-75 top-1/2 -mt-4 left-1/2 -ml-3"
+                                className="absolute stroke-2 stroke-yellow-600 stroke-[4px] w-8 h-8 top-1/2 -mt-4 left-1/2 -ml-4"
                             />
                         )}
                         {isBanned && (
                             <NotInterestedIcon
-                                className="absolute w-8 h-8 opacity-75 top-1/2 -mt-3 left-1/2 -ml-3"
-                                style={{
-                                    fill: "darkred",
-                                }}
+                                className="absolute stroke-red-700 stroke-[4px] w-8 h-8 top-1/2 -mt-4 left-1/2 -ml-4"
                             />
                         )}
                     </div>
