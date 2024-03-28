@@ -1,0 +1,7 @@
+{
+  "name": "@fxdxpz/prettier-config",
+  "version": "0.1.0",
+  "description": "Prettier config for my projects",
+  "license": "MIT",
+  "main": "index.json"
+}
