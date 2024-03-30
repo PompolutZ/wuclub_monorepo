@@ -8,7 +8,7 @@ import { AutosuggestSearch } from "./Search";
 
 const Home = () => {
     const history = useHistory();
-    const { result: stats } = useFetch('api/v1/public-decks/stats');
+    const { result: stats } = useFetch("api/v1/public-decks/stats");
 
     const handleGlobalSearchClick = (payload) => {
         history.push(`/view/card/${payload.id}`);

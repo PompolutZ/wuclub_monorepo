@@ -88,6 +88,10 @@ export const setsIndex = [
   "thorns-of-the-briar-queen-rivals-deck",
   "zarbags-gitz-rivals-deck",
   "mollogs-mob-rivals-deck",
+  "brethren-of-the-bolt-rivals-deck",
+  "the-skinnerkin-rivals-deck",
+  "hungering-parasite-rivals-deck",
+  "rimewyrms-bite-rivals-deck",
 ];
 
 export const setsNames = [
@@ -183,6 +187,10 @@ export const setsNames = [
   "Thorns of the Briar Queen Rivals Deck",
   "Zarbag's Gitz Rivals Deck",
   "Mollog's Mob Rivals Deck",
+  "Brethren of the Bolt Rivals Deck",
+  "The Skinnerkin Rivals Deck",
+  "Hungering Parasite Rivals Deck",
+  "Rimewyrm's Bite Rivals Deck",
 ];
 
 // case "Order": return 38;
@@ -259,6 +267,9 @@ export const factionToGrandAlianceId = {
   "the-thricefold-discord": 39,
   "daggoks-stab-ladz": 41,
   "zondaras-gravebreakers": 40,
+
+  "brethren-of-the-bolt": 38,
+  "the-skinnerkin": 40,
 };
 
 export const factionIndexes = [
@@ -335,6 +346,8 @@ export const factionIndexes = [
   "the-thricefold-discord",
   "daggoks-stab-ladz",
   "zondaras-gravebreakers",
+  "brethren-of-the-bolt",
+  "the-skinnerkin",
 ];
 
 export const factionIdPrefix = {
@@ -411,4 +424,6 @@ export const factionIdPrefix = {
   "the-thricefold-discord": "ttd",
   "daggoks-stab-ladz": "dsl",
   "zondaras-gravebreakers": "zgb",
+  "brethren-of-the-bolt": "bob",
+  "the-skinnerkin": "tsk",
 };
