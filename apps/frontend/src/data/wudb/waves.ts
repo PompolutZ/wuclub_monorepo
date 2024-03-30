@@ -1,7 +1,7 @@
 type Wave = {
-    cardsCount: number;
-    asset: string;
-}
+  cardsCount: number;
+  asset: string;
+};
 
 export const Waves: Record<number, Wave> = {
   1: {
