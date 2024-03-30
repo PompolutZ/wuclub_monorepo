@@ -143,6 +143,10 @@ export const getFaction = (text) => {
       return 59;
     case "Zondara's Gravebreakers":
       return 60;
+    case "Brethren of the Bolt":
+      return 61;
+    case "The Skinnerkin":
+      return 62;
     default:
       return -1;
   }
@@ -192,6 +196,10 @@ const udbPrefexes = {
   BQ: 42,
   ZA: 43,
   MO: 44,
+  BB: 45,
+  SK: 46,
+  HP: 47,
+  RB: 48,
 };
 
 export const decodeUDB = card => {
