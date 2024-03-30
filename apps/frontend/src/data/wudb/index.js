@@ -7,330 +7,338 @@ export const latestSeasonStartNumber = 15000;
 export const sortedFactions = Object.values(factions).sort(sortByIdAsc);
 
 export const factionMembers = {
-    "garreks-reavers": ["Garrek", "Saek", "Karsus", "Targor", "Arnulf"],
-    "steelhearts-champions": ["Steelheart", "Obryn", "Angharad"],
-    "sepulchral-guard": [
-        "Warden",
-        "Champion",
-        "Prince",
-        "Harvester",
-        "Petitioner-1",
-        "Petitioner-2",
-        "Petitioner-3",
-    ],
-    "ironskulls-boyz": ["Gurzag", "Bonekutta", "Hakka", "Basha"],
-    "the-chosen-axes": ["Grimnir", "Tefk", "Vol", "Maegrim"],
-    "spiteclaws-swarm": [
-        "Skritch",
-        "Krrk",
-        "Lurking",
-        "Festering",
-        "Hungering",
-    ],
-    "magores-fiends": ["Magore", "Riptooth", "Zharkus", "Ghartok"],
-    "the-farstriders": ["Sanson", "Almeric", "Elias"],
+  "garreks-reavers": ["Garrek", "Saek", "Karsus", "Targor", "Arnulf"],
+  "steelhearts-champions": ["Steelheart", "Obryn", "Angharad"],
+  "sepulchral-guard": [
+    "Warden",
+    "Champion",
+    "Prince",
+    "Harvester",
+    "Petitioner-1",
+    "Petitioner-2",
+    "Petitioner-3",
+  ],
+  "ironskulls-boyz": ["Gurzag", "Bonekutta", "Hakka", "Basha"],
+  "the-chosen-axes": ["Grimnir", "Tefk", "Vol", "Maegrim"],
+  "spiteclaws-swarm": ["Skritch", "Krrk", "Lurking", "Festering", "Hungering"],
+  "magores-fiends": ["Magore", "Riptooth", "Zharkus", "Ghartok"],
+  "the-farstriders": ["Sanson", "Almeric", "Elias"],
 
-    // NIGHTVAULT
+  // NIGHTVAULT
 
-    "stormsires-cursebreakers": ["Stormsire", "Ammis", "Rastus"],
-    "thorns-of-the-briar-queen": [
-        "Briar Queen",
-        "Varclav",
-        "The Ever-hanged",
-        "Chainrasp",
-        "Chainrasp",
-        "Chainrasp",
-        "Chainrasp",
-    ],
-    "the-eyes-of-the-nine": [
-        "Vortemis",
-        `K'charik`,
-        `Narvia`,
-        "Turosh",
-        "Blue Horror",
-    ],
-    "zarbags-gitz": [
-        "Zarbag",
-        "Sourtongue",
-        "Drizgit",
-        "Bonekrakka",
-        "Gobbaluk",
-        "Prog",
-        "Stikkit",
-        "Redkap",
-        "Dibbz",
-    ],
-    "godsworn-hunt": [
-        "Theddra",
-        "Grundann",
-        "Jagathra",
-        "Shond",
-        "Ollo",
-        "Grawl",
-    ],
-    "mollogs-mob": ["Mollog", "Bat Squig", "Stalagsquig", "Spiteshroom"],
-    "thundriks-profiteers": [
-        "Bjorgen",
-        "Dead-Eye Lund",
-        "Enrik",
-        "Khazgan",
-        "Garodd",
-    ],
-    "yltharis-guardians": ["Ylthari", "Ahnslaine", "Gallanghann", "Skhathael"],
+  "stormsires-cursebreakers": ["Stormsire", "Ammis", "Rastus"],
+  "thorns-of-the-briar-queen": [
+    "Briar Queen",
+    "Varclav",
+    "The Ever-hanged",
+    "Chainrasp",
+    "Chainrasp",
+    "Chainrasp",
+    "Chainrasp",
+  ],
+  "the-eyes-of-the-nine": [
+    "Vortemis",
+    `K'charik`,
+    `Narvia`,
+    "Turosh",
+    "Blue Horror",
+  ],
+  "zarbags-gitz": [
+    "Zarbag",
+    "Sourtongue",
+    "Drizgit",
+    "Bonekrakka",
+    "Gobbaluk",
+    "Prog",
+    "Stikkit",
+    "Redkap",
+    "Dibbz",
+  ],
+  "godsworn-hunt": [
+    "Theddra",
+    "Grundann",
+    "Jagathra",
+    "Shond",
+    "Ollo",
+    "Grawl",
+  ],
+  "mollogs-mob": ["Mollog", "Bat Squig", "Stalagsquig", "Spiteshroom"],
+  "thundriks-profiteers": [
+    "Bjorgen",
+    "Dead-Eye Lund",
+    "Enrik",
+    "Khazgan",
+    "Garodd",
+  ],
+  "yltharis-guardians": ["Ylthari", "Ahnslaine", "Gallanghann", "Skhathael"],
 
-    // DREADFANE
+  // DREADFANE
 
-    "ironsouls-condemners": ["Ironsoul", "Blightbane", "Tavian"],
-    "lady-harrows-mournflight": [
-        "Lady Harrow",
-        "The Anguished One",
-        "The Maiden",
-        "Widow Caitha",
-    ],
+  "ironsouls-condemners": ["Ironsoul", "Blightbane", "Tavian"],
+  "lady-harrows-mournflight": [
+    "Lady Harrow",
+    "The Anguished One",
+    "The Maiden",
+    "Widow Caitha",
+  ],
 
-    // BEASTGRAVE
+  // BEASTGRAVE
 
-    "grashraks-despoilers": [
-        "Grashrak",
-        "Draknar",
-        "Murgroth",
-        "Korsh",
-        "Gnarl",
-        "Ushkor",
-    ],
-    "skaeths-wild-hunt": [
-        "Skaeths",
-        "Lighaen",
-        "Karthaen",
-        "Kurnoth4",
-        "Kurnoth5",
-    ],
-    "the-grymwatch": ["Duke Crakmarrow", "", "", "", "", ""],
-    "rippas-snarlfangs": ["Rippa", "Stabbit", "Mean-Eye"],
-    "hrothgorns-mantrappers": [
-        "Hrothgorn",
-        "Thrafnir",
-        "Bushwakka",
-        "Quiv",
-        "Luggit and Thwak",
-    ],
-    "the-wurmspat": ["Fecula", "Ghulgogh", "Sepsimus"],
-    "morgwaeths-blade-coven": [
-        "Morgwaeth",
-        "Kyrae",
-        "Khamyss",
-        "Kyrssa",
-        "Lethyr",
-    ],
+  "grashraks-despoilers": [
+    "Grashrak",
+    "Draknar",
+    "Murgroth",
+    "Korsh",
+    "Gnarl",
+    "Ushkor",
+  ],
+  "skaeths-wild-hunt": [
+    "Skaeths",
+    "Lighaen",
+    "Karthaen",
+    "Kurnoth4",
+    "Kurnoth5",
+  ],
+  "the-grymwatch": ["Duke Crakmarrow", "", "", "", "", ""],
+  "rippas-snarlfangs": ["Rippa", "Stabbit", "Mean-Eye"],
+  "hrothgorns-mantrappers": [
+    "Hrothgorn",
+    "Thrafnir",
+    "Bushwakka",
+    "Quiv",
+    "Luggit and Thwak",
+  ],
+  "the-wurmspat": ["Fecula", "Ghulgogh", "Sepsimus"],
+  "morgwaeths-blade-coven": [
+    "Morgwaeth",
+    "Kyrae",
+    "Khamyss",
+    "Kyrssa",
+    "Lethyr",
+  ],
 
-    "morgoks-krushas": ["Morgok", "’Ardskull", "Thugg"],
+  "morgoks-krushas": ["Morgok", "’Ardskull", "Thugg"],
 
-    // DIRECHASM
-    "myaris-purifiers": ["Myari", "Bahannar", "Ailenn", "Senaela"],
-    "dread-pageant": ["Vasillac", "Glissete", "Hadzu", "Slakeslash"],
-    "khagras-ravagers": ["Khagra", "Cragan", "Razek", "Zarshia"],
-    "the-starblood-stalkers": [
-        "Kixi-Taka",
-        "Klaq-Trok",
-        "Otapatl",
-        "Tok",
-        "Xepic",
-        "Huachi",
-    ],
-    "the-crimson-court": ["", "", "", ""],
-    "storm-of-celestus": ["", "", "", ""],
-    "drepurs-wraithcreepers": ["", "", "", ""],
-    "hedkrakkas-madmob": ["Hedkrakka", "Wollop", "Toofdagga", "Dakko"],
-    "kainans-reapers": ["", "", "", "", "", ""],
-    "elathains-soulreapers": ["", "", "", "", ""],
+  // DIRECHASM
+  "myaris-purifiers": ["Myari", "Bahannar", "Ailenn", "Senaela"],
+  "dread-pageant": ["Vasillac", "Glissete", "Hadzu", "Slakeslash"],
+  "khagras-ravagers": ["Khagra", "Cragan", "Razek", "Zarshia"],
+  "the-starblood-stalkers": [
+    "Kixi-Taka",
+    "Klaq-Trok",
+    "Otapatl",
+    "Tok",
+    "Xepic",
+    "Huachi",
+  ],
+  "the-crimson-court": ["", "", "", ""],
+  "storm-of-celestus": ["", "", "", ""],
+  "drepurs-wraithcreepers": ["", "", "", ""],
+  "hedkrakkas-madmob": ["Hedkrakka", "Wollop", "Toofdagga", "Dakko"],
+  "kainans-reapers": ["", "", "", "", "", ""],
+  "elathains-soulreapers": ["", "", "", "", ""],
 
-    "xandires-truthseekers": ["", "", "", ""],
-    "da-kunnin-krew": ["", "", "", "", ""],
-    "blackpowders-buccaneers": ["Gorlok", "Kagey", "Mange", "Peggs", "Shreek"],
-    "the-exiled-dead": [
-        "Deintalos",
-        "Marcov",
-        "Regulus",
-        "Coyl",
-        "Bault",
-        "Vlash",
-        "Ione",
-    ],
-    "skittershanks-clawpack": [
-        "Skittershanks",
-        "Snyp",
-        "Kreep",
-        "Krowcht",
-        "Skulck",
-    ],
-    "the-shadeborn": ["Slythael", "Drusylla", "Sylarc", "Valyssa"],
-    "hexbanes-hunters": [
-        "Haskel",
-        "Aemos",
-        "Quite Pock",
-        "Brydget",
-        "Grotbiter",
-        "Ratspike",
-    ],
-    "gorechosen-of-dromm": ["Dromm", "Gorehulk", "Herax"],
-    "gnarlspirit-pack": ["1", "2", "3", "4"],
-    "sons-of-velmorn": ["1", "2", "3", "4", "5"],
-    "grinkraks-looncourt": ["1", "2", "3", "4", "5", "6"],
-    "gryselles-arenai": ["1", "2", "3", "4", "5"],
-    "domitans-stormcoven": ["1", "2", "3"],
-    "ephilims-pandaemonium": ["1", "2", "3", "4", "5"],
-    "the-headsmens-curse": ["1", "2", "3", "4"],
-    "skabbiks-plaguepack": ["1", "2", "3", "4", "5", "6"],
-    "cyrenis-razors": ["1", "2", "3", "4"],
-    "the-thricefold-discord": ["1", "2", "3"],
-    "daggoks-stab-ladz": ["1", "2", "3", "4"],
-    "zonadaras-gravebreakers": ["1", "2", "3", "4", "5"],
+  "xandires-truthseekers": ["", "", "", ""],
+  "da-kunnin-krew": ["", "", "", "", ""],
+  "blackpowders-buccaneers": ["Gorlok", "Kagey", "Mange", "Peggs", "Shreek"],
+  "the-exiled-dead": [
+    "Deintalos",
+    "Marcov",
+    "Regulus",
+    "Coyl",
+    "Bault",
+    "Vlash",
+    "Ione",
+  ],
+  "skittershanks-clawpack": [
+    "Skittershanks",
+    "Snyp",
+    "Kreep",
+    "Krowcht",
+    "Skulck",
+  ],
+  "the-shadeborn": ["Slythael", "Drusylla", "Sylarc", "Valyssa"],
+  "hexbanes-hunters": [
+    "Haskel",
+    "Aemos",
+    "Quite Pock",
+    "Brydget",
+    "Grotbiter",
+    "Ratspike",
+  ],
+  "gorechosen-of-dromm": ["Dromm", "Gorehulk", "Herax"],
+  "gnarlspirit-pack": ["1", "2", "3", "4"],
+  "sons-of-velmorn": ["1", "2", "3", "4", "5"],
+  "grinkraks-looncourt": ["1", "2", "3", "4", "5", "6"],
+  "gryselles-arenai": ["1", "2", "3", "4", "5"],
+  "domitans-stormcoven": ["1", "2", "3"],
+  "ephilims-pandaemonium": ["1", "2", "3", "4", "5"],
+  "the-headsmens-curse": ["1", "2", "3", "4"],
+  "skabbiks-plaguepack": ["1", "2", "3", "4", "5", "6"],
+  "cyrenis-razors": ["1", "2", "3", "4"],
+  "the-thricefold-discord": ["1", "2", "3"],
+  "daggoks-stab-ladz": ["1", "2", "3", "4"],
+  "zonadaras-gravebreakers": ["1", "2", "3", "4", "5"],
+  "brethren-of-the-bolt": ["1", "2", "3", "4", "5"],
+  "the-skinnerkin": ["1", "2", "3", "4", "5"],
 };
 
 export const udbPrefexes = {
-    L: 2,
-    NM: 14,
-    N: 3,
-    P: 4,
-    DC: 9,
-    D: 5,
-    B: 6,
-    G: 7,
-    AM: 12,
-    A: 8,
-    S: 10,
-    E: 11,
-    H: 13,
-    GP: 15,
-    SV: 16,
-    DD: 17,
-    TC: 18,
-    GL: 19,
-    FF: 20,
-    GA: 21,
-    BA: 22,
-    DS: 23,
-    EP: 24,
-    SS: 25,
-    TT: 26,
-    HC: 27,
-    VT: 28,
-    SG: 29,
-    FS: 30,
-    SP: 31,
-    PP: 32,
-    CR: 33,
-    TD: 34,
-    BS: 35,
-    FO: 36,
-    SL: 37,
-    MM: 38,
-    ZG: 39,
-    RR: 40,
-    SW: 41,
-    BQ: 42,
-    ZA: 43,
-    MO: 44,
+  L: 2,
+  NM: 14,
+  N: 3,
+  P: 4,
+  DC: 9,
+  D: 5,
+  B: 6,
+  G: 7,
+  AM: 12,
+  A: 8,
+  S: 10,
+  E: 11,
+  H: 13,
+  GP: 15,
+  SV: 16,
+  DD: 17,
+  TC: 18,
+  GL: 19,
+  FF: 20,
+  GA: 21,
+  BA: 22,
+  DS: 23,
+  EP: 24,
+  SS: 25,
+  TT: 26,
+  HC: 27,
+  VT: 28,
+  SG: 29,
+  FS: 30,
+  SP: 31,
+  PP: 32,
+  CR: 33,
+  TD: 34,
+  BS: 35,
+  FO: 36,
+  SL: 37,
+  MM: 38,
+  ZG: 39,
+  RR: 40,
+  SW: 41,
+  BQ: 42,
+  ZA: 43,
+  MO: 44,
+  BB: 45,
+  SK: 46,
+  HP: 47,
+  RB: 48,
 };
 
 export const grouppedFactions = () => {
     return [
-        {
-            title: "Universal (Any warband)",
-            factions: [
-                factions["Universal"],
-                factions["Order"],
-                factions["Chaos"],
-                factions["Death"],
-                factions["Destruction"],
-            ],
-        },
-        {
-            title: "Deathgorge",
-            factions: sortedFactions.filter(
-                (f) => f.id >= factions["Cyreni's Razors"].id
-            ),
-        },
-        {
-            title: "Wyrdhollow",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Domitan's Stormcoven"].id &&
-                    f.id <= factions["Skabbik's Plaguepack"].id
-            ),
-        },
-        {
-            title: "Gnarlwood",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Gnarlspirit Pack"].id &&
-                    f.id <= factions["Gryselle's Arenai"].id
-            ),
-        },
-        {
-            title: "Nethermaze",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Skittershank's Clawpack"].id &&
-                    f.id <= factions["Gorechosen of Dromm"].id
-            ),
-        },
-        {
-            title: "Harrowdeep",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Xandire's Truthseekers"].id &&
-                    f.id <= factions["The Exiled Dead"].id
-            ),
-        },
-        {
-            title: "Direchasm",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Myari's Purifiers"].id &&
-                    f.id <= factions["Elathain's Soulraid"].id
-            ),
-        },
-        {
-            title: "Beastgrave",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Grashrak's Despoilers"].id &&
-                    f.id <= factions["Morgok's Krushas"].id
-            ),
-        },
-        {
-            title: "Nightvault",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Stormsire's Cursebreakers"].id &&
-                    f.id <= factions["Ylthari's Guardians"].id
-            ),
-        },
-        {
-            title: "Shadespire",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Garrek's Reavers"].id &&
-                    f.id <= factions["The Farstriders"].id
-            ),
-        },
-        {
-            title: "Starting set",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Storm of Celestus"].id &&
-                    f.id <= factions["Drepur's Wraithcreepers"].id
-            ),
-        },
-        {
-            title: "Dreadfane",
-            factions: sortedFactions.filter(
-                (f) =>
-                    f.id >= factions["Ironsoul's Condemners"].id &&
-                    f.id <= factions["Lady Harrow's Mournflight"].id
-            ),
-        },
+      {
+        title: "Universal (Any warband)",
+        factions: [
+          factions["Universal"],
+          factions["Order"],
+          factions["Chaos"],
+          factions["Death"],
+          factions["Destruction"],
+        ],
+      },
+      {
+        title: "Wintermaw",
+        factions: sortedFactions.filter(
+          (f) => f.id >= factions["Brethren of the Bolt"].id,
+        ),
+      },
+      {
+        title: "Deathgorge",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Cyreni's Razors"].id &&
+            f.id <= factions["Zondara's Gravebreakers"].id,
+        ),
+      },
+      {
+        title: "Wyrdhollow",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Domitan's Stormcoven"].id &&
+            f.id <= factions["Skabbik's Plaguepack"].id,
+        ),
+      },
+      {
+        title: "Gnarlwood",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Gnarlspirit Pack"].id &&
+            f.id <= factions["Gryselle's Arenai"].id,
+        ),
+      },
+      {
+        title: "Nethermaze",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Skittershank's Clawpack"].id &&
+            f.id <= factions["Gorechosen of Dromm"].id,
+        ),
+      },
+      {
+        title: "Harrowdeep",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Xandire's Truthseekers"].id &&
+            f.id <= factions["The Exiled Dead"].id,
+        ),
+      },
+      {
+        title: "Direchasm",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Myari's Purifiers"].id &&
+            f.id <= factions["Elathain's Soulraid"].id,
+        ),
+      },
+      {
+        title: "Beastgrave",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Grashrak's Despoilers"].id &&
+            f.id <= factions["Morgok's Krushas"].id,
+        ),
+      },
+      {
+        title: "Nightvault",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Stormsire's Cursebreakers"].id &&
+            f.id <= factions["Ylthari's Guardians"].id,
+        ),
+      },
+      {
+        title: "Shadespire",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Garrek's Reavers"].id &&
+            f.id <= factions["The Farstriders"].id,
+        ),
+      },
+      {
+        title: "Starting set",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Storm of Celestus"].id &&
+            f.id <= factions["Drepur's Wraithcreepers"].id,
+        ),
+      },
+      {
+        title: "Dreadfane",
+        factions: sortedFactions.filter(
+          (f) =>
+            f.id >= factions["Ironsoul's Condemners"].id &&
+            f.id <= factions["Lady Harrow's Mournflight"].id,
+        ),
+      },
     ];
 };
 
