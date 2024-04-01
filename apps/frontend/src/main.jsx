@@ -62,105 +62,74 @@ function MainLayout() {
                     </>
                 )}
 
-                <div className="row-start-1 row-end-2 col-start-1 col-end-2 flex justify-center">
-                    <div className="flex-1 flex flex-col max-w-[1920px]">
-                        <NavigationPanel />
+              <div className="row-start-1 row-end-2 col-start-1 col-end-2 flex justify-center">
+                  <div className="flex-1 flex flex-col max-w-[1920px]">
+                      <NavigationPanel />
 
-                        <main id="yawudb_main" className="flex flex-1">
-                            <ErrorBoundary>
-                                <Suspense fallback={<LazyLoading />}>
-                                    <Switch>
-                                        <Route
-                                            exact
-                                            path={ROUTES.HOME}
-                                            component={Home}
-                                        />
-                                        <Route
-                                            path={`${ROUTES.BROWSE_DECKS_FOR}/:faction`}
-                                            render={(props) => (
-                                                <Decks {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.CARDS_LIBRARY}
-                                            render={(props) => (
-                                                <Library {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.CREATOR_ROOT}
-                                            render={(props) => (
-                                                <DeckCreator {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.SIGN_IN}
-                                            render={(props) => (
-                                                <Login {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.SIGN_UP}
-                                            render={(props) => (
-                                                <SignUp {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.VIEW_DECK_ID}
-                                            render={(props) => (
-                                                <Deck {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.VIEW_CARD_ID}
-                                            render={(props) => (
-                                                <Card {...props} />
-                                            )}
-                                        />
+                      <main id="yawudb_main" className="flex flex-1">
+                          <ErrorBoundary>
+                              <Suspense fallback={<LazyLoading />}>
+                                  <Switch>
+                                      <Route exact path={ROUTES.HOME} component={Home} />
+                                      <Route
+                                          path={`${ROUTES.BROWSE_DECKS_FOR}/:faction`}
+                                          render={(props) => <Decks {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.CARDS_LIBRARY}
+                                          render={(props) => <Library {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.CREATOR_ROOT}
+                                          render={(props) => <DeckCreator {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.SIGN_IN}
+                                          render={(props) => <Login {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.SIGN_UP}
+                                          render={(props) => <SignUp {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.VIEW_DECK_ID}
+                                          render={(props) => <Deck {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.VIEW_CARD_ID}
+                                          render={(props) => <Card {...props} />}
+                                      />
 
-                                        <Route
-                                            path={ROUTES.PRIVACY_POLICY}
-                                            render={(props) => (
-                                                <PrivacyPolicy {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.PASSWORD_RESET}
-                                            render={(props) => (
-                                                <PasswordResetRequest
-                                                    {...props}
-                                                />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.MY_DECKS}
-                                            render={(props) => (
-                                                <MyDecks {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.BOARDS}
-                                            render={(props) => (
-                                                <BoardsPage {...props} />
-                                            )}
-                                        />
-                                        <Route
-                                            path={ROUTES.PROFILE}
-                                            component={UserProfile}
-                                        />
-                                        {/* <PrivateRoute
+                                      <Route
+                                          path={ROUTES.PRIVACY_POLICY}
+                                          render={(props) => <PrivacyPolicy {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.PASSWORD_RESET}
+                                          render={(props) => <PasswordResetRequest {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.MY_DECKS}
+                                          render={(props) => <MyDecks {...props} />}
+                                      />
+                                      <Route
+                                          path={ROUTES.BOARDS}
+                                          render={(props) => <BoardsPage {...props} />}
+                                      />
+                                      <Route path={ROUTES.PROFILE} component={UserProfile} />
+                                      {/* <PrivateRoute
                     path="/secret/cards-rating/:faction?"
                     component={CardsRating}
                 /> */}
-                                    </Switch>
-                                </Suspense>
-                            </ErrorBoundary>
-                        </main>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+                                  </Switch>
+                              </Suspense>
+                          </ErrorBoundary>
+                      </main>
+                  </div>
+              </div>
+          </div>
+      </>
+  );
 }
 
 const modalRoot = document.getElementById("modal-root");
