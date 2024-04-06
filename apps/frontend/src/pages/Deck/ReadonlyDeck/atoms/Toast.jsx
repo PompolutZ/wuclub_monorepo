@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { animated as a, useSpring } from "react-spring";
+import { animated as a, useSpring } from "@react-spring/web";
 
 export function Toast({ show, className, children, onTimeout }) {
     const [visible, setVisible] = useState(show);

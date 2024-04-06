@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardsTab from "./CardsTab";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring } from "@react-spring/web";
 import { OBJECTIVE_GLORY_FILTERS } from "./constants/objectiveGloryFilters";
 import { OBJECTIVE_SCORE_TYPE_FILTERS } from "./constants/objectiveScoreTypeFilters";
 import { KEYWORD_FILTERS } from "./constants/keywordFilters";

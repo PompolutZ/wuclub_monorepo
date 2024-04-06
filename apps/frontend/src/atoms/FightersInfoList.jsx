@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { factionMembers } from "../data/wudb";
-import { useSpring, animated as a } from "react-spring";
+import { useSpring, animated as a } from "@react-spring/web";
 import { useDeckBuilderState } from "../pages/DeckCreator";
 
 function useClickAway() {

@@ -3,7 +3,7 @@ import useAuthUser from "../../hooks/useAuthUser";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import { animated, useSpring, useTransition } from "react-spring";
+import { animated, useSpring, useTransition } from "@react-spring/web";
 import MenuIcon from "@icons/menu.svg?react";
 import CoffeeIcon from "@icons/coffee.svg?react";
 import Divider from "./Divider";
