@@ -68,9 +68,6 @@ importers:
       dexie:
         specifier: ^4.0.1
         version: 4.0.1
-      dexie-relationships:
-        specifier: ^1.2.11
-        version: 1.2.11(dexie@4.0.1)
       downshift:
         specifier: ^7.0.5
         version: 7.6.2(react@17.0.2)
@@ -4612,14 +4609,6 @@ packages:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
     dependencies:
       dequal: 2.0.2
-    dev: false
-
-  /dexie-relationships@1.2.11(dexie@4.0.1):
-    resolution: {integrity: sha512-dptIUMiCiEPnSPyZno6yOrmFo+xf0Y1PVC4LX2HO/VgPAYIoaf/wMcC7mbna+RMZ6wRIOEb4T+lgR5v21q2EnA==}
-    peerDependencies:
-      dexie: ^2.0.0-beta.10
-    dependencies:
-      dexie: 4.0.1
     dev: false
 
   /dexie@4.0.1:
