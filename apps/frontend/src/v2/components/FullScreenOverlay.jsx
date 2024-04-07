@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { animated, useTransition } from "react-spring";
+import { animated, useTransition } from "@react-spring/web";
 import CloseIcon from "@icons/x.svg?react";
 
 const FullScreenOverlay = ({

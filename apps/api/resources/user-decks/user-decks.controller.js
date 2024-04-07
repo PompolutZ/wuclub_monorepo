@@ -60,6 +60,7 @@ export async function getDeckById(req, res) {
 export async function createDeck(req, res) {
   try {
     const deckId = validateDeckId(req.body.deckId);
+    console.log("Save deck", req.body);
     if (!deckId) {
       return res.status(400).send("Deck missing id.");
     }

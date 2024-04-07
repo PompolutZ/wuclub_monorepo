@@ -1,7 +1,7 @@
 import React from "react";
 import { CardsList } from "./CardsList";
 import CardListSectionHeader from "../../../../v2/components/CardListSectionHeader";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring } from "@react-spring/web";
 import { useResizeHeight } from "../../../../hooks/useResizeHeight";
 import { ExpandCollapseButton } from "../../../../v2/components/ExpandCollapseButton";
 

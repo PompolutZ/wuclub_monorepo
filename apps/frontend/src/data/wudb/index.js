@@ -31,10 +31,10 @@ export const factionMembers = {
     "Briar Queen",
     "Varclav",
     "The Ever-hanged",
-    "Chainrasp",
-    "Chainrasp",
-    "Chainrasp",
-    "Chainrasp",
+    "The Silenced",
+    "The Ironwretch",
+    "The Exhumed",
+    "The Uncrowned",
   ],
   "the-eyes-of-the-nine": [
     "Vortemis",
@@ -99,7 +99,7 @@ export const factionMembers = {
     "Kurnoth4",
     "Kurnoth5",
   ],
-  "the-grymwatch": ["Duke Crakmarrow", "", "", "", "", ""],
+  "the-grymwatch": ["Duke Crakmarrow", "1", "2", "3", "4", "5"],
   "rippas-snarlfangs": ["Rippa", "Stabbit", "Mean-Eye"],
   "hrothgorns-mantrappers": [
     "Hrothgorn",
@@ -131,15 +131,15 @@ export const factionMembers = {
     "Xepic",
     "Huachi",
   ],
-  "the-crimson-court": ["", "", "", ""],
-  "storm-of-celestus": ["", "", "", ""],
-  "drepurs-wraithcreepers": ["", "", "", ""],
+  "the-crimson-court": ["1", "2", "3", "4"],
+  "storm-of-celestus": ["1", "2", "3", "4"],
+  "drepurs-wraithcreepers": ["1", "2", "3", "4"],
   "hedkrakkas-madmob": ["Hedkrakka", "Wollop", "Toofdagga", "Dakko"],
-  "kainans-reapers": ["", "", "", "", "", ""],
-  "elathains-soulreapers": ["", "", "", "", ""],
+  "kainans-reapers": ["1", "2", "3", "4", "5", "6"],
+  "elathains-soulreapers": ["1", "2", "3", "4", "5"],
 
-  "xandires-truthseekers": ["", "", "", ""],
-  "da-kunnin-krew": ["", "", "", "", ""],
+  "xandires-truthseekers": ["1", "2", "3", "4"],
+  "da-kunnin-krew": ["1", "2", "3", "4", "5"],
   "blackpowders-buccaneers": ["Gorlok", "Kagey", "Mange", "Peggs", "Shreek"],
   "the-exiled-dead": [
     "Deintalos",
@@ -592,14 +592,57 @@ const nemesis_valid_sets = [
   sets["Force of Frost Rivals Deck"].id,
   sets["Malevolent Masks Rivals Deck"].id,
   sets["Rimelocked Relics Rivals Deck"].id,
+  sets["Hungering Parasite Rivals Deck"].id,
+  sets["Rimewyrm's Bite Rivals Deck"].id,
 ];
+
+const factionsRivalsDecks = {
+  [`${factions["Sons of Velmorn"].name}`]: sets["Gnarlwood core set"].id,
+  [`${factions["Gnarlspirit Pack"].name}`]: sets["Gnarlwood core set"].id,
+  [`${factions["Grinkrak's Looncourt"].name}`]:
+    sets["Grinkrak's Looncourt Rivals Deck"].id,
+  [`${factions["Gryselle's Arenai"].name}`]:
+    sets["Gryselle's Arenai Rivals Deck"].id,
+  [`${factions["Domitan's Stormcoven"].name}`]:
+    sets["Domitan's Stormcoven Rivals Deck"].id,
+  [`${factions["Ephilim's Pandaemonium"].name}`]:
+    sets["Ephilim's Pandaemonium Rivals Deck"].id,
+  [`${factions["Ephilim's Pandaemonium"].name}`]:
+    sets["Ephilim's Pandaemonium Rivals Deck"].id,
+  [`${factions["The Headsmen's Curse"].name}`]:
+    sets["The Headsmen's Curse Rivals Deck"].id,
+  [`${factions["Sepulchral Guard"].name}`]:
+    sets["Sepulchral Guard Rivals Deck"].id,
+  [`${factions["The Farstriders"].name}`]:
+    sets["The Farstriders Rivals Deck"].id,
+  [`${factions["Skabbik's Plaguepack"].name}`]:
+    sets["Skabbik's Plaguepack Rivals Deck"].id,
+  [`${factions["Cyreni's Razors"].name}`]:
+    sets["Cyreni's Razors Rivals Deck"].id,
+  [`${factions["The Thricefold Discord"].name}`]:
+    sets["The Thricefold Discord Rivals Deck"].id,
+  [`${factions["Daggok's Stab-ladz"].name}`]:
+    sets["Daggok's Stab-ladz Rivals Deck"].id,
+  [`${factions["Zondara's Gravebreakers"].name}`]:
+    sets["Zondara's Gravebreakers Rivals Deck"].id,
+  [`${factions["Spiteclaw's Swarm"].name}`]:
+    sets["Spiteclaw's Swarm Rivals Deck"].id,
+  [`${factions["Zarbag's Gitz"].name}`]: sets["Zarbag's Gitz Rivals Deck"].id,
+  [`${factions["Thorns of the Briar Queen"].name}`]:
+    sets["Thorns of the Briar Queen Rivals Deck"].id,
+  [`${factions["Mollog's Mob"].name}`]: sets["Mollog's Mob Rivals Deck"].id,
+  [`${factions["Brethren of the Bolt"].name}`]:
+    sets["Brethren of the Bolt Rivals Deck"].id,
+  [`${factions["The Skinnerkin"].name}`]: sets["The Skinnerkin Rivals Deck"].id,
+};
 
 function getAllSetsValidForFormat(format) {
   switch (format) {
     case CHAMPIONSHIP_FORMAT:
       return Object.values(sets).filter(
         (set) =>
-          set.id >= sets["Nethermaze core set"].id ||
+          (set.id >= sets["Nethermaze core set"].id &&
+            !Object.values(factionsRivalsDecks).includes(set.id)) ||
           set.id === sets["Essential Cards Pack"].id,
       );
     case NEMESIS_FORMAT:
@@ -890,4 +933,5 @@ export {
   checkDeckHasPlots,
   boards,
   getBoardsValidForFormat,
+  factionsRivalsDecks,
 };
