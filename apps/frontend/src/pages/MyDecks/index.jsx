@@ -167,7 +167,7 @@ function useAnonDecksSyncronisation(refetch) {
         refetch();
       })
       .catch((e) => {
-        console.log("HELLO!", e);
+        console.error("Error", e);
       });
   }, [user, refetch, saveDeck]);
 }

@@ -81,7 +81,6 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
       let y = 3;
 
       for (let f of page) {
-        console.log(f);
         doc.addImage(
           document.getElementById(`proxy ${f}`),
           "png",
