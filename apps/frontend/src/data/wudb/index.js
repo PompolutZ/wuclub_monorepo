@@ -579,7 +579,6 @@ export const ACTIVE_FORMATS = [
 ];
 
 const nemesis_valid_sets = [
-  sets["Deadly Depths Rivals Deck"].id,
   sets["Tooth and Claw Rivals Deck"].id,
   sets["Daring Delvers Rivals Deck"].id,
   sets["Fearsome Fortress Rivals Deck"].id,
@@ -641,7 +640,7 @@ function getAllSetsValidForFormat(format) {
     case CHAMPIONSHIP_FORMAT:
       return Object.values(sets).filter(
         (set) =>
-          (set.id >= sets["Nethermaze core set"].id &&
+          (set.id >= sets["Gnarlwood core set"].id &&
             !Object.values(factionsRivalsDecks).includes(set.id)) ||
           set.id === sets["Essential Cards Pack"].id,
       );
