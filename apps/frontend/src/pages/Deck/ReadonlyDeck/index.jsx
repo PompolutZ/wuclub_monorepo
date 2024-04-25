@@ -206,9 +206,7 @@ function ReadonlyDeck(props) {
               onDelete={props.onDelete}
               onToggleDeckPrivacy={toggleDeckPrivacy}
               isPrivate={isPrivate}
-              onDownloadProxy={() => {
-                open();
-              }}
+              onDownloadProxy={() => setIsProxyPickerVisible(true)}
             />
           </div>
         </>
@@ -267,9 +265,7 @@ function ReadonlyDeck(props) {
 
       <Portal>
         <div className="h-full w-full grid place-content-center">
-          <div ref={portalClickAwayRef}>
-            
-          </div>
+          <div ref={portalClickAwayRef}></div>
         </div>
       </Portal>
     </div>
