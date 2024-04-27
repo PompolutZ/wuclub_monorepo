@@ -1,6 +1,33 @@
-import { factionMembers } from "@wudb/index";
+import {
+  factionMembers,
+  getFactionByName,
+  plots,
+  setHasPlot,
+  warbandHasPlot,
+} from "@wudb/index";
 import { useState } from "react";
 import { getCardPathByCardId } from "../../utils/helpers";
+
+const checkDeckHasPlots = (faction, sets) => {
+  return (
+    warbandHasPlot(getFactionByName(faction).id) ||
+    sets.some((setId) => setHasPlot(setId))
+  );
+};
+
+const getPlotKeywords = (faction, sets) => {
+  if (!checkDeckHasPlots(faction, sets)) return [];
+
+  const plotInfos = Object.values(plots);
+
+  return plotInfos.reduce((keywords, plot) => {
+    const factionWithPlot =
+      plot.connection === "Warband" && plot.name === faction;
+    const setWithPlot = plot.connection === "Set" && sets.includes(plot.id);
+
+    return factionWithPlot || setWithPlot ? [...keywords, plot] : keywords;
+  }, []);
+};
 
 const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
   const [selectedCardIds, setSelectedCardIds] = useState(
@@ -9,6 +36,16 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
   const [selectedFighters, setSelectedFighters] = useState(
     factionMembers[factionId],
   );
+
+  const plotCards = (
+    getPlotKeywords(
+      factionId,
+      cards.map((card) => card.setId),
+    ) ?? []
+  ).flatMap((plot) => plot.asset ?? plot.cards.map(({ asset }) => asset));
+  const [selectedPlotCards, setSelectedPlotCards] = useState(plotCards);
+  const totalProxies =
+    selectedCardIds.length + selectedFighters.length + selectedPlotCards.length;
 
   const handleDownload = async () => {
     const { default: jsPDF } = await import("jspdf");
@@ -23,12 +60,15 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
       selectedCardIds.includes(card.id),
     );
 
-    const pages = cardsToPrint.reduce((acc, el, index, array) => {
-      if (index % 9 === 0) {
-        acc.push(array.slice(index, index + 9));
-      }
-      return acc;
-    }, []);
+    const pages = [...cardsToPrint, ...selectedPlotCards].reduce(
+      (acc, el, index, array) => {
+        if (index % 9 === 0) {
+          acc.push(array.slice(index, index + 9));
+        }
+        return acc;
+      },
+      [],
+    );
 
     const fighterPages = selectedFighters.reduce((acc, el, index, array) => {
       if (index % 3 === 0) {
@@ -53,7 +93,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
 
       for (let c of page) {
         doc.addImage(
-          document.getElementById(`proxy ${c.id}`),
+          document.getElementById(`proxy ${c.id ?? c}`),
           "png",
           x,
           y,
@@ -133,13 +173,25 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
     }
   };
 
+  const handleTogglePlotCard = (card) => () => {
+    const selectedCardIndex = selectedPlotCards.indexOf(card);
+
+    if (selectedCardIndex >= 0) {
+      setSelectedPlotCards(selectedPlotCards.filter((id) => id !== card));
+    } else {
+      setSelectedPlotCards([...selectedPlotCards, card]);
+    }
+  };
+
   const toggleAll = () => {
     if (selectedCardIds.length > 0 || selectedFighters.length > 0) {
       setSelectedCardIds([]);
       setSelectedFighters([]);
+      setSelectedPlotCards([]);
     } else {
       setSelectedCardIds(cards.map(({ id }) => id));
       setSelectedFighters(factionMembers[factionId]);
+      setSelectedPlotCards(plotCards);
     }
   };
 
@@ -151,10 +203,29 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
     }
   };
 
+  const togglePlotCards = () => {
+    if (selectedPlotCards.length > 0) {
+      setSelectedPlotCards([]);
+    } else {
+      setSelectedPlotCards(plotCards);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-10 p-8 backdrop-blur">
       <div className="flex w-full h-full flex-col">
         <div className="flex-1 overflow-y-auto grid grid-cols-6 gap-y-2 p-4">
+          {plotCards.map((card) => (
+            <img
+              id={`proxy ${card}`}
+              key={card}
+              src={`/assets/plots/${card}.png`}
+              className={`w-[64.5mm] h-[89.9mm] filter ${
+                selectedPlotCards.includes(card) ? "grayscale-0" : "grayscale"
+              }`}
+              onClick={handleTogglePlotCard(card)}
+            />
+          ))}
           {factionMembers[factionId].map((fighter, index) => (
             <>
               <img
@@ -198,7 +269,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
             />
           ))}
         </div>
-        <div className="bg-gray-300 p-4 flex">
+        <div className="bg-gray-300 p-4 flex items-center">
           <button
             className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
             onClick={handleDownload}
@@ -217,6 +288,16 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
           >
             Toggle Warband
           </button>
+          <button
+            className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+            onClick={togglePlotCards}
+          >
+            Toggle Plot cards
+          </button>
+          <div>
+            Total proxy cards selected{" "}
+            <span className="font-bold">{totalProxies}</span>
+          </div>
           <button
             className="ml-auto btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
             onClick={onExit}

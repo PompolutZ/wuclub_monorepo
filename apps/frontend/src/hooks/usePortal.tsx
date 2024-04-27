@@ -8,7 +8,9 @@ export const usePortal = () => {
   const Portal = useCallback(
     ({ children }: PropsWithChildren) =>
       ReactDOM.createPortal(
-        <div className="fixed inset-0 backdrop-blur-sm z-10">{children}</div>,
+        <div className="fixed inset-0 backdrop-blur-sm z-10 bg-slate-900/5">
+          {children}
+        </div>,
         ref.current,
       ),
     [],

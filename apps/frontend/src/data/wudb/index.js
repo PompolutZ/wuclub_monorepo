@@ -1,6 +1,6 @@
-import { sets, cards, factions } from "./db.js";
 import { sortByIdAsc } from "../../utils/sort";
 import { boards } from "./boards";
+import { cards, factions, sets } from "./db.js";
 
 export const latestSeasonStartNumber = 15000;
 
@@ -440,8 +440,8 @@ const plots = {
     keyword: "Schemes",
     connection: "Warband",
     asset: "25433",
-    id: sets["Daggok's Stab-ladz Rivals Deck"].id,
-    name: sets["Daggok's Stab-ladz Rivals Deck"].name,
+    id: factions["Daggok's Stab-ladz"].id,
+    name: factions["Daggok's Stab-ladz"].name,
   },
   Rimelocked: {
     keyword: "Rimelocked",
@@ -454,15 +454,22 @@ const plots = {
     keyword: "Brethren of the Bold",
     connection: "Warband",
     asset: "45033",
-    id: sets["Brethren of the Bolt Rivals Deck"].id,
-    name: sets["Brethren of the Bolt Rivals Deck"].name,
+    id: factions["Brethren of the Bolt"].id,
+    name: factions["Brethren of the Bolt"].name,
   },
   Parasite: {
     keyword: "Hungering Parasite",
     connection: "Set",
-    asset: "47033",
     id: sets["Hungering Parasite Rivals Deck"].id,
     name: sets["Hungering Parasite Rivals Deck"].name,
+    cards: [
+      {
+        asset: "47033",
+      },
+      {
+        asset: "47034",
+      },
+    ],
   },
 };
 
@@ -902,35 +909,35 @@ const getBoardsValidForFormat = (format) => {
 };
 
 export {
-  getFactionByName,
-  getFactionByAbbr,
-  getFactionById,
-  getCardNumberFromId,
-  getSetNameById,
-  getSetById,
+  boards,
   cardTypes,
-  getCardById,
   checkCardIsObjective,
   checkCardIsPloy,
   checkCardIsUpgrade,
+  checkDeckHasPlots,
+  checkNonWarbandSpecificCard,
+  checkWarbandSpecificCard,
+  compareObjectivesByScoreType,
+  factionsRivalsDecks,
+  getAllSetsValidForFormat,
+  getBoardsValidForFormat,
+  getCardById,
+  getCardNumberFromId,
+  getFactionByAbbr,
+  getFactionById,
+  getFactionByName,
+  getSetById,
+  getSetNameById,
+  plots,
+  rivalDecksWithPlot,
+  setHasPlot,
   validateCardForPlayFormat,
   validateDeckForPlayFormat,
   validateObjectivesListForPlayFormat,
   validatePowerDeckForFormat,
-  compareObjectivesByScoreType,
-  getAllSetsValidForFormat,
-  sets as wusets,
-  factions as wufactions,
-  cards as wucards,
-  checkNonWarbandSpecificCard,
-  checkWarbandSpecificCard,
-  warbandsWithPlot,
-  rivalDecksWithPlot,
   warbandHasPlot,
-  setHasPlot,
-  plots,
-  checkDeckHasPlots,
-  boards,
-  getBoardsValidForFormat,
-  factionsRivalsDecks,
+  warbandsWithPlot,
+  cards as wucards,
+  factions as wufactions,
+  sets as wusets,
 };
