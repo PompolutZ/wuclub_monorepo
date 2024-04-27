@@ -8,12 +8,13 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    resolve: {
-        alias: {
-            "@icons": path.resolve(__dirname, "./src/svgs"),
-            "@components": path.resolve(__dirname, "./src/v2/components"),
-            "@wudb": path.resolve(__dirname, "./src/data/wudb"),
-        },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@icons": path.resolve(__dirname, "./src/svgs"),
+      "@components": path.resolve(__dirname, "./src/v2/components"),
+      "@wudb": path.resolve(__dirname, "./src/data/wudb"),
     },
-    plugins: [react(), svgr()],
+  },
+  plugins: [react(), svgr()],
 });
