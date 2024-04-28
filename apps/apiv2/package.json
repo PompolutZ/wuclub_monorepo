@@ -1,0 +1,6 @@
+{
+  "name": "wunderworlds-api-v2",
+  "main": "src/index.ts",
+  "type": "module",
+  "author": "Oleh Lutsenko"
+}
