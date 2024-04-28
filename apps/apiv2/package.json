@@ -4,16 +4,17 @@
   "type": "module",
   "author": "Oleh Lutsenko",
   "scripts": {
-    "dev": "tsx src/local.ts"
+    "dev": "tsx watch src/local.ts"
   },
   "dependencies": {
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "tsx": "^4.7.3",
-    "typescript": "^5.4.3",
     "@fxdxpz/eslint-config": "0.1.0",
-    "@fxdxpz/prettier-config": "0.1.0"
+    "@fxdxpz/prettier-config": "0.1.0",
+    "@types/express": "^4.17.21",
+    "tsx": "^4.7.3",
+    "typescript": "^5.4.3"
   },
   "prettier": "@fxdxpz/prettier-config"
 }
