@@ -2,5 +2,15 @@
   "name": "wunderworlds-api-v2",
   "main": "src/index.ts",
   "type": "module",
-  "author": "Oleh Lutsenko"
+  "author": "Oleh Lutsenko",
+  "scripts": {
+    "dev": "tsx src/local.ts"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.3",
+    "typescript": "^5.4.3"
+  }
 }
