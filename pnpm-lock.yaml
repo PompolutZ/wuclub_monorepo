@@ -41,6 +41,9 @@ importers:
 
   apps/apiv2:
     dependencies:
+      '@codegenie/serverless-express':
+        specifier: ^4.14.0
+        version: 4.14.0
       express:
         specifier: ^4.17.1
         version: 4.18.2
@@ -58,7 +61,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       '@types/node':
-        specifier: ^20.12.5
+        specifier: ^20.12.7
         version: 20.12.7
       aws-cdk:
         specifier: ^2.136.0
@@ -882,6 +885,11 @@ packages:
   /@bcoe/v8-coverage@0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
+
+  /@codegenie/serverless-express@4.14.0:
+    resolution: {integrity: sha512-74hOQzHz+rEhDtTKIdAZ/Gks/PGc9JHxKULBrVl5WBComGv6ceJHewdEKNfDtwPo7d1LKidNFJ2QXGO5pZr2tQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /@colors/colors@1.5.0:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
