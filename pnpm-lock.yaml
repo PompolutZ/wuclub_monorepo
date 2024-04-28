@@ -45,6 +45,12 @@ importers:
         specifier: ^4.17.1
         version: 4.18.2
     devDependencies:
+      '@fxdxpz/eslint-config':
+        specifier: 0.1.0
+        version: link:../../packages/eslint-config
+      '@fxdxpz/prettier-config':
+        specifier: 0.1.0
+        version: link:../../packages/prettier-config
       tsx:
         specifier: ^4.7.3
         version: 4.7.3

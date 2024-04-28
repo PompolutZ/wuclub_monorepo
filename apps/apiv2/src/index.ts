@@ -1,3 +1,1 @@
-export const handler = async () => {
-  console.log("HELLO!");
-};
+export const handler = async () => {};

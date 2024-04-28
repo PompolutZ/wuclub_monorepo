@@ -11,6 +11,9 @@
   },
   "devDependencies": {
     "tsx": "^4.7.3",
-    "typescript": "^5.4.3"
-  }
+    "typescript": "^5.4.3",
+    "@fxdxpz/eslint-config": "0.1.0",
+    "@fxdxpz/prettier-config": "0.1.0"
+  },
+  "prettier": "@fxdxpz/prettier-config"
 }
