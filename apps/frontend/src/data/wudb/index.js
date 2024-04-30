@@ -178,7 +178,7 @@ export const factionMembers = {
   "cyrenis-razors": ["1", "2", "3", "4"],
   "the-thricefold-discord": ["1", "2", "3"],
   "daggoks-stab-ladz": ["1", "2", "3", "4"],
-  "zonadaras-gravebreakers": ["1", "2", "3", "4", "5"],
+  "zondaras-gravebreakers": ["1", "2", "3", "4", "5"],
   "brethren-of-the-bolt": ["1", "2", "3", "4", "5"],
   "the-skinnerkin": ["1", "2", "3", "4", "5"],
 };
