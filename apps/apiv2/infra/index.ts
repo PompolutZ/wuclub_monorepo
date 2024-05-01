@@ -12,7 +12,7 @@ class WunderworldsApiLambda extends NodejsFunction {
     super(scope, id, {
       functionName: WUNDERWORLDS_API_LAMBDA,
       runtime: Runtime.NODEJS_20_X,
-      entry: path.join(__dirname, "../src/index.ts"),
+      entry: path.join(__dirname, "../src/lambdas/api.ts"),
     });
   }
 }
