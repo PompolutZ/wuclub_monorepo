@@ -1,11 +1,9 @@
 import express, { json } from "express";
+import { router } from "../routes";
 
 const app = express();
 
 app.use(json());
-
-app.get("/health", async (req, res) => {
-  res.status(200).send("Ok");
-});
+app.use("/v2", router);
 
 export { app };
