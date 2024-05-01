@@ -9,6 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src", "infra"],
+  "include": ["src", "infra", "env.d.ts"],
   "exclude": ["node_modules"]
 }

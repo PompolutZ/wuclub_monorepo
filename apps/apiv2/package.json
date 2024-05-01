@@ -3,12 +3,13 @@
   "main": "src/index.ts",
   "author": "Oleh Lutsenko",
   "scripts": {
-    "dev": "tsx watch src/local.ts",
+    "dev": "tsx watch --env-file=.env src/local.ts",
     "cdk:deploy": "cdk deploy --all --require-approval never --verbose"
   },
   "dependencies": {
     "@codegenie/serverless-express": "^4.14.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^6.5.0"
   },
   "devDependencies": {
     "@fxdxpz/eslint-config": "0.1.0",
