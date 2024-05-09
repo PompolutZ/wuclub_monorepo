@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
+import { getAllDecks as _getAllDecks } from "@/dal";
 
 export const getAllDecks = async (_: Request, res: Response) => {
-  res.status(200).send("Success");
+  const decks = await _getAllDecks();
+  res.json(decks);
 };

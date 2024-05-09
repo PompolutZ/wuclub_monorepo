@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "volta": {
-    "node": "18.19.0"
+    "node": "20.13.0",
+    "pnpm": "9.1.0"
   }
 }
