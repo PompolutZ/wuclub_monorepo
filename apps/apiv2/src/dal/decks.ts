@@ -16,10 +16,15 @@ export type DecksPipelineOptions = {
 };
 
 export const getAllDecks = async () => {
-  const pipe = buildPipeline({});
-  const client = await getOrCreateClient();
-  const decks = await client.collection("decks").aggregate(pipe).toArray();
-  return decks;
+  try {
+    const pipe = buildPipeline({});
+    const client = await getOrCreateClient();
+    const decks = await client.collection("decks").aggregate(pipe).toArray();
+    return decks;
+  } catch (error) {
+    console.error("ERROR", error);
+    return [];
+  }
 };
 
 function buildPipeline({ faction, skip, limit }: DecksPipelineOptions) {

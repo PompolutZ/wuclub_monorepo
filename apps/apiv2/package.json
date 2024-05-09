@@ -22,11 +22,12 @@
     "constructs": "^10.3.0",
     "esbuild": "^0.20.2",
     "tsx": "^4.7.3",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "dotenv": "^16.0.0"
   },
   "volta": {
     "node": "20.13.0",
-    "pnpm": "9.1.0"
+    "pnpm": "8.15.8"
   },
   "prettier": "@fxdxpz/prettier-config"
 }

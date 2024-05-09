@@ -3,9 +3,14 @@ import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
 import path from "path";
+import "dotenv/config";
 
-const { CDK_DEFAULT_ACCOUNT, CDK_DEFAULT_REGION } = process.env;
+const { CDK_DEFAULT_ACCOUNT, CDK_DEFAULT_REGION, DATABASE_NAME, DB_PASSWORD } =
+  process.env;
 const WUNDERWORLDS_API_LAMBDA = "WunderworldsApiLambda";
+
+const dbName = DATABASE_NAME;
+const dbPassword = DB_PASSWORD;
 
 class WunderworldsApiLambda extends NodejsFunction {
   constructor(scope: App | Construct, id: string) {
@@ -13,6 +18,10 @@ class WunderworldsApiLambda extends NodejsFunction {
       functionName: WUNDERWORLDS_API_LAMBDA,
       runtime: Runtime.NODEJS_20_X,
       entry: path.join(__dirname, "../src/lambdas/api.ts"),
+      environment: {
+        DATABASE_NAME: dbName!,
+        DB_PASSWORD: dbPassword!,
+      },
     });
   }
 }
