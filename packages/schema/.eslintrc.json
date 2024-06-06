@@ -1,0 +1,4 @@
+{
+  "root": true,
+  "extends": "@fxdxpz/eslint-config/node"
+}

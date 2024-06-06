@@ -1,5 +1,6 @@
 import { ObjectId, Document } from "mongodb";
 import { getOrCreateClient } from "./client";
+import { GetAllDecksQuery } from "../app/routes/decks/schemas";
 
 export type User = {
   _id: ObjectId;
@@ -9,15 +10,9 @@ export type User = {
   role: string[];
 };
 
-export type DecksPipelineOptions = {
-  faction?: string;
-  skip?: number;
-  limit?: number;
-};
-
-export const getAllDecks = async () => {
+export const getAllDecks = async (options: GetAllDecksQuery) => {
   try {
-    const pipe = buildPipeline({});
+    const pipe = buildPipeline(options);
     const client = await getOrCreateClient();
     const decks = await client.collection("decks").aggregate(pipe).toArray();
     return decks;
@@ -27,7 +22,7 @@ export const getAllDecks = async () => {
   }
 };
 
-function buildPipeline({ faction, skip, limit }: DecksPipelineOptions) {
+function buildPipeline({ faction, skip, limit }: GetAllDecksQuery) {
   const pipe: Document[] = [];
 
   pipe.push({
