@@ -9,14 +9,12 @@ export const verifyJwt = async (
   next: NextFunction,
 ) => {
   try {
-    const token = req.headers.authtoken as string;
-    if (!token) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    const decoded = await auth.verifyIdToken(token);
-    if (decoded?.uid) {
-      req.user = await getUserByFuid(decoded.uid);
+    if (req.headers.authtoken) {
+      const token = req.headers.authtoken as string;
+      const decoded = await auth.verifyIdToken(token);
+      if (decoded?.uid) {
+        req.user = await getUserByFuid(decoded.uid);
+      }
     }
     next();
   } catch (e) {

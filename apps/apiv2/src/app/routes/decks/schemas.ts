@@ -8,3 +8,6 @@ export const GetAllDecksSchema = z.object({
 });
 
 export type GetAllDecksQuery = z.infer<typeof GetAllDecksSchema>;
+
+export const DeckIdSchema = z.string().regex(/^[a-z]{2,7}-[a-z0-9]{12}$/);
+export type DeckId = z.infer<typeof DeckIdSchema>;
