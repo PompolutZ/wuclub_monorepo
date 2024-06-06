@@ -1,14 +1,6 @@
-import { ObjectId, Document } from "mongodb";
+import { Document } from "mongodb";
 import { getOrCreateClient } from "./client";
 import { GetAllDecksQuery } from "../app/routes/decks/schemas";
-
-export type User = {
-  _id: ObjectId;
-  fuid: string;
-  avatar: string;
-  displayName: string;
-  role: string[];
-};
 
 export const getAllDecks = async (options: GetAllDecksQuery) => {
   try {

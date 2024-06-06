@@ -10,6 +10,7 @@
     "@codegenie/serverless-express": "^4.14.0",
     "@fxdxpz/schema": "0.1.0",
     "express": "^4.17.1",
+    "firebase-admin": "^12.1.1",
     "mongodb": "^6.6.1",
     "zod": "^3.23.8"
   },
@@ -22,10 +23,10 @@
     "aws-cdk": "^2.136.0",
     "aws-cdk-lib": "^2.136.0",
     "constructs": "^10.3.0",
+    "dotenv": "^16.0.0",
     "esbuild": "^0.20.2",
     "tsx": "^4.7.3",
-    "typescript": "^5.4.3",
-    "dotenv": "^16.0.0"
+    "typescript": "^5.4.3"
   },
   "volta": {
     "node": "20.13.0",
