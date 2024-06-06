@@ -1,6 +1,6 @@
 import { Document } from "mongodb";
-import { getOrCreateClient } from "./client";
-import { GetAllDecksQuery } from "../app/routes/decks/schemas";
+import { getOrCreateClient } from "@/dal/client";
+import { GetAllDecksQuery } from "@/app/routes/decks/schemas";
 
 export const getAllDecks = async (options: GetAllDecksQuery) => {
   try {
@@ -36,44 +36,24 @@ function buildPipeline({ faction, skip, limit }: GetAllDecksQuery) {
     },
   });
 
-  if (faction) {
-    pipe.push({
-      $match: {
-        private: false,
-        faction,
-      },
-    });
-  } else {
-    pipe.push({
-      $match: {
-        private: false,
-      },
-    });
-  }
+  pipe.push({
+    $match: {
+      private: false,
+      faction: faction || { $exists: true },
+    },
+  });
 
   pipe.push({
     $sort: { updatedutc: -1 },
   });
 
-  if (skip) {
-    pipe.push({
-      $skip: skip,
-    });
-  } else {
-    pipe.push({
-      $skip: 0,
-    });
-  }
+  pipe.push({
+    $skip: skip,
+  });
 
-  if (limit) {
-    pipe.push({
-      $limit: limit,
-    });
-  } else {
-    pipe.push({
-      $limit: 30,
-    });
-  }
+  pipe.push({
+    $limit: limit,
+  });
 
   return pipe;
 }

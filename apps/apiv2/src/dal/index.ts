@@ -1,2 +1,2 @@
 export { getOrCreateClient } from "./client";
-export { getAllDecks } from "./decks";
+export { getAllDecks } from "./decks/getAllDecks";
