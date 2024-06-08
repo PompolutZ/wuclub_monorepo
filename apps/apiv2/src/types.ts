@@ -1,8 +1,7 @@
 import { Request } from "express";
-import { ObjectId } from "mongodb";
+import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 
 export type User = {
-  _id: ObjectId;
   fuid: string;
   avatar: string;
   displayName: string;
@@ -10,5 +9,5 @@ export type User = {
 };
 
 export interface ApiRequest extends Request {
-  user?: User;
+  claims: DecodedIdToken;
 }

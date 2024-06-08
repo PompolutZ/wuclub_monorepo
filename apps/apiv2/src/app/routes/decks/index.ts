@@ -22,7 +22,7 @@ export const getAllDecks = async (req: Request, res: Response) => {
   }
 };
 
-export const getDeckById = async (req: ApiRequest, res: Response) => {
+export const getDeckById = async (req: Request, res: Response) => {
   try {
     const deckId = DeckIdSchema.parse(req.params.id);
     const deck = await _getDeckById(deckId);
@@ -31,7 +31,8 @@ export const getDeckById = async (req: ApiRequest, res: Response) => {
       return res.status(404).json({ error: "Deck not found" });
     }
 
-    if (deck.private && deck.fuid !== req.user?.fuid) {
+    const claims = (req as ApiRequest).claims;
+    if (deck.private && deck.fuid !== claims.uid) {
       return res.status(403).json({ error: "Unauthorized" });
     }
 

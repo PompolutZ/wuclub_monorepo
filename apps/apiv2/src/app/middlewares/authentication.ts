@@ -1,10 +1,9 @@
-import { Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { auth } from "../services/firebase";
-import { getUserByFuid } from "../../dal/users";
 import { ApiRequest } from "../../types";
 
 export const verifyJwt = async (
-  req: ApiRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -12,9 +11,10 @@ export const verifyJwt = async (
     if (req.headers.authtoken) {
       const token = req.headers.authtoken as string;
       const decoded = await auth.verifyIdToken(token);
-      if (decoded?.uid) {
-        req.user = await getUserByFuid(decoded.uid);
+      if (!decoded) {
+        return res.status(401).json({ error: "Unauthorized" });
       }
+      (req as ApiRequest).claims = decoded;
     }
     next();
   } catch (e) {
