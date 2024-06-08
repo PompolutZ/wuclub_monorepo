@@ -1,15 +1,29 @@
 import { Router } from "express";
-import { getAllDecks, getDeckById } from "./decks";
+import {
+  createDeck,
+  deleteDeck,
+  getAllDecks,
+  getAllUsersDecks,
+  getDeckById,
+  updateDeck,
+} from "./decks";
 import { verifyJwt } from "../middlewares/authentication";
 import { getUser } from "./users/getUser";
 import { upsertUser } from "./users/upsertUser";
 
-const router = Router();
+const publicRouter = Router();
+publicRouter.get("/decks", getAllDecks);
 
-router.get("/decks", getAllDecks);
-router.get("/decks/:id", verifyJwt, getDeckById);
+const privateRouter = Router();
+privateRouter.use(verifyJwt);
 
-router.get("/users/:uid", verifyJwt, getUser);
-router.post("/users", verifyJwt, upsertUser);
+privateRouter.get("/decks/:id", getDeckById);
+privateRouter.put("/decks/:id", updateDeck);
+privateRouter.delete("/decks/:id", deleteDeck);
 
-export { router };
+privateRouter.post("/users", upsertUser);
+privateRouter.get("/users/:uid", getUser);
+privateRouter.get("/users/:uid/decks", getAllUsersDecks);
+privateRouter.post("/users/:uid/decks", createDeck);
+
+export { publicRouter, privateRouter };

@@ -1,9 +1,9 @@
 import express, { json } from "express";
-import { router } from "./routes";
+import { privateRouter, publicRouter } from "./routes";
 
 const app = express();
 
 app.use(json());
-app.use("/v2", router);
+app.use("/v2", privateRouter, publicRouter);
 
 export { app };

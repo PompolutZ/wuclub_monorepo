@@ -5,7 +5,7 @@ import {
 } from "@/dal";
 import { ZodError } from "zod";
 import { DeckIdSchema, GetAllDecksSchema } from "./schemas";
-import { ApiRequest } from "../../../types";
+import { ApiRequest } from "@/types";
 
 export const getAllDecks = async (req: Request, res: Response) => {
   try {
@@ -41,4 +41,20 @@ export const getDeckById = async (req: Request, res: Response) => {
     console.error("Error in getDeckById:", e);
     return res.status(500).json({ error: "Internal server error" });
   }
+};
+
+export const updateDeck = async (req: Request, res: Response) => {
+  res.status(501);
+};
+
+export const deleteDeck = async (req: Request, res: Response) => {
+  res.status(501);
+};
+
+export const getAllUsersDecks = async (req: Request, res: Response) => {
+  res.status(501).json({ error: "Not implemented" });
+};
+
+export const createDeck = async (req: Request, res: Response) => {
+  res.status(501);
 };
