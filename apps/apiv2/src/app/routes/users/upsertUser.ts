@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { ApiRequest, User } from "@/types";
 import { z } from "zod";
 import { factionsSchema } from "@fxdxpz/schema";
@@ -13,17 +13,19 @@ const updateUserSchema = z.object({
   avatar: factionsSchema,
 });
 
-export const postUser = async (
-  req: ApiRequest,
+export const upsertUser = async (
+  req: Request,
   res: Response<{ data: User } | { error: string }>,
 ) => {
   try {
     const payload = updateUserSchema.parse(req.body);
+    const claims = (req as ApiRequest).claims;
     const user = {
       ...payload,
-      fuid: req.claims.uid,
-      role: ["User"],
+      fuid: claims.uid,
+      role: ["User"], // this is smelly design :(
     };
+
     await setUser(user);
     return res.status(201).json({ data: user });
   } catch (e) {
