@@ -1,24 +1,16 @@
-import { Request, Response, NextFunction } from "express";
-import { auth } from "../services/firebase";
-import { ApiRequest } from "../../types";
+import { auth } from "@/services/firebase";
+import { createMiddleware } from "hono/factory";
 
-export const verifyJwt = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    if (req.headers.authtoken) {
-      const token = req.headers.authtoken as string;
-      const decoded = await auth.verifyIdToken(token);
-      if (!decoded) {
-        return res.status(401).json({ error: "Unauthorized" });
-      }
-      (req as ApiRequest).claims = decoded;
+export const authenticate = createMiddleware(async (c, next) => {
+  const token = c.req.header("authtoken");
+  if (token) {
+    const decoded = await auth.verifyIdToken(token);
+    if (!decoded) {
+      return c.json({ status: 401, error: "Unauthorized" });
     }
-    next();
-  } catch (e) {
-    console.error("Error in verifyJwt:", e);
-    return res.status(401).json({ error: "Unauthorized" });
+
+    c.set("claims", decoded);
   }
-};
+
+  await next();
+});

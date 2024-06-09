@@ -1,9 +1,8 @@
-import express, { json } from "express";
-import { privateRouter, publicRouter } from "./routes";
+import { Hono } from "hono";
+import { app as users } from "@/app/routes/users";
+import { app as decks } from "@/app/routes/decks";
 
-const app = express();
-
-app.use(json());
-app.use("/v2", privateRouter, publicRouter);
+const app = new Hono();
+app.basePath("/v2").route("/users", users).route("/decks", decks);
 
 export { app };

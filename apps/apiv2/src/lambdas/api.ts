@@ -1,4 +1,4 @@
-import servelessExpress from "@codegenie/serverless-express";
-import { app } from "../app";
+import { app } from "@/app";
+import { handle } from "hono/aws-lambda";
 
-export const handler = servelessExpress({ app });
+export const handler = handle(app);

@@ -47,12 +47,18 @@ importers:
       '@fxdxpz/schema':
         specifier: 0.1.0
         version: link:../../packages/schema
+      '@hono/zod-validator':
+        specifier: ^0.2.2
+        version: 0.2.2(hono@4.4.4)(zod@3.23.8)
       express:
         specifier: ^4.17.1
         version: 4.19.2
       firebase-admin:
         specifier: 11.11.1
         version: 11.11.1
+      hono:
+        specifier: ^4.4.4
+        version: 4.4.4
       mongodb:
         specifier: ^6.6.1
         version: 6.6.1
@@ -66,6 +72,9 @@ importers:
       '@fxdxpz/prettier-config':
         specifier: 0.1.0
         version: link:../../packages/prettier-config
+      '@hono/node-server':
+        specifier: ^1.11.2
+        version: 1.11.2
       '@types/aws-lambda':
         specifier: ^8.10.137
         version: 8.10.137
@@ -1770,6 +1779,21 @@ packages:
       client-only: 0.0.1
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
+    dev: false
+
+  /@hono/node-server@1.11.2:
+    resolution: {integrity: sha512-JhX0nUC66GeDxpIdMKWDRMEwtQBa64CY907iAF1sYqb4m2p2PdSU7zkbnNhAZLg/6IjSlTuj6CF307JlBXVvpg==}
+    engines: {node: '>=18.14.1'}
+    dev: true
+
+  /@hono/zod-validator@0.2.2(hono@4.4.4)(zod@3.23.8):
+    resolution: {integrity: sha512-dSDxaPV70Py8wuIU2QNpoVEIOSzSXZ/6/B/h4xA7eOMz7+AarKTSGV8E6QwrdcCbBLkpqfJ4Q2TmBO0eP1tCBQ==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.19.1
+    dependencies:
+      hono: 4.4.4
+      zod: 3.23.8
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
@@ -6354,6 +6378,11 @@ packages:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
+    dev: false
+
+  /hono@4.4.4:
+    resolution: {integrity: sha512-zO5+4K8yf1iuKhBZhwmpZ/0LzPMr8Zt1RugEGM1xvOqgh9DyLb7tslOtoBks4bmm5bIcLtzLCXUpYpXOkwpABA==}
+    engines: {node: '>=16.0.0'}
     dev: false
 
   /html-encoding-sniffer@2.0.1:

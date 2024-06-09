@@ -1,47 +1,40 @@
-import { Request, Response } from "express";
 import {
   getAllDecks as _getAllDecks,
   getDeckById as _getDeckById,
 } from "@/dal";
-import { ZodError } from "zod";
-import { DeckIdSchema, GetAllDecksSchema } from "./schemas";
-import { ApiRequest } from "@/types";
+import { zValidator } from "@hono/zod-validator";
+import { Request, Response } from "express";
+import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
+import { Hono } from "hono";
+import { DeckIdSchema, getAllDecksSchema } from "./schemas";
 
-export const getAllDecks = async (req: Request, res: Response) => {
-  try {
-    const query = GetAllDecksSchema.parse(req.query);
-    const decks = await _getAllDecks(query);
-    res.json(decks);
-  } catch (e) {
-    console.error("Error in getAllDecks:", e);
-    if (e instanceof ZodError) {
-      res.status(400).json({ error: e.errors });
-    } else {
-      res.status(500).json({ error: "Internal server error" });
+export const app = new Hono<{
+  Variables: {
+    claims: DecodedIdToken;
+  };
+}>();
+app
+  .get("/", zValidator("query", getAllDecksSchema), async (c) => {
+    try {
+      const decks = await _getAllDecks(c.req.valid("query"));
+      return c.json({ data: decks });
+    } catch (e) {
+      return c.json({ status: 500, error: "Internal server error" });
     }
-  }
-};
+  })
+  .get("/:id", async (c) => {
+    try {
+      const deckId = DeckIdSchema.parse(c.req.param("id"));
+      const deck = await _getDeckById(deckId);
+      if (!deck) {
+        return c.json({ status: 404, error: "Deck not found" });
+      }
 
-export const getDeckById = async (req: Request, res: Response) => {
-  try {
-    const deckId = DeckIdSchema.parse(req.params.id);
-    const deck = await _getDeckById(deckId);
-
-    if (!deck) {
-      return res.status(404).json({ error: "Deck not found" });
+      return c.json({ data: deck });
+    } catch (e) {
+      return c.json({ status: 500, error: "Internal server error" });
     }
-
-    const claims = (req as ApiRequest).claims;
-    if (deck.private && deck.fuid !== claims.uid) {
-      return res.status(403).json({ error: "Unauthorized" });
-    }
-
-    return res.json(deck);
-  } catch (e) {
-    console.error("Error in getDeckById:", e);
-    return res.status(500).json({ error: "Internal server error" });
-  }
-};
+  });
 
 export const updateDeck = async (req: Request, res: Response) => {
   res.status(501);
