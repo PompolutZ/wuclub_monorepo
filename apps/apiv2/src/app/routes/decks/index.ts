@@ -3,7 +3,6 @@ import {
   getDeckById as _getDeckById,
 } from "@/dal";
 import { zValidator } from "@hono/zod-validator";
-import { Request, Response } from "express";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 import { Hono } from "hono";
 import { DeckIdSchema, getAllDecksSchema } from "./schemas";
@@ -36,18 +35,18 @@ app
     }
   });
 
-export const updateDeck = async (req: Request, res: Response) => {
-  res.status(501);
-};
+// export const updateDeck = async (req: Request, res: Response) => {
+//   res.status(501);
+// };
 
-export const deleteDeck = async (req: Request, res: Response) => {
-  res.status(501);
-};
+// export const deleteDeck = async (req: Request, res: Response) => {
+//   res.status(501);
+// };
 
-export const getAllUsersDecks = async (req: Request, res: Response) => {
-  res.status(501).json({ error: "Not implemented" });
-};
+// export const getAllUsersDecks = async (req: Request, res: Response) => {
+//   res.status(501).json({ error: "Not implemented" });
+// };
 
-export const createDeck = async (req: Request, res: Response) => {
-  res.status(501);
-};
+// export const createDeck = async (req: Request, res: Response) => {
+//   res.status(501);
+// };
