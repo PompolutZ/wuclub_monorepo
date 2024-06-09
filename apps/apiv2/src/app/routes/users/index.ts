@@ -17,8 +17,8 @@ const updateUserSchema = z.object({
 });
 
 const deckQueryOptionsSchema = z.object({
-  skip: z.number().int().optional().default(0),
-  limit: z.number().int().optional().default(30),
+  skip: z.coerce.number().optional().default(0),
+  limit: z.coerce.number().max(30).optional().default(30),
 });
 
 const app = new Hono<{
