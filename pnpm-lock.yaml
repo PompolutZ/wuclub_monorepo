@@ -215,10 +215,10 @@ importers:
         version: 9.0.1
     devDependencies:
       '@fxdxpz/eslint-config':
-        specifier: 0.1.0
+        specifier: workspace:*
         version: link:../../packages/eslint-config
       '@fxdxpz/prettier-config':
-        specifier: 0.1.0
+        specifier: workspace:*
         version: link:../../packages/prettier-config
       '@types/lodash':
         specifier: ^4.17.0

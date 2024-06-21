@@ -52,8 +52,8 @@
   },
   "license": "MIT License",
   "devDependencies": {
-    "@fxdxpz/eslint-config": "0.1.0",
-    "@fxdxpz/prettier-config": "0.1.0",
+    "@fxdxpz/eslint-config": "workspace:*",
+    "@fxdxpz/prettier-config": "workspace:*",
     "@types/lodash": "^4.17.0",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.0.9",
