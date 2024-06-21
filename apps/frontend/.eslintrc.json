@@ -1,7 +1,4 @@
 {
   "root": true,
-  "extends": "@fxdxpz/eslint-config/react",
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  }
+  "extends": "@fxdxpz/eslint-config/react"
 }
