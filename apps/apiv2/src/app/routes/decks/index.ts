@@ -1,11 +1,13 @@
 import {
   getAllDecks as _getAllDecks,
   getDeckById as _getDeckById,
+  deleteDeckById as _deleteDeckById,
 } from "@/dal";
 import { zValidator } from "@hono/zod-validator";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 import { Hono } from "hono";
 import { DeckIdSchema, getAllDecksSchema } from "./schemas";
+import { authenticate } from "../../middlewares/authentication";
 
 export const app = new Hono<{
   Variables: {
@@ -21,15 +23,34 @@ app
       return c.json({ status: 500, error: "Internal server error" });
     }
   })
-  .get("/:id", async (c) => {
+  .get("/:id", authenticate, async (c) => {
     try {
       const deckId = DeckIdSchema.parse(c.req.param("id"));
       const deck = await _getDeckById(deckId);
+      const claims = c.get("claims");
+      if (deck.private && claims?.uid !== deck.fuid) {
+        return c.json({ status: 403, error: "Forbidden" });
+      }
+
       if (!deck) {
         return c.json({ status: 404, error: "Deck not found" });
       }
 
       return c.json({ data: deck });
+    } catch (e) {
+      return c.json({ status: 500, error: "Internal server error" });
+    }
+  })
+  .delete("/:id", authenticate, async (c) => {
+    try {
+      const deckId = DeckIdSchema.parse(c.req.param("id"));
+      const claims = c.get("claims");
+      if (!claims) {
+        return c.json({ status: 401, error: "Unauthorized" });
+      }
+
+      const result = await _deleteDeckById(deckId, claims.uid);
+      return c.json({ data: { deletedCount: result.deletedCount } });
     } catch (e) {
       return c.json({ status: 500, error: "Internal server error" });
     }
