@@ -90,5 +90,3 @@ export const app = new Hono<{
       return c.json({ status: 500, error: "Internal server error" });
     }
   });
-
-export type DeckRoutes = typeof app;

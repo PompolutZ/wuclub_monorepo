@@ -86,5 +86,4 @@ const app = new Hono<{
     }
   });
 
-type UserRoutes = typeof app;
-export { app, UserRoutes };
+export { app };
