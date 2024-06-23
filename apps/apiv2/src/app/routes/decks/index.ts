@@ -2,11 +2,12 @@ import {
   getAllDecks as _getAllDecks,
   getDeckById as _getDeckById,
   deleteDeckById as _deleteDeckById,
+  createNewDeck,
 } from "@/dal";
 import { zValidator } from "@hono/zod-validator";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 import { Hono } from "hono";
-import { DeckIdSchema, getAllDecksSchema } from "./schemas";
+import { DeckIdSchema, getAllDecksSchema, newDeckSchema } from "./schemas";
 import { authenticate } from "../../middlewares/authentication";
 
 export const app = new Hono<{
@@ -41,6 +42,20 @@ app
       return c.json({ status: 500, error: "Internal server error" });
     }
   })
+  .post("/", authenticate, zValidator("json", newDeckSchema), async (c) => {
+    try {
+      const claims = c.get("claims");
+      if (!claims) {
+        return c.json({ status: 401, error: "Unauthorized" });
+      }
+
+      const deck = await createNewDeck(c.req.valid("json"), claims.uid);
+      console.log(deck);
+      return c.json({ status: 201, data: deck });
+    } catch (e) {
+      return c.json({ status: 500, error: "Internal server error" });
+    }
+  })
   .delete("/:id", authenticate, async (c) => {
     try {
       const deckId = DeckIdSchema.parse(c.req.param("id"));
@@ -58,14 +73,6 @@ app
 
 // export const updateDeck = async (req: Request, res: Response) => {
 //   res.status(501);
-// };
-
-// export const deleteDeck = async (req: Request, res: Response) => {
-//   res.status(501);
-// };
-
-// export const getAllUsersDecks = async (req: Request, res: Response) => {
-//   res.status(501).json({ error: "Not implemented" });
 // };
 
 // export const createDeck = async (req: Request, res: Response) => {
