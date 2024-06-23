@@ -13,10 +13,8 @@ export type GetAllDecksQuery = z.infer<typeof getAllDecksSchema>;
 export const DeckIdSchema = z.string().regex(/^[a-z]{2,7}-[a-z0-9]{12}$/);
 export type DeckId = z.infer<typeof DeckIdSchema>;
 
-export const newDeckSchema = z.object({
-  deckId: DeckIdSchema,
+export const updateDeckSchema = z.object({
   deck: z.array(z.number()),
-  faction: factionsSchema,
   name: z
     .string()
     .min(2)
@@ -24,8 +22,14 @@ export const newDeckSchema = z.object({
     .regex(/^[^\$\{\}\[\]";]+$/, { message: "Invalid characters" }),
   private: z.boolean(),
   sets: z.array(z.number()),
-  createdutc: z.number(),
   updatedutc: z.number(),
 });
 
+export const newDeckSchema = z.object({
+  ...updateDeckSchema.shape,
+  deckId: DeckIdSchema,
+  createdutc: z.number(),
+});
+
+export type UpdateDeck = z.infer<typeof updateDeckSchema>;
 export type NewDeck = z.infer<typeof newDeckSchema>;

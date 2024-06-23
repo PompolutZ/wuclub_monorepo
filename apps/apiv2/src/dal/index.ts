@@ -3,3 +3,4 @@ export { getAllDecks } from "./decks/getAllDecks";
 export { getDeckById } from "./decks/getDeckById";
 export { deleteDeckById } from "./decks/deleteDeckById";
 export { createNewDeck } from "./decks/createNewDeck";
+export { updateDeck } from "./decks/updateDeck";
