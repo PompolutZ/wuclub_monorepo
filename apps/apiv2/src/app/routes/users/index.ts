@@ -25,10 +25,8 @@ const app = new Hono<{
   Variables: {
     claims: DecodedIdToken;
   };
-}>();
-
-app.use(authenticate);
-app
+}>()
+  .use(authenticate)
   .get("/", async (c) => {
     try {
       const { uid } = c.get("claims");
@@ -88,4 +86,5 @@ app
     }
   });
 
-export { app };
+type UserRoutes = typeof app;
+export { app, UserRoutes };

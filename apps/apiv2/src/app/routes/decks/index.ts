@@ -20,8 +20,7 @@ export const app = new Hono<{
   Variables: {
     claims: DecodedIdToken;
   };
-}>();
-app
+}>()
   .get("/", zValidator("query", getAllDecksSchema), async (c) => {
     try {
       const decks = await _getAllDecks(c.req.valid("query"));
@@ -91,3 +90,5 @@ app
       return c.json({ status: 500, error: "Internal server error" });
     }
   });
+
+export type DeckRoutes = typeof app;
