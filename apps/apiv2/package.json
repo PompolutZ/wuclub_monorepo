@@ -3,12 +3,13 @@
   "main": "src/index.ts",
   "author": "Oleh Lutsenko",
   "scripts": {
+    "tsc": "tsc",
     "lint:fix": "eslint --fix src",
     "dev": "tsx watch --env-file=.env src/local.ts",
     "cdk:deploy": "cdk deploy --all --require-approval never --verbose"
   },
   "dependencies": {
-    "@fxdxpz/schema": "0.1.0",
+    "@fxdxpz/schema": "workspace:*",
     "@hono/zod-validator": "^0.2.2",
     "firebase-admin": "11.11.1",
     "hono": "^4.4.4",
@@ -16,8 +17,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@fxdxpz/eslint-config": "0.1.0",
-    "@fxdxpz/prettier-config": "0.1.0",
+    "@fxdxpz/eslint-config": "workspace:*",
+    "@fxdxpz/prettier-config": "workspace:*",
     "@hono/node-server": "^1.11.2",
     "@types/aws-lambda": "^8.10.137",
     "@types/node": "^20.12.7",

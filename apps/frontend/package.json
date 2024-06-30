@@ -27,6 +27,7 @@
     "embla-carousel-react": "^8.0.2",
     "firebase": "^10.9.0",
     "fuse.js": "^7.0.0",
+    "hono": "^4.4.4",
     "immer": "^9.0.6",
     "immutable": "^3.8.2",
     "jspdf": "^2.3.1",
@@ -48,12 +49,13 @@
     "tailwindcss-animate": "^1.0.7",
     "unit-to-px": "^1.0.5",
     "use-effect-reducer": "^0.7.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "wunderworlds-api-v2": "file:../apiv2"
   },
   "license": "MIT License",
   "devDependencies": {
-    "@fxdxpz/eslint-config": "0.1.0",
-    "@fxdxpz/prettier-config": "0.1.0",
+    "@fxdxpz/eslint-config": "workspace:*",
+    "@fxdxpz/prettier-config": "workspace:*",
     "@types/lodash": "^4.17.0",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.0.9",
