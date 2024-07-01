@@ -8,3 +8,4 @@ export const app = new Hono()
   .route("/decks", decks);
 
 export type AppRoutes = typeof app;
+
