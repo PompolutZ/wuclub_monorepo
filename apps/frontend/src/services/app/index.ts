@@ -1,4 +1,25 @@
 export declare const app: import("hono/hono-base").HonoBase<import("hono/types").BlankEnv, {
+    "/v2/stats/decks": {
+        $get: {
+            input: {};
+            output: {
+                data: {
+                    [x: string]: any;
+                }[] | undefined;
+            };
+            outputFormat: "json";
+            status: import("hono/utils/http-status").StatusCode;
+        } | {
+            input: {};
+            output: {
+                status: number;
+                error: string;
+            };
+            outputFormat: "json";
+            status: import("hono/utils/http-status").StatusCode;
+        };
+    };
+} & {
     "/v2/decks": {
         $get: {
             input: {
