@@ -6,7 +6,8 @@
     "tsc": "tsc",
     "lint:fix": "eslint --fix src",
     "dev": "tsx watch --env-file=.env src/local.ts",
-    "cdk:deploy": "cdk deploy --all --require-approval never --verbose"
+    "cdk:deploy": "cdk deploy --all --require-approval never --verbose",
+    "build:client": "tsc -p tsconfig.client.json && cp ./dist/app/index.d.ts ../frontend/src/services/app.ts"
   },
   "dependencies": {
     "@fxdxpz/schema": "workspace:*",

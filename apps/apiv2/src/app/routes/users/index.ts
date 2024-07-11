@@ -35,7 +35,7 @@ const app = new Hono<{
         return c.json({ status: 403, error: "Unauthorized" });
       }
 
-      return c.json({ data: user });
+      return c.json(user);
     } catch (e) {
       console.error("Error in getUser:", e);
       return c.json({ status: 500, error: "Internal server error" });
@@ -52,7 +52,7 @@ const app = new Hono<{
       };
 
       await setUser(user);
-      return c.json({ data: user });
+      return c.json(user);
     } catch (e) {
       console.error("Error in postUser:", e);
       return c.json({ status: 500, error: "Internal server error" });
@@ -68,7 +68,7 @@ const app = new Hono<{
       };
 
       await setUser(user);
-      return c.json({ data: user });
+      return c.json(user);
     } catch (e) {
       console.error("Error in putUser:", e);
       return c.json({ status: 500, error: "Internal server error" });
@@ -79,7 +79,7 @@ const app = new Hono<{
       const { uid: fuid } = c.get("claims");
       const query = c.req.valid("query");
       const decks = await getAllUserDecks({ ...query, fuid });
-      return c.json({ data: decks });
+      return c.json(decks);
     } catch (e) {
       console.error("Error in getUserDecks:", e);
       return c.json({ status: 500, error: "Internal server error" });

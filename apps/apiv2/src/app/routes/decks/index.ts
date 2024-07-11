@@ -24,7 +24,7 @@ export const app = new Hono<{
   .get("/", zValidator("query", getAllDecksSchema), async (c) => {
     try {
       const decks = await _getAllDecks(c.req.valid("query"));
-      return c.json({ data: decks });
+      return c.json(decks);
     } catch (e) {
       return c.json({ status: 500, error: "Internal server error" });
     }
@@ -42,7 +42,7 @@ export const app = new Hono<{
         return c.json({ status: 404, error: "Deck not found" });
       }
 
-      return c.json({ data: deck });
+      return c.json(deck);
     } catch (e) {
       return c.json({ status: 500, error: "Internal server error" });
     }
@@ -55,7 +55,6 @@ export const app = new Hono<{
       }
 
       const deck = await createNewDeck(c.req.valid("json"), claims.uid);
-      console.log(deck);
       return c.json({ status: 201, data: deck });
     } catch (e) {
       return c.json({ status: 500, error: "Internal server error" });
@@ -73,7 +72,7 @@ export const app = new Hono<{
       }
 
       const result = await updateDeck(deckId, uid, c.req.valid("json"));
-      return c.json({ data: result });
+      return c.json(result);
     },
   )
   .delete("/:id", authenticate, async (c) => {
@@ -85,7 +84,7 @@ export const app = new Hono<{
       }
 
       const result = await _deleteDeckById(deckId, claims.uid);
-      return c.json({ data: { deletedCount: result.deletedCount } });
+      return c.json({ deletedCount: result.deletedCount });
     } catch (e) {
       return c.json({ status: 500, error: "Internal server error" });
     }

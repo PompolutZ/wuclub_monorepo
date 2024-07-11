@@ -7,9 +7,7 @@ import { AutosuggestSearch } from "./Search";
 
 const Home = () => {
   const history = useHistory();
-  const {
-    data: { data: stats },
-  } = useDeckStats();
+  const { data: stats } = useDeckStats();
 
   const handleGlobalSearchClick = (payload) => {
     history.push(`/view/card/${payload.id}`);

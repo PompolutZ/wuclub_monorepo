@@ -1,7 +1,7 @@
 import { Factions } from "@fxdxpz/schema";
 import { useQuery } from "@tanstack/react-query";
 import { hc } from "hono/client";
-import { AppRoutes } from "./app";
+import type { AppRoutes } from "./app";
 
 const api = hc<AppRoutes>("http://localhost:8181");
 

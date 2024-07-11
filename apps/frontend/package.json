@@ -16,6 +16,7 @@
     "@react-spring/web": "^9.7.3",
     "@tailwindcss/forms": "^0.5.3",
     "@tanstack/react-query": "^5.49.2",
+    "@tanstack/react-query-devtools": "^5.51.1",
     "@tanstack/react-virtual": "3.0.0-beta.54",
     "axios": "^0.21.2",
     "axios-hooks": "^2.6.3",

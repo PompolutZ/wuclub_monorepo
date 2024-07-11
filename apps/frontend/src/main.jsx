@@ -18,6 +18,7 @@ import Firebase, { FirebaseContext } from "./firebase";
 import { AuthContextProvider } from "./hooks/useAuthUser";
 import HeroImage from "./v2/components/HeroImage";
 import NavigationPanel from "./v2/components/NavigationPanel";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const Home = lazy(() => import("./pages/Home"));
 const DeckCreator = lazy(() => import("./pages/DeckCreator"));
@@ -167,6 +168,7 @@ const Root = () => (
           <MainLayout />
         </Router>
       </AuthContextProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </FirebaseContext.Provider>
 );
