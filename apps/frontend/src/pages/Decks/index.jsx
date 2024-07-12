@@ -1,7 +1,7 @@
-import { useQueryDecks } from "@services/api";
 import { useParams } from "react-router-dom";
 import { FixedVirtualizedList } from "../../v2/components/FixedVirtualizedList";
 import PublicDeckLink from "./PublicDeckLink";
+import { useQueryDecks } from "./useDecksQuery";
 
 export default function Deck() {
   const { faction } = useParams();

@@ -2,8 +2,8 @@ import { useHistory } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { grouppedFactions } from "../../data/wudb";
 import DeckMetaSummary from "../../molecules/DecksMetaSummary";
-import { useDeckStats } from "../../services/api";
 import { AutosuggestSearch } from "./Search";
+import { useDeckStats } from "./useDeckStats";
 
 const Home = () => {
   const history = useHistory();
