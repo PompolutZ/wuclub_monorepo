@@ -16,113 +16,8 @@ import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import { DeckTitle } from "@components/DeckTitle";
 import { offlineDB } from "../../services/db";
 import axios from "axios";
-
-function DeckLink({ onDelete, ...props }) {
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    const cards = props.cards.map((x) => getCardById(x));
-    setCards(cards);
-  }, [props.cards]);
-
-  const totalGlory = useMemo(
-    () =>
-      cards
-        .filter(checkCardIsObjective)
-        .reduce((total, { glory }) => (total += glory), 0),
-    [cards],
-  );
-
-  const objectiveSummary = useMemo(
-    () =>
-      cards.filter(checkCardIsObjective).reduce(
-        (acc, c) => {
-          acc[c.scoreType] += 1;
-          return acc;
-        },
-        { Surge: 0, End: 0, Third: 0 },
-      ),
-    [cards],
-  );
-
-  return (
-    <div className="flex items-center border-t border-gray-500 lg:w-1/3 lg:mx-auto my-2 py-2">
-      <FactionDeckPicture faction={props.faction} />
-
-      <div className="flex-1 pl-2">
-        <DeckTitle factionName={props.faction} sets={props.sets}>
-          <Link
-            className="text-xl"
-            to={{
-              pathname: `${VIEW_DECK}/${props.id}`,
-              state: {
-                deck: {
-                  ...props,
-                },
-                canUpdateOrDelete: true,
-              },
-            }}
-          >
-            {props.name}
-          </Link>
-        </DeckTitle>
-        <div className="space-y-2">
-          <div className="flex">
-            <h3 className="text-sm font-bold text-gray-700">
-              {new Date(props.updatedutc).toLocaleDateString()}
-            </h3>
-            {!props.private && (
-              <div className="flex items-center text-purple-700 uppercase text-xs pl-2 font-bold space-x-2">
-                <PeopleIcon className="w-4 h-4 stroke-current" />
-                public
-              </div>
-            )}
-          </div>
-          <SetsList sets={props.sets} />
-          <ScoringOverview summary={objectiveSummary} glory={totalGlory} />
-        </div>
-      </div>
-      <div className="pl-2">
-        <button className="btn btn-red" onClick={onDelete(props.id)}>
-          <TrashIcon />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function useUserDecksLoader() {
-  const user = useAuthUser();
-  const [error, setError] = useState(undefined);
-  const [loading, setLoading] = useState(false);
-  const [decks, setDecks] = useState([]);
-  const fetchAsync = useCallback(async () => {
-    setLoading(true);
-
-    try {
-      if (user) {
-        const token = await Firebase.getTokenId();
-        if (token) {
-          const { data } = await fetchUserDecks();
-          setDecks(data);
-        }
-      } else {
-        const localDecks = await offlineDB.anonDecks.toArray();
-        setDecks(localDecks);
-      }
-    } catch (e) {
-      setError(e);
-    } finally {
-      setLoading(false);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    fetchAsync();
-  }, [user]);
-
-  return [decks, loading, error, fetchAsync];
-}
+import { useUserDecksQuery } from "./useUserDecksQuery";
+import { DeckLink } from "./DeckLink";
 
 function useAnonDecksSyncronisation(refetch) {
   const user = useAuthUser();
@@ -205,8 +100,9 @@ function AnonymousUserDecksStorageInfo() {
 
 function MyDecksPage() {
   const user = useAuthUser();
-  const [userDecks, loading, error, refetch] = useUserDecksLoader(user);
-  useAnonDecksSyncronisation(refetch);
+  const { data: userDecks, isFetching: loading, refetch } = useUserDecksQuery();
+  console.log(userDecks);
+  //useAnonDecksSyncronisation(refetch);
   const [confirmDeleteDeckId, setConfirmDeleteDeckId] = useState(undefined);
   const deleteDeckAsync = useDeleteUserDeckFactory();
 
@@ -231,17 +127,12 @@ function MyDecksPage() {
   return (
     <div className="flex-1 flex p-4 flex-col">
       {!user && <AnonymousUserDecksStorageInfo />}
-      {/* {
-                error && error.response.status === 401 && (
-                    <Redirect to="/login" />
-                )
-            } */}
       {loading && (
         <div className="flex items-center justify-center">
           <p>Loading...</p>
         </div>
       )}
-      {!loading && userDecks.length === 0 && (
+      {!loading && userDecks && userDecks.length === 0 && (
         <div className="flex-1 flex items-center justify-center">
           <p>
             You don't have any decks yet.{" "}
@@ -252,17 +143,20 @@ function MyDecksPage() {
         </div>
       )}
 
-      {userDecks.length > 0 && (
+      {userDecks?.length > 0 && (
         <div className="flex-1">
           {userDecks
             .map((deck) => ({
               ...deck,
               id: deck.deckId,
-              cards: deck.deck,
             }))
             .sort((x, y) => y.updatedutc - x.updatedutc)
             .map((deck) => (
-              <DeckLink key={deck.id} onDelete={handleDeleteDeckId} {...deck} />
+              <DeckLink
+                key={deck.id}
+                onDelete={handleDeleteDeckId}
+                deck={deck}
+              />
             ))}
         </div>
       )}
@@ -270,7 +164,7 @@ function MyDecksPage() {
       <DeleteConfirmationDialog
         title="Delete deck"
         description={`Are you sure you want to delete deck: '${
-          userDecks.find((deck) => deck.deckId === confirmDeleteDeckId)?.name
+          userDecks?.find((deck) => deck.deckId === confirmDeleteDeckId)?.name
         }'`}
         open={!!confirmDeleteDeckId}
         onCloseDialog={handleCloseDeleteDialog}

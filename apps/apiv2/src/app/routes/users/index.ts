@@ -74,11 +74,10 @@ const app = new Hono<{
       return c.json({ status: 500, error: "Internal server error" });
     }
   })
-  .get("/decks", zValidator("query", deckQueryOptionsSchema), async (c) => {
+  .get("/decks", async (c) => {
     try {
       const { uid: fuid } = c.get("claims");
-      const query = c.req.valid("query");
-      const decks = await getAllUserDecks({ ...query, fuid });
+      const decks = await getAllUserDecks({ fuid });
       return c.json(decks);
     } catch (e) {
       console.error("Error in getUserDecks:", e);

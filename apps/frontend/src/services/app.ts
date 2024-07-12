@@ -271,24 +271,14 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
     };
     "/v2/users/decks": {
         $get: {
-            input: {
-                query: {
-                    skip?: string | string[] | undefined;
-                    limit?: string | string[] | undefined;
-                };
-            };
+            input: {};
             output: {
                 [x: string]: any;
             }[];
             outputFormat: "json";
             status: import("hono/utils/http-status").StatusCode;
         } | {
-            input: {
-                query: {
-                    skip?: string | string[] | undefined;
-                    limit?: string | string[] | undefined;
-                };
-            };
+            input: {};
             output: {
                 status: number;
                 error: string;
