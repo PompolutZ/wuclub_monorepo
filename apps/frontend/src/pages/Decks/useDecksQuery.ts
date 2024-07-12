@@ -7,7 +7,7 @@ const IsDecksResponse = (
   data: InferResponseType<typeof api.v2.decks.$get>,
 ): data is { decks: Deck[]; total: number } => "total" in data;
 
-const DECKS_BATCH_SIZE = 10;
+const DECKS_BATCH_SIZE = 30;
 
 export const useQueryDecks = (faction?: Factions) => {
   return useInfiniteQuery({
