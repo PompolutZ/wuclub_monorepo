@@ -14,6 +14,7 @@ export default defineConfig({
       "@icons": path.resolve(__dirname, "./src/svgs"),
       "@components": path.resolve(__dirname, "./src/v2/components"),
       "@wudb": path.resolve(__dirname, "./src/data/wudb"),
+      "@services": path.resolve(__dirname, "./src/services"),
     },
   },
   plugins: [react(), svgr()],

@@ -1,18 +1,20 @@
-import { Factions } from "@fxdxpz/schema";
-import { useQuery } from "@tanstack/react-query";
-import { hc } from "hono/client";
+import { Deck, Factions } from "@fxdxpz/schema";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { hc, InferResponseType } from "hono/client";
 import type { AppRoutes } from "./app";
 
 const api = hc<AppRoutes>("http://localhost:8181");
+const IsDecksResponse = (
+  data: InferResponseType<typeof api.v2.decks.$get>,
+): data is { decks: Deck[]; total: number } => "total" in data;
 
-export const useQueryDecks = (
-  faction?: Factions,
-  limit?: number,
-  skip?: number,
-) => {
-  return useQuery({
-    queryKey: ["decks", { faction, limit, skip }],
-    queryFn: async () => {
+const DECKS_BATCH_SIZE = 10;
+
+export const useQueryDecks = (faction?: Factions) => {
+  console.log("Faction", faction);
+  return useInfiniteQuery({
+    queryKey: ["decks", { faction: faction ?? "all" }],
+    queryFn: async ({ pageParam: { limit, skip, faction } }) => {
       const res = await api.v2.decks.$get({
         query: {
           faction,
@@ -22,6 +24,25 @@ export const useQueryDecks = (
       });
 
       return res.json();
+    },
+    getNextPageParam: (lastPage, pages) => {
+      if (
+        IsDecksResponse(lastPage) &&
+        lastPage.total < pages.length * DECKS_BATCH_SIZE
+      ) {
+        return undefined;
+      }
+
+      return {
+        limit: DECKS_BATCH_SIZE,
+        skip: pages.length * DECKS_BATCH_SIZE,
+        faction,
+      };
+    },
+    initialPageParam: {
+      limit: DECKS_BATCH_SIZE,
+      skip: 0,
+      faction,
     },
   });
 };

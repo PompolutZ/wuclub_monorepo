@@ -4,7 +4,7 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
             input: {};
             output: {
                 [x: string]: any;
-            }[] | undefined;
+            }[];
             outputFormat: "json";
             status: import("hono/utils/http-status").StatusCode;
         } | {
@@ -27,9 +27,12 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
                     limit?: string | string[] | undefined;
                 };
             };
-            output: {
-                [x: string]: any;
-            }[];
+            output: never[] | {
+                decks: {
+                    [x: string]: any;
+                }[];
+                total: any;
+            };
             outputFormat: "json";
             status: import("hono/utils/http-status").StatusCode;
         } | {
@@ -294,5 +297,7 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
             status: import("hono/utils/http-status").StatusCode;
         };
     };
+} & {
+    "/v2/*": {};
 }, "/v2">;
 export type AppRoutes = typeof app;

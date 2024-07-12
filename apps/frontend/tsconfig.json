@@ -22,7 +22,7 @@
       "@components/*": ["./src/v2/components/*"],
       "@wudb/*": ["./src/data/wudb/*"],
       "@wudb": ["./src/data/wudb/index.js"],
-      "@api/*": ["apiv2/src/*"]
+      "@services/*": ["./frontend/src/services"]
     }
   },
   "include": ["src", "postcss.config.js"],
