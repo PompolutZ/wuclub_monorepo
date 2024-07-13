@@ -132,7 +132,7 @@ function MyDecksPage() {
           <p>Loading...</p>
         </div>
       )}
-      {!loading && userDecks && userDecks.length === 0 && (
+      {!loading && userDecks?.length === 0 && (
         <div className="flex-1 flex items-center justify-center">
           <p>
             You don't have any decks yet.{" "}

@@ -1,13 +1,14 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
+import { createRoot, createPortal } from "react-dom/client";
 import {
-    Route,
-    BrowserRouter as Router,
-    Switch,
-    useLocation,
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  useLocation,
 } from "react-router-dom";
 import "./index.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 
 import { unregister } from "./registerServiceWorker";
 
@@ -19,6 +20,7 @@ import { AuthContextProvider } from "./hooks/useAuthUser";
 import HeroImage from "./v2/components/HeroImage";
 import NavigationPanel from "./v2/components/NavigationPanel";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { queryClient } from "@services/queryClient";
 
 const Home = lazy(() => import("./pages/Home"));
 const DeckCreator = lazy(() => import("./pages/DeckCreator"));
@@ -154,11 +156,9 @@ export class ModalPresenter extends React.Component {
   }
 
   render() {
-    return ReactDOM.createPortal(this.props.children, this.el);
+    return createPortal(this.props.children, this.el);
   }
 }
-
-const queryClient = new QueryClient();
 
 const Root = () => (
   <FirebaseContext.Provider value={Firebase}>
@@ -168,10 +168,11 @@ const Root = () => (
           <MainLayout />
         </Router>
       </AuthContextProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   </FirebaseContext.Provider>
 );
 
-ReactDOM.render(<Root />, document.getElementById("root"));
+const root = createRoot(document.getElementById("root"));
+root.render(<Root />);
 unregister();
