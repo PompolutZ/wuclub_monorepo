@@ -11,7 +11,7 @@ export const getUserByFuid = async (fuid: string): Promise<User> => {
   return payload as unknown as User;
 };
 
-export const setUser = async (user: User): Promise<void> => {
+export const setUser = async (user: User) => {
   const client = await getOrCreateClient();
   await client
     .collection("users")

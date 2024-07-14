@@ -8,6 +8,7 @@ import {
 import { zValidator } from "@hono/zod-validator";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 import { Hono } from "hono";
+import { HTTPException } from "hono/http-exception";
 import {
   DeckIdSchema,
   getAllDecksSchema,
@@ -26,7 +27,8 @@ export const app = new Hono<{
       const decks = await _getAllDecks(c.req.valid("query"));
       return c.json(decks);
     } catch (e) {
-      return c.json({ status: 500, error: "Internal server error" });
+      console.error("Error in getAllDecks:", e);
+      throw new HTTPException(500, { message: "Internal server error" });
     }
   })
   .get("/:id", authenticate, async (c) => {
@@ -35,29 +37,31 @@ export const app = new Hono<{
       const deck = await _getDeckById(deckId);
       const claims = c.get("claims");
       if (deck.private && claims?.uid !== deck.fuid) {
-        return c.json({ status: 403, error: "Forbidden" });
+        throw new HTTPException(403, { message: "Forbidden" });
       }
 
       if (!deck) {
-        return c.json({ status: 404, error: "Deck not found" });
+        throw new HTTPException(404, { message: "Deck not found" });
       }
 
       return c.json(deck);
     } catch (e) {
-      return c.json({ status: 500, error: "Internal server error" });
+      console.error("Error in getDeckById:", e);
+      throw new HTTPException(500, { message: "Internal server error" });
     }
   })
   .post("/", authenticate, zValidator("json", newDeckSchema), async (c) => {
     try {
       const claims = c.get("claims");
       if (!claims) {
-        return c.json({ status: 401, error: "Unauthorized" });
+        throw new HTTPException(401, { message: "Unauthorized" });
       }
 
       const deck = await createNewDeck(c.req.valid("json"), claims.uid);
       return c.json({ status: 201, data: deck });
     } catch (e) {
-      return c.json({ status: 500, error: "Internal server error" });
+      console.error("Error in createNewDeck:", e);
+      throw new HTTPException(500, { message: "Internal server error" });
     }
   })
   .put(
@@ -68,7 +72,7 @@ export const app = new Hono<{
       const deckId = DeckIdSchema.parse(c.req.param("id"));
       const { uid } = c.get("claims");
       if (!uid) {
-        return c.json({ status: 401, error: "Unauthorized" });
+        throw new HTTPException(401, { message: "Unauthorized" });
       }
 
       const result = await updateDeck(deckId, uid, c.req.valid("json"));
@@ -80,12 +84,13 @@ export const app = new Hono<{
       const deckId = DeckIdSchema.parse(c.req.param("id"));
       const claims = c.get("claims");
       if (!claims) {
-        return c.json({ status: 401, error: "Unauthorized" });
+        throw new HTTPException(401, { message: "Unauthorized" });
       }
 
       const result = await _deleteDeckById(deckId, claims.uid);
       return c.json({ deletedCount: result.deletedCount });
     } catch (e) {
-      return c.json({ status: 500, error: "Internal server error" });
+      console.error("Error in deleteDeckById:", e);
+      throw new HTTPException(500, { message: "Internal server error" });
     }
   });

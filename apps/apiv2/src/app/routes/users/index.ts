@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { HTTPException } from "hono/http-exception";
 import { zValidator } from "@hono/zod-validator";
 import { authenticate } from "@/app/middlewares/authentication";
 import { getUserByFuid, setUser } from "@/dal/users";
@@ -16,11 +17,6 @@ const updateUserSchema = z.object({
   avatar: factionsSchema,
 });
 
-const deckQueryOptionsSchema = z.object({
-  skip: z.coerce.number().optional().default(0),
-  limit: z.coerce.number().max(30).optional().default(30),
-});
-
 const app = new Hono<{
   Variables: {
     claims: DecodedIdToken;
@@ -32,13 +28,13 @@ const app = new Hono<{
       const { uid } = c.get("claims");
       const user = await getUserByFuid(uid);
       if (uid !== user?.fuid) {
-        return c.json({ status: 403, error: "Unauthorized" });
+        throw new HTTPException(403, { message: "Unauthorized" });
       }
 
       return c.json(user);
     } catch (e) {
       console.error("Error in getUser:", e);
-      return c.json({ status: 500, error: "Internal server error" });
+      throw new HTTPException(500, { message: "Internal server error" });
     }
   })
   .post("/", zValidator("json", updateUserSchema), async (c) => {
@@ -54,8 +50,8 @@ const app = new Hono<{
       await setUser(user);
       return c.json(user);
     } catch (e) {
-      console.error("Error in postUser:", e);
-      return c.json({ status: 500, error: "Internal server error" });
+      console.error("Error in getUser:", e);
+      throw new HTTPException(500, { message: "Internal server error" });
     }
   })
   .put("/", zValidator("json", updateUserSchema), async (c) => {
@@ -70,8 +66,8 @@ const app = new Hono<{
       await setUser(user);
       return c.json(user);
     } catch (e) {
-      console.error("Error in putUser:", e);
-      return c.json({ status: 500, error: "Internal server error" });
+      console.error("Error in getUser:", e);
+      throw new HTTPException(500, { message: "Internal server error" });
     }
   })
   .get("/decks", async (c) => {
@@ -80,8 +76,8 @@ const app = new Hono<{
       const decks = await getAllUserDecks({ fuid });
       return c.json(decks);
     } catch (e) {
-      console.error("Error in getUserDecks:", e);
-      return c.json({ status: 500, error: "Internal server error" });
+      console.error("Error in getUser:", e);
+      throw new HTTPException(500, { message: "Internal server error" });
     }
   });
 
