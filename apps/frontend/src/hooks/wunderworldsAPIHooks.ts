@@ -24,17 +24,7 @@ axios.interceptors.request.use(
   },
 );
 
-export function fetchUserDecks() {
-  return axios.get("/api/v1/user-decks");
-}
-
 export const useCardsRatings = (manual = false) => useAxios({}, { manual });
-
-export const useListAllPublicDecks = (manual = false) =>
-  useAxios({ method: "POST", url: "/api/v1/public-decks" }, { manual });
-
-export const useGetUserDecks = (manual = false) =>
-  useAxios("/api/v1/user-decks", { manual });
 
 export const useGetUserDeckById = (deckId: string, manual = false) =>
   useAxios(`/api/v1/user-decks/${deckId}`, { manual });
@@ -47,12 +37,3 @@ export const useUpdateUserDeck = () =>
 
 export const useDeleteUserDeck = () =>
   useAxios({ method: "DELETE" }, { manual: true });
-
-export const useGetUserData = (manual = false) =>
-  useAxios("/api/v1/users", { manual });
-
-export const useUpdateUser = () =>
-  useAxios({ method: "PUT", url: "/api/v1/users" }, { manual: true });
-
-export const useCreateUser = () =>
-  useAxios({ method: "POST", url: "/api/v1/users" }, { manual: true });
