@@ -3,6 +3,7 @@ import Firebase from "../../firebase";
 import { api } from "../../services/api";
 import { offlineDB } from "../../services/db";
 import useAuthUser from "../../hooks/useAuthUser";
+import { Deck } from "@fxdxpz/schema";
 
 export const useUserDecksQuery = () => {
   const user = useAuthUser();
@@ -21,7 +22,8 @@ export const useUserDecksQuery = () => {
             authtoken: token,
           },
         });
-        return res.json();
+
+        return res.json() as unknown as Deck[];
       }
     },
   });

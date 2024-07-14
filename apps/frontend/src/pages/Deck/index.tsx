@@ -6,12 +6,7 @@ import { getCardById } from "../../data/wudb";
 import { Toast } from "./ReadonlyDeck/atoms/Toast";
 import ReadonlyDeck from "./ReadonlyDeck";
 import DeleteConfirmationDialog from "../../atoms/DeleteConfirmationDialog";
-
-type Deck = {
-  id: string;
-  name: string;
-  cards: unknown[];
-};
+import { Deck } from "@fxdxpz/schema";
 
 const Deck2 = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,8 +28,9 @@ const Deck2 = () => {
   useEffect(() => {
     setLoading(true);
     if (state) {
+      console.log("state", state);
       setDeck(state.deck);
-      setCards(state.deck.cards.map(getCardById));
+      setCards(state.deck.deck.map(getCardById));
       setFactionId(state.deck && state.deck.id.split("-")[0]);
       setCanUpdateOrDelete(state.canUpdateOrDelete);
 
@@ -70,7 +66,7 @@ const Deck2 = () => {
 
   const handleDeleteDeck = async () => {
     try {
-      await deleteUserDeck(deck?.id);
+      await deleteUserDeck(deck?.deckId);
       handleCloseDeleteDialog();
       history.replace({
         pathname: "/mydecks",

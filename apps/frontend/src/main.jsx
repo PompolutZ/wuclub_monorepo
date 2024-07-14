@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
-import ReactDOM from "react-dom";
-import { createRoot, createPortal } from "react-dom/client";
+import { createPortal } from "react-dom";
+import { createRoot } from "react-dom/client";
 import {
   Route,
   BrowserRouter as Router,
@@ -168,7 +168,7 @@ const Root = () => (
           <MainLayout />
         </Router>
       </AuthContextProvider>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </FirebaseContext.Provider>
 );

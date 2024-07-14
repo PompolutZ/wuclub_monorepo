@@ -11,7 +11,7 @@ import { PeopleIcon } from "@components/Icons";
 
 type Props = {
   onDelete: (id: string) => void;
-  deck: Deck;
+  deck: Omit<Deck, "fuid">;
 };
 
 export const DeckLink = ({ onDelete, deck }: Props) => {
