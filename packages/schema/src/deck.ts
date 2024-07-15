@@ -1,13 +1,23 @@
 import { z } from "zod";
 
-export const deckSchema = z.object({
-  deckId: z.string(),
+// Deck payload is used to post a new deck, since some of the 
+// deck properties will be generated server-side.
+export const deckPayloadSchema = z
+  .object({
+    deckId: z.string(),
+    deck: z.array(z.number()),
+    faction: z.string(),
+    name: z.string(),
+    private: z.boolean(),
+    sets: z.array(z.number()),
+  })
+  .describe(
+    "Deck payload is used to post a new deck, since some of the deck properties will be generated server-side.",
+  );
+
+export type DeckPayload = z.infer<typeof deckPayloadSchema>;
+export const deckSchema = deckPayloadSchema.extend({
   fuid: z.string(),
-  deck: z.array(z.number()),
-  faction: z.string(),
-  name: z.string(),
-  private: z.boolean(),
-  sets: z.array(z.number()),
   createdutc: z.number(),
   updatedutc: z.number(),
 });

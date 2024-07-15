@@ -1,0 +1,15 @@
+{
+  "name": "shared",
+  "type": "module",
+  "version": "1.0.0",
+  "dependencies": {
+    "uuid": "^10.0.0"
+  },
+  "private": true,
+  "devDependencies": {
+    "@fxdxpz/eslint-config": "workspace:*",
+    "@fxdxpz/prettier-config": "workspace:*",
+    "@types/uuid": "^10.0.0"
+  },
+  "@prettier": "@fxdxpz/prettier-config"
+}

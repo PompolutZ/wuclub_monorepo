@@ -1,10 +1,10 @@
 import { getOrCreateClient } from "@/dal/client";
-import { UpdateDeck } from "../../app/routes/decks/schemas";
+import { DeckPayload } from "@fxdxpz/schema";
 
 export const updateDeck = async (
   deckId: string,
   fuid: string,
-  deck: UpdateDeck,
+  deck: DeckPayload,
 ) => {
   const client = await getOrCreateClient();
   const payload = await client.collection("decks").findOneAndUpdate(
@@ -12,13 +12,12 @@ export const updateDeck = async (
     {
       $set: {
         ...deck,
+        deckId,
         updatedutc: new Date().getTime(),
       },
     },
     { returnDocument: "after" },
   );
-
-  console.log(payload);
 
   return payload;
 };

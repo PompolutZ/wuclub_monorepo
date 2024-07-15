@@ -52,7 +52,8 @@
     "unit-to-px": "^1.0.5",
     "use-effect-reducer": "^0.7.0",
     "uuid": "^9.0.1",
-    "wunderworlds-api-v2": "file:../apiv2"
+    "wunderworlds-api-v2": "file:../apiv2",
+    "shared": "file:../../shared"
   },
   "license": "MIT License",
   "devDependencies": {

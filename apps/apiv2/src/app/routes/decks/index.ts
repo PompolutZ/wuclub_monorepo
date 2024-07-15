@@ -1,21 +1,17 @@
 import {
+  deleteDeckById as _deleteDeckById,
   getAllDecks as _getAllDecks,
   getDeckById as _getDeckById,
-  deleteDeckById as _deleteDeckById,
   createNewDeck,
   updateDeck,
 } from "@/dal";
+import { deckPayloadSchema } from "@fxdxpz/schema";
 import { zValidator } from "@hono/zod-validator";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
-import {
-  DeckIdSchema,
-  getAllDecksSchema,
-  newDeckSchema,
-  updateDeckSchema,
-} from "./schemas";
 import { authenticate } from "../../middlewares/authentication";
+import { DeckIdSchema, getAllDecksSchema } from "./schemas";
 
 export const app = new Hono<{
   Variables: {
@@ -50,7 +46,7 @@ export const app = new Hono<{
       throw new HTTPException(500, { message: "Internal server error" });
     }
   })
-  .post("/", authenticate, zValidator("json", newDeckSchema), async (c) => {
+  .post("/", authenticate, zValidator("json", deckPayloadSchema), async (c) => {
     try {
       const claims = c.get("claims");
       if (!claims) {
@@ -67,7 +63,7 @@ export const app = new Hono<{
   .put(
     "/:id",
     authenticate,
-    zValidator("json", updateDeckSchema),
+    zValidator("json", deckPayloadSchema),
     async (c) => {
       const deckId = DeckIdSchema.parse(c.req.param("id"));
       const { uid } = c.get("claims");
