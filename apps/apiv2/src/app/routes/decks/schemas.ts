@@ -18,7 +18,7 @@ export const updateDeckSchema = z.object({
     .string()
     .min(2)
     .max(50)
-    .regex(/^[^\$\{\}\[\]";]+$/, { message: "Invalid characters" }),
+    .regex(/^[^${}[\]";]+$/, { message: "Invalid characters" }),
   private: z.boolean(),
   sets: z.array(z.number()),
   updatedutc: z.number(),
