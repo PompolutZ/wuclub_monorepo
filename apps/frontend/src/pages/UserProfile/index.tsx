@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import AvatarPicker from "../../components/AvatarPicker";
 import { generateUsername } from "./generateUsername";
 import { useQueryUserData, useCreateUser, useUpdateUser } from "./queries";
@@ -6,21 +6,20 @@ import { Factions } from "@fxdxpz/schema";
 
 function UserProfile() {
   const { data, isLoading } = useQueryUserData();
-  console.log("DATA", data);
   const { mutateAsync: create } = useCreateUser();
   const { mutateAsync: update } = useUpdateUser();
   const [username, setUsername] = useState(
     data ? data.displayName : generateUsername(),
   );
-  const [avatar, setAvatar] = useState(
-    data ? data.avatar : "elathains-soulreapers",
+  const [avatar, setAvatar] = useState<Factions>(
+    data ? (data.avatar as Factions) : "elathains-soulreapers",
   );
 
-  const changeName = (e: any) => {
+  const changeName = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
 
-  const handleAvatarChange = (e: any) => {
+  const handleAvatarChange = (e: Factions) => {
     setAvatar(e);
   };
 
@@ -31,9 +30,9 @@ function UserProfile() {
     if (data.avatar.includes("/")) {
       const [icon] = data.avatar.split("/").slice(-1);
       const a = icon.split("-icon.png")[0];
-      setAvatar(a);
+      setAvatar(a as Factions);
     } else {
-      setAvatar(data.avatar);
+      setAvatar(data.avatar as Factions);
     }
   }, [data]);
 

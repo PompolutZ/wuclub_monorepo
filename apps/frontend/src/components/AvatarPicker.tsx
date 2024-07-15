@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import { wufactions } from "../data/wudb";
+import { Factions } from "@fxdxpz/schema";
 
-function FactionIcon({ faction, className }) {
+function FactionIcon({ faction }: { faction: Factions }) {
   return (
     <img
       alt={faction}
-      className={`w-8 h-8 ${className}`}
+      className={`w-8 h-8`}
       src={`/assets/icons/${faction}-icon.png`}
     />
   );
 }
 
-function ToggleableFactionIcon({ faction, className, isOn, onSelect }) {
+function FactionIconToggle({
+  faction,
+  isOn,
+  onSelect,
+}: {
+  faction: Factions;
+  isOn: boolean;
+  onSelect: (faction: Factions) => void;
+}) {
   return (
     <button
       className={`mx-4 my-2 cursor-pointer flex justify-center focus:outline-none w-8 h-8 transform transition-transform duration-300 filter ${
@@ -26,11 +35,18 @@ function ToggleableFactionIcon({ faction, className, isOn, onSelect }) {
   );
 }
 
-function AvatarPicker({ current, onSelectionChange }) {
+function AvatarPicker({
+  current,
+  onSelectionChange,
+}: {
+  current: Factions;
+  onSelectionChange: (faction: Factions) => void;
+}) {
   const factions = Object.values(wufactions)
     .filter((f) => f.id > 1)
     .sort((prev, next) => next.id - prev.id)
-    .map((f) => f.name);
+    .map((f) => f.name as Factions);
+
   const [selectedIcon, setSelectedIcon] = useState(
     current ? current : factions[factions.length],
   );
@@ -39,7 +55,7 @@ function AvatarPicker({ current, onSelectionChange }) {
     setSelectedIcon(current);
   }, [current]);
 
-  const selectIcon = (faction) => {
+  const selectIcon = (faction: Factions) => {
     setSelectedIcon(faction);
     onSelectionChange(faction);
   };
@@ -47,7 +63,7 @@ function AvatarPicker({ current, onSelectionChange }) {
   return (
     <div className="grid grid-cols-5">
       {factions.map((faction) => (
-        <ToggleableFactionIcon
+        <FactionIconToggle
           key={faction}
           faction={faction}
           isOn={selectedIcon === faction}

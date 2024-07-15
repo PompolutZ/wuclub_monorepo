@@ -1,31 +1,30 @@
+import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import {
-    getAuth,
-    onAuthStateChanged,
-    onIdTokenChanged,
-    FacebookAuthProvider,
-    GoogleAuthProvider,
-    createUserWithEmailAndPassword as authCreateWithEmailAndPassword,
-    signInWithRedirect,
-    signInWithEmailAndPassword as authSignInWithEmailAndPassword,
-    signOut as authSignOut,
-    sendPasswordResetEmail,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword as authCreateWithEmailAndPassword,
+  signInWithEmailAndPassword as authSignInWithEmailAndPassword,
+  signOut as authSignOut,
+  getAuth,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signInWithRedirect,
 } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
 // import "firebase/auth";
 // import "firebase/analytics";
 import axios from "axios";
 
 // import { prodConfig, devConfig } from './config';
 const config = {
-    apiKey: import.meta.env.VITE_API_KEY,
-    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-    databaseURL: import.meta.env.VITE_DATABASE_URL,
-    projectId: import.meta.env.VITE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_APP_ID,
-    measurementId: import.meta.env.VITE_MEASUREMENT_ID,
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_DATABASE_URL,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 // const prodConfig = {
@@ -40,88 +39,89 @@ const config = {
 // const config = process.env.REACT_APP_ENVIRONMENT === 'prod' ? prodConfig : devConfig
 
 const Firebase2 = (function () {
-    const app = initializeApp(config);
-    getAnalytics(app);
-    const auth = getAuth(app);
+  const app = initializeApp(config);
+  getAnalytics(app);
+  const auth = getAuth(app);
 
-    return {
-        signInWithFacebookProvider: function signInWithFacebookProvider() {
-            return signInWithRedirect(auth, new FacebookAuthProvider());
-        },
+  return {
+    signInWithFacebookProvider: function signInWithFacebookProvider() {
+      return signInWithRedirect(auth, new FacebookAuthProvider());
+    },
 
-        signInWithGoogleProvider: function signInWithGoogleProvider() {
-            return signInWithRedirect(auth, new GoogleAuthProvider());
-        },
+    signInWithGoogleProvider: function signInWithGoogleProvider() {
+      return signInWithRedirect(auth, new GoogleAuthProvider());
+    },
 
-        signInWithEmailAndPassword: function signInWithEmailAndPassword(
-            email,
-            password
-        ) {
-            return authSignInWithEmailAndPassword(auth, email, password);
-        },
+    signInWithEmailAndPassword: function signInWithEmailAndPassword(
+      email,
+      password,
+    ) {
+      return authSignInWithEmailAndPassword(auth, email, password);
+    },
 
-        createUserWithEmailAndPassword: function createUserWithEmailAndPassword(
-            email,
-            password
-        ) {
-            return authCreateWithEmailAndPassword(auth, email, password);
-        },
+    createUserWithEmailAndPassword: function createUserWithEmailAndPassword(
+      email,
+      password,
+    ) {
+      return authCreateWithEmailAndPassword(auth, email, password);
+    },
 
-        signOut: function signOut() {
-            return authSignOut(auth);
-        },
+    signOut: function signOut() {
+      return authSignOut(auth);
+    },
 
-        getTokenId: function getTokenId() {
-            return new Promise((res, rej) => {
-                const user = auth.currentUser;
-                if (user) {
-                    if (user) {
-                        user.getIdToken()
-                            .then((token) => res(token))
-                            .catch((e) => rej(e));
-                    }
-                } else {
-                    rej('Anon');
-                }
-            });
-        },
-
-        onAuthUserListener: function onAuthUserListener(next, fallback) {
-            return onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    const token = await user.getIdToken();
-                    const userInfo = await axios.get(
-                        `${import.meta.env.VITE_WUNDERWORLDS_API_ORIGIN}/api/v1/users`,
-                        {
-                            headers: {
-                                authtoken: token,
-                            },
-                        }
-                    );
-
-                    if (userInfo.data) {
-                        next({
-                            ...userInfo.data,
-                            uid: user.uid,
-                            isNew: false,
-                        });
-                    } else {
-                        next({
-                            uid: user.uid,
-                            isNew: true,
-                        });
-                    }
-                } else {
-                    console.error("Cannot login, fallback");
-                    fallback();
-                }
-            });
-        },
-
-        sendPasswordResetEmail: function invokeSendPasswordResetEmail(email) {
-            return sendPasswordResetEmail(auth, email)
+    getTokenId: function getTokenId() {
+      return new Promise((res, rej) => {
+        const user = auth.currentUser;
+        if (user) {
+          if (user) {
+            user
+              .getIdToken()
+              .then((token) => res(token))
+              .catch((e) => rej(e));
+          }
+        } else {
+          rej("Anon");
         }
-    };
+      });
+    },
+
+    onAuthUserListener: function onAuthUserListener(next, fallback) {
+      return onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const token = await user.getIdToken();
+          const userInfo = await axios.get(
+            `${import.meta.env.VITE_WUNDERWORLDS_API_ORIGIN}/api/v1/users`,
+            {
+              headers: {
+                authtoken: token,
+              },
+            },
+          );
+
+          if (userInfo.data) {
+            next({
+              ...userInfo.data,
+              uid: user.uid,
+              isNew: false,
+            });
+          } else {
+            next({
+              uid: user.uid,
+              isNew: true,
+            });
+          }
+        } else {
+          console.error("Cannot login, fallback");
+          fallback();
+        }
+      });
+    },
+
+    sendPasswordResetEmail: function invokeSendPasswordResetEmail(email) {
+      return sendPasswordResetEmail(auth, email);
+    },
+  };
 })();
 
 export default Firebase2;

@@ -9,9 +9,6 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import { QueryClientProvider } from "@tanstack/react-query";
-
-import { unregister } from "./registerServiceWorker";
-
 import ErrorBoundary from "./components/ErrorBoundary";
 import LazyLoading from "./components/LazyLoading";
 import * as ROUTES from "./constants/routes";
@@ -175,4 +172,3 @@ const Root = () => (
 
 const root = createRoot(document.getElementById("root"));
 root.render(<Root />);
-unregister();

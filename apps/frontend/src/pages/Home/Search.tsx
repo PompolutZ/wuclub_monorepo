@@ -104,7 +104,7 @@ export function AutosuggestSearch({
           className="absolute right-0 w-12 border-gray-500 peer-focus:text-white peer-focus:border-purple-700 border-l-0 peer-focus:bg-purple-700 box-border border-2"
           aria-label="toggle menu"
           disabled={!selectedItem}
-          onClick={() => onClick(selectedItem?.item!)}
+          onClick={() => selectedItem && onClick(selectedItem.item)}
         >
           <div className="h-11 flex justify-center items-center stroke-current">
             <SearchIcon className="w-8 h-8 stroke-current" />

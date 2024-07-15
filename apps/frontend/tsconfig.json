@@ -15,14 +15,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "../",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@icons/*": ["./src/svgs/*"],
-      "@components/*": ["./frontend/src/v2/components/*"],
+      "@components/*": ["./src/v2/components/*"],
       "@wudb/*": ["./src/data/wudb/*"],
       "@wudb": ["./src/data/wudb/index.js"],
-      "@services/*": ["./frontend/src/services/*"]
+      "@services/*": ["./src/services/*"]
     }
   },
   "include": ["src", "postcss.config.js"],

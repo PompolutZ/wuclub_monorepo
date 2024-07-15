@@ -28,10 +28,9 @@ const Deck2 = () => {
   useEffect(() => {
     setLoading(true);
     if (state) {
-      console.log("state", state);
       setDeck(state.deck);
       setCards(state.deck.deck.map(getCardById));
-      setFactionId(state.deck && state.deck.id.split("-")[0]);
+      setFactionId(state.deck && state.deck.deckId.split("-")[0]);
       setCanUpdateOrDelete(state.canUpdateOrDelete);
 
       setLoading(false);
@@ -51,10 +50,10 @@ const Deck2 = () => {
           // performs token check whether current user is the one who is the decks author
           setCanUpdateOrDelete(true);
         })
-        .catch((e) => console.error(e))
+        .catch((e: unknown) => console.error(e))
         .finally(() => setLoading(false));
     }
-  }, [state]);
+  }, [state, fetch, id]);
 
   const handleChangeView = () => {
     setCardsView((prev) => !prev);
@@ -66,7 +65,9 @@ const Deck2 = () => {
 
   const handleDeleteDeck = async () => {
     try {
-      await deleteUserDeck(deck?.deckId);
+      if (!deck) return;
+
+      await deleteUserDeck(deck.deckId);
       handleCloseDeleteDialog();
       history.replace({
         pathname: "/mydecks",

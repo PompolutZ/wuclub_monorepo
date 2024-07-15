@@ -37,7 +37,6 @@ const useMutateUser = (fn: typeof post | typeof put) => {
     mutationFn: async (payload: { avatar: Factions; displayName: string }) => {
       if (!user) return;
       const token = await Firebase.getTokenId();
-      console.log("Update with", payload);
       return fn(
         { json: payload },
         {
