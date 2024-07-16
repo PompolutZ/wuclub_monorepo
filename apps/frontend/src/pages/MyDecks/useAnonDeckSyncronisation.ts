@@ -1,13 +1,12 @@
-import axios from "axios";
 import { useEffect } from "react";
 import useAuthUser from "../../hooks/useAuthUser";
-import { useSaveDeckFactory } from "../../hooks/useSaveDeckFactory";
 import { offlineDB } from "../../services/db";
+import { useSaveDeck } from "../../shared/hooks/useSaveDeck";
 
 // TODO: https://github.com/PompolutZ/wuclub_monorepo/issues/3
-export function useAnonDecksSynchronisation(refetch: () => void) {
+export function useAnonDecksSynchronisation() {
   const user = useAuthUser();
-  const saveDeck = useSaveDeckFactory();
+  const { mutateAsync: saveDeck } = useSaveDeck();
 
   useEffect(() => {
     if (!user) return;
@@ -16,39 +15,16 @@ export function useAnonDecksSynchronisation(refetch: () => void) {
       .then((anonDecks) => {
         return Promise.all(
           anonDecks.map(async (d) => {
-            const {
-              deckId,
-              createdutc,
-              updatedutc,
-              deck,
-              sets,
-              name,
-              faction,
-            } = d;
-            await axios.post("/api/v1/user-decks", {
-              deckId,
-              createdutc,
-              updatedutc,
-              deck,
-              sets,
-              name,
-              faction,
-              private: d.private,
-            });
-
-            return d.id;
+            await saveDeck(d);
+            return (d as unknown as { id: number }).id;
           }),
         );
       })
-
       .then((idsToDelete) => {
         offlineDB.anonDecks.bulkDelete(idsToDelete);
-      })
-      .then(() => {
-        refetch();
       })
       .catch((e) => {
         console.error("Error", e);
       });
-  }, [user, refetch, saveDeck]);
+  }, [user, saveDeck]);
 }

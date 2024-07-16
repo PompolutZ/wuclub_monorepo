@@ -10,9 +10,11 @@ import { useUserDecksQuery } from "./useUserDecksQuery";
 
 function MyDecksPage() {
   const user = useAuthUser();
-  const { data: userDecks, isFetching: loading, refetch } = useUserDecksQuery();
+  const { data: userDecks, isFetching: loading } = useUserDecksQuery();
   const { mutateAsync } = useDeleteDeck();
-  useAnonDecksSynchronisation(refetch);
+
+  useAnonDecksSynchronisation();
+  
   const [confirmDeleteDeckId, setConfirmDeleteDeckId] = useState<string | null>(
     null,
   );

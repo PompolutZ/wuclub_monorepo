@@ -1,12 +1,12 @@
-import { useHistory, useLocation, useParams } from "react-router-dom";
-import { useGetUserDeckById } from "../../hooks/wunderworldsAPIHooks";
-import { useEffect, useState } from "react";
-import { useDeleteUserDeckFactory } from "../../hooks/useDeleteUserDeckFactory";
-import { getCardById } from "../../data/wudb";
-import { Toast } from "./ReadonlyDeck/atoms/Toast";
-import ReadonlyDeck from "./ReadonlyDeck";
-import DeleteConfirmationDialog from "../../atoms/DeleteConfirmationDialog";
 import { Deck } from "@fxdxpz/schema";
+import { useEffect, useState } from "react";
+import { useHistory, useLocation, useParams } from "react-router-dom";
+import DeleteConfirmationDialog from "../../atoms/DeleteConfirmationDialog";
+import { getCardById } from "../../data/wudb";
+import { useGetUserDeckById } from "../../hooks/wunderworldsAPIHooks";
+import { useDeleteDeck } from "../../shared/hooks/useDeleteDeck";
+import ReadonlyDeck from "./ReadonlyDeck";
+import { Toast } from "./ReadonlyDeck/atoms/Toast";
 
 const Deck2 = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,7 +20,7 @@ const Deck2 = () => {
   const history = useHistory();
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [cardsView, setCardsView] = useState(false);
-  const deleteUserDeck = useDeleteUserDeckFactory();
+  const { mutateAsync: deleteUserDeck } = useDeleteDeck();
   const [cannotShowDeckMessage, setCannotShowDeckMessage] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastContent, setToastContent] = useState<string | null>(null);

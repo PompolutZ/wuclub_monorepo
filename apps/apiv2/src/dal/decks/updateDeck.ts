@@ -4,7 +4,7 @@ import { DeckPayload } from "@fxdxpz/schema";
 export const updateDeck = async (
   deckId: string,
   fuid: string,
-  deck: DeckPayload,
+  deck: Partial<DeckPayload>,
 ) => {
   const client = await getOrCreateClient();
   const payload = await client.collection("decks").findOneAndUpdate(

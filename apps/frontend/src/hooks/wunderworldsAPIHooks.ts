@@ -28,12 +28,3 @@ export const useCardsRatings = (manual = false) => useAxios({}, { manual });
 
 export const useGetUserDeckById = (deckId: string, manual = false) =>
   useAxios(`/api/v1/user-decks/${deckId}`, { manual });
-
-export const usePostUserDeck = () =>
-  useAxios({ method: "POST", url: "/api/v1/user-decks" }, { manual: true });
-
-export const useUpdateUserDeck = () =>
-  useAxios({ method: "PUT", url: "/api/v1/user-decks" }, { manual: true });
-
-export const useDeleteUserDeck = () =>
-  useAxios({ method: "DELETE" }, { manual: true });

@@ -63,7 +63,7 @@ export const app = new Hono<{
   .put(
     "/:id",
     authenticate,
-    zValidator("json", deckPayloadSchema),
+    zValidator("json", deckPayloadSchema.partial()),
     async (c) => {
       const deckId = DeckIdSchema.parse(c.req.param("id"));
       const { uid } = c.get("claims");

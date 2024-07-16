@@ -74,12 +74,12 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
         $put: {
             input: {
                 json: {
-                    deckId: string;
-                    deck: number[];
-                    faction: string;
-                    name: string;
-                    private: boolean;
-                    sets: number[];
+                    deckId?: string | undefined;
+                    deck?: number[] | undefined;
+                    faction?: string | undefined;
+                    name?: string | undefined;
+                    private?: boolean | undefined;
+                    sets?: number[] | undefined;
                 };
             } & {
                 param: {
