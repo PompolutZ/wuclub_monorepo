@@ -1,59 +1,25 @@
 import { Deck } from "@fxdxpz/schema";
-import { useEffect, useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import DeleteConfirmationDialog from "../../atoms/DeleteConfirmationDialog";
 import { getCardById } from "../../data/wudb";
-import { useGetUserDeckById } from "../../hooks/wunderworldsAPIHooks";
 import { useDeleteDeck } from "../../shared/hooks/useDeleteDeck";
 import ReadonlyDeck from "./ReadonlyDeck";
 import { Toast } from "./ReadonlyDeck/atoms/Toast";
 
 const Deck2 = () => {
-  const { id } = useParams<{ id: string }>();
-  const { fetch } = useGetUserDeckById(id);
   const { state } = useLocation<{ deck: Deck; canUpdateOrDelete: boolean }>();
-  const [loading, setLoading] = useState(false);
-  const [deck, setDeck] = useState<Deck | undefined>(undefined);
-  const [cards, setCards] = useState<unknown[]>([]);
-  const [factionId, setFactionId] = useState("");
-  const [canUpdateOrDelete, setCanUpdateOrDelete] = useState(false);
   const history = useHistory();
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [cardsView, setCardsView] = useState(false);
   const { mutateAsync: deleteUserDeck } = useDeleteDeck();
-  const [cannotShowDeckMessage, setCannotShowDeckMessage] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastContent, setToastContent] = useState<string | null>(null);
 
-  useEffect(() => {
-    setLoading(true);
-    if (state) {
-      setDeck(state.deck);
-      setCards(state.deck.deck.map(getCardById));
-      setFactionId(state.deck && state.deck.deckId.split("-")[0]);
-      setCanUpdateOrDelete(state.canUpdateOrDelete);
-
-      setLoading(false);
-    } else {
-      fetch()
-        .then((r) => {
-          const [data] = r.data;
-          if (!data) {
-            setCannotShowDeckMessage(true);
-          }
-
-          setDeck(data);
-          setCards(data.deck.map(getCardById));
-          setFactionId(id.split("-")[0]);
-
-          // NOTE! This should be fine, since we are using user-decks endpoint which
-          // performs token check whether current user is the one who is the decks author
-          setCanUpdateOrDelete(true);
-        })
-        .catch((e: unknown) => console.error(e))
-        .finally(() => setLoading(false));
-    }
-  }, [state, fetch, id]);
+  const deck = state.deck;
+  const cards = state.deck.deck.map(getCardById);
+  const factionId = state.deck && state.deck.deckId.split("-")[0];
+  const canUpdateOrDelete = state.canUpdateOrDelete;
 
   const handleChangeView = () => {
     setCardsView((prev) => !prev);
@@ -91,25 +57,6 @@ const Deck2 = () => {
     setShowToast(false);
     setToastContent(null);
   };
-
-  if (loading) {
-    return (
-      <div className="flex-1 flex items-center justify-center">
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
-  if (cannotShowDeckMessage) {
-    return (
-      <div className="flex-1 flex items-center justify-center px-8 text-xl">
-        <p>
-          Not possible to see this deck because it was either deleted or not
-          shared with everyone.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <>
