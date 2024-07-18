@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { FixedVirtualizedList } from "@components/FixedVirtualizedList";
+import { useEffect, useMemo, useState } from "react";
+import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
 import {
   factionsRivalsDecks,
   validateCardForPlayFormat,
   VANGUARD_FORMAT,
   wucards,
 } from "../../../../data/wudb";
-import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
-import { useCardsRatings } from "../../../../hooks/wunderworldsAPIHooks";
-import CardInDeck from "./Card";
 import { toggleCardAction } from "../../reducer";
-import { useMemo } from "react";
-import { FixedVirtualizedList } from "@components/FixedVirtualizedList";
+import CardInDeck from "./Card";
 
 function stringTypeToNumber(type) {
   switch (type) {
@@ -38,12 +36,7 @@ function FilterableCardLibrary(props) {
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
   const state = useDeckBuilderState();
-  const [{ data, loading }, refetch] = useCardsRatings(true);
   const { searchText, visibleCardTypes } = props;
-
-  useEffect(() => {
-    refetch({ url: `/api/v1/cards-ratings/${state.faction.name}` });
-  }, [state.faction]);
 
   const deck = useMemo(
     () => [
@@ -62,24 +55,6 @@ function FilterableCardLibrary(props) {
         : card.factionId === state.faction.id &&
           (card.duplicates ? card.id === Math.max(...card.duplicates) : true),
     );
-
-    const ranks =
-      (data &&
-        data
-          .flatMap((group) =>
-            Object.entries(group.weights).map(([id, weight]) => ({
-              id: Number(id),
-              weight: group.faction !== "universal" ? weight * 10000 : weight,
-            })),
-          )
-          .reduce(
-            (ranks, { id, weight }) => ({
-              ...ranks,
-              [id]: Math.max(ranks[id] || 0, weight),
-            }),
-            {},
-          )) ||
-      {};
 
     const nextCards = [
       ...factionCards,
@@ -107,7 +82,7 @@ function FilterableCardLibrary(props) {
           state.format,
         );
         const card = {
-          ranking: ranks[c.id] || 0,
+          // ranking: ranks[c.id] || 0,
           ...c,
           isBanned: isForsaken,
           isRestricted,
@@ -121,7 +96,7 @@ function FilterableCardLibrary(props) {
         ? nextCards.filter((c) => !c.isBanned)
         : nextCards;
     setCards(nextCardsExcludingForsaken);
-  }, [state, props.filter, data]);
+  }, [state, props.filter]);
 
   useEffect(() => {
     let filteredCards = cards;
@@ -148,39 +123,31 @@ function FilterableCardLibrary(props) {
 
   return (
     <div className="flex-1 flex outline-none">
-      {loading && (
-        <div className="flex flex-1 items-center justify-center">
-          Loading last card ratings...
-        </div>
-      )}
-      {!loading && (
-        <FixedVirtualizedList items={filteredCards}>
-          {({ card, expanded }, { key, index }) => {
-            return card ? (
-              <div
-                key={key}
-                className={`flex flex-col justify-center pr-2 ${
-                  index % 2 === 0 ? "bg-purple-100" : "bg-white"
-                }`}
-              >
-                <CardInDeck
-                  showType
-                  key={card.id}
-                  cardId={card.id}
-                  ranking={card.ranking}
-                  expanded={expanded}
-                  inDeck={!!deck.find(({ id }) => id === card.id)}
-                  format={state.format}
-                  toggleCard={() => dispatch(toggleCardAction(card))}
-                  withAnimation={false}
-                />
-              </div>
-            ) : (
-              <span>NONE</span>
-            );
-          }}
-        </FixedVirtualizedList>
-      )}
+      <FixedVirtualizedList items={filteredCards}>
+        {({ card, expanded }, { key, index }) => {
+          return card ? (
+            <div
+              key={key}
+              className={`flex flex-col justify-center pr-2 ${
+                index % 2 === 0 ? "bg-purple-100" : "bg-white"
+              }`}
+            >
+              <CardInDeck
+                showType
+                key={card.id}
+                cardId={card.id}
+                expanded={expanded}
+                inDeck={!!deck.find(({ id }) => id === card.id)}
+                format={state.format}
+                toggleCard={() => dispatch(toggleCardAction(card))}
+                withAnimation={false}
+              />
+            </div>
+          ) : (
+            <span>NONE</span>
+          );
+        }}
+      </FixedVirtualizedList>
     </div>
   );
 }

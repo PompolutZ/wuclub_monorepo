@@ -1,9 +1,9 @@
 type Size = "small" | "large";
 
 interface FactionDeckPictureProps {
-    faction: string;
-    size: Size;
-    className: string;
+  faction: string;
+  size?: Size;
+  className?: string;
 }
 
 const variants: Record<Size, Record<string, string>> = {

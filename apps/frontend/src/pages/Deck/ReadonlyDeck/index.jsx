@@ -15,10 +15,10 @@ import CardListSectionHeader from "../../../v2/components/CardListSectionHeader"
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
 import DeckSummary from "./DeckSummary";
 import { useState } from "react";
-import { useUpdateUserDeck } from "../../../hooks/wunderworldsAPIHooks";
 import { ModalPresenter } from "../../../main";
 import { DeckPlotCards } from "./atoms/DeckPlotCards";
 import { usePortal } from "../../../hooks/usePortal";
+import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 
 const DeckActionsMenu = lazy(() => import("./atoms/DeckActionsMenu"));
 const DeckActionMenuLarge = lazy(() => import("./atoms/DeckActionsMenuLarge"));
@@ -55,7 +55,7 @@ function ReadonlyDeck(props) {
   const { Portal, open, close, portalClickAwayRef } = usePortal();
   const [isPrivate, setIsPrivate] = useState(props.private);
   const [isProxyPickerVisible, setIsProxyPickerVisible] = useState(false);
-  const [, update] = useUpdateUserDeck();
+  const { mutateAsync: update } = useUpdateDeck();
 
   const handleExportToUDB = () => {
     const invertedPrefixes = Object.entries(udbPrefexes).reduce(
@@ -102,13 +102,9 @@ function ReadonlyDeck(props) {
     setIsPrivate(nextState);
 
     update({
-      url: `/api/v1/user-decks/${id}`,
-      data: {
+      deckId: id,
+      deck: {
         private: nextState,
-        name,
-        faction,
-        deck: cards.map((c) => c.id),
-        sets: Array.from(new Set(cards.map((c) => c.setId))),
       },
     });
   };

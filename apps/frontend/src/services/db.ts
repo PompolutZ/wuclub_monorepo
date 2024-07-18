@@ -2,6 +2,7 @@ import Dexie from "dexie";
 
 const DB_NAME = "wudb";
 
+// TODO: https://github.com/PompolutZ/wuclub_monorepo/issues/4
 class OfflineDatabase extends Dexie {
   anonDecks!: Dexie.Table<AnonDecks, number>;
 
@@ -15,7 +16,6 @@ class OfflineDatabase extends Dexie {
 }
 
 export type AnonDecks = {
-  id: number;
   deckId: string;
   createdutc: number;
   deck: number[];

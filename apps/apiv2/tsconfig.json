@@ -7,8 +7,12 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    // "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src", "infra"],
+  "include": ["src", "infra", "env.d.ts"],
   "exclude": ["node_modules"]
 }

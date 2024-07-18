@@ -3,25 +3,38 @@
   "main": "src/index.ts",
   "author": "Oleh Lutsenko",
   "scripts": {
-    "dev": "tsx watch src/local.ts",
-    "cdk:deploy": "cdk deploy --all --require-approval never --verbose"
+    "tsc": "tsc",
+    "lint:fix": "eslint --fix src",
+    "dev": "tsx watch --env-file=.env src/local.ts",
+    "cdk:deploy": "cdk deploy --all --require-approval never --verbose",
+    "build:client": "tsc -p tsconfig.client.json && cp ./dist/app/index.d.ts ../frontend/src/services/app.ts",
+    "lint": "eslint src/ infra/"
   },
   "dependencies": {
-    "@codegenie/serverless-express": "^4.14.0",
-    "express": "^4.17.1"
+    "@fxdxpz/schema": "workspace:*",
+    "@hono/zod-validator": "^0.2.2",
+    "firebase-admin": "11.11.1",
+    "hono": "^4.4.4",
+    "mongodb": "^6.6.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@fxdxpz/eslint-config": "0.1.0",
-    "@fxdxpz/prettier-config": "0.1.0",
+    "@fxdxpz/eslint-config": "workspace:*",
+    "@fxdxpz/prettier-config": "workspace:*",
+    "@hono/node-server": "^1.11.2",
     "@types/aws-lambda": "^8.10.137",
-    "@types/express": "^4.17.21",
     "@types/node": "^20.12.7",
     "aws-cdk": "^2.136.0",
     "aws-cdk-lib": "^2.136.0",
     "constructs": "^10.3.0",
+    "dotenv": "^16.0.0",
     "esbuild": "^0.20.2",
     "tsx": "^4.7.3",
     "typescript": "^5.4.3"
+  },
+  "volta": {
+    "node": "20.13.0",
+    "pnpm": "8.15.8"
   },
   "prettier": "@fxdxpz/prettier-config"
 }

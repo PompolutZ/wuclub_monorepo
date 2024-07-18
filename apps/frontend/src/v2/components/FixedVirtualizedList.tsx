@@ -34,14 +34,12 @@ export const FixedVirtualizedList = <T,>({
         }
 
         const itemsPerRow = Math.floor(700 / minOptimalWidth);
-        let updatedRows;
+        const updatedRows = items.reduce((result, _, index, array) => {
+          if (index % itemsPerRow === 0) {
+            result.push(array.slice(index, index + itemsPerRow));
+          }
 
-        updatedRows = items.reduce((result, _, index, array) => {
-            if (index % itemsPerRow === 0) {
-                result.push(array.slice(index, index + itemsPerRow));
-            }
-
-            return result;
+          return result;
         }, [] as T[][]);
         setRowHeight(MAGICK_HEIGHT);
         setRows(updatedRows);

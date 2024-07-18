@@ -1,4 +1,2 @@
-import servelessExpress from "@codegenie/serverless-express";
-import { app } from "./app";
-
-export const handler = servelessExpress({ app });
+export { AppRoutes } from "./app";
+export { app } from "./app";

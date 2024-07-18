@@ -8,10 +8,10 @@ import {
   apiSaveDeckAsync,
   apiUpdateDeckAsync,
 } from "./effects";
-import { useSaveDeckFactory } from "../../hooks/useSaveDeckFactory";
-import { useUpdateDeckFactory } from "../../hooks/useUpdateDeckFactory";
 import DeckBuilder from "./DeckBuilder";
 import { useStateCreator } from "./useStateCreator";
+import { useSaveDeck } from "@/shared/hooks/useSaveDeck";
+import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 
 const DeckBuilderContext = React.createContext();
 const DeckBuilderDispatchContext = React.createContext();
@@ -52,8 +52,8 @@ const initialiseState = (deck) => (exec) => {
 };
 
 function DeckBuilderContextProvider({ children, deck }) {
-  const saveDeck = useSaveDeckFactory();
-  const updateDeck = useUpdateDeckFactory();
+  const { mutateAsync: saveDeck } = useSaveDeck();
+  const { mutateAsync: updateDeck } = useUpdateDeck();
   const [state, dispatch] = useEffectReducer(
     deckBuilderReducer,
     initialiseState(deck),
