@@ -6,10 +6,9 @@ import UpgradesList from "./UpgradesList";
 import SaveIcon from "@icons/save.svg?react";
 import CloseIcon from "@icons/x.svg?react";
 import {
-    validateCardForPlayFormat,
-    validateDeckForPlayFormat,
+  validateCardForPlayFormat,
+  validateDeckForPlayFormat,
 } from "../../../../data/wudb";
-import { v4 as uuid4 } from "uuid";
 import { useDeckBuilderState } from "../..";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 
@@ -103,58 +102,54 @@ function Deck({
     }, [objectives, gambits, upgrades, format]);
 
     return (
-        <div>
-            <div className="flex items-center">
-                <div className="flex flex-1 items-center m-2 space-x-2">
-                    <FactionDeckPicture
-                        faction={faction.name}
-                    />
-                    <DebouncedInput
-                        value={deckName}
-                        onChange={onDeckNameChange}
-                        placeholder={`${faction.displayName} Deck`}
-                        className="rounded h-12 bg-gray-200 box-border flex-1 mr-2 py-1 px-2 outline-none border-2 focus:border-purple-700"
-                    />
-                    <button
-                        className="btn btn-purple w-8 h-8 py-0 px-1"
-                        onClick={onSave}
-                    >
-                        <SaveIcon />
-                    </button>
-                    <button className="btn btn-red w-8 h-8 py-0 px-1" onClick={onReset}>
-                        <CloseIcon />
-                    </button>
-                </div>
-            </div>
-            <section className="my-4 text-accent3-700 text-sm p-4">
-                {!isValid && (
-                    <ul>
-                        {issues.map((issue) => (
-                            <li key={uuid4()}>
-                                {issue}
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </section>
-            <div className="flex flex-col xl:grid xl:grid-cols-3 xl:gap-2">
-                <ObjectivesList
-                    isValid={isValid}
-                    format={format}
-                    selectedObjectives={objectives}
-                />
-                <GambitsList
-                    isValid={isValid}
-                    format={format}
-                    selectedGambits={gambits}
-                />
-                <UpgradesList
-                    isValid={isValid}
-                    format={format}
-                    selectedUpgrades={upgrades}
-                />
-            </div>
+      <div>
+        <div className="flex items-center">
+          <div className="flex flex-1 items-center m-2 space-x-2">
+            <FactionDeckPicture faction={faction.name} />
+            <DebouncedInput
+              value={deckName}
+              onChange={onDeckNameChange}
+              placeholder={`${faction.displayName} Deck`}
+              className="rounded h-12 bg-gray-200 box-border flex-1 mr-2 py-1 px-2 outline-none border-2 focus:border-purple-700"
+            />
+            <button
+              className="btn btn-purple w-8 h-8 py-0 px-1"
+              onClick={onSave}
+            >
+              <SaveIcon />
+            </button>
+            <button className="btn btn-red w-8 h-8 py-0 px-1" onClick={onReset}>
+              <CloseIcon />
+            </button>
+          </div>
         </div>
+        <section className="my-4 text-accent3-700 text-sm p-4">
+          {!isValid && (
+            <ul>
+              {issues.map((issue, i) => (
+                <li key={i}>{issue}</li>
+              ))}
+            </ul>
+          )}
+        </section>
+        <div className="flex flex-col xl:grid xl:grid-cols-3 xl:gap-2">
+          <ObjectivesList
+            isValid={isValid}
+            format={format}
+            selectedObjectives={objectives}
+          />
+          <GambitsList
+            isValid={isValid}
+            format={format}
+            selectedGambits={gambits}
+          />
+          <UpgradesList
+            isValid={isValid}
+            format={format}
+            selectedUpgrades={upgrades}
+          />
+        </div>
+      </div>
     );
 }
 
