@@ -120,9 +120,6 @@ importers:
       '@tanstack/react-virtual':
         specifier: 3.0.0-beta.54
         version: 3.0.0-beta.54(react@18.3.1)
-      axios:
-        specifier: ^0.21.2
-        version: 0.21.4
       axios-hooks:
         specifier: ^2.6.3
         version: 2.7.0(axios@0.21.4)(react@18.3.1)
@@ -209,7 +206,7 @@ importers:
         version: 2.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       shared:
         specifier: file:../../shared
-        version: link:../../shared
+        version: file:shared
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.4.0
@@ -5500,6 +5497,9 @@ packages:
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
 
+  shared@file:shared:
+    resolution: {directory: shared, type: directory}
+
   shebang-command@1.2.0:
     resolution: {integrity: sha512-EV3L1+UQWGor21OmnvojK36mhg+TyIKDh3iFBKBohr5xeXIhNBcx8oWdgkTEEQ+BEFFYdLRuqMfd5L84N1V5Vg==}
     engines: {node: '>=0.10.0'}
@@ -9039,6 +9039,10 @@ snapshots:
     dependencies:
       ms: 2.0.0
 
+  debug@3.2.7:
+    dependencies:
+      ms: 2.1.3
+
   debug@3.2.7(supports-color@5.5.0):
     dependencies:
       ms: 2.1.3
@@ -12091,7 +12095,7 @@ snapshots:
   portfinder@1.0.32:
     dependencies:
       async: 2.6.4
-      debug: 3.2.7(supports-color@5.5.0)
+      debug: 3.2.7
       mkdirp: 0.5.6
     transitivePeerDependencies:
       - supports-color
@@ -12769,6 +12773,10 @@ snapshots:
       has-property-descriptors: 1.0.2
 
   setprototypeof@1.2.0: {}
+
+  shared@file:shared:
+    dependencies:
+      uuid: 10.0.0
 
   shebang-command@1.2.0:
     dependencies:
