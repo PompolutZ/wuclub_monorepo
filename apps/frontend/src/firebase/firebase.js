@@ -82,7 +82,6 @@ const Firebase2 = (function () {
             },
           });
           const userInfo = await response.json();
-          console.log("userInfo", userInfo);
 
           if (userInfo) {
             next({
