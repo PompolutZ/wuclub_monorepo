@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { Factions } from "./factions";
 
-// Deck payload is used to post a new deck, since some of the 
+// Deck payload is used to post a new deck, since some of the
 // deck properties will be generated server-side.
 export const deckPayloadSchema = z
   .object({
@@ -21,5 +22,10 @@ export const deckSchema = deckPayloadSchema.extend({
   createdutc: z.number(),
   updatedutc: z.number(),
 });
+
+export type DeckStat = {
+  faction: Factions;
+  count: number;
+};
 
 export type Deck = z.infer<typeof deckSchema>;

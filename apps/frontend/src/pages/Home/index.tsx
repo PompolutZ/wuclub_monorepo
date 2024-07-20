@@ -1,15 +1,14 @@
 import { useHistory } from "react-router-dom";
 import Footer from "../../components/Footer";
-import { grouppedFactions } from "../../data/wudb";
-import DeckMetaSummary from "../../molecules/DecksMetaSummary";
+import { Card } from "../../data/wudb/types";
+import DeckMetaSummary from "./DecksMetaSummary";
 import { AutosuggestSearch } from "./Search";
 import { useDeckStats } from "./useDeckStats";
 
 const Home = () => {
   const history = useHistory();
   const { data: stats } = useDeckStats();
-
-  const handleGlobalSearchClick = (payload) => {
+  const handleGlobalSearchClick = (payload: Card) => {
     history.push(`/view/card/${payload.id}`);
   };
 
@@ -26,16 +25,9 @@ const Home = () => {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {grouppedFactions()
-          .slice(1)
-          .flatMap(({ factions }) => factions)
-          .map((faction) => (
-            <DeckMetaSummary
-              key={faction.abbr}
-              faction={faction.name}
-              stats={stats}
-            />
-          ))}
+        {stats?.map(({ faction, count }) => (
+          <DeckMetaSummary key={faction} faction={faction} count={count} />
+        ))}
       </div>
 
       <Footer />

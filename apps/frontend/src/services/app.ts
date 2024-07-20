@@ -3,7 +3,8 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
         $get: {
             input: {};
             output: {
-                [x: string]: any;
+                faction: import("@fxdxpz/schema").Factions;
+                count: number;
             }[];
             outputFormat: "json";
             status: import("hono/utils/http-status").StatusCode;
