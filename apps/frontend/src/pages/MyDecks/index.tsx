@@ -7,6 +7,7 @@ import { AnonymousUserDecksStorageInfo } from "./AnonymousUserDeckStorageInfo";
 import { DeckLink } from "./DeckLink";
 import { useAnonDecksSynchronisation } from "./useAnonDeckSyncronisation";
 import { useUserDecksQuery } from "./useUserDecksQuery";
+import { LazyLoading } from "../../components/LazyLoading";
 
 function MyDecksPage() {
   const user = useAuthUser();
@@ -14,7 +15,7 @@ function MyDecksPage() {
   const { mutateAsync } = useDeleteDeck();
 
   useAnonDecksSynchronisation();
-  
+
   const [confirmDeleteDeckId, setConfirmDeleteDeckId] = useState<string | null>(
     null,
   );
@@ -40,11 +41,7 @@ function MyDecksPage() {
   return (
     <div className="flex-1 flex p-4 flex-col">
       {!user && <AnonymousUserDecksStorageInfo />}
-      {loading && (
-        <div className="flex items-center justify-center">
-          <p>Loading...</p>
-        </div>
-      )}
+      {loading && <LazyLoading />}
       {!loading && userDecks?.length === 0 && (
         <div className="flex-1 flex items-center justify-center">
           <p>

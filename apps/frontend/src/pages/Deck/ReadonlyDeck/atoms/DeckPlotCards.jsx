@@ -77,7 +77,7 @@ const PlotsCarousel = forwardRef(function PlotsCarousel({ plots = [] }, ref) {
 
   return (
     <div className="flex flex-col items-center" ref={ref}>
-      <Carousel setApi={setApi} className="w-5/6 max-w-xs">
+      <Carousel setApi={setApi} className="w-5/6 lg:w-full">
         <CarouselContent>
           {plotAssets.map((asset) => (
             <CarouselItem key={asset}>

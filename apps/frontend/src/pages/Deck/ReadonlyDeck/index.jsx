@@ -1,8 +1,10 @@
-import React, { lazy, Suspense } from "react";
-import { Set } from "immutable";
-import ScoringOverview from "../../../atoms/ScoringOverview";
-import Card from "./atoms/Card";
+import { LazyLoading } from "@/components/LazyLoading";
+import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
+import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
 import * as clipboard from "clipboard-polyfill";
+import { Set } from "immutable";
+import { lazy, Suspense, useState } from "react";
+import ScoringOverview from "../../../atoms/ScoringOverview";
 import {
   checkCardIsObjective,
   checkCardIsPloy,
@@ -11,14 +13,11 @@ import {
   compareObjectivesByScoreType,
   udbPrefexes,
 } from "../../../data/wudb";
-import CardListSectionHeader from "../../../v2/components/CardListSectionHeader";
-import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
-import DeckSummary from "./DeckSummary";
-import { useState } from "react";
 import { ModalPresenter } from "../../../main";
+import CardListSectionHeader from "../../../v2/components/CardListSectionHeader";
+import Card from "./atoms/Card";
 import { DeckPlotCards } from "./atoms/DeckPlotCards";
-import { usePortal } from "../../../hooks/usePortal";
-import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
+import DeckSummary from "./DeckSummary";
 
 const DeckActionsMenu = lazy(() => import("./atoms/DeckActionsMenu"));
 const DeckActionMenuLarge = lazy(() => import("./atoms/DeckActionsMenuLarge"));
@@ -52,7 +51,6 @@ function ReadonlyDeck(props) {
     createdutc,
     updatedutc,
   } = props;
-  const { Portal, open, close, portalClickAwayRef } = usePortal();
   const [isPrivate, setIsPrivate] = useState(props.private);
   const [isProxyPickerVisible, setIsProxyPickerVisible] = useState(false);
   const { mutateAsync: update } = useUpdateDeck();
@@ -249,7 +247,7 @@ function ReadonlyDeck(props) {
 
       {isProxyPickerVisible && (
         <ModalPresenter>
-          <Suspense fallback="Loading...">
+          <Suspense fallback={<LazyLoading />}>
             <CardProxyMaker
               factionId={faction}
               cards={cards}
@@ -258,12 +256,6 @@ function ReadonlyDeck(props) {
           </Suspense>
         </ModalPresenter>
       )}
-
-      <Portal>
-        <div className="h-full w-full grid place-content-center">
-          <div ref={portalClickAwayRef}></div>
-        </div>
-      </Portal>
     </div>
   );
 }
