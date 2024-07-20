@@ -23,29 +23,30 @@ export function FactionDeckPicture({
     size = "small",
 }: FactionDeckPictureProps) {
     return (
-        <div className={className}>
-            <div className={variants[size].container}>
-                <div className={variants[size].icon}>
-                    <picture>
-                        <source
-                            type="image/webp"
-                            srcSet={`/assets/icons/${faction}-icon.webp`}
-                        />
-                        <img src={`/assets/icons/${faction}-icon.png`} />
-                    </picture>
-                </div>
-                <picture>
-                    <source
-                        type="image/webp"
-                        srcSet="/assets/icons/Faction_Ring_with_Cards.webp"
-                    />
-                    <img
-                        className="absolute"
-                        src="/assets/icons/Faction_Ring_with_Cards.png"
-                    />
-                </picture>
-            </div>
+      <div className={className}>
+        <div className={variants[size].container}>
+          <div className={variants[size].icon}>
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={`/assets/icons/${faction}-icon.webp`}
+              />
+              <img alt={faction} src={`/assets/icons/${faction}-icon.png`} />
+            </picture>
+          </div>
+          <picture>
+            <source
+              type="image/webp"
+              srcSet="/assets/icons/Faction_Ring_with_Cards.webp"
+            />
+            <img
+              alt="deck of cards in hand"
+              className="absolute"
+              src="/assets/icons/Faction_Ring_with_Cards.png"
+            />
+          </picture>
         </div>
+      </div>
     );
 }
 
