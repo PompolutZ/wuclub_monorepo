@@ -17,4 +17,13 @@ export default defineConfig({
     },
   },
   plugins: [react(), svgr()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes("wudb/db")) return "db";
+        },
+      },
+    },
+  },
 });
