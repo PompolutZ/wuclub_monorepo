@@ -13,7 +13,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col relative">
+    <div className="relative">
       <h1 className="block text-2xl my-16 px-2 text-center text-white font-semibold">
         Deck building website for Warhammer Underworlds.
       </h1>
@@ -24,7 +24,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 min-h-screen">
         {stats?.map(({ faction, count }) => (
           <DeckMetaSummary key={faction} faction={faction} count={count} />
         ))}
