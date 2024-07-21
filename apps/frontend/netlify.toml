@@ -5,15 +5,9 @@
   status = 301
 
 [[redirects]]
-  from = "/__/auth/*"
-  to = "/signin_helpers/auth/*"
-  status = 200
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
 
 [[headers]]
   for = "/assets/*"
