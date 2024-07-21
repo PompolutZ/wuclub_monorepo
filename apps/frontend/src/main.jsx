@@ -10,7 +10,7 @@ import {
 import "./index.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import ErrorBoundary from "./components/ErrorBoundary";
-import LazyLoading from "./components/LazyLoading";
+import { LazyLoading } from "./components/LazyLoading";
 import * as ROUTES from "./constants/routes";
 import Firebase, { FirebaseContext } from "./firebase";
 import { AuthContextProvider } from "./hooks/useAuthUser";

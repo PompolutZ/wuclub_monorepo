@@ -10,6 +10,7 @@ import {
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithRedirect,
+  getRedirectResult,
 } from "firebase/auth";
 import { api } from "@/services/api";
 
@@ -34,7 +35,7 @@ const Firebase2 = (function () {
       return signInWithRedirect(auth, new FacebookAuthProvider());
     },
 
-    signInWithGoogleProvider: function signInWithGoogleProvider() {
+    signInWithGoogleProvider: async function signInWithGoogleProvider() {
       return signInWithRedirect(auth, new GoogleAuthProvider());
     },
 
@@ -72,34 +73,45 @@ const Firebase2 = (function () {
       });
     },
 
-    onAuthUserListener: function onAuthUserListener(next, fallback) {
-      return onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          const token = await user.getIdToken();
-          const response = await api.v2.users.$get(undefined, {
-            headers: {
-              authtoken: token,
-            },
-          });
-          const userInfo = await response.json();
+    getRedirectResult() {
+      return getRedirectResult(auth);
+    },
 
-          if (userInfo) {
-            next({
-              ...userInfo,
-              uid: user.uid,
-              isNew: false,
+    onAuthUserListener: function onAuthUserListener(next, fallback) {
+      return onAuthStateChanged(
+        auth,
+        async (user) => {
+          if (user) {
+            const token = await user.getIdToken();
+            const response = await api.v2.users.$get(undefined, {
+              headers: {
+                authtoken: token,
+              },
             });
+            const userInfo = await response.json();
+
+            if (userInfo) {
+              next({
+                ...userInfo,
+                uid: user.uid,
+                isNew: false,
+              });
+            } else {
+              next({
+                uid: user.uid,
+                isNew: true,
+              });
+            }
           } else {
-            next({
-              uid: user.uid,
-              isNew: true,
-            });
+            console.error("Cannot login, fallback");
+            fallback();
           }
-        } else {
-          console.error("Cannot login, fallback");
+        },
+        (error) => {
+          console.error(error);
           fallback();
-        }
-      });
+        },
+      );
     },
 
     sendPasswordResetEmail: function invokeSendPasswordResetEmail(email) {

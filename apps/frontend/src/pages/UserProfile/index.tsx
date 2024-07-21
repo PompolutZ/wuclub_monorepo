@@ -3,6 +3,7 @@ import AvatarPicker from "../../components/AvatarPicker";
 import { generateUsername } from "./generateUsername";
 import { useQueryUserData, useCreateUser, useUpdateUser } from "./queries";
 import { Factions } from "@fxdxpz/schema";
+import { LazyLoading } from "../../components/LazyLoading";
 
 function UserProfile() {
   const { data, isLoading } = useQueryUserData();
@@ -48,11 +49,7 @@ function UserProfile() {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex-1 flex items-center justify-center">
-        Hang on please...
-      </div>
-    );
+    return <LazyLoading />;
   }
 
   return (

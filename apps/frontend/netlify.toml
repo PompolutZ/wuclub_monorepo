@@ -9,6 +9,10 @@
   to = "/index.html"
   status = 200
 
+[[redirects]]
+  from = "/__/*"
+  to = "/signin_helpers/*"
+
 [[headers]]
   for = "/assets/*"
 
