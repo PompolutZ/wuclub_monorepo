@@ -1,12 +1,14 @@
 export default async (request, context) => {
   const url = new URL(request.url);
   if (url.pathname.startsWith("/__/auth/")) {
-    const response = await fetch(
-      `https://yawudb.firebaseapp.com${url.pathname}${url.search}`,
-      request,
-    );
+    console.log("Pathname", url.pathname);
+    console.log("Search", url.search);
 
-    return response;
+    const newUrl = new URL(request.url);
+    newUrl.hostname = "yawudb.firebaseapp.com";
+
+    const proxyRequest = new Request(newUrl.toString(), request);
+    return fetch(proxyRequest);
   }
 
   return context.next();
