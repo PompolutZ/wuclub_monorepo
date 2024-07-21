@@ -5,8 +5,8 @@
   status = 301
 
 [[redirects]]
-  from = "/__/*"
-  to = "/signin_helpers/*"
+  from = "/__/auth/*"
+  to = "/signin_helpers/auth/*"
   status = 200
 
 [[redirects]]
@@ -20,7 +20,7 @@
 
   [headers.values]
     # Multi-value headers are expressed with multi-line strings.
-    cache-control = '''public, max-age=2628000''' 
+    cache-control = '''public, max-age=5256000''' 
 
 [[headers]]
   for = "index.html"
