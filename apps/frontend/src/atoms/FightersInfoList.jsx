@@ -37,7 +37,7 @@ export default function FightersInfoList({ onClose }) {
   const clickedAway = useClickAway();
 
   useEffect(() => {
-    if (clickedAway) {
+    if (clickedAway && onClose) {
       onClose();
     }
   }, [clickedAway, onClose]);
