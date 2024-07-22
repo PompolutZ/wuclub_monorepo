@@ -9,6 +9,7 @@ import {
 } from "../../../../data/wudb";
 import { toggleCardAction } from "../../reducer";
 import CardInDeck from "./Card";
+import { factions } from "../../../../data/wudb/db";
 
 function stringTypeToNumber(type) {
   switch (type) {
@@ -49,9 +50,10 @@ function FilterableCardLibrary(props) {
 
   useEffect(() => {
     const rivalsDeckId = factionsRivalsDecks[state.faction.name];
+
     const factionCards = Object.values(wucards).filter((card) =>
       rivalsDeckId
-        ? card.setId === rivalsDeckId
+        ? card.setId === rivalsDeckId && card.factionId === state.faction.id
         : card.factionId === state.faction.id &&
           (card.duplicates ? card.id === Math.max(...card.duplicates) : true),
     );
