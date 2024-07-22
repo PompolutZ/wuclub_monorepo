@@ -4,7 +4,6 @@ import { FirebaseContext } from "../firebase";
 import SectionTitle from "../v2/components/SectionTitle";
 import { MY_DECKS, PROFILE, SIGN_UP } from "../constants/routes";
 import GoogleButton from "react-google-button";
-import { FacebookLoginButton } from "react-social-login-buttons";
 
 function EmailPasswordForm({ purpose, onUseCredentials }) {
   const [email, setEmail] = useState("");
@@ -119,10 +118,6 @@ function Login() {
     <div className="flex-1 text-gray-900">
       <div className="w-full sm:w-2/4 lg:w-1/4 mx-auto p-4 space-y-4">
         <h1 className="text-xl">Welcome to WUnderworlds, stranger!</h1>
-        <FacebookLoginButton
-          style={{ margin: "1rem 0" }}
-          onClick={firebase.signInWithFacebookProvider}
-        />
         <GoogleButton
           style={{ width: "100%" }}
           onClick={firebase.signInWithGoogleProvider}
