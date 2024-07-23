@@ -11,6 +11,7 @@ import {
   sendPasswordResetEmail,
   signInWithRedirect,
   getRedirectResult,
+  signInWithPopup,
 } from "firebase/auth";
 import { api } from "@/services/api";
 
@@ -36,7 +37,8 @@ const Firebase2 = (function () {
     },
 
     signInWithGoogleProvider: async function signInWithGoogleProvider() {
-      return signInWithRedirect(auth, new GoogleAuthProvider());
+      return signInWithPopup(auth, new GoogleAuthProvider());
+      // return signInWithRedirect(auth, new GoogleAuthProvider());
     },
 
     signInWithEmailAndPassword: function signInWithEmailAndPassword(
