@@ -12,7 +12,7 @@ import FightersInfoList from "../../../atoms/FightersInfoList";
 import useAuthUser from "../../../hooks/useAuthUser";
 import { useBreakpoint } from "../../../hooks/useMediaQuery";
 import { resetDeckAction, saveDeckAction, updateDeckAction } from "../reducer";
-import BottomPanelNavigation from "./components/BottomPanelNavigation";
+import BottomPanelNavigation from "../../../shared/components/BottomPanelNavigation";
 import CardLibraryToggles from "./components/CardLibraryFilters";
 import CardsLibrary from "./components/CardsLibrary";
 import Deck from "./components/Deck";
