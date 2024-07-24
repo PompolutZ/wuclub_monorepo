@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import { animated, useSpring, useTransition } from "@react-spring/web";
 import MenuIcon from "@icons/menu.svg?react";
 import CoffeeIcon from "@icons/coffee.svg?react";
-import Divider from "./Divider";
+import { Divider } from "./Divider";
 import { FirebaseContext } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import useMeasure from "react-use-measure";

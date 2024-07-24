@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
 import ToggableExpansionIcon from "../atoms/ToggableExpansionIcon";
 import { NEMESIS_FORMAT, setHasPlot } from "../data/wudb";
-import Toggle from "../v2/components/HexToggle";
+import Toggle from "../shared/components/HexToggle";
 import CompassIcon from "@icons/compass.svg?react";
 
 function ExpansionsToggle({

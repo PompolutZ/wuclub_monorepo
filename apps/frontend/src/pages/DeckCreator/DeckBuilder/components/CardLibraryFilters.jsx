@@ -2,7 +2,7 @@ import {
   FactionDeckPicture,
   FactionPicture,
 } from "@components/FactionDeckPicture";
-import { Overlay } from "@components/Overlay";
+import { Overlay } from "@/shared/components/Overlay";
 import CompassIcon from "@icons/compass.svg?react";
 import TogglesIcon from "@icons/sliders.svg?react";
 import CloseIcon from "@icons/x.svg?react";
@@ -20,10 +20,10 @@ import {
 } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormatInfo";
-import { DeckPlayFormatToggle } from "../../../../v2/components/DeckPlayFormatToggle";
-import Toggle from "../../../../v2/components/HexToggle";
-import IconButton from "../../../../v2/components/IconButton";
-import SectionTitle from "../../../../v2/components/SectionTitle";
+import { DeckPlayFormatToggle } from "../../../../shared/components/DeckPlayFormatToggle";
+import Toggle from "../../../../shared/components/HexToggle";
+import IconButton from "../../../../shared/components/IconButton";
+import SectionTitle from "../../../../shared/components/SectionTitle";
 
 function SelectedFaction({ faction = "morgwaeths-blade-coven", ...rest }) {
   return (

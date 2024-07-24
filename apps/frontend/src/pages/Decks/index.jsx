@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { FixedVirtualizedList } from "../../v2/components/FixedVirtualizedList";
+import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import PublicDeckLink from "./PublicDeckLink";
 import { useQueryDecks } from "./useDecksQuery";
 

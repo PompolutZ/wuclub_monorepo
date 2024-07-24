@@ -6,15 +6,15 @@ import {
     wucards,
     wufactions,
 } from "../../data/wudb";
-import SectionTitle from "../../v2/components/SectionTitle";
-import { DeckPlayFormatToggle } from "../../v2/components/DeckPlayFormatToggle";
+import SectionTitle from "../../shared/components/SectionTitle";
+import { DeckPlayFormatToggle } from "../../shared/components/DeckPlayFormatToggle";
 import { DeckPlayFormatInfo } from "../../shared/components/DeckPlayFormatInfo";
-import IconButton from "../../v2/components/IconButton";
+import IconButton from "../../shared/components/IconButton";
 import TogglesIcon from "@icons/sliders.svg?react";
 import { sortByIdAsc } from "../../utils/sort";
-import { GrouppedFactionsToggle } from "../../v2/components/GrouppedFactionsToggle";
-import { GrouppedExpansions } from "../../v2/components/GrouppedExpansions";
-import { FixedVirtualizedList } from "../../v2/components/FixedVirtualizedList";
+import { GrouppedFactionsToggle } from "../../shared/components/GrouppedFactionsToggle";
+import { GrouppedExpansions } from "../../shared/components/GrouppedExpansions";
+import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import { getCardPathByCardId } from "../../utils/helpers";
 
 function useFilteredCards(factions = [], expansions = []) {

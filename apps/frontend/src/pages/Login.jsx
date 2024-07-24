@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FirebaseContext } from "../firebase";
-import SectionTitle from "../v2/components/SectionTitle";
+import SectionTitle from "../shared/components/SectionTitle";
 import { MY_DECKS, PROFILE, SIGN_UP } from "../constants/routes";
 import GoogleButton from "react-google-button";
 

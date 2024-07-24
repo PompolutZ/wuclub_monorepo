@@ -8,7 +8,7 @@ import {
 } from "../../../../../data/wudb";
 import ToggleButton from "../ToggleButton";
 import { useDeckBuilderState } from "../../..";
-import IconButton from "../../../../../v2/components/IconButton";
+import IconButton from "../../../../../shared/components/IconButton";
 
 function CardsTab({
     enabledTypes,

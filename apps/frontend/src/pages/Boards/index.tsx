@@ -6,7 +6,7 @@ import {
   getBoardsValidForFormat,
 } from "../../data/wudb";
 import { BOARDS_BASE } from "../../constants/routes";
-import SectionTitle from "../../v2/components/SectionTitle";
+import SectionTitle from "../../shared/components/SectionTitle";
 
 interface BoardsRouteParams {
   format: string;

@@ -1,5 +1,5 @@
 import useAuthUser from "../../../../hooks/useAuthUser";
-import { PeopleIcon, PersonIcon } from "../../../../v2/components/Icons";
+import { PeopleIcon, PersonIcon } from "../../../../shared/components/Icons";
 
 const DeckPrivacyToggleButton = ({
   onClick,

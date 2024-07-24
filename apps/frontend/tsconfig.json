@@ -19,7 +19,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@icons/*": ["./src/svgs/*"],
-      "@components/*": ["./src/v2/components/*"],
+      "@components/*": ["./src/shared/components/*"],
       "@wudb/*": ["./src/data/wudb/*"],
       "@wudb": ["./src/data/wudb/index.js"],
       "@services/*": ["./src/services/*"]

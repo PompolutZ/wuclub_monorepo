@@ -1,8 +1,8 @@
 import React from "react";
 import SetsList from "../../../atoms/SetsList";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
-import { PeopleIcon, PersonIcon } from "../../../v2/components/Icons";
-import { DeckTitle } from "@components/DeckTitle";
+import { PeopleIcon, PersonIcon } from "../../../shared/components/Icons";
+import { DeckTitle } from "@/shared/components/DeckTitle";
 
 function DeckSummary({ faction, name, date, sets, children, isPrivate }) {
   return (

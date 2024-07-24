@@ -14,8 +14,8 @@ import { LazyLoading } from "./components/LazyLoading";
 import * as ROUTES from "./constants/routes";
 import Firebase, { FirebaseContext } from "./firebase";
 import { AuthContextProvider } from "./hooks/useAuthUser";
-import HeroImage from "./v2/components/HeroImage";
-import NavigationPanel from "./v2/components/NavigationPanel";
+import HeroImage from "./shared/components/HeroImage";
+import NavigationPanel from "./shared/components/NavigationPanel";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { queryClient } from "@services/queryClient";
 

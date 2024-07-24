@@ -2,10 +2,10 @@ import React, { useMemo } from "react";
 import ScoringOverview from "../../../../atoms/ScoringOverview";
 import { CardsList } from "./CardsList";
 import { CardListSectionHeader } from "../../../../shared/components/CardListSectionHeader";
-import SectionTitle from "../../../../v2/components/SectionTitle";
+import SectionTitle from "../../../../shared/components/SectionTitle";
 import { animated, useSpring } from "@react-spring/web";
 import { useResizeHeight } from "../../../../hooks/useResizeHeight";
-import { ExpandCollapseButton } from "../../../../v2/components/ExpandCollapseButton";
+import { ExpandCollapseButton } from "../../../../shared/components/ExpandCollapseButton";
 
 function ObjectivesList({ selectedObjectives, format, isValid }) {
   const [measureRef, open, toggle, contentHeight] = useResizeHeight({

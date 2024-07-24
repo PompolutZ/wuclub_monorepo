@@ -11,7 +11,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "@icons": path.resolve(__dirname, "./src/svgs"),
-      "@components": path.resolve(__dirname, "./src/v2/components"),
+      "@components": path.resolve(__dirname, "./src/shared/components"),
       "@wudb": path.resolve(__dirname, "./src/data/wudb"),
       "@services": path.resolve(__dirname, "./src/services"),
     },

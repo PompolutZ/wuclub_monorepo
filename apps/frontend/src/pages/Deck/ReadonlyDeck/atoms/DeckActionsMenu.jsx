@@ -5,10 +5,10 @@ import { DeleteMenuButton } from "./IconButton";
 import ExportMenu from "./ExportMenu";
 import DropdownMenu from "./DropdownMenu";
 import {
-    EditIcon,
-    MoreVerticalIcon,
-    ShareIcon,
-} from "../../../../v2/components/Icons";
+  EditIcon,
+  MoreVerticalIcon,
+  ShareIcon,
+} from "../../../../shared/components/Icons";
 import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
 
 function DeckActionsMenu({

@@ -11,7 +11,7 @@ import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
-import { DeckTitle } from "@components/DeckTitle";
+import { DeckTitle } from "@/shared/components/DeckTitle";
 
 const getPlotKeywords = (faction, sets) => {
     if (!checkDeckHasPlots(faction, sets)) return [];

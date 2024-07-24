@@ -9,7 +9,7 @@ import {
     validateCardForPlayFormat,
 } from "../data/wudb";
 import CardImage from "../shared/components/CardImage";
-import { PlayFormatPicture } from "../v2/components/PlayFormatPicture";
+import { PlayFormatPicture } from "../shared/components/PlayFormatPicture";
 
 function Card() {
     const { id } = useParams();

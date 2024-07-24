@@ -3,7 +3,7 @@ import { CardsList } from "./CardsList";
 import { CardListSectionHeader } from "../../../../shared/components/CardListSectionHeader";
 import { animated, useSpring } from "@react-spring/web";
 import { useResizeHeight } from "../../../../hooks/useResizeHeight";
-import { ExpandCollapseButton } from "../../../../v2/components/ExpandCollapseButton";
+import { ExpandCollapseButton } from "../../../../shared/components/ExpandCollapseButton";
 
 function GambitsList({ selectedGambits, format, isValid }) {
     const [measureRef, open, toggle, contentHeight] = useResizeHeight({

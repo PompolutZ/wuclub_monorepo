@@ -6,7 +6,7 @@ import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
 import { VIEW_DECK } from "../../constants/routes";
 import { checkCardIsObjective, getCardById } from "../../data/wudb";
-import { DeckTitle } from "@components/DeckTitle";
+import { DeckTitle } from "@/shared/components/DeckTitle";
 import { PeopleIcon } from "@components/Icons";
 
 type Props = {

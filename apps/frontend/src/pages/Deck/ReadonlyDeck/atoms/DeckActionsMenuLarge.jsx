@@ -4,7 +4,7 @@ import DropdownMenu from "./DropdownMenu";
 import ExportMenu from "./ExportMenu";
 import { Menu } from "@headlessui/react";
 import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
-import { EditIcon } from "../../../../v2/components/Icons";
+import { EditIcon } from "../../../../shared/components/Icons";
 
 function DeckActionMenuLarge({
     deckId,
