@@ -65,15 +65,6 @@ function Login() {
   const [loginError, setLoginError] = useState(undefined);
   const firebase = useContext(FirebaseContext);
 
-  useEffect(() => {
-    firebase
-      .getRedirectResult()
-      .then((result) => {
-        console.log("I am here!", result);
-      })
-      .catch((error) => console.log("Noooo", error));
-  }, [firebase]);
-
   React.useEffect(() => {
     const unsubscribe = firebase.onAuthUserListener(
       async (user) => {
