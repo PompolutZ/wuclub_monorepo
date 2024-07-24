@@ -13,7 +13,7 @@ import {
   validateCardForPlayFormat,
 } from "../../../../data/wudb";
 import { ModalPresenter } from "../../../../main";
-import CardImage from "../../../../v2/components/CardImage";
+import CardImage from "../../../../shared/components/CardImage";
 import { Waves } from "@wudb/waves";
 
 window.process = { cwd: () => "" };

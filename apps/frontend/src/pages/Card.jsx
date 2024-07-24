@@ -8,7 +8,7 @@ import {
     RELIC_FORMAT,
     validateCardForPlayFormat,
 } from "../data/wudb";
-import CardImage from "../v2/components/CardImage";
+import CardImage from "../shared/components/CardImage";
 import { PlayFormatPicture } from "../v2/components/PlayFormatPicture";
 
 function Card() {

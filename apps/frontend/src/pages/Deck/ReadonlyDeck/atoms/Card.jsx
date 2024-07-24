@@ -7,7 +7,7 @@ import {
 } from "../../../../data/wudb/index";
 import { pickCardColor2 } from "../../../../utils/functions";
 import AnimateHeight from "react-animate-height";
-import CardImage from "../../../../v2/components/CardImage";
+import CardImage from "../../../../shared/components/CardImage";
 import CardRule from "../../../../atoms/CardRule";
 import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
 import LockIcon from "@icons/lock.svg?react";
