@@ -13,7 +13,7 @@ import {
   udbPrefexes,
 } from "../../../data/wudb";
 import { ModalPresenter } from "../../../main";
-import CardListSectionHeader from "../../../v2/components/CardListSectionHeader";
+import { CardListSectionHeader } from "../../../shared/components/CardListSectionHeader";
 import Card from "./atoms/Card";
 import { DeckPlotCards } from "./atoms/DeckPlotCards";
 import DeckSummary from "./DeckSummary";

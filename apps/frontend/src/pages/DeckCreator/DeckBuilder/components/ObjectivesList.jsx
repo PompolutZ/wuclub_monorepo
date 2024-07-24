@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import ScoringOverview from "../../../../atoms/ScoringOverview";
 import { CardsList } from "./CardsList";
-import CardListSectionHeader from "../../../../v2/components/CardListSectionHeader";
+import { CardListSectionHeader } from "../../../../shared/components/CardListSectionHeader";
 import SectionTitle from "../../../../v2/components/SectionTitle";
 import { animated, useSpring } from "@react-spring/web";
 import { useResizeHeight } from "../../../../hooks/useResizeHeight";

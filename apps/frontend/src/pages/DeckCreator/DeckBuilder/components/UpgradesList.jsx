@@ -1,5 +1,5 @@
 import { CardsList } from "./CardsList";
-import CardListSectionHeader from "../../../../v2/components/CardListSectionHeader";
+import { CardListSectionHeader } from "../../../../shared/components/CardListSectionHeader";
 import { ExpandCollapseButton } from "../../../../v2/components/ExpandCollapseButton";
 import { useResizeHeight } from "../../../../hooks/useResizeHeight";
 import { animated, useSpring } from "@react-spring/web";
