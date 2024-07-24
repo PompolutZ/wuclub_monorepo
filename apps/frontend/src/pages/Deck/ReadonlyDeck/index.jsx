@@ -9,7 +9,6 @@ import {
   checkCardIsObjective,
   checkCardIsPloy,
   checkCardIsUpgrade,
-  checkDeckHasPlots,
   compareObjectivesByScoreType,
   udbPrefexes,
 } from "../../../data/wudb";
@@ -206,11 +205,7 @@ function ReadonlyDeck(props) {
         </>
       </div>
 
-      {checkDeckHasPlots(faction, sets) && (
-        <div className="m-4 lg:ml-24 bg-purple-700 p-2 rounded-md text-white">
-          <DeckPlotCards factionId={faction} sets={sets} />
-        </div>
-      )}
+      <DeckPlotCards factionId={faction} sets={sets} />
 
       <div
         className={`mt-4 lg:mt-8 mb-8 ${
