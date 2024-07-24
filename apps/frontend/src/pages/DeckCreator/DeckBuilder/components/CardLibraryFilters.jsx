@@ -19,7 +19,7 @@ import {
   wusets,
 } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
-import { DeckPlayFormatInfo } from "../../../../v2/components/DeckPlayFormatInfo";
+import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormatInfo";
 import { DeckPlayFormatToggle } from "../../../../v2/components/DeckPlayFormatToggle";
 import Toggle from "../../../../v2/components/HexToggle";
 import IconButton from "../../../../v2/components/IconButton";

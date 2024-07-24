@@ -8,7 +8,7 @@ import {
 } from "../../data/wudb";
 import SectionTitle from "../../v2/components/SectionTitle";
 import { DeckPlayFormatToggle } from "../../v2/components/DeckPlayFormatToggle";
-import { DeckPlayFormatInfo } from "../../v2/components/DeckPlayFormatInfo";
+import { DeckPlayFormatInfo } from "../../shared/components/DeckPlayFormatInfo";
 import IconButton from "../../v2/components/IconButton";
 import TogglesIcon from "@icons/sliders.svg?react";
 import { sortByIdAsc } from "../../utils/sort";
