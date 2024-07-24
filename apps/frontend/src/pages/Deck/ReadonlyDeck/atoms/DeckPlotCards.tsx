@@ -97,8 +97,11 @@ const PlotsCarousel = forwardRef<HTMLDivElement, { plots: Plot[] }>(
     }, [api]);
 
     return (
-      <div className="flex flex-col items-center" ref={ref}>
-        <Carousel setApi={setApi} className="w-3/4 lg:w-72">
+      <div
+        className="flex flex-col items-center w-5/6 lg:w-72 mx-auto"
+        ref={ref}
+      >
+        <Carousel setApi={setApi}>
           <CarouselContent>
             {plotAssets.map((asset) => (
               <CarouselItem key={asset}>
@@ -111,13 +114,14 @@ const PlotsCarousel = forwardRef<HTMLDivElement, { plots: Plot[] }>(
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <div className="flex items-center justify-center space-x-2 mt-2">
+            <CarouselPrevious />
+            <div className="py-2 text-center">
+              Card {current} of {plotAssets.length}
+            </div>
+            <CarouselNext />
+          </div>
         </Carousel>
-
-        <div className="py-2 text-center">
-          Card {current} of {plotAssets.length}
-        </div>
       </div>
     );
   },
