@@ -76,16 +76,6 @@ function ReadonlyDeck(props) {
     );
   };
 
-  const handleExportToUDS = () => {
-    const udsEncodedCards = props.cards
-      .map((card) => Number(card.id) - 1000)
-      .join();
-
-    window.open(
-      `https://www.underworlds-deckers.com/en/tournament-decks/?Deck=https://wunderworlds.club/cards,${udsEncodedCards}`,
-    );
-  };
-
   const handleCreateShareableLink = () => {
     const link = `${
       import.meta.env.VITE_BASE_URL
@@ -176,8 +166,6 @@ function ReadonlyDeck(props) {
               deckId={id}
               canUpdateOrDelete={props.canUpdateOrDelete}
               exportToUDB={handleExportToUDB}
-              exportToUDS={handleExportToUDS}
-              exportToClub={handleExportToClub(cards)}
               createShareableLink={handleCreateShareableLink}
               onDelete={props.onDelete}
               onToggleDeckPrivacy={toggleDeckPrivacy}
@@ -193,8 +181,6 @@ function ReadonlyDeck(props) {
               deck={deck}
               deckId={id}
               exportToUDB={handleExportToUDB}
-              exportToUDS={handleExportToUDS}
-              exportToClub={handleExportToClub(cards)}
               createShareableLink={handleCreateShareableLink}
               onDelete={props.onDelete}
               onToggleDeckPrivacy={toggleDeckPrivacy}
@@ -254,19 +240,6 @@ function ReadonlyDeck(props) {
     </div>
   );
 }
-
-const handleExportToClub = (cards) => () => {
-  const objectives = cards
-    .filter(checkCardIsObjective)
-    .map((card) => `${card.id}`.padStart(5, "0"));
-
-  const powers = cards
-    .filter((c) => !checkCardIsObjective(c))
-    .map((card) => `${card.id}`.padStart(5, "0"));
-
-  const deck = JSON.stringify([objectives, powers]);
-  clipboard.writeText(deck);
-};
 
 const vassalPrefixMap = {
   23: 230,

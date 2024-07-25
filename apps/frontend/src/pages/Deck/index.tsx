@@ -58,39 +58,23 @@ const Deck2 = () => {
     setToastContent(null);
   };
 
+  if (!deck) return null;
+
   return (
     <>
       <div className="flex-1 flex flex-col">
-        <div className="flex">
-          <div className="flex-1 bg-violet-500"></div>
-          <div className="bg-violet-400"></div>
-        </div>
-        <div className="bg-orange-500 order-last lg:order-none"></div>
         <div className="flex-1">
-          {deck && (
-            <>
-              <ReadonlyDeck
-                {...deck}
-                onCardsViewChange={handleChangeView}
-                cardsView={cardsView}
-                desc=""
-                factionId={factionId}
-                cards={cards}
-                canUpdateOrDelete={canUpdateOrDelete}
-                onDelete={_deleteDeck}
-                showToast={handleShowToast}
-              />
-
-              <DeleteConfirmationDialog
-                title="Delete deck"
-                description={`Are you sure you want to delete deck: '${deck.name}'`}
-                open={isDeleteDialogVisible}
-                onCloseDeleteDialog={handleCloseDeleteDialog}
-                onDeleteConfirmed={handleDeleteDeck}
-                onDeleteRejected={handleCloseDeleteDialog}
-              />
-            </>
-          )}
+          <ReadonlyDeck
+            {...deck}
+            onCardsViewChange={handleChangeView}
+            cardsView={cardsView}
+            desc=""
+            factionId={factionId}
+            cards={cards}
+            canUpdateOrDelete={canUpdateOrDelete}
+            onDelete={_deleteDeck}
+            showToast={handleShowToast}
+          />
         </div>
       </div>
 
@@ -101,6 +85,15 @@ const Deck2 = () => {
       >
         {toastContent}
       </Toast>
+
+      <DeleteConfirmationDialog
+        title="Delete deck"
+        description={`Are you sure you want to delete deck: '${deck.name}'`}
+        open={isDeleteDialogVisible}
+        onCloseDeleteDialog={handleCloseDeleteDialog}
+        onDeleteConfirmed={handleDeleteDeck}
+        onDeleteRejected={handleCloseDeleteDialog}
+      />
     </>
   );
 };
