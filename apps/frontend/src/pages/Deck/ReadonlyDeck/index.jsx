@@ -17,6 +17,7 @@ import { CardListSectionHeader } from "../../../shared/components/CardListSectio
 import Card from "./atoms/Card";
 import { DeckPlotCards } from "./atoms/DeckPlotCards";
 import DeckSummary from "./DeckSummary";
+import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
 
 const DeckActionsMenu = lazy(() => import("./atoms/DeckActionsMenu"));
 const DeckActionMenuLarge = lazy(() => import("./atoms/DeckActionsMenuLarge"));
@@ -191,7 +192,10 @@ function ReadonlyDeck(props) {
         </>
       </div>
 
-      <DeckPlotCards factionId={faction} sets={sets} />
+      <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4">
+        <DeckPlotCards factionId={faction} sets={sets} />
+        <FighterCardsPortal faction={faction} />
+      </div>
 
       <div
         className={`mt-4 lg:mt-8 mb-8 ${

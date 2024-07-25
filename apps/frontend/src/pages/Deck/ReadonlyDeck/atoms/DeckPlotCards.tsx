@@ -27,7 +27,7 @@ export const DeckPlotCards = ({ factionId, sets }: Props) => {
   }
 
   return (
-    <div className="p-4">
+    <div>
       <div className="flex space-x-2 items-center">
         <CompassIcon className="w-4 h-4 stroke-purple-700" />
         <h3 className="text-xs font-bold">This deck includes plot cards:</h3>
