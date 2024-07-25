@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { animated as a, useSpring } from "@react-spring/web";
+import { useEffect, useState } from "react";
 import { factionMembers } from "../data/wudb";
-import { useSpring, animated as a } from "@react-spring/web";
 import { useDeckBuilderState } from "../pages/DeckCreator";
 
 function useClickAway() {
@@ -46,14 +46,18 @@ export default function FightersInfoList({ onClose }) {
     <div className="flex-1 relative">
       <div className="absolute inset-0 overflow-y-auto p-4 lg:p-12">
         {factionMembers[faction.name].map((fighter, index) => (
-          <FighterCard key={fighter} faction={faction.name} index={index + 1} />
+          <FlippableFighterCard
+            key={fighter}
+            faction={faction.name}
+            index={index + 1}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-function FighterCard({ faction, index }) {
+function FlippableFighterCard({ faction, index }) {
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -65,22 +69,32 @@ function FighterCard({ faction, index }) {
       className="grid px-4 sm:px-0 mb-4 lg:w-1/3 lg:mx-auto cursor-pointer"
       onClick={() => set((state) => !state)}
     >
-      <a.img
+      <a.picture
         className="w-full rounded-sm sm:w-3/4 row-start-1 col-start-1 sm:mx-auto cursor-pointer hover:shadow-lg"
-        src={`/assets/fighters/${faction}/${faction}-${index}.png`}
         style={{
           opacity: opacity.to((o) => 1 - o),
           transform,
         }}
-      />
-      <a.img
+      >
+        <source
+          srcSet={`/assets/fighters/${faction}/${index}.webp`}
+          type="image/webp"
+        />
+        <img src={`/assets/fighters/${faction}/${index}.png`} />
+      </a.picture>
+      <a.picture
         className="w-full rounded-sm sm:w-3/4 row-start-1 col-start-1 sm:mx-auto cursor-pointer hover:shadow-lg"
-        src={`/assets/fighters/${faction}/${faction}-${index}-inspired.png`}
         style={{
           opacity,
           transform: transform.to((t) => `${t} rotateY(180deg)`),
         }}
-      />
+      >
+        <source
+          srcSet={`/assets/fighters/${faction}/${index}-inspired.webp`}
+          type="image/webp"
+        />
+        <img src={`/assets/fighters/${faction}/${index}-inspired.png`} />
+      </a.picture>
     </div>
   );
 }
