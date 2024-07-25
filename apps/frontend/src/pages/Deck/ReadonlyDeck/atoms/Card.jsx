@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import {
-  getSetById,
-  CHAMPIONSHIP_FORMAT,
-  getSetNameById,
-  validateCardForPlayFormat,
-} from "../../../../data/wudb/index";
-import { pickCardColor2 } from "../../../../utils/functions";
-import AnimateHeight from "react-animate-height";
-import CardImage from "../../../../shared/components/CardImage";
-import CardRule from "../../../../atoms/CardRule";
-import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
+import { SetIcon } from "@/shared/components/SetIcon";
 import LockIcon from "@icons/lock.svg?react";
 import ForsakenIcon from "@icons/no-symbol.svg?react";
 import { Waves } from "@wudb/waves";
+import { useState } from "react";
+import AnimateHeight from "react-animate-height";
+import CardRule from "../../../../atoms/CardRule";
+import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
+import {
+  CHAMPIONSHIP_FORMAT,
+  getSetById,
+  validateCardForPlayFormat,
+} from "../../../../data/wudb/index";
+import CardImage from "../../../../shared/components/CardImage";
+import { pickCardColor2 } from "../../../../utils/functions";
 
 const idToPrintId = (id) => {
   const wave = Waves[Math.floor(id / 1000)];
@@ -23,21 +23,6 @@ const idToPrintId = (id) => {
     </>
   );
 };
-
-const SetIcon = ({ id, setId, className = "" }) => (
-  <picture>
-    <source
-      type="image/webp"
-      srcSet={`/assets/icons/${getSetNameById(setId)}-icon.webp`}
-    />
-    <img
-      className={`w-4 h-4 -ml-1 mr-2 ${className}`}
-      id={id}
-      src={`/assets/icons/${getSetNameById(setId)}-icon-24.png`}
-      alt="icon"
-    />
-  </picture>
-);
 
 function CardImageOrText({ useTextFallback, image, fallback }) {
   return useTextFallback ? fallback : image;
@@ -54,7 +39,7 @@ function Expandable({ animateHeight, children }) {
 const CardAsImage = ({ id, name, setId }) => {
   const [, isForsaken, isRestricted] = validateCardForPlayFormat(
     id,
-    CHAMPIONSHIP_FORMAT
+    CHAMPIONSHIP_FORMAT,
   );
 
   return (

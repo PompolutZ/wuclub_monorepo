@@ -11,6 +11,7 @@ import { forwardRef, useEffect, useState } from "react";
 import { Factions, Plot } from "@fxdxpz/schema";
 import { type CarouselApi } from "@/components/ui/carousel";
 import CompassIcon from "@icons/compass.svg?react";
+import { PlotCard } from "../../../../shared/components/PlotCard";
 
 type Props = {
   factionId: Factions;
@@ -81,7 +82,7 @@ const PlotsCarousel = forwardRef<HTMLDivElement, { plots: Plot[] }>(
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
     const plotAssets = plots.flatMap((plot) =>
-      plot.asset ? [plot.asset] : plot.cards?.map(({ asset }) => asset),
+      plot.cards ? plot.cards.map(({ asset }) => asset) : [plot.asset],
     );
 
     useEffect(() => {
@@ -105,12 +106,7 @@ const PlotsCarousel = forwardRef<HTMLDivElement, { plots: Plot[] }>(
           <CarouselContent>
             {plotAssets.map((asset) => (
               <CarouselItem key={asset}>
-                <picture>
-                  <img
-                    src={`/assets/plots/${asset}.png`}
-                    className="rounded-xl"
-                  />
-                </picture>
+                <PlotCard asset={asset} />
               </CarouselItem>
             ))}
           </CarouselContent>
