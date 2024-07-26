@@ -8,7 +8,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import "./index.css";
-import { QueryClientProvider } from "@tanstack/react-query";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { LazyLoading } from "./components/LazyLoading";
 import * as ROUTES from "./constants/routes";
@@ -17,7 +16,8 @@ import { AuthContextProvider } from "./hooks/useAuthUser";
 import HeroImage from "./shared/components/HeroImage";
 import NavigationPanel from "./shared/components/NavigationPanel";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { queryClient } from "@services/queryClient";
+import { queryClient, persister } from "@services/queryClient";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 
 const Home = lazy(() => import("./pages/Home"));
 const DeckCreator = lazy(() => import("./pages/DeckCreator"));
@@ -159,14 +159,17 @@ export class ModalPresenter extends React.Component {
 
 const Root = () => (
   <FirebaseContext.Provider value={Firebase}>
-    <QueryClientProvider client={queryClient}>
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{ persister }}
+    >
       <AuthContextProvider>
         <Router>
           <MainLayout />
         </Router>
       </AuthContextProvider>
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-    </QueryClientProvider>
+    </PersistQueryClientProvider>
   </FirebaseContext.Provider>
 );
 
