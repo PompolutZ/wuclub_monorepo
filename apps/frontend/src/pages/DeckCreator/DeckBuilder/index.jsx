@@ -17,6 +17,7 @@ import CardLibraryToggles from "./components/CardLibraryFilters";
 import CardsLibrary from "./components/CardsLibrary";
 import Deck from "./components/Deck";
 import LibraryFilters from "./components/LibraryFilters";
+import { FighterCardsPortal } from "../../../shared/components/FighterCardsPortal";
 
 function CardsLibraryWithFilters() {
   const [searchText, setSearchText] = useState("");
@@ -151,15 +152,9 @@ function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
         <>
           <CardsLibraryWithFilters />
           <div className="lg:col-span-3 p-2 pt-4">
-            <button
-              className={`hidden lg:flex ml-auto mr-4 items-center py-2 text-xs text-gray-700 outline-none hover:text-purple-700 focus:text-purple-500`}
-              onClick={() => {
-                setShowWarband(true);
-              }}
-            >
-              <WarbandIcon className="h-6 fill-current mr-2" />
-              Warband
-            </button>
+            <div className="hidden lg:flex lg:flex-row-reverse lg:w-full lg:p-4">
+              <FighterCardsPortal faction={faction.name} />
+            </div>
 
             <Deck
               deckName={deckName}

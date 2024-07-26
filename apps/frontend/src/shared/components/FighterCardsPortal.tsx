@@ -107,7 +107,10 @@ const FlippableFighterCard = ({
 };
 
 const FighterCardsCarousel = forwardRef<HTMLDivElement, { faction: Warband }>(
-  function PlotsCarousel({ faction }, ref: React.ForwardedRef<HTMLDivElement>) {
+  function FighterCardsCarousel(
+    { faction },
+    ref: React.ForwardedRef<HTMLDivElement>,
+  ) {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
     const fighterCards = factionMembers[faction];
