@@ -11,8 +11,8 @@ import {
 } from "../../components/ui/carousel";
 import { Svgs } from "./Svgs";
 import { factionMembers } from "../../data/wudb";
-import { factions } from "../../data/wudb/db";
 import { FighterCard } from "./FighterCard";
+import { animated, useSpring } from "@react-spring/web";
 
 type GenericFaction = Extract<
   Factions,
@@ -62,6 +62,50 @@ export const FighterCardsPortal = ({ faction }: { faction: Factions }) => {
   );
 };
 
+const AnimatedFighterCard = animated(FighterCard);
+
+const FlippableFighterCard = ({
+  faction,
+  index,
+}: {
+  faction: Warband;
+  index: number;
+}) => {
+  const [flipped, setFlipped] = useState(false);
+  const { transform, opacity } = useSpring({
+    opacity: flipped ? 1 : 0,
+    transform: `perspective(600px) rotateY(${flipped ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 500, friction: 80 },
+  });
+
+  return (
+    <div
+      className="grid cursor-pointer"
+      onClick={() => setFlipped((prev) => !prev)}
+    >
+      <AnimatedFighterCard
+        faction={faction}
+        index={index}
+        className="w-full rounded-sm row-start-1 col-start-1"
+        style={{
+          opacity: opacity.to((o) => 1 - o),
+          transform,
+        }}
+      />
+      <AnimatedFighterCard
+        faction={faction}
+        index={index}
+        className="w-full rounded-sm row-start-1 col-start-1"
+        isInspired
+        style={{
+          opacity,
+          transform: transform.to((t) => `${t} rotateY(180deg)`),
+        }}
+      />
+    </div>
+  );
+};
+
 const FighterCardsCarousel = forwardRef<HTMLDivElement, { faction: Warband }>(
   function PlotsCarousel({ faction }, ref: React.ForwardedRef<HTMLDivElement>) {
     const [api, setApi] = useState<CarouselApi>();
@@ -89,7 +133,7 @@ const FighterCardsCarousel = forwardRef<HTMLDivElement, { faction: Warband }>(
           <CarouselContent>
             {fighterCards.map((fighter, index) => (
               <CarouselItem key={fighter}>
-                <FighterCard faction={faction} index={index + 1} />
+                <FlippableFighterCard faction={faction} index={index + 1} />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -97,9 +141,7 @@ const FighterCardsCarousel = forwardRef<HTMLDivElement, { faction: Warband }>(
             <CarouselPrevious />
             <div className="py-2 text-center">
               Fighter {current} of {fighterCards.length}
-              <h6 className="text-xs font-bold text-gray-900">
-                Tap card to flip
-              </h6>
+              <h6 className="text-xs italic text-gray-700">Tap card to flip</h6>
             </div>
             <CarouselNext />
           </div>
