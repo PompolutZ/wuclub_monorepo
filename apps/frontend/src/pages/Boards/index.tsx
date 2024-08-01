@@ -1,18 +1,16 @@
 import { useHistory, useParams } from "react-router-dom";
 import { DeckPlayFormatToggle } from "@components/DeckPlayFormatToggle";
-import {
-  ACTIVE_FORMATS,
-  boards as wuboards,
-  getBoardsValidForFormat,
-} from "../../data/wudb";
+import { ACTIVE_FORMATS } from "../../data/wudb";
 import { BOARDS_BASE } from "../../constants/routes";
 import SectionTitle from "../../shared/components/SectionTitle";
+import { Board, getBoardsValidForFormat } from "../../../../../shared/boards";
+import { Format } from "@fxdxpz/schema";
 
 interface BoardsRouteParams {
-  format: string;
+  format: Format;
 }
 
-const BoardPicture = ({ boardId }: { boardId: number }) => {
+const BoardPicture = ({ boardId, name }: { boardId: number; name: string }) => {
   const idx = `${boardId}`.padStart(2, "0");
   const filename = `BOARD${idx}`;
   const path = "/assets/boards/";
@@ -20,7 +18,7 @@ const BoardPicture = ({ boardId }: { boardId: number }) => {
     <picture>
       <source type="image/avif" srcSet={`${path}${filename}.avif`} />
       <source type="image/webp" srcSet={`${path}${filename}.webp`} />
-      <img alt={wuboards[boardId].name} src={`${path}${filename}.jpg`} />
+      <img alt={name} src={`${path}${filename}.jpg`} />
     </picture>
   );
 };
@@ -30,7 +28,7 @@ const BoardsPage = () => {
   const history = useHistory();
   const boards =
     getBoardsValidForFormat(format)?.sort(
-      (b1: number, b2: number) => b2 - b1,
+      (b1: Board, b2: Board) => b2.id - b1.id,
     ) ?? [];
 
   return (
@@ -46,16 +44,13 @@ const BoardsPage = () => {
         />
       </div>
       <section className="h-4 w-full col-span-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {boards.map((boardId) => (
-          <article
-            className="flex flex-col space-y-2 p-4"
-            key={wuboards[boardId].name}
-          >
-            <h3 className="text-xl">{wuboards[boardId].name}</h3>
-            <BoardPicture boardId={boardId} />
+        {boards.map(({ id, name, location }) => (
+          <article className="flex flex-col space-y-2 p-4" key={name}>
+            <h3 className="text-xl">{name}</h3>
+            <BoardPicture boardId={id} name={name} />
             <p className="italic">
               <span className="font-bold">Location: </span>
-              <span>{wuboards[boardId].location}</span>
+              <span>{location}</span>
             </p>
           </article>
         ))}

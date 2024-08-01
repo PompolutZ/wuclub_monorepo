@@ -9,6 +9,7 @@
   "devDependencies": {
     "@fxdxpz/eslint-config": "workspace:*",
     "@fxdxpz/prettier-config": "workspace:*",
+    "@fxdxpz/schema": "workspace:*",
     "@types/uuid": "^10.0.0"
   },
   "@prettier": "@fxdxpz/prettier-config"

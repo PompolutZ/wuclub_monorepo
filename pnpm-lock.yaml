@@ -316,6 +316,9 @@ importers:
       '@fxdxpz/prettier-config':
         specifier: workspace:*
         version: link:../packages/prettier-config
+      '@fxdxpz/schema':
+        specifier: workspace:*
+        version: link:../packages/schema
       '@types/uuid':
         specifier: ^10.0.0
         version: 10.0.0
