@@ -196,42 +196,42 @@ const Menu = ({ classes, showHome, children }) => {
     const auth = useAuthUser();
 
     return (
-        <nav className={`${classes}`}>
-            {showHome && (
-                <Link
-                    className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-                    to="/"
-                >
-                    Home
-                </Link>
-            )}
-            <Link
-                className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700 lg:hidden text-purple-900"
-                to="/deck/create"
-            >
-                Create New Deck
-            </Link>
+      <nav className={`${classes}`}>
+        {showHome && (
+          <Link
+            className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+            to="/"
+          >
+            Home
+          </Link>
+        )}
+        <Link
+          className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700 lg:hidden text-purple-900"
+          to="/deck/create"
+        >
+          Create New Deck
+        </Link>
 
-            <AnimatedLink
-                className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-                to={ROUTES.BROWSE_ALL_DECKS}
-            >
-                Public decks
-            </AnimatedLink>
-            <AnimatedLink
-                className="hidden lg:block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-                to={`${ROUTES.BOARDS_BASE}/${CHAMPIONSHIP_FORMAT}`}
-            >
-                Boards
-            </AnimatedLink>
-            <AnimatedLink
-                className="hidden lg:block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-                to={ROUTES.CARDS_LIBRARY}
-            >
-                Library
-            </AnimatedLink>
+        <AnimatedLink
+          className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+          to={ROUTES.BROWSE_ALL_DECKS}
+        >
+          Public decks
+        </AnimatedLink>
+        <AnimatedLink
+          className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+          to={`${ROUTES.BOARDS_BASE}/${CHAMPIONSHIP_FORMAT}`}
+        >
+          Boards
+        </AnimatedLink>
+        <AnimatedLink
+          className="hidden lg:block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+          to={ROUTES.CARDS_LIBRARY}
+        >
+          Library
+        </AnimatedLink>
 
-            {children}
-        </nav>
+        {children}
+      </nav>
     );
 };
