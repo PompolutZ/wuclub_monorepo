@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import AvatarPicker from "../components/AvatarPicker";
 import { MY_DECKS } from "../constants/routes";
 import { FirebaseContext } from "../firebase";
+import { useCreateUser } from "./UserProfile/queries";
 
 function EmailPasswordForm({ purpose, onUseCredentials }) {
   const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ function EmailPasswordForm({ purpose, onUseCredentials }) {
 function SignUp() {
   const history = useHistory();
   const firebase = useContext(FirebaseContext);
-  const [, create] = useCreateUser();
+  const { mutateAsync: create } = useCreateUser();
   const [signUpError, setError] = useState(null);
   const [displayName, setDisplayName] = useState("");
   const [avatar, setAvatar] = useState("garreks-reavers");
