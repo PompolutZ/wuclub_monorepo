@@ -6,7 +6,14 @@ export default async (request, context) => {
     newUrl.hostname = "yawudb.firebaseapp.com";
 
     const proxyRequest = new Request(newUrl.toString(), request);
-    return fetch(proxyRequest);
+    const response = await fetch(proxyRequest);
+    console.log(
+      "Status for ",
+      response.url,
+      response.status,
+      response.redirected,
+    );
+    return response;
   }
 
   return context.next();
