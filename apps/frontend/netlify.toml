@@ -5,6 +5,11 @@
   status = 301
 
 [[redirects]]
+  from = "/__/auth/*" 
+  to = "https://yawudb.firebaseapp.com/__/auth/:splat"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
