@@ -37,8 +37,8 @@ const Firebase2 = (function () {
     },
 
     signInWithGoogleProvider: async function signInWithGoogleProvider() {
-      // return signInWithPopup(auth, new GoogleAuthProvider());
-      return signInWithRedirect(auth, new GoogleAuthProvider());
+      return signInWithPopup(auth, new GoogleAuthProvider());
+      // return signInWithRedirect(auth, new GoogleAuthProvider());
     },
 
     signInWithEmailAndPassword: function signInWithEmailAndPassword(
