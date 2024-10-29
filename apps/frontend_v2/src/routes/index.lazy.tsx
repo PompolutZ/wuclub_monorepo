@@ -6,8 +6,19 @@ export const Route = createLazyFileRoute("/")({
 
 function Index() {
   return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
+    <div className="grid place-content-center">
+      <div>
+        <div>
+          🚧 Here we are building new version of Wunderworlds club for
+          Embergard. 🚧
+        </div>
+        <div>
+          If you are looking for previous version, it is available{" "}
+          <a className="underline text-xl" href="https://old.wunderworlds.club">
+            here
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
