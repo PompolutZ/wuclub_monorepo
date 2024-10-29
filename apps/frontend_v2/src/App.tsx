@@ -1,13 +1,5 @@
-import "./App.css";
-
 function App() {
-  return (
-    <>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+  return <h1 className="text-3xl font-bold underline m-8">Hello world!</h1>;
 }
 
 export default App;
