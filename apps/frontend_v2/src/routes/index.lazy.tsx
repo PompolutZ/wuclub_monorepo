@@ -6,7 +6,7 @@ export const Route = createLazyFileRoute("/")({
 
 function Index() {
   return (
-    <div className="grid place-content-center">
+    <div className="flex flex-col items-center text-gray-50 text-2xl">
       <div>
         <div>
           🚧 Here we are building new version of Wunderworlds club for
