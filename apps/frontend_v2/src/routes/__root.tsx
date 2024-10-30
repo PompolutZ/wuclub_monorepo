@@ -15,28 +15,36 @@ const TanStackRouterDevtools = import.meta.env.PROD
 export const Route = createRootRoute({
   component: () => (
     <div className="flex-1 grid grid-cols-1 grid-rows-1">
-      <div className="bg-green-900 row-span-full col-span-full">
-        <picture>
-          <source
-            srcSet="/assets/hero/Background_Texture_Green.avif"
-            type="image/avif"
-          />
-          <source
-            srcSet="/assets/hero/Background_Texture_Green.webp"
-            type="image/webp"
-          />
-          <img
-            loading="lazy"
-            src="/assets/hero/Background_Texture_Green.jpg"
-            alt="Hero Image"
-            className="w-full"
-          />
-        </picture>
-      </div>
+      {window.location.pathname === "/" && (
+        <div className="bg-black row-span-full col-span-full">
+          <picture>
+            <source
+              srcSet="/assets/hero/Background_Texture_Green.avif"
+              type="image/avif"
+            />
+            <source
+              srcSet="/assets/hero/Background_Texture_Green.webp"
+              type="image/webp"
+            />
+            <img
+              loading="lazy"
+              src="/assets/hero/Background_Texture_Green.jpg"
+              alt="Hero Image"
+              className="w-full"
+            />
+          </picture>
+        </div>
+      )}
       <div className="row-span-full col-span-full grid grid-rows-[auto_1fr] grid-cols-1">
         <nav className="p-2 flex gap-2">
           <Link to="/" className="[&.active]:font-bold">
             Home
+          </Link>{" "}
+          <Link to="/decks" className="[&.active]:font-bold">
+            Public decks
+          </Link>{" "}
+          <Link to="/library" className="[&.active]:font-bold">
+            Library
           </Link>{" "}
         </nav>
         <Outlet />
