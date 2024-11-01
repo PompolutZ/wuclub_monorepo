@@ -5,3 +5,10 @@
 #root {
   @apply min-h-screen flex;
 }
+
+@layer base {
+  :root {
+
+    --radius: 0.5rem
+  }
+}

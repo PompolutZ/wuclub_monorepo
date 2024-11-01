@@ -11,9 +11,15 @@
     "lint:fix": "eslint src --fix"
   },
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.1",
     "@tanstack/react-router": "^1.77.6",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.376.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@fxdxpz/eslint-config": "workspace:*",
@@ -21,6 +27,7 @@
     "@fxdxpz/schema": "workspace:*",
     "@tanstack/router-devtools": "^1.77.6",
     "@tanstack/router-plugin": "^1.76.4",
+    "@types/node": "^20.12.7",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
