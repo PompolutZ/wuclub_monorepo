@@ -19,6 +19,7 @@ import { Route as rootRoute } from './routes/__root'
 const IndexLazyImport = createFileRoute('/')()
 const LibraryIndexLazyImport = createFileRoute('/library/')()
 const DecksIndexLazyImport = createFileRoute('/decks/')()
+const BoardsIndexLazyImport = createFileRoute('/boards/')()
 
 // Create/Update Routes
 
@@ -40,6 +41,12 @@ const DecksIndexLazyRoute = DecksIndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/decks/index.lazy').then((d) => d.Route))
 
+const BoardsIndexLazyRoute = BoardsIndexLazyImport.update({
+  id: '/boards/',
+  path: '/boards/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/boards/index.lazy').then((d) => d.Route))
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -49,6 +56,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/boards/': {
+      id: '/boards/'
+      path: '/boards'
+      fullPath: '/boards'
+      preLoaderRoute: typeof BoardsIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/decks/': {
@@ -72,12 +86,14 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/boards': typeof BoardsIndexLazyRoute
   '/decks': typeof DecksIndexLazyRoute
   '/library': typeof LibraryIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/boards': typeof BoardsIndexLazyRoute
   '/decks': typeof DecksIndexLazyRoute
   '/library': typeof LibraryIndexLazyRoute
 }
@@ -85,27 +101,30 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/boards/': typeof BoardsIndexLazyRoute
   '/decks/': typeof DecksIndexLazyRoute
   '/library/': typeof LibraryIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/decks' | '/library'
+  fullPaths: '/' | '/boards' | '/decks' | '/library'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/decks' | '/library'
-  id: '__root__' | '/' | '/decks/' | '/library/'
+  to: '/' | '/boards' | '/decks' | '/library'
+  id: '__root__' | '/' | '/boards/' | '/decks/' | '/library/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  BoardsIndexLazyRoute: typeof BoardsIndexLazyRoute
   DecksIndexLazyRoute: typeof DecksIndexLazyRoute
   LibraryIndexLazyRoute: typeof LibraryIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  BoardsIndexLazyRoute: BoardsIndexLazyRoute,
   DecksIndexLazyRoute: DecksIndexLazyRoute,
   LibraryIndexLazyRoute: LibraryIndexLazyRoute,
 }
@@ -123,12 +142,16 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/boards/",
         "/decks/",
         "/library/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/boards/": {
+      "filePath": "boards/index.lazy.tsx"
     },
     "/decks/": {
       "filePath": "decks/index.lazy.tsx"
