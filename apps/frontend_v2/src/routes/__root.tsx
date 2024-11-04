@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 import React, { Suspense } from "react";
 import { Navigation } from "../components/Navigation";
 
@@ -20,10 +20,10 @@ export const Route = createRootRoute({
       <div className="row-span-full col-span-full grid grid-rows-[auto_1fr] grid-cols-1">
         {/* Navigation bar - consistent across all pages */}
         <Navigation />
-        
+
         {/* Outlet for page content */}
         <Outlet />
-        
+
         <Suspense>
           <TanStackRouterDevtools />
         </Suspense>
