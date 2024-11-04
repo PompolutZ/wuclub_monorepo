@@ -1,6 +1,6 @@
 {
   "name": "wunderworlds",
-  "version": "2.44.5",
+  "version": "2.44.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -64,6 +64,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "autoprefixer": "^10.4.13",
+    "esbuild": "0.23.1",
     "firebase-tools": "^11.15.0",
     "postcss": "^8.4.18",
     "tailwind-scrollbar": "^2.0.1",
