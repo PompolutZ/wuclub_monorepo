@@ -219,6 +219,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.13
         version: 10.4.20(postcss@8.4.47)
+      esbuild:
+        specifier: 0.23.1
+        version: 0.23.1
       firebase-tools:
         specifier: ^11.15.0
         version: 11.30.0
