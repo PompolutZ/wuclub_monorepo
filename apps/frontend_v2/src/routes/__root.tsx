@@ -1,5 +1,6 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import React, { Suspense } from "react";
+import { Navigation } from "../components/Navigation";
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null // Render nothing in production
@@ -18,17 +19,7 @@ export const Route = createRootRoute({
       {/* Main layout container */}
       <div className="row-span-full col-span-full grid grid-rows-[auto_1fr] grid-cols-1">
         {/* Navigation bar - consistent across all pages */}
-        <nav className="p-2 flex gap-2 relative z-10">
-          <Link to="/" className="[&.active]:font-bold">
-            Home
-          </Link>{" "}
-          <Link to="/decks" className="[&.active]:font-bold">
-            Public decks
-          </Link>{" "}
-          <Link to="/library" className="[&.active]:font-bold">
-            Library
-          </Link>{" "}
-        </nav>
+        <Navigation />
         
         {/* Outlet for page content */}
         <Outlet />
