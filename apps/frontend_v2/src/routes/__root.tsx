@@ -15,28 +15,10 @@ const TanStackRouterDevtools = import.meta.env.PROD
 export const Route = createRootRoute({
   component: () => (
     <div className="flex-1 grid grid-cols-1 grid-rows-1">
-      {window.location.pathname === "/" && (
-        <div className="bg-black row-span-full col-span-full">
-          <picture>
-            <source
-              srcSet="/assets/hero/Background_Texture_Green.avif"
-              type="image/avif"
-            />
-            <source
-              srcSet="/assets/hero/Background_Texture_Green.webp"
-              type="image/webp"
-            />
-            <img
-              loading="lazy"
-              src="/assets/hero/Background_Texture_Green.jpg"
-              alt="Hero Image"
-              className="w-full"
-            />
-          </picture>
-        </div>
-      )}
+      {/* Main layout container */}
       <div className="row-span-full col-span-full grid grid-rows-[auto_1fr] grid-cols-1">
-        <nav className="p-2 flex gap-2">
+        {/* Navigation bar - consistent across all pages */}
+        <nav className="p-2 flex gap-2 relative z-10">
           <Link to="/" className="[&.active]:font-bold">
             Home
           </Link>{" "}
@@ -47,7 +29,10 @@ export const Route = createRootRoute({
             Library
           </Link>{" "}
         </nav>
+        
+        {/* Outlet for page content */}
         <Outlet />
+        
         <Suspense>
           <TanStackRouterDevtools />
         </Suspense>
