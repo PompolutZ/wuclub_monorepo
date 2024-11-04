@@ -214,14 +214,11 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       '@vitejs/plugin-react-swc':
-        specifier: ^3.6.0
+        specifier: ^3.7.1
         version: 3.7.1(vite@5.4.10)
       autoprefixer:
         specifier: ^10.4.13
         version: 10.4.20(postcss@8.4.47)
-      esbuild:
-        specifier: 0.23.1
-        version: 0.23.1
       firebase-tools:
         specifier: ^11.15.0
         version: 11.30.0
@@ -238,7 +235,7 @@ importers:
         specifier: ^4.1.0
         version: 4.2.0
       vite:
-        specifier: ^5.1.6
+        specifier: ^5.4.10
         version: 5.4.10
       vite-plugin-svgr:
         specifier: ^4.2.0
