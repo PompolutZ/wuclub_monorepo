@@ -64,6 +64,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react-swc": "^3.7.1",
     "autoprefixer": "^10.4.13",
+    "esbuild": "0.23.1",
     "firebase-tools": "^11.15.0",
     "postcss": "^8.4.18",
     "tailwind-scrollbar": "^2.0.1",
@@ -75,8 +76,5 @@
   "prettier": "@fxdxpz/prettier-config",
   "volta": {
     "node": "20.16.0"
-  },
-  "resolutions": {
-    "esbuild": "0.23.1"
   }
 }
