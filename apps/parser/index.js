@@ -35,35 +35,8 @@ async function readFiles() {
         let setsStr = serialize(sets, "sets");
         let factionsStr = serialize(factions, "factions");
         let cardsStr = serialize(cards, "cards");
-        let preBeastgraveCards = Object.entries(cards).filter(([id]) => id < 6000).reduce((cards, [cardId, cardData]) => ({ ...cards, [cardId]: cardData }), {});
-        let afterBeastgraveCards = Object.entries(cards).filter(([id]) => id > 6000).reduce((cards, [cardId, cardData]) => ({ ...cards, [cardId]: cardData }), {});
 
-        // const cardsWithOldIds = Object.entries(cards).reduce((acc, [k, { factionId, rule, ...rest}]) => {
-        //     if(!rule) {
-        //         console.log(k, factionId, rule, rest);
-        //     }
-        //     const primacy = rule.toUpperCase().includes("PRIMACY") ?? false;
-        //     const faction = Object.values(factions).find(f => f.id === factionId).name;
-        //     const oldFormatId = k.padStart(5, "0");
-        //     return {
-        //         ...acc,
-        //         [oldFormatId]: {
-        //             ...rest,
-        //             factionId,
-        //             rule,
-        //             primacy,
-        //             faction,
-        //         }
-        //     }
-        // }, {})
-        
-        // let cardsClub = serialize(cardsWithOldIds, "cardsDb");
         writeFileSync(new URL('dist/wudb.js', import.meta.url), `${setsStr}\n${factionsStr}\n${cardsStr}\n`);
-        // writeFileSync(new URL('dist/chunked/sets.js', import.meta.url), setsStr);
-        // writeFileSync(new URL('dist/chunked/factions.js', import.meta.url), factionsStr);
-        // writeFileSync(new URL('dist/chunked/cards-archive.js', import.meta.url), serialize(preBeastgraveCards, "cards"));
-        // writeFileSync(new URL('dist/chunked/cards.js', import.meta.url), serialize(afterBeastgraveCards, "cards"));
-        // writeFileSync(new URL('dist/cardsDb.js', import.meta.url), cardsClub);
         
     } catch (e) {
         console.error(e);
@@ -198,5 +171,3 @@ const getSetIndex = (name) => {
             return setsNames.indexOf(name);
     }
 }
-
-// //
