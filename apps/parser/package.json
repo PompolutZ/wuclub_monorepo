@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "wudb": "node index.js UnderworldsDB.tsv",
+    "wudb": "tsx src/index.ts UnderworldsDB.tsv",
     "db:copy": "mv apps/parser/dist/wudb.js apps/frontend/src/data/wudb/db.js"
   },
   "devDependencies": {
