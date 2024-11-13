@@ -1,5 +1,5 @@
 // src/components/Navigation.tsx
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -27,8 +27,9 @@ const AnimatedLink = ({ to, children, className = "" }: AnimatedLinkProps) => {
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const router = useRouter();
-  const isHomePage = router.state.location.pathname === '/';
+  const routerState = useRouterState();
+  const isHomePage = routerState.location.pathname === '/';
+  console.log(routerState.location.pathname);
 
   return (
     <header className={`p-2 relative z-10 ${isMobileMenuOpen ? 'bg-white' : ''}`}>
@@ -60,14 +61,13 @@ export function Navigation() {
         </AnimatedLink>
         
         <div className="ml-auto flex items-center gap-4">
-          {/* Temporarily commented out New Deck button until route is implemented
           <Link 
-            to="/deck/create"
-            className="bg-purple-600 hover:bg-purple-700 text-gray-100 px-4 py-2 rounded-md transition-colors"
+            to="/decks/create"
+            className="inline-flex items-center justify-center rounded-md bg-slate-900 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 px-4 py-2"
           >
             + New Deck
           </Link>
-          */}
+         
         </div>
       </nav>
 
@@ -92,21 +92,24 @@ export function Navigation() {
           `}
         >
           <div className="p-4 flex flex-col gap-4">
-            <Link to="/" className="[&.active]:font-bold">
-              Home
-            </Link>
-            <Link to="/decks" className="[&.active]:font-bold">
-              Public Decks
-            </Link>
-            <Link to="/library" className="[&.active]:font-bold">
-              Library
-            </Link>
-            <Link to="/boards" className="[&.active]:font-bold">
-              Boards
-            </Link>
+            <MobileNavLink closeMenu={() => setIsMobileMenuOpen(false)} to="/">Home</MobileNavLink>
+            <MobileNavLink closeMenu={() => setIsMobileMenuOpen(false)} to="/decks">Public Decks</MobileNavLink>
+            <MobileNavLink closeMenu={() => setIsMobileMenuOpen(false)} to="/decks/create">Create Deck</MobileNavLink>
+            <MobileNavLink closeMenu={() => setIsMobileMenuOpen(false)} to="/library">Library</MobileNavLink>
+            <MobileNavLink closeMenu={() => setIsMobileMenuOpen(false)} to="/boards">Boards</MobileNavLink>
           </div>
         </div>
       </div>
     </header>
   );
 }
+
+const MobileNavLink = ({ to, children, closeMenu }: { to: string; children: React.ReactNode, closeMenu: () => void }) => (
+  <Link 
+    to={to} 
+    className="[&.active]:font-bold"
+    onClick={() => closeMenu()}
+  >
+    {children}
+  </Link>
+);
