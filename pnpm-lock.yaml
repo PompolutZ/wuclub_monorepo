@@ -325,6 +325,9 @@ importers:
 
   apps/parser:
     devDependencies:
+      '@types/node':
+        specifier: ^20.12.7
+        version: 20.17.2
       tsx:
         specifier: ^4.7.3
         version: 4.19.2

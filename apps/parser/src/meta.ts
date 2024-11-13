@@ -1,124 +1,103 @@
-export const setsIndex: string[] = [
-  // SHADESPIRE
-  "shadespire-core", // 0
-  "sepulchral-guard",
-  "ironskulls-boyz",
-  "the-chosen-axes",
-  "spiteclaws-swarm",
-  "magores-fiends",
-  "the-farstriders",
-  "leaders", // 7
-
-  // NIGHTVAULT
-  "nightvault-core", // 8
-  "the-eyes-of-the-nine",
-  "zarbags-gitz",
-  "garreks-reavers",
-  "steelhearts-champions",
-  "echoes-of-glory", // 13
-  "godsworn-hunt",
-  "mollogs-mob",
-  "thundriks-profiteers",
-  "yltharis-guardians", // 17
-  "powers-unbound", // 18
-
-  // DREADFANE
-  "dreadfane", // 19
-
-  // BEASTGRAVE
-  "beastgrave-core", // 20
-  "the-grymwatch", // 21
-  "rippas-snarlfangs", // 22
-  "the-wurmspat", // 25
-  "hrothgorns-mantrappers", // 24
-  "morgwaeths-blade-coven", // 26
-  "morgoks-krushas", // 27
-  "beastgrave-gift-pack", // 23
-  "arena-mortis", // 28
-
-  "direchasm-core",
-  "khagras-ravagers", // 29
-  "the-starblood-stalkers", // 30
-  "the-crimson-court", // 30
-  "hedkrakkas-madmob", // 32
-  "kainans-reapers",
-  "elathains-soulreapers", // 30
-  "starter-set", // 30
-  "essential-cards-pack", // 30
-  "silent-menace-universal-deck", // 31
-  "arena-mortis-2", //32
-
-  "harrowdeep-core", // 33
-  "blackpowders-buccaneers", // 34
-  "illusory-might-universal-deck",
-  "the-exiled-dead-expansion",
-
-  "nethermaze-core-set",
-  "hexbanes-hunters-expansion",
-  "gorechosen-of-dromm-expansion",
-  "deadly-depths-rivals-deck",
-
-  "gnarlwood-core-set",
-  "daring-delvers-rivals-deck",
-  "tooth-and-claw-rivals-deck",
-  "grinkraks-looncourt-expansion",
-  "fearsome-fortress-rivals-deck",
-  "gryselles-arenai-expansion",
-  "beastbound-assault-rivals-deck",
-  "domitans-stormcoven-rivals-deck",
-  "ephilims-pandaemonium-rivals-deck",
-  "seismic-shock-rivals-deck",
-  "toxic-terrors-rivals-deck",
-  "the-headsmens-curse-rivals-deck",
-  "voidcursed-thralls-rivals-deck",
-  "sepulchral-guard-rivals-deck",
-  "the-farstriders-rivals-deck",
-  "skabbiks-plaguepack-rivals-deck",
-  "paths-of-prophecy-rivals-deck",
-  "cyrenis-razors-rivals-deck",
-  "the-thricefold-discord-rivals-deck",
-  "breakneck-slaughter-rivals-deck",
-  "force-of-frost-rivals-deck",
-  "daggoks-stab-ladz-rivals-deck",
-  "malevolent-masks-rivals-deck",
-  "zondaras-gravebreakers-rivals-deck",
-  "rimelocked-relics-rivals-deck",
-  "spiteclaws-swarm-rivals-deck",
-  "thorns-of-the-briar-queen-rivals-deck",
-  "zarbags-gitz-rivals-deck",
-  "mollogs-mob-rivals-deck",
-  "brethren-of-the-bolt-rivals-deck",
-  "the-skinnerkin-rivals-deck",
-  "hungering-parasite-rivals-deck",
-  "rimewyrms-bite-rivals-deck",
-];
-
 export const setsNames: string[] = [
-  // SHADESPIRE
-  "Core set", // 0
-  "Sepulchral Guard expansion",
-  "Ironskull's Boyz expansion",
-  "The Chosen Axes expansion",
-  "Spiteclaw's Swarm expansion",
-  "Magore's Fiends expansion",
-  "The Farstriders expansion",
-  "Leaders", // 7
+// SHADESPIRE
+// "Core set", // 0
+// "Sepulchral Guard expansion",
+// "Ironskull's Boyz expansion",
+// "The Chosen Axes expansion",
+// "Spiteclaw's Swarm expansion",
+// "Magore's Fiends expansion",
+// "The Farstriders expansion",
+// "Leaders", // 7
 
-  // NIGHTVAULT
-  "Nightvault core set", // 8
-  "Eyes of the Nine expansion",
-  "Zarbag's Gitz expansion",
-  "Garrek's Reavers expansion",
-  "Steelheart's Champions expansion",
-  "Echoes Of Glory Expansion Card Set", // 13
-  "Godsworn Hunt expansion",
-  "Mollog's Mob expansion",
-  "Thundrik's Profiteers expansion",
-  "Ylthari's Guardians expansion",
-  "Power Unbound", // 18
+// // NIGHTVAULT
 
-  // Rest of setsNames array...
-  // (continuing with the same pattern)
+// "Nightvault core set", // 8
+// "Eyes of the Nine expansion",
+// "Zarbag's Gitz expansion",
+// "Garrek's Reavers expansion",
+// "Steelheart's Champions expansion",
+// "Echoes Of Glory Expansion Card Set", // 13
+// "Godsworn Hunt expansion",
+// "Mollog's Mob expansion",
+// "Thundrik's Profiteers expansion",
+// "Ylthari's Guardians expansion",
+// "Power Unbound", // 18
+
+// // DREADFANE
+// "Dreadfane", // 19
+
+// // BEASTGRAVE
+// "Beastgrave core set", // 20
+// "The Grymwatch expansion", // 21
+// "Rippa's Snarlfangs expansion", // 22
+// "The Wurmspat expansion", // 23
+// "Hrothgorn's Mantrappers expansion", // 24
+// "Morgwaeth's Blade-coven expansion", // 25
+// "Morgok's Krushas expansion", // 26
+// "Beastgrave Gift Pack expansion", // 27
+// "Arena Mortis expansion", // 28
+
+// // DIRECHASM
+// "Direchasm core set", // 29
+// "Khagra's Ravagers expansion",
+// "The Starblood Stalkers expansion", // 30
+// "The Crimson Court expansion", // 30
+// "Hedkrakka's Madmob expansion", // 32
+// "Kainan's Reapers expansion", //
+// "Elathain's Soulraid expansion", // 30
+// "Starter Set", // 30
+// "Essential Cards Pack",
+// "Silent Menace Universal Deck",
+// "Arena Mortis 2 expansion",
+
+// // Harrowdeep
+// "Harrowdeep core set",
+// "Blackpowder's Buccaneers expansion",
+// "Illusory Might Universal Deck",
+// "The Exiled Dead expansion",
+
+// "Nethermaze core set",
+// "Hexbane's Hunters expansion",
+// "Gorechosen of Dromm expansion",
+// "Deadly Depths Rivals Deck",
+
+// "Gnarlwood core set",
+// "Daring Delvers Rivals Deck",
+// "Tooth and Claw Rivals Deck",
+// "Grinkrak's Looncourt expansion",
+// "Fearsome Fortress Rivals Deck",
+// "Gryselle's Arenai expansion",
+// "Beastbound Assault Rivals Deck",
+
+// "Domitan's Stormcoven Rivals Deck",
+// "Ephilim's Pandaemonium Rivals Deck",
+// "Seismic Shock Rivals Deck",
+// "Toxic Terrors Rivals Deck",
+// "The Headsmen's Curse Rivals Deck",
+// "Voidcursed Thralls Rivals Deck",
+// "Sepulchral Guard Rivals Deck",
+// "The Farstriders Rivals Deck",
+// "Skabbik's Plaguepack Rivals Deck",
+// "Paths of Prophecy Rivals Deck",
+// "Cyreni's Razors Rivals Deck",
+// "The Thricefold Discord Rivals Deck",
+// "Breakneck Slaughter Rivals Deck",
+// "Force of Frost Rivals Deck",
+// "Daggok's Stab-ladz Rivals Deck",
+// "Malevolent Masks Rivals Deck",
+// "Zondara's Gravebreakers Rivals Deck",
+// "Rimelocked Relics Rivals Deck",
+// "Spiteclaw's Swarm Rivals Deck",
+// "Thorns of the Briar Queen Rivals Deck",
+// "Zarbag's Gitz Rivals Deck",
+// "Mollog's Mob Rivals Deck",
+// "Brethren of the Bolt Rivals Deck",
+// "The Skinnerkin Rivals Deck",
+// "Hungering Parasite Rivals Deck",
+"Blazing Assault Rivals Deck",
+"Emberstone Sentinels Rivals Deck",
+"Pillage and Plunder Rivals Deck",
+"Countdown to Cataclysm Rivals Deck"
 ];
 
 type GrandAllianceId = 38 | 39 | 40 | 41;

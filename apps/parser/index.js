@@ -43,7 +43,7 @@ async function readFiles() {
     }
 }
 
-readFiles();
+
 
 const toLines = str => str.split('\n');
 

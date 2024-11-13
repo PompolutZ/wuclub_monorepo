@@ -219,12 +219,12 @@ type CardData = {
     [key: string]: any; // Add more specific types as needed
 }
 
-export const decodeUDB = (card: string): number => {
+export const decodeUDB = (card: string): string[] => {
     const match = card.match(/([A-Z]+)?(\d+)?/);
-    if (!match) return 0;
+    if (!match) return [];
     
-    const [, prefix, cardNumber] = match;
-    return prefix ? udbPrefexes[prefix] * 1000 + Number(cardNumber) : 1000 + Number(cardNumber);
+    return [...match, card];
+    // return prefix ? udbPrefexes[prefix] * 1000 + Number(cardNumber) : 1000 + Number(cardNumber);
 }
 
 export function findDuplicatesByName(name: string, source: Record<string, CardData>): [string, CardData][] {
@@ -232,6 +232,6 @@ export function findDuplicatesByName(name: string, source: Record<string, CardDa
         .filter(([, data]) => data.name === name);        
 }
 
-function dashify(str: string): string {
+export function dashify(str: string): string {
     return str.replaceAll(" ", "-").replaceAll("'", "").toLowerCase();
 } 

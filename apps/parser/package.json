@@ -9,6 +9,7 @@
     "db:copy": "mv apps/parser/dist/wudb.js apps/frontend/src/data/wudb/db.js"
   },
   "devDependencies": {
+    "@types/node": "^20.12.7",
     "tsx": "^4.7.3",
     "typescript": "^5.6.3"
   }
