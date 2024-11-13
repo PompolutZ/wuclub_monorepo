@@ -28,138 +28,72 @@ export const getType = (text: string): number => {
     }
 }
 
-export const getFaction = (text: string): number => {
-    switch (text) {
-        case "Universal":
-          return 0;
-        case "Garrek's Reavers":
-          return 1;
-        case "Steelheart's Champions":
-          return 2;
-        case "Sepulchral Guard":
-          return 3;
-        case "Ironskull's Boyz":
-          return 4;
-        case "The Chosen Axes":
-          return 5;
-        case "Spiteclaw's Swarm":
-          return 6;
-        case "Magore's Fiends":
-          return 7;
-        case "The Farstriders":
-          return 8;
-        case "Stormsire's Cursebreakers":
-          return 9;
-        case "Thorns of the Briar Queen":
-          return 10;
-        case "Eyes of the Nine":
-          return 11;
-        case "Zarbag's Gitz":
-          return 12;
-        case "Godsworn Hunt":
-          return 13;
-        case "Mollog's Mob":
-          return 14;
-        case "Thundrik's Profiteers":
-          return 15;
-        case "Ylthari's Guardians":
-          return 16;
-        case "Ironsoul's Condemners":
-          return 17;
-        case "Lady Harrow's Mournflight":
-          return 18;
-        case "Grashrak's Despoilers":
-          return 19;
-        case "Skaeth's Wild Hunt":
-          return 20;
-        case "The Grymwatch":
-          return 21;
-        case "Rippa's Snarlfangs":
-          return 22;
-        case "Hrothgorn's Mantrappers":
-          return 23;
-        case "The Wurmspat":
-          return 24;
-        case "Morgwaeth's Blade-coven":
-          return 25;
-        case "Morgok's Krushas":
-          return 26;
-        case "Myari's Purifiers":
-          return 27;
-        case "The Dread Pageant":
-          return 28;
-        case "Khagra's Ravagers":
-          return 29;
-        case "The Starblood Stalkers":
-          return 30;
-        case "The Crimson Court":
-          return 31;
-        case "Hedkrakka's Madmob":
-          return 32;
-        case "Kainan's Reapers":
-          return 33;
-        case "Elathain's Soulraid":
-          return 34;
-        case "Storm of Celestus":
-          return 35;
-        case "Drepur's Wraithcreepers":
-          return 36;
-        case "Order":
-          return 37;
-        case "Chaos":
-          return 38;
-        case "Death":
-          return 39;
-        case "Destruction":
-          return 40;
-        case "Xandire's Truthseekers":
-          return 41;
-        case "Da Kunnin' Krew":
-          return 42;
-        case "Blackpowder's Buccaneers":
-          return 43;
-        case "The Exiled Dead":
-          return 44;
-        case "Skittershank's Clawpack":
-          return 45;
-        case "The Shadeborn":
-          return 46;
-        case "Hexbane's Hunters":
-          return 47;
-        case "Gorechosen of Dromm":
-          return 48;
-        case "Gnarlspirit Pack":
-          return 49;
-        case "Sons of Velmorn":
-          return 50;
-        case "Grinkrak's Looncourt":
-          return 51;
-        case "Gryselle's Arenai":
-          return 52;
-        case "Domitan's Stormcoven":
-          return 53;
-        case "Ephilim's Pandaemonium":
-          return 54;
-        case "The Headsmen's Curse":
-          return 55;
-        case "Skabbik's Plaguepack":
-          return 56;
-        case "Cyreni's Razors":
-          return 57;
-        case "The Thricefold Discord":
-          return 58;
-        case "Daggok's Stab-ladz":
-          return 59;
-        case "Zondara's Gravebreakers":
-          return 60;
-        case "Brethren of the Bolt":
-          return 61;
-        case "The Skinnerkin":
-          return 62;
-        default:
-          return -1;
-    }
-}
+export const factionNames = [
+    "Universal",
+    "Garrek's Reavers", 
+    "Steelheart's Champions",
+    "Sepulchral Guard",
+    "Ironskull's Boyz",
+    "The Chosen Axes",
+    "Spiteclaw's Swarm",
+    "Magore's Fiends",
+    "The Farstriders",
+    "Stormsire's Cursebreakers",
+    "Thorns of the Briar Queen",
+    "Eyes of the Nine",
+    "Zarbag's Gitz",
+    "Godsworn Hunt",
+    "Mollog's Mob",
+    "Thundrik's Profiteers",
+    "Ylthari's Guardians",
+    "Ironsoul's Condemners",
+    "Lady Harrow's Mournflight",
+    "Grashrak's Despoilers",
+    "Skaeth's Wild Hunt",
+    "The Grymwatch",
+    "Rippa's Snarlfangs",
+    "Hrothgorn's Mantrappers",
+    "The Wurmspat",
+    "Morgwaeth's Blade-coven",
+    "Morgok's Krushas",
+    "Myari's Purifiers",
+    "The Dread Pageant",
+    "Khagra's Ravagers",
+    "The Starblood Stalkers",
+    "The Crimson Court",
+    "Hedkrakka's Madmob",
+    "Kainan's Reapers",
+    "Elathain's Soulraid",
+    "Storm of Celestus",
+    "Drepur's Wraithcreepers",
+    "Grand Aliance Order",
+    "Grand Aliance Chaos",
+    "Grand Aliance Death",
+    "Grand Aliance Destruction",
+    "Xandire's Truthseekers",
+    "Da Kunnin' Krew",
+    "Blackpowder's Buccaneers",
+    "The Exiled Dead",
+    "Skittershank's Clawpack",
+    "The Shadeborn",
+    "Hexbane's Hunters",
+    "Gorechosen of Dromm",
+    "Gnarlspirit Pack",
+    "Sons of Velmorn",
+    "Grinkrak's Looncourt",
+    "Gryselle's Arenai",
+    "Domitan's Stormcoven",
+    "Ephilim's Pandaemonium",
+    "The Headsmen's Curse",
+    "Skabbik's Plaguepack",
+    "Cyreni's Razors",
+    "The Thricefold Discord",
+    "Daggok's Stab-ladz",
+    "Zondara's Gravebreakers",
+    "Brethren of the Bolt",
+    "The Skinnerkin"
+];
+
 type UDBPrefixes = {
     [key: string]: number;
 }

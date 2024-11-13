@@ -270,7 +270,7 @@ export const factionIdPrefix: Record<string, string> = {
 
   "stormsires-cursebreakers": "stc",
   "thorns-of-the-briar-queen": "toftbq",
-  "the-eyes-of-the-nine": "teotn",
+  "eyes-of-the-nine": "eotn",
   "zarbags-gitz": "zg",
   "godsworn-hunt": "gh",
   "mollogs-mob": "mm",
@@ -294,7 +294,7 @@ export const factionIdPrefix: Record<string, string> = {
   "morgoks-krushas": "mk",
 
   "myaris-purifiers": "mp",
-  "dread-pageant": "dp",
+  "the-dread-pageant": "tdp",
   "khagras-ravagers": "kr", // 29
   "the-starblood-stalkers": "tss", // 30
   "the-crimson-court": "tcc", // 30
@@ -302,7 +302,7 @@ export const factionIdPrefix: Record<string, string> = {
   "drepurs-wraithcreepers": "dw", // 30
   "hedkrakkas-madmob": "hem", // 32
   "kainans-reapers": "kar", //
-  "elathains-soulreapers": "es",
+  "elathains-soulraid": "es",
 
   "grand-aliance-order": "gao",
   "grand-aliance-chaos": "gac",

@@ -1,6 +1,6 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
-import { factionIdPrefix, setsNames } from './meta';
-import { dashify, decodeUDB, findDuplicatesByName, getFaction } from './utils';
+import { factionIdPrefix, factionToGrandAlianceId, setsNames } from './meta';
+import { dashify, decodeUDB, factionNames, findDuplicatesByName } from './utils';
 
 interface WUDB {
     sets: Record<string, Set>;
@@ -15,7 +15,7 @@ interface Set {
 }
 
 interface Faction {
-    id: number;
+    id: string;
     abbr: string;
     name: string;
     gaId: number;
@@ -42,7 +42,6 @@ async function readFiles() {
         console.log(files.slice(1));
 
         let sets = {};
-        let factions = {};
         let cards = {};
 
         for (let file of files.slice(1)) {
@@ -53,23 +52,32 @@ async function readFiles() {
                 ...parsed.sets,
             }
 
-            factions = {
-                ...factions,
-                ...parsed.factions,
-            }
-
             cards = {
                 ...cards,
                 ...parsed.cards,
             }
         }
 
-        // const { sets, factions, cards } = parse(tsvFile)
+        const factions = factionNames.reduce((acc: Record<string, Faction>, faction: string) => {
+            const dashified = dashify(faction);
+            acc[factionIdPrefix[dashified]] = {
+                id: factionIdPrefix[dashified],
+                abbr: factionIdPrefix[dashified],
+                name: dashified,
+                displayName: faction,
+                gaId: factionToGrandAlianceId[dashified],
+            }
+
+            return acc;
+        }, {})
+
         let setsStr = serialize(sets, "sets");
         let factionsStr = serialize(factions, "factions");
         let cardsStr = serialize(cards, "cards");
 
-        await writeFile(new URL('../dist/cards.js', import.meta.url), `${cardsStr}\n`);
+        await writeFile(new URL('../dist/cards.ts', import.meta.url), `${cardsStr} as const;`);
+        await writeFile(new URL('../dist/factions.ts', import.meta.url), `${factionsStr} as const;`);
+        await writeFile(new URL('../dist/sets.ts', import.meta.url), `${setsStr} as const;`);
         
     } catch (e) {
         console.error(e);
