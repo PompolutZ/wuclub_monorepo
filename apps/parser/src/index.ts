@@ -122,13 +122,13 @@ function parse(text: string): WUDB {
 
             let [,prefix,, id] = decodeUDB(udbIndex);
             
-            if(!acc.sets[set]) {
+            if(!acc.sets[prefix]) {
                 if(!prefix) {
                     console.log(line);
                     throw Error(`Cannot find index for > ${set}`);
                 }
 
-                acc.sets[set] = {
+                acc.sets[prefix] = {
                     id: prefix,
                     name: dashify(set),
                     displayName: set

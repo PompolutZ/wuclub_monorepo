@@ -4,9 +4,15 @@ export type Card = {
     setId: string;
     name: string;
     type: string;
-    glory: number;
+    glory: number | null;
     rule: string;
     scoreType: string;
     status: string;
     rotated: boolean;
+}
+
+export type Set = {
+    id: string;
+    name: string;
+    displayName: string;
 }

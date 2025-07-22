@@ -1,10 +1,11 @@
 import SearchIcon from "@icons/magnifying-glass.svg?react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { getSetNameById } from "@wudb";
 import { useCombobox } from "downshift";
 import Fuse, { FuseResult, RangeTuple } from "fuse.js";
 import { useRef, useState } from "react";
 import { Card } from "../../data/wudb/types";
+import { ExpansionPicture } from "../../shared/components/ExpansionPicture";
+import { sets } from "../../data/wudb/sets";
 
 function estimateSize() {
   return 40;
@@ -83,7 +84,7 @@ export function AutosuggestSearch({
       const searchResults = inputValue
         ? fuse
             .search(inputValue)
-            .toSorted((prev, next) => next.item.id - prev.item.id)
+            .toSorted((prev, next) => next.item.id.localeCompare(prev.item.id))
         : [];
 
       setItems(searchResults);
@@ -125,10 +126,11 @@ export function AutosuggestSearch({
             />
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const {
-                item: { id, setId, type },
+                item,
                 matches,
               } = items[virtualRow.index];
 
+              const { id, setId } = item;
               const { indices, value } = matches?.[0] ?? {};
               const valueNodes =
                 indices && highlightSubstrings(value ?? "", indices);
@@ -151,16 +153,7 @@ export function AutosuggestSearch({
                   })}
                   onClick={() => onClick(items[virtualRow.index].item)}
                 >
-                  <img
-                    className="w-8 h-8 relative"
-                    alt={`${type}`}
-                    src={`/assets/icons/${type.toLowerCase()}-icon.png`}
-                  />
-                  <img
-                    className="w-8 h-8 absolute left-6"
-                    alt={`${getSetNameById(setId)}`}
-                    src={`/assets/icons/${getSetNameById(setId)}-icon.png`}
-                  />
+                  <ExpansionPicture className="w-8 h-8" setName={sets[setId as keyof typeof sets].name} />
                   <div>
                     {valueNodes?.map(({ text, highlight }, index) => {
                       return (

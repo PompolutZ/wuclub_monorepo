@@ -187,16 +187,23 @@ function getFactionById(factionId) {
   return Object.values(factions).find((f) => f.id === factionId);
 }
 
-const idToSetKey = {};
-function getSetNameById(setId) {
+type SetId = typeof sets[keyof typeof sets]["id"];
+type SetName = typeof sets[keyof typeof sets]["name"];
+const idToSetKey: Record<SetId, SetName> = {};
+function getSetNameById(setId: SetId) {
   if (idToSetKey[setId]) {
-    return sets[idToSetKey[setId]].name;
+    return idToSetKey[setId];
   }
 
-  const [key, value] = Object.entries(sets).find(
-    ([, value]) => value.id == setId,
+  const [_, value] = Object.entries(sets).find(
+    ([, { id }]) => id == setId,
   );
-  idToSetKey[setId] = key;
+
+  if (!value) {
+    throw new Error(`Set with id ${setId} not found`);
+  }
+
+  idToSetKey[setId] = value.name;
   return value.name;
 }
 
