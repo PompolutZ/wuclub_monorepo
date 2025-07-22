@@ -1,13 +1,13 @@
 import { useHistory } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { Card } from "../../data/wudb/types";
-import DeckMetaSummary from "./DecksMetaSummary";
+// import DeckMetaSummary from "./DecksMetaSummary";
 import { AutosuggestSearch } from "./Search";
-import { useDeckStats } from "./useDeckStats";
+// import { useDeckStats } from "./useDeckStats";
 
 const Home = () => {
   const history = useHistory();
-  const { data: stats } = useDeckStats();
+  // const { data: stats } = useDeckStats();
   const handleGlobalSearchClick = (payload: Card) => {
     history.push(`/view/card/${payload.id}`);
   };

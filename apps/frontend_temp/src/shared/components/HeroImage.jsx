@@ -5,15 +5,15 @@ function HeroImage() {
       <picture>
         <source
           type="image/avif"
-          srcSet="/assets/wyrdhollow_bg_xs.avif 375w, /assets/wyrdhollow_bg_lg.avif 1000w"
+          srcSet="/assets/hero/Background_Texture_Green.avif"
         />
         <source
           type="image/webp"
-          srcSet="/assets/wyrdhollow_bg_xs.webp 375w, /assets/wyrdhollow_bg_lg.webp 1000w"
+          srcSet="/assets/hero/Background_Texture_Green.webp"
         />
         <img
-          srcSet="/assets/wyrdhollow_bg_xs.jpg 375w, /assets/wyrdhollow_bg_lg.jpg 1000w"
-          alt="Stormcast Eternal surrounded by Ephilims Pandemonium"
+          srcSet="/assets/hero/Background_Texture_Green.jpg"
+          alt="Green shattered glass background"
           style={{
             width: "100%",
             height: "70%",
