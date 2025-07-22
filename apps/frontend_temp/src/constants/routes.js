@@ -4,7 +4,7 @@ export const SIGN_UP = "/user/signup";
 export const PASSWORD_RESET = "/requestPasswordReset";
 
 export const BOARDS_BASE = "/boards"
-export const BOARDS = `${BOARDS_BASE}/:format`;
+export const BOARDS = `${BOARDS_BASE}`;
 
 export const PRIVACY_POLICY = "/privacy-policy";
 
