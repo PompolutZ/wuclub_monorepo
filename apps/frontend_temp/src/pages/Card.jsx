@@ -1,19 +1,20 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import {
     CHAMPIONSHIP_FORMAT,
-    getCardById,
     getSetById,
     NEMESIS_FORMAT,
     RELIC_FORMAT,
-    validateCardForPlayFormat,
+    validateCardForPlayFormat
 } from "../data/wudb";
-import CardImage from "../shared/components/CardImage";
+import { cards } from "../data/wudb/cards";
+import { CardPicture } from "../shared/components/CardPicture";
 import { PlayFormatPicture } from "../shared/components/PlayFormatPicture";
+import { ExpansionPicture } from "../shared/components/ExpansionPicture";
+import { sets } from "../data/wudb/sets";
 
 function Card() {
     const { id } = useParams();
-    const card = getCardById(id);
+    const card = cards[id];
     const [
         isValid,
         isForsakenChampionship,
@@ -31,11 +32,7 @@ function Card() {
 
     return (
         <div className="w-full h-full lg:w-1/2 lg:mx-auto grid place-content-center px-4 text-gray-900">
-            <CardImage
-                id={Number(id)}
-                alt={`card`}
-                className="max-w-full rounded-xl shadow-md"
-            />
+            <CardPicture card={card} className="max-w-full rounded-xl shadow-md mb-4" />
             {card && (
                 <>
                     <div>
@@ -43,11 +40,7 @@ function Card() {
                             Card location:
                         </h3>
                         <div>
-                            <img
-                                src={`/assets/icons/${set.name}-icon.png`}
-                                alt={`${set.displayName}`}
-                                className="w-8 h-8 mr-4"
-                            />
+                            <ExpansionPicture setName={sets[card.setId].name} className="w-8 h-8 inline-block mr-2" />
                             {set.displayName}
                         </div>
                     </div>
@@ -56,43 +49,19 @@ function Card() {
                             Play format availability:
                         </h3>
                         <div className="flex my-2 items-center space-x-4">
-                            <PlayFormatPicture format={CHAMPIONSHIP_FORMAT} />
                             {isValid && (
                                 <span>
-                                    This card is VALID for Championship format.
+                                    ✅ This card is VALID for Nemesis format.
                                 </span>
                             )}
                             {isRestrictedChampionship && (
                                 <span>
-                                    This card is RESTRICTED for Championship
-                                    format.
+                                    ⚠️ This card is RESTRICTED for Nemesis format.
                                 </span>
                             )}
                             {isForsakenChampionship && (
                                 <span>
-                                    This card is FORSAKEN for Championship
-                                    format.
-                                </span>
-                            )}
-                        </div>
-                        <div className="flex my-2 items-center space-x-4">
-                            <PlayFormatPicture format={RELIC_FORMAT} />
-                            {isRelicValid && (
-                                <span>
-                                    This card is VALID for Relic format.
-                                </span>
-                            )}
-                            {isForsakenRelic && (
-                                <span>
-                                    This card is FORSAKEN for Relic format.
-                                </span>
-                            )}
-                        </div>
-                        <div className="flex break-words my-2 items-center space-x-4">
-                            <PlayFormatPicture format={NEMESIS_FORMAT} /> 
-                            {isValidForNemesis && (
-                                <span>
-                                    This card is VALID for Nemesis format.
+                                    ❌ This card is FORSAKEN for Nemesis format.
                                 </span>
                             )}
                         </div>
