@@ -47,8 +47,7 @@ function CardPicture({ name, id }) {
 
 function Library() {
     const cardsContainerRef = React.createRef();
-    const [selectedFormat, setSelectedFormat] = useState(NEMESIS_FORMAT);
-    const validSetIds = getAllSetsValidForFormat(selectedFormat).map(
+    const validSetIds = getAllSetsValidForFormat(NEMESIS_FORMAT).map(
         (set) => set.id
     );
     const [selectedExpansions, setSelectedExpansions] = useState(validSetIds);
