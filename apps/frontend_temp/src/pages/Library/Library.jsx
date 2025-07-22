@@ -8,11 +8,12 @@ import { CardPicture } from "../../shared/components/CardPicture";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
 
-function useFilteredCards(factions = [], expansions = []) {
+function useFilteredCards(expansions = []) {
     const [searchText, setSearchText] = useState("");
     const filteredCards = useMemo(() => {
 
         const cards = Object.values(wucards)
+            .filter(card => card.setId && expansions.includes(card.setId))
             .sort(
                 (prev, next) => next.setId - prev.setId
             );
@@ -24,7 +25,7 @@ function useFilteredCards(factions = [], expansions = []) {
         );
 
         return filteredCards;
-    }, [factions, expansions, searchText]);
+    }, [expansions, searchText]);
 
     return [filteredCards, setSearchText];
 }
@@ -36,7 +37,6 @@ function Library() {
     );
     const [selectedExpansions, setSelectedExpansions] = useState(validSetIds);
     const [filteredCards, findCardsWithText] = useFilteredCards(
-        [], // selectedFactions
         selectedExpansions
     );
 
