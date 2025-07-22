@@ -167,137 +167,6 @@ export const grouppedFactions = () => {
   ];
 };
 
-const warbandsWithPlot = [
-  factions["Khagra's Ravagers"].id,
-  factions["Hedkrakka's Madmob"].id,
-  factions["Ephilim's Pandaemonium"].id,
-  factions["The Headsmen's Curse"].id,
-  factions["Skabbik's Plaguepack"].id,
-  factions["Daggok's Stab-ladz"].id,
-  factions["Brethren of the Bolt"].id,
-];
-
-const rivalDecksWithPlot = [
-  sets["Daring Delvers Rivals Deck"].id,
-  sets["Tooth and Claw Rivals Deck"].id,
-  sets["Fearsome Fortress Rivals Deck"].id,
-  sets["Voidcursed Thralls Rivals Deck"].id,
-  sets["Breakneck Slaughter Rivals Deck"].id,
-  sets["Rimelocked Relics Rivals Deck"].id,
-  sets["Hungering Parasite Rivals Deck"].id,
-];
-
-const warbandHasPlot = (warbandId) => warbandsWithPlot.includes(warbandId);
-const setHasPlot = (setId) => rivalDecksWithPlot.includes(setId);
-
-const plots = {
-  Desecration: {
-    keyword: "Desecration",
-    connection: "Warband",
-    asset: "Desecration",
-    id: factions["Khagra's Ravagers"].id,
-    name: factions["Khagra's Ravagers"].name,
-  },
-  Primacy: {
-    keyword: "Primacy",
-    connection: "Warband",
-    asset: "Primacy",
-    id: factions["Hedkrakka's Madmob"].id,
-    name: factions["Hedkrakka's Madmob"].name,
-  },
-  Pandaemonium: {
-    keyword: "Pandaemonium",
-    connection: "Warband",
-    asset: "Pandaemonium",
-    id: factions["Ephilim's Pandaemonium"].id,
-    name: factions["Ephilim's Pandaemonium"].name,
-  },
-  HeadsmensCurse: {
-    keyword: "Headsmens Curse",
-    connection: "Warband",
-    asset: "TheHeadsmensCurse",
-    id: factions["The Headsmen's Curse"].id,
-    name: factions["The Headsmen's Curse"].name,
-  },
-  Plaguepack: {
-    keyword: "Plaguepack",
-    connection: "Warband",
-    asset: "Plaguepack",
-    id: factions["Skabbik's Plaguepack"].id,
-    name: factions["Skabbik's Plaguepack"].name,
-  },
-  Explorer: {
-    keyword: "Explorer",
-    connection: "Set",
-    asset: "17000",
-    id: sets["Daring Delvers Rivals Deck"].id,
-    name: sets["Daring Delvers Rivals Deck"].name,
-  },
-  Savage: {
-    keyword: "Savage",
-    connection: "Set",
-    asset: "18000",
-    id: sets["Tooth and Claw Rivals Deck"].id,
-    name: sets["Tooth and Claw Rivals Deck"].name,
-  },
-  Fortress: {
-    keyword: "Fortress",
-    connection: "Set",
-    asset: "20000",
-    id: sets["Fearsome Fortress Rivals Deck"].id,
-    name: sets["Fearsome Fortress Rivals Deck"].name,
-  },
-  Voidcursed: {
-    keyword: "Voidcursed",
-    connection: "Set",
-    asset: "voidcursed",
-    id: sets["Voidcursed Thralls Rivals Deck"].id,
-    name: sets["Voidcursed Thralls Rivals Deck"].name,
-  },
-  Impetus: {
-    keyword: "Impetus",
-    connection: "Set",
-    asset: "Impetus",
-    id: sets["Breakneck Slaughter Rivals Deck"].id,
-    name: sets["Breakneck Slaughter Rivals Deck"].name,
-  },
-  Schemes: {
-    keyword: "Schemes",
-    connection: "Warband",
-    asset: "25433",
-    id: factions["Daggok's Stab-ladz"].id,
-    name: factions["Daggok's Stab-ladz"].name,
-  },
-  Rimelocked: {
-    keyword: "Rimelocked",
-    connection: "Set",
-    asset: "Rimelocked",
-    id: sets["Rimelocked Relics Rivals Deck"].id,
-    name: sets["Rimelocked Relics Rivals Deck"].name,
-  },
-  Brethren: {
-    keyword: "Brethren of the Bold",
-    connection: "Warband",
-    asset: "45033",
-    id: factions["Brethren of the Bolt"].id,
-    name: factions["Brethren of the Bolt"].name,
-  },
-  Parasite: {
-    keyword: "Hungering Parasite",
-    connection: "Set",
-    id: sets["Hungering Parasite Rivals Deck"].id,
-    name: sets["Hungering Parasite Rivals Deck"].name,
-    cards: [
-      {
-        asset: "47033",
-      },
-      {
-        asset: "47034",
-      },
-    ],
-  },
-};
-
 function getCardNumberFromId(cardId) {
   if (typeof cardId == "string") {
     return +cardId.slice(-3);
@@ -316,22 +185,6 @@ function getFactionByAbbr(factionAbbr) {
 
 function getFactionById(factionId) {
   return Object.values(factions).find((f) => f.id === factionId);
-}
-
-const nonWarbandIds = [
-  factions.Universal.id,
-  factions.Order.id,
-  factions.Chaos.id,
-  factions.Death.id,
-  factions.Destruction.id,
-];
-
-function checkNonWarbandSpecificCard(card) {
-  return nonWarbandIds.includes(card.factionId);
-}
-
-function checkWarbandSpecificCard(card) {
-  return !checkNonWarbandSpecificCard(card);
 }
 
 const idToSetKey = {};
@@ -406,66 +259,7 @@ export const RIVALS_FORMAT = "rivals";
 export const ACTIVE_FORMATS = [
   RIVALS_FORMAT,
   NEMESIS_FORMAT,
-  CHAMPIONSHIP_FORMAT,
-  RELIC_FORMAT,
 ];
-
-const nemesis_valid_sets = [
-  sets["Tooth and Claw Rivals Deck"].id,
-  sets["Daring Delvers Rivals Deck"].id,
-  sets["Fearsome Fortress Rivals Deck"].id,
-  sets["Beastbound Assault Rivals Deck"].id,
-  sets["Seismic Shock Rivals Deck"].id,
-  sets["Toxic Terrors Rivals Deck"].id,
-  sets["Voidcursed Thralls Rivals Deck"].id,
-  sets["Paths of Prophecy Rivals Deck"].id,
-  sets["Breakneck Slaughter Rivals Deck"].id,
-  sets["Force of Frost Rivals Deck"].id,
-  sets["Malevolent Masks Rivals Deck"].id,
-  sets["Rimelocked Relics Rivals Deck"].id,
-  sets["Hungering Parasite Rivals Deck"].id,
-  sets["Rimewyrm's Bite Rivals Deck"].id,
-];
-
-const factionsRivalsDecks = {
-  [`${factions["Sons of Velmorn"].name}`]: sets["Gnarlwood core set"].id,
-  [`${factions["Gnarlspirit Pack"].name}`]: sets["Gnarlwood core set"].id,
-  [`${factions["Grinkrak's Looncourt"].name}`]:
-    sets["Grinkrak's Looncourt Rivals Deck"].id,
-  [`${factions["Gryselle's Arenai"].name}`]:
-    sets["Gryselle's Arenai Rivals Deck"].id,
-  [`${factions["Domitan's Stormcoven"].name}`]:
-    sets["Domitan's Stormcoven Rivals Deck"].id,
-  [`${factions["Ephilim's Pandaemonium"].name}`]:
-    sets["Ephilim's Pandaemonium Rivals Deck"].id,
-  [`${factions["Ephilim's Pandaemonium"].name}`]:
-    sets["Ephilim's Pandaemonium Rivals Deck"].id,
-  [`${factions["The Headsmen's Curse"].name}`]:
-    sets["The Headsmen's Curse Rivals Deck"].id,
-  [`${factions["Sepulchral Guard"].name}`]:
-    sets["Sepulchral Guard Rivals Deck"].id,
-  [`${factions["The Farstriders"].name}`]:
-    sets["The Farstriders Rivals Deck"].id,
-  [`${factions["Skabbik's Plaguepack"].name}`]:
-    sets["Skabbik's Plaguepack Rivals Deck"].id,
-  [`${factions["Cyreni's Razors"].name}`]:
-    sets["Cyreni's Razors Rivals Deck"].id,
-  [`${factions["The Thricefold Discord"].name}`]:
-    sets["The Thricefold Discord Rivals Deck"].id,
-  [`${factions["Daggok's Stab-ladz"].name}`]:
-    sets["Daggok's Stab-ladz Rivals Deck"].id,
-  [`${factions["Zondara's Gravebreakers"].name}`]:
-    sets["Zondara's Gravebreakers Rivals Deck"].id,
-  [`${factions["Spiteclaw's Swarm"].name}`]:
-    sets["Spiteclaw's Swarm Rivals Deck"].id,
-  [`${factions["Zarbag's Gitz"].name}`]: sets["Zarbag's Gitz Rivals Deck"].id,
-  [`${factions["Thorns of the Briar Queen"].name}`]:
-    sets["Thorns of the Briar Queen Rivals Deck"].id,
-  [`${factions["Mollog's Mob"].name}`]: sets["Mollog's Mob Rivals Deck"].id,
-  [`${factions["Brethren of the Bolt"].name}`]:
-    sets["Brethren of the Bolt Rivals Deck"].id,
-  [`${factions["The Skinnerkin"].name}`]: sets["The Skinnerkin Rivals Deck"].id,
-};
 
 function getAllSetsValidForFormat(format) {
   switch (format) {
@@ -712,39 +506,13 @@ function validatePowerDeckForFormat(gambits, upgrades, format) {
   return [isValid, issues];
 }
 
-const checkDeckHasPlots = (faction, sets) => {
-  return (
-    warbandHasPlot(getFactionByName(faction).id) ||
-    sets.some((setId) => setHasPlot(setId))
-  );
-};
-
-const getBoardsValidForFormat = (format) => {
-  switch (format) {
-    case CHAMPIONSHIP_FORMAT:
-    case RIVALS_FORMAT:
-    case NEMESIS_FORMAT:
-      return [
-        1, 2, 7, 9, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-        40,
-      ];
-    default:
-      return Object.keys(boards).map(Number);
-  }
-};
-
 export {
   cardTypes,
   checkCardIsObjective,
   checkCardIsPloy,
   checkCardIsUpgrade,
-  checkDeckHasPlots,
-  checkNonWarbandSpecificCard,
-  checkWarbandSpecificCard,
   compareObjectivesByScoreType,
-  factionsRivalsDecks,
   getAllSetsValidForFormat,
-  getBoardsValidForFormat,
   getCardById,
   getCardNumberFromId,
   getFactionByAbbr,
@@ -752,16 +520,11 @@ export {
   getFactionByName,
   getSetById,
   getSetNameById,
-  plots,
-  rivalDecksWithPlot,
-  setHasPlot,
   validateCardForPlayFormat,
   validateDeckForPlayFormat,
   validateObjectivesListForPlayFormat,
   validatePowerDeckForFormat,
-  warbandHasPlot,
   factionMembers,
-  warbandsWithPlot,
   cards as wucards,
   factions as wufactions,
   sets as wusets,

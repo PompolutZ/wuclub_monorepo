@@ -4,8 +4,8 @@ import { VIEW_DECK } from "../../constants/routes";
 import {
     checkCardIsObjective,
     getCardById,
-    checkDeckHasPlots,
-    plots,
+    // checkDeckHasPlots,
+    // plots,
 } from "../../data/wudb";
 import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
@@ -14,7 +14,8 @@ import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
 import { DeckTitle } from "@/shared/components/DeckTitle";
 
 const getPlotKeywords = (faction, sets) => {
-    if (!checkDeckHasPlots(faction, sets)) return [];
+    return [];
+    // if (!checkDeckHasPlots(faction, sets)) return [];
 
     const plotInfos = Object.values(plots);
 
@@ -31,6 +32,7 @@ const getPlotKeywords = (faction, sets) => {
 
 export default function PublicDeckLink({ ...props }) {
     const cards = props.deck.map((x) => getCardById(x));
+    console.log("HELLO", cards);
     const totalGlory = cards
         .filter(checkCardIsObjective)
         .reduce((total, { glory }) => (total += glory), 0);
