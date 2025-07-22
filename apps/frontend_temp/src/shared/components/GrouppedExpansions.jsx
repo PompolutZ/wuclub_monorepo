@@ -3,6 +3,7 @@ import { wusets } from "../../data/wudb";
 import { useMultiSelectArray } from "../../hooks/useMultiSelectArray";
 import IconButton from "./IconButton";
 import SectionTitle from "./SectionTitle";
+import { ExpansionPicture } from "./ExpansionPicture";
 
 const createExpansionGroups = () => {
   const season1 = [
@@ -26,19 +27,6 @@ const createExpansionGroups = () => {
     },
   ];
 };
-
-function ExpansionPicture({ setName, ...rest }) {
-  return (
-    <picture>
-      <source type="image/webp" srcSet={`/assets/icons/decks/${setName}.webp`} />
-      <img
-        src={`/assets/icons/decks/${setName}.png`}
-        alt={`${setName}`}
-        {...rest}
-      />
-    </picture>
-  );
-}
 
 const GrouppedExpansions = ({
   onSelectionChanged,
