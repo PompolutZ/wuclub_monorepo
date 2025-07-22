@@ -25,9 +25,9 @@ const Home = () => {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 min-h-screen">
-        {stats?.map(({ faction, count }) => (
+        {/* {stats?.map(({ faction, count }) => (
           <DeckMetaSummary key={faction} faction={faction} count={count} />
-        ))}
+        ))} */}
       </div>
 
       <Footer />
