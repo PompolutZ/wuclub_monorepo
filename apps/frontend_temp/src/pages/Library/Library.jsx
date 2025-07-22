@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import {
     CHAMPIONSHIP_FORMAT,
     getAllSetsValidForFormat,
+    NEMESIS_FORMAT,
     RELIC_FORMAT,
     wucards,
     wufactions,
@@ -11,8 +12,8 @@ import { DeckPlayFormatToggle } from "../../shared/components/DeckPlayFormatTogg
 import { DeckPlayFormatInfo } from "../../shared/components/DeckPlayFormatInfo";
 import IconButton from "../../shared/components/IconButton";
 import TogglesIcon from "@icons/sliders.svg?react";
-import { sortByIdAsc } from "../../utils/sort";
-import { GrouppedFactionsToggle } from "../../shared/components/GrouppedFactionsToggle";
+// import { sortByIdAsc } from "../../utils/sort";
+// import { GrouppedFactionsToggle } from "../../shared/components/GrouppedFactionsToggle";
 import { GrouppedExpansions } from "../../shared/components/GrouppedExpansions";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import { getCardPathByCardId } from "../../utils/helpers";
@@ -21,7 +22,7 @@ function useFilteredCards(factions = [], expansions = []) {
     const [searchText, setSearchText] = useState("");
     const filteredCards = useMemo(() => {
         const includeUniversalCards = factions.includes(
-            wufactions["Universal"].id
+            wufactions["u"].id
         );
 
         const cards = Object.values(wucards)
@@ -65,17 +66,17 @@ function CardPicture({ name, id }) {
 
 function Library() {
     const cardsContainerRef = React.createRef();
-    const [selectedFormat, setSelectedFormat] = useState(CHAMPIONSHIP_FORMAT);
+    const [selectedFormat, setSelectedFormat] = useState(NEMESIS_FORMAT);
     const validSetIds = getAllSetsValidForFormat(selectedFormat).map(
         (set) => set.id
     );
-    const sortedFactions = Object.values(wufactions).sort(sortByIdAsc);
-    const [selectedFactions, setSelectedFactions] = useState(
-        sortedFactions.map((f) => f.id)
-    );
+    // const sortedFactions = Object.values(wufactions).sort(sortByIdAsc);
+    // const [selectedFactions, setSelectedFactions] = useState(
+    //     sortedFactions.map((f) => f.id)
+    // );
     const [selectedExpansions, setSelectedExpansions] = useState(validSetIds);
     const [filteredCards, findCardsWithText] = useFilteredCards(
-        selectedFactions,
+        [], // selectedFactions
         selectedExpansions
     );
     const [showFilters, setShowFilters] = useState(false);
@@ -123,10 +124,10 @@ function Library() {
                         selectedExpansions={selectedExpansions}
                         onSelectionChanged={setSelectedExpansions}
                     />
-                    <GrouppedFactionsToggle
+                    {/* <GrouppedFactionsToggle
                         selectedFactions={selectedFactions}
                         onSelectionChanged={setSelectedFactions}
-                    />
+                    /> */}
                 </div>
                 <div className="flex-1 lg:col-span-3 flex flex-col lg:px-2">
                     {filteredCards.length === 0 && (
