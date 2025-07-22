@@ -7,15 +7,15 @@ import { ExpansionPicture } from "./ExpansionPicture";
 
 const createExpansionGroups = () => {
   const season1 = [
-    wusets["Blazing Assault Rivals Deck"].id,
-    wusets["Countdown to Cataclysm Rivals Deck"].id,
-    wusets["Edge of the Knife Rivals Deck"].id,
-    wusets["Emberstone Sentinels Rivals Deck"].id,
-    wusets["Pillage and Plunder Rivals Deck"].id,
-    wusets["Raging Slayers Rivals Deck"].id,
-    wusets["Realmstone Raiders Rivals Deck"].id,
-    wusets["Reckless Fury Rivals Deck"].id,
-    wusets["Wrack and Ruin Rivals Deck"].id,
+    wusets["BL"].id,
+    wusets["CC"].id,
+    wusets["EK"].id,
+    wusets["ES"].id,
+    wusets["PL"].id,
+    wusets["RS"].id,
+    wusets["RF"].id,
+    wusets["WR"].id,
+    wusets["RG"].id,
   ];
 
   return [
