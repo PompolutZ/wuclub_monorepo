@@ -4,9 +4,9 @@ import {
     NEMESIS_FORMAT,
     wucards
 } from "../../data/wudb";
+import { CardPicture } from "../../shared/components/CardPicture";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
-import { getCardPathByCardId } from "../../utils/helpers";
 
 function useFilteredCards(factions = [], expansions = []) {
     const [searchText, setSearchText] = useState("");
@@ -27,22 +27,6 @@ function useFilteredCards(factions = [], expansions = []) {
     }, [factions, expansions, searchText]);
 
     return [filteredCards, setSearchText];
-}
-
-function CardPicture({ name, id }) {
-    return (
-        <picture className="max-h-full max-w-full flex">
-            <source
-                type="image/webp"
-                srcSet={getCardPathByCardId(id, "webp")}
-            />
-            <img
-                className="relative object-contain cursor-pointer transform hover:scale-105 transition-all hover:z-10 filter hover:drop-shadow-lg"
-                alt={name}
-                src={getCardPathByCardId(id, "png")}
-            />
-        </picture>
-    );
 }
 
 function Library() {
@@ -105,8 +89,7 @@ function Library() {
                                                     className="flex-1 p-2 flex items-center justify-center"
                                                 >
                                                         <CardPicture
-                                                            id={card.id}
-                                                            name={card.name}
+                                                            card={card}
                                                         />
                                                 </div>
                                             ))}

@@ -1,13 +1,12 @@
-export interface Card {
-    id: number;
-    factionId: number;
-    setId: number,
-    name: string,
-    type: string,
+export type Card = {
+    id: string;
+    factionId: string;
+    setId: string;
+    name: string;
+    type: string;
     glory: number;
     rule: string;
-    scoreType?: string; // "End";
-    status: string; //"V--_V-_V";
+    scoreType: string;
+    status: string;
     rotated: boolean;
-    duplicates: number[];
 }
