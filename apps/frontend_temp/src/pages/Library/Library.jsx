@@ -1,48 +1,29 @@
 import React, { useMemo, useState } from "react";
 import {
-    CHAMPIONSHIP_FORMAT,
     getAllSetsValidForFormat,
     NEMESIS_FORMAT,
-    RELIC_FORMAT,
-    wucards,
-    wufactions,
+    wucards
 } from "../../data/wudb";
-import SectionTitle from "../../shared/components/SectionTitle";
-import { DeckPlayFormatToggle } from "../../shared/components/DeckPlayFormatToggle";
-import { DeckPlayFormatInfo } from "../../shared/components/DeckPlayFormatInfo";
-import IconButton from "../../shared/components/IconButton";
-import TogglesIcon from "@icons/sliders.svg?react";
-// import { sortByIdAsc } from "../../utils/sort";
-// import { GrouppedFactionsToggle } from "../../shared/components/GrouppedFactionsToggle";
-import { GrouppedExpansions } from "../../shared/components/GrouppedExpansions";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
+import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
 import { getCardPathByCardId } from "../../utils/helpers";
 
 function useFilteredCards(factions = [], expansions = []) {
     const [searchText, setSearchText] = useState("");
     const filteredCards = useMemo(() => {
-        const includeUniversalCards = factions.includes(
-            wufactions["u"].id
-        );
 
         const cards = Object.values(wucards)
-            .filter(
-                (card) =>
-                    (card.factionId > 1 && factions.includes(card.factionId)) ||
-                    (includeUniversalCards &&
-                        card.factionId === 1 &&
-                        expansions.includes(card.setId))
-            )
             .sort(
-                (prev, next) =>
-                    prev.factionId - next.factionId || next.setId - prev.setId
+                (prev, next) => next.setId - prev.setId
             );
         const findText = searchText.toUpperCase();
-        return cards.filter(
+        const filteredCards = cards.filter(
             (card) =>
                 card.name.toUpperCase().includes(findText) ||
                 card.rule.toUpperCase().includes(findText)
         );
+
+        return filteredCards;
     }, [factions, expansions, searchText]);
 
     return [filteredCards, setSearchText];
@@ -70,16 +51,11 @@ function Library() {
     const validSetIds = getAllSetsValidForFormat(selectedFormat).map(
         (set) => set.id
     );
-    // const sortedFactions = Object.values(wufactions).sort(sortByIdAsc);
-    // const [selectedFactions, setSelectedFactions] = useState(
-    //     sortedFactions.map((f) => f.id)
-    // );
     const [selectedExpansions, setSelectedExpansions] = useState(validSetIds);
     const [filteredCards, findCardsWithText] = useFilteredCards(
         [], // selectedFactions
         selectedExpansions
     );
-    const [showFilters, setShowFilters] = useState(false);
 
     return (
         <React.Fragment>
@@ -91,43 +67,13 @@ function Library() {
                             placeholder="Search for text on a card"
                             className="flex-1 px-3 py-2 w-full m-1border border-purple-300 focus:ring focus:ring-purple-500 focus:outline-none"
                         />
-                        <IconButton
-                            className="lg:hidden rounded-full ml-3 px-2 w-11 h-11 grid place-content-center relative hover:bg-gray-100 focus:text-purple-700"
-                            onClick={() => setShowFilters((prev) => !prev)}
-                        >
-                            <TogglesIcon />
-                        </IconButton>
-                    </section>
-                    <section className="p-4">
-                        <SectionTitle title="Game format" />
-                        <div className="grid p-4">
-                            <div className="">
-                                <DeckPlayFormatToggle
-                                    formats={[
-                                        CHAMPIONSHIP_FORMAT,
-                                        RELIC_FORMAT,
-                                    ]}
-                                    selectedFormat={selectedFormat}
-                                    onFormatChange={setSelectedFormat}
-                                />
-                            </div>
-
-                            <DeckPlayFormatInfo
-                                className="text-gray-900 text-sm mt-2 max-w-sm"
-                                format={selectedFormat}
-                            />
-                        </div>
                     </section>
 
-                    <GrouppedExpansions
+                    <GroupedExpansions
                         validSetIds={validSetIds}
                         selectedExpansions={selectedExpansions}
                         onSelectionChanged={setSelectedExpansions}
                     />
-                    {/* <GrouppedFactionsToggle
-                        selectedFactions={selectedFactions}
-                        onSelectionChanged={setSelectedFactions}
-                    /> */}
                 </div>
                 <div className="flex-1 lg:col-span-3 flex flex-col lg:px-2">
                     {filteredCards.length === 0 && (

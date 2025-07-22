@@ -28,7 +28,7 @@ const createExpansionGroups = () => {
   ];
 };
 
-const GrouppedExpansions = ({
+export const GroupedExpansions = ({
   onSelectionChanged,
   selectedExpansions = [],
   validSetIds = [],
@@ -76,4 +76,3 @@ const GrouppedExpansions = ({
   );
 };
 
-export { GrouppedExpansions };
