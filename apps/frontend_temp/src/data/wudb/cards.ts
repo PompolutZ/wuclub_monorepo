@@ -69,7 +69,11 @@ export const cards = {
         "rule": "Score this immediately after an enemy fighter is slain if that fighter was the first fighter slain this combat phase.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "BL6",
+            "WR11"
+        ]
     },
     "BL7": {
         "id": "BL7",
@@ -193,7 +197,8 @@ export const cards = {
         "duplicates": [
             "BL16",
             "ES14",
-            "PL13"
+            "PL13",
+            "EK19"
         ]
     },
     "BL17": {
@@ -221,7 +226,7 @@ export const cards = {
         "glory": null,
         "rule": "Pick a friendly fighter. Remove that fighter from the battlefield, and then place that fighter in an empty starting hex in friendly territory.",
         "scoreType": "-",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "BL19": {
@@ -325,7 +330,8 @@ export const cards = {
         "rotated": false,
         "duplicates": [
             "BL26",
-            "ES32"
+            "ES32",
+            "RS30"
         ]
     },
     "BL27": {
@@ -338,7 +344,11 @@ export const cards = {
         "rule": "This fighter's weapons have **Ensnare**.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "BL27",
+            "EK24"
+        ]
     },
     "BL28": {
         "id": "BL28",
@@ -350,7 +360,11 @@ export const cards = {
         "rule": "This fighter's weapons have **Cleave**.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "BL28",
+            "EK32"
+        ]
     },
     "BL29": {
         "id": "BL29",
@@ -394,7 +408,9 @@ export const cards = {
         "duplicates": [
             "BL31",
             "ES30",
-            "CC30"
+            "CC30",
+            "EK26",
+            "RS28"
         ]
     },
     "BL32": {
@@ -410,7 +426,10 @@ export const cards = {
         "rotated": false,
         "duplicates": [
             "BL32",
-            "ES31"
+            "ES31",
+            "RF30",
+            "RS31",
+            "RG29"
         ]
     },
     "ES1": {
@@ -423,7 +442,11 @@ export const cards = {
         "rule": "Score this immediately after your opponent's Action step if a friendly fighter with any Charge tokens hold a treasure token in enemy territory.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "ES1",
+            "RF9"
+        ]
     },
     "ES2": {
         "id": "ES2",
@@ -471,7 +494,11 @@ export const cards = {
         "rule": "Score this immediately after a friendly fighter's Attack if the attacker is holding a treasure token.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "ES5",
+            "EK1"
+        ]
     },
     "ES6": {
         "id": "ES6",
@@ -483,7 +510,11 @@ export const cards = {
         "rule": "Score this immediately after a friendly fighter Moves if 2 or more friendly fighters that have Move tokens are in enemy territory.",
         "scoreType": "Surge",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "ES6",
+            "WR3"
+        ]
     },
     "ES7": {
         "id": "ES7",
@@ -554,7 +585,7 @@ export const cards = {
         "glory": 3,
         "rule": "Score this in an end phase if 2 or more friendly fighters with a total Bounty characteristic of 3 or more hold treasure tokens.",
         "scoreType": "End",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "ES13": {
@@ -583,7 +614,8 @@ export const cards = {
         "duplicates": [
             "BL16",
             "ES14",
-            "PL13"
+            "PL13",
+            "EK19"
         ]
     },
     "ES15": {
@@ -648,7 +680,11 @@ export const cards = {
         "rule": "Pick 2 adjacent fighters. Remove those fighters from the battlefield and then place each in the hex the other was removed from.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "ES19",
+            "WR13"
+        ]
     },
     "ES20": {
         "id": "ES20",
@@ -723,14 +759,16 @@ export const cards = {
         "rotated": false,
         "duplicates": [
             "ES25",
-            "PL23"
+            "PL23",
+            "WR26",
+            "RS29"
         ]
     },
     "ES26": {
         "id": "ES26",
         "factionId": "u",
         "setId": "ES",
-        "name": "Share Reflexes",
+        "name": "Sharp Reflexes",
         "type": "Upgrade",
         "glory": 2,
         "rule": "This fighter has +1 Save, to a maximum of 2.",
@@ -760,7 +798,11 @@ export const cards = {
         "rule": "**Deft:** After you make a Save roll for this fighter, you can immediately re-roll 1 Save dice in that Save roll.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "ES28",
+            "RG23"
+        ]
     },
     "ES29": {
         "id": "ES29",
@@ -792,7 +834,9 @@ export const cards = {
         "duplicates": [
             "BL31",
             "ES30",
-            "CC30"
+            "CC30",
+            "EK26",
+            "RS28"
         ]
     },
     "ES31": {
@@ -808,7 +852,10 @@ export const cards = {
         "rotated": false,
         "duplicates": [
             "BL32",
-            "ES31"
+            "ES31",
+            "RF30",
+            "RS31",
+            "RG29"
         ]
     },
     "ES32": {
@@ -824,7 +871,8 @@ export const cards = {
         "rotated": false,
         "duplicates": [
             "BL26",
-            "ES32"
+            "ES32",
+            "RS30"
         ]
     },
     "PL1": {
@@ -932,7 +980,7 @@ export const cards = {
         "glory": 1,
         "rule": "Score this immediately after your warband Delves for the third or subsequent time this combat phase.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "PL10": {
@@ -985,7 +1033,8 @@ export const cards = {
         "duplicates": [
             "BL16",
             "ES14",
-            "PL13"
+            "PL13",
+            "EK19"
         ]
     },
     "PL14": {
@@ -1113,7 +1162,9 @@ export const cards = {
         "rotated": false,
         "duplicates": [
             "ES25",
-            "PL23"
+            "PL23",
+            "WR26",
+            "RS29"
         ]
     },
     "PL24": {
@@ -1233,7 +1284,7 @@ export const cards = {
         "glory": null,
         "rule": "Score this in an end phase. Gain a number of Glory points equal to your Cataclysm value, to a maximum of 2.",
         "scoreType": "End",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "CC2": {
@@ -1555,7 +1606,7 @@ export const cards = {
         "name": "Utter Conviction",
         "type": "Upgrade",
         "glory": 1,
-        "rule": "This fighter's Save characteristic is X, where X is your Cataclysm value, and cannot be modified further.",
+        "rule": "This fighter's Save characteristic is X, where X is your Cataclysm value, and cannot be modified further. \\n This fighter cannot use Critical Weapon abilities.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -1586,7 +1637,9 @@ export const cards = {
         "duplicates": [
             "BL31",
             "ES30",
-            "CC30"
+            "CC30",
+            "EK26",
+            "RS28"
         ]
     },
     "CC31": {
@@ -1609,6 +1662,2032 @@ export const cards = {
         "type": "Upgrade",
         "glory": 1,
         "rule": "**Melee Attack action** \\n [:Hex: 1 - :atSmash: 2 - :boom: 3] \\n Immediately after this fighter has Attacked with this weapon, inflict 1 damage on this fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF1": {
+        "id": "RF1",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Aim for the Top",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if the total Bounty characteristic of slain and/or damaged enemy fighters is 4 or more.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF2": {
+        "id": "RF2",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Arena Mortis",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if all fighters in the same territory have Charge tokens and their total Bounty characteristic is 4 or more.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF3": {
+        "id": "RF3",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Best Foot Forward",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's successful Attack if that fighter has any Charge tokens and is in enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "RF3",
+            "RG2"
+        ]
+    },
+    "RF4": {
+        "id": "RF4",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Bloodbathed Rampager",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if a friendly fighter has 2 or more Charge tokens.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF5": {
+        "id": "RF5",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Bloody Momentum",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if 2 or more friendly fighters with a total Bounty characteristic of 4 or more have Charge tokens and are in enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF6": {
+        "id": "RF6",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Frenzied Rush",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an Action step if friendly fighters with a total Bounty characteristic of 3 or more have Charge tokens and are in enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF7": {
+        "id": "RF7",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Living Bludgeon",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an Action step if a friendly fighter has a Guard token and a Charge token and is not in friendly territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF8": {
+        "id": "RF8",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Red Aftermath",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if the total Bounty characteristic of slain enemy fighters is 2 or more.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF9": {
+        "id": "RF9",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Sally Forth",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after your opponent's Action step if a friendly fighter with any Charge tokens holds a treasure token in enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES1",
+            "RF9"
+        ]
+    },
+    "RF10": {
+        "id": "RF10",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Savage Sprinter",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an Action step if a friendly fighter in enemy territory has 2 or more Move tokens.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF11": {
+        "id": "RF11",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Unrelenting Massacre",
+        "type": "Objective",
+        "glory": 3,
+        "rule": "Score this in an end phase if all fighters have Charge tokens.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "RF11",
+            "RG12"
+        ]
+    },
+    "RF12": {
+        "id": "RF12",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Vicious Brawl",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an Action step if there are 3 or more fighters with Charge tokens adjacent to each other. If you are the **underdog**, there can be 2 or more fighters instead.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF13": {
+        "id": "RF13",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Braced",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter. Give that fighter a Charge token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF14": {
+        "id": "RF14",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Catch Weapon",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a fighter's successful Attack. Give that fighter a Charge token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF15": {
+        "id": "RF15",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Diving In",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter. Push that fighter up to 2 hexes. That push must end adjacent to any fighters with Charge tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF16": {
+        "id": "RF16",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Get It Done",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick 2 friendly fighters. Remove a Charge token from 1 of those fighters and then give the other fighter a Charge token.",
+        "scoreType": "-",
+        "status": "NY-_N-_V",
+        "rotated": false
+    },
+    "RF17": {
+        "id": "RF17",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Lost Legacy",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after you discard a slain friendly fighter's Upgrades. Pick 1 of those Upgrades, put it in your hand then draw 1 Power card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF18": {
+        "id": "RF18",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Outburst",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter with any Charge tokens. Roll an Attack dice for each enemy fighter adjacent to them. If you are the **underdog**, roll a number of dice equal to the battle round number instead. If the roll contains any :atSmash:, inflict 1 damage on that fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF19": {
+        "id": "RF19",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Over to You",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately before removing a slain friendly fighter's tokens if that fighter was slain by an attacker and had any Move, Charge, Guard and/or Stagger tokens. Pick a friendly fighter or the attacker. Give the fighter you picked all of the slain fighter's Move, Charge, Guard and Stagger tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF20": {
+        "id": "RF20",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Push Through",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter with a Bounty characteristic of 2 or less. Inflict 1 damage on that fighter. In your next Action step, that fighter can use Core abilities as if they did not have any Move or Charge tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF21": {
+        "id": "RF21",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Quick Shift",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter that has any Move tokens. Remove 1 of that fighter's Move tokens and then give that fighter a Charge token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF22": {
+        "id": "RF22",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Reckless Attitudes",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Enemy fighters cannot use Core abilities other than the Charge ability in the next Action step.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF23": {
+        "id": "RF23",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Bellowing Tyrant",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Bellow:** This fighter can use this Core ability if they have any Charge tokens. Push each other friendly fighter with any Charge tokens up to 2 hexes. Then, pick 1 of those fighters. Remove 1 of that fighter's Charge tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF24": {
+        "id": "RF24",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Bladecatcher",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "While this fighter is the target of an Attack, the attacker cannot use Weapon abilities.",
+        "scoreType": "-",
+        "status": "V-Y_V-_V",
+        "rotated": false
+    },
+    "RF25": {
+        "id": "RF25",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Blades of Wrath",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "If this fighter is slain, before removing them from the battlefield, roll a number of Attack dice equal to the battle round number for each enemy fighter adjacent to them. If the roll contains any :atSmash:, inflict 1 damage on that fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF26": {
+        "id": "RF26",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Furious Might",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter's melee weapons have **Grievous** while this fighter has any Charge tokens and is not using the Charge ability.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF27": {
+        "id": "RF27",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Fury of Aqshy",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "Fighters adjacent to this fighter cannot use Core abilities other than the Charge ability.",
+        "scoreType": "-",
+        "status": "NY-_N-_V",
+        "rotated": false
+    },
+    "RF28": {
+        "id": "RF28",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Headcase",
+        "type": "Upgrade",
+        "glory": null,
+        "rule": "If this fighter has no Charge tokens, instead of playing a Power card in a Power step, you can give this fighter a Charge token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF29": {
+        "id": "RF29",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Headlong Charge",
+        "type": "Upgrade",
+        "glory": null,
+        "rule": "This fighter has +2 Move while using the Charge ability.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF30": {
+        "id": "RF30",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Keen Eye",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter's melee weapons have +1 Attack dice.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL32",
+            "ES31",
+            "RF30",
+            "RS31",
+            "RG29"
+        ]
+    },
+    "RF31": {
+        "id": "RF31",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Still Swinging",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter's melee weapons have **Ensnare** while this fighter has any Charge tokens and is not using the Charge ability.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RF32": {
+        "id": "RF32",
+        "factionId": "u",
+        "setId": "RF",
+        "name": "Utter Ignorance",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "If this fighter would be slain, they are not slain. Remove damage tokens from this fighter until they are vulnerable and then discard this card.",
+        "scoreType": "-",
+        "status": "NY-_N-_V",
+        "rotated": false
+    },
+    "WR1": {
+        "id": "WR1",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Alone in the Dark",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if no fighters are adjacent.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR2": {
+        "id": "WR2",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Bloody and Bruised",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after your warband inflicts damage on an enemy fighter if 3 or more fighters are damaged.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR3": {
+        "id": "WR3",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Careful Advance",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter Moves if 2 or more friendly fighters that have Move tokens are in enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES6",
+            "WR3"
+        ]
+    },
+    "WR4": {
+        "id": "WR4",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Living on the Edge",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if a vulnerable friendly fighter is in enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR5": {
+        "id": "WR5",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Low on Options",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after you discard a Power card if 5 or more Ploy cards are in your Power discard pile.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR6": {
+        "id": "WR6",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Out of the Frying Pan",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if 3 or more damaged friendly fighters that have Move and/or Charge tokens are in enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR7": {
+        "id": "WR7",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Ploymaster",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if you played 3 or more Ploys this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR8": {
+        "id": "WR8",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Predictable End",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an ability on a friendly Wrack and Ruin card inflicts damage on an enemy fighter holding a treasure token.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR9": {
+        "id": "WR9",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Spread Out!",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if there is a friendly fighter in each territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR10": {
+        "id": "WR10",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Stay Close",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if there are no fighters in edge hexes.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR11": {
+        "id": "WR11",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Strong Start",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an enemy fighter is slain if that fighter was the first fighter slain this combat phase.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL6",
+            "WR11"
+        ]
+    },
+    "WR12": {
+        "id": "WR12",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Unsafe Ground",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after your warband inflicts damage on an enemy fighter in an edge hex. If you are the **underdog**, that enemy fighter can be within 1 hex of an edge hex instead.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR13": {
+        "id": "WR13",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Confusion",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick 2 adjacent fighters. Remove those fighters from the battlefield and then place each in the hex the other was removed from.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES19",
+            "WR13"
+        ]
+    },
+    "WR14": {
+        "id": "WR14",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Damned if you Do",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Your opponent must pick 1 of the following abilities for you to resolve: \\n Pick an enemy fighter. Push that fighter 1 hex. \\n Pick an enemy fighter that is not vulnerable. Inflict 1 damage on that fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR15": {
+        "id": "WR15",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Deadly Traps",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a friendly fighter's drawn Attack if the target is not vulnerable and was driven back. Inflict 1 damage on the target.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR16": {
+        "id": "WR16",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Fault Lines",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an undamaged enemy fighter. Inflict 1 damage on that fighter. Then, your opponent can pick a fighter. Inflict 1 damage on that fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR17": {
+        "id": "WR17",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Fireproof",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "The first time damage is inflicted on a friendly fighter in the next turn, reduce that damage to 1.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR18": {
+        "id": "WR18",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Flee!",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter in friendly territory. That fighter has +3 Move in your next Action step. If that fighter Moves in that Action step, that Move cannot end in friendly territory.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR19": {
+        "id": "WR19",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Ominous Rumbling",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Your opponent must pick 1 of the following abilities for you to resolve: \\n Pick 2 enemy fighters. Give each of those fighters a Stagger token. \\n Pick an enemy fighter that is not vulnerable. Inflict 1 damage on that fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR20": {
+        "id": "WR20",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Sidle Up",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter. Push that fighter up to 2 hexes. That push must end adjacent to 2 or more fighters.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR21": {
+        "id": "WR21",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Vicious Intent",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after you pick a melee weapon as part of an Attack. That weapon has +1 Attack dice for that Attack. If the target is undamaged, that weapon has +2 Attack dice for that Attack instead.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR22": {
+        "id": "WR22",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Volcanic Eruption",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a fighter. Then your opponent can pick an enemy fighter. Starting with the fighter you picked, roll a number of Attack dice for each of those fighters equal to their Bounty characteristic, to a minimum of 1. If the roll contains any :atSmash:, inflict 1 damage on that fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR23": {
+        "id": "WR23",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Barge",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "**Barge:** This fighter can use this Core ability if they have no Move and/or Charge tokens. This fighter Moves. That Move must end adjacent to an enemy fighter. Give this fighter a Charge token. Then, pick an enemy fighter adjacent to this fighter. Push that fighter 1 hex then give them a Stagger token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR24": {
+        "id": "WR24",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Desperate Defence",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "While this fighter is the target of an Attack, the attacker's weapons have -1 Damage. The next time damage is inflicted on this fighter as part on an Attack, discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR25": {
+        "id": "WR25",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Fiery Temper",
+        "type": "Upgrade",
+        "glory": null,
+        "rule": "**Belligerent:** Immediately after this fighter has been picked to be pushed, you can inflict 1 damage on this fighter. If you do so, this fighter is not pushed.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR26": {
+        "id": "WR26",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Great Speed",
+        "type": "Upgrade",
+        "glory": null,
+        "rule": "This fighter has +1 Move.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES25",
+            "PL23",
+            "WR26",
+            "RS29"
+        ]
+    },
+    "WR27": {
+        "id": "WR27",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Henchman",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Disciplined:** Immediately after you make an Attack roll for this fighter, you can change 1 result to :atSup1:. You cannot re-roll Attack rolls for this fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR28": {
+        "id": "WR28",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Misfortune",
+        "type": "Upgrade",
+        "glory": null,
+        "rule": "**Ill-fated:** Immediately after this fighter uses a Core ability, you can inflict 1 damage on this fighter. Then, you can remove this Upgrade from this fighter and equip another friendly fighter with this Upgrade.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR29": {
+        "id": "WR29",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Rock-splitting Tread",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Stomp:** Immediately after your last Action step in a battle round, pick an adjacent enemy fighter that is not vulnerable. Inflict 1 damage on that fighter. Then, roll an Attack dice. On an :atSmash:, discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR30": {
+        "id": "WR30",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Sundering Weapon",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter's melee weapons have **Cleave**.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR31": {
+        "id": "WR31",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Unstoppable",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "While this fighter is vulnerable, each time 1 damage is inflicted on this fighter, reduce that damage to 0.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "WR32": {
+        "id": "WR32",
+        "factionId": "u",
+        "setId": "WR",
+        "name": "Wary Tread",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "You can use this ability after the last Power step in a battle round. Push this fighter 1 hex. That push cannot end adjacent to any fighters.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK1": {
+        "id": "EK1",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Aggressive Defender",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's Attack if the attacker is holding a treasure token.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES5",
+            "EK1"
+        ]
+    },
+    "EK2": {
+        "id": "EK2",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "All In",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if there are no tempered friendly fighters in friendly territory and any tempered friendly fighters are in neutral and/or enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK3": {
+        "id": "EK3",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Behind Enemy Lines",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an opponent's Action step if a tempered friendly fighter holds a feature token in enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK4": {
+        "id": "EK4",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Calm Before the Storm",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if there are any damaged fighters and those fighters are not adjacent.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK5": {
+        "id": "EK5",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Double Team",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's successful Attack if the target was Flanked by a friendly fighter.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK6": {
+        "id": "EK6",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Immovable",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an opponent's Action step if a friendly fighter was the target of an Attack in that Action step while they were tempered and the target was not slain.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK7": {
+        "id": "EK7",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Power in Numbers",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an Action step if 3 or more tempered fighters with no Move tokens are adjacent. If you are the **underdog** score this if 2 or more tempered fighters with no Move tokens are adjacent instead.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK8": {
+        "id": "EK8",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Risky Position",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if a tempered friendly fighter is in enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK9": {
+        "id": "EK9",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Sneak Into Position",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an opponent's Action step if 2 or more tempered friendly fighters are adjacent to the same enemy fighter.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK10": {
+        "id": "EK10",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Trial of the Tempered",
+        "type": "Objective",
+        "glory": 3,
+        "rule": "Score this in an end phase if each fighter is tempered.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK11": {
+        "id": "EK11",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Two-pronged Assault",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if 2 or more tempered friendly fighters are in enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK12": {
+        "id": "EK12",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Usurper",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if an enemy **leader** was slain by a tempered friendly fighter this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK13": {
+        "id": "EK13",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Death Throes",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a tempered friendly fighter. In the next Action step, Attacks that target this fighter have -2 Attack dice.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK14": {
+        "id": "EK14",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Fake Out!",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an enemy fighter with a Health characteristic of 3 or more that is adjacent to a tempered friendly fighter, and then roll an Attack dice. If the roll contains any :atSmash: or :atFury:, inflict 1 damage on that fighter, and then give that fighter a stagger token. If you are the **underdog**, the roll can also contain :atCrit:.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK15": {
+        "id": "EK15",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Final Stand",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "In the next Action step, tempered friendly fighters cannot be pushed.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK16": {
+        "id": "EK16",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Opportunity Strikes",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after you pick a weapon as part of an Attack for a tempered friendly fighter. That weapon had +1 Attack dice for that Attack.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK17": {
+        "id": "EK17",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Power from Death",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a friendly fighter with a bounty of 1 or more is slain by an enemy fighter, if that fighter was tempered before inflicting the damage that would slay them. Draw up to 3 Power cards.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK18": {
+        "id": "EK18",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Running Riot",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a tempered friendly fighter's successful Attack. Pick another friendly fighter. That fighter is tempered.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK19": {
+        "id": "EK19",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Sidestep",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter. Push that fighter 1 hex.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL16",
+            "ES14",
+            "PL13",
+            "EK19"
+        ]
+    },
+    "EK20": {
+        "id": "EK20",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Spiteful Traps",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an enemy fighter with a Health characteristic of 3 or more within 2 hexes of your **leader**. Give that fighter a Move token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK21": {
+        "id": "EK21",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Synchronised Effort",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick 2 tempered friendly fighters within 4 hexes of each other. Remove those fighters from the battlefield and then place each in the hex the other was removed from.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK22": {
+        "id": "EK22",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "The Uprising!",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "All friendly fighters are tempered in the next Action step.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK23": {
+        "id": "EK23",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Dark Horse",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter is tempered.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK24": {
+        "id": "EK24",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Deadly Aim",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter's weapons have **Ensnare**.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL27",
+            "EK24"
+        ]
+    },
+    "EK25": {
+        "id": "EK25",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Fuelled by Pain",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Melee Attack action** \\n [:Hex: 1 - :atSmash: X - :boom: 2 -(:atCrit: **Ensnare**)-] \\n X is equal to the number of damage tokens this fighter has.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK26": {
+        "id": "EK26",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Great Fortitude",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter has +1 Health.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL31",
+            "ES30",
+            "CC30",
+            "EK26",
+            "RS28"
+        ]
+    },
+    "EK27": {
+        "id": "EK27",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Impervious",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "While this fighter is tempered, Save rolls for this fighter cannot be affected by **Cleave** and **Ensnare**.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK28": {
+        "id": "EK28",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Lash Out",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Thrash:** Immediately after this fighter is slain, before removing them from the battlefield, roll a number of Save dice equal to the battle round. For each :dfBlock:, give an enemy fighter within 2 hexes of this fighter a Move token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK29": {
+        "id": "EK29",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Mobbed!",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "When this fighter Attacks, if the target is within 3 hexes of any other friendly fighters, the target is Flanked and Surrounded for that Attack.",
+        "scoreType": "-",
+        "status": "V-Y_V-_V",
+        "rotated": false
+    },
+    "EK30": {
+        "id": "EK30",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Parting Shot",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Pyrrhic Strike:** Immediately after this fighter is slain by an enemy fighter, before removing them from the battlefield, pick an enemy fighter within 2 hexes of them. Give that fighter a stagger token. If this fighter was tempered before inflicting the damage that would slay them, inflict 1 damage on that fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK31": {
+        "id": "EK31",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Pesky Nuisance",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "Enemy fighters adjacent to this fighter must target this fighter with any Attacks.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "EK32": {
+        "id": "EK32",
+        "factionId": "u",
+        "setId": "EK",
+        "name": "Sharpened Points",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter's weapons have **Cleave**.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL28",
+            "EK32"
+        ]
+    },
+    "RS1": {
+        "id": "RS1",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "A Sure Bet",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after raiding an Emberstone card after a melee Attack if the Attack roll contained 3 or more Attack dice.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS2": {
+        "id": "RS2",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Certain Aggression",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if you raided 2 or more times this battle round and there are no enemy fighters in friendly territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS3": {
+        "id": "RS3",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Critical Risk",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after raiding an Emberstone card if the preceding Attack was successful and the Attack roll included any :atCrit:.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS4": {
+        "id": "RS4",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Emberstone Stash",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if you raided 4 or more different Emberstone cards this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS5": {
+        "id": "RS5",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Hoarder's Hovel",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if any friendly fighters are holding a treasure token that has a value equal to that fighter's Bounty characteristic.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS6": {
+        "id": "RS6",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Invade",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if you raided any Emberstone cards this battle round after a melee Attack if the target was holding a treasure token.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS7": {
+        "id": "RS7",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Looted Realmstone",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after raiding 2 or more different Emberstone cards from the same melee attack.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS8": {
+        "id": "RS8",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Pillage",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after raiding 2 or more different Emberstone cards after a melee Attack if the target was in neutral or enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS9": {
+        "id": "RS9",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Ragerock Strike",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after resolving the Emberstone Ploy ability or the Emberstone Upgrade ability (see Plot card).",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS10": {
+        "id": "RS10",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Realmstone Raid",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if you raided 3 or more times after different friendly fighters Attacked this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS11": {
+        "id": "RS11",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Reckless Gambit",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after raiding an Emberstone card for the second or subsequent time this battle round and each Emberstone card raided was a different card.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS12": {
+        "id": "RS12",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Roused Violence",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if the number of treasure tokens on the battlefield is equal to or less than the number of Emberstone cards you raided this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS13": {
+        "id": "RS13",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Ambush",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after picking a ranged weapon as part of an Attack. You can raid after a successful friendly ranged Attack instead of a melee Attack this turn.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS14": {
+        "id": "RS14",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Angered Focus",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Emberstone Ploy** \\n Pick a friendly fighter holding a treasure token in friendly territory that does not have any Move, Charge or Stagger tokens. Raid a number of cards equal to that fighter's Bounty characteristic. Cards raided this way do not count as having been raided as a result of a successful Attack.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS15": {
+        "id": "RS15",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "A Step Ahead",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Emberstone Ploy** \\n Pick a friendly fighter in neutral or enemy territory. Push that fighter 1 hex. That push must end closer to an enemy fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS16": {
+        "id": "RS16",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Fortune Faded",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter adjacent to an enemy fighter that is not vulnerable. Inflict 1 damage on both fighters.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS17": {
+        "id": "RS17",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Hidden Knowledge",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Emberstone Ploy** \\n Pick an enemy fighter adjacent to a friendly fighter. Give that fighter a Move token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS18": {
+        "id": "RS18",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Intoxicated with Rage",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Emberstone Ploy** \\n Pick a friendly fighter that has no Move and/or Charge tokens. Give that fighter a Guard token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS19": {
+        "id": "RS19",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Manipulated Fate",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a friendly fighter is picked as the target of an Attack. Save rolls made for that Attack count as having more :atCrit: than the Attack roll for the purposes of the Stand Fast ability.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS20": {
+        "id": "RS20",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Misstep",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Emberstone Ploy** \\n Pick an enemy fighter. Give that fighter a Stagger token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS21": {
+        "id": "RS21",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Raider's Rapture",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Domain:** When you raid, you can reveal 1 additional card. This effect persists until the end of the round or until another Domain card is played.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS22": {
+        "id": "RS22",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Raider's Premonition",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Emberstone Ploy** \\n Pick an Objective card from your hand and put it on the bottom of your Objective deck. Then draw 1 Objective card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS23": {
+        "id": "RS23",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Armour Piercer",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "**Emberstone Upgrade:** \\n **Breached:** Immediately after a drawn Attack made by this fighter, if the Damage characteristic of the attacker's weapon is greater than the target's Save characteristic, inflict 1 damage on the target. Then discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS24": {
+        "id": "RS24",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Brightstone Vigour",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "**Emberstone Upgrade:** \\n **Soothed by Slaughter:** Immediately after a successful Attack made by this fighter, if the Damage characteristic of the weapon used is greater than the Save characteristic of the target, you can heal the attacker. Then discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS25": {
+        "id": "RS25",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Call to Power",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Emberstone Upgrade:** \\n **Heed the Call:** Immediately after a successful Attack made by this fighter, you can draw 1 Power card. Then discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS26": {
+        "id": "RS26",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Emberstone Edge",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "**Emberstone Upgrade:** \\n **Melee Attack action** \\n [:Hex: 1 - :atSmash: 2 - :boom: 1] \\n This weapon has +1 Attack dice if you raided in the same phase.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS27": {
+        "id": "RS27",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Forgotten Fortune",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Emberstone Upgrade:** \\n **Lingering Power:** Immediately after a successful Attack made by this fighter, you can pick 1 Emberstone Ploy from your Power discard pile. Add it to your hand. Then discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RS28": {
+        "id": "RS28",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Great Fortitude",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter has +1 Health.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL31",
+            "ES30",
+            "CC30",
+            "EK26",
+            "RS28"
+        ]
+    },
+    "RS29": {
+        "id": "RS29",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Great Speed",
+        "type": "Upgrade",
+        "glory": null,
+        "rule": "This fighter has +1 Move.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES25",
+            "PL23",
+            "WR26",
+            "RS29"
+        ]
+    },
+    "RS30": {
+        "id": "RS30",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Great Strength",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter's melee weapons have **Grievous**.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL26",
+            "ES32",
+            "RS30"
+        ]
+    },
+    "RS31": {
+        "id": "RS31",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Keen Eye",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter's melee weapons have +1 Attack dice.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL32",
+            "ES31",
+            "RF30",
+            "RS31",
+            "RG29"
+        ]
+    },
+    "RS32": {
+        "id": "RS32",
+        "factionId": "u",
+        "setId": "RS",
+        "name": "Reforged Aid",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Emberstone Upgrade:** \\n **Salvaged Arms:** Immediately after a successful Attack made by this fighter, you can pick 1 Emberstone Upgrade from your Power discard pile. Add it to your hand. Then discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG1": {
+        "id": "RG1",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Aggressive Expansion",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if 3 or more enraged friendly fighters are in enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG2": {
+        "id": "RG2",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Best Foot Forward",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's successful Attack if that fighter has any Charge tokens and is in enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "RF3",
+            "RG2"
+        ]
+    },
+    "RG3": {
+        "id": "RG3",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Blinded by Rage",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an enemy fighter is slain by an enraged friendly fighter's melee Attack if that friendly fighter was enraged at the start of the turn.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG4": {
+        "id": "RG4",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Coordinated Assault",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an Action step if each friendly fighter is enraged and in enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG5": {
+        "id": "RG5",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Into the Fire",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if your **leader** is in enemy territory and within 2 hexes of 2 other fighters.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG6": {
+        "id": "RG6",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "No Contest",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if an enemy **leader** is slain.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG7": {
+        "id": "RG7",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "No Escape",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if each friendly fighter is enraged and in enemy territory, and no enemy fighters are in your territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG8": {
+        "id": "RG8",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "No Respite",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an opponent's Action step if there is an enraged friendly fighter in each territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG9": {
+        "id": "RG9",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Overwhelming Presence",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if each friendly fighter is enraged and there are no fighters holding treasure tokens.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG10": {
+        "id": "RG10",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Sever the Head",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an enemy **leader** is slain by an enraged friendly fighter's melee Attack.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG11": {
+        "id": "RG11",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Supreme Slayer",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after your **leader's** successful Attack if the target was slain and that was the second or subsequent fighter slain by your **leader**.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG12": {
+        "id": "RG12",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Unrelenting Massacre",
+        "type": "Objective",
+        "glory": 3,
+        "rule": "Score this in an end phase if all fighters have Charge tokens.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "RF11",
+            "RG12"
+        ]
+    },
+    "RG13": {
+        "id": "RG13",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Adrenaline Rush",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick up to 2 enraged friendly fighters. Remove their Stagger tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG14": {
+        "id": "RG14",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Honed Reflexes",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Domain:** Each time you make a Save roll for an enraged friendly fighter, you can re-roll 1 Save dice in that Save roll. This effect persists until the end of the battle round or until another Domain card is played.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG15": {
+        "id": "RG15",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Knife to the Heart",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an enemy fighter that is not vulnerable and that is adjacent to an enraged friendly fighter. Inflict 1 damage on that enemy fighter. Then, remove that friendly fighter's Rage tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG16": {
+        "id": "RG16",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Murderlust",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after an enraged friendly fighter's melee Attack fails. Friendly fighters' melee weapons have +1 Attack dice while targeting the target of that failed Attack until the end of the battle round.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG17": {
+        "id": "RG17",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Senseless Haste",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Friendly fighters have +1 Move in the next turn. After any friendly fighters Move in your next turn, give that fighter a Stagger token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG18": {
+        "id": "RG18",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Slayer's Aid",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an enraged friendly fighter. Push that fighter up to 3 hexes. That push must end adjacent to your **leader**.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG19": {
+        "id": "RG19",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Slayer's Arena",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Domain:** After each failed Attack, give the attacker a Stagger token. This effect persists until the end of the battle round or until another Domain card is played.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG20": {
+        "id": "RG20",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Venting Strike",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after you pick a melee weapon as part of an Attack made by an enraged friendly fighter. That weapon has +1 Attack dice for that Attack. Immediately after that Attack, remove that fighter's Rage tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG21": {
+        "id": "RG21",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "What Pain?",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick up to 2 enraged friendly fighters. Heal those fighters. Then, remove their Rage tokens and give them a Stagger token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG22": {
+        "id": "RG22",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Wrong-footed Stance",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "**Domain:** If a fighter enters or is placed in a stagger hex, give them a Move token in addition to a Stagger token. This effect persists until the end of the battle round or until another Domain card is played.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG23": {
+        "id": "RG23",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Agile",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "**Deft:** After you make a Save roll for this fighter, you can immediately re-roll 1 Save dice in that Save roll.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES28",
+            "RG23"
+        ]
+    },
+    "RG24": {
+        "id": "RG24",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Aggressive Ambusher",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "While this fighter is enraged, their melee weapons have **Cleave** and **Ensnare** if the target is Flanked and/or Surrounded.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG25": {
+        "id": "RG25",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Angered Swing",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Melee Attack action** \\n [:Hex: 1 - :atFury: 3 - :boom: 2] \\n A fighter can only use this weapon while enraged. When using the Raging Strike ability with this weapon, you must re-roll each Attack dice instead.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG26": {
+        "id": "RG26",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Assured Bloodshed",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "While this fighter is enraged, their melee weapons have **Grapple** and **Brutal**.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG27": {
+        "id": "RG27",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Gifted Vitality",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "Heal this fighter at the end of each battle round.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG28": {
+        "id": "RG28",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Haymaker",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter's melee weapons (excluding Upgrades) have the **Lethal** Weapon ability. After this fighter make a successful Attack with **Lethal**, discard this card. \\n **Lethal:** That fighter's weapon has +2 Damage for that Attack, to a maximum of 4.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG29": {
+        "id": "RG29",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Keen Eye",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter's melee weapons have +1 Attack dice.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL32",
+            "ES31",
+            "RF30",
+            "RS31",
+            "RG29"
+        ]
+    },
+    "RG30": {
+        "id": "RG30",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Murderous Instincts",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter's Range 1 melee weapons (excluding Upgrades) have **Grievous**. \\n This fighter cannot use Core abilities other than the Charge ability.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG31": {
+        "id": "RG31",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "Stubborn to the Bone",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "While this fighter is enraged, this fighter cannot be pushed or given Stagger tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "RG32": {
+        "id": "RG32",
+        "factionId": "u",
+        "setId": "RG",
+        "name": "United in Anger",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Rally Together:** Immediately after an enraged friendly fighter is pushed, you can push this fighter up to 1 hex closer to that fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
