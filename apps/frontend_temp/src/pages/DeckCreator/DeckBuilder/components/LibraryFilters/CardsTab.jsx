@@ -1,15 +1,14 @@
-import React, { useMemo } from "react";
+import FilterIcon from "@icons/filter.svg?react";
 import LockIcon from "@icons/lock.svg?react";
 import SurgeIcon from "@icons/zap.svg?react";
-import FilterIcon from "@icons/filter.svg?react";
-import {
-    validateCardForPlayFormat,
-    CHAMPIONSHIP_FORMAT,
-    NEMESIS_FORMAT,
-} from "../../../../../data/wudb";
-import ToggleButton from "../ToggleButton";
+import { useMemo } from "react";
 import { useDeckBuilderState } from "../../..";
+import {
+    NEMESIS_FORMAT,
+    validateCardForPlayFormat
+} from "../../../../../data/wudb";
 import IconButton from "../../../../../shared/components/IconButton";
+import ToggleButton from "../ToggleButton";
 
 function CardsTab({
     enabledTypes,
@@ -30,7 +29,7 @@ function CardsTab({
             ...selectedUpgrades,
             ...selectedGambits,
         ].filter((card) => {
-            const [, , isRestricted] = validateCardForPlayFormat(card, format);
+            const [, , isRestricted] = validateCardForPlayFormat(card);
             return isRestricted;
         });
     }, [selectedObjectives, selectedUpgrades, selectedGambits, format]);

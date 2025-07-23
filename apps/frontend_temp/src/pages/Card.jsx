@@ -1,33 +1,21 @@
 import { useParams } from "react-router-dom";
 import {
-    CHAMPIONSHIP_FORMAT,
     getSetById,
-    NEMESIS_FORMAT,
-    RELIC_FORMAT,
     validateCardForPlayFormat
 } from "../data/wudb";
 import { cards } from "../data/wudb/cards";
-import { CardPicture } from "../shared/components/CardPicture";
-import { PlayFormatPicture } from "../shared/components/PlayFormatPicture";
-import { ExpansionPicture } from "../shared/components/ExpansionPicture";
 import { sets } from "../data/wudb/sets";
+import { CardPicture } from "../shared/components/CardPicture";
+import { ExpansionPicture } from "../shared/components/ExpansionPicture";
 
 function Card() {
     const { id } = useParams();
     const card = cards[id];
     const [
         isValid,
-        isForsakenChampionship,
-        isRestrictedChampionship,
-    ] = validateCardForPlayFormat(card, CHAMPIONSHIP_FORMAT);
-    const [isRelicValid, isForsakenRelic] = validateCardForPlayFormat(
-        card,
-        RELIC_FORMAT
-    );
-    const [isValidForNemesis] = validateCardForPlayFormat(
-        card,
-        NEMESIS_FORMAT
-    );
+        isForsakenNemesis,
+        isRestrictedNemesis,
+    ] = validateCardForPlayFormat(card);
     const set = getSetById(card.setId);
 
     return (
@@ -54,12 +42,12 @@ function Card() {
                                     ✅ This card is VALID for Nemesis format.
                                 </span>
                             )}
-                            {isRestrictedChampionship && (
+                            {isRestrictedNemesis && (
                                 <span>
                                     ⚠️ This card is RESTRICTED for Nemesis format.
                                 </span>
                             )}
-                            {isForsakenChampionship && (
+                            {isForsakenNemesis && (
                                 <span>
                                     ❌ This card is FORSAKEN for Nemesis format.
                                 </span>

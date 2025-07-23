@@ -4,6 +4,7 @@ import { sets } from "./sets";
 import { cards } from "./cards";
 import { factionMembers } from "./factionMembers";
 import { format } from "path";
+import { Card } from "./types";
 
 export const latestSeasonStartNumber = 15000;
 
@@ -332,41 +333,27 @@ export const warbandsValidForOrganisedPlay = [
   factions["mk"]
 ]
 
-function validateCardForPlayFormat(card, format = CHAMPIONSHIP_FORMAT) {
-  if (!format) return [];
-  console.log("Validating card", card, "for format", format);
+function validateCardForPlayFormat(card: Card | string, format = NEMESIS_FORMAT) {
   let c = undefined;
   if (typeof card === "string") {
-    c = cards[card];
-  } else if (typeof card === "number") {
-    c = cards[card];
+    c = cards[card as keyof typeof cards];
   } else {
     c = card;
   }
 
-  const [championship, relic] = c.status.split("_");
+  console.log("Validating card", c.id, c.name, "for format", format);
+
+  const [mask] = c.status.split("_");
   switch (format) {
-    case CHAMPIONSHIP_FORMAT:
-      return [
-        // V-- means card is valid, is Forsaken, is Restricted
-        championship[0] === "V",
-        championship[1] !== "-",
-        championship[2] !== "-",
-      ];
-    case RELIC_FORMAT:
-      return [
-        // V-- means card is valid, is Forsaken. Relic has no restricted cards
-        relic[0] === "V",
-        relic[1] !== "-",
-        undefined,
-      ];
     case NEMESIS_FORMAT:
       return [
-        // V-- means card is valid, Open format has no cards restrictions
-        relic[0] === "V",
-        undefined,
-        undefined,
+        // V-- means card is valid, is Forsaken, is Restricted
+        mask[0] === "V",
+        mask[1] !== "-",
+        mask[2] !== "-",
       ];
+    case RIVALS_FORMAT:
+      return [true, false, false];
   }
 }
 

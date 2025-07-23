@@ -1,4 +1,3 @@
-import { SetIcon } from "@/shared/components/SetIcon";
 import LockIcon from "@icons/lock.svg?react";
 import ForsakenIcon from "@icons/no-symbol.svg?react";
 import { useState } from "react";
@@ -6,15 +5,15 @@ import AnimateHeight from "react-animate-height";
 import CardRule from "../../../../atoms/CardRule";
 import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
 import {
-  CHAMPIONSHIP_FORMAT,
   getSetById,
   getSetNameById,
+  NEMESIS_FORMAT,
   RIVALS_DECK_CARDS_TOTAL,
-  validateCardForPlayFormat,
+  validateCardForPlayFormat
 } from "../../../../data/wudb/index";
 import CardImage from "../../../../shared/components/CardImage";
-import { pickCardColor2 } from "../../../../utils/functions";
 import { ExpansionPicture } from "../../../../shared/components/ExpansionPicture";
+import { pickCardColor2 } from "../../../../utils/functions";
 
 const idToPrintId = (id) => {
   return (
@@ -38,10 +37,9 @@ function Expandable({ animateHeight, children }) {
 }
 
 const CardAsImage = ({ card }) => {
-  // const [, isForsaken, isRestricted] = validateCardForPlayFormat(
-  //   id,
-  //   CHAMPIONSHIP_FORMAT,
-  // );
+  const [, isForsaken, isRestricted] = validateCardForPlayFormat(
+    card,
+  );
   const set = getSetById(card.setId);
   return (
     <div className="relative m-2 w-56 flex flex-col">
@@ -49,22 +47,21 @@ const CardAsImage = ({ card }) => {
         <CardImage
           alt={card.name}
           id={card.id}
-          // className={`shadow-lg rounded-2xl ${
-          //   isForsaken
-          //     ? "shadow-red-500"
-          //     : isRestricted
-          //       ? "shadow-objective-gold"
-          //       : ""
-          // }`}
-          className={`shadow-lg rounded-2xl`}
+          className={`shadow-lg rounded-2xl ${
+            isForsaken
+              ? "shadow-red-500"
+              : isRestricted
+                ? "shadow-objective-gold"
+                : ""
+          }`}
         />
-        {/* {isForsaken && (
+        {isForsaken && (
           <ForsakenIcon className="text-red-500/40 stroke-current w-50 h-50 absolute inset-0 m-auto" />
         )}
 
         {isRestricted && (
           <LockIcon className="text-objective-gold/40 stroke-current w-50 h-50 absolute inset-0 m-auto" />
-        )} */}
+        )}
       </div>
 
       <div className="space-y-2 mt-4">
@@ -95,7 +92,7 @@ const CardAsText = ({ card, cardId }) => {
         <h3
           className="cursor-pointer flex-1 inline-block"
           style={{
-            color: pickCardColor2(cardId, CHAMPIONSHIP_FORMAT),
+            color: pickCardColor2(cardId, NEMESIS_FORMAT),
           }}
         >
           {card.name}

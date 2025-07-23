@@ -100,7 +100,7 @@ const CardInDeck = memo(
     const card = getCardById(cardId);
     const [, isBanned, isRestricted] = validateCardForPlayFormat(
       cardId,
-      format,
+      format
     );
     
     if (!card) return null;
