@@ -58,25 +58,25 @@ async function readFiles() {
             }
         }
 
-        const factions = factionNames.reduce((acc: Record<string, Faction>, faction: string) => {
-            const dashified = dashify(faction);
-            acc[factionIdPrefix[dashified]] = {
-                id: factionIdPrefix[dashified],
-                abbr: factionIdPrefix[dashified],
-                name: dashified,
-                displayName: faction,
-                gaId: factionToGrandAlianceId[dashified],
-            }
+        // const factions = factionNames.reduce((acc: Record<string, Faction>, faction: string) => {
+        //     const dashified = dashify(faction);
+        //     acc[factionIdPrefix[dashified]] = {
+        //         id: factionIdPrefix[dashified],
+        //         abbr: factionIdPrefix[dashified],
+        //         name: dashified,
+        //         displayName: faction,
+        //         gaId: factionToGrandAlianceId[dashified],
+        //     }
 
-            return acc;
-        }, {})
+        //     return acc;
+        // }, {})
 
         let setsStr = serialize(sets, "sets");
-        let factionsStr = serialize(factions, "factions");
+        //let factionsStr = serialize(factions, "factions");
         let cardsStr = serialize(cards, "cards");
 
         await writeFile(new URL('../dist/cards.ts', import.meta.url), `${cardsStr} as const;`);
-        await writeFile(new URL('../dist/factions.ts', import.meta.url), `${factionsStr} as const;`);
+        //await writeFile(new URL('../dist/factions.ts', import.meta.url), `${factionsStr} as const;`);
         await writeFile(new URL('../dist/sets.ts', import.meta.url), `${setsStr} as const;`);
         
     } catch (e) {
