@@ -173,4 +173,12 @@ export const factionMembers = {
     "zondaras-gravebreakers": ["1", "2", "3", "4", "5"],
     "brethren-of-the-bolt": ["1", "2", "3", "4", "5"],
     "the-skinnerkin": ["1", "2", "3", "4", "5"],
+    
+    "the-emberwatch": ["1", "2", "3"],
+    "zikkits-tunnelpack": ["1", "2", "3", "4", "5"],
+    "grandfathers-gardeners": ["1", "2", "3", "4", "5"],
+    "jaws-of-itzl": ["1", "2", "3", "4"],
+    "borgits-beastgrabbaz": ["1", "2", "3", "4", "5"],
+    "knives-of-the-crone": ["1", "2", "3", "4"],
+    "kamandoras-blades": ["1", "2", "3", "4", "5"],    
   } as const;

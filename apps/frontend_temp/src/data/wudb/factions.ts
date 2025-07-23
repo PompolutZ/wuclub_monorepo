@@ -431,5 +431,54 @@ export const factions = {
         "name": "the-skinnerkin",
         "displayName": "The Skinnerkin",
         "gaId": 40
+    },
+    "tew": {
+        id: "tew",
+        abbr: "tew",
+        name: "the-emberwatch",
+        displayName: "The Emberwatch",
+        gaId: 38
+    },
+    "ztt": {
+        "id": "ztt",
+        "abbr": "ztt",
+        "name": "zikkits-tunnelpack",
+        "displayName": "Zikkit's Tunnelpack",
+        "gaId": 39
+    },
+    "gg": {
+        "id": "gg",
+        "abbr": "gg",
+        "name": "grandfathers-gardeners",
+        "displayName": "Grandfather's Gardeners",
+        "gaId": 39
+    },
+    "ji": {
+        "id": "ji",
+        "abbr": "ji",
+        "name": "jaws-of-itzl",
+        "displayName": "Jaws of Itzl",
+        "gaId": 38
+    },
+    "bbg": {
+        "id": "bbg",
+        "abbr": "bbg",
+        "name": "borgits-beastgrabbaz",
+        "displayName": "Borgit's Beastgrabbaz",
+        "gaId": 41
+    },
+    "koc": {
+        "id": "koc",
+        "abbr": "koc",
+        "name": "knives-of-the-crone",
+        "displayName": "Knives of the Crone",
+        "gaId": 38
+    },
+    "kab": {
+        "id": "kab",
+        "abbr": "kab",
+        "name": "kamandoras-blades",
+        "displayName": "Kamandora's Blades",
+        "gaId": 39
     }
 } as const;

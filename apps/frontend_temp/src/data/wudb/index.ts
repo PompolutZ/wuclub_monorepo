@@ -298,6 +298,14 @@ function getAllSetsValidForFormat(format: typeof ACTIVE_FORMATS[number]) {
 }
 
 export const warbandsValidForOrganisedPlay = [
+  // emberwatch
+  factions["tew"],
+  factions["ztt"],
+  factions["gg"],
+  factions["ji"],
+  factions["bbg"],
+  factions["koc"],
+  factions["kab"],
   // released via digital download files
   factions["tf"],
   factions["ss"],
