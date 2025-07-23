@@ -1,10 +1,9 @@
-import React from "react";
 import { getSetNameById } from "../data/wudb";
-import ExpansionIcon from "./ExpansionIcon";
+import { ExpansionPicture } from "../shared/components/ExpansionPicture";
 
 const SetsList = ({ sets = [] }) => (
     <div className="flex flex-wrap space-x-0.5">
-        {sets.map(s => <ExpansionIcon key={s} setName={getSetNameById(Number(s))} />)}
+        {sets.map(s => <ExpansionPicture className="w-6 h-6" key={s} setName={getSetNameById(s)} />)}
     </div>
 );
 
