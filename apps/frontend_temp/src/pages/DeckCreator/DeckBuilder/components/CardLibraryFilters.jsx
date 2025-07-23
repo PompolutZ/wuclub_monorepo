@@ -14,7 +14,7 @@ import {
   getAllSetsValidForFormat,
   NEMESIS_FORMAT,
   RELIC_FORMAT,
-  warbandHasPlot,
+  // warbandHasPlot,
   wufactions,
   wusets,
 } from "../../../../data/wudb";
@@ -59,11 +59,11 @@ function FactionsPicker({ selected, onChangeWarband, ...rest }) {
               onClick={handleSelectWarband(faction)}
               src={`/assets/icons/${faction.name}-icon.png`}
             />
-            {warbandHasPlot(faction.id) && (
+            {/* {warbandHasPlot(faction.id) && (
               <div className="absolute w-4 h-4 bg-purple-700 bottom-0 left-4 rounded-full text-white">
                 <CompassIcon className="stroke-current w-4 h-4" />
               </div>
-            )}
+            )} */}
           </div>
         ))}
     </div>

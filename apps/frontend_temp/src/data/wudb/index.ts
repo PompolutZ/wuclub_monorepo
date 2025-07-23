@@ -6,6 +6,8 @@ import { factionMembers } from "./factionMembers";
 
 export const latestSeasonStartNumber = 15000;
 
+export const RIVALS_DECK_CARDS_TOTAL = 32;
+
 export const sortedFactions = Object.values(factions).sort(sortByIdAsc);
 
 // export const udbPrefexes = {
@@ -183,8 +185,8 @@ function getFactionByAbbr(factionAbbr) {
   return Object.values(factions).find((f) => f.abbr == factionAbbr);
 }
 
-function getFactionById(factionId) {
-  return Object.values(factions).find((f) => f.id === factionId);
+function getFactionById() {
+  return factions["u"];
 }
 
 type SetId = typeof sets[keyof typeof sets]["id"];
@@ -205,6 +207,16 @@ function getSetNameById(setId: SetId) {
 
   idToSetKey[setId] = value.name;
   return value.name;
+}
+
+const setsWithPlot: SetId[] = [
+  sets["RG"].id,
+  sets["EK"].id,
+  sets["CC"].id,
+  sets["RS"].id,
+]
+export const setHasPlot = (setId: SetId) => {
+  return setsWithPlot.includes(setId);
 }
 
 function getSetById(setId) {

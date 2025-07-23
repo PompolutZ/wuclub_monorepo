@@ -2,14 +2,14 @@ import { FixedVirtualizedList } from "@components/FixedVirtualizedList";
 import { useEffect, useMemo, useState } from "react";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
 import {
-  factionsRivalsDecks,
+  // factionsRivalsDecks,
   validateCardForPlayFormat,
   VANGUARD_FORMAT,
   wucards,
 } from "../../../../data/wudb";
 import { toggleCardAction } from "../../reducer";
 import CardInDeck from "./Card";
-import { factions } from "../../../../data/wudb/db";
+// import { factions } from "../../../../data/wudb/factions";
 
 function stringTypeToNumber(type) {
   switch (type) {
@@ -49,17 +49,17 @@ function FilterableCardLibrary(props) {
   );
 
   useEffect(() => {
-    const rivalsDeckId = factionsRivalsDecks[state.faction.name];
+    // const rivalsDeckId = factionsRivalsDecks[state.faction.name];
 
-    const factionCards = Object.values(wucards).filter((card) =>
-      rivalsDeckId
-        ? card.setId === rivalsDeckId && card.factionId === state.faction.id
-        : card.factionId === state.faction.id &&
-          (card.duplicates ? card.id === Math.max(...card.duplicates) : true),
-    );
+    // const factionCards = Object.values(wucards).filter((card) =>
+    //   rivalsDeckId
+    //     ? card.setId === rivalsDeckId && card.factionId === state.faction.id
+    //     : card.factionId === state.faction.id &&
+    //       (card.duplicates ? card.id === Math.max(...card.duplicates) : true),
+    // );
 
     const nextCards = [
-      ...factionCards,
+      // ...factionCards,
       ...Object.values(wucards).filter(
         (card) =>
           !!state.sets.find((set) => set.id == card.setId) &&

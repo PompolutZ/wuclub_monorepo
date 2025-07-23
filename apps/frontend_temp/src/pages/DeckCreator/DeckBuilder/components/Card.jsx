@@ -10,49 +10,49 @@ import {
   getCardById,
   getCardNumberFromId,
   getSetNameById,
+  RIVALS_DECK_CARDS_TOTAL,
   validateCardForPlayFormat,
 } from "../../../../data/wudb";
 import { ModalPresenter } from "../../../../main";
 import CardImage from "../../../../shared/components/CardImage";
-import { Waves } from "@wudb/waves";
 
 window.process = { cwd: () => "" };
 
-function Rank({ value }) {
-  const normalized = value >= 10000 ? value / 10000 : value;
-  const wholeStarsCount = Math.floor(normalized / 2);
-  const wholeStars = isNaN(wholeStarsCount)
-    ? []
-    : new Array(wholeStarsCount).fill(1);
-  const halfStars = normalized % 2 > 0 ? [0] : [];
-  const rankInStars = [...wholeStars, ...halfStars];
-  return (
-    <div className="flex fill-current">
-      {rankInStars.map((star, i) => {
-        if (star === 1)
-          return (
-            <RankIcon
-              key={i}
-              className="text-lg text-purple-800 fill-current"
-            />
-          );
-        if (star === 0)
-          return (
-            <RankIcon
-              key={i}
-              className="text-lg text-purple-500 fill-current"
-            />
-          );
-      })}
-    </div>
-  );
-}
+// function Rank({ value }) {
+//   const normalized = value >= 10000 ? value / 10000 : value;
+//   const wholeStarsCount = Math.floor(normalized / 2);
+//   const wholeStars = isNaN(wholeStarsCount)
+//     ? []
+//     : new Array(wholeStarsCount).fill(1);
+//   const halfStars = normalized % 2 > 0 ? [0] : [];
+//   const rankInStars = [...wholeStars, ...halfStars];
+//   return (
+//     <div className="flex fill-current">
+//       {rankInStars.map((star, i) => {
+//         if (star === 1)
+//           return (
+//             <RankIcon
+//               key={i}
+//               className="text-lg text-purple-800 fill-current"
+//             />
+//           );
+//         if (star === 0)
+//           return (
+//             <RankIcon
+//               key={i}
+//               className="text-lg text-purple-500 fill-current"
+//             />
+//           );
+//       })}
+//     </div>
+//   );
+// }
 
 class WUCardInfo extends PureComponent {
   render() {
     const { scoreType, name, id, glory, onClick } = this.props;
 
-    const wave = Waves[Math.floor(id / 1000)];
+    // const wave = Waves[Math.floor(id / 1000)];
     return (
       <div className="flex-1 self-start cursor-pointer" onClick={onClick}>
         <div className="flex items-center">
@@ -75,7 +75,7 @@ class WUCardInfo extends PureComponent {
           </h6>
         </div>
         <div className="flex items-center">
-          <Rank value={this.props.rank} />
+          {/* <Rank value={this.props.rank} /> */}
 
           {glory && (
             <div className="flex items-center font-bold mx-2">
@@ -87,7 +87,7 @@ class WUCardInfo extends PureComponent {
 
           <span className="font-bold text-xs text-gray-500">{`${getCardNumberFromId(
             id,
-          )}/${wave.cardsCount}`}</span>
+          )}/${RIVALS_DECK_CARDS_TOTAL}`}</span>
 
           <img
             className="w-3 h-3 ml-1"

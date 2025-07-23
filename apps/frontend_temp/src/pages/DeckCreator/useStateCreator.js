@@ -5,12 +5,12 @@ import {
     checkCardIsObjective,
     checkCardIsPloy,
     checkCardIsUpgrade,
-    checkWarbandSpecificCard,
+    // checkWarbandSpecificCard,
     getCardById,
     getFactionById,
     getFactionByName,
     getSetById,
-    udbPrefexes,
+    // udbPrefexes,
 } from "../../data/wudb";
 import { INITIAL_STATE } from "./reducer";
 
@@ -51,10 +51,10 @@ export function useStateCreator() {
                 return card;
             });
 
-            const [{ factionId }] = decodedCards.filter(
-                checkWarbandSpecificCard
-            );
-            const faction = getFactionById(factionId);
+            // const [{ factionId }] = decodedCards.filter(
+            //     checkWarbandSpecificCard
+            // );
+            const faction = getFactionById();
 
             const sets = decodedCards.reduce(
                 (sets, { setId }) => sets.add(setId),
@@ -97,9 +97,10 @@ const decodeUDS = (card) => {
 const decodeWUC = (card) => card;
 
 const decodeUDB = card => {
-    const [,prefix, cardNumber] = card.match(/([A-Z]+)?(\d+)?/);
+    return card;
+    // const [,prefix, cardNumber] = card.match(/([A-Z]+)?(\d+)?/);
 
-    return prefix ? udbPrefexes[prefix] * 1000 + Number(cardNumber) : 1000 + Number(cardNumber);
+    // return prefix ? udbPrefexes[prefix] * 1000 + Number(cardNumber) : 1000 + Number(cardNumber);
 }
 
 const getDecodingFunction = (encoding) => {
