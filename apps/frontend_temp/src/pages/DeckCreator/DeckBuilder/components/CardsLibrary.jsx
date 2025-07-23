@@ -17,8 +17,6 @@ function stringTypeToNumber(type) {
       return 0;
     case "Ploy":
       return 1;
-    case "Spell":
-      return 1;
     case "Upgrade":
       return 2;
   }

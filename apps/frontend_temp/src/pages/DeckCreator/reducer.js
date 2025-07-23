@@ -2,6 +2,7 @@ import {
     getFactionByName,
     getAllSetsValidForFormat,
     CHAMPIONSHIP_FORMAT,
+    NEMESIS_FORMAT,
 } from "../../data/wudb";
 
 export const UPDATE_FILTERS_ACTION = "UPDATE_FILTERS";
@@ -69,9 +70,9 @@ export function updateDeckAction(deckMeta) {
 
 export const INITIAL_STATE = {
     faction: getFactionByName("sons-of-velmorn"),
-    sets: getAllSetsValidForFormat(CHAMPIONSHIP_FORMAT),
+    sets: getAllSetsValidForFormat(NEMESIS_FORMAT),
     hideDuplicates: true,
-    format: CHAMPIONSHIP_FORMAT,
+    format: NEMESIS_FORMAT,
     selectedObjectives: [],
     selectedGambits: [],
     selectedUpgrades: [],
