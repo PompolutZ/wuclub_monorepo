@@ -187,7 +187,7 @@ function getFactionById() {
   return factions["u"];
 }
 
-type SetId = typeof sets[keyof typeof sets]["id"];
+export type SetId = typeof sets[keyof typeof sets]["id"];
 type SetName = typeof sets[keyof typeof sets]["name"];
 // const idToSetKey: Record<SetId, SetName> = {};
 function getSetNameById(setId: SetId) {
@@ -342,6 +342,7 @@ export const warbandsValidForOrganisedPlay = [
 
 function validateCardForPlayFormat(card, format = CHAMPIONSHIP_FORMAT) {
   if (!format) return [];
+  console.log("Validating card", card, "for format", format);
   let c = undefined;
   if (typeof card === "string") {
     c = cards[card];

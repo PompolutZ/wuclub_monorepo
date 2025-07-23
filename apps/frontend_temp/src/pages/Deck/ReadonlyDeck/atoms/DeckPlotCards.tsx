@@ -1,4 +1,4 @@
-import { getFactionByName, plots, setHasPlot, warbandHasPlot } from "@wudb";
+import { getFactionByName, setHasPlot, SetId } from "@wudb";
 import { usePortal } from "../../../../hooks/usePortal";
 import {
   Carousel,
@@ -20,11 +20,11 @@ type Props = {
 
 export const DeckPlotCards = ({ factionId, sets }: Props) => {
   const { Portal, open, portalClickAwayRef } = usePortal();
-  const plots = getPlotKeywords(factionId, sets);
+  //const plots = getPlotKeywords(factionId, sets);
 
-  if (!checkDeckHasPlots(factionId, sets)) {
-    return null;
-  }
+  // if (!checkDeckHasPlots(factionId, sets)) {
+  //   return null;
+  // }
 
   return (
     <div>
@@ -33,7 +33,7 @@ export const DeckPlotCards = ({ factionId, sets }: Props) => {
         <h3 className="text-xs font-bold">This deck includes plot cards:</h3>
       </div>
       <div className="space-x-1">
-        {plots.map(({ keyword }) => (
+        {/* {plots.map(({ keyword }) => (
           <span
             className="underline hover:cursor-pointer"
             key={keyword}
@@ -41,21 +41,20 @@ export const DeckPlotCards = ({ factionId, sets }: Props) => {
           >
             {keyword}
           </span>
-        ))}
+        ))} */}
       </div>
 
       <Portal>
         <div className="grid w-full h-full place-content-center bg-purple-100/25">
-          <PlotsCarousel plots={plots} ref={portalClickAwayRef} />
+          {/* <PlotsCarousel plots={plots} ref={portalClickAwayRef} /> */}
         </div>
       </Portal>
     </div>
   );
 };
 
-function checkDeckHasPlots(faction: Factions, sets: number[]) {
+function checkDeckHasPlots(faction: Factions, sets: SetId[]) {
   return (
-    warbandHasPlot(getFactionByName(faction)?.id) ||
     sets.some((setId) => setHasPlot(setId))
   );
 }

@@ -1,7 +1,6 @@
 import { SetIcon } from "@/shared/components/SetIcon";
 import LockIcon from "@icons/lock.svg?react";
 import ForsakenIcon from "@icons/no-symbol.svg?react";
-import { Waves } from "@wudb/waves";
 import { useState } from "react";
 import AnimateHeight from "react-animate-height";
 import CardRule from "../../../../atoms/CardRule";
@@ -9,17 +8,19 @@ import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIco
 import {
   CHAMPIONSHIP_FORMAT,
   getSetById,
+  getSetNameById,
+  RIVALS_DECK_CARDS_TOTAL,
   validateCardForPlayFormat,
 } from "../../../../data/wudb/index";
 import CardImage from "../../../../shared/components/CardImage";
 import { pickCardColor2 } from "../../../../utils/functions";
+import { ExpansionPicture } from "../../../../shared/components/ExpansionPicture";
 
 const idToPrintId = (id) => {
-  const wave = Waves[Math.floor(id / 1000)];
   return (
     <>
       <span className="font-bold">{`${id}`.slice(-3)}</span>
-      <span>/{wave.cardsCount}</span>
+      <span>/{RIVALS_DECK_CARDS_TOTAL}</span>
     </>
   );
 };
@@ -82,7 +83,6 @@ const CardAsText = ({ card, cardId }) => {
   const [expanded, setExpanded] = useState(false);
   const [useTextFallback, setUseTextFallback] = useState(false);
   const animateHeight = expanded ? "auto" : 0;
-  const wave = Waves[Math.floor(cardId / 1000)];
 
   return (
     <>
@@ -90,7 +90,7 @@ const CardAsText = ({ card, cardId }) => {
         className="flex items-center p-2 rounded cursor-pointer space-x-1 transform transition-all sm:hover:bg-gray-300 sm:hover:shadow-sm sm:hover:scale-105"
         onClick={() => setExpanded((prev) => !prev)}
       >
-        <SetIcon id={`${cardId}`} setId={card.setId} />
+        <ExpansionPicture className="w-8 h-8" setName={getSetNameById(card.setId)} />
         <h3
           className="cursor-pointer flex-1 inline-block"
           style={{
@@ -117,18 +117,6 @@ const CardAsText = ({ card, cardId }) => {
           <div className="ml-auto flex items-center text-xs text-gray-700">
             <div>(</div>
             {idToPrintId(cardId)}
-            <picture>
-              <source
-                type="image/webp"
-                srcSet={`/assets/icons/${wave.asset}.webp`}
-              />
-              <img
-                className="w-3 h-3 ml-1"
-                id={idToPrintId(cardId)}
-                alt={wave.asset}
-                src={`/assets/icons/${wave.asset}.png`}
-              />
-            </picture>
             <div>)</div>
           </div>
         </div>
@@ -153,11 +141,10 @@ const CardAsText = ({ card, cardId }) => {
 };
 
 const Card = ({ card, asImage }) => {
-  const cardId = `${card.id}`.padStart(5, "0");
   return asImage ? (
-    <CardAsImage id={cardId} name={card.name} setId={card.setId} />
+    <CardAsImage id={card.id} name={card.name} setId={card.setId} />
   ) : (
-    <CardAsText card={card} cardId={cardId} />
+    <CardAsText card={card} cardId={card.id} />
   );
 };
 

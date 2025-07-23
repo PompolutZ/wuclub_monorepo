@@ -10,7 +10,6 @@ import {
   checkCardIsPloy,
   checkCardIsUpgrade,
   compareObjectivesByScoreType,
-  udbPrefexes,
 } from "../../../data/wudb";
 import { ModalPresenter } from "../../../main";
 import { CardListSectionHeader } from "../../../shared/components/CardListSectionHeader";
@@ -56,25 +55,25 @@ function ReadonlyDeck(props) {
   const { mutateAsync: update } = useUpdateDeck();
 
   const handleExportToUDB = () => {
-    const invertedPrefixes = Object.entries(udbPrefexes).reduce(
-      (acc, [prefix, wave]) => ({ ...acc, [wave]: prefix }),
-      { 1: "" },
-    );
+    // const invertedPrefixes = Object.entries(udbPrefexes).reduce(
+    //   (acc, [prefix, wave]) => ({ ...acc, [wave]: prefix }),
+    //   { 1: "" },
+    // );
 
-    const encodeToUDB = (card) => {
-      const udbPrefix = invertedPrefixes[Math.floor(Number(card) / 1000)];
+    // const encodeToUDB = (card) => {
+    //   const udbPrefix = invertedPrefixes[Math.floor(Number(card) / 1000)];
 
-      return `${udbPrefix}${Number(card) % 1000}`;
-    };
+    //   return `${udbPrefix}${Number(card) % 1000}`;
+    // };
 
-    const udbEncodedCards = props.cards
-      .map((card) => `${card.id}`.padStart(5, "0"))
-      .map(encodeToUDB)
-      .sort()
-      .join();
-    window.open(
-      `https://www.underworldsdb.com/shared.php?deck=0,${udbEncodedCards}`,
-    );
+    // const udbEncodedCards = props.cards
+    //   .map((card) => `${card.id}`.padStart(5, "0"))
+    //   .map(encodeToUDB)
+    //   .sort()
+    //   .join();
+    // window.open(
+    //   `https://www.underworldsdb.com/shared.php?deck=0,${udbEncodedCards}`,
+    // );
   };
 
   const handleCreateShareableLink = () => {
