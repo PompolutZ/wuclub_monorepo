@@ -3,7 +3,6 @@ import CardsTab from "./CardsTab";
 import { animated, useSpring } from "@react-spring/web";
 import { OBJECTIVE_GLORY_FILTERS } from "./constants/objectiveGloryFilters";
 import { OBJECTIVE_SCORE_TYPE_FILTERS } from "./constants/objectiveScoreTypeFilters";
-import { KEYWORD_FILTERS } from "./constants/keywordFilters";
 import { CARD_TYPE_FILTERS } from "./constants/cardTypeFilters";
 import FiltersGroupToggles from "./FilterGroupToggles";
 import useMeasure from "react-use-measure";
@@ -73,10 +72,6 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
     const updateAllFilters = () => {
         const typesFilter = composeTypeFilters(enabledCardTypes);
 
-        const keywordsFilters = composeFilters(
-            enabledKeywords,
-            KEYWORD_FILTERS
-        );
         const gloryFilters = composeFilters(
             enabledGloryFilters,
             OBJECTIVE_GLORY_FILTERS
@@ -89,13 +84,11 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
         const aggregateFilters = (card) => {
             if (enabledCardTypes.includes("Objective")) {
                 return  typesFilter(card) &&
-                keywordsFilters(card) &&
                 gloryFilters(card) &&
                 scoreTypeFilters(card);
             }
 
-            return typesFilter(card) &&
-            keywordsFilters(card);
+            return typesFilter(card);
         };
 
         onFiltersChanged({
@@ -174,15 +167,6 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
                         onToggle={handleToggleKeyword(
                             enabledObjectiveScoreTypes,
                             setObjectiveScoreTypes
-                        )}
-                    />
-                    <FiltersGroupToggles
-                        title="Keyword"
-                        filters={KEYWORD_FILTERS}
-                        enabledFilters={enabledKeywords}
-                        onToggle={handleToggleKeyword(
-                            enabledKeywords,
-                            setEnabledKeywords
                         )}
                     />
 

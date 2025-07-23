@@ -88,12 +88,6 @@ class WUCardInfo extends PureComponent {
           <span className="font-bold text-xs text-gray-500">{`${getCardNumberFromId(
             id,
           )}/${RIVALS_DECK_CARDS_TOTAL}`}</span>
-
-          <img
-            className="w-3 h-3 ml-1"
-            alt={wave.asset}
-            src={`/assets/icons/${wave.asset}.png`}
-          />
         </div>
       </div>
     );
@@ -108,6 +102,9 @@ const CardInDeck = memo(
       cardId,
       format,
     );
+    
+    if (!card) return null;
+
     const { type, id, scoreType, glory, name, setId } = card;
 
     const pickForegroundColor = (isRestricted, isBanned, defaultColor) => {
@@ -153,7 +150,7 @@ const CardInDeck = memo(
             <img
               className={`w-8 h-8 ${isRestricted || isBanned ? "opacity-50" : ""}`}
               alt={`${getSetNameById(setId)}`}
-              src={`/assets/icons/${getSetNameById(setId)}-icon.png`}
+              src={`/assets/icons/decks/${getSetNameById(setId)}.png`}
             />
 
             {isRestricted && (

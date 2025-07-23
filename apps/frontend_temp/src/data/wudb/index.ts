@@ -170,12 +170,9 @@ export const sortedFactions = Object.values(factions).sort(sortByIdAsc);
 //   ];
 // };
 
-function getCardNumberFromId(cardId) {
-  if (typeof cardId == "string") {
-    return +cardId.slice(-3);
-  }
-
-  return cardId % 1000;
+function getCardNumberFromId(cardId: string) {
+  const match = cardId.match(/(\d+)/);
+  return match ? +match[1] : null;
 }
 
 function getFactionByName(factionName) {
@@ -192,22 +189,23 @@ function getFactionById() {
 
 type SetId = typeof sets[keyof typeof sets]["id"];
 type SetName = typeof sets[keyof typeof sets]["name"];
-const idToSetKey: Record<SetId, SetName> = {};
+// const idToSetKey: Record<SetId, SetName> = {};
 function getSetNameById(setId: SetId) {
-  if (idToSetKey[setId]) {
-    return idToSetKey[setId];
-  }
+  return sets[setId]?.name;
+  // if (idToSetKey[setId]) {
+  //   return idToSetKey[setId];
+  // }
 
-  const [_, value] = Object.entries(sets).find(
-    ([, { id }]) => id == setId,
-  );
+  // const [_, value] = Object.entries(sets).find(
+  //   ([, { id }]) => id == setId,
+  // );
 
-  if (!value) {
-    throw new Error(`Set with id ${setId} not found`);
-  }
+  // if (!value) {
+  //   throw new Error(`Set with id ${setId} not found`);
+  // }
 
-  idToSetKey[setId] = value.name;
-  return value.name;
+  // idToSetKey[setId] = value.name;
+  // return value.name;
 }
 
 const setsWithPlot: SetId[] = [
@@ -236,7 +234,7 @@ const cardTypes = ["Objective", "Ploy", "Upgrade", "Spell"];
 
 // This is very stupid but best idea at 22:17 for backward compatibility
 function getCardById(cardId) {
-  return cards[`${Number(cardId)}`];
+  return cards[cardId];
 }
 
 function checkCardIsObjective({ type }) {
@@ -346,7 +344,7 @@ function validateCardForPlayFormat(card, format = CHAMPIONSHIP_FORMAT) {
   if (!format) return [];
   let c = undefined;
   if (typeof card === "string") {
-    c = cards[Number(card)];
+    c = cards[card];
   } else if (typeof card === "number") {
     c = cards[card];
   } else {

@@ -1,7 +1,4 @@
-import React from 'react';
 import ObjectiveScoreTypeIcon from "../../../../../../components/ObjectiveScoreTypeIcon";
-import DualIcon from "@icons/Dual.svg?react";
-import HybridIcon from "@icons/Hybrid.svg?react";
 
 export const OBJECTIVE_SCORE_TYPE_FILTERS = [
     {
@@ -23,27 +20,5 @@ export const OBJECTIVE_SCORE_TYPE_FILTERS = [
             />
         ),
         filter: (card) => card.scoreType === "End" || card.scoreType === 1,
-    },
-    {
-        label: "3rd end phase",
-        icon: (
-            <ObjectiveScoreTypeIcon
-                type="Third"
-                style={{ width: "1rem", height: "1rem" }}
-            />
-        ),
-        filter: (card) => card.scoreType === "Third" || card.scoreType === 2,
-    },
-    {
-        label: "Dual",
-        icon: <DualIcon className="w-6 h-6 mx-auto fill-current" />,
-        filter: (card) => card.rule.includes("Dual"),
-    },
-    {
-        label: "Hybrid",
-        icon: (
-            <HybridIcon className="w-6 h-6 mx-auto fill-current" />
-        ),
-        filter: (card) => card.rule.includes("Hybrid"),
     },
 ];

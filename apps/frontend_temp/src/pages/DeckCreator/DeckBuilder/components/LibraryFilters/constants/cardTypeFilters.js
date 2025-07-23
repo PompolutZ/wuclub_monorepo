@@ -5,7 +5,7 @@ export const CARD_TYPE_FILTERS = [
     },
     {
         label: "Gambit",
-        filter: card => card.type === 'Ploy' || card.type === 'Spell',
+        filter: card => card.type === 'Ploy',
     },
     {
         label: "Upgrade",

@@ -2,14 +2,12 @@ import { FixedVirtualizedList } from "@components/FixedVirtualizedList";
 import { useEffect, useMemo, useState } from "react";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
 import {
-  // factionsRivalsDecks,
   validateCardForPlayFormat,
-  VANGUARD_FORMAT,
   wucards,
+  wufactions
 } from "../../../../data/wudb";
 import { toggleCardAction } from "../../reducer";
 import CardInDeck from "./Card";
-// import { factions } from "../../../../data/wudb/factions";
 
 function stringTypeToNumber(type) {
   switch (type) {
@@ -37,6 +35,10 @@ function FilterableCardLibrary(props) {
   const state = useDeckBuilderState();
   const { searchText, visibleCardTypes } = props;
 
+  useEffect(() => {
+    console.log("useEffect: FilterableCardLibrary", cards, filteredCards);
+  }, [cards, filteredCards])
+
   const deck = useMemo(
     () => [
       ...state.selectedObjectives,
@@ -47,22 +49,11 @@ function FilterableCardLibrary(props) {
   );
 
   useEffect(() => {
-    // const rivalsDeckId = factionsRivalsDecks[state.faction.name];
-
-    // const factionCards = Object.values(wucards).filter((card) =>
-    //   rivalsDeckId
-    //     ? card.setId === rivalsDeckId && card.factionId === state.faction.id
-    //     : card.factionId === state.faction.id &&
-    //       (card.duplicates ? card.id === Math.max(...card.duplicates) : true),
-    // );
-
     const nextCards = [
-      // ...factionCards,
       ...Object.values(wucards).filter(
         (card) =>
           !!state.sets.find((set) => set.id == card.setId) &&
-          (card.factionId === 1 || card.factionId === state.faction.gaId) &&
-          (card.duplicates ? card.id === Math.max(...card.duplicates) : true),
+          (card.factionId === wufactions["u"].id) 
       ),
     ]
       .filter((card) => {
@@ -73,16 +64,11 @@ function FilterableCardLibrary(props) {
         return isValid;
       })
       .map((c) => {
-        // previously cards were in format '00000' where first two digits were wave
-        // (e.g. Shadespire, Beastgrave or Power Unbound) and then card number
-        // =========
-        // new format has cards as numbers, which requires padding 0s for now for backward compatibility.
         const [, isForsaken, isRestricted] = validateCardForPlayFormat(
           c,
           state.format,
         );
         const card = {
-          // ranking: ranks[c.id] || 0,
           ...c,
           isBanned: isForsaken,
           isRestricted,
@@ -90,12 +76,7 @@ function FilterableCardLibrary(props) {
 
         return card;
       });
-
-    const nextCardsExcludingForsaken =
-      state.format !== VANGUARD_FORMAT
-        ? nextCards.filter((c) => !c.isBanned)
-        : nextCards;
-    setCards(nextCardsExcludingForsaken);
+    setCards(nextCards);
   }, [state, props.filter]);
 
   useEffect(() => {
@@ -125,6 +106,7 @@ function FilterableCardLibrary(props) {
     <div className="flex-1 flex outline-none">
       <FixedVirtualizedList items={filteredCards}>
         {({ card, expanded }, { key, index }) => {
+          console.log("CardInDeck", card, expanded, key, index);
           return card ? (
             <div
               key={key}
@@ -141,6 +123,7 @@ function FilterableCardLibrary(props) {
                 format={state.format}
                 toggleCard={() => dispatch(toggleCardAction(card))}
                 withAnimation={false}
+                card={card}
               />
             </div>
           ) : (
