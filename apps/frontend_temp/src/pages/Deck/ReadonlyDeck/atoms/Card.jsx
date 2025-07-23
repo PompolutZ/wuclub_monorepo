@@ -37,41 +37,42 @@ function Expandable({ animateHeight, children }) {
   );
 }
 
-const CardAsImage = ({ id, name, setId }) => {
-  const [, isForsaken, isRestricted] = validateCardForPlayFormat(
-    id,
-    CHAMPIONSHIP_FORMAT,
-  );
-
+const CardAsImage = ({ card }) => {
+  // const [, isForsaken, isRestricted] = validateCardForPlayFormat(
+  //   id,
+  //   CHAMPIONSHIP_FORMAT,
+  // );
+  const set = getSetById(card.setId);
   return (
     <div className="relative m-2 w-56 flex flex-col">
       <div className="relative">
         <CardImage
-          alt={name}
-          id={id}
-          className={`shadow-lg rounded-2xl ${
-            isForsaken
-              ? "shadow-red-500"
-              : isRestricted
-                ? "shadow-objective-gold"
-                : ""
-          }`}
+          alt={card.name}
+          id={card.id}
+          // className={`shadow-lg rounded-2xl ${
+          //   isForsaken
+          //     ? "shadow-red-500"
+          //     : isRestricted
+          //       ? "shadow-objective-gold"
+          //       : ""
+          // }`}
+          className={`shadow-lg rounded-2xl`}
         />
-        {isForsaken && (
+        {/* {isForsaken && (
           <ForsakenIcon className="text-red-500/40 stroke-current w-50 h-50 absolute inset-0 m-auto" />
         )}
 
         {isRestricted && (
           <LockIcon className="text-objective-gold/40 stroke-current w-50 h-50 absolute inset-0 m-auto" />
-        )}
+        )} */}
       </div>
 
       <div className="space-y-2 mt-4">
         <span className="inline-block text-sm text-gray-700">Found in: </span>
         <div className="flex space-x-2 items-center">
-          <SetIcon id={`${id}`} setId={setId} />
+          <ExpansionPicture className="w-6 h-6" setName={set.name} />
           <span className="inline-block text-sm">
-            {getSetById(setId).displayName}
+            {set.displayName}
           </span>
         </div>
       </div>
@@ -142,7 +143,7 @@ const CardAsText = ({ card, cardId }) => {
 
 const Card = ({ card, asImage }) => {
   return asImage ? (
-    <CardAsImage id={card.id} name={card.name} setId={card.setId} />
+    <CardAsImage card={card} />
   ) : (
     <CardAsText card={card} cardId={card.id} />
   );

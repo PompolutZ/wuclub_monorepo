@@ -218,16 +218,8 @@ export const setHasPlot = (setId: SetId) => {
   return setsWithPlot.includes(setId);
 }
 
-function getSetById(setId) {
-  if (idToSetKey[setId]) {
-    return sets[idToSetKey[setId]];
-  }
-
-  const [key, value] = Object.entries(sets).find(
-    ([, value]) => value.id == setId,
-  );
-  idToSetKey[setId] = key;
-  return value;
+function getSetById(setId: SetId) {
+  return sets[setId];
 }
 
 const cardTypes = ["Objective", "Ploy", "Upgrade", "Spell"];
