@@ -1,28 +1,23 @@
+import { Overlay } from "@/shared/components/Overlay";
 import {
   FactionDeckPicture,
   FactionPicture,
 } from "@components/FactionDeckPicture";
-import { Overlay } from "@/shared/components/Overlay";
-import CompassIcon from "@icons/compass.svg?react";
 import TogglesIcon from "@icons/sliders.svg?react";
 import CloseIcon from "@icons/x.svg?react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
 import ExpansionsToggle from "../../../../components/ExpansionsToggle";
 import {
-  CHAMPIONSHIP_FORMAT,
   getAllSetsValidForFormat,
   NEMESIS_FORMAT,
-  RELIC_FORMAT,
   RIVALS_FORMAT,
   // warbandHasPlot,
-  wufactions,
-  wusets,
+  wufactions
 } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormatInfo";
 import { DeckPlayFormatToggle } from "../../../../shared/components/DeckPlayFormatToggle";
-import Toggle from "../../../../shared/components/HexToggle";
 import IconButton from "../../../../shared/components/IconButton";
 import SectionTitle from "../../../../shared/components/SectionTitle";
 
@@ -37,7 +32,13 @@ function SelectedFaction({ faction = "morgwaeths-blade-coven", ...rest }) {
   );
 }
 
-const notPlayableFactionIds = [1, 38, 39, 40, 41];
+const notPlayableFactionIds = [
+  wufactions["u"].id,
+  wufactions["gao"].id,
+  wufactions["gad"].id,
+  wufactions["gads"].id,
+  wufactions["gac"].id,
+];
 
 function FactionsPicker({ selected, onChangeWarband, ...rest }) {
   const handleSelectWarband = (faction) => () => {
@@ -54,18 +55,25 @@ function FactionsPicker({ selected, onChangeWarband, ...rest }) {
         )
         .reverse()
         .map((faction) => (
-          <div className="relative" key={faction.id}>
-            <img
-              className="w-10 h-10 m-1 cursor-pointer"
-              onClick={handleSelectWarband(faction)}
-              src={`/assets/icons/${faction.name}-icon.png`}
-            />
-            {/* {warbandHasPlot(faction.id) && (
-              <div className="absolute w-4 h-4 bg-purple-700 bottom-0 left-4 rounded-full text-white">
-                <CompassIcon className="stroke-current w-4 h-4" />
-              </div>
-            )} */}
-          </div>
+          <button
+            key={faction.id}
+            className="[all:unset] [cursor:pointer]"
+            onClick={handleSelectWarband(faction)}
+          >
+            <FactionPicture size="w-12 h-12" faction={faction.name} />
+          </button>
+          // <div className="relative" key={faction.id}>
+          //   <img
+          //     className="w-10 h-10 m-1 cursor-pointer"
+          //     onClick={handleSelectWarband(faction)}
+          //     src={`/assets/icons/${faction.name}-icon.png`}
+          //   />
+          //   {/* {warbandHasPlot(faction.id) && (
+          //     <div className="absolute w-4 h-4 bg-purple-700 bottom-0 left-4 rounded-full text-white">
+          //       <CompassIcon className="stroke-current w-4 h-4" />
+          //     </div>
+          //   )} */}
+          // </div>
         ))}
     </div>
   );
@@ -86,9 +94,9 @@ function CardLibraryFilters(props) {
   const [warband, setWarband] = useState(state.faction);
   const [hideDuplicates, setHideDuplicates] = useState(true);
   const [selectedSets, setSelectedSets] = useState(
-      selectedFormat === NEMESIS_FORMAT
-        ? validSets.slice(0, 2)
-        : [validSets.at(0)],
+    selectedFormat === NEMESIS_FORMAT
+      ? validSets.slice(0, 2)
+      : [validSets.at(0)],
   );
 
   const handleFormatChange = (format) => {
@@ -117,7 +125,7 @@ function CardLibraryFilters(props) {
         return [validSets.at(0)];
       }
     });
-  }, [selectedFormat])
+  }, [selectedFormat]);
 
   return (
     <>

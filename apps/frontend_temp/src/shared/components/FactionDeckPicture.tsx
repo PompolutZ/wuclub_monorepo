@@ -29,12 +29,16 @@ export function FactionDeckPicture({
             <picture>
               <source
                 type="image/webp"
-                srcSet={`/assets/icons/${faction}-icon.webp`}
+                srcSet={`/assets/warbands/${faction}-icon.webp`}
               />
-              <img alt={faction} src={`/assets/icons/${faction}-icon.png`} />
+              <img alt={faction} src={`/assets/warbands/${faction}-icon.png`} />
             </picture>
           </div>
           <picture>
+            <source
+              type="image/avif"
+              srcSet="/assets/icons/Faction_Ring_with_Cards.avif"
+            />
             <source
               type="image/webp"
               srcSet="/assets/icons/Faction_Ring_with_Cards.webp"
@@ -60,13 +64,17 @@ export function FactionPicture({
     return (
         <picture>
             <source
+                type="image/avif"
+                srcSet={`/assets/warbands/${faction}-icon.avif`}
+            />
+            <source
                 type="image/webp"
-                srcSet={`/assets/icons/${faction}-icon.webp`}
+                srcSet={`/assets/warbands/${faction}-icon.webp`}
             />
 
             <img
                 className={`${size}`}
-                src={`/assets/icons/${faction}-icon.png`}
+                src={`/assets/warbands/${faction}-icon.png`}
             />
         </picture>
     );
