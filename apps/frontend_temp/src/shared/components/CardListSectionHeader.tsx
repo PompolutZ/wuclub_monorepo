@@ -21,7 +21,7 @@ export function CardListSectionHeader({
         return cardTypes.filter((t) => t === "Objective").map(toLower);
       case "Gambits":
         return cardTypes
-          .filter((t) => t === "Ploy" || t === "Spell")
+          .filter((t) => t === "Ploy")
           .map(toLower);
       case "Upgrades":
         return cardTypes.filter((t) => t === "Upgrade").map(toLower);

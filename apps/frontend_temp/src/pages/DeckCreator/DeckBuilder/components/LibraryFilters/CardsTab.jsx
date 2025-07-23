@@ -5,6 +5,7 @@ import FilterIcon from "@icons/filter.svg?react";
 import {
     validateCardForPlayFormat,
     CHAMPIONSHIP_FORMAT,
+    NEMESIS_FORMAT,
 } from "../../../../../data/wudb";
 import ToggleButton from "../ToggleButton";
 import { useDeckBuilderState } from "../../..";
@@ -43,11 +44,11 @@ function CardsTab({
 
     return (
         <div className="flex items-center my-2">
-            {format === CHAMPIONSHIP_FORMAT && (
+            {format === NEMESIS_FORMAT && (
                 <div className="flex flex-col items-center mx-4">
                     <LockIcon className="text-yellow-600 stroke-current w-4 h-4" />
                     <h6 className="text-gray-700 text-xs">
-                        {restrictedCards.length}/3
+                        {restrictedCards.length}/1
                     </h6>
                 </div>
             )}
@@ -82,11 +83,6 @@ function CardsTab({
                 isOn={enabledTypes.includes("Gambit")}
                 onClick={onToggleType("Gambit")}
             >
-                <img
-                    src={`/assets/icons/spell-icon.png`}
-                    alt="ploy"
-                    className="w-4 h-4"
-                />
                 <img
                     src={`/assets/icons/ploy-icon.png`}
                     alt="spell"
