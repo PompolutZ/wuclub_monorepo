@@ -3,6 +3,7 @@ import { factions } from "./factions";
 import { sets } from "./sets";
 import { cards } from "./cards";
 import { factionMembers } from "./factionMembers";
+import { format } from "path";
 
 export const latestSeasonStartNumber = 15000;
 
@@ -295,6 +296,43 @@ function getAllSetsValidForFormat(format: typeof ACTIVE_FORMATS[number]) {
       return Object.values(sets);
   }
 }
+
+export const warbandsValidForOrganisedPlay = [
+  // released via digital download files
+  factions["tf"],
+  factions["ss"],
+  factions["tsk"],
+  factions["dsl"],
+  factions["ic"],
+  factions["ttd"],
+  factions["zgb"],
+  factions["bob"],
+  factions["sg"],
+  factions["mm"],
+  factions["cr"],
+  factions["toftbq"],
+  factions["zg"],
+  // grand alliance order
+  factions["hh"],
+  factions["mp"],
+  factions["tp"],
+  factions["yg"],
+  // grand alliance chaos
+  factions["kr"],
+  factions["ep"],
+  factions["tdp"],
+  factions["god"],
+  // grand alliance death
+  factions["thc"],
+  factions["tcc"],
+  factions["kar"],
+  factions["tg"],
+  // grand alliance destruction
+  factions["gl"],
+  factions["bb"],
+  factions['dkk'],
+  factions["mk"]
+]
 
 function validateCardForPlayFormat(card, format = CHAMPIONSHIP_FORMAT) {
   if (!format) return [];

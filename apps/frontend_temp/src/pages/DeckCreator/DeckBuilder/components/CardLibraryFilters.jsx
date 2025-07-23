@@ -12,8 +12,8 @@ import {
   getAllSetsValidForFormat,
   NEMESIS_FORMAT,
   RIVALS_FORMAT,
-  // warbandHasPlot,
-  wufactions
+  warbandsValidForOrganisedPlay,
+  wufactions,
 } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormatInfo";
@@ -40,14 +40,19 @@ const notPlayableFactionIds = [
   wufactions["gac"].id,
 ];
 
-function FactionsPicker({ selected, onChangeWarband, ...rest }) {
+function FactionsPicker({
+  selected,
+  onChangeWarband,
+  selectableWarbands,
+  ...rest
+}) {
   const handleSelectWarband = (faction) => () => {
     onChangeWarband(faction);
   };
 
   return (
     <div className={`flex flex-wrap align-middle ${rest.className}`}>
-      {Object.values(wufactions)
+      {selectableWarbands
         .filter(
           (faction) =>
             faction.id != selected.id &&
@@ -62,18 +67,6 @@ function FactionsPicker({ selected, onChangeWarband, ...rest }) {
           >
             <FactionPicture size="w-12 h-12" faction={faction.name} />
           </button>
-          // <div className="relative" key={faction.id}>
-          //   <img
-          //     className="w-10 h-10 m-1 cursor-pointer"
-          //     onClick={handleSelectWarband(faction)}
-          //     src={`/assets/icons/${faction.name}-icon.png`}
-          //   />
-          //   {/* {warbandHasPlot(faction.id) && (
-          //     <div className="absolute w-4 h-4 bg-purple-700 bottom-0 left-4 rounded-full text-white">
-          //       <CompassIcon className="stroke-current w-4 h-4" />
-          //     </div>
-          //   )} */}
-          // </div>
         ))}
     </div>
   );
@@ -163,7 +156,11 @@ function CardLibraryFilters(props) {
 
             <SelectedFaction faction={warband} />
 
-            <FactionsPicker selected={warband} onChangeWarband={setWarband} />
+            <FactionsPicker
+              selected={warband}
+              onChangeWarband={setWarband}
+              selectableWarbands={warbandsValidForOrganisedPlay}
+            />
 
             <SectionTitle title="Format" className="my-8" />
 
