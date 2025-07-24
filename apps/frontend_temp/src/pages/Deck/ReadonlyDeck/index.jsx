@@ -181,7 +181,7 @@ function ReadonlyDeck(props) {
         </>
       </div>
 
-      <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4">
+      <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
         <DeckPlotCards factionId={faction} sets={sets} />
         <FighterCardsPortal faction={faction} />
       </div>

@@ -3,8 +3,7 @@ import { factions } from "./factions";
 import { sets } from "./sets";
 import { cards } from "./cards";
 import { factionMembers } from "./factionMembers";
-import { format } from "path";
-import { Card } from "./types";
+import { Card, Set } from "./types";
 
 export const latestSeasonStartNumber = 15000;
 
@@ -188,8 +187,8 @@ function getFactionById() {
   return factions["u"];
 }
 
-export type SetId = typeof sets[keyof typeof sets]["id"];
-type SetName = typeof sets[keyof typeof sets]["name"];
+export type SetId = (typeof sets)[keyof typeof sets]["id"];
+type SetName = (typeof sets)[keyof typeof sets]["name"];
 // const idToSetKey: Record<SetId, SetName> = {};
 function getSetNameById(setId: SetId) {
   return sets[setId]?.name;
@@ -214,10 +213,10 @@ const setsWithPlot: SetId[] = [
   sets["EK"].id,
   sets["CC"].id,
   sets["RS"].id,
-]
+];
 export const setHasPlot = (setId: SetId) => {
   return setsWithPlot.includes(setId);
-}
+};
 
 function getSetById(setId: SetId) {
   return sets[setId];
@@ -267,12 +266,9 @@ export const VANGUARD_FORMAT = "vanguard";
 export const NEMESIS_FORMAT = "nemesis";
 export const RIVALS_FORMAT = "rivals";
 
-export const ACTIVE_FORMATS = [
-  RIVALS_FORMAT,
-  NEMESIS_FORMAT,
-] as const;
+export const ACTIVE_FORMATS = [RIVALS_FORMAT, NEMESIS_FORMAT] as const;
 
-function getAllSetsValidForFormat(format: typeof ACTIVE_FORMATS[number]) {
+function getAllSetsValidForFormat(format: (typeof ACTIVE_FORMATS)[number]) {
   switch (format) {
     // case CHAMPIONSHIP_FORMAT:
     //   return Object.values(sets).filter(
@@ -331,11 +327,14 @@ export const warbandsValidForOrganisedPlay = [
   // grand alliance destruction
   factions["gl"],
   factions["bb"],
-  factions['dkk'],
-  factions["mk"]
-]
+  factions["dkk"],
+  factions["mk"],
+];
 
-function validateCardForPlayFormat(card: Card | string, format = NEMESIS_FORMAT) {
+function validateCardForPlayFormat(
+  card: Card | string,
+  format = NEMESIS_FORMAT,
+) {
   let c = undefined;
   if (typeof card === "string") {
     c = cards[card as keyof typeof cards];
@@ -357,9 +356,22 @@ function validateCardForPlayFormat(card: Card | string, format = NEMESIS_FORMAT)
   }
 }
 
+const setsWithPlotCards: SetId[] = [
+  sets["RG"].id,
+  sets["EK"].id,
+  sets["CC"].id,
+  sets["RS"].id,
+] as const;
+
+export const checkDeckHasPlots = (deckSets: SetId[]): Set[] => {
+  return deckSets
+    .filter((setId) => setsWithPlotCards.includes(setId))
+    .map((setId) => sets[setId]);
+};
+
 function validateDeckForPlayFormat({ objectives, gambits, upgrades }, format) {
-    return [true, []];
-    // @TODO: fix this function later
+  return [true, []];
+  // @TODO: fix this function later
   const deck = [...objectives, ...gambits, ...upgrades];
   const MAX_RESTRICTED_CARDS = 3;
   const MIN_OBJECTIVE_COUNT = 12;
@@ -423,45 +435,45 @@ function validateDeckForPlayFormat({ objectives, gambits, upgrades }, format) {
     }
   }
 
-//   if (format == RIVALS_FORMAT) {
-//     const [{ factionId, setId }] = deck;
-//     const shouldBeFactionOnlyDeck = factionId > 1;
-//     const allCardsAreFactionCards = deck.reduce(
-//       (onlyFactionCards, c) => onlyFactionCards && c.setId === setId,
-//       true,
-//     );
-//     const allCardsAreSameRivalsDeck = deck.reduce(
-//       (sameRilvalsDeck, c) => sameRilvalsDeck && c.setId === setId,
-//       nemesis_valid_sets.includes(setId),
-//     );
+  //   if (format == RIVALS_FORMAT) {
+  //     const [{ factionId, setId }] = deck;
+  //     const shouldBeFactionOnlyDeck = factionId > 1;
+  //     const allCardsAreFactionCards = deck.reduce(
+  //       (onlyFactionCards, c) => onlyFactionCards && c.setId === setId,
+  //       true,
+  //     );
+  //     const allCardsAreSameRivalsDeck = deck.reduce(
+  //       (sameRilvalsDeck, c) => sameRilvalsDeck && c.setId === setId,
+  //       nemesis_valid_sets.includes(setId),
+  //     );
 
-//     isValid = shouldBeFactionOnlyDeck
-//       ? allCardsAreFactionCards
-//       : allCardsAreSameRivalsDeck;
-//     if (!isValid) {
-//       issues.push(
-//         "Rivals deck only includes cards with that warband symbol or only includes cards from the same universal Rivals Deck",
-//       );
-//     }
-//   }
+  //     isValid = shouldBeFactionOnlyDeck
+  //       ? allCardsAreFactionCards
+  //       : allCardsAreSameRivalsDeck;
+  //     if (!isValid) {
+  //       issues.push(
+  //         "Rivals deck only includes cards with that warband symbol or only includes cards from the same universal Rivals Deck",
+  //       );
+  //     }
+  //   }
 
-//   if (format === NEMESIS_FORMAT) {
-//     const universalOnly = deck.filter((c) => c.factionId === 1);
-//     if (universalOnly.length) {
-//       const universalRivalsDeckId = universalOnly[0].setId;
-//       isValid = universalOnly.reduce(
-//         (sameRivalsDeck, c) =>
-//           sameRivalsDeck && c.setId === universalRivalsDeckId,
-//         nemesis_valid_sets.includes(universalRivalsDeckId),
-//       );
+  //   if (format === NEMESIS_FORMAT) {
+  //     const universalOnly = deck.filter((c) => c.factionId === 1);
+  //     if (universalOnly.length) {
+  //       const universalRivalsDeckId = universalOnly[0].setId;
+  //       isValid = universalOnly.reduce(
+  //         (sameRivalsDeck, c) =>
+  //           sameRivalsDeck && c.setId === universalRivalsDeckId,
+  //         nemesis_valid_sets.includes(universalRivalsDeckId),
+  //       );
 
-//       if (!isValid) {
-//         issues.push(
-//           `Nemesis deck could include only cards with warband symbols or taken from the same single universal Rivals deck`,
-//         );
-//       }
-//     }
-//   }
+  //       if (!isValid) {
+  //         issues.push(
+  //           `Nemesis deck could include only cards with warband symbols or taken from the same single universal Rivals deck`,
+  //         );
+  //       }
+  //     }
+  //   }
 
   if (objectives.length < MIN_OBJECTIVE_COUNT) {
     isValid = false;

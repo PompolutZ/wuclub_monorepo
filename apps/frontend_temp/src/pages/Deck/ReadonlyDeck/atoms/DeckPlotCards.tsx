@@ -1,30 +1,27 @@
-import { getFactionByName, setHasPlot, SetId } from "@wudb";
-import { usePortal } from "../../../../hooks/usePortal";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
-import { forwardRef, useEffect, useState } from "react";
-import { Factions, Plot } from "@fxdxpz/schema";
-import { type CarouselApi } from "@/components/ui/carousel";
+import { Factions } from "@fxdxpz/schema";
 import CompassIcon from "@icons/compass.svg?react";
+import { checkDeckHasPlots, SetId } from "@wudb";
+import { Set } from "@wudb/types";
+import { forwardRef, useEffect, useState } from "react";
+import { usePortal } from "../../../../hooks/usePortal";
 import { PlotCard } from "../../../../shared/components/PlotCard";
 
 type Props = {
   factionId: Factions;
-  sets: number[];
+  sets: SetId[];
 };
 
 export const DeckPlotCards = ({ factionId, sets }: Props) => {
   const { Portal, open, portalClickAwayRef } = usePortal();
-  //const plots = getPlotKeywords(factionId, sets);
-
-  // if (!checkDeckHasPlots(factionId, sets)) {
-  //   return null;
-  // }
+  const setsWithPlots = checkDeckHasPlots(sets);
 
   return (
     <div>
@@ -33,56 +30,34 @@ export const DeckPlotCards = ({ factionId, sets }: Props) => {
         <h3 className="text-xs font-bold">This deck includes plot cards:</h3>
       </div>
       <div className="space-x-1">
-        {/* {plots.map(({ keyword }) => (
+        {setsWithPlots.map(({ id, displayName }) => (
           <span
             className="underline hover:cursor-pointer"
-            key={keyword}
+            key={id}
             onClick={open}
           >
-            {keyword}
+            {displayName}
           </span>
-        ))} */}
+        ))}
       </div>
 
       <Portal>
         <div className="grid w-full h-full place-content-center bg-purple-100/25">
-          {/* <PlotsCarousel plots={plots} ref={portalClickAwayRef} /> */}
+          <PlotsCarousel setsWithPlots={setsWithPlots} ref={portalClickAwayRef} />
         </div>
       </Portal>
     </div>
   );
 };
 
-function checkDeckHasPlots(faction: Factions, sets: SetId[]) {
-  return (
-    sets.some((setId) => setHasPlot(setId))
-  );
-}
-
-function getPlotKeywords(faction: Factions, sets: number[]) {
-  if (!checkDeckHasPlots(faction, sets)) return [];
-
-  const plotInfos = Object.values(plots) as Plot[];
-
-  return plotInfos.reduce((keywords: Plot[], plot: Plot) => {
-    const factionWithPlot =
-      plot.connection === "Warband" && plot.name === faction;
-    const setWithPlot = plot.connection === "Set" && sets.includes(plot.id);
-
-    return factionWithPlot || setWithPlot ? [...keywords, plot] : keywords;
-  }, []);
-}
-
-const PlotsCarousel = forwardRef<HTMLDivElement, { plots: Plot[] }>(
+const PlotsCarousel = forwardRef<HTMLDivElement, { setsWithPlots: Set[] }>(
   function PlotsCarousel(
-    { plots = [] },
+    { setsWithPlots = [] },
     ref: React.ForwardedRef<HTMLDivElement>,
   ) {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
-    const plotAssets = plots.flatMap((plot) =>
-      plot.cards ? plot.cards.map(({ asset }) => asset) : [plot.asset],
-    );
+    const sets = setsWithPlots.map((set) => set.id);
 
     useEffect(() => {
       if (!api) {
@@ -103,16 +78,16 @@ const PlotsCarousel = forwardRef<HTMLDivElement, { plots: Plot[] }>(
       >
         <Carousel setApi={setApi}>
           <CarouselContent>
-            {plotAssets.map((asset) => (
-              <CarouselItem key={asset}>
-                <PlotCard asset={asset} />
+            {sets.map((set) => (
+              <CarouselItem key={set}>
+                <PlotCard set={set} />
               </CarouselItem>
             ))}
           </CarouselContent>
           <div className="flex items-center justify-center space-x-2 mt-2">
             <CarouselPrevious />
             <div className="py-2 text-center">
-              Card {current} of {plotAssets.length}
+              Card {current} of {sets.length}
             </div>
             <CarouselNext />
           </div>
