@@ -15,7 +15,7 @@ export const FighterCard = ({
   className,
   isInspired = false,
 }: Props) => {
-  const assetWithoutExtension = `/assets/fighters/${faction}/${index}${isInspired ? "-inspired" : ""}`;
+  const assetWithoutExtension = `/assets/fighters/${faction}/${faction}-${index}${isInspired ? "-inspired" : ""}`;
   return (
     <picture className={className} style={style}>
       <source type="image/webp" srcSet={`${assetWithoutExtension}.webp`} />
