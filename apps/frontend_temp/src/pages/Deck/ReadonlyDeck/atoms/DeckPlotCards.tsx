@@ -19,7 +19,7 @@ type Props = {
   sets: SetId[];
 };
 
-export const DeckPlotCards = ({ factionId, sets }: Props) => {
+export const DeckPlotCards = ({ sets }: Props) => {
   const { Portal, open, portalClickAwayRef } = usePortal();
   const setsWithPlots = checkDeckHasPlots(sets);
 

@@ -10,7 +10,7 @@ export const deckPayloadSchema = z
     faction: z.string(),
     name: z.string(),
     private: z.boolean(),
-    sets: z.array(z.number()),
+    sets: z.array(z.string()),
   })
   .describe(
     "Deck payload is used to post a new deck, since some of the deck properties will be generated server-side.",

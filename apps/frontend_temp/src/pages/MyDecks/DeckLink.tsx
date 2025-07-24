@@ -33,7 +33,7 @@ export const DeckLink = ({ onDelete, deck }: Props) => {
       <FactionDeckPicture faction={deck.faction} />
 
       <div className="flex-1 pl-2">
-        <DeckTitle factionName={deck.faction} sets={deck.sets}>
+        <DeckTitle sets={deck.sets}>
           <Link
             className="text-xl"
             to={{
