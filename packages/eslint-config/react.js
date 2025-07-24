@@ -22,4 +22,20 @@ export default [
       ...pluginReactHooks.configs.recommended.rules,
     },
   },
+  {
+    files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
+    rules: {
+      "no-console": "error",
+    }
+  },
+  {
+    // rules to fix someday
+    rules: {
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-empty-object-type": "warn",
+      "@typescript-eslint/no-explicit-any": "warn",
+      "no-unreachable": "warn",
+      "no-undef": "warn",
+    }
+  }
 ];

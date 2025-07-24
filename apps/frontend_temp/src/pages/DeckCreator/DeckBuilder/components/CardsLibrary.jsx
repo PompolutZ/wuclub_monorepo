@@ -35,10 +35,6 @@ function FilterableCardLibrary(props) {
   const state = useDeckBuilderState();
   const { searchText, visibleCardTypes } = props;
 
-  useEffect(() => {
-    console.log("useEffect: FilterableCardLibrary", cards, filteredCards);
-  }, [cards, filteredCards])
-
   const deck = useMemo(
     () => [
       ...state.selectedObjectives,
@@ -106,7 +102,6 @@ function FilterableCardLibrary(props) {
     <div className="flex-1 flex outline-none">
       <FixedVirtualizedList items={filteredCards}>
         {({ card, expanded }, { key, index }) => {
-          console.log("CardInDeck", card, expanded, key, index);
           return card ? (
             <div
               key={key}

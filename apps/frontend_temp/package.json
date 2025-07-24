@@ -7,7 +7,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "eslint": "eslint",
-    "lint": "eslint src",
+    "lint": "eslint src --quiet",
     "lint:fix": "eslint src --fix"
   },
   "dependencies": {

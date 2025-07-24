@@ -32,7 +32,6 @@ const getPlotKeywords = (faction, sets) => {
 
 export default function PublicDeckLink({ ...props }) {
     const cards = props.deck.map((x) => getCardById(x));
-    console.log("HELLO", cards);
     const totalGlory = cards
         .filter(checkCardIsObjective)
         .reduce((total, { glory }) => (total += glory), 0);

@@ -5,12 +5,10 @@ import {
     checkCardIsObjective,
     checkCardIsPloy,
     checkCardIsUpgrade,
-    // checkWarbandSpecificCard,
     getCardById,
     getFactionById,
     getFactionByName,
     getSetById,
-    // udbPrefexes,
 } from "../../data/wudb";
 import { INITIAL_STATE } from "./reducer";
 
@@ -43,17 +41,16 @@ export function useStateCreator() {
             const decodedCards = cardIds.map((foreignId) => {
                 const wuid = decode(foreignId);
                 let card = getCardById(wuid);
-                if (card.duplicates) {
-                    const newest = Math.max(...card.duplicates);
-                    card = getCardById(newest);
+                if (!card) {
+                    console.warn(
+                        `Card with ID ${wuid} not found in the database.`
+                    );
+                    return null;
                 }
 
                 return card;
             });
 
-            // const [{ factionId }] = decodedCards.filter(
-            //     checkWarbandSpecificCard
-            // );
             const faction = getFactionById();
 
             const sets = decodedCards.reduce(

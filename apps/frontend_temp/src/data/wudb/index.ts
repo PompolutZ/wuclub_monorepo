@@ -289,6 +289,8 @@ function getAllSetsValidForFormat(format: typeof ACTIVE_FORMATS[number]) {
 }
 
 export const warbandsValidForOrganisedPlay = [
+  // very reasonable in 2nd edition
+  factions["u"],
   // emberwatch
   factions["tew"],
   factions["ztt"],
@@ -340,8 +342,6 @@ function validateCardForPlayFormat(card: Card | string, format = NEMESIS_FORMAT)
   } else {
     c = card;
   }
-
-  console.log("Validating card", c.id, c.name, "for format", format);
 
   const [mask] = c.status.split("_");
   switch (format) {
