@@ -5,16 +5,18 @@ interface DropdownMenuProps {
   children?: ReactNode;
   trigger?: ReactNode;
   className: string;
+  disabled?: boolean;
 }
 
 const DropdownMenu = ({
   children,
   trigger,
   className = "relative inline-block text-left w-6 h-6 z-10",
+  disabled = false,
 }: DropdownMenuProps) => {
   return (
     <Menu as="div" className={className}>
-      <Menu.Button>{trigger}</Menu.Button>
+      <Menu.Button disabled={disabled}>{trigger}</Menu.Button>
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"

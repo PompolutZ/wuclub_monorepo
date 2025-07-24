@@ -107,7 +107,8 @@ function DeckActionMenuLarge({
       </button>
 
       <DropdownMenu
-        className="relative z-10"
+        className="relative z-10 opacity-10"
+        disabled={true}
         trigger={
           <div className="flex text-purple-700 w-28 justify-center group hover:bg-gray-200 rounded-md items-center px-2 py-2 text-sm">
             <svg
