@@ -55,7 +55,10 @@ function ReadonlyDeck(props) {
   const { mutateAsync: update } = useUpdateDeck();
 
   const handleExportToUDB = () => {
-    const deckFormat = new Set(props.cards.map(card => card.setId)).size > 1 ? "nemesis" : "rivals";
+    const deckFormat =
+      new Set(props.cards.map((card) => card.setId)).size > 1
+        ? "nemesis"
+        : "rivals";
 
     const udbEncodedCards = props.cards
       .map((card) => `${card.id}`)
@@ -72,6 +75,12 @@ function ReadonlyDeck(props) {
     }/deck/transfer/wuc,${props.cards.map((card) => card.id).join(",")}`;
     clipboard.writeText(link);
     props.showToast("Link copied to clipboard!");
+  };
+
+  const handleSaveVassalFiles = (faction, cards) => () => {
+    const cardList = `${faction}\r\n${cards.map((card) => card.id).join(",")}`;
+    clipboard.writeText(cardList);
+    props.showToast("Deck copied to clipboard!");
   };
 
   const toggleDeckPrivacy = () => {
@@ -166,7 +175,7 @@ function ReadonlyDeck(props) {
             <DeckActionMenuLarge
               cardsView={props.cardsView}
               onCardsViewChange={props.onCardsViewChange}
-              onSaveVassalFiles={handleSaveVassalFiles(name, cards)}
+              copyInVassalFormat={handleSaveVassalFiles(faction, cards)}
               canUpdateOrDelete={props.canUpdateOrDelete}
               deck={deck}
               deckId={id}
@@ -233,115 +242,5 @@ function ReadonlyDeck(props) {
     </div>
   );
 }
-
-const vassalPrefixMap = {
-  23: 230,
-  24: 231,
-  25: 232,
-  26: 233,
-  27: 234,
-  28: 235,
-  29: 240,
-  31: 236,
-  32: 237,
-  33: 251,
-  34: 250,
-  35: 252,
-  36: 253,
-  37: 254,
-  38: 255,
-  39: 256,
-  40: 257,
-  41: 260,
-  42: 261,
-  43: 262,
-  44: 263,
-  45: 270,
-  46: 271,
-  47: 272,
-  48: 273,
-};
-
-const handleSaveVassalFiles = (name, cards) => () => {
-  const objectives = cards
-    .filter(({ type }) => type === "Objective")
-    .map((c) => {
-      if (c.id >= 30000 && c.id <= 31000) {
-        // handle special case:
-        // Sepulchral Guard REMASTERED = 24001 to 24032
-        // Farstriders REMASTERED = 24033 to 24064
-        const cardIdx = c.id % 100;
-        return [240 + `${32 + cardIdx}`.padStart(2, "0"), c.name];
-      }
-      if (c.id >= 23000) {
-        const prefix = Math.floor(c.id / 1000);
-        const cardIdx = c.id % 100;
-
-        return [
-          vassalPrefixMap[prefix] + `${cardIdx}`.padStart(2, "0"),
-          c.name,
-        ];
-      }
-
-      return [`${c.id}`.padStart(5, "0"), c.name];
-    })
-    .map(
-      ([cardId, name], i) =>
-        '+/1660398120521/mark;RealCardName	restrict;PLAYER 1,PLAYER 2;false;false;\\	hideCmd;P2;Disable;PlayerOwnership = PLAYER1 && PlayerSide = PLAYER 2;70\\,130,44\\,650\\\\	hideCmd;P1;Disable;PlayerOwnership = PLAYER2 && PlayerSide = PLAYER 1;70\\,130,44\\,650\\\\\\	hideCmd;OBSERVER;Disable;{GetProperty("PlayerSide = <observer")>};70\\,130\\\\\\\\	macro;Puts back;;;DeckName = OBJECTIVE CARDS LEFT WIDE || DeckName = OBJECTIVE CARDS RIGHT WIDE;74\\,715;74\\,585;false;;;counted;;;;false;;1;1\\\\\\\\\\	report;74\\,585;$PlayerName$ puts back an OBJECTIVE CARD;;;Puts back;false\\\\\\\\\\\\	macro;Location is not offboard;;;OldLocationName = OBJECTIVE CARDS LEFT WIDE || OldLocationName = OBJECTIVE CARDS RIGHT WIDE;74\\,715;74\\,195;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\	macro;Make playerside 2;;74,715;PlayerSide = PLAYER 2 && PlayerOwnership = NONE;;40\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\	macro;Make playerside 1;;74,715;PlayerSide = PLAYER 1 && PlayerOwnership = NONE;;35\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\	report;74\\,195;`$PlayerName$ draws an OBJECTIVE CARD;;;;false\\\\\\\\\\\\\\\\\\\\	PROP;PlayerOwnership;false,0,100,false;:35\\,130:P\\,PLAYER1,:40\\,130:P\\,PLAYER2;\\\\\\\\\\\\\\\\\\\\\\	macro;p2 Mulligan;;44,650;PlayerOwnership = PLAYER2 && ObscuredToOthers = false;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\	macro;p1 Mulligan;;44,650;{(PlayerOwnership=="PLAYER1") && (ObscuredToOthers==false)};;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\	macro;p2 return to deck;;72,130;PlayerOwnership = PLAYER2;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\\\	macro;p1 return to deck;;72,130;PlayerOwnership = PLAYER1;;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	return;;98,130;OBJECTIVE CARDS RIGHT WIDE;Select destination;;2;false;OBJECTIVE CARDS RIGHT WIDE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	return;;97,130;OBJECTIVE CARDS LEFT WIDE;Select destination;;2;false;OBJECTIVE CARDS LEFT WIDE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	obs;70,130;Objectives background.png;REVEAL;GHiddnoverlay 2.png;?;player:;Peek;;false;;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	report;68\\,195;$PlayerName$ Deleted: $PieceName$;;;INFORME TIRADA;false\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	immob;g;N;R;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	mark;MapLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	delete;Delete;68,195;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	piece;;;' +
-        cardId +
-        ".png;" +
-        cardId +
-        "/" +
-        name +
-        "	\\	\\\\	\\\\\\	\\\\\\\\	\\\\\\\\\\	-1\\\\\\\\\\\\	\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\	-1\\\\\\\\\\\\\\\\\\\\	NONE\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	null;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	CardsLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	null;2852;244;" +
-        i +
-        ";6;OldZone;;OldLocationName;;OldX;2824;OldY;900;OldBoard;BOARD WIDE;OldMap;",
-    );
-
-  const powers = cards
-    .filter(({ type }) => type !== "Objective")
-    .map((c) => {
-      if (c.id >= 23000) {
-        const prefix = Math.floor(c.id / 1000);
-        const cardIdx = c.id % 100;
-
-        return [
-          vassalPrefixMap[prefix] + `${cardIdx}`.padStart(2, "0"),
-          c.name,
-        ];
-      }
-
-      return [`${c.id}`.padStart(5, "0"), c.name];
-    })
-    .map(
-      ([cardId, name], i) =>
-        '+/1660396530624/mark;RealCardName	restrict;PLAYER 1,PLAYER 2;false;false;\\	hideCmd;P2;Disable;PlayerOwnership = PLAYER1 && PlayerSide = PLAYER 2;70\\,130,44\\,650\\\\	hideCmd;P1;Disable;PlayerOwnership = PLAYER2 && PlayerSide = PLAYER 1;70\\,130,44\\,650\\\\\\	hideCmd;OBSERVER;Disable;{GetProperty("PlayerSide = <observer")>};70\\,130\\\\\\\\	macro;Puts back;;;DeckName = POWER CARDS LEFT WIDE || DeckName = POWER CARDS RIGHT WIDE;74\\,715;74\\,585;false;;;counted;;;;false;;1;1\\\\\\\\\\	report;74\\,585;$PlayerName$ puts back a POWER CARD;;;Puts back;false\\\\\\\\\\\\	macro;Location is not offboard;;;OldLocationName = POWER CARDS LEFT WIDE || OldLocationName = POWER CARDS RIGHT WIDE;74\\,715;74\\,195;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\	macro;Make playerside 2;;74,715;PlayerSide = PLAYER 2 && PlayerOwnership = NONE;;40\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\	macro;Make playerside 1;;74,715;PlayerSide = PLAYER 1 && PlayerOwnership = NONE;;35\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\	report;74\\,195;`$PlayerName$ draws a POWER CARD;;;;false\\\\\\\\\\\\\\\\\\\\	PROP;PlayerOwnership;false,0,100,false;:35\\,130:P\\,PLAYER1,:40\\,130:P\\,PLAYER2;\\\\\\\\\\\\\\\\\\\\\\	macro;p2 Mulligan;;44,650;PlayerOwnership = PLAYER2 && ObscuredToOthers = false;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\	macro;p1 Mulligan;;44,650;{(PlayerOwnership=="PLAYER1") && (ObscuredToOthers==false)};;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\	macro;p2 return to deck;;72,130;PlayerOwnership = PLAYER2;;98\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\\\	macro;p1 return to deck;;72,130;PlayerOwnership = PLAYER1;;97\\,130;false;;;counted;;;;false;;1;1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	return;;98,130;POWER CARDS RIGHT WIDE;Select destination;;2;false;POWER CARDS RIGHT WIDE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	return;;97,130;POWER CARDS LEFT WIDE;Select destination;;2;false;POWER CARDS LEFT WIDE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	obs;70,130;powercardsback.png;REVEAL;GHiddnoverlay 2.png;?;player:;Peek;;false;;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	report;68\\,195;$PlayerName$ Deleted: $PieceName$;;;INFORME TIRADA;false\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	immob;g;N;R;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	mark;MapLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	delete;Delete;68,195;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	piece;;;' +
-        cardId +
-        ".png;" +
-        cardId +
-        "/" +
-        name +
-        "	\\	\\\\	\\\\\\	\\\\\\\\	\\\\\\\\\\	-1\\\\\\\\\\\\	\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\	-1\\\\\\\\\\\\\\\\\\\\	NONE\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	asd123;true|0\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	CardsLayers\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	null;2543;244;" +
-        i +
-        ";6;OldZone;;OldLocationName;;OldX;2508;OldY;948;OldBoard;BOARD WIDE;OldMap;",
-    );
-
-  downloadVassalDeckWithTempLink(objectives, `${name}_OBJECTIVES.txt`);
-  downloadVassalDeckWithTempLink(powers, `${name}_POWERS.txt`);
-};
-
-const downloadVassalDeckWithTempLink = (deck, fileName) => {
-  const tempDownloadLink = document.createElement("a");
-  tempDownloadLink.style.display = "none";
-  document.body.appendChild(tempDownloadLink);
-  const content = ["DECK\t", ...deck];
-
-  const file = new Blob(content, { type: "text/plain" });
-  tempDownloadLink.href = URL.createObjectURL(file);
-  tempDownloadLink.download = fileName;
-  tempDownloadLink.click();
-
-  document.body.removeChild(tempDownloadLink);
-};
 
 export default ReadonlyDeck;

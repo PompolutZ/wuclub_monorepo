@@ -5,6 +5,7 @@ import ExportMenu from "./ExportMenu";
 import { Menu } from "@headlessui/react";
 import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
 import { EditIcon } from "../../../../shared/components/Icons";
+import { Copy } from "lucide-react";
 
 function DeckActionMenuLarge({
   deckId,
@@ -14,7 +15,7 @@ function DeckActionMenuLarge({
   cardsView,
   onCardsViewChange,
   canUpdateOrDelete,
-  onSaveVassalFiles,
+  copyInVassalFormat,
   onDelete,
   exportToUDB,
   createShareableLink,
@@ -85,26 +86,45 @@ function DeckActionMenuLarge({
           onClick={onToggleDeckPrivacy}
         />
       )}
-      <button
-        className={`text-purple-700 w-28 justify-center group hover:bg-gray-200 flex rounded-md items-center px-2 py-2 text-sm`}
-        onClick={createShareableLink}
+
+      <DropdownMenu
+        className="relative z-10"
+        trigger={
+          <div className="flex text-purple-700 w-28 justify-center group hover:bg-gray-200 rounded-md items-center px-2 py-2 text-sm">
+            <Copy className="h-5 w-5 mr-2" fill="#C4B5FD" />
+            <span className="text-gray-900">Copy</span>
+          </div>
+        }
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 mr-2 stroke-current"
-          fill="#C4B5FD"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-          />
-        </svg>
-        <span className="text-gray-900">Share link</span>
-      </button>
+        <Menu.Item>
+          {({ active }) => (
+            <button
+              className={`${
+                active ? "bg-purple-500 text-white" : "text-purple-900"
+              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+              onClick={createShareableLink}
+            >
+              <span className={`${active ? "text-white" : "text-gray-900"}`}>
+                Shareable link
+              </span>
+            </button>
+          )}
+        </Menu.Item>
+        <Menu.Item>
+          {({ active }) => (
+            <button
+              className={`${
+                active ? "bg-purple-500 text-white" : "text-purple-900"
+              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+              onClick={copyInVassalFormat}
+            >
+              <span className={`${active ? "text-white" : "text-gray-900"}`}>
+                Copy in Vassal format
+              </span>
+            </button>
+          )}
+        </Menu.Item>
+      </DropdownMenu>
 
       <DropdownMenu
         className="relative z-10 opacity-10"
@@ -135,27 +155,6 @@ function DeckActionMenuLarge({
               className={`${
                 active ? "bg-purple-500 text-white" : "text-purple-900"
               } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-              onClick={onSaveVassalFiles}
-            >
-              <img
-                className="w-14 h-5 mr-2"
-                alt="Vassal logo"
-                src="https://vassalengine.org/images/wordmark-path.png"
-                width="356"
-                height="120"
-              />
-              <span className={`${active ? "text-white" : "text-gray-900"}`}>
-                Decks
-              </span>
-            </button>
-          )}
-        </Menu.Item>
-        <Menu.Item>
-          {({ active }) => (
-            <button
-              className={`${
-                active ? "bg-purple-500 text-white" : "text-purple-900"
-              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
               onClick={onDownloadProxy}
             >
               <span className={`${active ? "text-white" : "text-gray-900"}`}>
@@ -165,6 +164,7 @@ function DeckActionMenuLarge({
           )}
         </Menu.Item>
       </DropdownMenu>
+      
       <DropdownMenu
         className="relative z-10"
         trigger={
