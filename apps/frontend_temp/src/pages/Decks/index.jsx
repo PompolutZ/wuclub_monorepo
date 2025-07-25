@@ -14,11 +14,13 @@ export default function Deck() {
       {data && (
         <FixedVirtualizedList
           estimateItemSize={101}
-          items={data?.pages?.flatMap((x) => x.decks) ?? []}
+          items={data?.pages?.flatMap((x) => x.decks ?? [])}
           lazy={true}
           onLoadMore={() => !isFetching && hasNextPage && fetchNextPage()}
         >
-          {(deck, { key }) => <PublicDeckLink key={key} {...deck} />}
+          {(deck, { key }) => {
+            return <PublicDeckLink key={key} {...deck} />
+          }}
         </FixedVirtualizedList>
       )}
     </div>

@@ -14,6 +14,8 @@ function MyDecksPage() {
   const { data: userDecks, isFetching: loading } = useUserDecksQuery();
   const { mutateAsync } = useDeleteDeck();
 
+  console.log("userDecks", userDecks);  
+
   useAnonDecksSynchronisation();
 
   const [confirmDeleteDeckId, setConfirmDeleteDeckId] = useState<string | null>(
@@ -42,7 +44,7 @@ function MyDecksPage() {
     <div className="flex-1 flex p-4 flex-col">
       {!user && <AnonymousUserDecksStorageInfo />}
       {loading && <LazyLoading />}
-      {!loading && userDecks?.length === 0 && (
+      {!loading && userDecks?.total === 0 && (
         <div className="flex-1 flex items-center justify-center">
           <p>
             You don't have any decks yet.{" "}
@@ -53,9 +55,9 @@ function MyDecksPage() {
         </div>
       )}
 
-      {userDecks && userDecks.length > 0 && (
+      {userDecks && userDecks.total > 0 && (
         <div className="flex-1">
-          {userDecks
+          {userDecks.decks
             .map((deck) => ({
               ...deck,
               id: deck.deckId,
@@ -74,7 +76,7 @@ function MyDecksPage() {
       <DeleteConfirmationDialog
         title="Delete deck"
         description={`Are you sure you want to delete deck: '${
-          userDecks?.find((deck) => deck.deckId === confirmDeleteDeckId)?.name
+          userDecks?.decks.find((deck) => deck.deckId === confirmDeleteDeckId)?.name
         }'`}
         open={!!confirmDeleteDeckId}
         onCloseDeleteDialog={handleCloseDeleteDialog}

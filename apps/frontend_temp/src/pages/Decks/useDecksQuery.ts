@@ -11,13 +11,14 @@ const DECKS_BATCH_SIZE = 30;
 
 export const useQueryDecks = (faction?: Factions) => {
   return useInfiniteQuery({
-    queryKey: ["decks", { faction: faction ?? "all" }],
+    queryKey: ["decks2", { faction: faction ?? "all" }],
     queryFn: async ({ pageParam: { limit, skip, faction } }) => {
       const res = await api.v2.decks.$get({
         query: {
           faction,
           limit: limit?.toString(),
           skip: skip?.toString(),
+          edition: "2",
         },
       });
 

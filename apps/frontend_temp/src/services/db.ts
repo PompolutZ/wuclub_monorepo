@@ -22,7 +22,7 @@ export type AnonDecks = {
   faction: string;
   name: string;
   private: boolean;
-  sets: number[];
+  sets: (number | string)[];
   updatedutc: number;
 };
 

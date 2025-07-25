@@ -5,6 +5,8 @@ export const getAllDecksSchema = z.object({
   faction: factionsSchema.optional(),
   skip: z.coerce.number().optional().default(0),
   limit: z.coerce.number().max(30).optional().default(30),
+  edition: z.coerce.number().optional(),
+  fuid: z.string().optional(),
 });
 
 export type GetAllDecksQuery = z.infer<typeof getAllDecksSchema>;

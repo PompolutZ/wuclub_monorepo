@@ -1,114 +1,7 @@
 export declare const app: import("hono/hono-base").HonoBase<{}, {
-    "/v2/stats/decks": {
-        $get: {
-            input: {};
-            output: {
-                faction: import("@fxdxpz/schema").Factions;
-                count: number;
-            }[];
-            outputFormat: "json";
-            status: import("hono/utils/http-status").StatusCode;
-        };
-    };
-} & {
-    "/v2/decks": {
-        $get: {
-            input: {
-                query: {
-                    faction?: string | string[] | undefined;
-                    skip?: string | string[] | undefined;
-                    limit?: string | string[] | undefined;
-                };
-            };
-            output: never[] | {
-                decks: {
-                    [x: string]: any;
-                }[];
-                total: any;
-            };
-            outputFormat: "json";
-            status: import("hono/utils/http-status").StatusCode;
-        };
-        $post: {
-            input: {
-                json: {
-                    deckId: string;
-                    deck: number[];
-                    faction: string;
-                    name: string;
-                    private: boolean;
-                    sets: number[];
-                };
-            };
-            output: {
-                status: number;
-                data: {
-                    acknowledged: boolean;
-                    insertedId: string;
-                };
-            };
-            outputFormat: "json";
-            status: import("hono/utils/http-status").StatusCode;
-        };
-    };
-    "/v2/decks/:id": {
-        $get: {
-            input: {
-                param: {
-                    id: string;
-                };
-            };
-            output: {
-                deckId: string;
-                deck: number[];
-                faction: string;
-                name: string;
-                private: boolean;
-                sets: number[];
-                fuid: string;
-                createdutc: number;
-                updatedutc: number;
-            };
-            outputFormat: "json";
-            status: import("hono/utils/http-status").StatusCode;
-        };
-        $put: {
-            input: {
-                json: {
-                    deckId?: string | undefined;
-                    deck?: number[] | undefined;
-                    faction?: string | undefined;
-                    name?: string | undefined;
-                    private?: boolean | undefined;
-                    sets?: number[] | undefined;
-                };
-            } & {
-                param: {
-                    id: string;
-                };
-            };
-            output: {
-                [x: string]: any;
-                _id: string;
-            } | null;
-            outputFormat: "json";
-            status: import("hono/utils/http-status").StatusCode;
-        };
-        $delete: {
-            input: {
-                param: {
-                    id: string;
-                };
-            };
-            output: {
-                deletedCount: number;
-            };
-            outputFormat: "json";
-            status: import("hono/utils/http-status").StatusCode;
-        };
-    };
-} & {
-    "/v2/users": {
+    "/v2/*": {};
+} | import("hono/types").MergeSchemaPath<{
+    "/": {
         $get: {
             input: {};
             output: {
@@ -120,6 +13,9 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
             outputFormat: "json";
             status: import("hono/utils/http-status").StatusCode;
         };
+    };
+} & {
+    "/": {
         $post: {
             input: {
                 json: {
@@ -136,6 +32,9 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
             outputFormat: "json";
             status: import("hono/utils/http-status").StatusCode;
         };
+    };
+} & {
+    "/": {
         $put: {
             input: {
                 json: {
@@ -152,7 +51,8 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
             status: import("hono/utils/http-status").StatusCode;
         };
     };
-    "/v2/users/decks": {
+} & {
+    "/decks": {
         $get: {
             input: {};
             output: {
@@ -162,7 +62,125 @@ export declare const app: import("hono/hono-base").HonoBase<{}, {
             status: import("hono/utils/http-status").StatusCode;
         };
     };
+}, "/v2/users"> | import("hono/types").MergeSchemaPath<{
+    "/": {
+        $get: {
+            input: {
+                query: {
+                    faction?: string | string[] | undefined;
+                    skip?: string | string[] | undefined;
+                    limit?: string | string[] | undefined;
+                    edition?: string | string[] | undefined;
+                };
+            };
+            output: never[] | {
+                decks: {
+                    [x: string]: any;
+                }[];
+                total: any;
+            };
+            outputFormat: "json";
+            status: import("hono/utils/http-status").StatusCode;
+        };
+    };
 } & {
-    "/v2/*": {};
-}, "/v2">;
+    "/:id": {
+        $get: {
+            input: {
+                param: {
+                    id: string;
+                };
+            };
+            output: {
+                deckId: string;
+                deck: number[];
+                faction: string;
+                name: string;
+                private: boolean;
+                sets: string[];
+                fuid: string;
+                createdutc: number;
+                updatedutc: number;
+            };
+            outputFormat: "json";
+            status: import("hono/utils/http-status").StatusCode;
+        };
+    };
+} & {
+    "/": {
+        $post: {
+            input: {
+                json: {
+                    deckId: string;
+                    deck: number[];
+                    faction: string;
+                    name: string;
+                    private: boolean;
+                    sets: string[];
+                };
+            };
+            output: {
+                status: number;
+                data: {
+                    acknowledged: boolean;
+                    insertedId: string;
+                };
+            };
+            outputFormat: "json";
+            status: import("hono/utils/http-status").StatusCode;
+        };
+    };
+} & {
+    "/:id": {
+        $put: {
+            input: {
+                json: {
+                    deckId?: string | undefined;
+                    deck?: number[] | undefined;
+                    faction?: string | undefined;
+                    name?: string | undefined;
+                    private?: boolean | undefined;
+                    sets?: string[] | undefined;
+                };
+            } & {
+                param: {
+                    id: string;
+                };
+            };
+            output: {
+                [x: string]: any;
+                _id: string;
+            } | null;
+            outputFormat: "json";
+            status: import("hono/utils/http-status").StatusCode;
+        };
+    };
+} & {
+    "/:id": {
+        $delete: {
+            input: {
+                param: {
+                    id: string;
+                };
+            };
+            output: {
+                deletedCount: number;
+            };
+            outputFormat: "json";
+            status: import("hono/utils/http-status").StatusCode;
+        };
+    };
+}, "/v2/decks"> | import("hono/types").MergeSchemaPath<{
+    "/decks": {
+        $get: {
+            input: {};
+            output: {
+                faction: import("@fxdxpz/schema").Factions;
+                count: number;
+            }[];
+            outputFormat: "json";
+            status: import("hono/utils/http-status").StatusCode;
+        };
+    };
+}, "/v2/stats">, "/v2">;
 export type AppRoutes = typeof app;

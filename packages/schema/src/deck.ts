@@ -6,11 +6,12 @@ import { Factions } from "./factions";
 export const deckPayloadSchema = z
   .object({
     deckId: z.string(),
-    deck: z.array(z.number()),
+    deck: z.array(z.union([z.number(), z.string()])),
     faction: z.string(),
     name: z.string(),
     private: z.boolean(),
     sets: z.array(z.string()),
+    edition: z.coerce.number().optional(),
   })
   .describe(
     "Deck payload is used to post a new deck, since some of the deck properties will be generated server-side.",

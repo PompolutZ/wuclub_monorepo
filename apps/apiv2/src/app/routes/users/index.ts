@@ -1,12 +1,13 @@
-import { Hono } from "hono";
-import { HTTPException } from "hono/http-exception";
-import { zValidator } from "@hono/zod-validator";
 import { authenticate } from "@/app/middlewares/authentication";
 import { getUserByFuid, setUser } from "@/dal/users";
-import { z } from "zod";
 import { factionsSchema } from "@fxdxpz/schema";
-import { getAllUserDecks } from "../../../dal/decks/getAllUserDecks";
+import { zValidator } from "@hono/zod-validator";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
+import { Hono } from "hono";
+import { HTTPException } from "hono/http-exception";
+import { z } from "zod";
+import { getAllDecks } from "../../../dal";
+import { getAllDecksSchema } from "../decks/schemas";
 
 const updateUserSchema = z.object({
   displayName: z
@@ -70,10 +71,10 @@ const app = new Hono<{
       throw new HTTPException(500, { message: "Internal server error" });
     }
   })
-  .get("/decks", async (c) => {
+  .get("/decks", zValidator("query", getAllDecksSchema), async (c) => {
     try {
       const { uid: fuid } = c.get("claims");
-      const decks = await getAllUserDecks({ fuid });
+      const decks = await getAllDecks({ ...c.req.valid("query"), fuid });
       return c.json(decks);
     } catch (e) {
       console.error("Error in getUser:", e);
