@@ -1,7 +1,7 @@
-import { Factions } from "@fxdxpz/schema";
+import { FactionName } from "../../data/wudb/types";
 
 type Props = {
-  faction: Factions;
+  faction: FactionName;
   isInspired?: boolean;
   index: number;
   style?: React.CSSProperties;
