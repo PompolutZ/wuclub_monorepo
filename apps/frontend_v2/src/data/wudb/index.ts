@@ -2,8 +2,15 @@ import { sortByIdAsc } from "../../utils/sort";
 import { factions } from "./factions";
 import { sets } from "./sets";
 import { cards } from "./cards";
+import type {
+  Card,
+  CardId,
+  FactionAbbr,
+  FactionName,
+  Set,
+  SetId,
+} from "./types";
 import { factionMembers } from "./factionMembers";
-import type { Card, CardId, FactionAbbr, FactionName, Set, SetId } from "./types";
 
 export const latestSeasonStartNumber = 15000;
 
@@ -260,7 +267,6 @@ function compareObjectivesByScoreType(scoreTypeOne, scoreTypeTwo) {
 export const CHAMPIONSHIP_FORMAT = "championship";
 export const OPEN_FORMAT = "open";
 export const RELIC_FORMAT = "relic";
-export const VANGUARD_FORMAT = "vanguard";
 export const NEMESIS_FORMAT = "nemesis";
 export const RIVALS_FORMAT = "rivals";
 
@@ -368,153 +374,99 @@ export const checkDeckHasPlots = (deckSets: SetId[]): Set[] => {
 };
 
 function validateDeckForPlayFormat({ objectives, gambits, upgrades }, format) {
-  return [true, []];
-  // @TODO: fix this function later
   const deck = [...objectives, ...gambits, ...upgrades];
   const MAX_RESTRICTED_CARDS = 3;
   const MIN_OBJECTIVE_COUNT = 12;
   const MAX_SURGE_OBJECTIVE_COUNT = 6;
   const MIN_POWER_CARD_COUNT = 20;
-  const issues = [];
+  const issues: string[] = [];
   let isValid = true;
+
+  console.log(deck, format);
 
   if (format === OPEN_FORMAT) return [isValid, issues];
 
-  if (format == VANGUARD_FORMAT) {
-    const onlyLatestSeason = deck
-      .filter((c) => c.factionId < 2)
-      .reduce(
-        (lastSeasonOnly, c) =>
-          lastSeasonOnly && Number(c.id) > latestSeasonStartNumber,
-        true,
-      );
-
-    isValid = onlyLatestSeason;
-    if (!onlyLatestSeason) {
-      issues.push(`Vanguard decks can only include cards from last season`);
-    }
-  }
-
-  if (format == CHAMPIONSHIP_FORMAT) {
-    const onlyLastTwoSeasons = deck
-      .filter((c) => c.factionId < 2)
-      .reduce((lastTwoSeasons, c) => lastTwoSeasons && c.id > 11000, true);
-    isValid = onlyLastTwoSeasons;
-
-    if (!onlyLastTwoSeasons) {
-      issues.push(`Championship decks cannot include rotated out cards`);
-    }
-
-    const totalInvalidCards = deck
-      .map((card) => validateCardForPlayFormat(card, format))
-      .reduce(
-        (total, [, isForsaken, isRestricted]) => {
-          return {
-            // we can just sum by using coersion here, but mathematically that doesn't make sense
-            forsaken: isForsaken ? total.forsaken + 1 : total.forsaken,
-            restricted: isRestricted ? total.restricted + 1 : total.restricted,
-          };
-        },
-        { forsaken: 0, restricted: 0 },
-      );
-
-    if (totalInvalidCards.forsaken > 0) {
+  if (format === RIVALS_FORMAT) {
+    const uniqueSets = new Set(deck.map((c) => c.setId));
+    if (uniqueSets.size > 1) {
       isValid = false;
       issues.push(
-        `Deck built for ${format} cannot include forsaken cards, but has ${totalInvalidCards.forsaken}`,
+        "In Rivals format deck can only include cards from the same Rivals deck",
       );
     }
 
-    if (totalInvalidCards.restricted > MAX_RESTRICTED_CARDS) {
+    if (deck.length !== RIVALS_DECK_CARDS_TOTAL) {
       isValid = false;
       issues.push(
-        `Deck built for ${format} can include at most ${MAX_RESTRICTED_CARDS} restricted cards, but has ${totalInvalidCards.restricted}`,
+        `Rivals deck must include all ${RIVALS_DECK_CARDS_TOTAL} cards with the same rivals decks symbol.`
       );
     }
+
+    //   if (format === NEMESIS_FORMAT) {
+    //     const universalOnly = deck.filter((c) => c.factionId === 1);
+    //     if (universalOnly.length) {
+    //       const universalRivalsDeckId = universalOnly[0].setId;
+    //       isValid = universalOnly.reduce(
+    //         (sameRivalsDeck, c) =>
+    //           sameRivalsDeck && c.setId === universalRivalsDeckId,
+    //         nemesis_valid_sets.includes(universalRivalsDeckId),
+    //       );
+
+    //       if (!isValid) {
+    //         issues.push(
+    //           `Nemesis deck could include only cards with warband symbols or taken from the same single universal Rivals deck`,
+    //         );
+    //       }
+    //     }
+    //   }
+
+    // if (objectives.length < MIN_OBJECTIVE_COUNT) {
+    //   isValid = false;
+    //   issues.push("Your deck must include at least 12 objective cards");
+    // }
+
+    // if (
+    //   objectives.filter((card) => card.scoreType == SURGE_SCORE_TYPE).length >
+    //   MAX_SURGE_OBJECTIVE_COUNT
+    // ) {
+    //   isValid = false;
+    //   issues.push("Your deck can't include more than 6 Surge cards");
+    // }
+
+    // if (gambits.length + upgrades.length < MIN_POWER_CARD_COUNT) {
+    //   isValid = false;
+    //   issues.push(
+    //     "Your deck must include at least 20 power cards (gambits and upgrades)",
+    //   );
+    // }
+
+    // if (gambits.length > upgrades.length) {
+    //   isValid = false;
+    //   issues.push("Your deck can't include more gambits than upgrade cards");
+    // }
+
+    // const setsWithPlotCards = Object.keys(
+    //   deck.reduce((acc, c) => {
+    //     const wave = Math.floor(c.id / 1000);
+    //     if (wave === 17 || wave === 18) {
+    //       acc[wave] = acc[wave] ? acc[wave] + 1 : 1;
+    //     }
+
+    //     return acc;
+    //   }, {}),
+    // ).length;
+
+    // if (setsWithPlotCards > 1) {
+    //   isValid = false;
+    //   issues.push(`You can use only one Rivals deck that uses a plot card.`);
+    // }
+
+    return [isValid, issues];
   }
 
-  //   if (format == RIVALS_FORMAT) {
-  //     const [{ factionId, setId }] = deck;
-  //     const shouldBeFactionOnlyDeck = factionId > 1;
-  //     const allCardsAreFactionCards = deck.reduce(
-  //       (onlyFactionCards, c) => onlyFactionCards && c.setId === setId,
-  //       true,
-  //     );
-  //     const allCardsAreSameRivalsDeck = deck.reduce(
-  //       (sameRilvalsDeck, c) => sameRilvalsDeck && c.setId === setId,
-  //       nemesis_valid_sets.includes(setId),
-  //     );
-
-  //     isValid = shouldBeFactionOnlyDeck
-  //       ? allCardsAreFactionCards
-  //       : allCardsAreSameRivalsDeck;
-  //     if (!isValid) {
-  //       issues.push(
-  //         "Rivals deck only includes cards with that warband symbol or only includes cards from the same universal Rivals Deck",
-  //       );
-  //     }
-  //   }
-
-  //   if (format === NEMESIS_FORMAT) {
-  //     const universalOnly = deck.filter((c) => c.factionId === 1);
-  //     if (universalOnly.length) {
-  //       const universalRivalsDeckId = universalOnly[0].setId;
-  //       isValid = universalOnly.reduce(
-  //         (sameRivalsDeck, c) =>
-  //           sameRivalsDeck && c.setId === universalRivalsDeckId,
-  //         nemesis_valid_sets.includes(universalRivalsDeckId),
-  //       );
-
-  //       if (!isValid) {
-  //         issues.push(
-  //           `Nemesis deck could include only cards with warband symbols or taken from the same single universal Rivals deck`,
-  //         );
-  //       }
-  //     }
-  //   }
-
-  if (objectives.length < MIN_OBJECTIVE_COUNT) {
-    isValid = false;
-    issues.push("Your deck must include at least 12 objective cards");
+  if (format === NEMESIS_FORMAT) {
+    return [true, []]
   }
-
-  if (
-    objectives.filter((card) => card.scoreType == SURGE_SCORE_TYPE).length >
-    MAX_SURGE_OBJECTIVE_COUNT
-  ) {
-    isValid = false;
-    issues.push("Your deck can't include more than 6 Surge cards");
-  }
-
-  if (gambits.length + upgrades.length < MIN_POWER_CARD_COUNT) {
-    isValid = false;
-    issues.push(
-      "Your deck must include at least 20 power cards (gambits and upgrades)",
-    );
-  }
-
-  if (gambits.length > upgrades.length) {
-    isValid = false;
-    issues.push("Your deck can't include more gambits than upgrade cards");
-  }
-
-  const setsWithPlotCards = Object.keys(
-    deck.reduce((acc, c) => {
-      const wave = Math.floor(c.id / 1000);
-      if (wave === 17 || wave === 18) {
-        acc[wave] = acc[wave] ? acc[wave] + 1 : 1;
-      }
-
-      return acc;
-    }, {}),
-  ).length;
-
-  if (setsWithPlotCards > 1) {
-    isValid = false;
-    issues.push(`You can use only one Rivals deck that uses a plot card.`);
-  }
-
-  return [isValid, issues];
 }
 
 function validateObjectivesListForPlayFormat(objectives, format) {
