@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-types */
 export declare const app: import("hono/hono-base").HonoBase<{}, {
     "/v2/stats/decks": {
         $get: {

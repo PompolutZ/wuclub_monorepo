@@ -1,16 +1,12 @@
 import {
   factionMembers,
-  getFactionByName,
-  plots,
-  setHasPlot,
-  warbandHasPlot,
+  setHasPlot
 } from "@wudb/index";
 import { useState } from "react";
 import { getCardPathByCardId } from "../../utils/helpers";
 
 const checkDeckHasPlots = (faction, sets) => {
   return (
-    warbandHasPlot(getFactionByName(faction).id) ||
     sets.some((setId) => setHasPlot(setId))
   );
 };
@@ -18,15 +14,15 @@ const checkDeckHasPlots = (faction, sets) => {
 const getPlotKeywords = (faction, sets) => {
   if (!checkDeckHasPlots(faction, sets)) return [];
 
-  const plotInfos = Object.values(plots);
+  // const plotInfos = Object.values(plots);
 
-  return plotInfos.reduce((keywords, plot) => {
-    const factionWithPlot =
-      plot.connection === "Warband" && plot.name === faction;
-    const setWithPlot = plot.connection === "Set" && sets.includes(plot.id);
+  // return plotInfos.reduce((keywords, plot) => {
+  //   const factionWithPlot =
+  //     plot.connection === "Warband" && plot.name === faction;
+  //   const setWithPlot = plot.connection === "Set" && sets.includes(plot.id);
 
-    return factionWithPlot || setWithPlot ? [...keywords, plot] : keywords;
-  }, []);
+  //   return factionWithPlot || setWithPlot ? [...keywords, plot] : keywords;
+  // }, []);
 };
 
 const CardProxyMaker = ({ cards = [], factionId, onExit }) => {

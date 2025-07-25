@@ -14,8 +14,6 @@ function MyDecksPage() {
   const { data: userDecks, isFetching: loading } = useUserDecksQuery();
   const { mutateAsync } = useDeleteDeck();
 
-  console.log("userDecks", userDecks);  
-
   useAnonDecksSynchronisation();
 
   const [confirmDeleteDeckId, setConfirmDeleteDeckId] = useState<string | null>(
