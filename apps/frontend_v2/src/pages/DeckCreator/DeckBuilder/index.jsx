@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react";
 import AddCardIcon from "@icons/add-card.svg?react";
 import DeckIcon from "@icons/deck.svg?react";
 import WarbandIcon from "@icons/warband.svg?react";
-import { Children, useEffect, useState } from "react";
+import { Children, useEffect, useMemo, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import useMeasure from "react-use-measure";
 import { generateDeckId } from "shared/helpers";
@@ -72,7 +72,6 @@ const MobileLayout = ({ children }) => {
 
 function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
   const isMobile = useBreakpoint("mobile");
-  const [deckId, setDeckId] = useState(existingDeckId || "");
   const [deckName, setDeckName] = useState(currentDeckName || "");
   const [showWarband, setShowWarband] = useState(false);
   const [showConfirmDeckReset, setShowConfirmDeckReset] = useState(false);
@@ -80,16 +79,11 @@ function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
     uid: "Anonymous",
     displayName: "Anonymous",
   };
-
   const { faction, status } = useDeckBuilderState();
-
   const dispatch = useDeckBuilderDispatcher();
-
-  useEffect(() => {
-    if (existingDeckId) return;
-
-    setDeckId(generateDeckId(faction.abbr));
-  }, [faction, existingDeckId]);
+  const deckId = useMemo(() => {
+    return existingDeckId ?? generateDeckId(faction.abbr);
+  }, [existingDeckId, faction.abbr]);
 
   const handleCloseConfirmDialog = () => {
     setShowConfirmDeckReset(false);

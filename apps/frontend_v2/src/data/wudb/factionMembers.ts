@@ -1,4 +1,9 @@
 export const factionMembers = {
+    "universal": [],
+    "grand-aliance-order": [],
+    "grand-aliance-chaos": [],
+    "grand-aliance-death": [],
+    "grand-aliance-destruction": [],
     "garreks-reavers": ["Garrek", "Saek", "Karsus", "Targor", "Arnulf"],
     "steelhearts-champions": ["Steelheart", "Obryn", "Angharad"],
     "sepulchral-guard": [
@@ -28,7 +33,7 @@ export const factionMembers = {
       "The Exhumed",
       "The Uncrowned",
     ],
-    "the-eyes-of-the-nine": [
+    "eyes-of-the-nine": [
       "Vortemis",
       `K'charik`,
       `Narvia`,
@@ -113,7 +118,7 @@ export const factionMembers = {
   
     // DIRECHASM
     "myaris-purifiers": ["Myari", "Bahannar", "Ailenn", "Senaela"],
-    "dread-pageant": ["Vasillac", "Glissete", "Hadzu", "Slakeslash"],
+    "the-dread-pageant": ["Vasillac", "Glissete", "Hadzu", "Slakeslash"],
     "khagras-ravagers": ["Khagra", "Cragan", "Razek", "Zarshia"],
     "the-starblood-stalkers": [
       "Kixi-Taka",
@@ -128,7 +133,7 @@ export const factionMembers = {
     "drepurs-wraithcreepers": ["1", "2", "3", "4"],
     "hedkrakkas-madmob": ["Hedkrakka", "Wollop", "Toofdagga", "Dakko"],
     "kainans-reapers": ["1", "2", "3", "4", "5", "6"],
-    "elathains-soulreapers": ["1", "2", "3", "4", "5"],
+    "elathains-soulraid": ["1", "2", "3", "4", "5"],
   
     "xandires-truthseekers": ["1", "2", "3", "4"],
     "da-kunnin-krew": ["1", "2", "3", "4", "5"],
