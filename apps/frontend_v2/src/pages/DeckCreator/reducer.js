@@ -31,45 +31,8 @@ export function updateDeckAction(deckMeta) {
     return { type: UPDATE_DECK, payload: deckMeta };
 }
 
-///// CURRENT DECK SCHEMA
-// 'factionPrefix-id': {
-//     author: string (uid),
-//     authorDisplayName: string;
-//     cards: [],
-//     created: string,
-//     desc: string;
-//     name: string;
-//     private: Boolean;
-//     scoringSummary: [],
-//     sets: [],
-//     source: string;
-// }
-
-//// new schema
-// 'abbr-id': {
-//     author: string (uid),
-//     authorDisplayName: string;
-
-//     cards: [],
-//     cardslist: string;
-
-//     created: string,
-//     createdutc: number;
-//     updatedutc: number;
-
-//     desc: string;
-//     name: string;
-//     private: Boolean;
-//     scoringSummary: [],
-
-//     sets: [],
-//     setslist: string;
-
-//     source: string;
-// }
-
 export const INITIAL_STATE = {
-    faction: getFactionByName("sons-of-velmorn"),
+    faction: getFactionByName("universal"),
     sets: getAllSetsValidForFormat(NEMESIS_FORMAT),
     hideDuplicates: true,
     format: NEMESIS_FORMAT,

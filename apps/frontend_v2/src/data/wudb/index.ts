@@ -3,7 +3,7 @@ import { factions } from "./factions";
 import { sets } from "./sets";
 import { cards } from "./cards";
 import { factionMembers } from "./factionMembers";
-import { Card, Set } from "./types";
+import type { Card, CardId, FactionAbbr, FactionName, Set, SetId } from "./types";
 
 export const latestSeasonStartNumber = 15000;
 
@@ -175,11 +175,11 @@ function getCardNumberFromId(cardId: string) {
   return match ? +match[1] : null;
 }
 
-function getFactionByName(factionName) {
+function getFactionByName(factionName: FactionName) {
   return Object.values(factions).find((f) => f.name == factionName);
 }
 
-function getFactionByAbbr(factionAbbr) {
+function getFactionByAbbr(factionAbbr: FactionAbbr) {
   return Object.values(factions).find((f) => f.abbr == factionAbbr);
 }
 
@@ -187,8 +187,6 @@ function getFactionById() {
   return factions["u"];
 }
 
-export type SetId = (typeof sets)[keyof typeof sets]["id"];
-type SetName = (typeof sets)[keyof typeof sets]["name"];
 // const idToSetKey: Record<SetId, SetName> = {};
 function getSetNameById(setId: SetId) {
   return sets[setId]?.name;
@@ -225,7 +223,7 @@ function getSetById(setId: SetId) {
 const cardTypes = ["Objective", "Ploy", "Upgrade", "Spell"];
 
 // This is very stupid but best idea at 22:17 for backward compatibility
-function getCardById(cardId) {
+function getCardById(cardId: CardId) {
   return cards[cardId];
 }
 
