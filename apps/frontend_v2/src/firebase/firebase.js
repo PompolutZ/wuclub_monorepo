@@ -27,6 +27,14 @@ const config = {
 };
 
 const Firebase2 = (function () {
+  if (!config.apiKey) {
+    return {
+      onAuthUserListener: () => {
+        console.warn("Firebase is not configured. No auth listener will be set.");
+      }
+    };
+  }
+
   const app = initializeApp(config);
   getAnalytics(app);
   const auth = getAuth(app);
