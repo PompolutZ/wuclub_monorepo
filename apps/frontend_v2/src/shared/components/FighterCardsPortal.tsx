@@ -1,6 +1,5 @@
+import { animated, useSpring } from "@react-spring/web";
 import { forwardRef, useEffect, useState } from "react";
-import { usePortal } from "../../hooks/usePortal";
-import { Factions } from "@fxdxpz/schema";
 import {
   Carousel,
   CarouselApi,
@@ -9,13 +8,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../../components/ui/carousel";
-import { Svgs } from "./Svgs";
 import { factionMembers } from "../../data/wudb";
+import { FactionName } from "../../data/wudb/types";
+import { usePortal } from "../../hooks/usePortal";
 import { FighterCard } from "./FighterCard";
-import { animated, useSpring } from "@react-spring/web";
+import { Svgs } from "./Svgs";
+import { WarbandWarscroll } from "./WarbandWarscroll";
 
 type GenericFaction = Extract<
-  Factions,
+  FactionName,
   | "universal"
   | "grand-aliance-order"
   | "grand-aliance-chaos"
@@ -23,9 +24,7 @@ type GenericFaction = Extract<
   | "grand-aliance-destruction"
 >;
 
-type Warband = Exclude<Factions, GenericFaction>;
-
-const IsGenericFaction = (faction: Factions): faction is GenericFaction =>
+const IsGenericFaction = (faction: FactionName): faction is GenericFaction =>
   [
     "universal",
     "grand-aliance-order",
@@ -34,7 +33,7 @@ const IsGenericFaction = (faction: Factions): faction is GenericFaction =>
     "grand-aliance-destruction",
   ].includes(faction);
 
-export const FighterCardsPortal = ({ faction }: { faction: Factions }) => {
+export const FighterCardsPortal = ({ faction }: { faction: FactionName }) => {
   const { Portal, open, portalClickAwayRef } = usePortal();
 
   if (IsGenericFaction(faction)) {
@@ -68,7 +67,7 @@ const FlippableFighterCard = ({
   faction,
   index,
 }: {
-  faction: Warband;
+  faction: FactionName;
   index: number;
 }) => {
   const [flipped, setFlipped] = useState(false);
@@ -80,13 +79,13 @@ const FlippableFighterCard = ({
 
   return (
     <div
-      className="grid cursor-pointer"
+      className="grid grid-cols-1 grid-rows-1 cursor-pointer"
       onClick={() => setFlipped((prev) => !prev)}
     >
       <AnimatedFighterCard
         faction={faction}
         index={index}
-        className="w-full rounded-sm row-start-1 col-start-1"
+        className="rounded-sm row-start-1 col-start-1 row-end-1 col-end-1 flex justify-center items-center"
         style={{
           opacity: opacity.to((o) => 1 - o),
           transform,
@@ -95,7 +94,7 @@ const FlippableFighterCard = ({
       <AnimatedFighterCard
         faction={faction}
         index={index}
-        className="w-full rounded-sm row-start-1 col-start-1"
+        className="rounded-sm row-start-1 col-start-1 row-end-1 col-end-1 flex justify-center items-center"
         isInspired
         style={{
           opacity,
@@ -106,50 +105,55 @@ const FlippableFighterCard = ({
   );
 };
 
-const FighterCardsCarousel = forwardRef<HTMLDivElement, { faction: Warband }>(
-  function FighterCardsCarousel(
-    { faction },
-    ref: React.ForwardedRef<HTMLDivElement>,
-  ) {
-    const [api, setApi] = useState<CarouselApi>();
-    const [current, setCurrent] = useState(0);
-    const fighterCards = factionMembers[faction];
+const FighterCardsCarousel = forwardRef<
+  HTMLDivElement,
+  { faction: FactionName }
+>(function FighterCardsCarousel(
+  { faction },
+  ref: React.ForwardedRef<HTMLDivElement>,
+) {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const fighterCards = factionMembers[faction];
 
-    useEffect(() => {
-      if (!api) {
-        return;
-      }
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
 
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
       setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
-      api.on("select", () => {
-        setCurrent(api.selectedScrollSnap() + 1);
-      });
-    }, [api]);
-
-    return (
-      <div
-        className="flex flex-col items-center w-5/6 lg:w-72 mx-auto"
-        ref={ref}
-      >
-        <Carousel setApi={setApi}>
-          <CarouselContent>
-            {fighterCards.map((fighter, index) => (
-              <CarouselItem key={fighter}>
-                <FlippableFighterCard faction={faction} index={index + 1} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="flex items-center justify-center space-x-2 mt-2">
-            <CarouselPrevious />
-            <div className="py-2 text-center">
-              Fighter {current} of {fighterCards.length}
-              <h6 className="text-xs italic text-gray-700">Tap card to flip</h6>
-            </div>
-            <CarouselNext />
+  return (
+    <div
+      className="lg:w-[70vw] mx-auto"
+      ref={ref}
+    >
+      <Carousel setApi={setApi}>
+        <CarouselContent>
+          <CarouselItem className="flex justify-center items-center">
+            {/* Show warband warscroll */}
+            <WarbandWarscroll factionName={faction} />
+          </CarouselItem>
+          {fighterCards.map((fighter, index) => (
+            <CarouselItem key={fighter}>
+              <FlippableFighterCard faction={faction} index={index + 1} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="flex items-center justify-center space-x-2 mt-2">
+          <CarouselPrevious />
+          <div className="py-2 text-center">
+            Card {current} of {fighterCards.length + 1}
+            <h6 className="text-xs italic text-gray-700">Tap card to flip</h6>
           </div>
-        </Carousel>
-      </div>
-    );
-  },
-);
+          <CarouselNext />
+        </div>
+      </Carousel>
+    </div>
+  );
+});
