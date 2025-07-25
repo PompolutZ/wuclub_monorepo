@@ -11,6 +11,7 @@ import type {
   SetId,
 } from "./types";
 import { factionMembers } from "./factionMembers";
+import { is } from "immutable";
 
 export const latestSeasonStartNumber = 15000;
 
@@ -357,6 +358,8 @@ function validateCardForPlayFormat(
       ];
     case RIVALS_FORMAT:
       return [true, false, false];
+    default:
+      return [true, false, false]; // open format
   }
 }
 
@@ -373,100 +376,104 @@ export const checkDeckHasPlots = (deckSets: SetId[]): Set[] => {
     .map((setId) => sets[setId]);
 };
 
-function validateDeckForPlayFormat({ objectives, gambits, upgrades }, format) {
-  const deck = [...objectives, ...gambits, ...upgrades];
-  const MAX_RESTRICTED_CARDS = 3;
-  const MIN_OBJECTIVE_COUNT = 12;
-  const MAX_SURGE_OBJECTIVE_COUNT = 6;
-  const MIN_POWER_CARD_COUNT = 20;
+const NEMESIS_MAX_RESTRICTED_CARDS = 1;
+const MIN_OBJECTIVE_COUNT = 12;
+const MAX_SURGE_OBJECTIVE_COUNT = 6;
+const MIN_POWER_CARD_COUNT = 20;
+
+function validateDeckForPlayFormat(
+  {
+    objectives,
+    gambits,
+    upgrades,
+  }: { objectives: Card[]; gambits: Card[]; upgrades: Card[] },
+  format: (typeof ACTIVE_FORMATS)[number],
+) {
+  const deck: Card[] = [...objectives, ...gambits, ...upgrades];
   const issues: string[] = [];
-  let isValid = true;
+  const uniqueSets = new Set(deck.map((c) => c.setId));
+  const { restricted, forsaken } = deck.reduce(
+    (total, card) => {
+      const [, forsaken, restricted] = validateCardForPlayFormat(card, format);
 
-  console.log(deck, format);
-
-  if (format === OPEN_FORMAT) return [isValid, issues];
+      return {
+        restricted: total.restricted + (restricted ? 1 : 0),
+        forsaken: total.forsaken + (forsaken ? 1 : 0),
+      };
+    },
+    { restricted: 0, forsaken: 0 },
+  );
 
   if (format === RIVALS_FORMAT) {
-    const uniqueSets = new Set(deck.map((c) => c.setId));
     if (uniqueSets.size > 1) {
-      isValid = false;
       issues.push(
         "In Rivals format deck can only include cards from the same Rivals deck",
       );
     }
 
     if (deck.length !== RIVALS_DECK_CARDS_TOTAL) {
-      isValid = false;
       issues.push(
-        `Rivals deck must include all ${RIVALS_DECK_CARDS_TOTAL} cards with the same rivals decks symbol.`
+        `Rivals deck must include all ${RIVALS_DECK_CARDS_TOTAL} cards with the same rivals decks symbol.`,
       );
     }
 
-    //   if (format === NEMESIS_FORMAT) {
-    //     const universalOnly = deck.filter((c) => c.factionId === 1);
-    //     if (universalOnly.length) {
-    //       const universalRivalsDeckId = universalOnly[0].setId;
-    //       isValid = universalOnly.reduce(
-    //         (sameRivalsDeck, c) =>
-    //           sameRivalsDeck && c.setId === universalRivalsDeckId,
-    //         nemesis_valid_sets.includes(universalRivalsDeckId),
-    //       );
-
-    //       if (!isValid) {
-    //         issues.push(
-    //           `Nemesis deck could include only cards with warband symbols or taken from the same single universal Rivals deck`,
-    //         );
-    //       }
-    //     }
-    //   }
-
-    // if (objectives.length < MIN_OBJECTIVE_COUNT) {
-    //   isValid = false;
-    //   issues.push("Your deck must include at least 12 objective cards");
-    // }
-
-    // if (
-    //   objectives.filter((card) => card.scoreType == SURGE_SCORE_TYPE).length >
-    //   MAX_SURGE_OBJECTIVE_COUNT
-    // ) {
-    //   isValid = false;
-    //   issues.push("Your deck can't include more than 6 Surge cards");
-    // }
-
-    // if (gambits.length + upgrades.length < MIN_POWER_CARD_COUNT) {
-    //   isValid = false;
-    //   issues.push(
-    //     "Your deck must include at least 20 power cards (gambits and upgrades)",
-    //   );
-    // }
-
-    // if (gambits.length > upgrades.length) {
-    //   isValid = false;
-    //   issues.push("Your deck can't include more gambits than upgrade cards");
-    // }
-
-    // const setsWithPlotCards = Object.keys(
-    //   deck.reduce((acc, c) => {
-    //     const wave = Math.floor(c.id / 1000);
-    //     if (wave === 17 || wave === 18) {
-    //       acc[wave] = acc[wave] ? acc[wave] + 1 : 1;
-    //     }
-
-    //     return acc;
-    //   }, {}),
-    // ).length;
-
-    // if (setsWithPlotCards > 1) {
-    //   isValid = false;
-    //   issues.push(`You can use only one Rivals deck that uses a plot card.`);
-    // }
-
-    return [isValid, issues];
+    return [issues.length === 0, issues];
   }
 
   if (format === NEMESIS_FORMAT) {
-    return [true, []]
+    if (deck.length < RIVALS_DECK_CARDS_TOTAL) {
+      issues.push(
+        `Nemesis deck must have at least ${RIVALS_DECK_CARDS_TOTAL} cards.`,
+      );
+    }
+
+    if (uniqueSets.size > 2) {
+      issues.push(
+        "Nemesis deck can only include cards from up to 2 different Rivals decks.",
+      );
+    }
+
+    if (objectives.length < MIN_OBJECTIVE_COUNT) {
+      issues.push(
+        `Nemesis deck must have at least ${MIN_OBJECTIVE_COUNT} objective cards.`,
+      );
+    }
+
+    if (gambits.length + upgrades.length < MIN_POWER_CARD_COUNT) {
+      issues.push(
+        `Nemesis deck must have at least ${MIN_POWER_CARD_COUNT} power cards (ploys and upgrades).`,
+      );
+    }
+
+    if (gambits.length > upgrades.length) {
+      issues.push("Nemesis deck cannot have more gambits than upgrade cards.");
+    }
+
+    if (forsaken > 0) {
+      issues.push(
+        `Nemesis deck cannot include Forsaken cards. You have ${forsaken} Forsaken cards.`,
+      );
+    }
+
+    if (restricted > NEMESIS_MAX_RESTRICTED_CARDS) {
+      issues.push(
+        `Nemesis deck cannot have more than ${NEMESIS_MAX_RESTRICTED_CARDS} restricted cards. You have ${restricted} restricted cards.`,
+      );
+    }
+
+    if (
+      objectives.filter(({ scoreType }) => scoreType === SURGE_SCORE_TYPE)
+        .length > MAX_SURGE_OBJECTIVE_COUNT
+    ) {
+      issues.push(
+        `Nemesis deck cannot have more than ${MAX_SURGE_OBJECTIVE_COUNT} Surge objectives. You have ${objectives.filter(({ scoreType }) => scoreType === SURGE_SCORE_TYPE).length} Surge objectives.`,
+      );
+    }
+
+    return [issues.length === 0, issues];
   }
+
+  return [true, issues];
 }
 
 function validateObjectivesListForPlayFormat(objectives, format) {
