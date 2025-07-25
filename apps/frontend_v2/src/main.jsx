@@ -168,7 +168,7 @@ const Root = () => (
           <MainLayout />
         </Router>
       </AuthContextProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </PersistQueryClientProvider>
   </FirebaseContext.Provider>
 );

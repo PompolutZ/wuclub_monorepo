@@ -2,6 +2,7 @@ import { animated as a, useSpring } from "@react-spring/web";
 import { useEffect, useState } from "react";
 import { factionMembers } from "../data/wudb";
 import { useDeckBuilderState } from "../pages/DeckCreator";
+import { WarbandWarscroll } from "../shared/components/WarbandWarscroll";
 
 function useClickAway() {
   const [clickedAway, setClickedAway] = useState(false);
@@ -45,6 +46,7 @@ export default function FightersInfoList({ onClose }) {
   return (
     <div className="flex-1 relative">
       <div className="absolute inset-0 overflow-y-auto p-4 lg:p-12">
+        <WarbandWarscroll className="mb-4" factionName={faction.name} />
         {factionMembers[faction.name].map((fighter, index) => (
           <FlippableFighterCard
             key={fighter}
@@ -77,10 +79,10 @@ function FlippableFighterCard({ faction, index }) {
         }}
       >
         <source
-          srcSet={`/assets/fighters/${faction}/${index}.webp`}
+          srcSet={`/assets/fighters/${faction}/${faction}-${index}.webp`}
           type="image/webp"
         />
-        <img src={`/assets/fighters/${faction}/${index}.png`} />
+        <img src={`/assets/fighters/${faction}/${faction}-${index}.png`} />
       </a.picture>
       <a.picture
         className="w-full rounded-sm sm:w-3/4 row-start-1 col-start-1 sm:mx-auto cursor-pointer hover:shadow-lg"
@@ -90,10 +92,10 @@ function FlippableFighterCard({ faction, index }) {
         }}
       >
         <source
-          srcSet={`/assets/fighters/${faction}/${index}-inspired.webp`}
+          srcSet={`/assets/fighters/${faction}/${faction}-${index}-inspired.webp`}
           type="image/webp"
         />
-        <img src={`/assets/fighters/${faction}/${index}-inspired.png`} />
+        <img src={`/assets/fighters/${faction}/${faction}-${index}-inspired.png`} />
       </a.picture>
     </div>
   );
