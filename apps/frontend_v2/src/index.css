@@ -50,6 +50,16 @@
     display: grid;
   }
 
+  #dice-box,
+  #dice-box canvas {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
   .stv-radio-buttons-wrapper {
     clear: both;
     display: inline-block;
