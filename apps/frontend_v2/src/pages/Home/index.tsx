@@ -9,7 +9,9 @@ import { Dice } from "../../shared/components/DiceBox";
 // import { useDeckStats } from "./useDeckStats";
 
 // create Dice Roll Parser to handle complex notations
-const DRP = new DiceParser();
+const DRP = new DiceParser({
+  
+});
 
 // create display overlay for final results
 const DiceResults = new DisplayResults("#dice-box");
@@ -44,25 +46,14 @@ const Home = () => {
   };
 
   Dice.onRollComplete = (results) => {
-    console.log(results);
-
-    // handle any rerolls
-    const rerolls = DRP.handleRerolls(results);
-    if (rerolls.length) {
-      rerolls.forEach((roll) => Dice.add(roll, roll.groupId));
-      return rerolls;
-    }
-    // if no rerolls needed then parse the final results
-    const finalResults = DRP.parseFinalResults(results);
-
-    // show the results
-    DiceResults.showResults(finalResults);
   };
 
   // trigger dice roll
-  const rollDice = (notation, group) => {
+  const rollDice = (notation) => () => {
+    Dice.clear();
     // trigger the dice roll using the parser
-    Dice.show().roll(DRP.parseNotation(notation));
+    const diceCount = Math.floor(Math.random() * 4) + 1; // randomize number of dice
+    Dice.show().roll(`${diceCount}d${notation}`);
   };
 
   return (
@@ -77,12 +68,12 @@ const Home = () => {
         </div>
       </div>
 
-      <AdvRollBtn label="d20 Advantage" notation="2d20kh1" onRoll={rollDice} />
+      <div className="flex flex-col items-center gap-4">
+        <AdvRollBtn label="Defence" onRoll={rollDice("defence")} />
+        <AdvRollBtn label="Attack" onRoll={rollDice("attack")} />
+      </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 min-h-screen">
-        {/* {stats?.map(({ faction, count }) => (
-          <DeckMetaSummary key={faction} faction={faction} count={count} />
-        ))} */}
       </div>
 
       <Footer />

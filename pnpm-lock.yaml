@@ -433,6 +433,9 @@ importers:
       '@3d-dice/dice-parser-interface':
         specifier: ^0.2.1
         version: 0.2.1
+      '@3d-dice/dice-themes':
+        specifier: ^0.2.1
+        version: 0.2.1
       '@3d-dice/dice-ui':
         specifier: ^0.5.2
         version: 0.5.2
@@ -730,6 +733,10 @@ packages:
 
   /@3d-dice/dice-roller-parser@0.2.6:
     resolution: {integrity: sha512-9dMSX0bqKZ5BQ+HABE4c4ZY1/VPUqtQd+gXKAHPMcFbY3cCMOPy327ZQ/LHdptS7VNZCGPriybIQrg7efYIQEw==}
+    dev: false
+
+  /@3d-dice/dice-themes@0.2.1:
+    resolution: {integrity: sha512-1z7k9RTZOHvPnqIZ0HMSYRXaAut+C3VJVCnDUu6xmdXdQ7CaBTeFsB5d3NySpPXQLbIsiSZ8PoUKAC78nnLQGQ==}
     dev: false
 
   /@3d-dice/dice-ui@0.5.2:

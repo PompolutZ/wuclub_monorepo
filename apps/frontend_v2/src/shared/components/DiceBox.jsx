@@ -9,10 +9,13 @@ const Dice = new DiceBox(
   {
     id: "dice-canvas", // canvas element id
     assetPath: "/assets/dice-box/",
-    startingHeight: 8,
+    startingHeight: 10,
     throwForce: 6,
-    spinForce: 5,
-    lightIntensity: 0.9
+    spinForce: 6,
+    lightIntensity: 0.9,
+    mass: 1,
+    theme: "underworlds", // default theme
+    scale: 0.4,
   }
 );
 

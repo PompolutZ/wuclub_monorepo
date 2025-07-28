@@ -13,6 +13,7 @@
   "dependencies": {
     "@3d-dice/dice-box": "^1.1.4",
     "@3d-dice/dice-parser-interface": "^0.2.1",
+    "@3d-dice/dice-themes": "^0.2.1",
     "@3d-dice/dice-ui": "^0.5.2",
     "@headlessui/react": "^1.2.0",
     "@radix-ui/react-slot": "^1.1.0",

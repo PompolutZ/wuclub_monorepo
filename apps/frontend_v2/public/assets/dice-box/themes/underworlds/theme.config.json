@@ -1,0 +1,19 @@
+{
+	"name": "Default Colors",
+	"systemName": "default",
+	"author": "Frank Ali",
+	"version": 0.2,
+	"meshFile": "default.json",
+	"material": {
+		"type": "standard",
+		"diffuseTexture": "underworlds.png",
+		"diffuseLevel": 1,
+		"bumpTexture": "normal.png",
+		"bumpLevel": 0.5,
+		"specularTexture": "specular.png",
+		"specularPower": 1
+	},
+	"diceAvailable": [
+		"attack", "defence"
+	]
+}
