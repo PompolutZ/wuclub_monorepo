@@ -10,7 +10,7 @@ interface FixedVirtualizedListProps<T> {
     items: T[];
     children: (item: T | T[], row: VirtualItem) => JSX.Element;
     estimateItemSize: number;
-    variant: "list" | "grid";
+    variant?: "list" | "grid";
     onLoadMore: () => void;
     lazy?: boolean;
 }

@@ -2,9 +2,10 @@ import { useParams } from "react-router-dom";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import PublicDeckLink from "./PublicDeckLink";
 import { useQueryDecks } from "./useDecksQuery";
+import { FactionName } from "@wudb/types";
 
 export default function Deck() {
-  const { faction } = useParams();
+  const { faction } = useParams<{ faction: FactionName | "all"}>();
   const { data, isFetching, hasNextPage, fetchNextPage } = useQueryDecks(
     faction === "all" ? undefined : faction,
   );

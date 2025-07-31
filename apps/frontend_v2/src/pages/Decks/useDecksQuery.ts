@@ -1,7 +1,8 @@
-import { InferResponseType } from "hono/client";
-import { api } from "../../services/api";
-import { Deck, Factions } from "@fxdxpz/schema";
+import { Deck } from "@fxdxpz/schema";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { InferResponseType } from "hono/client";
+import { FactionName } from "../../data/wudb/types";
+import { api } from "../../services/api";
 
 const IsDecksResponse = (
   data: InferResponseType<typeof api.v2.decks.$get>,
@@ -9,7 +10,7 @@ const IsDecksResponse = (
 
 const DECKS_BATCH_SIZE = 30;
 
-export const useQueryDecks = (faction?: Factions) => {
+export const useQueryDecks = (faction?: FactionName | "all") => {
   return useInfiniteQuery({
     queryKey: ["decks2", { faction: faction ?? "all" }],
     queryFn: async ({ pageParam: { limit, skip, faction } }) => {
@@ -22,7 +23,10 @@ export const useQueryDecks = (faction?: Factions) => {
         },
       });
 
-      return res.json();
+      return res.json() as Promise<{
+        decks: Deck[];
+        total: number;
+      }>;
     },
     getNextPageParam: (lastPage, pages) => {
       if (
