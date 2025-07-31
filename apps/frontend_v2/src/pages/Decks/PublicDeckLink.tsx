@@ -1,43 +1,31 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { DeckTitle } from "@/shared/components/DeckTitle";
+import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
+import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import { Link } from "react-router-dom";
+import ScoringOverview from "../../atoms/ScoringOverview";
+import SetsList from "../../atoms/SetsList";
 import { VIEW_DECK } from "../../constants/routes";
 import {
     checkCardIsObjective,
     getCardById,
-    // checkDeckHasPlots,
-    // plots,
 } from "../../data/wudb";
-import ScoringOverview from "../../atoms/ScoringOverview";
-import SetsList from "../../atoms/SetsList";
-import { FactionDeckPicture } from "@components/FactionDeckPicture";
-import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
-import { DeckTitle } from "@/shared/components/DeckTitle";
+import { Deck, SetId } from "../../data/wudb/types";
 
-const getPlotKeywords = (faction, sets) => {
-    return [];
-    // if (!checkDeckHasPlots(faction, sets)) return [];
+type PublicDeckLinkProps = {
+    deck: Deck;
+}
 
-    const plotInfos = Object.values(plots);
-
-    return plotInfos.reduce((keywords, plot) => {
-        const factionWithPlot =
-            plot.connection === "Warband" && plot.name === faction;
-        const setWithPlot = plot.connection === "Set" && sets.includes(plot.id);
-
-        return factionWithPlot || setWithPlot
-            ? [...keywords, plot.keyword]
-            : keywords;
-    }, []);
-};
-
-export default function PublicDeckLink({ ...props }) {
-    const cards = props.deck.map((x) => getCardById(x));
+export default function PublicDeckLink({ deck }: PublicDeckLinkProps) {
+    const { deck: cardIds, sets, faction, deckId, name, updatedutc  } = deck;
+    const cards = cardIds.map((x) => getCardById(x));
     const totalGlory = cards
         .filter(checkCardIsObjective)
-        .reduce((total, { glory }) => (total += glory), 0);
+        .reduce((total, { glory }) => (total += glory ?? 0), 0);
 
     const objectiveSummary = cards.filter(checkCardIsObjective).reduce(
         (acc, c) => {
+            if (c.scoreType === "-") return acc;
+
             acc[c.scoreType] += 1;
             return acc;
         },
@@ -47,33 +35,33 @@ export default function PublicDeckLink({ ...props }) {
     return (
         <div className="flex p-2 items-center border-gray-400 border-b last:border-none">
             <div className="flex flex-col items-center space-y-2 w-24">
-                <FactionDeckPicture faction={props.faction} />
+                <FactionDeckPicture faction={faction} />
                 <DeckPlayFormatsValidity cards={cards} />
             </div>
             <div className="flex-1 ml-8">
-                <DeckTitle factionName={props.faction} sets={props.sets}>
+                <DeckTitle sets={sets}>
                     <Link
                         className="text-xl truncate hover:text-purple-700"
                         to={{
-                            pathname: `${VIEW_DECK}/${props.deckId}`,
+                            pathname: `${VIEW_DECK}/${deckId}`,
                             state: {
                                 deck: {
-                                    ...props,
-                                    id: props.deckId,
+                                    ...deck,
+                                    id: deckId,
                                 },
                                 canUpdateOrDelete: false,
                             },
                         }}
                     >
-                        {props.name}
+                        {name}
                     </Link>
                 </DeckTitle>
 
                 <div className="flex space-x-1 items-baseline">
                     <h3 className="text-xs text-gray-700">
-                        {new Date(props.updatedutc).toLocaleDateString()}
+                        {new Date(updatedutc).toLocaleDateString()}
                     </h3>
-                    {getPlotKeywords(props.faction, props.sets).map(
+                    {/* {getPlotKeywords(faction, sets).map(
                         (keyword) => (
                             <span
                                 className="text-purple-700 font-bold"
@@ -82,9 +70,9 @@ export default function PublicDeckLink({ ...props }) {
                                 {keyword}
                             </span>
                         )
-                    )}
+                    )} */}
                 </div>
-                <SetsList sets={props.sets} />
+                <SetsList sets={sets as SetId[]} />
                 <ScoringOverview
                     summary={objectiveSummary}
                     glory={totalGlory}

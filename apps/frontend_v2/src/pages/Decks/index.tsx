@@ -20,7 +20,7 @@ export default function Deck() {
           onLoadMore={() => !isFetching && hasNextPage && fetchNextPage()}
         >
           {(deck, { key }) => {
-            return <PublicDeckLink key={key} {...deck} />
+            return <PublicDeckLink key={key} deck={Array.isArray(deck) ? deck[0] : deck} />
           }}
         </FixedVirtualizedList>
       )}

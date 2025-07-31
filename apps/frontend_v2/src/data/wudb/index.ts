@@ -5,8 +5,10 @@ import { cards } from "./cards";
 import type {
   Card,
   CardId,
+  CardType,
   FactionAbbr,
   FactionName,
+  ScoreType,
   Set,
   SetId,
 } from "./types";
@@ -235,18 +237,16 @@ function getCardById(cardId: CardId) {
   return cards[cardId];
 }
 
-function checkCardIsObjective({ type }) {
-  return typeof type == "string" ? cardTypes.indexOf(type) == 0 : type === 0;
+function checkCardIsObjective({ type }: {type: CardType }) {
+  return typeof type === "string" && type === "Objective";
 }
 
-function checkCardIsPloy({ type }) {
-  return typeof type == "string"
-    ? cardTypes.indexOf(type) == 1 || cardTypes.indexOf(type) == 3
-    : type === 1 || type === 3;
+function checkCardIsPloy({ type }: {type: CardType }) {
+  return typeof type === "string" && type === "Ploy";
 }
 
-function checkCardIsUpgrade({ type }) {
-  return typeof type == "string" ? cardTypes.indexOf(type) == 2 : type === 2;
+function checkCardIsUpgrade({ type }: {type: CardType }) {
+  return typeof type === "string" && type === "Upgrade";
 }
 
 const SURGE_SCORE_TYPE = "Surge";
