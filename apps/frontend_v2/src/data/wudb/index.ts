@@ -388,7 +388,7 @@ function validateDeckForPlayFormat(
     upgrades,
   }: { objectives: Card[]; gambits: Card[]; upgrades: Card[] },
   format: (typeof ACTIVE_FORMATS)[number],
-) {
+): [boolean, string[]] {
   const deck: Card[] = [...objectives, ...gambits, ...upgrades];
   const issues: string[] = [];
   const uniqueSets = new Set(deck.map((c) => c.setId));

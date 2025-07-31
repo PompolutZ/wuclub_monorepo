@@ -5,12 +5,12 @@ import { sets } from "./sets";
 export type Card = {
     id: string;
     factionId: string;
-    setId: string;
+    setId: SetId;
     name: string;
-    type: string;
+    type: CardType;
     glory: number | null;
     rule: string;
-    scoreType: string;
+    scoreType: ScoreType;
     status: string;
     rotated: boolean;
 }
