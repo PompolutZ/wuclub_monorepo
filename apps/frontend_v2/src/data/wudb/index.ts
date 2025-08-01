@@ -275,13 +275,6 @@ export const ACTIVE_FORMATS = [RIVALS_FORMAT, NEMESIS_FORMAT] as const;
 
 function getAllSetsValidForFormat(format: (typeof ACTIVE_FORMATS)[number]) {
   switch (format) {
-    // case CHAMPIONSHIP_FORMAT:
-    //   return Object.values(sets).filter(
-    //     (set) =>
-    //       (set.id >= sets["Gnarlwood core set"].id &&
-    //         !Object.values(factionsRivalsDecks).includes(set.id)) ||
-    //       set.id === sets["Essential Cards Pack"].id,
-    //   );
     case NEMESIS_FORMAT:
       return Object.values(sets);
     default:
@@ -468,6 +461,11 @@ function validateDeckForPlayFormat(
       issues.push(
         `Nemesis deck cannot have more than ${MAX_SURGE_OBJECTIVE_COUNT} Surge objectives. You have ${objectives.filter(({ scoreType }) => scoreType === SURGE_SCORE_TYPE).length} Surge objectives.`,
       );
+    }
+
+    const uniqueCardsByName = new Set(deck.map(({ name }) => name));
+    if (uniqueCardsByName.size < deck.length) {
+      issues.push("Nemesis deck cannot have more than one card with the same name.");
     }
 
     return [issues.length === 0, issues];
