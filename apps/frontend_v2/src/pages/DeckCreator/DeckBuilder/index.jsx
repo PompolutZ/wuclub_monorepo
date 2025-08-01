@@ -18,6 +18,7 @@ import CardsLibrary from "./components/CardsLibrary";
 import Deck from "./components/Deck";
 import LibraryFilters from "./components/LibraryFilters";
 import { FighterCardsPortal } from "../../../shared/components/FighterCardsPortal";
+import { factions } from "../../../data/wudb/factions";
 
 function CardsLibraryWithFilters() {
   const [searchText, setSearchText] = useState("");
@@ -36,7 +37,7 @@ function CardsLibraryWithFilters() {
   );
 }
 
-const tabs = [
+const tabs = (factionId) => [
   {
     name: "Library",
     Icon: ({ className }) => <AddCardIcon className={className} />,
@@ -48,10 +49,11 @@ const tabs = [
   {
     name: "Warband",
     Icon: ({ className }) => <WarbandIcon className={className} />,
+    disabled: factionId === factions["u"].id, 
   },
 ];
 
-const MobileLayout = ({ children }) => {
+const MobileLayout = ({ children, factionId }) => {
   const { action } = useParams();
   const childrenArray = Children.toArray(children);
   const [activeTabIndex, setActiveTabIndex] = useState(
@@ -62,7 +64,7 @@ const MobileLayout = ({ children }) => {
     <div className="flex flex-col">
       <div className="flex-1 flex">{childrenArray[activeTabIndex]}</div>
       <BottomPanelNavigation
-        tabs={tabs}
+        tabs={tabs(factionId)}
         activeTabIndex={activeTabIndex}
         setActiveTabIndex={setActiveTabIndex}
       />
@@ -126,7 +128,7 @@ function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
       {status === "Saved" && <Redirect to="/mydecks" />}
 
       {isMobile && (
-        <MobileLayout>
+        <MobileLayout factionId={faction.id}>
           <CardsLibraryWithFilters />
           <div className="flex-1 relative">
             <div className="absolute inset-0 overflow-y-auto">

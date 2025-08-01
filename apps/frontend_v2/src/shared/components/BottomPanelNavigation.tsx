@@ -3,6 +3,7 @@ import { Component } from "react";
 type Tab = {
   name: string;
   Icon: typeof Component;
+  disabled?: boolean;
 };
 
 type BottomPanelNavigationProps = {
@@ -26,16 +27,23 @@ function BottomPanelNavigation({
             : "from-gray-100 via-gray-100 to-purple-200"
       }`}
     >
-      {tabs.map(({ name, Icon }: Tab, index: number) => (
+      {tabs.map(({ name, Icon, disabled }: Tab, index: number) => (
         <button
           key={name}
           className={`flex-1 flex flex-col items-center py-2 text-xs
                 ${
-                  activeTabIndex === index ? "text-purple-700" : "text-gray-700"
+                  disabled
+                    ? "text-gray-400"
+                    : activeTabIndex === index
+                      ? "text-purple-700"
+                      : "text-gray-700"
                 }`}
           onClick={() => setActiveTabIndex(index)}
+          disabled={disabled}
         >
-          <Icon className="h-6 fill-current mb-1" />
+          <Icon
+            className={`h-6 mb-1 ${disabled ? "fill-gray-400" : "fill-current"}`}
+          />
           {name}
         </button>
       ))}
