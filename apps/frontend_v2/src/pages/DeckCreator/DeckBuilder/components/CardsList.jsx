@@ -1,4 +1,3 @@
-import React from "react";
 import { useDeckBuilderDispatcher } from "../..";
 import { CHAMPIONSHIP_FORMAT } from "../../../../data/wudb";
 import { toggleCardAction } from "../../reducer";

@@ -30,10 +30,9 @@ const _sort = (card1, card2) => {
 
 function FilterableCardLibrary(props) {
   const dispatch = useDeckBuilderDispatcher();
-  const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
   const state = useDeckBuilderState();
-  const { searchText, visibleCardTypes } = props;
+  const { searchText } = props;
 
   const deck = useMemo(
     () => [
@@ -72,11 +71,8 @@ function FilterableCardLibrary(props) {
 
         return card;
       });
-    setCards(nextCards);
-  }, [state, props.filter]);
-
-  useEffect(() => {
-    let filteredCards = cards;
+    
+    let filteredCards = nextCards;
 
     if (isNaN(searchText)) {
       filteredCards = filteredCards.filter((c) => {
@@ -96,7 +92,8 @@ function FilterableCardLibrary(props) {
     const sorted = filteredCards.sort((c1, c2) => _sort(c1, c2));
     const drawableCards = sorted.map((c) => ({ card: c, expanded: false }));
     setFilteredCards(drawableCards);
-  }, [cards, searchText, visibleCardTypes]);
+
+  }, [state, props.filter, searchText]);
 
   return (
     <div className="flex-1 flex outline-none">

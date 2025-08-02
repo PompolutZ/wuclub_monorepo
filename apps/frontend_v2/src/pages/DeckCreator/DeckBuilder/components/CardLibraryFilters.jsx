@@ -111,14 +111,14 @@ function CardLibraryFilters(props) {
 
   // meh, but for now...
   useEffect(() => {
-    setSelectedSets((prev) => {
+    setSelectedSets(() => {
       if (selectedFormat === NEMESIS_FORMAT) {
         return validSets.slice(0, 2);
       } else {
         return [validSets.at(0)];
       }
     });
-  }, [selectedFormat]);
+  }, [selectedFormat, validSets]);
 
   return (
     <>
