@@ -480,5 +480,19 @@ export const factions = {
         "name": "kamandoras-blades",
         "displayName": "Kamandora's Blades",
         "gaId": 39
-    }
+    },
+    "kh": {
+        "id": "kh",
+        "abbr": "kh",
+        "name": "kurnoths-heralds",
+        "displayName": "Kurnoth's Heralds",
+        "gaId": 38
+    },
+    "botb": {
+        "id": "botb",
+        "abbr": "botb",
+        "name": "blood-of-the-bull",
+        "displayName": "Blood of the Bull",
+        "gaId": 39
+    },
 } as const;

@@ -125,6 +125,9 @@ function getAllSetsValidForFormat(format: (typeof ACTIVE_FORMATS)[number]) {
 export const warbandsValidForOrganisedPlay = [
   // very reasonable in 2nd edition
   factions["u"],
+  //spitewood
+  factions["kh"],
+  factions["botb"],
   // emberwatch
   factions["tew"],
   factions["ztt"],

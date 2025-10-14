@@ -186,4 +186,6 @@ export const factionMembers = {
     "borgits-beastgrabbaz": ["1", "2", "3", "4", "5"],
     "knives-of-the-crone": ["1", "2", "3", "4"],
     "kamandoras-blades": ["1", "2", "3", "4", "5"],    
+    "kurnoths-heralds": ["1", "2", "3"],    
+    "blood-of-the-bull": ["1", "2", "3", "4", "5"],
   } as const;
