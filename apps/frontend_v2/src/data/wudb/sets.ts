@@ -43,5 +43,15 @@ export const sets = {
         "id": "RG",
         "name": "raging-slayers-rivals-deck",
         "displayName": "Raging Slayers Rivals Deck"
+    },
+    "HG": {
+        "id": "HG",
+        "name": "hunting-grounds-rivals-deck",
+        "displayName": "Hunting Grounds Rivals Deck"
+    },
+    "DY": {
+        "id": "DY",
+        "name": "deadly-synergy-rivals-deck",
+        "displayName": "Deadly Synergy Rivals Deck"
     }
 } as const;

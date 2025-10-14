@@ -8,12 +8,10 @@ import type {
   CardType,
   FactionAbbr,
   FactionName,
-  ScoreType,
   Set,
   SetId,
 } from "./types";
 import { factionMembers } from "./factionMembers";
-import { is } from "immutable";
 
 export const latestSeasonStartNumber = 15000;
 

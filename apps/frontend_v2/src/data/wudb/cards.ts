@@ -198,7 +198,9 @@ export const cards = {
             "BL16",
             "ES14",
             "PL13",
-            "EK19"
+            "EK19",
+            "HG22",
+            "DY19"
         ]
     },
     "BL17": {
@@ -303,7 +305,11 @@ export const cards = {
         "rule": "Enemy fighters adjacent to this fighter are Flanked.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "BL24",
+            "HG29"
+        ]
     },
     "BL25": {
         "id": "BL25",
@@ -379,7 +385,8 @@ export const cards = {
         "rotated": false,
         "duplicates": [
             "BL29",
-            "ES29"
+            "ES29",
+            "DY25"
         ]
     },
     "BL30": {
@@ -410,7 +417,8 @@ export const cards = {
             "ES30",
             "CC30",
             "EK26",
-            "RS28"
+            "RS28",
+            "DY27"
         ]
     },
     "BL32": {
@@ -429,7 +437,8 @@ export const cards = {
             "ES31",
             "RF30",
             "RS31",
-            "RG29"
+            "RG29",
+            "DY28"
         ]
     },
     "ES1": {
@@ -615,7 +624,9 @@ export const cards = {
             "BL16",
             "ES14",
             "PL13",
-            "EK19"
+            "EK19",
+            "HG22",
+            "DY19"
         ]
     },
     "ES15": {
@@ -761,7 +772,8 @@ export const cards = {
             "ES25",
             "PL23",
             "WR26",
-            "RS29"
+            "RS29",
+            "HG28"
         ]
     },
     "ES26": {
@@ -817,7 +829,8 @@ export const cards = {
         "rotated": false,
         "duplicates": [
             "BL29",
-            "ES29"
+            "ES29",
+            "DY25"
         ]
     },
     "ES30": {
@@ -836,7 +849,8 @@ export const cards = {
             "ES30",
             "CC30",
             "EK26",
-            "RS28"
+            "RS28",
+            "DY27"
         ]
     },
     "ES31": {
@@ -855,7 +869,8 @@ export const cards = {
             "ES31",
             "RF30",
             "RS31",
-            "RG29"
+            "RG29",
+            "DY28"
         ]
     },
     "ES32": {
@@ -1034,7 +1049,9 @@ export const cards = {
             "BL16",
             "ES14",
             "PL13",
-            "EK19"
+            "EK19",
+            "HG22",
+            "DY19"
         ]
     },
     "PL14": {
@@ -1164,7 +1181,8 @@ export const cards = {
             "ES25",
             "PL23",
             "WR26",
-            "RS29"
+            "RS29",
+            "HG28"
         ]
     },
     "PL24": {
@@ -1639,7 +1657,8 @@ export const cards = {
             "ES30",
             "CC30",
             "EK26",
-            "RS28"
+            "RS28",
+            "DY27"
         ]
     },
     "CC31": {
@@ -2042,7 +2061,8 @@ export const cards = {
             "ES31",
             "RF30",
             "RS31",
-            "RG29"
+            "RG29",
+            "DY28"
         ]
     },
     "RF31": {
@@ -2396,7 +2416,8 @@ export const cards = {
             "ES25",
             "PL23",
             "WR26",
-            "RS29"
+            "RS29",
+            "HG28"
         ]
     },
     "WR27": {
@@ -2706,7 +2727,9 @@ export const cards = {
             "BL16",
             "ES14",
             "PL13",
-            "EK19"
+            "EK19",
+            "HG22",
+            "DY19"
         ]
     },
     "EK20": {
@@ -2801,7 +2824,8 @@ export const cards = {
             "ES30",
             "CC30",
             "EK26",
-            "RS28"
+            "RS28",
+            "DY27"
         ]
     },
     "EK27": {
@@ -3220,7 +3244,8 @@ export const cards = {
             "ES30",
             "CC30",
             "EK26",
-            "RS28"
+            "RS28",
+            "DY27"
         ]
     },
     "RS29": {
@@ -3238,7 +3263,8 @@ export const cards = {
             "ES25",
             "PL23",
             "WR26",
-            "RS29"
+            "RS29",
+            "HG28"
         ]
     },
     "RS30": {
@@ -3274,7 +3300,8 @@ export const cards = {
             "ES31",
             "RF30",
             "RS31",
-            "RG29"
+            "RG29",
+            "DY28"
         ]
     },
     "RS32": {
@@ -3653,7 +3680,8 @@ export const cards = {
             "ES31",
             "RF30",
             "RS31",
-            "RG29"
+            "RG29",
+            "DY28"
         ]
     },
     "RG30": {
@@ -3688,6 +3716,822 @@ export const cards = {
         "type": "Upgrade",
         "glory": 1,
         "rule": "**Rally Together:** Immediately after an enraged friendly fighter is pushed, you can push this fighter up to 1 hex closer to that fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG1": {
+        "id": "HG1",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Back Off!",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's Attack if the target was pushed into a different territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG2": {
+        "id": "HG2",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Bloodscent",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if any enemy fighters in friendly territory have 2 or more damage tokens and/or are vulnerable. If you are the **underdog**, those enemy fighters can be in enemy territory instead.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG3": {
+        "id": "HG3",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Hands Off!",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's Attack if the target was on a feature token and was driven back.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG4": {
+        "id": "HG4",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Home Advantage",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an enemy fighter's failed Attack if the target was a friendly fighter in friendly territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG5": {
+        "id": "HG5",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Lead by Example",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if your **leader** is in friendly territory and Attacked 2 or more times this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG6": {
+        "id": "HG6",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "No Business Here",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's Attack if the target was in friendly territory and was Flanked and/or Surrounded.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG7": {
+        "id": "HG7",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "No Trespassers",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's Attack if the target was in friendly territory and was slain.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG8": {
+        "id": "HG8",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Pinned!",
+        "type": "Objective",
+        "glory": 3,
+        "rule": "Score this in an end phase if an enemy fighter was driven back into an edge hex in friendly territory this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG9": {
+        "id": "HG9",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Ready or Not",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if 2 or more enemy fighters are in friendly territory and each enemy fighter is damaged and/or adjacent to any friendly fighters.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG10": {
+        "id": "HG10",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Spoiling for a Fight",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if your **leader** is in friendly territory and is within 2 hexes of 2 or more other fighters from 2 or more warbands.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG11": {
+        "id": "HG11",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "This is Our Turf!",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if there are more friendly fighters with Move and/or Charge tokens in friendly territory than there are enemy fighters with Move and/or Charge tokens in friendly territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG12": {
+        "id": "HG12",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Usurped",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's Attack if the attacker is on a feature token that the target was on when you picked them to be the target of that Attack.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG13": {
+        "id": "HG13",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Audacious Denial",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "If your **leader** is in friendly territory, pick an enemy fighter adjacent to them in friendly territory. Your **leader** immediately Attacks that fighter with 1 or their melee weapons that has a Damage characteristic of 1.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG14": {
+        "id": "HG14",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Deny Invaders",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "In the next turn, friendly fighters' weapons have +1 Attack dice while they are in friendly territory.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG15": {
+        "id": "HG15",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Hidden Snares",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an enemy fighter in friendly territory and within 1 hex of a feature token. If you are the **underdog**, you can pick an enemy fighter in enemy territory and within 1 hex of a feature token instead. That fighter's weapons have -1 Attack dice in the next turn.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG16": {
+        "id": "HG16",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Keep Them at Bay",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "In the next turn, friendly fighters' melee weapons have +1 Range, to a maximum of 2, for Attacks that target enemy fighters in friendly territory.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG17": {
+        "id": "HG17",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Mind Your Step",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an enemy fighter in friendly territory. Push that fighter up to 2 hexes. That push must end in neutral or enemy territory.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG18": {
+        "id": "HG18",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Mystical Misdirection",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick 2 treasure tokens in friendly territory. Swap the positions of those treasure tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG19": {
+        "id": "HG19",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Paths Unknown",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter in friendly territory. If you are the **underdog**, you can pick a friendly fighter in enemy territory instead. In the next turn, that fighter cannot be picked to be the target of an Attack.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG20": {
+        "id": "HG20",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Poor Footing",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an enemy fighter in friendly territory and within 1 hex of a feature token. Give that fighter a Move token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG21": {
+        "id": "HG21",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Secrets of the Realm",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Give each enemy fighter in friendly territory that is adjacent to a friendly fighter and/or feature token a Stagger token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG22": {
+        "id": "HG22",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Sidestep",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter. Push that fighter 1 hex.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL16",
+            "ES14",
+            "PL13",
+            "EK19",
+            "HG22",
+            "DY19"
+        ]
+    },
+    "HG23": {
+        "id": "HG23",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Balance of Ghyran",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Equilibrium:** Immediately after an enemy fighter's successful Attack, if this fighter was the target of that Attack and the attacker is within 3 hexes of them, roll 3 Attack dice. If the roll contains any :atFury:, inflice 1 damage on the attacker.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG24": {
+        "id": "HG24",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Blocked!",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Hinder:** The first time each enemy fighter enters a hex adjacent to this fighter as part of a Move, roll an Attack dice. On a :atSmash: or :atCrit:, that fighter must end that Move in that hex.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG25": {
+        "id": "HG25",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Bounty of Ghyran",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter is Inspired while they are in friendly territory. Immediately after your next Action step, Uninspire this fighter and discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG26": {
+        "id": "HG26",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Crippling Blow",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "**Ranged Attack action** \\n [:Hex: 2 - :atFury: 3 - :boom: 1] \\n If the target is in friendly territory, give that fighter a Move token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG27": {
+        "id": "HG27",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Goading Defender",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter has +1 Save while they are in friendly territory. Discard this card if this fighter is picked to be the target of a Ploy or is damaged.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG28": {
+        "id": "HG28",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Great Speed",
+        "type": "Upgrade",
+        "glory": null,
+        "rule": "This fighter has +1 Move.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES25",
+            "PL23",
+            "WR26",
+            "RS29",
+            "HG28"
+        ]
+    },
+    "HG29": {
+        "id": "HG29",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Hidden Aid",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "Enemy fighters adjacent to this fighter are Flanked.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL24",
+            "HG29"
+        ]
+    },
+    "HG30": {
+        "id": "HG30",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Hidden Traps",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Melee Attack action** \\n [:Hex: 1 - :atSmash: 3 - :boom: 1] \\n This weapon has **Grievous** if the target is within 1 hex of a feature token in friendly territory.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG31": {
+        "id": "HG31",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "Killing Blow",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter's melee weapons have **Grievous** if the target is damaged.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "HG32": {
+        "id": "HG32",
+        "factionId": "u",
+        "setId": "HG",
+        "name": "True Grit",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This Upgrade can only be given to your **leader**. \\n Rolls of :dfBlock: and :dfDodge: count as successes in Save rolls for friendly fighters adjacent to this fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY1": {
+        "id": "DY1",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Aggressive Unity",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if 3 or more melee Attacks were made by united friendly fighters this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY2": {
+        "id": "DY2",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Beatdown",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if the same enemy fighter was picked to be the target of 3 or more different friendly fighters' melee Attacks this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY3": {
+        "id": "DY3",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Closed Down",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if a united friendly fighter is holding a treasure token that was held by an enemy fighter this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY4": {
+        "id": "DY4",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Got Your Back!",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an enemy fighter's failed Attack if the target was a unite friendly fighter.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY5": {
+        "id": "DY5",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Helping Hand",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a united friendly fighter's successful Attack if the Attack roll contained any :atSup1:.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY6": {
+        "id": "DY6",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Hemmed In",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if an enemy **leader** was slain by a united friendly fighter this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY7": {
+        "id": "DY7",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Inevitable Outcome",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if 2 or more united friendly fighter are adjacent to the same enemy fighter.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY8": {
+        "id": "DY8",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Infiltrate",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's successful Attack if the target was in neutral or enemy territory and either the attacker was united or the target was Flanked and/or Surrounded.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY9": {
+        "id": "DY9",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Outmuscle",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if an enemy fighter was driven back as part of a united friendly fighter's successful Attack this battle round.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY10": {
+        "id": "DY10",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Tag Team",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's successful Attack if they have no Move or Charge tokens and either the attacker was united or the target was Flanked and/or Surrounded.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY11": {
+        "id": "DY11",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Tandem Assault",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after an enemy fighter is slain by a friendly fighter's Attack if the attacker was united or the target was Flanked and/or Surrounded.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY12": {
+        "id": "DY12",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "United Aid",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after you make a Save roll for a united friendly fighter if there were more successes in the Save roll than the Attacker roll and the Save roll contained any :dfSup1:. If you are the **underdog**, the Save roll does not have to contain any :dfSup1:.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY13": {
+        "id": "DY13",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Another Swing",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a united friendly fighter's failed melee Attack if the attacker is adjacent to 2 united friendly fighters. That fighter Attacks again using a melee weapon, but the Damage characteristic of that weapon is reduced to 1.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY14": {
+        "id": "DY14",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Army of Two",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter. That fighter is united in the next turn.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY15": {
+        "id": "DY15",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Brother-in-Arms",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately before you pick a melee weapon as part of a united friendly fighter's Attack. Pick a united friendly fighter adjacent to the attacker. Use 1 of that fighter's melee weapons for that Attack instead.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY16": {
+        "id": "DY16",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Defiant Duo",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick 2 adjacent united friendly fighters. If you are the **underdog**, pick 2 united friendly fighters instead. Give 1 of those fighters a Guard token and then heal the other fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY17": {
+        "id": "DY17",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Out of Nowhere",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after you make an Attack roll for a united friendly fighter. Change 1 dice in that Attack roll to :atSup1: or :atSup2:.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY18": {
+        "id": "DY18",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Selfless Parry",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a united friendly fighter is picked to be the target of an Attack. Pick a united friendly fighter adjacent to the target. The target has that fighter's Save characteristic for that Attack.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY19": {
+        "id": "DY19",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Sidestep",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter. Push that fighter 1 hex.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL16",
+            "ES14",
+            "PL13",
+            "EK19",
+            "HG22",
+            "DY19"
+        ]
+    },
+    "DY20": {
+        "id": "DY20",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Take One for the Team",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a united friendly fighter is picked to be the target of an Attack. Pick a united friendly fighter adjacent to the target and within range of the weapon being used for the Attack. That fighter must be the target of that Attack instead.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY21": {
+        "id": "DY21",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Timed Strike",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after you pick a melee weapon as part of an Attack for a friendly fighter that is not united. That weapon has +1 Attack dice for that Attack.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY22": {
+        "id": "DY22",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Unified Front",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "United friendly fighters have +1 Save in the next turn, to a maximum of 3.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY23": {
+        "id": "DY23",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Battering Ram",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "Attack rolls made for this fighter as part of melee Attacks always count as having more :atCrit: than the Save roll for purposes of Drive Back and Overrun.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY24": {
+        "id": "DY24",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Coordinated Deathblow",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "**Melee Attack action** \\n [:Hex: 1 - :atFury: 3 - :boom: 2] \\n This weapon has **Grievous** while this fighter is united.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY25": {
+        "id": "DY25",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Duellist",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Footwork:** Immediately after this fighter has Attacked, you can push this fighter 1 hex.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL29",
+            "ES29",
+            "DY25"
+        ]
+    },
+    "DY26": {
+        "id": "DY26",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Entangling Strike",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Melee Attack action** \\n [:Hex: 1 - :atSmash: 3 - :boom: 1] \\n This weapon has **Cleave** and **Ensnare** if the target is Flanked and/or Surrounded.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY27": {
+        "id": "DY27",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Great Fortitude",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter has +1 Health.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL31",
+            "ES30",
+            "CC30",
+            "EK26",
+            "RS28",
+            "DY27"
+        ]
+    },
+    "DY28": {
+        "id": "DY28",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Keen Eye",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter's melee weapons have +1 Attack dice.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "BL32",
+            "ES31",
+            "RF30",
+            "RS31",
+            "RG29",
+            "DY28"
+        ]
+    },
+    "DY29": {
+        "id": "DY29",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Rush to Aid",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "**Assist:** Immediately after this fighter has Attacked, you can pick a united friendly fighter. Push this fighter up to 2 hexes. That push must end adjacent to that united friendly fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY30": {
+        "id": "DY30",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Shared Incentive",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This upgrade can only be given to your **leader**. \\n This fighter has +1 Move. \\n United friendly fighters have +1 Move if they are adjacent to this fighter when they start that Move.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY31": {
+        "id": "DY31",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Spurred Momentum",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Driven:** Immediately after this fighter's successful Attack, if this fighter was united, remove their Move and Stagger tokens and then discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "DY32": {
+        "id": "DY32",
+        "factionId": "u",
+        "setId": "DY",
+        "name": "Titan of Combat",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter is united.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
