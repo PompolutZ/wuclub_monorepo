@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { wusets } from "../../data/wudb";
 import { useMultiSelectArray } from "../../hooks/useMultiSelectArray";
 import IconButton from "./IconButton";
@@ -18,7 +17,18 @@ const createExpansionGroups = () => {
     wusets["RG"].id,
   ];
 
+  const season2 = [
+    wusets["HG"].id,
+    wusets["DY"].id,
+  ];
+
   return [
+    {
+      title: "Season 2",
+      expansions: Object.values(wusets).filter((exp) =>
+        season2.includes(exp.id),
+      ),
+    },
     {
       title: "Season 1",
       expansions: Object.values(wusets).filter((exp) =>
