@@ -20,6 +20,26 @@ export const boards = [
     description:
       "Found in the Embergard Core Box.",
   },
+    {
+    id: 3,
+    name: "The Verdant Maw",
+    asset: "the_verdant_maw",
+    locations: [
+      "Spitewood Box",
+    ],
+    description:
+      "Found in the Spitewood Box.",
+  },
+    {
+    id: 4,
+    name: "Whispering Root Hollow",
+    asset: "whispering_root_hollow",
+    locations: [
+      "Spitewood Box",
+    ],
+    description:
+      "Found in the Spitewood Box.",
+  },
 ] as const;
 
 export type Board = (typeof boards)[number];

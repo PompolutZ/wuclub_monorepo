@@ -19,165 +19,6 @@ export const RIVALS_DECK_CARDS_TOTAL = 32;
 
 export const sortedFactions = Object.values(factions).sort(sortByIdAsc);
 
-// export const udbPrefexes = {
-//   L: 2,
-//   NM: 14,
-//   N: 3,
-//   P: 4,
-//   DC: 9,
-//   D: 5,
-//   B: 6,
-//   G: 7,
-//   AM: 12,
-//   A: 8,
-//   S: 10,
-//   E: 11,
-//   H: 13,
-//   GP: 15,
-//   SV: 16,
-//   DD: 17,
-//   TC: 18,
-//   GL: 19,
-//   FF: 20,
-//   GA: 21,
-//   BA: 22,
-//   DS: 23,
-//   EP: 24,
-//   SS: 25,
-//   TT: 26,
-//   HC: 27,
-//   VT: 28,
-//   SG: 29,
-//   FS: 30,
-//   SP: 31,
-//   PP: 32,
-//   CR: 33,
-//   TD: 34,
-//   BS: 35,
-//   FO: 36,
-//   SL: 37,
-//   MM: 38,
-//   ZG: 39,
-//   RR: 40,
-//   SW: 41,
-//   BQ: 42,
-//   ZA: 43,
-//   MO: 44,
-//   BB: 45,
-//   SK: 46,
-//   HP: 47,
-//   RB: 48,
-// };
-
-// export const grouppedFactions = () => {
-//   return [
-//     {
-//       title: "Universal (Any warband)",
-//       factions: [
-//         factions["Universal"],
-//         factions["Order"],
-//         factions["Chaos"],
-//         factions["Death"],
-//         factions["Destruction"],
-//       ],
-//     },
-//     {
-//       title: "Wintermaw",
-//       factions: sortedFactions.filter(
-//         (f) => f.id >= factions["Brethren of the Bolt"].id,
-//       ),
-//     },
-//     {
-//       title: "Deathgorge",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Cyreni's Razors"].id &&
-//           f.id <= factions["Zondara's Gravebreakers"].id,
-//       ),
-//     },
-//     {
-//       title: "Wyrdhollow",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Domitan's Stormcoven"].id &&
-//           f.id <= factions["Skabbik's Plaguepack"].id,
-//       ),
-//     },
-//     {
-//       title: "Gnarlwood",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Gnarlspirit Pack"].id &&
-//           f.id <= factions["Gryselle's Arenai"].id,
-//       ),
-//     },
-//     {
-//       title: "Nethermaze",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Skittershank's Clawpack"].id &&
-//           f.id <= factions["Gorechosen of Dromm"].id,
-//       ),
-//     },
-//     {
-//       title: "Harrowdeep",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Xandire's Truthseekers"].id &&
-//           f.id <= factions["The Exiled Dead"].id,
-//       ),
-//     },
-//     {
-//       title: "Direchasm",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Myari's Purifiers"].id &&
-//           f.id <= factions["Elathain's Soulraid"].id,
-//       ),
-//     },
-//     {
-//       title: "Beastgrave",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Grashrak's Despoilers"].id &&
-//           f.id <= factions["Morgok's Krushas"].id,
-//       ),
-//     },
-//     {
-//       title: "Nightvault",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Stormsire's Cursebreakers"].id &&
-//           f.id <= factions["Ylthari's Guardians"].id,
-//       ),
-//     },
-//     {
-//       title: "Shadespire",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Garrek's Reavers"].id &&
-//           f.id <= factions["The Farstriders"].id,
-//       ),
-//     },
-//     {
-//       title: "Starting set",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Storm of Celestus"].id &&
-//           f.id <= factions["Drepur's Wraithcreepers"].id,
-//       ),
-//     },
-//     {
-//       title: "Dreadfane",
-//       factions: sortedFactions.filter(
-//         (f) =>
-//           f.id >= factions["Ironsoul's Condemners"].id &&
-//           f.id <= factions["Lady Harrow's Mournflight"].id,
-//       ),
-//     },
-//   ];
-// };
-
 function getCardNumberFromId(cardId: string) {
   const match = cardId.match(/(\d+)/);
   return match ? +match[1] : null;
@@ -219,6 +60,7 @@ const setsWithPlot: SetId[] = [
   sets["EK"].id,
   sets["CC"].id,
   sets["RS"].id,
+  sets["DY"].id,
 ];
 export const setHasPlot = (setId: SetId) => {
   return setsWithPlot.includes(setId);
@@ -359,6 +201,7 @@ const setsWithPlotCards: SetId[] = [
   sets["EK"].id,
   sets["CC"].id,
   sets["RS"].id,
+  sets["DY"].id,
 ] as const;
 
 export const checkDeckHasPlots = (deckSets: SetId[]): Set[] => {
