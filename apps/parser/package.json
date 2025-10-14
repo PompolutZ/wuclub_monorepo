@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "wudb": "tsx src/index.ts UnderworldsDB.tsv",
-    "db:copy": "mv apps/parser/dist/*.ts apps/frontend_v2/src/db/"
+    "db:copy": "mv /apps/parser/dist/*.ts /apps/frontend_v2/src/db/"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
