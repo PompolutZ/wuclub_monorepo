@@ -28,7 +28,14 @@ const app = new Hono<{
     try {
       const { uid } = c.get("claims");
       const user = await getUserByFuid(uid);
-      if (uid !== user?.fuid) {
+      if (!user) {
+        // This happens when we are about to create a new user,
+        // so we have a token from firebase, but there is no user record in db yet.
+        console.info("No user found for fuid:", uid);
+        return c.json(null);
+      }
+
+      if (uid !== user.fuid) {
         throw new HTTPException(403, { message: "Unauthorized" });
       }
 
