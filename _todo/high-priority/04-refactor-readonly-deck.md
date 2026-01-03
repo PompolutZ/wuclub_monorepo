@@ -51,46 +51,16 @@ Created two custom hooks and one utility module to separate business logic from 
 
 Refactored `index.tsx` to use hooks and call utility functions directly inline (no unnecessary useCallback wrappers). Removed inline card filtering/sorting logic. Code is cleaner and more maintainable.
 
-### Phase 3: Extract Inline SVGs (45 min)
+### Phase 3: Extract Inline SVGs ✅ COMPLETED
 
-#### 3.1 Create Icon Components
+Replaced all inline SVG elements in `DeckActionsMenuLarge.tsx` with lucide-react icons:
+- List icon (menu/hamburger icon for list view)
+- Image icon (photo/image icon for image view)
+- Download icon (download arrow)
+- ExternalLink icon (export with arrow)
+- Trash2 icon (delete/trash can)
 
-**File:** `atoms/icons/ListIcon.tsx`
-
-```typescript
-export const ListIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    fill="#C4B5FD"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M4 6h16M4 10h16M4 14h16M4 18h16"
-    />
-  </svg>
-);
-```
-
-Similar for:
-- `ImagesIcon.tsx`
-- `DownloadIcon.tsx`
-- `ExportIcon.tsx`
-- `DeleteIcon.tsx`
-
-**Or better:** Replace inline SVGs with icons from `lucide-react` (already used in the project):
-
-```typescript
-import { List, Image, Download, ExternalLink, Trash2 } from 'lucide-react';
-```
-
-#### 3.2 Update DeckActionsMenuLarge
-
-Replace inline SVGs with icon components.
+Updated imports to include: `List`, `Image`, `Download`, `ExternalLink`, `Trash2` from lucide-react. All icons maintain the same styling (h-5 w-5 mr-2 class, #C4B5FD fill). TypeScript compilation successful, no new errors introduced.
 
 ### Phase 4: Performance Optimizations (30 min)
 

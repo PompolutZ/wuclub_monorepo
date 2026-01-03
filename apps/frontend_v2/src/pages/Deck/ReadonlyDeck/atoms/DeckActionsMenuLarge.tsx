@@ -5,7 +5,7 @@ import ExportMenu from "./ExportMenu";
 import { Menu } from "@headlessui/react";
 import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
 import { EditIcon } from "../../../../shared/components/Icons";
-import { Copy } from "lucide-react";
+import { Copy, List, Image, Download, ExternalLink, Trash2 } from "lucide-react";
 import type { DeckActionsMenuLargeProps } from "../types";
 
 function DeckActionMenuLarge({
@@ -45,38 +45,12 @@ function DeckActionMenuLarge({
       >
         {cardsView ? (
           <>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="#C4B5FD"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 10h16M4 14h16M4 18h16"
-              />
-            </svg>
+            <List className="h-5 w-5 mr-2" fill="#C4B5FD" />
             <span className="text-gray-900">List</span>
           </>
         ) : (
           <>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="#C4B5FD"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
+            <Image className="h-5 w-5 mr-2" fill="#C4B5FD" />
             <span className="text-gray-900">Images</span>
           </>
         )}
@@ -132,20 +106,7 @@ function DeckActionMenuLarge({
         disabled={true}
         trigger={
           <div className="flex text-purple-700 w-28 justify-center group hover:bg-gray-200 rounded-md items-center px-2 py-2 text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="#C4B5FD"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-              />
-            </svg>
+            <Download className="h-5 w-5 mr-2" fill="#C4B5FD" />
             <span className="text-gray-900">Download</span>
           </div>
         }
@@ -170,20 +131,7 @@ function DeckActionMenuLarge({
         className="relative z-10"
         trigger={
           <div className="flex text-purple-700 w-28 justify-center group hover:bg-gray-200 rounded-md items-center px-2 py-2 text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="#C4B5FD"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
+            <ExternalLink className="h-5 w-5 mr-2" fill="#C4B5FD" />
             <span className="text-gray-900">Export</span>
           </div>
         }
@@ -195,20 +143,7 @@ function DeckActionMenuLarge({
           className={`text-accent3-700 group hover:bg-gray-200 flex rounded-md items-center px-2 py-2 text-sm`}
           onClick={onDelete}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2"
-            fill="#F27263"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-            />
-          </svg>
+          <Trash2 className="h-6 w-6 mr-2" fill="#F27263" />
           <span>Delete</span>
         </button>
       )}
