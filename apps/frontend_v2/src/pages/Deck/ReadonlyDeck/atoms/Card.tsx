@@ -1,6 +1,6 @@
 import LockIcon from "@icons/lock.svg?react";
 import ForsakenIcon from "@icons/no-symbol.svg?react";
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import AnimateHeight from "react-animate-height";
 import CardRule from "../../../../atoms/CardRule";
 import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
@@ -83,11 +83,15 @@ const CardAsText = ({ card, cardId }: { card: DeckCard; cardId: string }) => {
   const [useTextFallback, setUseTextFallback] = useState(false);
   const animateHeight = expanded ? "auto" : 0;
 
+  const toggleExpanded = useCallback(() => {
+    setExpanded((prev) => !prev);
+  }, []);
+
   return (
     <>
       <div
         className="flex items-center p-2 rounded cursor-pointer space-x-1 transform transition-all sm:hover:bg-gray-300 sm:hover:shadow-sm sm:hover:scale-105"
-        onClick={() => setExpanded((prev) => !prev)}
+        onClick={toggleExpanded}
       >
         <ExpansionPicture className="w-8 h-8" setName={getSetNameById(card.setId)} />
         <h3
@@ -139,12 +143,12 @@ const CardAsText = ({ card, cardId }: { card: DeckCard; cardId: string }) => {
   );
 };
 
-const Card = ({ card, asImage }: CardProps) => {
+const Card = memo(function Card({ card, asImage }: CardProps) {
   return asImage ? (
     <CardAsImage card={card} />
   ) : (
     <CardAsText card={card} cardId={card.id} />
   );
-};
+});
 
 export default Card;

@@ -1,7 +1,7 @@
 import { LazyLoading } from "@/components/LazyLoading";
 import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
-import { lazy, Suspense, useState } from "react";
+import { lazy, memo, Suspense, useState } from "react";
 import ScoringOverview from "../../../atoms/ScoringOverview";
 import { ModalPresenter } from "../../../main";
 import { CardListSectionHeader } from "../../../shared/components/CardListSectionHeader";
@@ -18,7 +18,7 @@ const DeckActionsMenu = lazy(() => import("./atoms/DeckActionsMenu"));
 const DeckActionMenuLarge = lazy(() => import("./atoms/DeckActionsMenuLarge"));
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 
-function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
+const CardsSectionContent = memo(function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
   return listView ? (
     <ul className="px-3">
       {cards.map((v) => (
@@ -32,7 +32,7 @@ function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
       ))}
     </div>
   );
-}
+});
 
 function ReadonlyDeck(props: ReadonlyDeckProps) {
   const {
