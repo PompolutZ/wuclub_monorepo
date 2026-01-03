@@ -25,6 +25,12 @@ Then fill in the staging Firebase credentials and test user credentials. You'll 
 - Firebase staging project credentials (from Firebase console)
 - A dedicated test user account in Firebase Authentication
 
+**NOTE!** Since this is a home project, we do not have multiple environments, so configuration file should be the same as we use for `dev`. Also test user might already exists, but otherwise create a new one in the Firebase Console.
+
+```bash
+E2E_TEST_USER_EMAIL=e2e-test-user@wunderworlds.test
+```
+
 ### 3. Start the Dev Server
 
 Tests run against the local Vite dev server. Start it in a separate terminal:

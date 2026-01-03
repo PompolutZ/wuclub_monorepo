@@ -131,6 +131,22 @@ The API is deployed to AWS Lambda using CDK:
 
 ## Important Workflows
 
+### Verifying Refactoring and New Implementations
+When implementing new features or refactoring based on a plan, ALWAYS verify changes with:
+```bash
+# 1. Type check
+cd apps/frontend_v2
+pnpm tsc                        # Verify TypeScript compilation
+
+# 2. Build the project
+pnpm build                      # Ensure production build succeeds
+
+# 3. Run end-to-end tests
+pnpm test:e2e                   # Verify all e2e tests pass
+```
+
+All three steps must succeed before considering the work complete. If any step fails, fix the issues before proceeding.
+
 ### After Backend API Changes
 When you modify API routes or schemas:
 ```bash
