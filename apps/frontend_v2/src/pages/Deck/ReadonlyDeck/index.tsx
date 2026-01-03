@@ -13,11 +13,16 @@ import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
 import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
 import { exportToUDB, createShareableLink, saveVassalFormat } from "./utils/deckExport";
+import { getAuthorDisplayName, getFormattedDate } from "./utils/displayHelpers";
 
 const DeckActionsMenu = lazy(() => import("./atoms/DeckActionsMenu"));
 const DeckActionMenuLarge = lazy(() => import("./atoms/DeckActionsMenuLarge"));
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 
+/**
+ * Renders a section of cards in either list or image view
+ * Memoized to prevent unnecessary re-renders when cards or view mode don't change
+ */
 const CardsSectionContent = memo(function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
   return listView ? (
     <ul className="px-3">
@@ -34,6 +39,11 @@ const CardsSectionContent = memo(function CardsSectionContent({ cards, listView 
   );
 });
 
+/**
+ * Main component for displaying a read-only deck view
+ * Displays deck metadata, cards organized by type, and action menus
+ * Handles deck privacy toggling and various export/share operations
+ */
 function ReadonlyDeck(props: ReadonlyDeckProps) {
   const {
     id,
@@ -79,14 +89,8 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
     });
   };
 
-  const [userInfo] = props.userInfo || [];
-  const authorDisplayName = userInfo ? userInfo.displayName : "Anonymous";
-
-  const createdDate = updatedutc
-    ? `${new Date(updatedutc).toLocaleDateString()}`
-    : created
-      ? `${new Date(created).toLocaleDateString()}`
-      : "";
+  const authorDisplayName = getAuthorDisplayName(props.userInfo);
+  const createdDate = getFormattedDate(updatedutc, created);
 
   return (
     <div className="flex-1 w-screen">

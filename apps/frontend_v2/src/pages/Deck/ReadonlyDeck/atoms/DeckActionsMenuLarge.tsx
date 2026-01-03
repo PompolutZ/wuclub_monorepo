@@ -1,4 +1,3 @@
-import React from "react";
 import IconLink from "./IconLink";
 import DropdownMenu from "./DropdownMenu";
 import ExportMenu from "./ExportMenu";
@@ -8,6 +7,11 @@ import { EditIcon } from "../../../../shared/components/Icons";
 import { Copy, List, Image, Download, ExternalLink, Trash2 } from "lucide-react";
 import type { DeckActionsMenuLargeProps } from "../types";
 
+/**
+ * Large screen action menu for deck operations
+ * Provides edit, view toggle, privacy control, copy, download, export, and delete actions
+ * Displays as a horizontal toolbar on desktop screens
+ */
 function DeckActionMenuLarge({
   deckId,
   isPrivate,
@@ -23,7 +27,7 @@ function DeckActionMenuLarge({
   onDownloadProxy,
 }: DeckActionsMenuLargeProps) {
   return (
-    <React.Fragment>
+    <>
       {canUpdateOrDelete && (
         <IconLink
           className="hover:bg-gray-200"
@@ -147,7 +151,7 @@ function DeckActionMenuLarge({
           <span>Delete</span>
         </button>
       )}
-    </React.Fragment>
+    </>
   );
 }
 
