@@ -67,12 +67,17 @@ const Deck2 = () => {
       <div className="flex-1 flex flex-col">
         <div className="flex-1">
           <ReadonlyDeck
-            {...deck}
+            id={deck.deckId}
+            name={deck.name}
+            author={factionId}
+            faction={deck.faction as any}
+            cards={cards}
+            sets={deck.sets as any[]}
+            createdutc={deck.createdutc}
+            updatedutc={deck.updatedutc}
+            private={deck.private}
             onCardsViewChange={handleChangeView}
             cardsView={cardsView}
-            desc=""
-            factionId={factionId}
-            cards={cards}
             canUpdateOrDelete={canUpdateOrDelete}
             onDelete={_deleteDeck}
             showToast={handleShowToast}

@@ -58,7 +58,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
 
   const handleExportToUDB = () => {
     const deckFormat =
-      new Set(props.cards.map((card) => card.setId)).size > 1
+      new globalThis.Set(props.cards.map((card) => card.setId)).size > 1
         ? "nemesis"
         : "rivals";
 
@@ -133,17 +133,22 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
       ? `${new Date(created).toLocaleDateString()}`
       : "";
 
-  const objectiveSummary = new Set(objectives)
-    .groupBy((c) => c.scoreType)
+  const objectiveSummary = Set(objectives)
+    .groupBy((c) => c?.scoreType ?? "-")
     .reduce(
       (r, v, k) => {
-        r[k] = v.count();
-        return r;
+        if (v && r && k) {
+          const key = k as "Surge" | "End" | "Third" | "-";
+          if (key !== "-") {
+            r[key] = v.count();
+          }
+        }
+        return r ?? { Surge: 0, End: 0, Third: 0 };
       },
-      [0, 0, 0, 0],
+      { Surge: 0, End: 0, Third: 0 } as { Surge: number; End: number; Third: number },
     );
 
-  const totalGlory = objectives.reduce((acc, c) => acc + Number(c.glory), 0);
+  const totalGlory = objectives.reduce((acc, c) => acc + Number(c.glory ?? 0), 0);
 
   return (
     <div className="flex-1 w-screen">
@@ -235,7 +240,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           <Suspense fallback={<LazyLoading />}>
             <CardProxyMaker
               factionId={faction}
-              cards={cards}
+              cards={cards as any}
               onExit={() => setIsProxyPickerVisible(false)}
             ></CardProxyMaker>
           </Suspense>

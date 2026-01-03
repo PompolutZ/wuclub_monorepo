@@ -4,12 +4,12 @@ import { checkDeckHasPlots } from "../../data/wudb";
 import { SetId } from "../../data/wudb/types";
 
 export interface DeckTitleProps {
-  sets: string[];
+  sets: SetId[];
   children: ReactNode;
 }
 
 export const DeckTitle = ({ sets, children }: DeckTitleProps) => {
-  const setsWithPlots = checkDeckHasPlots(sets as SetId[]);
+  const setsWithPlots = checkDeckHasPlots(sets);
   return (
     <div>
       {children}

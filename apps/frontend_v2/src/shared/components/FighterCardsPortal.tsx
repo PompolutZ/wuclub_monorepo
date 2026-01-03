@@ -24,7 +24,7 @@ type GenericFaction = Extract<
   | "grand-aliance-destruction"
 >;
 
-const IsGenericFaction = (faction: FactionName): faction is GenericFaction =>
+const IsGenericFaction = (faction: string): faction is GenericFaction =>
   [
     "universal",
     "grand-aliance-order",
@@ -33,10 +33,10 @@ const IsGenericFaction = (faction: FactionName): faction is GenericFaction =>
     "grand-aliance-destruction",
   ].includes(faction);
 
-export const FighterCardsPortal = ({ faction }: { faction: FactionName }) => {
+export const FighterCardsPortal = ({ faction }: { faction: FactionName | string }) => {
   const { Portal, open, portalClickAwayRef } = usePortal();
 
-  if (IsGenericFaction(faction)) {
+  if (IsGenericFaction(faction as string)) {
     return null;
   }
 
@@ -54,7 +54,7 @@ export const FighterCardsPortal = ({ faction }: { faction: FactionName }) => {
 
       <Portal>
         <div className="grid w-full h-full place-content-center bg-purple-100/25">
-          <FighterCardsCarousel faction={faction} ref={portalClickAwayRef} />
+          <FighterCardsCarousel faction={faction as FactionName} ref={portalClickAwayRef} />
         </div>
       </Portal>
     </div>

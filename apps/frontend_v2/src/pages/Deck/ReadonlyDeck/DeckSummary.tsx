@@ -1,4 +1,3 @@
-import React from "react";
 import SetsList from "../../../atoms/SetsList";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import { PeopleIcon, PersonIcon } from "../../../shared/components/Icons";
@@ -12,7 +11,7 @@ function DeckSummary({ faction, name, date, sets, children, isPrivate }: DeckSum
 
       <div className="space-y-2 text-gray-900">
         <div>
-          <DeckTitle factionName={faction} sets={sets}>
+          <DeckTitle sets={sets}>
             <h1 className="text-xl">{name}</h1>
           </DeckTitle>
 

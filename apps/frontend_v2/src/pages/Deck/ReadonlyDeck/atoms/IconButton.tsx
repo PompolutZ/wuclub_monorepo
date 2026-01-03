@@ -30,10 +30,7 @@ const IconButton = ({
   );
 };
 
-type DeleteMenuButtonProps = Exclude<
-  IconButtonProps,
-  "label" | "className" | "children"
->;
+type DeleteMenuButtonProps = Pick<IconButtonProps, "active" | "onClick">;
 
 export const DeleteMenuButton = ({
   active,

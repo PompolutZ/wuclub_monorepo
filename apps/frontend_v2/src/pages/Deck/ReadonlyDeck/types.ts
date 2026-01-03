@@ -1,14 +1,8 @@
 import { Factions } from '@fxdxpz/schema';
-import { SetId } from '@wudb';
+import { SetId, Card } from '@wudb';
 
-export interface DeckCard {
-  id: string;
-  name: string;
-  setId: SetId;
-  scoreType?: string;
-  glory?: number;
-  rule?: string;
-}
+// DeckCard is essentially a Card from the database
+export type DeckCard = Card;
 
 export interface ReadonlyDeckProps {
   id: string;

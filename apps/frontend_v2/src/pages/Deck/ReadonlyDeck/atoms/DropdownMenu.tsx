@@ -4,7 +4,7 @@ import { Fragment, ReactNode } from "react";
 interface DropdownMenuProps {
   children?: ReactNode;
   trigger?: ReactNode;
-  className: string;
+  className?: string;
   disabled?: boolean;
 }
 

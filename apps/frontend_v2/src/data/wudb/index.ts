@@ -382,5 +382,6 @@ export {
   cards as wucards,
   factions as wufactions,
   sets as wusets,
-  SetId,
 };
+
+export type { Card, SetId, CardId, CardType, Set } from "./types";
