@@ -8,6 +8,8 @@ import { DeckLink } from "./DeckLink";
 import { useAnonDecksSynchronisation } from "./useAnonDeckSyncronisation";
 import { useUserDecksQuery } from "./useUserDecksQuery";
 import { LazyLoading } from "../../components/LazyLoading";
+import { logger } from "@/utils/logger";
+import { Toast } from "../Deck/ReadonlyDeck/atoms/Toast";
 
 function MyDecksPage() {
   const user = useAuthUser();
@@ -19,6 +21,8 @@ function MyDecksPage() {
   const [confirmDeleteDeckId, setConfirmDeleteDeckId] = useState<string | null>(
     null,
   );
+  const [showToast, setShowToast] = useState(false);
+  const [toastContent, setToastContent] = useState<string | null>(null);
 
   const handleCloseDeleteDialog = () => {
     setConfirmDeleteDeckId(null);
@@ -34,8 +38,15 @@ function MyDecksPage() {
       await mutateAsync(confirmDeleteDeckId);
       setConfirmDeleteDeckId(null);
     } catch (e) {
-      console.error(e);
+      logger.error("Failed to delete deck", e as Error, { deckId: confirmDeleteDeckId });
+      setToastContent("Failed to delete deck. Please try again.");
+      setShowToast(true);
     }
+  };
+
+  const resetToast = () => {
+    setShowToast(false);
+    setToastContent(null);
   };
 
   return (
@@ -81,6 +92,14 @@ function MyDecksPage() {
         onDeleteConfirmed={handleDeleteDeck}
         onDeleteRejected={handleCloseDeleteDialog}
       />
+
+      <Toast
+        className="border-purple-700 border-2 bg-purple-100 font-bold p-4 text-purple-700 text-xs lg:text-default rounded-md shadow-md"
+        show={showToast}
+        onTimeout={resetToast}
+      >
+        {toastContent}
+      </Toast>
     </div>
   );
 }

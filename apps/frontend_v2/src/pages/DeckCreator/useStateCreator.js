@@ -11,6 +11,7 @@ import {
     getSetById,
 } from "../../data/wudb";
 import { INITIAL_STATE } from "./reducer";
+import { logger } from "@/utils/logger";
 
 export function useStateCreator() {
     const { action, data } = useParams();
@@ -42,9 +43,7 @@ export function useStateCreator() {
                 const wuid = decode(foreignId);
                 let card = getCardById(wuid);
                 if (!card) {
-                    console.warn(
-                        `Card with ID ${wuid} not found in the database.`
-                    );
+                    logger.warn(`Card with ID ${wuid} not found in the database`, { wuid, foreignId });
                     return null;
                 }
 

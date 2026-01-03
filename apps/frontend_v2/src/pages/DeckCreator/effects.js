@@ -1,4 +1,5 @@
 import { FINISH_SAVING_DECK } from "./reducer";
+import { logger } from "@/utils/logger";
 
 export const apiSaveDeckAsync = (save) => async (state, effect, dispatch) => {
   try {
@@ -21,7 +22,8 @@ export const apiSaveDeckAsync = (save) => async (state, effect, dispatch) => {
 
     dispatch({ type: FINISH_SAVING_DECK });
   } catch (e) {
-    console.error("Error saving deck", e);
+    logger.error("Failed to save deck", e, { deckId: effect.deckMeta?.deckId, deckName: effect.deckMeta?.deckName });
+    // TODO: Add user-facing toast notification: "Failed to save deck. Please try again."
   }
 };
 
@@ -48,7 +50,8 @@ export const apiUpdateDeckAsync = (update) => async (state, effect, dispatch) =>
 
     dispatch({ type: FINISH_SAVING_DECK });
   } catch (e) {
-    console.error("Error saving deck", e);
+    logger.error("Failed to update deck", e, { deckId: effect.deckMeta?.deckId, deckName: effect.deckMeta?.deckName });
+    // TODO: Add user-facing toast notification: "Failed to update deck. Please try again."
   }
 };
 

@@ -14,6 +14,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { api } from "@/services/api";
+import { logger } from "@/utils/logger";
 
 const config = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -30,7 +31,7 @@ const Firebase2 = (function () {
   if (!config.apiKey) {
     return {
       onAuthUserListener: () => {
-        console.warn("Firebase is not configured. No auth listener will be set.");
+        logger.warn("Firebase is not configured. No auth listener will be set.");
       }
     };
   }
@@ -113,12 +114,12 @@ const Firebase2 = (function () {
               });
             }
           } else {
-            console.error("Cannot login, fallback");
+            logger.info("No authenticated user, using fallback");
             fallback();
           }
         },
         (error) => {
-          console.error(error);
+          logger.error("Authentication error", error);
           fallback();
         },
       );

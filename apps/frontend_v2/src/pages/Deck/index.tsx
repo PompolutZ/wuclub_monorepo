@@ -6,6 +6,7 @@ import { getCardById } from "../../data/wudb";
 import { useDeleteDeck } from "../../shared/hooks/useDeleteDeck";
 import ReadonlyDeck from "./ReadonlyDeck";
 import { Toast } from "./ReadonlyDeck/atoms/Toast";
+import { logger } from "@/utils/logger";
 
 const Deck2 = () => {
   const { state } = useLocation<{ deck: Deck; canUpdateOrDelete: boolean }>();
@@ -40,7 +41,8 @@ const Deck2 = () => {
         state: { deck, status: "DELETED" },
       });
     } catch (e) {
-      console.error(e);
+      logger.error("Failed to delete deck", e as Error, { deckId: deck?.deckId });
+      handleShowToast("Failed to delete deck. Please try again.");
     }
   };
 
