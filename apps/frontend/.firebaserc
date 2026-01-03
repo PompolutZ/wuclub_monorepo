@@ -1,6 +1,0 @@
-{
-  "projects": {
-    "prod": "yawudb",
-    "staging": "yawudb-test"
-  }
-}
