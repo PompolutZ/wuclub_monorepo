@@ -1,0 +1,512 @@
+# Refactor ReadonlyDeck Component
+
+**Priority:** HIGH
+**Effort:** 3-4 hours
+**Impact:** Type safety, maintainability, performance, code quality
+
+## Problem
+
+The `ReadonlyDeck` component and its sub-components have several issues that affect maintainability and type safety:
+
+1. **Mixed TypeScript/JavaScript** - Main component and several atoms are still `.jsx` instead of `.tsx`
+2. **Prop Drilling** - Deep prop passing through multiple component layers
+3. **Business Logic in UI** - Card filtering, sorting, and export logic mixed with presentation
+4. **Inline SVG Code** - Large chunks of SVG markup in `DeckActionsMenuLarge.jsx` making it hard to read
+5. **Missing TypeScript Types** - No proper interfaces for props, leading to poor IDE support
+6. **No Memoization** - Components re-render unnecessarily on parent updates
+7. **Inconsistent File Extensions** - Mix of `.jsx`, `.tsx`, and `.ts` files in the same directory
+
+## Component Structure
+
+### Current Files
+```
+ReadonlyDeck/
+├── index.jsx                      ❌ JavaScript
+├── DeckSummary.jsx                ❌ JavaScript
+├── atoms/
+│   ├── Card.jsx                   ❌ JavaScript
+│   ├── DeckActionsMenu.jsx        ❌ JavaScript
+│   ├── DeckActionsMenuLarge.jsx   ❌ JavaScript (contains inline SVGs)
+│   ├── DeckPlotCards.tsx          ✅ TypeScript
+│   ├── DeckPrivacyToggle.tsx      ✅ TypeScript
+│   ├── DropdownMenu.tsx           ✅ TypeScript
+│   ├── ExportMenu.tsx             ✅ TypeScript
+│   ├── IconButton.tsx             ✅ TypeScript
+│   ├── IconLink.tsx               ✅ TypeScript
+│   └── Toast.jsx                  ❌ JavaScript
+```
+
+## Refactoring Plan
+
+### Phase 1: TypeScript Migration (1.5 hours)
+
+#### 1.1 Convert Main Component Files
+
+**Files to convert:**
+- `index.jsx` → `index.tsx`
+- `DeckSummary.jsx` → `DeckSummary.tsx`
+- `atoms/Card.jsx` → `atoms/Card.tsx`
+- `atoms/DeckActionsMenu.jsx` → `atoms/DeckActionsMenu.tsx`
+- `atoms/DeckActionsMenuLarge.jsx` → `atoms/DeckActionsMenuLarge.tsx`
+- `atoms/Toast.jsx` → `atoms/Toast.tsx`
+
+#### 1.2 Define Type Interfaces
+
+Create `ReadonlyDeck/types.ts`:
+
+```typescript
+import { Factions } from '@fxdxpz/schema';
+import { SetId } from '@wudb';
+
+export interface DeckCard {
+  id: string;
+  name: string;
+  setId: SetId;
+  scoreType?: string;
+  glory?: number;
+  rule?: string;
+}
+
+export interface ReadonlyDeckProps {
+  id: string;
+  name: string;
+  author: string;
+  faction: Factions;
+  cards: DeckCard[];
+  sets: SetId[];
+  created?: string;
+  createdutc?: number;
+  updatedutc?: number;
+  private: boolean;
+  userInfo?: [{ displayName: string }];
+  canUpdateOrDelete: boolean;
+  cardsView: boolean;
+  onCardsViewChange: () => void;
+  onDelete: () => void;
+  showToast: (message: string) => void;
+}
+
+export interface DeckSummaryProps {
+  faction: Factions;
+  name: string;
+  author?: string;
+  date: string;
+  sets: SetId[];
+  isPrivate: boolean;
+  children?: React.ReactNode;
+}
+
+export interface DeckActionsMenuProps {
+  deckId: string;
+  deck: ProcessedDeck;
+  isPrivate: boolean;
+  onToggleDeckPrivacy: () => void;
+  exportToUDB: () => void;
+  createShareableLink: () => void;
+  onDelete: () => void;
+  canUpdateOrDelete: boolean;
+}
+
+export interface ProcessedDeck {
+  id: string;
+  name: string;
+  author: string;
+  faction: Factions;
+  sets: SetId[];
+  created?: string;
+  createdutc?: number;
+  updatedutc?: number;
+  objectives: DeckCard[];
+  gambits: DeckCard[];
+  upgrades: DeckCard[];
+  private: boolean;
+}
+
+export interface CardProps {
+  card: DeckCard;
+  asImage?: boolean;
+}
+```
+
+#### 1.3 Type Each Component
+
+Apply proper TypeScript types to all function signatures, props, and state.
+
+### Phase 2: Extract Business Logic (1 hour)
+
+#### 2.1 Create Hooks for Business Logic
+
+**File:** `ReadonlyDeck/hooks/useDeckData.ts`
+
+```typescript
+import { useMemo } from 'react';
+import { checkCardIsObjective, checkCardIsPloy, checkCardIsUpgrade, compareObjectivesByScoreType } from '@wudb';
+import type { DeckCard, ProcessedDeck } from '../types';
+
+export function useDeckData(
+  id: string,
+  name: string,
+  author: string,
+  faction: Factions,
+  sets: SetId[],
+  created?: string,
+  createdutc?: number,
+  updatedutc?: number,
+  isPrivate: boolean,
+  cards: DeckCard[] = []
+): ProcessedDeck {
+  return useMemo(() => {
+    const objectives = cards
+      .filter(checkCardIsObjective)
+      .sort((a, b) => compareObjectivesByScoreType(a.scoreType, b.scoreType));
+
+    const gambits = cards
+      .filter(checkCardIsPloy)
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    const upgrades = cards
+      .filter(checkCardIsUpgrade)
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    return {
+      id,
+      name,
+      author,
+      faction,
+      sets,
+      created,
+      createdutc,
+      updatedutc,
+      objectives,
+      gambits,
+      upgrades,
+      private: isPrivate,
+    };
+  }, [id, name, author, faction, sets, created, createdutc, updatedutc, isPrivate, cards]);
+}
+```
+
+**File:** `ReadonlyDeck/hooks/useDeckExport.ts`
+
+```typescript
+import * as clipboard from 'clipboard-polyfill';
+import { Set } from 'immutable';
+import type { DeckCard } from '../types';
+
+export function useDeckExport(cards: DeckCard[], showToast: (msg: string) => void) {
+  const handleExportToUDB = () => {
+    const deckFormat = new Set(cards.map((card) => card.setId)).size > 1 ? 'nemesis' : 'rivals';
+    const udbEncodedCards = cards
+      .map((card) => `${card.id}`)
+      .sort()
+      .join();
+    window.open(
+      `https://www.underworldsdb.com/shared.php?deck=0,${udbEncodedCards}&format=${deckFormat}`
+    );
+  };
+
+  const handleCreateShareableLink = () => {
+    const link = `${import.meta.env.VITE_BASE_URL}/deck/transfer/wuc,${cards.map((card) => card.id).join(',')}`;
+    clipboard.writeText(link);
+    showToast('Link copied to clipboard!');
+  };
+
+  const handleSaveVassalFiles = (faction: string) => () => {
+    const cardList = `${faction}\r\n${cards.map((card) => card.id).join(',')}`;
+    clipboard.writeText(cardList);
+    showToast('Deck copied to clipboard!');
+  };
+
+  return {
+    handleExportToUDB,
+    handleCreateShareableLink,
+    handleSaveVassalFiles,
+  };
+}
+```
+
+**File:** `ReadonlyDeck/hooks/useObjectiveSummary.ts`
+
+```typescript
+import { useMemo } from 'react';
+import { Set } from 'immutable';
+import type { DeckCard } from '../types';
+
+export function useObjectiveSummary(objectives: DeckCard[]) {
+  return useMemo(() => {
+    const summary = new Set(objectives)
+      .groupBy((c) => c.scoreType)
+      .reduce(
+        (r, v, k) => {
+          r[k] = v.count();
+          return r;
+        },
+        [0, 0, 0, 0]
+      );
+
+    const totalGlory = objectives.reduce((acc, c) => acc + Number(c.glory || 0), 0);
+
+    return { summary, totalGlory };
+  }, [objectives]);
+}
+```
+
+#### 2.2 Simplify Main Component
+
+Refactor `index.tsx` to use the new hooks:
+
+```typescript
+function ReadonlyDeck(props: ReadonlyDeckProps) {
+  const [isPrivate, setIsPrivate] = useState(props.private);
+  const [isProxyPickerVisible, setIsProxyPickerVisible] = useState(false);
+  const { mutateAsync: update } = useUpdateDeck();
+
+  // Use custom hooks for business logic
+  const deck = useDeckData(
+    props.id,
+    props.name,
+    props.author,
+    props.faction,
+    props.sets,
+    props.created,
+    props.createdutc,
+    props.updatedutc,
+    isPrivate,
+    props.cards
+  );
+
+  const { handleExportToUDB, handleCreateShareableLink, handleSaveVassalFiles } =
+    useDeckExport(props.cards, props.showToast);
+
+  const { summary: objectiveSummary, totalGlory } =
+    useObjectiveSummary(deck.objectives);
+
+  // ... rest of component
+}
+```
+
+### Phase 3: Extract Inline SVGs (45 min)
+
+#### 3.1 Create Icon Components
+
+**File:** `atoms/icons/ListIcon.tsx`
+
+```typescript
+export const ListIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    fill="#C4B5FD"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 6h16M4 10h16M4 14h16M4 18h16"
+    />
+  </svg>
+);
+```
+
+Similar for:
+- `ImagesIcon.tsx`
+- `DownloadIcon.tsx`
+- `ExportIcon.tsx`
+- `DeleteIcon.tsx`
+
+**Or better:** Replace inline SVGs with icons from `lucide-react` (already used in the project):
+
+```typescript
+import { List, Image, Download, ExternalLink, Trash2 } from 'lucide-react';
+```
+
+#### 3.2 Update DeckActionsMenuLarge
+
+Replace inline SVGs with icon components.
+
+### Phase 4: Performance Optimizations (30 min)
+
+#### 4.1 Add Memoization
+
+Wrap components in `React.memo`:
+
+```typescript
+export const CardsSectionContent = memo(function CardsSectionContent({
+  cards,
+  listView
+}: CardsSectionContentProps) {
+  // ... implementation
+});
+
+export const DeckSummary = memo(function DeckSummary(props: DeckSummaryProps) {
+  // ... implementation
+});
+
+export const Card = memo(function Card({ card, asImage }: CardProps) {
+  // ... implementation
+});
+```
+
+#### 4.2 Optimize Card Rendering
+
+Use `useCallback` for event handlers passed to Card components:
+
+```typescript
+const toggleExpanded = useCallback(() => {
+  setExpanded((prev) => !prev);
+}, []);
+```
+
+### Phase 5: Code Quality Improvements (30 min)
+
+#### 5.1 Fix Code Smells
+
+1. **Remove React Fragment Wrapper** - In `DeckActionsMenuLarge`, replace `<React.Fragment>` with array return
+2. **Consistent Naming** - Rename `DeckActionMenuLarge` → `DeckActionsMenuLarge` (consistency)
+3. **Extract Magic Strings** - Move URLs and format strings to constants
+4. **Remove Unused Variables** - Clean up any unused imports or variables
+
+#### 5.2 Improve Readability
+
+1. Extract `createdDate` calculation to utility function
+2. Extract `authorDisplayName` logic to utility function
+3. Add JSDoc comments to exported components
+
+#### 5.3 Add Constants File
+
+**File:** `ReadonlyDeck/constants.ts`
+
+```typescript
+export const UNDERWORLDS_DB_URL = 'https://www.underworldsdb.com';
+export const DECK_TRANSFER_PREFIX = 'wuc';
+export const VASSAL_LINE_SEPARATOR = '\r\n';
+```
+
+## Implementation Steps
+
+### Step 1: Create Type Definitions (15 min)
+1. Create `types.ts` with all interfaces
+2. Create `constants.ts` with shared constants
+
+### Step 2: Convert to TypeScript (1 hour)
+1. Rename all `.jsx` files to `.tsx`
+2. Apply types to each component
+3. Fix type errors
+4. Run `pnpm tsc --noEmit` to verify
+
+### Step 3: Extract Business Logic (45 min)
+1. Create `hooks/` directory
+2. Implement `useDeckData.ts`
+3. Implement `useDeckExport.ts`
+4. Implement `useObjectiveSummary.ts`
+5. Update main component to use hooks
+
+### Step 4: Replace Inline SVGs (30 min)
+1. Option A: Create icon components in `atoms/icons/`
+2. Option B: Replace with `lucide-react` icons (recommended)
+3. Update `DeckActionsMenuLarge` to use icon components
+
+### Step 5: Add Memoization (20 min)
+1. Wrap components with `React.memo`
+2. Add `useCallback` for event handlers
+3. Verify performance with React DevTools Profiler
+
+### Step 6: Code Quality (20 min)
+1. Run ESLint and fix warnings
+2. Remove unused code
+3. Add JSDoc comments
+4. Extract magic strings to constants
+
+### Step 7: Testing (30 min)
+1. Manual testing of all features
+2. Verify deck viewing works
+3. Test all export options
+4. Test privacy toggle
+5. Test edit/delete functionality
+
+## Testing Checklist
+
+- [ ] `pnpm tsc --noEmit` passes with no errors
+- [ ] `pnpm lint` passes with no warnings
+- [ ] Application starts: `pnpm dev`
+- [ ] Deck loads and displays correctly
+- [ ] Card list/image view toggle works
+- [ ] Export to UnderworldsDB works
+- [ ] Create shareable link works (copies to clipboard)
+- [ ] Copy in Vassal format works
+- [ ] Privacy toggle works for deck owners
+- [ ] Edit button navigates correctly
+- [ ] Delete button works for deck owners
+- [ ] Plot cards display correctly
+- [ ] Fighter cards portal works
+- [ ] Objective summary displays correctly
+- [ ] Card expansion works in list view
+- [ ] Card images load in image view
+- [ ] Proxy card picker modal opens
+- [ ] No console errors or warnings
+- [ ] React DevTools shows improved render performance
+
+## Success Criteria
+
+- [ ] All components converted to TypeScript
+- [ ] No `any` types used
+- [ ] Business logic extracted to custom hooks
+- [ ] All inline SVGs replaced with icon components
+- [ ] Components properly memoized
+- [ ] No prop drilling beyond 2 levels
+- [ ] ESLint passes with no warnings
+- [ ] TypeScript compiler passes
+- [ ] Manual testing confirms all features work
+- [ ] Code is more maintainable and readable
+
+## Benefits
+
+### Type Safety
+- Catch errors at compile time
+- Better IDE autocomplete and IntelliSense
+- Self-documenting code through types
+- Easier refactoring
+
+### Maintainability
+- Clear separation of concerns
+- Business logic separated from UI
+- Reusable custom hooks
+- Cleaner component code
+
+### Performance
+- Reduced unnecessary re-renders
+- Optimized component updates
+- Better memory usage
+
+### Developer Experience
+- Easier to understand code flow
+- Better error messages
+- Easier to add new features
+- Consistent code style
+
+## Migration Notes
+
+- Keep backward compatibility during migration
+- Test after each phase
+- Use `@ts-expect-error` sparingly, only for known issues
+- Document any workarounds needed
+- Update imports in parent components if needed
+- Ensure lazy-loaded components still work
+
+## Related Files to Update
+
+After completing this refactor, these files may need updates:
+
+- `src/pages/Deck/index.jsx` - Parent component that uses ReadonlyDeck
+- Any tests for ReadonlyDeck components
+- Storybook stories if they exist
+
+## Future Improvements (Out of Scope)
+
+- Add unit tests for custom hooks
+- Add Storybook stories for visual testing
+- Consider breaking down into smaller sub-features
+- Add error boundaries around critical sections
+- Implement loading states for async operations
