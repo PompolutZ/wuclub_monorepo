@@ -42,158 +42,14 @@ ReadonlyDeck/
 
 Migrated 6 ReadonlyDeck components from `.jsx` to `.tsx` with proper type definitions. Created `types.ts` with interfaces, fixed type issues (DeckCard uses Card from @wudb, DropdownMenu className optional, DeleteMenuButton uses Pick), updated parent component prop mapping. Build passes, no TypeScript errors.
 
-### Phase 2: Extract Business Logic (1 hour)
+### Phase 2: Extract Business Logic ✅ COMPLETED
 
-#### 2.1 Create Hooks for Business Logic
+Created two custom hooks and one utility module to separate business logic from presentation:
+- `hooks/useDeckData.ts` - Memoized card filtering/sorting into objectives, gambits, upgrades
+- `hooks/useObjectiveSummary.ts` - Memoized objective scoring summary and total glory calculation
+- `utils/deckExport.ts` - Pure utility functions for UDB export, shareable links, and Vassal format
 
-**File:** `ReadonlyDeck/hooks/useDeckData.ts`
-
-```typescript
-import { useMemo } from 'react';
-import { checkCardIsObjective, checkCardIsPloy, checkCardIsUpgrade, compareObjectivesByScoreType } from '@wudb';
-import type { DeckCard, ProcessedDeck } from '../types';
-
-export function useDeckData(
-  id: string,
-  name: string,
-  author: string,
-  faction: Factions,
-  sets: SetId[],
-  created?: string,
-  createdutc?: number,
-  updatedutc?: number,
-  isPrivate: boolean,
-  cards: DeckCard[] = []
-): ProcessedDeck {
-  return useMemo(() => {
-    const objectives = cards
-      .filter(checkCardIsObjective)
-      .sort((a, b) => compareObjectivesByScoreType(a.scoreType, b.scoreType));
-
-    const gambits = cards
-      .filter(checkCardIsPloy)
-      .sort((a, b) => a.name.localeCompare(b.name));
-
-    const upgrades = cards
-      .filter(checkCardIsUpgrade)
-      .sort((a, b) => a.name.localeCompare(b.name));
-
-    return {
-      id,
-      name,
-      author,
-      faction,
-      sets,
-      created,
-      createdutc,
-      updatedutc,
-      objectives,
-      gambits,
-      upgrades,
-      private: isPrivate,
-    };
-  }, [id, name, author, faction, sets, created, createdutc, updatedutc, isPrivate, cards]);
-}
-```
-
-**File:** `ReadonlyDeck/hooks/useDeckExport.ts`
-
-```typescript
-import * as clipboard from 'clipboard-polyfill';
-import { Set } from 'immutable';
-import type { DeckCard } from '../types';
-
-export function useDeckExport(cards: DeckCard[], showToast: (msg: string) => void) {
-  const handleExportToUDB = () => {
-    const deckFormat = new Set(cards.map((card) => card.setId)).size > 1 ? 'nemesis' : 'rivals';
-    const udbEncodedCards = cards
-      .map((card) => `${card.id}`)
-      .sort()
-      .join();
-    window.open(
-      `https://www.underworldsdb.com/shared.php?deck=0,${udbEncodedCards}&format=${deckFormat}`
-    );
-  };
-
-  const handleCreateShareableLink = () => {
-    const link = `${import.meta.env.VITE_BASE_URL}/deck/transfer/wuc,${cards.map((card) => card.id).join(',')}`;
-    clipboard.writeText(link);
-    showToast('Link copied to clipboard!');
-  };
-
-  const handleSaveVassalFiles = (faction: string) => () => {
-    const cardList = `${faction}\r\n${cards.map((card) => card.id).join(',')}`;
-    clipboard.writeText(cardList);
-    showToast('Deck copied to clipboard!');
-  };
-
-  return {
-    handleExportToUDB,
-    handleCreateShareableLink,
-    handleSaveVassalFiles,
-  };
-}
-```
-
-**File:** `ReadonlyDeck/hooks/useObjectiveSummary.ts`
-
-```typescript
-import { useMemo } from 'react';
-import { Set } from 'immutable';
-import type { DeckCard } from '../types';
-
-export function useObjectiveSummary(objectives: DeckCard[]) {
-  return useMemo(() => {
-    const summary = new Set(objectives)
-      .groupBy((c) => c.scoreType)
-      .reduce(
-        (r, v, k) => {
-          r[k] = v.count();
-          return r;
-        },
-        [0, 0, 0, 0]
-      );
-
-    const totalGlory = objectives.reduce((acc, c) => acc + Number(c.glory || 0), 0);
-
-    return { summary, totalGlory };
-  }, [objectives]);
-}
-```
-
-#### 2.2 Simplify Main Component
-
-Refactor `index.tsx` to use the new hooks:
-
-```typescript
-function ReadonlyDeck(props: ReadonlyDeckProps) {
-  const [isPrivate, setIsPrivate] = useState(props.private);
-  const [isProxyPickerVisible, setIsProxyPickerVisible] = useState(false);
-  const { mutateAsync: update } = useUpdateDeck();
-
-  // Use custom hooks for business logic
-  const deck = useDeckData(
-    props.id,
-    props.name,
-    props.author,
-    props.faction,
-    props.sets,
-    props.created,
-    props.createdutc,
-    props.updatedutc,
-    isPrivate,
-    props.cards
-  );
-
-  const { handleExportToUDB, handleCreateShareableLink, handleSaveVassalFiles } =
-    useDeckExport(props.cards, props.showToast);
-
-  const { summary: objectiveSummary, totalGlory } =
-    useObjectiveSummary(deck.objectives);
-
-  // ... rest of component
-}
-```
+Refactored `index.tsx` to use hooks and call utility functions directly inline (no unnecessary useCallback wrappers). Removed inline card filtering/sorting logic. Code is cleaner and more maintainable.
 
 ### Phase 3: Extract Inline SVGs (45 min)
 
@@ -306,12 +162,12 @@ export const VASSAL_LINE_SEPARATOR = '\r\n';
 3. Fix type errors
 4. Run `pnpm tsc --noEmit` to verify
 
-### Step 3: Extract Business Logic (45 min)
-1. Create `hooks/` directory
-2. Implement `useDeckData.ts`
-3. Implement `useDeckExport.ts`
-4. Implement `useObjectiveSummary.ts`
-5. Update main component to use hooks
+### Step 3: Extract Business Logic ✅ COMPLETED
+1. ✅ Create `hooks/` and `utils/` directories
+2. ✅ Implement `useDeckData.ts`
+3. ✅ Implement `useObjectiveSummary.ts`
+4. ✅ Implement `utils/deckExport.ts` (pure functions instead of hook)
+5. ✅ Update main component to use hooks and utilities
 
 ### Step 4: Replace Inline SVGs (30 min)
 1. Option A: Create icon components in `atoms/icons/`

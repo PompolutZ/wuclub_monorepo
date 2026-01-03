@@ -1,24 +1,18 @@
 import { LazyLoading } from "@/components/LazyLoading";
 import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
-import * as clipboard from "clipboard-polyfill";
-import { Set } from "immutable";
 import { lazy, Suspense, useState } from "react";
 import ScoringOverview from "../../../atoms/ScoringOverview";
-import {
-  checkCardIsObjective,
-  checkCardIsPloy,
-  checkCardIsUpgrade,
-  compareObjectivesByScoreType,
-} from "../../../data/wudb";
 import { ModalPresenter } from "../../../main";
 import { CardListSectionHeader } from "../../../shared/components/CardListSectionHeader";
 import Card from "./atoms/Card";
 import { DeckPlotCards } from "./atoms/DeckPlotCards";
 import DeckSummary from "./DeckSummary";
 import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
-import type { ReadonlyDeckProps, CardsSectionContentProps, DeckCard } from "./types";
-import { Factions } from "@fxdxpz/schema";
+import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
+import { useDeckData } from "./hooks/useDeckData";
+import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
+import { exportToUDB, createShareableLink, saveVassalFormat } from "./utils/deckExport";
 
 const DeckActionsMenu = lazy(() => import("./atoms/DeckActionsMenu"));
 const DeckActionMenuLarge = lazy(() => import("./atoms/DeckActionsMenuLarge"));
@@ -56,34 +50,22 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   const [isProxyPickerVisible, setIsProxyPickerVisible] = useState(false);
   const { mutateAsync: update } = useUpdateDeck();
 
-  const handleExportToUDB = () => {
-    const deckFormat =
-      new globalThis.Set(props.cards.map((card) => card.setId)).size > 1
-        ? "nemesis"
-        : "rivals";
+  // Use custom hooks for business logic
+  const deck = useDeckData(
+    id,
+    name,
+    author,
+    faction,
+    sets,
+    created,
+    createdutc,
+    updatedutc,
+    isPrivate,
+    cards
+  );
 
-    const udbEncodedCards = props.cards
-      .map((card) => `${card.id}`)
-      .sort()
-      .join();
-    window.open(
-      `https://www.underworldsdb.com/shared.php?deck=0,${udbEncodedCards}&format=${deckFormat}`,
-    );
-  };
-
-  const handleCreateShareableLink = () => {
-    const link = `${
-      import.meta.env.VITE_BASE_URL
-    }/deck/transfer/wuc,${props.cards.map((card) => card.id).join(",")}`;
-    clipboard.writeText(link);
-    props.showToast("Link copied to clipboard!");
-  };
-
-  const handleSaveVassalFiles = (faction: Factions, cards: DeckCard[]) => () => {
-    const cardList = `${faction}\r\n${cards.map((card) => card.id).join(",")}`;
-    clipboard.writeText(cardList);
-    props.showToast("Deck copied to clipboard!");
-  };
+  const { summary: objectiveSummary, totalGlory } =
+    useObjectiveSummary(deck.objectives);
 
   const toggleDeckPrivacy = () => {
     const nextState = !isPrivate;
@@ -100,55 +82,11 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   const [userInfo] = props.userInfo || [];
   const authorDisplayName = userInfo ? userInfo.displayName : "Anonymous";
 
-  const objectives = cards
-    .filter(checkCardIsObjective)
-    .sort((a, b) => compareObjectivesByScoreType(a.scoreType, b.scoreType));
-
-  const gambits = cards
-    .filter(checkCardIsPloy)
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  const upgrades = cards
-    .filter(checkCardIsUpgrade)
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  const deck = {
-    id,
-    name,
-    author,
-    faction,
-    sets,
-    created,
-    createdutc,
-    updatedutc,
-    objectives,
-    gambits,
-    upgrades,
-    private: isPrivate,
-  };
-
   const createdDate = updatedutc
     ? `${new Date(updatedutc).toLocaleDateString()}`
     : created
       ? `${new Date(created).toLocaleDateString()}`
       : "";
-
-  const objectiveSummary = Set(objectives)
-    .groupBy((c) => c?.scoreType ?? "-")
-    .reduce(
-      (r, v, k) => {
-        if (v && r && k) {
-          const key = k as "Surge" | "End" | "Third" | "-";
-          if (key !== "-") {
-            r[key] = v.count();
-          }
-        }
-        return r ?? { Surge: 0, End: 0, Third: 0 };
-      },
-      { Surge: 0, End: 0, Third: 0 } as { Surge: number; End: number; Third: number },
-    );
-
-  const totalGlory = objectives.reduce((acc, c) => acc + Number(c.glory ?? 0), 0);
 
   return (
     <div className="flex-1 w-screen">
@@ -171,8 +109,8 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
               deck={deck}
               deckId={id}
               canUpdateOrDelete={props.canUpdateOrDelete}
-              exportToUDB={handleExportToUDB}
-              createShareableLink={handleCreateShareableLink}
+              exportToUDB={() => exportToUDB(cards)}
+              createShareableLink={() => createShareableLink(cards, props.showToast)}
               onDelete={props.onDelete}
               onToggleDeckPrivacy={toggleDeckPrivacy}
               isPrivate={isPrivate}
@@ -182,12 +120,12 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
             <DeckActionMenuLarge
               cardsView={props.cardsView}
               onCardsViewChange={props.onCardsViewChange}
-              copyInVassalFormat={handleSaveVassalFiles(faction, cards)}
+              copyInVassalFormat={() => saveVassalFormat(faction, cards, props.showToast)}
               canUpdateOrDelete={props.canUpdateOrDelete}
               deck={deck}
               deckId={id}
-              exportToUDB={handleExportToUDB}
-              createShareableLink={handleCreateShareableLink}
+              exportToUDB={() => exportToUDB(cards)}
+              createShareableLink={() => createShareableLink(cards, props.showToast)}
               onDelete={props.onDelete}
               onToggleDeckPrivacy={toggleDeckPrivacy}
               isPrivate={isPrivate}
@@ -211,27 +149,27 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           <CardListSectionHeader
             className="px-2"
             type={"Objectives"}
-            amount={objectives.length}
+            amount={deck.objectives.length}
           >
             <ScoringOverview summary={objectiveSummary} glory={totalGlory} />
           </CardListSectionHeader>
-          <CardsSectionContent cards={objectives} listView={!props.cardsView} />
+          <CardsSectionContent cards={deck.objectives} listView={!props.cardsView} />
         </section>
         <section className="mt-4 lg:mt-0 px-4">
           <CardListSectionHeader
             className="px-2"
             type={"Gambits"}
-            amount={gambits.length}
+            amount={deck.gambits.length}
           />
-          <CardsSectionContent cards={gambits} listView={!props.cardsView} />
+          <CardsSectionContent cards={deck.gambits} listView={!props.cardsView} />
         </section>
         <section className="mt-4 lg:mt-0 px-4">
           <CardListSectionHeader
             className="px-2"
             type={"Upgrades"}
-            amount={upgrades.length}
+            amount={deck.upgrades.length}
           />
-          <CardsSectionContent cards={upgrades} listView={!props.cardsView} />{" "}
+          <CardsSectionContent cards={deck.upgrades} listView={!props.cardsView} />{" "}
         </section>
       </div>
 
