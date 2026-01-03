@@ -1,6 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent in ES modules
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Load test environment variables
 dotenv.config({ path: path.resolve(__dirname, '.env.test') });
@@ -55,7 +59,7 @@ export default defineConfig({
   },
 
   // Global setup - runs once before all tests
-  globalSetup: require.resolve('./tests/e2e/setup/global-setup.ts'),
+  globalSetup: './tests/e2e/setup/global-setup.ts',
 
   // Configure projects for major browsers
   projects: [

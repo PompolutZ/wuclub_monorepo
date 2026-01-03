@@ -44,7 +44,7 @@ export class LoginPage extends BasePage {
   }
 
   /**
-   * Log in with email and password
+   * Log in with email and password (without waiting for navigation)
    */
   async login(email: string, password: string) {
     await this.emailInput.fill(email);
@@ -56,8 +56,23 @@ export class LoginPage extends BasePage {
    * Log in with email/password and wait for redirect
    */
   async loginAndWaitForRedirect(email: string, password: string, expectedUrl = '/mydecks') {
-    await this.login(email, password);
-    await this.waitForNavigation(expectedUrl);
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+
+    // Click and wait for navigation in parallel to avoid race condition
+    await Promise.all([
+      this.page.waitForURL((url) => url.pathname.includes(expectedUrl), { timeout: 30000 }),
+      this.signInButton.click(),
+    ]);
+
+    // Wait for auth data to be persisted
+    await this.page.waitForFunction(
+      () => {
+        const authData = localStorage.getItem('yawudb_authUser');
+        return authData !== null && authData !== '';
+      },
+      { timeout: 10000 }
+    );
   }
 
   /**

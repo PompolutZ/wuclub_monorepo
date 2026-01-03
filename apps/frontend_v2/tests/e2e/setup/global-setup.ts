@@ -1,5 +1,9 @@
 import { chromium, FullConfig } from '@playwright/test';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent in ES modules
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * Global setup function that runs once before all tests
@@ -27,25 +31,31 @@ async function globalSetup(config: FullConfig) {
 
   try {
     // Navigate to login page
+    console.log(`📍 Navigating to ${baseURL}/login`);
     await page.goto(`${baseURL}/login`);
 
     // Fill in login credentials
+    console.log('📝 Filling in credentials');
     await page.locator('input[type="email"]').fill(testEmail);
     await page.locator('input[type="password"]').fill(testPassword);
 
-    // Click sign in button and wait for navigation
+    // Click sign in button and wait for navigation in parallel (avoids race condition)
+    console.log('🔘 Clicking sign in and waiting for navigation...');
     await Promise.all([
-      page.waitForURL('**/mydecks', { timeout: 15000 }),
+      page.waitForURL((url) => !url.pathname.includes('/login'), { timeout: 30000 }),
       page.locator('button:has-text("Sign in")').click(),
     ]);
 
+    console.log(`✓ Navigated to: ${page.url()}`);
+
     // Wait for auth data to be stored in localStorage
+    console.log('⏳ Waiting for auth data in localStorage...');
     await page.waitForFunction(
       () => {
         const authData = localStorage.getItem('yawudb_authUser');
         return authData !== null && authData !== '';
       },
-      { timeout: 10000 }
+      { timeout: 15000 }
     );
 
     console.log('✅ Authentication successful');
@@ -56,6 +66,17 @@ async function globalSetup(config: FullConfig) {
     console.log(`✅ Auth state saved to ${authFile}`);
   } catch (error) {
     console.error('❌ Authentication setup failed:', error);
+
+    // Take a screenshot for debugging
+    try {
+      const screenshotPath = path.join(__dirname, '../../.auth/auth-failure.png');
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+      console.log(`📸 Screenshot saved to ${screenshotPath}`);
+      console.log(`Current URL: ${page.url()}`);
+    } catch (screenshotError) {
+      console.error('Failed to take screenshot:', screenshotError);
+    }
+
     throw error;
   } finally {
     await browser.close();
