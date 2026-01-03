@@ -430,12 +430,15 @@ importers:
       tsconfig-paths:
         specifier: ^4.1.0
         version: 4.2.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
       vite:
         specifier: ^7.0.6
         version: 7.0.6
       vite-plugin-svgr:
         specifier: ^4.2.0
-        version: 4.2.0(vite@7.0.6)
+        version: 4.2.0(typescript@5.9.3)(vite@7.0.6)
 
   apps/parser:
     devDependencies:
@@ -2613,6 +2616,20 @@ packages:
       - typescript
     dev: true
 
+  /@svgr/core@8.1.0(typescript@5.9.3):
+    resolution: {integrity: sha512-8QqtOQT5ACVlmsvKOJNEaWmRPmcojMOzCz4Hs2BGG/toAp/K38LcsMRyLp349glq5AzJbCEeimEoxaX6v/fLrA==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@babel/core': 7.26.0
+      '@svgr/babel-preset': 8.1.0(@babel/core@7.26.0)
+      camelcase: 6.3.0
+      cosmiconfig: 8.3.6(typescript@5.9.3)
+      snake-case: 3.0.4
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+    dev: true
+
   /@svgr/hast-util-to-babel-ast@8.0.0:
     resolution: {integrity: sha512-EbDKwO9GpfWP4jN9sGdYwPBU0kdomaPIL2Eu4YwmgP+sJeXT+L7bMwJUBnhzfH8Q2qMBqZ4fJwpCyYsAN3mt2Q==}
     engines: {node: '>=14'}
@@ -2629,7 +2646,7 @@ packages:
     dependencies:
       '@babel/core': 7.26.0
       '@svgr/babel-preset': 8.1.0(@babel/core@7.26.0)
-      '@svgr/core': 8.1.0
+      '@svgr/core': 8.1.0(typescript@5.9.3)
       '@svgr/hast-util-to-babel-ast': 8.0.0
       svg-parser: 2.0.4
     transitivePeerDependencies:
@@ -4379,6 +4396,22 @@ packages:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
+    dev: true
+
+  /cosmiconfig@8.3.6(typescript@5.9.3):
+    resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      typescript: '>=4.9.5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      import-fresh: 3.3.0
+      js-yaml: 4.1.0
+      parse-json: 5.2.0
+      path-type: 4.0.0
+      typescript: 5.9.3
     dev: true
 
   /crc-32@1.2.2:
@@ -9812,6 +9845,12 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  /typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: true
+
   /uc.micro@2.1.0:
     resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
 
@@ -10063,6 +10102,21 @@ packages:
       vfile-message: 4.0.2
     dev: false
 
+  /vite-plugin-svgr@4.2.0(typescript@5.9.3)(vite@7.0.6):
+    resolution: {integrity: sha512-SC7+FfVtNQk7So0XMjrrtLAbEC8qjFPifyD7+fs/E6aaNdVde6umlVVh0QuwDLdOMu7vp5RiGFsB70nj5yo0XA==}
+    peerDependencies:
+      vite: ^2.6.0 || 3 || 4 || 5
+    dependencies:
+      '@rollup/pluginutils': 5.1.3
+      '@svgr/core': 8.1.0(typescript@5.9.3)
+      '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
+      vite: 7.0.6
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - typescript
+    dev: true
+
   /vite-plugin-svgr@4.2.0(vite@5.4.10):
     resolution: {integrity: sha512-SC7+FfVtNQk7So0XMjrrtLAbEC8qjFPifyD7+fs/E6aaNdVde6umlVVh0QuwDLdOMu7vp5RiGFsB70nj5yo0XA==}
     peerDependencies:
@@ -10072,21 +10126,6 @@ packages:
       '@svgr/core': 8.1.0
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
       vite: 5.4.10
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-      - typescript
-    dev: true
-
-  /vite-plugin-svgr@4.2.0(vite@7.0.6):
-    resolution: {integrity: sha512-SC7+FfVtNQk7So0XMjrrtLAbEC8qjFPifyD7+fs/E6aaNdVde6umlVVh0QuwDLdOMu7vp5RiGFsB70nj5yo0XA==}
-    peerDependencies:
-      vite: ^2.6.0 || 3 || 4 || 5
-    dependencies:
-      '@rollup/pluginutils': 5.1.3
-      '@svgr/core': 8.1.0
-      '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
-      vite: 7.0.6
     transitivePeerDependencies:
       - rollup
       - supports-color

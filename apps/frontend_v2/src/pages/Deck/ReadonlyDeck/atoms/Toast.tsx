@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { animated as a, useSpring } from "@react-spring/web";
+import type { ToastProps } from "../types";
 
-export function Toast({ show, className, children, onTimeout }) {
+export function Toast({ show, className, children, onTimeout }: ToastProps) {
     const [visible, setVisible] = useState(show);
     const spring = useSpring({ opacity: visible ? 1 : 0, translateY: visible ? -10 : 0 });
 

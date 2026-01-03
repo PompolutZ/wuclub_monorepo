@@ -14,8 +14,9 @@ import {
 import CardImage from "../../../../shared/components/CardImage";
 import { ExpansionPicture } from "../../../../shared/components/ExpansionPicture";
 import { pickCardColor2 } from "../../../../utils/functions";
+import type { CardProps, DeckCard } from "../types";
 
-const idToPrintId = (id) => {
+const idToPrintId = (id: string) => {
   return (
     <>
       <span className="font-bold">{`${id}`.slice(-3)}</span>
@@ -24,11 +25,11 @@ const idToPrintId = (id) => {
   );
 };
 
-function CardImageOrText({ useTextFallback, image, fallback }) {
+function CardImageOrText({ useTextFallback, image, fallback }: { useTextFallback: boolean; image: React.ReactNode; fallback: React.ReactNode }) {
   return useTextFallback ? fallback : image;
 }
 
-function Expandable({ animateHeight, children }) {
+function Expandable({ animateHeight, children }: { animateHeight: "auto" | number; children: React.ReactNode }) {
   return (
     <AnimateHeight height={animateHeight} duration={250} easing="ease-out">
       {children}
@@ -36,7 +37,7 @@ function Expandable({ animateHeight, children }) {
   );
 }
 
-const CardAsImage = ({ card }) => {
+const CardAsImage = ({ card }: { card: DeckCard }) => {
   const [, isForsaken, isRestricted] = validateCardForPlayFormat(
     card,
   );
@@ -77,7 +78,7 @@ const CardAsImage = ({ card }) => {
   );
 };
 
-const CardAsText = ({ card, cardId }) => {
+const CardAsText = ({ card, cardId }: { card: DeckCard; cardId: string }) => {
   const [expanded, setExpanded] = useState(false);
   const [useTextFallback, setUseTextFallback] = useState(false);
   const animateHeight = expanded ? "auto" : 0;
@@ -138,7 +139,7 @@ const CardAsText = ({ card, cardId }) => {
   );
 };
 
-const Card = ({ card, asImage }) => {
+const Card = ({ card, asImage }: CardProps) => {
   return asImage ? (
     <CardAsImage card={card} />
   ) : (

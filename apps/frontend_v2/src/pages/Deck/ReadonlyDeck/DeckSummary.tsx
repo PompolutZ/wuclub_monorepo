@@ -3,8 +3,9 @@ import SetsList from "../../../atoms/SetsList";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import { PeopleIcon, PersonIcon } from "../../../shared/components/Icons";
 import { DeckTitle } from "@/shared/components/DeckTitle";
+import type { DeckSummaryProps } from "./types";
 
-function DeckSummary({ faction, name, date, sets, children, isPrivate }) {
+function DeckSummary({ faction, name, date, sets, children, isPrivate }: DeckSummaryProps) {
   return (
     <div className="flex items-center flex-1 space-x-4">
       <FactionDeckPicture size="large" faction={faction} />

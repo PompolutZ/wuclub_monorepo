@@ -382,4 +382,5 @@ export {
   cards as wucards,
   factions as wufactions,
   sets as wusets,
+  SetId,
 };

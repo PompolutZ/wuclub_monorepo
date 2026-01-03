@@ -6,6 +6,7 @@ import { Menu } from "@headlessui/react";
 import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
 import { EditIcon } from "../../../../shared/components/Icons";
 import { Copy } from "lucide-react";
+import type { DeckActionsMenuLargeProps } from "../types";
 
 function DeckActionMenuLarge({
   deckId,
@@ -20,7 +21,7 @@ function DeckActionMenuLarge({
   exportToUDB,
   createShareableLink,
   onDownloadProxy,
-}) {
+}: DeckActionsMenuLargeProps) {
   return (
     <React.Fragment>
       {canUpdateOrDelete && (

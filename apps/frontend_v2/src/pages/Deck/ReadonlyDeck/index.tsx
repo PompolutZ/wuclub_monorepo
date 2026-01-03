@@ -17,12 +17,14 @@ import Card from "./atoms/Card";
 import { DeckPlotCards } from "./atoms/DeckPlotCards";
 import DeckSummary from "./DeckSummary";
 import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
+import type { ReadonlyDeckProps, CardsSectionContentProps, DeckCard } from "./types";
+import { Factions } from "@fxdxpz/schema";
 
 const DeckActionsMenu = lazy(() => import("./atoms/DeckActionsMenu"));
 const DeckActionMenuLarge = lazy(() => import("./atoms/DeckActionsMenuLarge"));
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 
-function CardsSectionContent({ cards, listView }) {
+function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
   return listView ? (
     <ul className="px-3">
       {cards.map((v) => (
@@ -38,7 +40,7 @@ function CardsSectionContent({ cards, listView }) {
   );
 }
 
-function ReadonlyDeck(props) {
+function ReadonlyDeck(props: ReadonlyDeckProps) {
   const {
     id,
     name,
@@ -77,7 +79,7 @@ function ReadonlyDeck(props) {
     props.showToast("Link copied to clipboard!");
   };
 
-  const handleSaveVassalFiles = (faction, cards) => () => {
+  const handleSaveVassalFiles = (faction: Factions, cards: DeckCard[]) => () => {
     const cardList = `${faction}\r\n${cards.map((card) => card.id).join(",")}`;
     clipboard.writeText(cardList);
     props.showToast("Deck copied to clipboard!");

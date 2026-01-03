@@ -9,6 +9,7 @@ import DropdownMenu from "./DropdownMenu";
 import ExportMenu from "./ExportMenu";
 import { DeleteMenuButton } from "./IconButton";
 import IconLink from "./IconLink";
+import type { DeckActionsMenuProps } from "../types";
 
 function DeckActionsMenu({
   deckId,
@@ -19,7 +20,7 @@ function DeckActionsMenu({
   createShareableLink,
   onDelete,
   canUpdateOrDelete,
-}) {
+}: DeckActionsMenuProps) {
   return (
     <DropdownMenu trigger={<MoreVerticalIcon />}>
       <div>
