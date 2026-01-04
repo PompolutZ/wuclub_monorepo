@@ -1,5 +1,5 @@
 import { DeleteConfirmationDialog } from "@components/DeleteConfirmationDialog";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuthUser from "../../hooks/useAuthUser";
 import { useDeleteDeck } from "../../shared/hooks/useDeleteDeck";
@@ -10,6 +10,10 @@ import { useUserDecksQuery } from "./useUserDecksQuery";
 import { LazyLoading } from "../../components/LazyLoading";
 import { logger } from "@/utils/logger";
 import { Toast } from "../Deck/ReadonlyDeck/atoms/Toast";
+import { FilterSortBar } from "./components/FilterSortBar";
+import { SortOption } from "./components/SortDropdown";
+import { sets } from "@wudb/sets";
+import { Deck } from "@fxdxpz/schema";
 
 function MyDecksPage() {
   const user = useAuthUser();
@@ -23,6 +27,8 @@ function MyDecksPage() {
   );
   const [showToast, setShowToast] = useState(false);
   const [toastContent, setToastContent] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<SortOption>("date-desc");
+  const [selectedSetFilters, setSelectedSetFilters] = useState<string[]>([]);
 
   const handleCloseDeleteDialog = () => {
     setConfirmDeleteDeckId(null);
@@ -49,6 +55,35 @@ function MyDecksPage() {
     setToastContent(null);
   };
 
+  const filterDecks = (decks: Deck[], filters: string[]) => {
+    if (filters.length === 0) return decks;
+    return decks.filter((deck) => deck.sets.some((set) => filters.includes(set)));
+  };
+
+  const sortDecks = (decks: Deck[], sortOption: SortOption) => {
+    const sorted = [...decks];
+    switch (sortOption) {
+      case "name-asc":
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+      case "name-desc":
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+      case "date-desc":
+        return sorted.sort((a, b) => b.updatedutc - a.updatedutc);
+      case "date-asc":
+        return sorted.sort((a, b) => a.updatedutc - b.updatedutc);
+      default:
+        return sorted;
+    }
+  };
+
+  const filteredAndSortedDecks = useMemo(() => {
+    if (!userDecks?.decks) return [];
+    // Cast to Deck[] since both AnonDecks and Deck have the required fields
+    const decks = userDecks.decks as Deck[];
+    const filtered = filterDecks(decks, selectedSetFilters);
+    return sortDecks(filtered, sortBy);
+  }, [userDecks, selectedSetFilters, sortBy]);
+
   return (
     <div className="flex-1 flex p-4 flex-col">
       {!user && <AnonymousUserDecksStorageInfo />}
@@ -66,19 +101,35 @@ function MyDecksPage() {
 
       {userDecks && userDecks.total > 0 && (
         <div className="flex-1">
-          {userDecks.decks
-            .map((deck) => ({
-              ...deck,
-              id: deck.deckId,
-            }))
-            .sort((x, y) => y.updatedutc - x.updatedutc)
-            .map((deck) => (
+          <FilterSortBar
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+            selectedSets={selectedSetFilters}
+            onSetsChange={setSelectedSetFilters}
+            onClearFilters={() => setSelectedSetFilters([])}
+            availableSets={Object.keys(sets)}
+          />
+          {filteredAndSortedDecks.length === 0 && selectedSetFilters.length > 0 ? (
+            <div className="flex-1 flex items-center justify-center">
+              <p className="text-gray-600">
+                No decks found with selected filters.{" "}
+                <button
+                  className="text-purple-700 font-bold"
+                  onClick={() => setSelectedSetFilters([])}
+                >
+                  Clear filters
+                </button>
+              </p>
+            </div>
+          ) : (
+            filteredAndSortedDecks.map((deck) => (
               <DeckLink
-                key={deck.id}
+                key={deck.deckId}
                 onDelete={handleDeleteDeckId}
                 deck={deck}
               />
-            ))}
+            ))
+          )}
         </div>
       )}
 
