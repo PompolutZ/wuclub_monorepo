@@ -11,7 +11,7 @@ export const getAllDecksSchema = z.object({
 
 export type GetAllDecksQuery = z.infer<typeof getAllDecksSchema>;
 
-export const DeckIdSchema = z.string().regex(/^[a-z]{2,7}-[a-z0-9]{12}$/);
+export const DeckIdSchema = z.string().regex(/^[a-z]{1,7}-[a-z0-9]{12}$/);
 export type DeckId = z.infer<typeof DeckIdSchema>;
 
 export const updateDeckSchema = z.object({
