@@ -25,7 +25,7 @@ export const useDeleteDeck = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["userDecks", { user: user?.fuid ?? "anon" }],
+        queryKey: ["userDecks2", { user: user?.fuid ?? "anon" }],
       });
     },
   });
