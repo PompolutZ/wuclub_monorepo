@@ -97,7 +97,8 @@ export const setsNames: string[] = [
 "Blazing Assault Rivals Deck",
 "Emberstone Sentinels Rivals Deck",
 "Pillage and Plunder Rivals Deck",
-"Countdown to Cataclysm Rivals Deck"
+"Countdown to Cataclysm Rivals Deck",
+"Nexus of Power Rivals Deck"
 ];
 
 type GrandAllianceId = 38 | 39 | 40 | 41;
