@@ -571,7 +571,11 @@ export const cards = {
         "rule": "Score this in an end phase if your warband holds any treasure tokens in both neutral territory and enemy territory.",
         "scoreType": "End",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "ES10",
+            "NP9"
+        ]
     },
     "ES11": {
         "id": "ES11",
@@ -707,7 +711,11 @@ export const cards = {
         "rule": "Fighters cannot be driven back. This effect persists until the end of the next Action step.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "ES20",
+            "NP20"
+        ]
     },
     "ES21": {
         "id": "ES21",
@@ -755,7 +763,11 @@ export const cards = {
         "rule": "This fighter cannot be Flanked or Surrounded while they hold a treasure token.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "ES24",
+            "NP27"
+        ]
     },
     "ES25": {
         "id": "ES25",
@@ -983,7 +995,7 @@ export const cards = {
         "glory": 1,
         "rule": "Score this immediately after a friendly fighter Delves in enemy territory. If you are the **underdog**, that Delve can be in friendly territory instead.",
         "scoreType": "Surge",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "PL9": {
@@ -1603,7 +1615,11 @@ export const cards = {
         "rule": "**Insensate:** Immediately after this fighter is driven back, you can heal this fighter.",
         "scoreType": "-",
         "status": "V--_V-_V",
-        "rotated": false
+        "rotated": false,
+        "duplicates": [
+            "CC26",
+            "NP26"
+        ]
     },
     "CC27": {
         "id": "CC27",
@@ -3375,7 +3391,7 @@ export const cards = {
         "name": "Into the Fire",
         "type": "Objective",
         "glory": 1,
-        "rule": "Score this in an end phase if your **leader** is in enemy territory and within 2 hexes of 2 other fighters.",
+        "rule": "*(Errata update)* Score this in an end phase if your **leader** is in enemy territory and within 2 hexes of 2 or more other fighters.",
         "scoreType": "End",
         "status": "V--_V-_V",
         "rotated": false
@@ -4228,7 +4244,7 @@ export const cards = {
         "glory": 2,
         "rule": "Score this in an end phase if an enemy fighter was driven back as part of a united friendly fighter's successful Attack this battle round.",
         "scoreType": "End",
-        "status": "V--_V-_V",
+        "status": "V-Y_V-_V",
         "rotated": false
     },
     "DY10": {
@@ -4402,7 +4418,7 @@ export const cards = {
         "name": "Battering Ram",
         "type": "Upgrade",
         "glory": 1,
-        "rule": "Attack rolls made for this fighter as part of melee Attacks always count as having more :atCrit: than the Save roll for purposes of Drive Back and Overrun.",
+        "rule": "*(Errata update)* Attack rolls made for this fighter as part of melee Attacks always count as having more :atCrit: than the Save roll for the purposes of Stand Fast and Overrun.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false
@@ -4532,6 +4548,406 @@ export const cards = {
         "type": "Upgrade",
         "glory": 1,
         "rule": "This fighter is united.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP1": {
+        "id": "NP1",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Seized",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly fighter's successful melee Attack if the target was within 1 hex of a treasure token.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP2": {
+        "id": "NP2",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Break Out",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately at the end of your opponent's Action step if 2 or more friendly **covetous** fighters are in neutral and/or enemy territory.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP3": {
+        "id": "NP3",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Claimed",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately at the end of your opponent's Action step if 3 or more friendly fighters are **covetous**.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP4": {
+        "id": "NP4",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Pound for Pound",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after a friendly **covetous** fighter's successful Attack that targeted an enemy fighter with a Bounty characteristic of 2 or more that was within 1 hex of a treasure token. If you are the underdog, score this if the target had a Bounty characteristic of 1 or more.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP5": {
+        "id": "NP5",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "All Part of the Plan",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after your Action step if an enemy fighter that was holding a treasure token when they were picked to be the target of a friendly fighter's attack is no longer holding that treasure token and you hold that treasure token.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP6": {
+        "id": "NP6",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Calculated Strike",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this immediately after you make an Attack roll for a friendly **covetous** fighter if any of the results was an :atCrit:.",
+        "scoreType": "Surge",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP7": {
+        "id": "NP7",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Audacity",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if a friendly **covetous** fighter made a successful Attack in the preceding combat phase while they were in enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP8": {
+        "id": "NP8",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Close the Vice",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if 3 different friendly **covetous** fighters Attacked in the preceding combat phase.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP9": {
+        "id": "NP9",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Slow Advance",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if your warband holds any treasure tokens in both neutral territory and enemy territory.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES10",
+            "NP9"
+        ]
+    },
+    "NP10": {
+        "id": "NP10",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Domination",
+        "type": "Objective",
+        "glory": 1,
+        "rule": "Score this in an end phase if 3 or more friendly fighters are within 1 hex of different treasure tokens.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP11": {
+        "id": "NP11",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Lone Wolves",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if 2 or more friendly fighters are within 1 hex of the same treasure token and none of those fighters is adjacent to another fighter.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP12": {
+        "id": "NP12",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Skin of Their Teeth",
+        "type": "Objective",
+        "glory": 2,
+        "rule": "Score this in an end phase if 2 or more friendly fighters are holding treasure tokens and any of those fighters are damaged.",
+        "scoreType": "End",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP13": {
+        "id": "NP13",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Pilfer",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter. Push that fighter 1 hex. That push must end within 1 hex of a treasure token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP14": {
+        "id": "NP14",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Move at the Opening",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a friendly fighter Moves. Pick a different friendly fighter with no Move or Charge tokens. That fighter Moves and must end that Move within 1 hex of a treasure token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP15": {
+        "id": "NP15",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Organised Efforts",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick 2 friendly fighters holding treasure tokens. Remove those fighters from the battlefield and then place each on the treasure token the other was removed from.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP16": {
+        "id": "NP16",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Defiance",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after you pick a weapon as part of an Attack for a friendly fighter within 1 hex of a treasure token. That weapon has +1 Attack dice for that Attack.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP17": {
+        "id": "NP17",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Into the Deepwoods",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a friendly fighter within 1 hex of a treasure token that is in neutral or enemy territory. Give that fighter a Guard token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP18": {
+        "id": "NP18",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Unearthed Treasure",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick a cover token that does not have a fighter on it. Flip that cover token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP19": {
+        "id": "NP19",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Territorial Welcome",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Pick an undamaged enemy fighter within 1 hex of a treasure token. Melee Attacks that target that enemy fighter in the next turn have **Cleave**.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP20": {
+        "id": "NP20",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Hold the Line!",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Fighters cannot be driven back. This effect persists until the end of the next Action step.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES20",
+            "NP20"
+        ]
+    },
+    "NP21": {
+        "id": "NP21",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Dig In",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after a friendly fighter within 1 hex of a treasure token is picked as the target of an Attack. You can re-roll 1 Save dice in the Save roll for that Attack.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP22": {
+        "id": "NP22",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "The High Ground",
+        "type": "Ploy",
+        "glory": null,
+        "rule": "Play this immediately after you pick a weapon as part of an Attack for a friendly fighter within 1 hex of a treasure token. That weapon has **Grapple** and **Brutal** for that Attack.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP23": {
+        "id": "NP23",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Wily Prospector",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter is **covetous** while they are within 1 hex of a cover token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP24": {
+        "id": "NP24",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Cautious Attitude",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "This fighter's Range 1 weapons have +2 Range while they are **covetous**. While the target of this fighter's Attack is 3 or more hexes from this fighter, this fighter's Range 1 melee weapons have a maximum Damage characteristic of 2. Immediately after this fighter makes a successful Attack if the target was 3 or more hexes from this fighter, discard this card.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP25": {
+        "id": "NP25",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Mirror Shield",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "Ranged attacks that target this fighter have -1 Attack dice.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP26": {
+        "id": "NP26",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Driven by Pain",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Insensate:** Immediately after this fighter is driven back, you can heal this fighter.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "CC26",
+            "NP26"
+        ]
+    },
+    "NP27": {
+        "id": "NP27",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Inviolate",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter cannot be Flanked or Surrounded while they hold a treasure token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false,
+        "duplicates": [
+            "ES24",
+            "NP27"
+        ]
+    },
+    "NP28": {
+        "id": "NP28",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Opportunist",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Unearth:** Immediately after an enemy fighter has Charged, if this fighter is within 1 hex of a cover token, flip that cover token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP29": {
+        "id": "NP29",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Overreach",
+        "type": "Upgrade",
+        "glory": 2,
+        "rule": "While this fighter is within 1 hex of a treasure token, their ranged weapons have +2 Range. Immediately discard this Upgrade after this fighter makes a successful ranged Attack while they are within 1 hex of a treasure token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP30": {
+        "id": "NP30",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Spiteful Defender",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter's melee weapons have **Grievous** while they are within 1 hex of a treasure token and have no Charge tokens.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP31": {
+        "id": "NP31",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "I Like Those Odds",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "This fighter has +1 Save (to a maximum of 2) while they hold an odd-numbered treasure token.",
+        "scoreType": "-",
+        "status": "V--_V-_V",
+        "rotated": false
+    },
+    "NP32": {
+        "id": "NP32",
+        "factionId": "u",
+        "setId": "NP",
+        "name": "Starmaw",
+        "type": "Upgrade",
+        "glory": 1,
+        "rule": "**Ranged Attack action** \\n [:Hex: 4 - :atSmash: 2 - :boom: 1 -(**Stagger**)-] \\n This weapon has +1 Attack dice while the attacker is within 1 hex of a treasure token.",
         "scoreType": "-",
         "status": "V--_V-_V",
         "rotated": false

@@ -53,5 +53,10 @@ export const sets = {
         "id": "DY",
         "name": "deadly-synergy-rivals-deck",
         "displayName": "Deadly Synergy Rivals Deck"
+    },
+    "NP": {
+        "id": "NP",
+        "name": "nexus-of-power-rivals-deck",
+        "displayName": "Nexus of Power Rivals Deck"
     }
 } as const;

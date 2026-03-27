@@ -61,6 +61,7 @@ const setsWithPlot: SetId[] = [
   sets["CC"].id,
   sets["RS"].id,
   sets["DY"].id,
+  sets["NP"].id,
 ];
 export const setHasPlot = (setId: SetId) => {
   return setsWithPlot.includes(setId);
@@ -205,6 +206,7 @@ const setsWithPlotCards: SetId[] = [
   sets["CC"].id,
   sets["RS"].id,
   sets["DY"].id,
+  sets["NP"].id,
 ] as const;
 
 export const checkDeckHasPlots = (deckSets: SetId[]): Set[] => {
