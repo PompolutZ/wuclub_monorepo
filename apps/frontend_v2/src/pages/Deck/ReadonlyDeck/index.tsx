@@ -15,14 +15,13 @@ import { DeckPlotCards } from "./atoms/DeckPlotCards";
 import DeckSummary from "./DeckSummary";
 import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
 import { DeckProvider } from "./context";
+import { DeckActions } from "./atoms/DeckActions";
 import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
 import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
 import { exportToUDB, createShareableLink, saveVassalFormat } from "./utils/deckExport";
 import { getAuthorDisplayName, getFormattedDate } from "./utils/displayHelpers";
 
-const DeckActionsMenu = lazy(() => import("./atoms/DeckActionsMenu"));
-const DeckActionMenuLarge = lazy(() => import("./atoms/DeckActionsMenuLarge"));
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 
 const CardsSectionContent = memo(function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
@@ -144,18 +143,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
               <DeckPlayFormatsValidity cards={cards} />
             </div>
           </DeckSummary>
-          <>
-            <div className="lg:hidden">
-              <Suspense fallback={<LazyLoading />}>
-                <DeckActionsMenu />
-              </Suspense>
-            </div>
-            <div className="hidden lg:flex items-center">
-              <Suspense fallback={<LazyLoading />}>
-                <DeckActionMenuLarge />
-              </Suspense>
-            </div>
-          </>
+          <DeckActions />
         </div>
 
         <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
