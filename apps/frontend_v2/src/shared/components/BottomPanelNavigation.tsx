@@ -12,6 +12,17 @@ type BottomPanelNavigationProps = {
   tabs: Tab[];
 };
 
+function getGradientClass(activeTabIndex: number, tabCount: number): string {
+  if (tabCount === 2) {
+    return activeTabIndex === 0
+      ? "from-purple-200 to-gray-100"
+      : "from-gray-100 to-purple-200";
+  }
+  if (activeTabIndex === 0) return "from-purple-200 via-gray-100 to-gray-100";
+  if (activeTabIndex === 1) return "from-gray-100 via-purple-200 to-gray-100";
+  return "from-gray-100 via-gray-100 to-purple-200";
+}
+
 function BottomPanelNavigation({
   activeTabIndex,
   setActiveTabIndex,
@@ -19,13 +30,7 @@ function BottomPanelNavigation({
 }: BottomPanelNavigationProps) {
   return (
     <div
-      className={`flex transition-colors duration-500 bg-gradient-to-r ${
-        activeTabIndex == 0
-          ? "from-purple-200 via-gray-100 to-gray-100"
-          : activeTabIndex == 1
-            ? "from-gray-100 via-purple-200 to-gray-100"
-            : "from-gray-100 via-gray-100 to-purple-200"
-      }`}
+      className={`flex transition-colors duration-500 bg-gradient-to-r ${getGradientClass(activeTabIndex, tabs.length)}`}
     >
       {tabs.map(({ name, Icon, disabled }: Tab, index: number) => (
         <button
