@@ -4,10 +4,6 @@ import { SetId, Card } from '@wudb';
 // DeckCard is essentially a Card from the database
 export type DeckCard = Card;
 
-export interface UserInfo {
-  displayName: string;
-}
-
 export interface ReadonlyDeckProps {
   id: string;
   name: string;
@@ -19,14 +15,12 @@ export interface ReadonlyDeckProps {
   createdutc?: number;
   updatedutc?: number;
   private: boolean;
-  userInfo?: UserInfo[];
   canUpdateOrDelete: boolean;
 }
 
 export interface DeckSummaryProps {
   faction: Factions;
   name: string;
-  author?: string;
   date: string;
   sets: SetId[];
   isPrivate: boolean;

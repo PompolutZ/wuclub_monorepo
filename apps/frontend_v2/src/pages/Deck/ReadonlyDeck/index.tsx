@@ -20,7 +20,7 @@ import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
 import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
 import { exportToUDB, createShareableLink, saveVassalFormat } from "./utils/deckExport";
-import { getAuthorDisplayName, getFormattedDate } from "./utils/displayHelpers";
+import { getFormattedDate } from "./utils/displayHelpers";
 
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 
@@ -98,7 +98,6 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
     }
   };
 
-  const authorDisplayName = getAuthorDisplayName(props.userInfo);
   const createdDate = getFormattedDate(updatedutc, created);
 
   return (
@@ -123,7 +122,6 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           <DeckSummary
             faction={faction}
             name={name}
-            author={authorDisplayName}
             date={createdDate}
             sets={sets}
             isPrivate={isPrivate}
