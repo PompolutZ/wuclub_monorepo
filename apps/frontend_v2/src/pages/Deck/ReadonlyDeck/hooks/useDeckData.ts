@@ -7,7 +7,7 @@ import type { DeckCard, ProcessedDeck } from '../types';
 interface UseDeckDataParams {
   id: string;
   name: string;
-  author: string;
+  factionId: string;
   faction: Factions;
   sets: SetId[];
   created?: string;
@@ -20,7 +20,7 @@ interface UseDeckDataParams {
 export function useDeckData({
   id,
   name,
-  author,
+  factionId,
   faction,
   sets,
   created,
@@ -45,7 +45,7 @@ export function useDeckData({
     return {
       id,
       name,
-      author,
+      factionId,
       faction,
       sets,
       created,
@@ -56,5 +56,5 @@ export function useDeckData({
       upgrades,
       private: isPrivate,
     };
-  }, [id, name, author, faction, sets, created, createdutc, updatedutc, isPrivate, cards]);
+  }, [id, name, factionId, faction, sets, created, createdutc, updatedutc, isPrivate, cards]);
 }

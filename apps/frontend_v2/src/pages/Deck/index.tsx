@@ -19,7 +19,7 @@ const Deck2 = () => {
         <ReadonlyDeck
           id={deck.deckId}
           name={deck.name}
-          author={factionId}
+          factionId={factionId}
           faction={deck.faction as any}
           cards={cards}
           sets={deck.sets as any[]}

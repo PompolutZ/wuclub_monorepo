@@ -7,7 +7,7 @@ export type DeckCard = Card;
 export interface ReadonlyDeckProps {
   id: string;
   name: string;
-  author: string;
+  factionId: string;
   faction: Factions;
   cards: DeckCard[];
   sets: SetId[];
@@ -31,7 +31,7 @@ export interface DeckSummaryProps {
 export interface ProcessedDeck {
   id: string;
   name: string;
-  author: string;
+  factionId: string;
   faction: Factions;
   sets: SetId[];
   created?: string;
