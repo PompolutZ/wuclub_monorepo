@@ -64,18 +64,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   const { mutateAsync: update } = useUpdateDeck();
   const { mutateAsync: deleteUserDeck } = useDeleteDeck();
 
-  const deck = useDeckData(
-    id,
-    name,
-    author,
-    faction,
-    sets,
-    created,
-    createdutc,
-    updatedutc,
-    isPrivate,
-    cards
-  );
+  const deck = useDeckData({ id, name, author, faction, sets, created, createdutc, updatedutc, isPrivate, cards });
 
   const { summary: objectiveSummary, totalGlory } = useObjectiveSummary(deck.objectives);
 

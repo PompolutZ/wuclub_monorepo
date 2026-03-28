@@ -4,18 +4,31 @@ import { SetId } from '@wudb';
 import { checkCardIsObjective, checkCardIsPloy, checkCardIsUpgrade, compareObjectivesByScoreType } from '../../../../data/wudb';
 import type { DeckCard, ProcessedDeck } from '../types';
 
-export function useDeckData(
-  id: string,
-  name: string,
-  author: string,
-  faction: Factions,
-  sets: SetId[],
-  created: string | undefined,
-  createdutc: number | undefined,
-  updatedutc: number | undefined,
-  isPrivate: boolean,
-  cards: DeckCard[] = []
-): ProcessedDeck {
+interface UseDeckDataParams {
+  id: string;
+  name: string;
+  author: string;
+  faction: Factions;
+  sets: SetId[];
+  created?: string;
+  createdutc?: number;
+  updatedutc?: number;
+  isPrivate: boolean;
+  cards?: DeckCard[];
+}
+
+export function useDeckData({
+  id,
+  name,
+  author,
+  faction,
+  sets,
+  created,
+  createdutc,
+  updatedutc,
+  isPrivate,
+  cards = [],
+}: UseDeckDataParams): ProcessedDeck {
   return useMemo(() => {
     const objectives = cards
       .filter(checkCardIsObjective)
