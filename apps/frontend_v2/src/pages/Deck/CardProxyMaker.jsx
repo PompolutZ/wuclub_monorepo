@@ -210,13 +210,13 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
   return (
     <div className="fixed inset-0 z-10 p-8 backdrop-blur">
       <div className="flex w-full h-full flex-col">
-        <div className="flex-1 overflow-y-auto grid grid-cols-6 gap-y-2 p-4">
+        <div className="flex-1 overflow-y-auto grid grid-cols-6 gap-2 p-4">
           {plotCards.map((card) => (
             <img
               id={`proxy ${card}`}
               key={card}
               src={`/assets/plots/${card}.png`}
-              className={`w-[64.5mm] h-[89.9mm] filter ${
+              className={`w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${
                 selectedPlotCards.includes(card) ? "grayscale-0" : "grayscale"
               }`}
               onClick={handleTogglePlotCard(card)}
@@ -230,7 +230,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
                 src={`/assets/fighters/${factionId}/${factionId}-${
                   index + 1
                 }.png`}
-                className={`w-[64.5mm] h-[89.9mm] filter ${
+                className={`w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${
                   selectedFighters.includes(fighter)
                     ? "grayscale-0"
                     : "grayscale"
@@ -243,7 +243,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
                 src={`/assets/fighters/${factionId}/${factionId}-${
                   index + 1
                 }-inspired.png`}
-                className={`w-[64.5mm] h-[89.9mm] filter ${
+                className={`w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${
                   selectedFighters.includes(fighter)
                     ? "grayscale-0"
                     : "grayscale"
@@ -258,7 +258,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
               id={`proxy ${card.id}`}
               key={card.id}
               src={getCardPathByCardId(card, "png")}
-              className={`w-[64.5mm] h-[89.9mm] filter ${
+              className={`w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${
                 selectedCardIds.includes(card.id) ? "grayscale-0" : "grayscale"
               }`}
               onClick={handleToggleCardSelected(card.id)}
@@ -286,12 +286,14 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
               Toggle Warband
             </button>
           )}
-          <button
-            className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
-            onClick={togglePlotCards}
-          >
-            Toggle Plot cards
-          </button>
+          {plotCards.length > 0 && (
+            <button
+              className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+              onClick={togglePlotCards}
+            >
+              Toggle Plot cards
+            </button>
+          )}
           <div>
             Total proxy cards selected{" "}
             <span className="font-bold">{totalProxies}</span>
