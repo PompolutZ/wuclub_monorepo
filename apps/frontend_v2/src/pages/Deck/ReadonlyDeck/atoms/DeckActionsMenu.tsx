@@ -4,23 +4,25 @@ import {
   MoreVerticalIcon,
   ShareIcon,
 } from "../../../../shared/components/Icons";
+import { useDeckContext } from "../context";
 import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
 import DropdownMenu from "./DropdownMenu";
 import ExportMenu from "./ExportMenu";
 import { DeleteMenuButton } from "./IconButton";
 import IconLink from "./IconLink";
-import type { DeckActionsMenuProps } from "../types";
 
-function DeckActionsMenu({
-  deckId,
-  deck,
-  isPrivate,
-  onToggleDeckPrivacy,
-  exportToUDB,
-  createShareableLink,
-  onDelete,
-  canUpdateOrDelete,
-}: DeckActionsMenuProps) {
+function DeckActionsMenu() {
+  const {
+    deckId,
+    deck,
+    isPrivate,
+    toggleDeckPrivacy,
+    exportToUDB,
+    createShareableLink,
+    onDelete,
+    canUpdateOrDelete,
+  } = useDeckContext();
+
   return (
     <DropdownMenu trigger={<MoreVerticalIcon />}>
       <div>
@@ -31,9 +33,7 @@ function DeckActionsMenu({
                 active={active}
                 to={{
                   pathname: `/deck/edit/${deckId}`,
-                  state: {
-                    deck,
-                  },
+                  state: { deck },
                 }}
                 label="Edit"
               >
@@ -77,7 +77,7 @@ function DeckActionsMenu({
                   active ? "bg-purple-500 text-white" : "text-purple-900"
                 } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                 isPrivate={isPrivate}
-                onClick={onToggleDeckPrivacy}
+                onClick={toggleDeckPrivacy}
               />
             )}
           </Menu.Item>
@@ -89,10 +89,7 @@ function DeckActionsMenu({
         {canUpdateOrDelete && (
           <Menu.Item>
             {({ active }) => (
-              <DeleteMenuButton
-                active={active}
-                onClick={onDelete}
-              ></DeleteMenuButton>
+              <DeleteMenuButton active={active} onClick={onDelete} />
             )}
           </Menu.Item>
         )}

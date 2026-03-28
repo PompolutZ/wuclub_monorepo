@@ -14,6 +14,7 @@ import { Toast } from "./atoms/Toast";
 import { DeckPlotCards } from "./atoms/DeckPlotCards";
 import DeckSummary from "./DeckSummary";
 import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
+import { DeckProvider } from "./context";
 import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
 import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
@@ -113,7 +114,22 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   const createdDate = getFormattedDate(updatedutc, created);
 
   return (
-    <>
+    <DeckProvider
+      value={{
+        deckId: id,
+        deck,
+        canUpdateOrDelete: props.canUpdateOrDelete,
+        isPrivate,
+        cardsView,
+        toggleDeckPrivacy,
+        onDelete: () => setIsDeleteDialogVisible(true),
+        onCardsViewChange: () => setCardsView((prev) => !prev),
+        exportToUDB: () => exportToUDB(cards),
+        createShareableLink: () => createShareableLink(cards, handleShowToast),
+        copyInVassalFormat: () => saveVassalFormat(faction, cards, handleShowToast),
+        onDownloadProxy: () => setIsProxyPickerVisible(true),
+      }}
+    >
       <div className="flex-1 w-screen">
         <div className="flex px-4">
           <DeckSummary
@@ -131,34 +147,12 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           <>
             <div className="lg:hidden">
               <Suspense fallback={<LazyLoading />}>
-                <DeckActionsMenu
-                  deck={deck}
-                  deckId={id}
-                  canUpdateOrDelete={props.canUpdateOrDelete}
-                  exportToUDB={() => exportToUDB(cards)}
-                  createShareableLink={() => createShareableLink(cards, handleShowToast)}
-                  onDelete={() => setIsDeleteDialogVisible(true)}
-                  onToggleDeckPrivacy={toggleDeckPrivacy}
-                  isPrivate={isPrivate}
-                />
+                <DeckActionsMenu />
               </Suspense>
             </div>
             <div className="hidden lg:flex items-center">
               <Suspense fallback={<LazyLoading />}>
-                <DeckActionMenuLarge
-                  cardsView={cardsView}
-                  onCardsViewChange={() => setCardsView((prev) => !prev)}
-                  copyInVassalFormat={() => saveVassalFormat(faction, cards, handleShowToast)}
-                  canUpdateOrDelete={props.canUpdateOrDelete}
-                  deck={deck}
-                  deckId={id}
-                  exportToUDB={() => exportToUDB(cards)}
-                  createShareableLink={() => createShareableLink(cards, handleShowToast)}
-                  onDelete={() => setIsDeleteDialogVisible(true)}
-                  onToggleDeckPrivacy={toggleDeckPrivacy}
-                  isPrivate={isPrivate}
-                  onDownloadProxy={() => setIsProxyPickerVisible(true)}
-                />
+                <DeckActionMenuLarge />
               </Suspense>
             </div>
           </>
@@ -231,7 +225,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
         onDeleteConfirmed={handleDeleteDeck}
         onDeleteRejected={() => setIsDeleteDialogVisible(false)}
       />
-    </>
+    </DeckProvider>
   );
 }
 

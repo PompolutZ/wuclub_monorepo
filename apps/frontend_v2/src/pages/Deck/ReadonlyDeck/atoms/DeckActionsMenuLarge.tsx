@@ -1,31 +1,28 @@
-import IconLink from "./IconLink";
-import DropdownMenu from "./DropdownMenu";
-import ExportMenu from "./ExportMenu";
 import { Menu } from "@headlessui/react";
-import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
 import { EditIcon } from "../../../../shared/components/Icons";
 import { Copy, List, Image, Download, ExternalLink, Trash2 } from "lucide-react";
-import type { DeckActionsMenuLargeProps } from "../types";
+import { useDeckContext } from "../context";
+import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
+import DropdownMenu from "./DropdownMenu";
+import ExportMenu from "./ExportMenu";
+import IconLink from "./IconLink";
 
-/**
- * Large screen action menu for deck operations
- * Provides edit, view toggle, privacy control, copy, download, export, and delete actions
- * Displays as a horizontal toolbar on desktop screens
- */
-function DeckActionMenuLarge({
-  deckId,
-  isPrivate,
-  onToggleDeckPrivacy,
-  deck,
-  cardsView,
-  onCardsViewChange,
-  canUpdateOrDelete,
-  copyInVassalFormat,
-  onDelete,
-  exportToUDB,
-  createShareableLink,
-  onDownloadProxy,
-}: DeckActionsMenuLargeProps) {
+function DeckActionMenuLarge() {
+  const {
+    deckId,
+    deck,
+    isPrivate,
+    toggleDeckPrivacy,
+    cardsView,
+    onCardsViewChange,
+    canUpdateOrDelete,
+    copyInVassalFormat,
+    onDelete,
+    exportToUDB,
+    createShareableLink,
+    onDownloadProxy,
+  } = useDeckContext();
+
   return (
     <>
       {canUpdateOrDelete && (
@@ -33,9 +30,7 @@ function DeckActionMenuLarge({
           className="hover:bg-gray-200"
           to={{
             pathname: `/deck/edit/${deckId}`,
-            state: {
-              deck,
-            },
+            state: { deck },
           }}
           label="Edit"
         >
@@ -59,10 +54,11 @@ function DeckActionMenuLarge({
           </>
         )}
       </button>
+
       {canUpdateOrDelete && (
         <DeckPrivacyToggleButton
           isPrivate={isPrivate}
-          onClick={onToggleDeckPrivacy}
+          onClick={toggleDeckPrivacy}
         />
       )}
 
@@ -130,7 +126,7 @@ function DeckActionMenuLarge({
           )}
         </Menu.Item>
       </DropdownMenu>
-      
+
       <DropdownMenu
         className="relative z-10"
         trigger={
@@ -142,6 +138,7 @@ function DeckActionMenuLarge({
       >
         <ExportMenu exportToUDB={exportToUDB} />
       </DropdownMenu>
+
       {canUpdateOrDelete && (
         <button
           className={`text-accent3-700 group hover:bg-gray-200 flex rounded-md items-center px-2 py-2 text-sm`}

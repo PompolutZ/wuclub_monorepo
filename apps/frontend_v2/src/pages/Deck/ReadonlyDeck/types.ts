@@ -33,31 +33,6 @@ export interface DeckSummaryProps {
   children?: React.ReactNode;
 }
 
-export interface DeckActionsMenuProps {
-  deckId: string;
-  deck: ProcessedDeck;
-  isPrivate: boolean;
-  onToggleDeckPrivacy: () => void;
-  exportToUDB: () => void;
-  createShareableLink: () => void;
-  onDelete: () => void;
-  canUpdateOrDelete: boolean;
-}
-
-export interface DeckActionsMenuLargeProps {
-  deckId: string;
-  deck: ProcessedDeck;
-  isPrivate: boolean;
-  onToggleDeckPrivacy: () => void;
-  exportToUDB: () => void;
-  createShareableLink: () => void;
-  onDelete: () => void;
-  canUpdateOrDelete: boolean;
-  cardsView: boolean;
-  onCardsViewChange: () => void;
-  copyInVassalFormat: () => void;
-  onDownloadProxy: () => void;
-}
 
 export interface ProcessedDeck {
   id: string;
