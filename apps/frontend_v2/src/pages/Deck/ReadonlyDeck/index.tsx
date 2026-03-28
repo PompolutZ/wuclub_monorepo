@@ -21,8 +21,19 @@ import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
 import { exportToUDB, createShareableLink, saveVassalFormat } from "./utils/deckExport";
 import { getFormattedDate } from "./utils/displayHelpers";
+import { useBreakpoint } from "@/hooks/useMediaQuery";
+import BottomPanelNavigation from "@components/BottomPanelNavigation";
+import FightersInfoList from "../../../atoms/FightersInfoList";
+import DeckIcon from "@icons/deck.svg?react";
+import WarbandIcon from "@icons/warband.svg?react";
+import { factions } from "@wudb/factions";
 
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
+
+const MOBILE_TABS = (factionId: string) => [
+  { name: "Deck", Icon: DeckIcon },
+  { name: "Warband", Icon: WarbandIcon, disabled: factionId === factions["u"].id },
+];
 
 const CardsSectionContent = memo(function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
   return listView ? (
@@ -54,6 +65,8 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   } = props;
 
   const history = useHistory();
+  const isMobile = useBreakpoint("mobile");
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isPrivate, setIsPrivate] = useState(props.private);
   const [isProxyPickerVisible, setIsProxyPickerVisible] = useState(false);
   const [cardsView, setCardsView] = useState(false);
@@ -100,6 +113,41 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
 
   const createdDate = getFormattedDate(updatedutc, created);
 
+  const cardSections = (
+    <div
+      className={`mt-4 lg:mt-8 mb-8 ${
+        cardsView ? "" : "lg:grid lg:gap-2 lg:grid-cols-3"
+      }`}
+    >
+      <section className="px-4">
+        <CardListSectionHeader
+          className="px-2"
+          type={"Objectives"}
+          amount={deck.objectives.length}
+        >
+          <ScoringOverview summary={objectiveSummary} glory={totalGlory} />
+        </CardListSectionHeader>
+        <CardsSectionContent cards={deck.objectives} listView={!cardsView} />
+      </section>
+      <section className="mt-4 lg:mt-0 px-4">
+        <CardListSectionHeader
+          className="px-2"
+          type={"Gambits"}
+          amount={deck.gambits.length}
+        />
+        <CardsSectionContent cards={deck.gambits} listView={!cardsView} />
+      </section>
+      <section className="mt-4 lg:mt-0 px-4">
+        <CardListSectionHeader
+          className="px-2"
+          type={"Upgrades"}
+          amount={deck.upgrades.length}
+        />
+        <CardsSectionContent cards={deck.upgrades} listView={!cardsView} />
+      </section>
+    </div>
+  );
+
   return (
     <DeckProvider
       value={{
@@ -117,72 +165,79 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
         onDownloadProxy: () => setIsProxyPickerVisible(true),
       }}
     >
-      <div className="flex-1 w-screen">
-        <div className="flex px-4">
-          <DeckSummary
-            faction={faction}
-            name={name}
-            date={createdDate}
-            sets={sets}
-            isPrivate={isPrivate}
-          >
-            <div className="ml-4">
-              <DeckPlayFormatsValidity cards={cards} />
-            </div>
-          </DeckSummary>
-          <DeckActions />
-        </div>
+      {isMobile ? (
+        <div className="flex flex-col h-full">
+          <div className="flex-1 flex overflow-hidden min-h-0">
+            {activeTabIndex === 0 && (
+              <div className="flex-1 relative">
+                <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">
+                  <div className="flex px-4">
+                    <DeckSummary
+                      faction={faction}
+                      name={name}
+                      date={createdDate}
+                      sets={sets}
+                      isPrivate={isPrivate}
+                    >
+                      <div className="ml-4">
+                        <DeckPlayFormatsValidity cards={cards} />
+                      </div>
+                    </DeckSummary>
+                    <DeckActions />
+                  </div>
+                  <div className="p-4">
+                    <DeckPlotCards factionId={faction} sets={sets} />
+                  </div>
+                  {cardSections}
+                </div>
+              </div>
+            )}
+            {activeTabIndex === 1 && <FightersInfoList factionName={faction} />}
+          </div>
 
-        <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
-          <DeckPlotCards factionId={faction} sets={sets} />
-          <FighterCardsPortal faction={faction} />
+          <BottomPanelNavigation
+            tabs={MOBILE_TABS(factionId)}
+            activeTabIndex={activeTabIndex}
+            setActiveTabIndex={setActiveTabIndex}
+          />
         </div>
-
-        <div
-          className={`mt-4 lg:mt-8 mb-8 ${
-            cardsView ? "" : "lg:grid lg:gap-2 lg:grid-cols-3"
-          }`}
-        >
-          <section className="px-4">
-            <CardListSectionHeader
-              className="px-2"
-              type={"Objectives"}
-              amount={deck.objectives.length}
+      ) : (
+        <div className="flex-1 w-screen">
+          <div className="flex px-4">
+            <DeckSummary
+              faction={faction}
+              name={name}
+              date={createdDate}
+              sets={sets}
+              isPrivate={isPrivate}
             >
-              <ScoringOverview summary={objectiveSummary} glory={totalGlory} />
-            </CardListSectionHeader>
-            <CardsSectionContent cards={deck.objectives} listView={!cardsView} />
-          </section>
-          <section className="mt-4 lg:mt-0 px-4">
-            <CardListSectionHeader
-              className="px-2"
-              type={"Gambits"}
-              amount={deck.gambits.length}
-            />
-            <CardsSectionContent cards={deck.gambits} listView={!cardsView} />
-          </section>
-          <section className="mt-4 lg:mt-0 px-4">
-            <CardListSectionHeader
-              className="px-2"
-              type={"Upgrades"}
-              amount={deck.upgrades.length}
-            />
-            <CardsSectionContent cards={deck.upgrades} listView={!cardsView} />
-          </section>
-        </div>
+              <div className="ml-4">
+                <DeckPlayFormatsValidity cards={cards} />
+              </div>
+            </DeckSummary>
+            <DeckActions />
+          </div>
 
-        {isProxyPickerVisible && (
-          <ModalPresenter>
-            <Suspense fallback={<LazyLoading />}>
-              <CardProxyMaker
-                factionId={faction}
-                cards={cards as any}
-                onExit={() => setIsProxyPickerVisible(false)}
-              />
-            </Suspense>
-          </ModalPresenter>
-        )}
-      </div>
+          <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
+            <DeckPlotCards factionId={faction} sets={sets} />
+            <FighterCardsPortal faction={faction} />
+          </div>
+
+          {cardSections}
+        </div>
+      )}
+
+      {isProxyPickerVisible && (
+        <ModalPresenter>
+          <Suspense fallback={<LazyLoading />}>
+            <CardProxyMaker
+              factionId={faction}
+              cards={cards as any}
+              onExit={() => setIsProxyPickerVisible(false)}
+            />
+          </Suspense>
+        </ModalPresenter>
+      )}
 
       <Toast
         className="border-purple-700 border-2 bg-purple-100 font-bold p-4 text-purple-700 text-xs lg:text-default rounded-md shadow-md"

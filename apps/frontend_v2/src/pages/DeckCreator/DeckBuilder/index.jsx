@@ -148,7 +148,7 @@ function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
             />
           </div>
         </div>
-        <FightersInfoList />
+        <FightersInfoList factionName={faction.name} />
       </MobileView>
 
       <DesktopView>

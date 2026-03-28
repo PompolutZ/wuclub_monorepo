@@ -1,7 +1,6 @@
 import { animated as a, useSpring } from "@react-spring/web";
 import { useEffect, useState } from "react";
 import { factionMembers } from "../data/wudb";
-import { useDeckBuilderState } from "../pages/DeckCreator";
 import { WarbandWarscroll } from "../shared/components/WarbandWarscroll";
 
 function useClickAway() {
@@ -33,8 +32,7 @@ function useClickAway() {
   return clickedAway;
 }
 
-export default function FightersInfoList({ onClose }) {
-  const { faction } = useDeckBuilderState();
+export default function FightersInfoList({ onClose = undefined, factionName }) {
   const clickedAway = useClickAway();
 
   useEffect(() => {
@@ -46,11 +44,11 @@ export default function FightersInfoList({ onClose }) {
   return (
     <div className="flex-1 relative">
       <div className="absolute inset-0 overflow-y-auto p-4 lg:p-12">
-        <WarbandWarscroll className="mb-4" factionName={faction.name} />
-        {factionMembers[faction.name].map((fighter, index) => (
+        <WarbandWarscroll className="mb-4" factionName={factionName} />
+        {factionMembers[factionName].map((fighter, index) => (
           <FlippableFighterCard
             key={fighter}
-            faction={faction.name}
+            faction={factionName}
             index={index + 1}
           />
         ))}

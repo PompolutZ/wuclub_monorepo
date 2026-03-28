@@ -7,7 +7,7 @@ import GloryIcon from '@icons/wu-glory.svg?react';
 
 function ScoringOverview({ summary: { Surge, End, Third }, glory }) {
     return (
-        <div className="flex items-center text-sm text-gray-800">
+        <div className="flex flex-wrap items-center text-sm text-gray-800">
             (
             {Surge > 0 && (
                 <div className="flex items-center mr-2">

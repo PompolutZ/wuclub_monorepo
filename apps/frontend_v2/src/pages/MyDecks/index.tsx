@@ -1,4 +1,5 @@
 import { DeleteConfirmationDialog } from "@components/DeleteConfirmationDialog";
+import { ScrollContainer } from "@components/ScrollContainer";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuthUser from "../../hooks/useAuthUser";
@@ -86,53 +87,59 @@ function MyDecksPage() {
 
   return (
     <div className="flex-1 flex p-4 flex-col">
-      {!user && <AnonymousUserDecksStorageInfo />}
-      {loading && <LazyLoading />}
-      {!loading && userDecks?.total === 0 && (
-        <div className="flex-1 flex items-center justify-center">
-          <p>
-            You don't have any decks yet.{" "}
-            <Link className="text-purple-700 font-bold" to="/deck/create">
-              Let's make one!
-            </Link>
-          </p>
-        </div>
-      )}
+      <ScrollContainer>
+        <div className="flex flex-col h-full">
+          {!user && <AnonymousUserDecksStorageInfo />}
+          {loading && <LazyLoading />}
 
-      {userDecks && userDecks.total > 0 && (
-        <div className="flex-1">
-          <FilterSortBar
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-            selectedSets={selectedSetFilters}
-            onSetsChange={setSelectedSetFilters}
-            onClearFilters={() => setSelectedSetFilters([])}
-            availableSets={Object.keys(sets)}
-          />
-          {filteredAndSortedDecks.length === 0 && selectedSetFilters.length > 0 ? (
+          {!loading && userDecks?.total === 0 && (
             <div className="flex-1 flex items-center justify-center">
-              <p className="text-gray-600">
-                No decks found with selected filters.{" "}
-                <button
-                  className="text-purple-700 font-bold"
-                  onClick={() => setSelectedSetFilters([])}
-                >
-                  Clear filters
-                </button>
+              <p>
+                You don't have any decks yet.{" "}
+                <Link className="text-purple-700 font-bold" to="/deck/create">
+                  Let's make one!
+                </Link>
               </p>
             </div>
-          ) : (
-            filteredAndSortedDecks.map((deck) => (
-              <DeckLink
-                key={deck.deckId}
-                onDelete={handleDeleteDeckId}
-                deck={deck}
+          )}
+
+          {userDecks && userDecks.total > 0 && (
+            <div className="flex-1 flex flex-col min-h-0">
+              <FilterSortBar
+                sortBy={sortBy}
+                onSortChange={setSortBy}
+                selectedSets={selectedSetFilters}
+                onSetsChange={setSelectedSetFilters}
+                onClearFilters={() => setSelectedSetFilters([])}
+                availableSets={Object.keys(sets)}
               />
-            ))
+              <div className="flex-1 overflow-y-auto overflow-x-hidden">
+                {filteredAndSortedDecks.length === 0 && selectedSetFilters.length > 0 ? (
+                  <div className="flex-1 flex items-center justify-center">
+                    <p className="text-gray-600">
+                      No decks found with selected filters.{" "}
+                      <button
+                        className="text-purple-700 font-bold"
+                        onClick={() => setSelectedSetFilters([])}
+                      >
+                        Clear filters
+                      </button>
+                    </p>
+                  </div>
+                ) : (
+                  filteredAndSortedDecks.map((deck) => (
+                    <DeckLink
+                      key={deck.deckId}
+                      onDelete={handleDeleteDeckId}
+                      deck={deck}
+                    />
+                  ))
+                )}
+              </div>
+            </div>
           )}
         </div>
-      )}
-
+      </ScrollContainer>
       <DeleteConfirmationDialog
         title="Delete deck"
         description={`Are you sure you want to delete deck: '${

@@ -11,13 +11,13 @@ import type { DeckSummaryProps } from "./types";
  */
 const DeckSummary = memo(function DeckSummary({ faction, name, date, sets, children, isPrivate }: DeckSummaryProps) {
   return (
-    <div className="flex items-center flex-1 space-x-4">
+    <div className="flex items-center flex-1 space-x-4 min-w-0">
       <FactionDeckPicture size="large" faction={faction} />
 
-      <div className="space-y-2 text-gray-900">
+      <div className="space-y-2 text-gray-900 min-w-0">
         <div>
           <DeckTitle sets={sets}>
-            <h1 className="text-xl">{name}</h1>
+            <h1 className="text-xl truncate">{name}</h1>
           </DeckTitle>
 
           <h2 className="font-bold text-sm flex items-center space-x-2 divide-x-2 divide-gray-700">
