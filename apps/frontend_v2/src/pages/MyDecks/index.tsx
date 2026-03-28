@@ -1,4 +1,5 @@
 import { DeleteConfirmationDialog } from "@components/DeleteConfirmationDialog";
+import { ScrollContainer } from "@components/ScrollContainer";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuthUser from "../../hooks/useAuthUser";
@@ -86,8 +87,8 @@ function MyDecksPage() {
 
   return (
     <div className="flex-1 flex p-4 flex-col">
-      <div className="flex-1 relative">
-        <div className="absolute inset-0 overflow-hidden flex flex-col">
+      <ScrollContainer>
+        <div className="flex flex-col h-full">
           {!user && <AnonymousUserDecksStorageInfo />}
           {loading && <LazyLoading />}
 
@@ -138,7 +139,7 @@ function MyDecksPage() {
             </div>
           )}
         </div>
-      </div>
+      </ScrollContainer>
       <DeleteConfirmationDialog
         title="Delete deck"
         description={`Are you sure you want to delete deck: '${
