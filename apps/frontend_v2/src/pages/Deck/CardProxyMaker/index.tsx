@@ -1,7 +1,7 @@
 import { factionMembers } from "@wudb/index";
 import { getCardPathByCardId } from "../../../utils/helpers";
 import type { Card } from "../../../data/wudb/types";
-import { getPlotKeywords } from "./utils";
+import { getPlotSetIds } from "./utils";
 import { useProxySelection } from "./useProxySelection";
 import { ProxyCardSection } from "./ProxyCardSection";
 import { ProxyActionBar } from "./ProxyActionBar";
@@ -13,14 +13,14 @@ interface CardProxyMakerProps {
 }
 
 const cardImgClass = (selected: boolean) =>
-  `w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${selected ? "grayscale-0" : "grayscale"}`;
+  `w-full aspect-[64.5/89.9] object-cover cursor-pointer filter transition-all duration-150 ${
+    selected ? "grayscale-0 drop-shadow-lg" : "grayscale"
+  }`;
 
 const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) => {
   const fighters = [...((factionMembers as Record<string, readonly string[]>)[factionId] ?? [])];
   const hasWarband = fighters.length > 0;
-  const plotCards = (
-    getPlotKeywords(cards.map((card) => card.setId)) ?? []
-  ).flatMap((plot: any) => plot.asset ?? plot.cards.map(({ asset }: { asset: string }) => asset));
+  const plotCards = getPlotSetIds([...new Set(cards.map((card) => card.setId))]);
 
   const {
     selectedCardIds,
@@ -40,12 +40,12 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
       <div className="flex w-full h-full flex-col">
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
           {plotCards.length > 0 && (
-            <ProxyCardSection title="Plot Cards">
+            <ProxyCardSection title="Plot Cards" selected={selectedPlotCards.length} total={plotCards.length}>
               {plotCards.map((card: string) => (
                 <img
                   id={`proxy ${card}`}
                   key={card}
-                  src={`/assets/plots/${card}.png`}
+                  src={`/assets/cards/${card}/${card}Plot.png`}
                   className={cardImgClass(selectedPlotCards.includes(card))}
                   onClick={togglePlotCard(card)}
                 />
@@ -54,7 +54,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
           )}
 
           {hasWarband && (
-            <ProxyCardSection title="Fighter Cards">
+            <ProxyCardSection title="Fighter Cards" selected={selectedFighters.length} total={fighters.length}>
               {fighters.map((fighter: string, index: number) => (
                 <>
                   <img
@@ -76,7 +76,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
             </ProxyCardSection>
           )}
 
-          <ProxyCardSection title="Deck Cards">
+          <ProxyCardSection title="Deck Cards" selected={selectedCardIds.length} total={cards.length}>
             {cards.map((card) => (
               <img
                 id={`proxy ${card.id}`}
