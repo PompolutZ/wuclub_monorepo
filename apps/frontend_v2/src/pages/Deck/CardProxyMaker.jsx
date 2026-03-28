@@ -40,9 +40,6 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
     ) ?? []
   ).flatMap((plot) => plot.asset ?? plot.cards.map(({ asset }) => asset));
   const [selectedPlotCards, setSelectedPlotCards] = useState(plotCards);
-  const totalProxies =
-    selectedCardIds.length + selectedFighters.length + selectedPlotCards.length;
-
   const handleDownload = async () => {
     const { default: jsPDF } = await import("jspdf");
     let doc = new jsPDF({
@@ -207,80 +204,90 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
     }
   };
 
+  const cardImgClass = (selected) =>
+    `w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${selected ? "grayscale-0" : "grayscale"}`;
+
+  const gridClass = "grid grid-cols-3 md:grid-cols-6 gap-2";
+
   return (
     <div className="fixed inset-0 z-10 p-8 backdrop-blur">
       <div className="flex w-full h-full flex-col">
-        <div className="flex-1 overflow-y-auto grid grid-cols-6 gap-2 p-4">
-          {plotCards.map((card) => (
-            <img
-              id={`proxy ${card}`}
-              key={card}
-              src={`/assets/plots/${card}.png`}
-              className={`w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${
-                selectedPlotCards.includes(card) ? "grayscale-0" : "grayscale"
-              }`}
-              onClick={handleTogglePlotCard(card)}
-            />
-          ))}
-          {hasWarband && fighters.map((fighter, index) => (
-            <>
-              <img
-                id={`proxy ${fighter}`}
-                key={fighter}
-                src={`/assets/fighters/${factionId}/${factionId}-${
-                  index + 1
-                }.png`}
-                className={`w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${
-                  selectedFighters.includes(fighter)
-                    ? "grayscale-0"
-                    : "grayscale"
-                }`}
-                onClick={handleToggleFighterSelected(fighter)}
-              />
-              <img
-                id={`proxy ${fighter}-inspired`}
-                key={`${fighter}-inspired`}
-                src={`/assets/fighters/${factionId}/${factionId}-${
-                  index + 1
-                }-inspired.png`}
-                className={`w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${
-                  selectedFighters.includes(fighter)
-                    ? "grayscale-0"
-                    : "grayscale"
-                }`}
-                onClick={handleToggleFighterSelected(fighter)}
-              />
-            </>
-          ))}
+        <div className="flex-1 overflow-y-auto p-4 space-y-6">
+          {plotCards.length > 0 && (
+            <section>
+              <h3 className="text-sm font-bold text-gray-700 mb-2">Plot Cards</h3>
+              <div className={gridClass}>
+                {plotCards.map((card) => (
+                  <img
+                    id={`proxy ${card}`}
+                    key={card}
+                    src={`/assets/plots/${card}.png`}
+                    className={cardImgClass(selectedPlotCards.includes(card))}
+                    onClick={handleTogglePlotCard(card)}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
 
-          {cards.map((card) => (
-            <img
-              id={`proxy ${card.id}`}
-              key={card.id}
-              src={getCardPathByCardId(card, "png")}
-              className={`w-full aspect-[64.5/89.9] object-cover cursor-pointer filter ${
-                selectedCardIds.includes(card.id) ? "grayscale-0" : "grayscale"
-              }`}
-              onClick={handleToggleCardSelected(card.id)}
-            />
-          ))}
+          {hasWarband && (
+            <section>
+              <h3 className="text-sm font-bold text-gray-700 mb-2">Fighter Cards</h3>
+              <div className={gridClass}>
+                {fighters.map((fighter, index) => (
+                  <>
+                    <img
+                      id={`proxy ${fighter}`}
+                      key={fighter}
+                      src={`/assets/fighters/${factionId}/${factionId}-${index + 1}.png`}
+                      className={cardImgClass(selectedFighters.includes(fighter))}
+                      onClick={handleToggleFighterSelected(fighter)}
+                    />
+                    <img
+                      id={`proxy ${fighter}-inspired`}
+                      key={`${fighter}-inspired`}
+                      src={`/assets/fighters/${factionId}/${factionId}-${index + 1}-inspired.png`}
+                      className={cardImgClass(selectedFighters.includes(fighter))}
+                      onClick={handleToggleFighterSelected(fighter)}
+                    />
+                  </>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <section>
+            <h3 className="text-sm font-bold text-gray-700 mb-2">Deck Cards</h3>
+            <div className={gridClass}>
+              {cards.map((card) => (
+                <img
+                  id={`proxy ${card.id}`}
+                  key={card.id}
+                  src={getCardPathByCardId(card, "png")}
+                  className={cardImgClass(selectedCardIds.includes(card.id))}
+                  onClick={handleToggleCardSelected(card.id)}
+                />
+              ))}
+            </div>
+          </section>
         </div>
-        <div className="bg-gray-300 p-4 flex items-center">
+
+        <div className="bg-gray-300 p-4 flex items-center gap-4">
           <button
-            className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+            className="btn btn-purple cursor-pointer px-4 py-2 font-bold"
             onClick={handleDownload}
           >
             Download
           </button>
           <button
-            className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+            className="btn btn-purple cursor-pointer px-4 py-2 font-bold"
             onClick={toggleAll}
           >
             Toggle All
           </button>
           {hasWarband && (
             <button
-              className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+              className="btn btn-purple cursor-pointer px-4 py-2 font-bold"
               onClick={toggleWarband}
             >
               Toggle Warband
@@ -288,18 +295,23 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
           )}
           {plotCards.length > 0 && (
             <button
-              className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+              className="btn btn-purple cursor-pointer px-4 py-2 font-bold"
               onClick={togglePlotCards}
             >
-              Toggle Plot cards
+              Toggle Plot Cards
             </button>
           )}
-          <div>
-            Total proxy cards selected{" "}
-            <span className="font-bold">{totalProxies}</span>
+          <div className="text-sm text-gray-700 flex items-center gap-2">
+            <span>{selectedCardIds.length}/{cards.length} deck cards</span>
+            {hasWarband && (
+              <span>· {selectedFighters.length}/{fighters.length} fighters</span>
+            )}
+            {plotCards.length > 0 && (
+              <span>· {selectedPlotCards.length}/{plotCards.length} plot cards</span>
+            )}
           </div>
           <button
-            className="ml-auto btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+            className="ml-auto btn btn-purple cursor-pointer px-4 py-2 font-bold"
             onClick={onExit}
           >
             Quit
