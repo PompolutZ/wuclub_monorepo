@@ -13,7 +13,7 @@ export const DeckTitle = ({ sets, children }: DeckTitleProps) => {
   return (
     <div>
       {children}
-      <div className="flex items-center space-x-1 text-purple-700 text-sm">
+      <div className="flex flex-wrap items-center space-x-1 text-purple-700 text-sm">
         {setsWithPlots.length > 0 && (
           <>
             <CompassIcon className="w-4 h-4 stroke-purple-700" />

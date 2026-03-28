@@ -8,7 +8,7 @@ const BoardPicture = ({ asset, name }: { asset: string; name: string }) => {
     <picture>
       <source type="image/avif" srcSet={`${path}.avif`} />
       <source type="image/webp" srcSet={`${path}.webp`} />
-      <img alt={name} src={`${path}.jpg`} className="max-w-2xl" />
+      <img alt={name} src={`${path}.jpg`} className="max-w-2xl w-full" />
     </picture>
   );
 };

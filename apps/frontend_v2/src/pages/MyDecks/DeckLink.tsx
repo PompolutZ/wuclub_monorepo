@@ -32,10 +32,10 @@ export const DeckLink = ({ onDelete, deck }: Props) => {
     <div className="flex items-center border-t border-gray-500 lg:w-1/3 lg:mx-auto my-2 py-2">
       <FactionDeckPicture faction={deck.faction} />
 
-      <div className="flex-1 pl-2">
+      <div className="flex-1 pl-2 min-w-0">
         <DeckTitle sets={deck.sets}>
           <Link
-            className="text-xl"
+            className="text-xl block truncate"
             to={{
               pathname: `${VIEW_DECK}/${deck.deckId}`,
               state: {
