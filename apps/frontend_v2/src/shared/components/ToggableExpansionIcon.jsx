@@ -1,4 +1,4 @@
-import { ExpansionPicture } from "../shared/components/ExpansionPicture";
+import { ExpansionPicture } from "./ExpansionPicture";
 
 export const ToggableExpansionIcon = ({ set, isEnabled, onClick }) => {
     return (
