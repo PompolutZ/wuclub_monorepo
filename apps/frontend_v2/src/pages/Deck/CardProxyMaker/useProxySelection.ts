@@ -6,6 +6,7 @@ interface UseProxySelectionProps {
   factionId: string;
   fighters: string[];
   plotCards: string[];
+  hasWarband: boolean;
   onExit: () => void;
 }
 
@@ -13,11 +14,13 @@ export const useProxySelection = ({
   cards,
   fighters,
   plotCards,
+  hasWarband,
   onExit,
 }: UseProxySelectionProps) => {
   const [selectedCardIds, setSelectedCardIds] = useState(() => cards.map((c) => c.id));
   const [selectedFighters, setSelectedFighters] = useState(fighters);
   const [selectedPlotCards, setSelectedPlotCards] = useState(plotCards);
+  const [selectedWarbandCard, setSelectedWarbandCard] = useState(hasWarband);
 
   const handleDownload = async () => {
     const { default: jsPDF } = await import("jspdf");
@@ -43,8 +46,13 @@ export const useProxySelection = ({
       [],
     );
 
+    let firstPage = true;
+    const nextPage = () => {
+      if (firstPage) { firstPage = false; } else { doc.addPage(); }
+    };
+
     for (const [pageIdx, page] of pages.entries()) {
-      if (pageIdx > 0) doc.addPage();
+      if (pageIdx === 0) nextPage(); else doc.addPage();
       let rowIdx = 0;
       let x = 0;
       let y = 0;
@@ -68,7 +76,7 @@ export const useProxySelection = ({
     }
 
     for (const page of fighterPages) {
-      doc.addPage();
+      nextPage();
       let rowIdx = 0;
       let x = 3;
       let y = 3;
@@ -87,6 +95,36 @@ export const useProxySelection = ({
         x = 3;
         y = rowIdx * h + 3;
       }
+    }
+
+    if (selectedWarbandCard) {
+      const imgEl = document.getElementById("proxy warband-card") as HTMLImageElement;
+      const canvas = document.createElement("canvas");
+      // Rotate 90° clockwise: swap dimensions
+      canvas.width = imgEl.naturalHeight;
+      canvas.height = imgEl.naturalWidth;
+      const ctx = canvas.getContext("2d")!;
+      ctx.translate(imgEl.naturalHeight, 0);
+      ctx.rotate(Math.PI / 2);
+      ctx.drawImage(imgEl, 0, 0);
+
+      // Portrait A4
+      const pageW = 210;
+      const pageH = 297;
+      // After rotation: original h becomes width, original w becomes height
+      const rw = 104.14;
+      const rh = 142.24;
+      nextPage();
+      doc.addImage(
+        canvas.toDataURL("image/png"),
+        "png",
+        (pageW - rw) / 2,
+        (pageH - rh) / 2,
+        rw,
+        rh,
+        "",
+        "SLOW",
+      );
     }
 
     doc.save("cards.pdf");
@@ -111,19 +149,26 @@ export const useProxySelection = ({
     );
   };
 
+  const toggleWarbandCard = () => {
+    setSelectedWarbandCard((prev) => !prev);
+  };
+
   const toggleAll = () => {
     if (
       selectedCardIds.length > 0 ||
       selectedFighters.length > 0 ||
-      selectedPlotCards.length > 0
+      selectedPlotCards.length > 0 ||
+      selectedWarbandCard
     ) {
       setSelectedCardIds([]);
       setSelectedFighters([]);
       setSelectedPlotCards([]);
+      setSelectedWarbandCard(false);
     } else {
       setSelectedCardIds(cards.map(({ id }) => id));
       setSelectedFighters(fighters);
       setSelectedPlotCards(plotCards);
+      setSelectedWarbandCard(hasWarband);
     }
   };
 
@@ -139,10 +184,12 @@ export const useProxySelection = ({
     selectedCardIds,
     selectedFighters,
     selectedPlotCards,
+    selectedWarbandCard,
     handleDownload,
     toggleCard,
     toggleFighter,
     togglePlotCard,
+    toggleWarbandCard,
     toggleAll,
     toggleWarband,
     togglePlotCards,

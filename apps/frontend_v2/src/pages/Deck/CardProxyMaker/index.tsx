@@ -26,14 +26,16 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
     selectedCardIds,
     selectedFighters,
     selectedPlotCards,
+    selectedWarbandCard,
     handleDownload,
     toggleCard,
     toggleFighter,
     togglePlotCard,
+    toggleWarbandCard,
     toggleAll,
     toggleWarband,
     togglePlotCards,
-  } = useProxySelection({ cards, factionId, fighters, plotCards, onExit });
+  } = useProxySelection({ cards, factionId, fighters, plotCards, hasWarband, onExit });
 
   return (
     <div className="fixed inset-0 z-10 p-8 backdrop-blur">
@@ -51,6 +53,20 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
                 />
               ))}
             </ProxyCardSection>
+          )}
+
+          {hasWarband && (
+            <section>
+              <h3 className="text-sm font-bold text-gray-700 mb-2">Warband Card</h3>
+              <img
+                id="proxy warband-card"
+                src={`/assets/fighters/${factionId}/${factionId}-0.png`}
+                className={`w-1/2 md:w-1/3 aspect-[5.6/4.1] object-cover cursor-pointer filter transition-all duration-150 ${
+                  selectedWarbandCard ? "grayscale-0 drop-shadow-lg" : "grayscale"
+                }`}
+                onClick={toggleWarbandCard}
+              />
+            </section>
           )}
 
           {hasWarband && (
@@ -99,6 +115,8 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
           totalPlotCards={plotCards.length}
           onDownload={handleDownload}
           onToggleAll={toggleAll}
+          onToggleWarbandCard={toggleWarbandCard}
+          selectedWarbandCard={selectedWarbandCard}
           onToggleWarband={toggleWarband}
           onTogglePlotCards={togglePlotCards}
           onExit={onExit}
