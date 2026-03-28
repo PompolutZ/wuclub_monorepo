@@ -21,10 +21,6 @@ export interface ReadonlyDeckProps {
   private: boolean;
   userInfo?: UserInfo[];
   canUpdateOrDelete: boolean;
-  cardsView: boolean;
-  onCardsViewChange: () => void;
-  onDelete: () => void;
-  showToast: (message: string) => void;
 }
 
 export interface DeckSummaryProps {
