@@ -174,8 +174,7 @@ function DesktopMenu() {
       </DropdownMenu>
 
       <DropdownMenu
-        className="relative z-10 opacity-10"
-        disabled={true}
+        className="relative z-10"
         trigger={
           <div className="flex text-purple-700 w-28 justify-center group hover:bg-gray-200 rounded-md items-center px-2 py-2 text-sm">
             <Download className="h-5 w-5 mr-2" fill="#C4B5FD" />

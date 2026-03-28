@@ -29,9 +29,9 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
   const [selectedCardIds, setSelectedCardIds] = useState(
     cards.map((c) => c.id),
   );
-  const [selectedFighters, setSelectedFighters] = useState(
-    factionMembers[factionId],
-  );
+  const fighters = factionMembers[factionId] ?? [];
+  const hasWarband = fighters.length > 0;
+  const [selectedFighters, setSelectedFighters] = useState(fighters);
 
   const plotCards = (
     getPlotKeywords(
@@ -186,7 +186,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
       setSelectedPlotCards([]);
     } else {
       setSelectedCardIds(cards.map(({ id }) => id));
-      setSelectedFighters(factionMembers[factionId]);
+      setSelectedFighters(fighters);
       setSelectedPlotCards(plotCards);
     }
   };
@@ -195,7 +195,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
     if (selectedFighters.length > 0) {
       setSelectedFighters([]);
     } else {
-      setSelectedFighters(factionMembers[factionId]);
+      setSelectedFighters(fighters);
     }
   };
 
@@ -222,7 +222,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
               onClick={handleTogglePlotCard(card)}
             />
           ))}
-          {factionMembers[factionId].map((fighter, index) => (
+          {hasWarband && fighters.map((fighter, index) => (
             <>
               <img
                 id={`proxy ${fighter}`}
@@ -257,7 +257,7 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
             <img
               id={`proxy ${card.id}`}
               key={card.id}
-              src={getCardPathByCardId(card.id, "png")}
+              src={getCardPathByCardId(card, "png")}
               className={`w-[64.5mm] h-[89.9mm] filter ${
                 selectedCardIds.includes(card.id) ? "grayscale-0" : "grayscale"
               }`}
@@ -278,12 +278,14 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }) => {
           >
             Toggle All
           </button>
-          <button
-            className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
-            onClick={toggleWarband}
-          >
-            Toggle Warband
-          </button>
+          {hasWarband && (
+            <button
+              className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
+              onClick={toggleWarband}
+            >
+              Toggle Warband
+            </button>
+          )}
           <button
             className="btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
             onClick={togglePlotCards}
