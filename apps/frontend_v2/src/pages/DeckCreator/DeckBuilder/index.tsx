@@ -2,7 +2,7 @@ import { DeleteConfirmationDialog } from "@components/DeleteConfirmationDialog";
 import AddCardIcon from "@icons/add-card.svg?react";
 import DeckIcon from "@icons/deck.svg?react";
 import WarbandIcon from "@icons/warband.svg?react";
-import { Children, useMemo, useState } from "react";
+import React, { Children, useMemo, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import useMeasure from "react-use-measure";
 import { generateDeckId } from "shared/helpers";
@@ -13,7 +13,8 @@ import useAuthUser from "../../../hooks/useAuthUser";
 import { useBreakpoint } from "../../../hooks/useMediaQuery";
 import BottomPanelNavigation from "../../../shared/components/BottomPanelNavigation";
 import { FighterCardsPortal } from "../../../shared/components/FighterCardsPortal";
-import { resetDeckAction, saveDeckAction, updateDeckAction } from "../reducer";
+import { resetDeckAction, saveDeckAction, updateDeckAction, STATUS_SAVED } from "../reducer";
+import type { CardFilter } from "../reducer";
 import CardLibraryToggles from "./components/CardLibraryFilters";
 import CardsLibrary from "./components/CardsLibrary";
 import Deck from "./components/Deck";
@@ -21,7 +22,7 @@ import LibraryFilters from "./components/LibraryFilters";
 
 function CardsLibraryWithFilters() {
   const [searchText, setSearchText] = useState("");
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState<CardFilter>({});
   const [ref, bounds] = useMeasure();
 
   return (
@@ -36,25 +37,23 @@ function CardsLibraryWithFilters() {
   );
 }
 
-const tabs = (factionId) => [
-  {
-    name: "Library",
-    Icon: ({ className }) => <AddCardIcon className={className} />,
-  },
-  {
-    name: "Deck",
-    Icon: ({ className }) => <DeckIcon className={className} />,
-  },
+type TabIconProps = { className?: string };
+
+const tabs = (factionId: string) => [
+  { name: "Library", Icon: ({ className }: TabIconProps) => <AddCardIcon className={className} /> },
+  { name: "Deck", Icon: ({ className }: TabIconProps) => <DeckIcon className={className} /> },
   {
     name: "Warband",
-    Icon: ({ className }) => <WarbandIcon className={className} />,
+    Icon: ({ className }: TabIconProps) => <WarbandIcon className={className} />,
     disabled: factionId === factions["u"].id,
   },
 ];
 
-const MobileView = ({ children, factionId }) => {
+interface MobileViewProps { children: React.ReactNode; factionId: string }
+
+const MobileView = ({ children, factionId }: MobileViewProps) => {
   const isMobile = useBreakpoint("mobile");
-  const { action } = useParams();
+  const { action } = useParams<{ action: string }>();
   const childrenArray = Children.toArray(children);
   const [activeTabIndex, setActiveTabIndex] = useState(
     action && action !== "create" ? 1 : 0,
@@ -76,12 +75,18 @@ const MobileView = ({ children, factionId }) => {
   );
 };
 
-const DesktopView = ({ children }) => {
+const DesktopView = ({ children }: { children: React.ReactNode }) => {
   const isMobile = useBreakpoint("mobile");
   return !isMobile ? children : null;
 };
 
-function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
+interface DeckBuilderProps {
+  currentDeckName?: string;
+  existingDeckId?: string;
+  isPrivate?: boolean;
+}
+
+function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }: DeckBuilderProps) {
   const [deckName, setDeckName] = useState(currentDeckName || "");
   const [showConfirmDeckReset, setShowConfirmDeckReset] = useState(false);
   const { uid, displayName } = useAuthUser() || {
@@ -130,7 +135,7 @@ function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
     }
   };
 
-  if (status === "Saved") {
+  if (status === STATUS_SAVED) {
     return <Redirect to="/mydecks" />;
   }
 
@@ -171,7 +176,7 @@ function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
         title="Clear current deck"
         description={`Are you sure you want to clear current deck? Your deck building progress will be lost.`}
         open={showConfirmDeckReset}
-        onCloseDialog={handleCloseConfirmDialog}
+        onCloseDeleteDialog={handleCloseConfirmDialog}
         onDeleteConfirmed={handleResetDeck}
         onDeleteRejected={handleCloseConfirmDialog}
       />

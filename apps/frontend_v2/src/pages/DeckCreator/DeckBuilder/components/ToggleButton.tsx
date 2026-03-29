@@ -1,4 +1,12 @@
-import React from 'react'
+import { ButtonHTMLAttributes } from "react";
+
+interface ToggleButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    isOn: boolean;
+    whenDisabled?: string;
+    on?: string;
+    off?: string;
+    className?: string;
+}
 
 function ToggleButton({
     isOn,
@@ -8,7 +16,7 @@ function ToggleButton({
     on = "bg-purple-100 border-purple-300 shadow-none text-gray-900",
     off = "bg-purple-500 border-purple-500 shadow-lg text-white hover:bg-purple-400",
     ...rest
-}) {
+}: ToggleButtonProps) {
     return (
         <button
             className={`x-2 py-3 px-3 border-t-2 border-b-2 border-l-2 rounded-none focus:outline-none transition-colors duration-300 ${

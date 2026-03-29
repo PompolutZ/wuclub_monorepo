@@ -1,13 +1,19 @@
 import { useDeckBuilderDispatcher } from "../..";
 import { CHAMPIONSHIP_FORMAT } from "../../../../data/wudb";
 import { toggleCardAction } from "../../reducer";
+import type { EnrichedCard } from "../../reducer";
 import CardInDeck from "./Card";
 
-export function CardsList({ cards = [], format= CHAMPIONSHIP_FORMAT, restrictedCardsCount }) {
+interface CardsListProps {
+    cards?: EnrichedCard[];
+    format?: string;
+}
+
+export function CardsList({ cards = [], format = CHAMPIONSHIP_FORMAT }: CardsListProps) {
     const dispatch = useDeckBuilderDispatcher();
     return (
         <>
-            {cards.map(({ isForsaken, ...card}, i) => (
+            {cards.map((card, i) => (
                 <CardInDeck
                     cardId={card.id}
                     withAnimation
@@ -15,10 +21,9 @@ export function CardsList({ cards = [], format= CHAMPIONSHIP_FORMAT, restrictedC
                     format={format}
                     key={card.id}
                     toggleCard={() => dispatch(toggleCardAction(card))}
-                    restrictedCardsCount={restrictedCardsCount}
-                    isAlter={i % 2 === 0} />
+                    isAlter={i % 2 === 0}
+                />
             ))}
         </>
     );
-
 }

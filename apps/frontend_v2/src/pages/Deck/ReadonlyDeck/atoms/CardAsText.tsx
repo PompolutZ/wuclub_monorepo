@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import AnimateHeight from "react-animate-height";
 import CardRule from "../../../../atoms/CardRule";
 import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
+import GloryIcon from "@icons/wu-glory.svg?react";
 import {
   getSetNameById,
   NEMESIS_FORMAT,
@@ -49,7 +50,10 @@ export function CardAsText({ card }: { card: DeckCard }) {
             />
           )}
           {card.glory && (
-            <span className="text-xs font-bold">({card.glory})</span>
+            <div className="flex items-center font-bold ml-1">
+              <GloryIcon className={`${card.type === "Upgrade" ? "bg-gray-400" : "bg-objective-gold"} rounded-full w-3 h-3 fill-current mr-1`} />
+              {card.glory}
+            </div>
           )}
         </div>
         <div className="flex items-center">

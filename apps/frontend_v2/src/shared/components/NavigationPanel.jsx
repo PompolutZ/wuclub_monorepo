@@ -225,7 +225,7 @@ const Menu = ({ classes, showHome, children }) => {
           Boards
         </AnimatedLink>
         <AnimatedLink
-          className="hidden lg:block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+          className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
           to={ROUTES.CARDS_LIBRARY}
         >
           Library

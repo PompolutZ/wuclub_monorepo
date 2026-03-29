@@ -2,7 +2,7 @@ import { LazyLoading } from "@/components/LazyLoading";
 import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 import { useDeleteDeck } from "@/shared/hooks/useDeleteDeck";
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
-import { lazy, memo, Suspense, useState } from "react";
+import { lazy, memo, Suspense, useState, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import ScoringOverview from "../../../atoms/ScoringOverview";
 import { ModalPresenter } from "../../../main";
@@ -26,6 +26,7 @@ import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../../atoms/FightersInfoList";
 import DeckIcon from "@icons/deck.svg?react";
 import WarbandIcon from "@icons/warband.svg?react";
+import GloryIcon from "@icons/wu-glory.svg?react";
 import { factions } from "@wudb/factions";
 
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
@@ -80,6 +81,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   const deck = useDeckData({ id, name, factionId, faction, sets, created, createdutc, updatedutc, isPrivate, cards });
 
   const { summary: objectiveSummary, totalGlory } = useObjectiveSummary(deck.objectives);
+  const totalUpgradesGlory = useMemo(() => deck.upgrades.reduce((sum, c) => sum + Number(c.glory ?? 0), 0), [deck.upgrades]);
 
   const toggleDeckPrivacy = () => {
     const nextState = !isPrivate;
@@ -142,7 +144,12 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           className="px-2"
           type={"Upgrades"}
           amount={deck.upgrades.length}
-        />
+        >
+          <div className="flex items-center ml-2 text-sm text-gray-800">
+            <GloryIcon className="bg-gray-400 rounded-full w-5 h-5 fill-current" />
+            {totalUpgradesGlory}
+          </div>
+        </CardListSectionHeader>
         <CardsSectionContent cards={deck.upgrades} listView={!cardsView} />
       </section>
     </div>
