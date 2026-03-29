@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CardsTab from "./CardsTab";
 import { animated, useSpring } from "@react-spring/web";
 import { OBJECTIVE_GLORY_FILTERS } from "./constants/objectiveGloryFilters";
@@ -10,9 +10,8 @@ import useMeasure from "react-use-measure";
 const composeTypeFilters = (enabledTypes) => {
     if (enabledTypes.length === 0) {
         return () => false;
-    } else {
-        return composeFilters(enabledTypes, CARD_TYPE_FILTERS);
     }
+    return composeFilters(enabledTypes, CARD_TYPE_FILTERS);
 };
 
 const composeFilters = (enabledTypes, allTypeFilters) => {
@@ -23,9 +22,7 @@ const composeFilters = (enabledTypes, allTypeFilters) => {
     return enabledTypes
         .map((type) => {
             const filter = allTypeFilters.find((f) => f.label === type);
-
             if (!filter) throw Error("Cannot find filter matching type!");
-
             return filter.filter;
         })
         .reduce((compFilter, fun) => {
@@ -37,13 +34,9 @@ const composeFilters = (enabledTypes, allTypeFilters) => {
 
 function LibraryFilters({ bounds, onFiltersChanged }) {
     const [showFilters, setShowFilters] = useState(false);
-
     const [enabledCardTypes, setEnabledCardTypes] = useState(
-        CARD_TYPE_FILTERS.slice(0,1).map((f) => f.label)
+        CARD_TYPE_FILTERS.slice(0, 1).map((f) => f.label)
     );
-
-    const [enabledKeywords, setEnabledKeywords] = useState([]);
-
     const [enabledObjectiveScoreTypes, setObjectiveScoreTypes] = useState([]);
     const [enabledGloryFilters, setEnabledGloryFilters] = useState([]);
     const [ref, { height }] = useMeasure();
@@ -57,77 +50,50 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
         zIndex: 1,
     });
 
-    const changeShowFilters = () => {
-        if (showFilters) {
-            updateAllFilters();
-        }
+    const updateAllFilters = () => {
+        const typesFilter = composeTypeFilters(enabledCardTypes);
+        const gloryFilters = composeFilters(enabledGloryFilters, OBJECTIVE_GLORY_FILTERS);
+        const scoreTypeFilters = composeFilters(enabledObjectiveScoreTypes, OBJECTIVE_SCORE_TYPE_FILTERS);
 
-        setShowFilters((prev) => !prev);
+        const aggregateFilters = (card) => {
+            if (enabledCardTypes.includes("Objective")) {
+                return typesFilter(card) && gloryFilters(card) && scoreTypeFilters(card);
+            }
+            return typesFilter(card);
+        };
+
+        onFiltersChanged({ test: (card) => aggregateFilters(card) });
     };
 
     useEffect(() => {
         updateAllFilters();
-    }, [enabledCardTypes]);
+    }, [enabledCardTypes, enabledGloryFilters, enabledObjectiveScoreTypes]);
 
-    const updateAllFilters = () => {
-        const typesFilter = composeTypeFilters(enabledCardTypes);
-
-        const gloryFilters = composeFilters(
-            enabledGloryFilters,
-            OBJECTIVE_GLORY_FILTERS
-        );
-        const scoreTypeFilters = composeFilters(
-            enabledObjectiveScoreTypes,
-            OBJECTIVE_SCORE_TYPE_FILTERS
-        );
-
-        const aggregateFilters = (card) => {
-            if (enabledCardTypes.includes("Objective")) {
-                return  typesFilter(card) &&
-                gloryFilters(card) &&
-                scoreTypeFilters(card);
-            }
-
-            return typesFilter(card);
-        };
-
-        onFiltersChanged({
-            test: (card) =>
-                aggregateFilters(card)
-        });
+    const changeShowFilters = () => {
+        setShowFilters((prev) => !prev);
     };
 
-    const handleToggleKeyword = (value, update) => (keyword) => () => {
-        const index = value.indexOf(keyword);
+    const handleToggleSubFilter = (value, update) => (item) => () => {
+        const index = value.indexOf(item);
         if (index >= 0) {
-            update((prev) => [
-                ...prev.slice(0, index),
-                ...prev.slice(index + 1),
-            ]);
+            update((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
         } else {
-            update((prev) => [...prev, keyword]);
+            update((prev) => [...prev, item]);
         }
     };
 
-    const handleToggleType = (selectedTypes, allTypes, update) => type => () => {
-        update([type])
-    }
+    const handleToggleType = (_selectedTypes, _allTypes, update) => (type) => () => {
+        update([type]);
+    };
 
     const handleClearAll = () => {
         setEnabledGloryFilters([]);
         setObjectiveScoreTypes([]);
-        setEnabledKeywords([]);
     };
 
-    const calculateTotalFilterCount = (enabledCardTypes, enabledKeywords, enabledObjectiveScoreTypes, enabledGloryFilters) => {
-        if (enabledCardTypes.includes("Objective")) {
-            return enabledKeywords.length +
-            enabledObjectiveScoreTypes.length +
-            enabledGloryFilters.length;
-        }
-
-        return enabledKeywords.length;
-    }
+    const totalActiveFilters = enabledCardTypes.includes("Objective")
+        ? enabledObjectiveScoreTypes.length + enabledGloryFilters.length
+        : 0;
 
     return (
         <div className="relative" ref={ref}>
@@ -138,9 +104,7 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
                     CARD_TYPE_FILTERS.map((f) => f.label),
                     setEnabledCardTypes
                 )}
-                totalActiveFilters={
-                    calculateTotalFilterCount(enabledCardTypes, enabledKeywords, enabledObjectiveScoreTypes, enabledGloryFilters)
-                }
+                totalActiveFilters={totalActiveFilters}
                 onToggleShowFilters={changeShowFilters}
             />
             <animated.div className="bg-white text-gray-900 flex" style={styles}>
@@ -154,29 +118,18 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
                         disabled={!enabledCardTypes.includes("Objective")}
                         filters={OBJECTIVE_GLORY_FILTERS}
                         enabledFilters={enabledGloryFilters}
-                        onToggle={handleToggleKeyword(
-                            enabledGloryFilters,
-                            setEnabledGloryFilters
-                        )}
+                        onToggle={handleToggleSubFilter(enabledGloryFilters, setEnabledGloryFilters)}
                     />
                     <FiltersGroupToggles
                         title="Score type"
                         disabled={!enabledCardTypes.includes("Objective")}
                         filters={OBJECTIVE_SCORE_TYPE_FILTERS}
                         enabledFilters={enabledObjectiveScoreTypes}
-                        onToggle={handleToggleKeyword(
-                            enabledObjectiveScoreTypes,
-                            setObjectiveScoreTypes
-                        )}
+                        onToggle={handleToggleSubFilter(enabledObjectiveScoreTypes, setObjectiveScoreTypes)}
                     />
-
                     <button
                         className="btn btn-red py-3"
-                        disabled={
-                            enabledGloryFilters.length === 0 &&
-                            enabledKeywords.length === 0 &&
-                            enabledObjectiveScoreTypes.length === 0
-                        }
+                        disabled={enabledGloryFilters.length === 0 && enabledObjectiveScoreTypes.length === 0}
                         onClick={handleClearAll}
                     >
                         Clear All Filters

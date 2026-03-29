@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import ScoringOverview from "../../../../atoms/ScoringOverview";
 import { CardsList } from "./CardsList";
 import { CardListSectionHeader } from "../../../../shared/components/CardListSectionHeader";
@@ -8,52 +8,31 @@ import { useResizeHeight } from "../../../../hooks/useResizeHeight";
 import { ExpandCollapseButton } from "../../../../shared/components/ExpandCollapseButton";
 
 function ObjectivesList({ selectedObjectives, format, isValid }) {
-  const [measureRef, open, toggle, contentHeight] = useResizeHeight({
-    open: true,
-  });
+  const [measureRef, open, toggle, contentHeight] = useResizeHeight({ open: true });
   const expand = useSpring({
     height: open ? `${contentHeight}px` : "0px",
   });
 
-  const totalGlory = useMemo(
-    () => selectedObjectives.reduce((total, { glory }) => (total += glory), 0),
-    [selectedObjectives],
-  );
+  const { surge, end, third, totalGlory, objectiveSummary } = useMemo(() => {
+    const surge = [];
+    const end = [];
+    const third = [];
+    let totalGlory = 0;
+    const objectiveSummary = { Surge: 0, End: 0, Third: 0 };
 
-  const objectiveSummary = useMemo(
-    () =>
-      selectedObjectives.reduce(
-        (acc, c) => {
-          acc[c.scoreType] += 1;
-          return acc;
-        },
-        { Surge: 0, End: 0, Third: 0 },
-      ),
-    [selectedObjectives],
-  );
+    for (const c of selectedObjectives) {
+      totalGlory += c.glory;
+      if (c.scoreType in objectiveSummary) objectiveSummary[c.scoreType]++;
+      if (c.scoreType === "Surge") surge.push(c);
+      else if (c.scoreType === "End") end.push(c);
+      else if (c.scoreType === "Third") third.push(c);
+    }
 
-  const surge = useMemo(() => {
-    return selectedObjectives.filter(
-      (objective) => objective.scoreType === "Surge",
-    );
-  }, [selectedObjectives]);
-
-  const end = useMemo(() => {
-    return selectedObjectives.filter(
-      (objective) => objective.scoreType === "End",
-    );
-  }, [selectedObjectives]);
-
-  const third = useMemo(() => {
-    return selectedObjectives.filter(
-      (objective) => objective.scoreType === "Third",
-    );
+    return { surge, end, third, totalGlory, objectiveSummary };
   }, [selectedObjectives]);
 
   return (
-    <div
-      className={`${isValid ? "bg-green-100" : "bg-red-200"} p-2 mb-4 lg:mb-0`}
-    >
+    <div className={`${isValid ? "bg-green-100" : "bg-red-200"} p-2 mb-4 lg:mb-0`}>
       <CardListSectionHeader
         className="border-none"
         type="Objectives"
@@ -61,7 +40,6 @@ function ObjectivesList({ selectedObjectives, format, isValid }) {
       >
         <>
           <ScoringOverview summary={objectiveSummary} glory={totalGlory} />
-
           <ExpandCollapseButton
             open={open}
             className="ml-auto lg:hidden outline-none shadow-md text-white bg-purple-700 rounded-full hover:bg-purple-500 focus:text-white"

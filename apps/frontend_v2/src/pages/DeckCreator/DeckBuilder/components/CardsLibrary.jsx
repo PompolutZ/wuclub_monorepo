@@ -1,10 +1,10 @@
 import { FixedVirtualizedList } from "@components/FixedVirtualizedList";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
 import {
   validateCardForPlayFormat,
   wucards,
-  wufactions
+  wufactions,
 } from "../../../../data/wudb";
 import { toggleCardAction } from "../../reducer";
 import CardInDeck from "./Card";
@@ -28,11 +28,9 @@ const _sort = (card1, card2) => {
   );
 };
 
-function FilterableCardLibrary(props) {
+function FilterableCardLibrary({ searchText, filter }) {
   const dispatch = useDeckBuilderDispatcher();
-  const [filteredCards, setFilteredCards] = useState([]);
   const state = useDeckBuilderState();
-  const { searchText } = props;
 
   const deck = useMemo(
     () => [
@@ -43,17 +41,16 @@ function FilterableCardLibrary(props) {
     [state.selectedObjectives, state.selectedGambits, state.selectedUpgrades],
   );
 
-  useEffect(() => {
-    const nextCards = [
-      ...Object.values(wucards).filter(
+  const filteredCards = useMemo(() => {
+    const deckCardNames = new Set(deck.map((c) => c.name));
+
+    let cards = Object.values(wucards)
+      .filter(
         (card) =>
           !!state.sets.find((set) => set.id == card.setId) &&
-          (card.factionId === wufactions["u"].id) 
-      ),
-    ]
-      .filter((card) => {
-        return props.filter.test ? props.filter.test(card) : true;
-      })
+          card.factionId === wufactions["u"].id,
+      )
+      .filter((card) => (filter.test ? filter.test(card) : true))
       .filter((card) => {
         const [isValid] = validateCardForPlayFormat(card, state.format);
         return isValid;
@@ -63,42 +60,35 @@ function FilterableCardLibrary(props) {
           c,
           state.format,
         );
-        const card = {
-          ...c,
-          isBanned: isForsaken,
-          isRestricted,
-        };
-
-        return card;
+        return { ...c, isBanned: isForsaken, isRestricted };
       });
-    
-    let filteredCards = nextCards;
 
     if (isNaN(searchText)) {
-      filteredCards = filteredCards.filter((c) => {
+      cards = cards.filter((c) => {
         if (!searchText) return true;
-
         return (
           c.name.toUpperCase().includes(searchText.toUpperCase()) ||
           c.rule.toUpperCase().includes(searchText.toUpperCase())
         );
       });
     } else {
-      filteredCards = filteredCards.filter(({ id }) =>
+      cards = cards.filter(({ id }) =>
         `${id}`.padStart(5, "0").includes(searchText),
       );
     }
 
-    const sorted = filteredCards.sort((c1, c2) => _sort(c1, c2));
-    const drawableCards = sorted.map((c) => ({ card: c, expanded: false }));
-    setFilteredCards(drawableCards);
-
-  }, [state, props.filter, searchText]);
+    return cards.sort(_sort).map((card) => ({
+      card,
+      expanded: false,
+      isNameDuplicate:
+        !deck.find(({ id }) => id === card.id) && deckCardNames.has(card.name),
+    }));
+  }, [state.sets, state.format, filter, searchText, deck]);
 
   return (
     <div className="flex-1 flex outline-none">
       <FixedVirtualizedList items={filteredCards}>
-        {({ card, expanded }, { key, index }) => {
+        {({ card, expanded, isNameDuplicate }, { key, index }) => {
           return card ? (
             <div
               key={key}
@@ -112,6 +102,7 @@ function FilterableCardLibrary(props) {
                 cardId={card.id}
                 expanded={expanded}
                 inDeck={!!deck.find(({ id }) => id === card.id)}
+                isNameDuplicate={isNameDuplicate}
                 format={state.format}
                 toggleCard={() => dispatch(toggleCardAction(card))}
                 withAnimation={false}

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useEffectReducer } from "use-effect-reducer";
-import { deckBuilderReducer, INITIAL_STATE } from "./reducer";
+import { deckBuilderReducer, INITIAL_STATE, DECK_IN_PROGRESS_KEY } from "./reducer";
 import {
   addKeyToLocalStorage,
   removeKeyFromLocalStorage,
@@ -45,7 +45,7 @@ const initialiseState = (deck) => (exec) => {
 
   exec({
     type: "initialiseStateFromLocalStorage",
-    key: "wunderworlds_deck_in_progress",
+    key: DECK_IN_PROGRESS_KEY,
   });
 
   return INITIAL_STATE;

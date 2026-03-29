@@ -1,9 +1,10 @@
 import {
     getFactionByName,
     getAllSetsValidForFormat,
-    CHAMPIONSHIP_FORMAT,
     NEMESIS_FORMAT,
 } from "../../data/wudb";
+
+export const DECK_IN_PROGRESS_KEY = "wunderworlds_deck_in_progress";
 
 export const UPDATE_FILTERS_ACTION = "UPDATE_FILTERS";
 export const TOGGLE_CARD_ACTION = "TOGGLE_CARD";
@@ -11,6 +12,13 @@ export const RESET_DECK_ACTION = "RESET_DECK_ACTION";
 export const SAVE_DECK = "SAVE_DECK";
 export const UPDATE_DECK = "UPDATE_DECK";
 export const FINISH_SAVING_DECK = "FINISH_SAVING_DECK";
+export const SAVE_ERROR = "SAVE_ERROR";
+export const SET_DESERIALIZED_STATE = "SET_DESERIALIZED_STATE";
+
+export const STATUS_IDLE = "Idle";
+export const STATUS_SAVING = "Saving";
+export const STATUS_SAVED = "Saved";
+export const STATUS_ERROR = "Error";
 
 export function toggleCardAction(card) {
     return {
@@ -34,13 +42,13 @@ export function updateDeckAction(deckMeta) {
 export const INITIAL_STATE = {
     faction: getFactionByName("universal"),
     sets: getAllSetsValidForFormat(NEMESIS_FORMAT),
-    hideDuplicates: true,
     format: NEMESIS_FORMAT,
     selectedObjectives: [],
     selectedGambits: [],
     selectedUpgrades: [],
     visibleCardTypes: [],
-    status: "Idle",
+    status: STATUS_IDLE,
+    saveError: null,
 };
 
 export const deckBuilderReducer = (state, event, exec) => {
@@ -53,7 +61,7 @@ export const deckBuilderReducer = (state, event, exec) => {
 
             exec({
                 type: "addKeyToLocalStorage",
-                key: "wunderworlds_deck_in_progress",
+                key: DECK_IN_PROGRESS_KEY,
                 value: nextState,
             });
 
@@ -69,33 +77,25 @@ export const deckBuilderReducer = (state, event, exec) => {
             const cardWillBeRemoved = deck.find(
                 ({ id }) => id === event.payload.id
             );
-            let nextState = {
-                ...state,
-            };
+            let nextState = { ...state };
 
             if (event.payload.type === "Objective") {
                 nextState.selectedObjectives = cardWillBeRemoved
-                    ? state.selectedObjectives.filter(
-                          ({ id }) => id !== event.payload.id
-                      )
+                    ? state.selectedObjectives.filter(({ id }) => id !== event.payload.id)
                     : [...state.selectedObjectives, event.payload];
             } else if (event.payload.type === "Upgrade") {
                 nextState.selectedUpgrades = cardWillBeRemoved
-                    ? state.selectedUpgrades.filter(
-                          ({ id }) => id !== event.payload.id
-                      )
+                    ? state.selectedUpgrades.filter(({ id }) => id !== event.payload.id)
                     : [...state.selectedUpgrades, event.payload];
             } else {
                 nextState.selectedGambits = cardWillBeRemoved
-                    ? state.selectedGambits.filter(
-                          ({ id }) => id !== event.payload.id
-                      )
+                    ? state.selectedGambits.filter(({ id }) => id !== event.payload.id)
                     : [...state.selectedGambits, event.payload];
             }
 
             exec({
                 type: "addKeyToLocalStorage",
-                key: "wunderworlds_deck_in_progress",
+                key: DECK_IN_PROGRESS_KEY,
                 value: nextState,
             });
 
@@ -112,40 +112,33 @@ export const deckBuilderReducer = (state, event, exec) => {
 
             exec({
                 type: "addKeyToLocalStorage",
-                key: "wunderworlds_deck_in_progress",
+                key: DECK_IN_PROGRESS_KEY,
                 value: nextState,
             });
 
             return nextState;
         }
+
         case SAVE_DECK:
             exec({ type: "saveDeck", deckMeta: event.payload });
+            return { ...state, status: STATUS_SAVING, saveError: null };
 
-            return {
-                ...state,
-                status: "Saving...",
-            };
         case UPDATE_DECK:
             exec({ type: "updateDeck", deckMeta: event.payload });
+            return { ...state, status: STATUS_SAVING, saveError: null };
 
-            return {
-                ...state,
-                status: "Saving...",
-            };
         case FINISH_SAVING_DECK:
             exec({
                 type: "removeKeyFromLocalStorage",
-                key: "wunderworlds_deck_in_progress",
+                key: DECK_IN_PROGRESS_KEY,
             });
+            return { ...state, status: STATUS_SAVED };
 
-            return {
-                ...state,
-                status: "Saved",
-            };
+        case SAVE_ERROR:
+            return { ...state, status: STATUS_IDLE, saveError: event.payload };
 
-        case "SET_DESERIALIZED_STATE": {
+        case SET_DESERIALIZED_STATE:
             return event.payload;
-        }
 
         default:
             return state;

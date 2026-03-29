@@ -1,10 +1,9 @@
-import React, { PureComponent, useState, memo } from "react";
+import { memo } from "react";
 import ReactMarkdown from "react-markdown";
 import LockIcon from "@icons/lock.svg?react";
 import NotInterestedIcon from "@icons/no-symbol.svg?react";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import CloseIcon from "@icons/x.svg?react";
-import RankIcon from "@icons/wu-glory.svg?react";
 import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
 import {
   getCardById,
@@ -15,114 +14,50 @@ import {
 } from "../../../../data/wudb";
 import { ModalPresenter } from "../../../../main";
 import CardImage from "../../../../shared/components/CardImage";
+import { useState } from "react";
 
-window.process = { cwd: () => "" };
-
-// function Rank({ value }) {
-//   const normalized = value >= 10000 ? value / 10000 : value;
-//   const wholeStarsCount = Math.floor(normalized / 2);
-//   const wholeStars = isNaN(wholeStarsCount)
-//     ? []
-//     : new Array(wholeStarsCount).fill(1);
-//   const halfStars = normalized % 2 > 0 ? [0] : [];
-//   const rankInStars = [...wholeStars, ...halfStars];
-//   return (
-//     <div className="flex fill-current">
-//       {rankInStars.map((star, i) => {
-//         if (star === 1)
-//           return (
-//             <RankIcon
-//               key={i}
-//               className="text-lg text-purple-800 fill-current"
-//             />
-//           );
-//         if (star === 0)
-//           return (
-//             <RankIcon
-//               key={i}
-//               className="text-lg text-purple-500 fill-current"
-//             />
-//           );
-//       })}
-//     </div>
-//   );
-// }
-
-class WUCardInfo extends PureComponent {
-  render() {
-    const { scoreType, name, id, glory, onClick } = this.props;
-
-    // const wave = Waves[Math.floor(id / 1000)];
-    return (
-      <div className="flex-1 self-start cursor-pointer" onClick={onClick}>
-        <div className="flex items-center">
-          {scoreType && scoreType !== "-" && (
-            <ObjectiveScoreTypeIcon
-              type={scoreType}
-              style={{
-                width: "1rem",
-                height: "1rem",
-              }}
-            />
-          )}
-
-          <h6
-            className={`truncate ${
-              scoreType && scoreType !== "-" ? "ml-2" : ""
-            }`}
-          >
-            {name}
-          </h6>
-        </div>
-        <div className="flex items-center">
-          {/* <Rank value={this.props.rank} /> */}
-
-          {glory && (
-            <div className="flex items-center font-bold mx-2">
-              <GloryIcon className="bg-objective-gold rounded-full w-3 h-3 fill-current mr-1" />
-
-              {glory}
-            </div>
-          )}
-
-          <span className="font-bold text-xs text-gray-500">{`${getCardNumberFromId(
-            id,
-          )}/${RIVALS_DECK_CARDS_TOTAL}`}</span>
-        </div>
+const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, onClick }) {
+  return (
+    <div className="flex-1 self-start cursor-pointer" onClick={onClick}>
+      <div className="flex items-center">
+        {scoreType && scoreType !== "-" && (
+          <ObjectiveScoreTypeIcon
+            type={scoreType}
+            style={{ width: "1rem", height: "1rem" }}
+          />
+        )}
+        <h6 className={`truncate ${scoreType && scoreType !== "-" ? "ml-2" : ""}`}>
+          {name}
+        </h6>
       </div>
-    );
-  }
-}
+      <div className="flex items-center">
+        {glory && (
+          <div className="flex items-center font-bold mx-2">
+            <GloryIcon className="bg-objective-gold rounded-full w-3 h-3 fill-current mr-1" />
+            {glory}
+          </div>
+        )}
+        <span className="font-bold text-xs text-gray-500">{`${getCardNumberFromId(id)}/${RIVALS_DECK_CARDS_TOTAL}`}</span>
+      </div>
+    </div>
+  );
+});
 
 const CardInDeck = memo(
-  ({ cardId, format, toggleCard, inDeck, ranking, ...props }) => {
+  ({ cardId, format, toggleCard, inDeck, isNameDuplicate, ranking, ...props }) => {
     const [overlayIsVisible, setOverlayIsVisible] = useState(false);
     const card = getCardById(cardId);
-    const [, isBanned, isRestricted] = validateCardForPlayFormat(
-      cardId,
-      format
-    );
-    
+    const [, isBanned, isRestricted] = validateCardForPlayFormat(cardId, format);
+
     if (!card) return null;
 
     const { type, id, scoreType, glory, name, setId } = card;
-
-    const pickForegroundColor = (isRestricted, isBanned, defaultColor) => {
-      if (isBanned || isRestricted) {
-        return "white";
-      }
-
-      return defaultColor;
-    };
-
-    const handleShowCardImageOverlay = () => {
-      setOverlayIsVisible(true);
-    };
+    const isAddDisabled = isNameDuplicate && !inDeck;
 
     return (
       <>
         <div
-          className={`flex items-center ${
+          className={`flex items-center ${isNameDuplicate ? "grayscale opacity-60" : ""} ${
             isRestricted
               ? "bg-yellow-100"
               : isBanned
@@ -135,9 +70,7 @@ const CardInDeck = memo(
           }`}
         >
           <div
-            className={`items-center relative ${
-              props.showType ? "ml-2 mr-6" : "mx-2"
-            }`}
+            className={`items-center relative ${props.showType ? "ml-2 mr-6" : "mx-2"}`}
           >
             {props.showType && (
               <img
@@ -152,7 +85,6 @@ const CardInDeck = memo(
               alt={`${getSetNameById(setId)}`}
               src={`/assets/icons/decks/${getSetNameById(setId)}.png`}
             />
-
             {isRestricted && (
               <LockIcon className="absolute stroke-2 stroke-yellow-600 stroke-[4px] w-8 h-8 top-1/2 -mt-4 left-1/2 -ml-4" />
             )}
@@ -162,7 +94,6 @@ const CardInDeck = memo(
           </div>
           <WUCardInfo
             rank={ranking}
-            pickColor={pickForegroundColor}
             isRestricted={isRestricted}
             isBanned={isBanned}
             set={setId}
@@ -171,13 +102,14 @@ const CardInDeck = memo(
             type={type}
             id={id}
             glory={glory}
-            onClick={handleShowCardImageOverlay}
+            onClick={() => setOverlayIsVisible(true)}
           />
           <button
             className={`btn m-2 w-8 h-8 py-0 px-1 ${
               inDeck ? "btn-red" : "btn-purple"
-            }`}
-            onClick={toggleCard}
+            } ${isAddDisabled ? "opacity-40 cursor-not-allowed" : ""}`}
+            onClick={isAddDisabled ? undefined : toggleCard}
+            disabled={isAddDisabled}
           >
             <CloseIcon
               className={`text-white stroke-current transform transition-transform duration-300 ${
@@ -197,14 +129,10 @@ const CardInDeck = memo(
                 <div className="w-4/5 lg:w-1/4">
                   <div className="w-[300px] h-[420px] bg-purple-100 rounded-2xl border-4 border-gray-900 grid grid-cols-1 grid-rows-1">
                     <div className="py-4">
-                      <h1 className="text-center text-xl font-bold">
-                        {card.name}
-                      </h1>
+                      <h1 className="text-center text-xl font-bold">{card.name}</h1>
                       <div className="p-2">
                         {card.rule.split("\\n").map((paragraph, i) => (
-                          <ReactMarkdown key={i}>
-                            {paragraph.trim()}
-                          </ReactMarkdown>
+                          <ReactMarkdown key={i}>{paragraph.trim()}</ReactMarkdown>
                         ))}
                         {card.glory && (
                           <div className="flex items-center justify-center space-x-2 mt-8">
@@ -221,9 +149,7 @@ const CardInDeck = memo(
                     <CardImage
                       id={id}
                       className="rounded-lg row-start-1 row-end-2 col-start-1 col-end-2"
-                      style={{
-                        filter: "drop-shadow(0 0 10px black)",
-                      }}
+                      style={{ filter: "drop-shadow(0 0 10px black)" }}
                       alt={id}
                     />
                   </div>

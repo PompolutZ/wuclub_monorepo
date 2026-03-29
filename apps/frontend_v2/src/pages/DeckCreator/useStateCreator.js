@@ -20,6 +20,7 @@ export function useStateCreator() {
     switch (action) {
         case "create":
             return { action, state: null };
+
         case "edit":
             return {
                 action,
@@ -36,24 +37,26 @@ export function useStateCreator() {
                     private: state?.deck?.private,
                 },
             };
+
         case "transfer": {
             const [transferFormat, ...cardIds] = data.split(",");
             const decode = getDecodingFunction(transferFormat);
-            const decodedCards = cardIds.map((foreignId) => {
-                const wuid = decode(foreignId);
-                let card = getCardById(wuid);
-                if (!card) {
-                    logger.warn(`Card with ID ${wuid} not found in the database`, { wuid, foreignId });
-                    return null;
-                }
-
-                return card;
-            });
+            const decodedCards = cardIds
+                .map((foreignId) => {
+                    const wuid = decode(foreignId);
+                    const card = getCardById(wuid);
+                    if (!card) {
+                        logger.warn(`Card with ID ${wuid} not found in the database`, { wuid, foreignId });
+                        return null;
+                    }
+                    return card;
+                })
+                .filter(Boolean);
 
             const faction = getFactionById();
 
             const sets = decodedCards.reduce(
-                (sets, { setId }) => sets.add(setId),
+                (acc, { setId }) => acc.add(setId),
                 new Set()
             );
 
@@ -63,19 +66,19 @@ export function useStateCreator() {
                 action,
                 state: {
                     ...INITIAL_STATE,
-                    format:
-                        selectedSets.length === 2
-                            ? NEMESIS_FORMAT
-                            : CHAMPIONSHIP_FORMAT,
+                    format: selectedSets.length === 2 ? NEMESIS_FORMAT : CHAMPIONSHIP_FORMAT,
                     faction,
                     sets: selectedSets.map((setId) => getSetById(setId)),
-                    selectedObjectives:
-                        decodedCards.filter(checkCardIsObjective),
+                    selectedObjectives: decodedCards.filter(checkCardIsObjective),
                     selectedGambits: decodedCards.filter(checkCardIsPloy),
                     selectedUpgrades: decodedCards.filter(checkCardIsUpgrade),
                 },
             };
         }
+
+        default:
+            logger.warn(`Unknown DeckCreator action: ${action}`);
+            return { action, state: null };
     }
 }
 
@@ -86,18 +89,12 @@ const decodeUDS = (card) => {
     } else if (udsId >= 10000 && udsId < 11000) {
         return String(Number(card)).padStart(5, "0");
     }
-
     return String(Number(card) + 1000).padStart(5, "0");
 };
 
 const decodeWUC = (card) => card;
 
-const decodeUDB = card => {
-    return card;
-    // const [,prefix, cardNumber] = card.match(/([A-Z]+)?(\d+)?/);
-
-    // return prefix ? udbPrefexes[prefix] * 1000 + Number(cardNumber) : 1000 + Number(cardNumber);
-}
+const decodeUDB = (card) => card;
 
 const getDecodingFunction = (encoding) => {
     switch (encoding) {
@@ -108,6 +105,6 @@ const getDecodingFunction = (encoding) => {
         case "wuc":
             return decodeWUC;
         default:
-            throw Error("Unknown encoding format");
+            throw Error(`Unknown encoding format: ${encoding}`);
     }
 };

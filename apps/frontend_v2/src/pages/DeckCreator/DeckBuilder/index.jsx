@@ -13,7 +13,7 @@ import useAuthUser from "../../../hooks/useAuthUser";
 import { useBreakpoint } from "../../../hooks/useMediaQuery";
 import BottomPanelNavigation from "../../../shared/components/BottomPanelNavigation";
 import { FighterCardsPortal } from "../../../shared/components/FighterCardsPortal";
-import { resetDeckAction, saveDeckAction, updateDeckAction } from "../reducer";
+import { resetDeckAction, saveDeckAction, updateDeckAction, STATUS_SAVED } from "../reducer";
 import CardLibraryToggles from "./components/CardLibraryFilters";
 import CardsLibrary from "./components/CardsLibrary";
 import Deck from "./components/Deck";
@@ -130,7 +130,7 @@ function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }) {
     }
   };
 
-  if (status === "Saved") {
+  if (status === STATUS_SAVED) {
     return <Redirect to="/mydecks" />;
   }
 

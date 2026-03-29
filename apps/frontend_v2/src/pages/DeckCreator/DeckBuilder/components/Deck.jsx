@@ -1,16 +1,22 @@
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import SaveIcon from "@icons/save.svg?react";
 import CloseIcon from "@icons/x.svg?react";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useDeckBuilderState } from "../..";
 import {
   validateCardForPlayFormat,
   validateDeckForPlayFormat,
 } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
+import { STATUS_SAVING } from "../../reducer";
 import GambitsList from "./GambitsList";
 import ObjectivesList from "./ObjectivesList";
 import UpgradesList from "./UpgradesList";
+
+function enrichCard(c, format) {
+  const [, isForsaken, isRestricted] = validateCardForPlayFormat(c, format);
+  return { ...c, isBanned: isForsaken, isRestricted };
+}
 
 function Deck({ deckName, onDeckNameChange, onSave, onReset }) {
   const {
@@ -19,85 +25,31 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }) {
     selectedGambits,
     selectedUpgrades,
     format,
+    status,
+    saveError,
   } = useDeckBuilderState();
-  const [objectives, setObjectives] = useState(selectedObjectives);
-  const [gambits, setGambits] = useState(selectedGambits);
-  const [upgrades, setUpgrades] = useState(selectedUpgrades);
-  const [isValid, setIsValid] = useState(false);
-  const [issues, setIssues] = useState([]);
 
-  useEffect(() => {
-    // Cards ids is a mess
-    setObjectives(
-      selectedObjectives.map((c) => {
-        const [, isForsaken, isRestricted] = validateCardForPlayFormat(
-          c,
-          format,
-        );
+  const objectives = useMemo(
+    () => selectedObjectives.map((c) => enrichCard(c, format)),
+    [selectedObjectives, format],
+  );
 
-        const card = {
-          ...c,
-          isBanned: isForsaken,
-          isRestricted,
-        };
+  const gambits = useMemo(
+    () => selectedGambits.map((c) => enrichCard(c, format)),
+    [selectedGambits, format],
+  );
 
-        return card;
-      }),
-    );
-  }, [selectedObjectives, format]);
+  const upgrades = useMemo(
+    () => selectedUpgrades.map((c) => enrichCard(c, format)),
+    [selectedUpgrades, format],
+  );
 
-  useEffect(() => {
-    // Cards ids is a mess
-    setGambits(
-      selectedGambits.map((c) => {
-        const [, isForsaken, isRestricted] = validateCardForPlayFormat(
-          c,
-          format,
-        );
+  const [isValid, issues] = useMemo(
+    () => validateDeckForPlayFormat({ objectives, gambits, upgrades }, format),
+    [objectives, gambits, upgrades, format],
+  );
 
-        const card = {
-          ...c,
-          isBanned: isForsaken,
-          isRestricted,
-        };
-
-        return card;
-      }),
-    );
-  }, [selectedGambits, format]);
-
-  useEffect(() => {
-    // Cards ids is a mess
-    setUpgrades(
-      selectedUpgrades.map((c) => {
-        const [, isForsaken, isRestricted] = validateCardForPlayFormat(
-          c,
-          format,
-        );
-
-        const card = {
-          ...c,
-          isBanned: isForsaken,
-          isRestricted,
-        };
-
-        return card;
-      }),
-    );
-  }, [selectedUpgrades, format]);
-
-  useEffect(() => {
-    const [isValid, issues] = validateDeckForPlayFormat(
-      {
-        objectives,
-        gambits,
-        upgrades,
-      },
-      format,
-    );
-    setIsValid(isValid);
-    setIssues(issues);
-  }, [objectives, gambits, upgrades, format]);
+  const isSaving = status === STATUS_SAVING;
 
   return (
     <div>
@@ -110,7 +62,11 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }) {
             placeholder={`${faction.displayName} Deck`}
             className="rounded h-12 bg-gray-200 box-border flex-1 mr-2 py-1 px-2 outline-none border-2 focus:border-purple-700"
           />
-          <button className="btn btn-purple w-8 h-8 py-0 px-1" onClick={onSave}>
+          <button
+            className="btn btn-purple w-8 h-8 py-0 px-1 disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={onSave}
+            disabled={isSaving}
+          >
             <SaveIcon />
           </button>
           <button className="btn btn-red w-8 h-8 py-0 px-1" onClick={onReset}>
@@ -118,6 +74,11 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }) {
           </button>
         </div>
       </div>
+
+      {saveError && (
+        <p className="text-red-600 text-sm px-4 py-1">{saveError}</p>
+      )}
+
       <section className="my-4 text-accent3-700 text-sm p-4">
         {!isValid && (
           <ul>
@@ -127,6 +88,7 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }) {
           </ul>
         )}
       </section>
+
       <div className="flex flex-col xl:grid xl:grid-cols-3 xl:gap-2">
         <ObjectivesList
           isValid={isValid}

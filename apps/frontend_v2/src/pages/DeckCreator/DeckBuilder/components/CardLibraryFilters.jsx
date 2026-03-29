@@ -85,7 +85,6 @@ function CardLibraryFilters(props) {
     [selectedFormat],
   );
   const [warband, setWarband] = useState(state.faction);
-  const [hideDuplicates, setHideDuplicates] = useState(true);
   const [selectedSets, setSelectedSets] = useState(
     selectedFormat === NEMESIS_FORMAT
       ? validSets.slice(0, 2)
@@ -97,13 +96,12 @@ function CardLibraryFilters(props) {
   };
 
   const closeAndUpdateFilters = () => {
-    setShowFilters(!showFilters);
+    setShowFilters(false);
     dispatch({
       type: "UPDATE_FILTERS",
       payload: {
         faction: warband,
         sets: selectedSets,
-        hideDuplicates,
         format: selectedFormat,
       },
     });
