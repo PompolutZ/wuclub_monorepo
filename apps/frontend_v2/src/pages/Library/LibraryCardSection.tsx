@@ -2,7 +2,7 @@ import { animated, useSpring } from "@react-spring/web";
 import { ExpandCollapseButton } from "../../shared/components/ExpandCollapseButton";
 import { ExpansionPicture } from "../../shared/components/ExpansionPicture";
 import { useResizeHeight } from "../../hooks/useResizeHeight";
-import { getSetNameById } from "../../data/wudb";
+import { getSetById, getSetNameById } from "../../data/wudb";
 import type { Card } from "../../data/wudb";
 import LibraryCardRow from "./LibraryCardRow";
 
@@ -17,13 +17,14 @@ function LibraryCardSection({ setId, cards }: LibraryCardSectionProps) {
     height: open ? `${contentHeight}px` : "0px",
   });
 
+  const set = getSetById(setId as never);
   const setName = getSetNameById(setId as never);
 
   return (
     <div className="mb-4">
-      <div className="flex items-center border-b border-gray-500 pb-2">
-        <ExpansionPicture setName={setName} className="w-8 h-8 mr-2" />
-        <h1 className="text-gray-900 text-xl mr-2 flex-1 truncate">{setName}</h1>
+      <div className="flex items-center border-b border-gray-500 pb-2 mx-2">
+        <ExpansionPicture setName={setName} className="w-8 h-8 mr-2 shrink-0" />
+        <h1 className="text-gray-900 text-xl mr-2 min-w-0 flex-1 truncate">{set?.displayName ?? setName}</h1>
         <span className="text-gray-500 text-sm mr-2">{cards.length}</span>
         <ExpandCollapseButton
           open={open}

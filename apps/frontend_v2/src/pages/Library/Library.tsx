@@ -15,6 +15,7 @@ import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedLi
 import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
 import IconButton from "../../shared/components/IconButton";
 import { Overlay } from "../../shared/components/Overlay";
+import { ScrollContainer } from "../../shared/components/ScrollContainer";
 import LibraryCardSection from "./LibraryCardSection";
 
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
@@ -104,7 +105,7 @@ function Library() {
           </div>
         </Overlay>
 
-        <div className="flex-1 overflow-y-auto px-2 pb-4">
+        <ScrollContainer className="px-2 pb-4">
           {filteredCards.length === 0 ? (
             <div className="flex items-center justify-center text-gray-900 text-xl mt-8">
               No cards matching your filters.
@@ -116,7 +117,7 @@ function Library() {
               ))}
             </>
           )}
-        </div>
+        </ScrollContainer>
       </div>
     );
   }
