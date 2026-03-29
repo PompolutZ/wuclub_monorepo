@@ -1,6 +1,7 @@
 import FilterIcon from "@icons/filter.svg?react";
 import LockIcon from "@icons/lock.svg?react";
 import SurgeIcon from "@icons/zap.svg?react";
+import GloryIcon from "@icons/wu-glory.svg?react";
 import { useMemo } from "react";
 import { useDeckBuilderState } from "../../..";
 
@@ -42,6 +43,10 @@ function CardsTab({ enabledTypes, totalActiveFilters, onToggleType, onToggleShow
                 objective.scoreType === "Surge"
         ).length;
     }, [selectedObjectives]);
+
+    const upgradesGlory = useMemo(() => {
+        return selectedUpgrades.reduce((sum, c) => sum + (c.glory ?? 0), 0);
+    }, [selectedUpgrades]);
 
     return (
         <div className="flex items-center my-2">
@@ -102,6 +107,8 @@ function CardsTab({ enabledTypes, totalActiveFilters, onToggleType, onToggleShow
                     className="w-4 h-4"
                 />
                 <div>{selectedUpgrades.length}</div>
+                <GloryIcon className="bg-gray-400 rounded-full w-4 h-4 fill-current" />
+                <h6 className="text-xs text-gray-700">{upgradesGlory}</h6>
             </ToggleButton>
             <IconButton
                 className="rounded-full ml-3 px-2 w-11 h-11 grid place-content-center relative hover:bg-gray-100 focus:text-purple-700 "

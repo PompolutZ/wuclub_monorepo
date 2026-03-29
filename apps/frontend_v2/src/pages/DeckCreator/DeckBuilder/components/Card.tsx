@@ -21,10 +21,11 @@ interface WUCardInfoProps {
   name: string;
   id: string;
   glory: number | null;
+  type: string;
   onClick: () => void;
 }
 
-const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, onClick }: WUCardInfoProps) {
+const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, type, onClick }: WUCardInfoProps) {
   return (
     <div className="flex-1 min-w-0 self-start cursor-pointer" onClick={onClick}>
       <div className="flex items-center">
@@ -41,7 +42,7 @@ const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, onClic
       <div className="flex items-center">
         {glory && (
           <div className="flex items-center font-bold mx-2">
-            <GloryIcon className="bg-objective-gold rounded-full w-3 h-3 fill-current mr-1" />
+            <GloryIcon className={`${type === "Upgrade" ? "bg-gray-400" : "bg-objective-gold"} rounded-full w-3 h-3 fill-current mr-1`} />
             {glory}
           </div>
         )}
@@ -117,6 +118,7 @@ const CardInDeck = memo(
             scoreType={scoreType}
             id={id}
             glory={glory}
+            type={type}
             onClick={() => setOverlayIsVisible(true)}
           />
           <button
