@@ -26,7 +26,7 @@ interface WUCardInfoProps {
 
 const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, onClick }: WUCardInfoProps) {
   return (
-    <div className="flex-1 self-start cursor-pointer" onClick={onClick}>
+    <div className="flex-1 min-w-0 self-start cursor-pointer" onClick={onClick}>
       <div className="flex items-center">
         {scoreType && scoreType !== "-" && (
           <ObjectiveScoreTypeIcon
