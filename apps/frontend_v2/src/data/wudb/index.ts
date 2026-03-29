@@ -386,4 +386,4 @@ export {
   sets as wusets,
 };
 
-export type { Card, SetId, CardId, CardType, Set } from "./types";
+export type { Card, SetId, CardId, CardType, ScoreType, Set, FactionName } from "./types";

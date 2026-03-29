@@ -1,22 +1,32 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardsTab from "./CardsTab";
 import { animated, useSpring } from "@react-spring/web";
 import { OBJECTIVE_GLORY_FILTERS } from "./constants/objectiveGloryFilters";
 import { OBJECTIVE_SCORE_TYPE_FILTERS } from "./constants/objectiveScoreTypeFilters";
 import { CARD_TYPE_FILTERS } from "./constants/cardTypeFilters";
+import type { FilterConfig } from "./constants/cardTypeFilters";
 import FiltersGroupToggles from "./FilterGroupToggles";
 import useMeasure from "react-use-measure";
+import type { Card } from "../../../../../data/wudb";
+import type { CardFilter } from "../../../reducer";
 
-const composeTypeFilters = (enabledTypes) => {
+type FilterFn = (card: Card) => boolean;
+
+interface LibraryFiltersProps {
+    bounds: { height: number; width: number };
+    onFiltersChanged: (filter: CardFilter) => void;
+}
+
+const composeTypeFilters = (enabledTypes: string[]): FilterFn => {
     if (enabledTypes.length === 0) {
         return () => false;
     }
     return composeFilters(enabledTypes, CARD_TYPE_FILTERS);
 };
 
-const composeFilters = (enabledTypes, allTypeFilters) => {
+const composeFilters = (enabledTypes: string[], allTypeFilters: FilterConfig[]): FilterFn => {
     if (enabledTypes.length === 0) {
-        return (card) => card;
+        return (card) => !!card;
     }
 
     return enabledTypes
@@ -25,20 +35,20 @@ const composeFilters = (enabledTypes, allTypeFilters) => {
             if (!filter) throw Error("Cannot find filter matching type!");
             return filter.filter;
         })
-        .reduce((compFilter, fun) => {
+        .reduce<FilterFn>((compFilter, fun) => {
             return compFilter
                 ? (card) => compFilter(card) || fun(card)
                 : (card) => fun(card);
-        }, undefined);
+        }, () => false);
 };
 
-function LibraryFilters({ bounds, onFiltersChanged }) {
+function LibraryFilters({ bounds, onFiltersChanged }: LibraryFiltersProps) {
     const [showFilters, setShowFilters] = useState(false);
     const [enabledCardTypes, setEnabledCardTypes] = useState(
         CARD_TYPE_FILTERS.slice(0, 1).map((f) => f.label)
     );
-    const [enabledObjectiveScoreTypes, setObjectiveScoreTypes] = useState([]);
-    const [enabledGloryFilters, setEnabledGloryFilters] = useState([]);
+    const [enabledObjectiveScoreTypes, setObjectiveScoreTypes] = useState<string[]>([]);
+    const [enabledGloryFilters, setEnabledGloryFilters] = useState<string[]>([]);
     const [ref, { height }] = useMeasure();
 
     const styles = useSpring({
@@ -55,7 +65,7 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
         const gloryFilters = composeFilters(enabledGloryFilters, OBJECTIVE_GLORY_FILTERS);
         const scoreTypeFilters = composeFilters(enabledObjectiveScoreTypes, OBJECTIVE_SCORE_TYPE_FILTERS);
 
-        const aggregateFilters = (card) => {
+        const aggregateFilters = (card: Card) => {
             if (enabledCardTypes.includes("Objective")) {
                 return typesFilter(card) && gloryFilters(card) && scoreTypeFilters(card);
             }
@@ -73,16 +83,16 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
         setShowFilters((prev) => !prev);
     };
 
-    const handleToggleSubFilter = (value, update) => (item) => () => {
+    const handleToggleSubFilter = (value: string[], update: React.Dispatch<React.SetStateAction<string[]>>) => (item: string) => () => {
         const index = value.indexOf(item);
         if (index >= 0) {
-            update((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
+            update((prev: string[]) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
         } else {
-            update((prev) => [...prev, item]);
+            update((prev: string[]) => [...prev, item]);
         }
     };
 
-    const handleToggleType = (_selectedTypes, _allTypes, update) => (type) => () => {
+    const handleToggleType = (_selectedTypes: string[], _allTypes: string[], update: React.Dispatch<React.SetStateAction<string[]>>) => (type: string) => () => {
         update([type]);
     };
 
@@ -107,7 +117,7 @@ function LibraryFilters({ bounds, onFiltersChanged }) {
                 totalActiveFilters={totalActiveFilters}
                 onToggleShowFilters={changeShowFilters}
             />
-            <animated.div className="bg-white text-gray-900 flex" style={styles}>
+            <animated.div className="bg-white text-gray-900 flex" style={styles as unknown as React.CSSProperties}>
                 <div
                     className={`${
                         showFilters ? "flex-1 flex flex-col overflow-y-auto" : "hidden"

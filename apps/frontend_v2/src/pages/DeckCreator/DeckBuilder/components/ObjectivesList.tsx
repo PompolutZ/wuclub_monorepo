@@ -3,32 +3,36 @@ import ScoringOverview from "../../../../atoms/ScoringOverview";
 import { CardsList } from "./CardsList";
 import { CardListSectionHeader } from "../../../../shared/components/CardListSectionHeader";
 import SectionTitle from "../../../../shared/components/SectionTitle";
+import type { EnrichedCard } from "../../reducer";
 import { animated, useSpring } from "@react-spring/web";
 import { useResizeHeight } from "../../../../hooks/useResizeHeight";
 import { ExpandCollapseButton } from "../../../../shared/components/ExpandCollapseButton";
 
-function ObjectivesList({ selectedObjectives, format, isValid }) {
+interface ObjectivesListProps {
+  selectedObjectives: EnrichedCard[];
+  format: string;
+  isValid: boolean;
+}
+
+function ObjectivesList({ selectedObjectives, format, isValid }: ObjectivesListProps) {
   const [measureRef, open, toggle, contentHeight] = useResizeHeight({ open: true });
   const expand = useSpring({
     height: open ? `${contentHeight}px` : "0px",
   });
 
-  const { surge, end, third, totalGlory, objectiveSummary } = useMemo(() => {
+  const { surge, end, totalGlory, objectiveSummary } = useMemo(() => {
     const surge = [];
     const end = [];
-    const third = [];
     let totalGlory = 0;
     const objectiveSummary = { Surge: 0, End: 0, Third: 0 };
 
     for (const c of selectedObjectives) {
-      totalGlory += c.glory;
-      if (c.scoreType in objectiveSummary) objectiveSummary[c.scoreType]++;
-      if (c.scoreType === "Surge") surge.push(c);
-      else if (c.scoreType === "End") end.push(c);
-      else if (c.scoreType === "Third") third.push(c);
+      totalGlory += (c.glory ?? 0);
+      if (c.scoreType === "Surge") { objectiveSummary.Surge++; surge.push(c); }
+      else if (c.scoreType === "End") { objectiveSummary.End++; end.push(c); }
     }
 
-    return { surge, end, third, totalGlory, objectiveSummary };
+    return { surge, end, totalGlory, objectiveSummary };
   }, [selectedObjectives]);
 
   return (
@@ -62,12 +66,7 @@ function ObjectivesList({ selectedObjectives, format, isValid }) {
               <CardsList format={format} cards={end} />
             </section>
           )}
-          {third.length > 0 && (
-            <section className="mt-4 mb-2">
-              <SectionTitle title="Third End Phase" />
-              <CardsList format={format} cards={third} />
-            </section>
-          )}
+
         </div>
       </animated.div>
     </div>

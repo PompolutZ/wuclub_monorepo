@@ -1,6 +1,7 @@
 import ObjectiveScoreTypeIcon from "../../../../../../components/ObjectiveScoreTypeIcon";
+import type { FilterConfig } from "./cardTypeFilters";
 
-export const OBJECTIVE_SCORE_TYPE_FILTERS = [
+export const OBJECTIVE_SCORE_TYPE_FILTERS: FilterConfig[] = [
     {
         label: "Surge",
         icon: (
@@ -9,7 +10,7 @@ export const OBJECTIVE_SCORE_TYPE_FILTERS = [
                 style={{ width: "1rem", height: "1rem" }}
             />
         ),
-        filter: (card) => card.scoreType === "Surge" || card.scoreType === 0,
+        filter: (card) => card.scoreType === "Surge",
     },
     {
         label: "End phase",
@@ -19,6 +20,6 @@ export const OBJECTIVE_SCORE_TYPE_FILTERS = [
                 style={{ width: "1rem", height: "1rem" }}
             />
         ),
-        filter: (card) => card.scoreType === "End" || card.scoreType === 1,
+        filter: (card) => card.scoreType === "End",
     },
 ];

@@ -9,9 +9,9 @@ const optimalHeight = 16 * 3;
 interface FixedVirtualizedListProps<T> {
     items: T[];
     children: (item: T | T[], row: VirtualItem) => JSX.Element;
-    estimateItemSize: number;
+    estimateItemSize?: number;
     variant?: "list" | "grid";
-    onLoadMore: () => void;
+    onLoadMore?: () => void;
     lazy?: boolean;
 }
 
@@ -78,7 +78,7 @@ export const FixedVirtualizedList = <T,>({
                         <InView
                             onChange={(inView) => {
                                 if (inView) {
-                                    onLoadMore();
+                                    onLoadMore?.();
                                 }
                             }}
                         />

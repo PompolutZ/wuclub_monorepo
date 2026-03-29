@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useEffectReducer } from "use-effect-reducer";
 import { deckBuilderReducer, INITIAL_STATE, DECK_IN_PROGRESS_KEY } from "./reducer";
+import type { DeckBuilderAction, DeckBuilderState } from "./reducer";
 import {
   addKeyToLocalStorage,
   removeKeyFromLocalStorage,
@@ -13,10 +14,12 @@ import { useStateCreator } from "./useStateCreator";
 import { useSaveDeck } from "@/shared/hooks/useSaveDeck";
 import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 
-const DeckBuilderContext = React.createContext();
-const DeckBuilderDispatchContext = React.createContext();
+type Dispatch = (action: DeckBuilderAction) => void;
 
-export function useDeckBuilderState() {
+const DeckBuilderContext = React.createContext<DeckBuilderState | undefined>(undefined);
+const DeckBuilderDispatchContext = React.createContext<Dispatch | undefined>(undefined);
+
+export function useDeckBuilderState(): DeckBuilderState {
   const context = useContext(DeckBuilderContext);
   if (context === undefined) {
     throw Error(
@@ -27,7 +30,7 @@ export function useDeckBuilderState() {
   return context;
 }
 
-export function useDeckBuilderDispatcher() {
+export function useDeckBuilderDispatcher(): Dispatch {
   const context = useContext(DeckBuilderDispatchContext);
   if (context === undefined) {
     throw Error(
@@ -38,7 +41,7 @@ export function useDeckBuilderDispatcher() {
   return context;
 }
 
-const initialiseState = (deck) => (exec) => {
+const initialiseState = (deck: DeckBuilderState | null) => (exec: (effect: { type: string; key: string }) => void) => {
   if (deck) {
     return deck;
   }
@@ -51,15 +54,15 @@ const initialiseState = (deck) => (exec) => {
   return INITIAL_STATE;
 };
 
-function DeckBuilderContextProvider({ children, deck }) {
+function DeckBuilderContextProvider({ children, deck }: { children: React.ReactNode; deck: DeckBuilderState | null }) {
   const { mutateAsync: saveDeck } = useSaveDeck();
   const { mutateAsync: updateDeck } = useUpdateDeck();
   const [state, dispatch] = useEffectReducer(
     deckBuilderReducer,
-    initialiseState(deck),
+    initialiseState(deck) as never,
     {
-      saveDeck: apiSaveDeckAsync(saveDeck),
-      updateDeck: apiUpdateDeckAsync(updateDeck),
+      saveDeck: apiSaveDeckAsync(saveDeck as never) as never,
+      updateDeck: apiUpdateDeckAsync(updateDeck as never) as never,
       addKeyToLocalStorage,
       removeKeyFromLocalStorage,
       initialiseStateFromLocalStorage,

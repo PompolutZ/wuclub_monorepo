@@ -7,18 +7,27 @@ import {
   validateCardForPlayFormat,
   validateDeckForPlayFormat,
 } from "../../../../data/wudb";
+import type { Card } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { STATUS_SAVING } from "../../reducer";
+import type { EnrichedCard } from "../../reducer";
 import GambitsList from "./GambitsList";
 import ObjectivesList from "./ObjectivesList";
 import UpgradesList from "./UpgradesList";
 
-function enrichCard(c, format) {
-  const [, isForsaken, isRestricted] = validateCardForPlayFormat(c, format);
+function enrichCard(c: Card, format: string): EnrichedCard {
+  const [, isForsaken, isRestricted] = validateCardForPlayFormat(c, format as never);
   return { ...c, isBanned: isForsaken, isRestricted };
 }
 
-function Deck({ deckName, onDeckNameChange, onSave, onReset }) {
+interface DeckProps {
+  deckName: string;
+  onDeckNameChange: (name: string) => void;
+  onSave: () => void;
+  onReset: () => void;
+}
+
+function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
   const {
     faction,
     selectedObjectives,
@@ -45,7 +54,7 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }) {
   );
 
   const [isValid, issues] = useMemo(
-    () => validateDeckForPlayFormat({ objectives, gambits, upgrades }, format),
+    () => validateDeckForPlayFormat({ objectives, gambits, upgrades }, format as never),
     [objectives, gambits, upgrades, format],
   );
 

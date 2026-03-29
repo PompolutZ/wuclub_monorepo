@@ -5,7 +5,7 @@ import {
 } from "@components/FactionDeckPicture";
 import TogglesIcon from "@icons/sliders.svg?react";
 import CloseIcon from "@icons/x.svg?react";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
 import ExpansionsToggle from "../../../../components/ExpansionsToggle";
 import {
@@ -15,15 +15,22 @@ import {
   warbandsValidForOrganisedPlay,
   wufactions,
 } from "../../../../data/wudb";
+import type { Faction } from "../../reducer";
+import type { Set as WuSet } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormatInfo";
 import { DeckPlayFormatToggle } from "../../../../shared/components/DeckPlayFormatToggle";
 import IconButton from "../../../../shared/components/IconButton";
 import SectionTitle from "../../../../shared/components/SectionTitle";
 
-function SelectedFaction({ faction = "morgwaeths-blade-coven", ...rest }) {
+interface SelectedFactionProps {
+  faction: Faction;
+  className?: string;
+}
+
+function SelectedFaction({ faction, className }: SelectedFactionProps) {
   return (
-    <div className={`flex flex-grow ${rest.className}`}>
+    <div className={`flex flex-grow ${className ?? ""}`}>
       <FactionDeckPicture faction={faction.name} size="large" />
       <div className="flex-grow grid place-content-center text-gray-900 text-2xl">
         {faction.displayName}
@@ -40,23 +47,25 @@ const notPlayableFactionIds = [
   wufactions["gac"].id,
 ];
 
-function FactionsPicker({
-  selected,
-  onChangeWarband,
-  selectableWarbands,
-  ...rest
-}) {
-  const handleSelectWarband = (faction) => () => {
+interface FactionsPickerProps {
+  selected: Faction;
+  onChangeWarband: (faction: Faction) => void;
+  selectableWarbands: Faction[];
+  className?: string;
+}
+
+function FactionsPicker({ selected, onChangeWarband, selectableWarbands, className }: FactionsPickerProps) {
+  const handleSelectWarband = (faction: Faction) => () => {
     onChangeWarband(faction);
   };
 
   return (
-    <div className={`flex flex-wrap align-middle ${rest.className}`}>
+    <div className={`flex flex-wrap align-middle ${className ?? ""}`}>
       {selectableWarbands
         .filter(
           (faction) =>
             faction.id != selected.id &&
-            !notPlayableFactionIds.includes(faction.id),
+            !notPlayableFactionIds.includes(faction.id as never),
         )
         .reverse()
         .map((faction) => (
@@ -72,26 +81,30 @@ function FactionsPicker({
   );
 }
 
-function CardLibraryFilters(props) {
+interface CardLibraryFiltersProps {
+  onSearchTextChange: (text: string) => void;
+}
+
+function CardLibraryFilters({ onSearchTextChange }: CardLibraryFiltersProps) {
   const state = useDeckBuilderState();
   const dispatch = useDeckBuilderDispatcher();
 
-  const [showFilters, setShowFilters] = React.useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const [selectedFormat, setSelectedFormat] = useState(state.format);
 
   /// Here will be new approach, keeping the rest for now
   const validSets = useMemo(
-    () => getAllSetsValidForFormat(selectedFormat),
+    () => getAllSetsValidForFormat(selectedFormat as never),
     [selectedFormat],
   );
   const [warband, setWarband] = useState(state.faction);
-  const [selectedSets, setSelectedSets] = useState(
+  const [selectedSets, setSelectedSets] = useState<WuSet[]>(
     selectedFormat === NEMESIS_FORMAT
       ? validSets.slice(0, 2)
-      : [validSets.at(0)],
+      : validSets.slice(0, 1),
   );
 
-  const handleFormatChange = (format) => {
+  const handleFormatChange = (format: string) => {
     setSelectedFormat(format);
   };
 
@@ -113,7 +126,7 @@ function CardLibraryFilters(props) {
       if (selectedFormat === NEMESIS_FORMAT) {
         return validSets.slice(0, 2);
       } else {
-        return [validSets.at(0)];
+        return validSets.slice(0, 1);
       }
     });
   }, [selectedFormat, validSets]);
@@ -131,7 +144,7 @@ function CardLibraryFilters(props) {
         <DebouncedInput
           className="rounded h-12 bg-gray-200 box-border flex-1 py-1 px-2 outline-none border-2 focus:border-purple-700"
           placeholder="Search for any text on card"
-          onChange={props.onSearchTextChange}
+          onChange={onSearchTextChange}
         />
         <IconButton
           className="rounded-full ml-3 px-2 w-11 h-11 grid place-content-center relative hover:bg-gray-100 focus:text-purple-700"
@@ -179,9 +192,9 @@ function CardLibraryFilters(props) {
 
             <ExpansionsToggle
               singleSet={selectedFormat === RIVALS_FORMAT}
-              expansions={validSets}
-              selectedExpansions={selectedSets}
-              onExpansionsChange={setSelectedSets}
+              expansions={validSets as never[]}
+              selectedExpansions={selectedSets as never[]}
+              onExpansionsChange={setSelectedSets as never}
             />
           </section>
         </div>

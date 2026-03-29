@@ -3,8 +3,15 @@ import { CardListSectionHeader } from "../../../../shared/components/CardListSec
 import { ExpandCollapseButton } from "../../../../shared/components/ExpandCollapseButton";
 import { useResizeHeight } from "../../../../hooks/useResizeHeight";
 import { animated, useSpring } from "@react-spring/web";
+import type { EnrichedCard } from "../../reducer";
 
-function UpgradesList({ selectedUpgrades, format, isValid }) {
+interface UpgradesListProps {
+    selectedUpgrades: EnrichedCard[];
+    format: string;
+    isValid: boolean;
+}
+
+function UpgradesList({ selectedUpgrades, format, isValid }: UpgradesListProps) {
   const [measureRef, open, toggle, contentHeight] = useResizeHeight({
     open: true,
   });

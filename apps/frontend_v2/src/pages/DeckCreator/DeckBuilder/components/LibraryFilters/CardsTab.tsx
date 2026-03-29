@@ -3,6 +3,13 @@ import LockIcon from "@icons/lock.svg?react";
 import SurgeIcon from "@icons/zap.svg?react";
 import { useMemo } from "react";
 import { useDeckBuilderState } from "../../..";
+
+interface CardsTabProps {
+    enabledTypes: string[];
+    totalActiveFilters: number;
+    onToggleType: (type: string) => () => void;
+    onToggleShowFilters: () => void;
+}
 import {
     NEMESIS_FORMAT,
     validateCardForPlayFormat
@@ -10,12 +17,7 @@ import {
 import IconButton from "../../../../../shared/components/IconButton";
 import ToggleButton from "../ToggleButton";
 
-function CardsTab({
-    enabledTypes,
-    totalActiveFilters,
-    onToggleType,
-    onToggleShowFilters,
-}) {
+function CardsTab({ enabledTypes, totalActiveFilters, onToggleType, onToggleShowFilters }: CardsTabProps) {
     const {
         selectedObjectives,
         selectedGambits,
@@ -37,7 +39,7 @@ function CardsTab({
     const surgeCount = useMemo(() => {
         return selectedObjectives.filter(
             (objective) =>
-                objective.scoreType === "Surge" || objective.scoreType === 0
+                objective.scoreType === "Surge"
         ).length;
     }, [selectedObjectives]);
 

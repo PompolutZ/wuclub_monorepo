@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import LockIcon from "@icons/lock.svg?react";
 import NotInterestedIcon from "@icons/no-symbol.svg?react";
@@ -12,11 +12,19 @@ import {
   RIVALS_DECK_CARDS_TOTAL,
   validateCardForPlayFormat,
 } from "../../../../data/wudb";
+import type { ScoreType } from "../../../../data/wudb";
 import { ModalPresenter } from "../../../../main";
 import CardImage from "../../../../shared/components/CardImage";
-import { useState } from "react";
 
-const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, onClick }) {
+interface WUCardInfoProps {
+  scoreType: ScoreType;
+  name: string;
+  id: string;
+  glory: number | null;
+  onClick: () => void;
+}
+
+const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, onClick }: WUCardInfoProps) {
   return (
     <div className="flex-1 self-start cursor-pointer" onClick={onClick}>
       <div className="flex items-center">
@@ -43,11 +51,23 @@ const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, onClic
   );
 });
 
+interface CardInDeckProps {
+  cardId: string;
+  format: string;
+  toggleCard: () => void;
+  inDeck: boolean;
+  isNameDuplicate?: boolean;
+  ranking?: number;
+  showType?: boolean;
+  withAnimation?: boolean;
+  isAlter?: boolean;
+}
+
 const CardInDeck = memo(
-  ({ cardId, format, toggleCard, inDeck, isNameDuplicate, ranking, ...props }) => {
+  ({ cardId, format, toggleCard, inDeck, isNameDuplicate, ...props }: CardInDeckProps) => {
     const [overlayIsVisible, setOverlayIsVisible] = useState(false);
-    const card = getCardById(cardId);
-    const [, isBanned, isRestricted] = validateCardForPlayFormat(cardId, format);
+    const card = getCardById(cardId as never);
+    const [, isBanned, isRestricted] = validateCardForPlayFormat(cardId as never, format as never);
 
     if (!card) return null;
 
@@ -93,13 +113,8 @@ const CardInDeck = memo(
             )}
           </div>
           <WUCardInfo
-            rank={ranking}
-            isRestricted={isRestricted}
-            isBanned={isBanned}
-            set={setId}
             name={name}
             scoreType={scoreType}
-            type={type}
             id={id}
             glory={glory}
             onClick={() => setOverlayIsVisible(true)}

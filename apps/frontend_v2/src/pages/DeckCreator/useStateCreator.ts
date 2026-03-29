@@ -10,12 +10,31 @@ import {
     getFactionByName,
     getSetById,
 } from "../../data/wudb";
+import type { Card, SetId, FactionName } from "../../data/wudb";
 import { INITIAL_STATE } from "./reducer";
+import type { DeckBuilderState, Faction } from "./reducer";
 import { logger } from "@/utils/logger";
 
-export function useStateCreator() {
-    const { action, data } = useParams();
-    const { state } = useLocation();
+type DeckRouteState = {
+    deck?: {
+        faction?: string;
+        objectives?: DeckBuilderState["selectedObjectives"];
+        gambits?: DeckBuilderState["selectedGambits"];
+        upgrades?: DeckBuilderState["selectedUpgrades"];
+        name?: string;
+        private?: boolean;
+    };
+};
+
+type PreviousDeck = { id: string | undefined; name: string | undefined; private: boolean | undefined };
+
+type StateCreatorResult =
+    | { action: string | undefined; state: null; previous?: undefined }
+    | { action: string; state: DeckBuilderState; previous?: PreviousDeck };
+
+export function useStateCreator(): StateCreatorResult {
+    const { action, data } = useParams<{ action: string; data: string }>();
+    const { state } = useLocation<DeckRouteState | null>();
 
     switch (action) {
         case "create":
@@ -26,10 +45,10 @@ export function useStateCreator() {
                 action,
                 state: {
                     ...INITIAL_STATE,
-                    faction: getFactionByName(state?.deck?.faction),
-                    selectedObjectives: state?.deck?.objectives,
-                    selectedGambits: state?.deck?.gambits,
-                    selectedUpgrades: state?.deck?.upgrades,
+                    faction: (getFactionByName(state?.deck?.faction as FactionName) ?? INITIAL_STATE.faction) as Faction,
+                    selectedObjectives: state?.deck?.objectives ?? [],
+                    selectedGambits: state?.deck?.gambits ?? [],
+                    selectedUpgrades: state?.deck?.upgrades ?? [],
                 },
                 previous: {
                     id: data,
@@ -41,23 +60,23 @@ export function useStateCreator() {
         case "transfer": {
             const [transferFormat, ...cardIds] = data.split(",");
             const decode = getDecodingFunction(transferFormat);
-            const decodedCards = cardIds
+            const decodedCards = (cardIds
                 .map((foreignId) => {
                     const wuid = decode(foreignId);
-                    const card = getCardById(wuid);
+                    const card = getCardById(wuid as never);
                     if (!card) {
                         logger.warn(`Card with ID ${wuid} not found in the database`, { wuid, foreignId });
                         return null;
                     }
-                    return card;
+                    return card as unknown as Card;
                 })
-                .filter(Boolean);
+                .filter(Boolean) as Card[]);
 
             const faction = getFactionById();
 
             const sets = decodedCards.reduce(
-                (acc, { setId }) => acc.add(setId),
-                new Set()
+                (acc, card) => acc.add(card.setId),
+                new Set<SetId>()
             );
 
             const selectedSets = [...sets.values()];
@@ -68,10 +87,10 @@ export function useStateCreator() {
                     ...INITIAL_STATE,
                     format: selectedSets.length === 2 ? NEMESIS_FORMAT : CHAMPIONSHIP_FORMAT,
                     faction,
-                    sets: selectedSets.map((setId) => getSetById(setId)),
-                    selectedObjectives: decodedCards.filter(checkCardIsObjective),
-                    selectedGambits: decodedCards.filter(checkCardIsPloy),
-                    selectedUpgrades: decodedCards.filter(checkCardIsUpgrade),
+                    sets: selectedSets.map((setId) => getSetById(setId as never)!),
+                    selectedObjectives: decodedCards.filter(checkCardIsObjective) as Card[],
+                    selectedGambits: decodedCards.filter(checkCardIsPloy) as Card[],
+                    selectedUpgrades: decodedCards.filter(checkCardIsUpgrade) as Card[],
                 },
             };
         }
@@ -82,7 +101,9 @@ export function useStateCreator() {
     }
 }
 
-const decodeUDS = (card) => {
+type DecodeFn = (card: string) => string;
+
+const decodeUDS: DecodeFn = (card) => {
     const udsId = Number(card);
     if (udsId >= 9000 && udsId < 10000) {
         return String(Number(card) + 2000).padStart(5, "0");
@@ -92,11 +113,11 @@ const decodeUDS = (card) => {
     return String(Number(card) + 1000).padStart(5, "0");
 };
 
-const decodeWUC = (card) => card;
+const decodeWUC: DecodeFn = (card) => card;
 
-const decodeUDB = (card) => card;
+const decodeUDB: DecodeFn = (card) => card;
 
-const getDecodingFunction = (encoding) => {
+const getDecodingFunction = (encoding: string): DecodeFn => {
     switch (encoding) {
         case "udb":
             return decodeUDB;

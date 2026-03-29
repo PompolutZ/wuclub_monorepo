@@ -1,8 +1,8 @@
-import { Component } from "react";
+import React from "react";
 
 type Tab = {
   name: string;
-  Icon: typeof Component;
+  Icon: React.ComponentType<{ className?: string }>;
   disabled?: boolean;
 };
 

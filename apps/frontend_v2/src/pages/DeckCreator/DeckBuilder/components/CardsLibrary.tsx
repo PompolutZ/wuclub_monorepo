@@ -6,29 +6,31 @@ import {
   wucards,
   wufactions,
 } from "../../../../data/wudb";
+import type { Card } from "../../../../data/wudb";
 import { toggleCardAction } from "../../reducer";
+import type { CardFilter } from "../../reducer";
 import CardInDeck from "./Card";
 
-function stringTypeToNumber(type) {
+interface FilterableCardLibraryProps {
+  searchText: string;
+  filter: CardFilter;
+}
+
+type CardListItem = { card: Card & { isBanned: boolean; isRestricted: boolean }; expanded: boolean; isNameDuplicate: boolean };
+
+function stringTypeToNumber(type: string): number {
   switch (type) {
-    case "Objective":
-      return 0;
-    case "Ploy":
-      return 1;
-    case "Upgrade":
-      return 2;
+    case "Objective": return 0;
+    case "Ploy": return 1;
+    case "Upgrade": return 2;
+    default: return 3;
   }
 }
 
-const _sort = (card1, card2) => {
-  const t1 = stringTypeToNumber(card1.type);
-  const t2 = stringTypeToNumber(card2.type);
-  return (
-    t1 - t2 || card2.faction - card1.faction || card2.ranking - card1.ranking
-  );
-};
+const _sort = (card1: Card, card2: Card) =>
+  stringTypeToNumber(card1.type) - stringTypeToNumber(card2.type);
 
-function FilterableCardLibrary({ searchText, filter }) {
+function FilterableCardLibrary({ searchText, filter }: FilterableCardLibraryProps) {
   const dispatch = useDeckBuilderDispatcher();
   const state = useDeckBuilderState();
 
@@ -63,7 +65,7 @@ function FilterableCardLibrary({ searchText, filter }) {
         return { ...c, isBanned: isForsaken, isRestricted };
       });
 
-    if (isNaN(searchText)) {
+    if (isNaN(Number(searchText))) {
       cards = cards.filter((c) => {
         if (!searchText) return true;
         return (
@@ -87,8 +89,9 @@ function FilterableCardLibrary({ searchText, filter }) {
 
   return (
     <div className="flex-1 flex outline-none">
-      <FixedVirtualizedList items={filteredCards}>
-        {({ card, expanded, isNameDuplicate }, { key, index }) => {
+      <FixedVirtualizedList items={filteredCards} onLoadMore={() => {}}>
+        {(item, { key, index }) => {
+          const { card, isNameDuplicate } = item as CardListItem;
           return card ? (
             <div
               key={key}
@@ -100,13 +103,11 @@ function FilterableCardLibrary({ searchText, filter }) {
                 showType
                 key={card.id}
                 cardId={card.id}
-                expanded={expanded}
                 inDeck={!!deck.find(({ id }) => id === card.id)}
                 isNameDuplicate={isNameDuplicate}
                 format={state.format}
                 toggleCard={() => dispatch(toggleCardAction(card))}
                 withAnimation={false}
-                card={card}
               />
             </div>
           ) : (

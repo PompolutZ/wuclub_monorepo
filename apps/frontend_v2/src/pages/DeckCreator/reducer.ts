@@ -2,7 +2,9 @@ import {
     getFactionByName,
     getAllSetsValidForFormat,
     NEMESIS_FORMAT,
+    wufactions,
 } from "../../data/wudb";
+import type { Card, Set as WuSet } from "../../data/wudb";
 
 export const DECK_IN_PROGRESS_KEY = "wunderworlds_deck_in_progress";
 
@@ -20,27 +22,69 @@ export const STATUS_SAVING = "Saving";
 export const STATUS_SAVED = "Saved";
 export const STATUS_ERROR = "Error";
 
-export function toggleCardAction(card) {
-    return {
-        type: TOGGLE_CARD_ACTION,
-        payload: card,
-    };
+export type Faction = (typeof wufactions)[keyof typeof wufactions];
+
+export type EnrichedCard = Card & { isBanned: boolean; isRestricted: boolean };
+
+export type CardFilter = { test?: (card: Card) => boolean };
+
+export type DeckMeta = {
+    deckName: string;
+    deckId: string;
+    author?: string;
+    authorDisplayName?: string;
+    private?: boolean;
+};
+
+export type DeckBuilderState = {
+    faction: Faction;
+    sets: WuSet[];
+    format: string;
+    selectedObjectives: Card[];
+    selectedGambits: Card[];
+    selectedUpgrades: Card[];
+    visibleCardTypes: string[];
+    status: string;
+    saveError: string | null;
+};
+
+type ExecEffect =
+    | { type: "addKeyToLocalStorage"; key: string; value: DeckBuilderState }
+    | { type: "removeKeyFromLocalStorage"; key: string }
+    | { type: "saveDeck"; deckMeta: DeckMeta }
+    | { type: "updateDeck"; deckMeta: DeckMeta }
+    | { type: "initialiseStateFromLocalStorage"; key: string };
+
+export type DeckBuilderAction =
+    | { type: typeof UPDATE_FILTERS_ACTION; payload: Partial<DeckBuilderState> }
+    | { type: typeof TOGGLE_CARD_ACTION; payload: Card }
+    | { type: typeof RESET_DECK_ACTION }
+    | { type: typeof SAVE_DECK; payload: DeckMeta }
+    | { type: typeof UPDATE_DECK; payload: DeckMeta }
+    | { type: typeof FINISH_SAVING_DECK }
+    | { type: typeof SAVE_ERROR; payload: string }
+    | { type: typeof SET_DESERIALIZED_STATE; payload: DeckBuilderState };
+
+type ExecFn = (effect: ExecEffect) => void;
+
+export function toggleCardAction(card: Card): DeckBuilderAction {
+    return { type: TOGGLE_CARD_ACTION, payload: card };
 }
 
-export function resetDeckAction() {
+export function resetDeckAction(): DeckBuilderAction {
     return { type: RESET_DECK_ACTION };
 }
 
-export function saveDeckAction(deckMeta) {
+export function saveDeckAction(deckMeta: DeckMeta): DeckBuilderAction {
     return { type: SAVE_DECK, payload: deckMeta };
 }
 
-export function updateDeckAction(deckMeta) {
+export function updateDeckAction(deckMeta: DeckMeta): DeckBuilderAction {
     return { type: UPDATE_DECK, payload: deckMeta };
 }
 
-export const INITIAL_STATE = {
-    faction: getFactionByName("universal"),
+export const INITIAL_STATE: DeckBuilderState = {
+    faction: getFactionByName("universal") as Faction,
     sets: getAllSetsValidForFormat(NEMESIS_FORMAT),
     format: NEMESIS_FORMAT,
     selectedObjectives: [],
@@ -51,7 +95,11 @@ export const INITIAL_STATE = {
     saveError: null,
 };
 
-export const deckBuilderReducer = (state, event, exec) => {
+export const deckBuilderReducer = (
+    state: DeckBuilderState,
+    event: DeckBuilderAction,
+    exec: ExecFn,
+): DeckBuilderState => {
     switch (event.type) {
         case UPDATE_FILTERS_ACTION: {
             const nextState = {

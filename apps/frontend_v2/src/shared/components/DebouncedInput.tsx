@@ -5,7 +5,7 @@ type DebouncedInputProps = {
     wait?: number;
     value?: string;
     onChange: (value: string) => void;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
 
 export function DebouncedInput({
   wait,

@@ -1,4 +1,6 @@
-export const OBJECTIVE_GLORY_FILTERS = [
+import type { FilterConfig } from "./cardTypeFilters";
+
+export const OBJECTIVE_GLORY_FILTERS: FilterConfig[] = [
     {
         label: "1",
         filter: card => card.glory === 1,
@@ -13,6 +15,6 @@ export const OBJECTIVE_GLORY_FILTERS = [
     },
     {
         label: "4+",
-        filter: card => card.glory >= 4, 
+        filter: card => (card.glory ?? 0) >= 4,
     },
 ]

@@ -1,11 +1,17 @@
-import React from "react";
 import { CardsList } from "./CardsList";
 import { CardListSectionHeader } from "../../../../shared/components/CardListSectionHeader";
 import { animated, useSpring } from "@react-spring/web";
 import { useResizeHeight } from "../../../../hooks/useResizeHeight";
 import { ExpandCollapseButton } from "../../../../shared/components/ExpandCollapseButton";
+import type { EnrichedCard } from "../../reducer";
 
-function GambitsList({ selectedGambits, format, isValid }) {
+interface GambitsListProps {
+    selectedGambits: EnrichedCard[];
+    format: string;
+    isValid: boolean;
+}
+
+function GambitsList({ selectedGambits, format, isValid }: GambitsListProps) {
     const [measureRef, open, toggle, contentHeight] = useResizeHeight({
         open: true,
     });
