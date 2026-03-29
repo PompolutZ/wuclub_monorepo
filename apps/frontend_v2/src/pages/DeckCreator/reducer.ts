@@ -85,7 +85,7 @@ export function updateDeckAction(deckMeta: DeckMeta): DeckBuilderAction {
 
 export const INITIAL_STATE: DeckBuilderState = {
     faction: getFactionByName("universal") as Faction,
-    sets: getAllSetsValidForFormat(NEMESIS_FORMAT),
+    sets: getAllSetsValidForFormat(NEMESIS_FORMAT).slice(0, 2),
     format: NEMESIS_FORMAT,
     selectedObjectives: [],
     selectedGambits: [],
