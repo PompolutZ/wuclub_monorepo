@@ -17,6 +17,7 @@ import {
 } from "../../../../data/wudb";
 import type { Faction } from "../../reducer";
 import type { Set as WuSet } from "../../../../data/wudb";
+import NemesisSetsInfo from "./NemesisSetsInfo";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormatInfo";
 import { DeckPlayFormatToggle } from "../../../../shared/components/DeckPlayFormatToggle";
@@ -80,6 +81,7 @@ function FactionsPicker({ selected, onChangeWarband, selectableWarbands, classNa
     </div>
   );
 }
+
 
 interface CardLibraryFiltersProps {
   onSearchTextChange: (text: string) => void;
@@ -189,6 +191,9 @@ function CardLibraryFilters({ onSearchTextChange }: CardLibraryFiltersProps) {
             </div>
 
             <SectionTitle title="Sets" className="my-8" />
+            {selectedFormat === NEMESIS_FORMAT && (
+              <NemesisSetsInfo selectedSets={selectedSets} />
+            )}
 
             <ExpansionsToggle
               singleSet={selectedFormat === RIVALS_FORMAT}
