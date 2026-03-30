@@ -1,13 +1,14 @@
 import { Deck } from "@fxdxpz/schema";
 import { useLocation } from "react-router-dom";
 import { getCardById } from "../../data/wudb";
+import type { CardId } from "../../data/wudb";
 import ReadonlyDeck from "./ReadonlyDeck";
 
 const Deck2 = () => {
   const { state } = useLocation<{ deck: Deck; canUpdateOrDelete: boolean }>();
 
   const deck = state.deck;
-  const cards = state.deck.deck.map(getCardById);
+  const cards = state.deck.deck.map((id) => getCardById(id as CardId));
   const factionId = state.deck && state.deck.deckId.split("-")[0];
   const canUpdateOrDelete = state.canUpdateOrDelete;
 

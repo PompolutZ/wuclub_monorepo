@@ -89,7 +89,7 @@ interface DeckBuilderProps {
 function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }: DeckBuilderProps) {
   const [deckName, setDeckName] = useState(currentDeckName || "");
   const [showConfirmDeckReset, setShowConfirmDeckReset] = useState(false);
-  const { uid, displayName } = useAuthUser() || {
+  const { uid, displayName } = (useAuthUser() as { uid?: string; displayName?: string } | null) || {
     uid: "Anonymous",
     displayName: "Anonymous",
   };

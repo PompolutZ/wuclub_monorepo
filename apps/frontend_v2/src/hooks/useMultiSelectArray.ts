@@ -8,7 +8,7 @@ export const useMultiSelectArray = <T>(
 ) => {
     const [selected, setSelected] = useState<T[]>(defaultSelection);
 
-    const onToggle = item => () => {
+    const onToggle = (item: T) => () => {
         if (!allowMultiSelect) {
             setSelected([item]);
             onSelectionChanged([item]);

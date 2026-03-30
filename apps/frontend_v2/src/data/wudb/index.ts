@@ -1,4 +1,3 @@
-import { sortByIdAsc } from "../../utils/sort";
 import { factions } from "./factions";
 import { sets } from "./sets";
 import { cards } from "./cards";
@@ -17,7 +16,11 @@ export const latestSeasonStartNumber = 15000;
 
 export const RIVALS_DECK_CARDS_TOTAL = 32;
 
-export const sortedFactions = Object.values(factions).sort(sortByIdAsc);
+export const sortedFactions = Object.values(factions).sort((a, b) => {
+  const aId = 'gaId' in a ? (a as { gaId: number }).gaId : 0;
+  const bId = 'gaId' in b ? (b as { gaId: number }).gaId : 0;
+  return aId - bId;
+});
 
 function getCardNumberFromId(cardId: string) {
   const match = cardId.match(/(\d+)/);
@@ -99,7 +102,7 @@ const objectiveScoreTypes = [
   THIRD_END_SCORE_TYPE,
 ];
 
-function compareObjectivesByScoreType(scoreTypeOne, scoreTypeTwo) {
+function compareObjectivesByScoreType(scoreTypeOne: string, scoreTypeTwo: string) {
   return (
     objectiveScoreTypes.indexOf(scoreTypeOne) -
     objectiveScoreTypes.indexOf(scoreTypeTwo)
@@ -320,7 +323,7 @@ function validateDeckForPlayFormat(
   return [true, issues];
 }
 
-function validateObjectivesListForPlayFormat(objectives, format) {
+function validateObjectivesListForPlayFormat(objectives: Card[], format: string) {
   const issues = [];
   let isValid = true;
 
@@ -341,7 +344,7 @@ function validateObjectivesListForPlayFormat(objectives, format) {
   return [isValid, issues];
 }
 
-function validatePowerDeckForFormat(gambits, upgrades, format) {
+function validatePowerDeckForFormat(gambits: Card[], upgrades: Card[], format: string) {
   const issues = [];
   let isValid = true;
 

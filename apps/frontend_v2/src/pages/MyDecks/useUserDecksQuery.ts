@@ -6,7 +6,7 @@ import useAuthUser from "../../hooks/useAuthUser";
 import { Deck } from "@fxdxpz/schema";
 
 export const useUserDecksQuery = () => {
-  const user = useAuthUser();
+  const user = useAuthUser() as { fuid?: string; uid?: string } | null;
   return useQuery({
     queryKey: ["userDecks2", { user: user?.fuid ?? "anon" }],
     queryFn: async () => {
@@ -41,7 +41,7 @@ export const useUserDecksQuery = () => {
 
 // I am not sure if we even need this hook at all.
 export const useUserDeck = (deckId: string) => {
-  const { fuid } = useAuthUser();
+  const { fuid } = (useAuthUser() as { fuid?: string } | null) ?? {};
   const { getQueryCache } = useQueryClient();
 
   const user = fuid ?? "anon";

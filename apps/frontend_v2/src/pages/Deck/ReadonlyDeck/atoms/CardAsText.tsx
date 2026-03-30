@@ -66,7 +66,7 @@ export function CardAsText({ card }: { card: DeckCard }) {
       </div>
       <AnimateHeight height={animateHeight} duration={250} easing="ease-out">
         {useTextFallback ? (
-          <CardRule rule={card.rule} glory={card.glory} />
+          <CardRule rule={card.rule} glory={card.glory ?? undefined} />
         ) : (
           <CardImage
             onError={() => setUseTextFallback(true)}
