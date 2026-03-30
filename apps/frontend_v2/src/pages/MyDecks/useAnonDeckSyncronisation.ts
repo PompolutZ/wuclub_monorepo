@@ -16,7 +16,7 @@ export function useAnonDecksSynchronisation() {
       .then((anonDecks) => {
         return Promise.all(
           anonDecks.map(async (d) => {
-            await saveDeck(d);
+            await saveDeck(d as never);
             return (d as unknown as { id: number }).id;
           }),
         );

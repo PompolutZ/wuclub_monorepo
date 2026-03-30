@@ -43,8 +43,8 @@ function AvatarPicker({
   onSelectionChange: (faction: Factions) => void;
 }) {
   const factions = Object.values(wufactions)
-    .filter((f) => f.id > 1)
-    .sort((prev, next) => next.id - prev.id)
+    .filter((f): f is typeof f & { gaId: number } => 'gaId' in f)
+    .sort((prev, next) => next.gaId - prev.gaId)
     .map((f) => f.name as Factions);
 
   const [selectedIcon, setSelectedIcon] = useState(

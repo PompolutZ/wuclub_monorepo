@@ -23,10 +23,7 @@ export const useUpdateDeck = () => {
         return offlineDB.anonDecks
           .where("deckId")
           .equals(deckId)
-          .modify({
-            ...deck,
-            updatedutc: now,
-          });
+          .modify({ updatedutc: now, ...deck } as never);
       }
 
       const token = await Firebase.getTokenId();

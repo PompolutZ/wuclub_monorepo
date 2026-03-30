@@ -6,6 +6,7 @@ import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
 import { VIEW_DECK } from "../../constants/routes";
 import { checkCardIsObjective, getCardById } from "../../data/wudb";
+import type { CardId, SetId } from "../../data/wudb";
 import { DeckTitle } from "@/shared/components/DeckTitle";
 import { PeopleIcon } from "@components/Icons";
 
@@ -15,14 +16,16 @@ type Props = {
 };
 
 export const DeckLink = ({ onDelete, deck }: Props) => {
-  const cards = deck.deck.map((x) => getCardById(x));
+  const cards = deck.deck.map((x) => getCardById(x as CardId));
   const totalGlory = cards
     .filter(checkCardIsObjective)
-    .reduce((total, { glory }) => (total += glory), 0);
+    .reduce((total, { glory }) => (total += glory ?? 0), 0);
 
   const objectiveSummary = cards.filter(checkCardIsObjective).reduce(
     (acc, c) => {
-      acc[c.scoreType] += 1;
+      if (c.scoreType in acc) {
+        acc[c.scoreType as keyof typeof acc] += 1;
+      }
       return acc;
     },
     { Surge: 0, End: 0, Third: 0 },
@@ -33,7 +36,7 @@ export const DeckLink = ({ onDelete, deck }: Props) => {
       <FactionDeckPicture faction={deck.faction} />
 
       <div className="flex-1 pl-2 min-w-0">
-        <DeckTitle sets={deck.sets}>
+        <DeckTitle sets={deck.sets as SetId[]}>
           <Link
             className="text-xl block truncate"
             to={{
@@ -59,7 +62,7 @@ export const DeckLink = ({ onDelete, deck }: Props) => {
               </div>
             )}
           </div>
-          <SetsList sets={deck.sets} />
+          <SetsList sets={deck.sets as SetId[]} />
           <ScoringOverview summary={objectiveSummary} glory={totalGlory} />
         </div>
       </div>

@@ -199,7 +199,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
                 </div>
               </div>
             )}
-            {activeTabIndex === 1 && <FightersInfoList factionName={faction} />}
+            {activeTabIndex === 1 && <FightersInfoList factionName={faction as never} />}
           </div>
 
           <BottomPanelNavigation

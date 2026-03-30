@@ -1,8 +1,10 @@
 import { getSetNameById } from "@/data/wudb";
 
+import type { SetId } from "@/data/wudb";
+
 type Props = {
   id: string;
-  setId: number;
+  setId: SetId;
 };
 
 export const SetIcon = ({ id, setId }: Props) => (

@@ -15,7 +15,7 @@ export const useSaveDeck = () => {
         // TODO: This is not nice.
         // https://github.com/PompolutZ/wuclub_monorepo/issues/4
         return offlineDB.anonDecks.add({
-          ...deck,
+          ...(deck as unknown as import("../../services/db").AnonDecks),
           createdutc: now,
           updatedutc: now,
         });
