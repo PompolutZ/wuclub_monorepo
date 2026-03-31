@@ -9,6 +9,7 @@ export const BOARDS = `${BOARDS_BASE}`;
 export const PRIVACY_POLICY = "/privacy-policy";
 
 export const PROFILE = "/profile";
+export const SETTINGS = "/settings";
 export const MY_DECKS = "/mydecks";
 
 export const CREATE_NEW_DECK = "/deck/:action/:data?";

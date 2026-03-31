@@ -229,6 +229,12 @@ const Menu = ({ classes, showHome, children }: { classes: string; showHome?: boo
         >
           Library
         </AnimatedLink>
+        <AnimatedLink
+          className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+          to={ROUTES.SETTINGS}
+        >
+          Settings
+        </AnimatedLink>
 
         {children}
       </nav>

@@ -31,6 +31,7 @@ const Login = lazy(() => import("./pages/Login"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const PasswordResetRequest = lazy(() => import("./pages/PasswordResetRequest"));
 const BoardsPage = lazy(() => import("./pages/Boards"));
+const Settings = lazy(() => import("./pages/Settings"));
 
 function MainLayout() {
   const { pathname } = useLocation();
@@ -117,6 +118,7 @@ function MainLayout() {
                       render={(props) => <BoardsPage {...(props as any)} />}
                     />
                     <Route path={ROUTES.PROFILE} component={UserProfile} />
+                    <Route path={ROUTES.SETTINGS} component={Settings} />
                   </Switch>
                 </Suspense>
               </ErrorBoundary>
