@@ -159,21 +159,32 @@ export const warbandsValidForOrganisedPlay = [
   factions["mp"],
   factions["tp"],
   factions["yg"],
+  factions["es"],
+  factions["xt"],
+  factions["tss"],
+  factions["ts"],
   // grand alliance chaos
   factions["kr"],
   factions["ep"],
   factions["tdp"],
   factions["god"],
+  factions["gp"],
+  factions["tw"],
   // grand alliance death
   factions["thc"],
   factions["tcc"],
   factions["kar"],
   factions["tg"],
+  factions["sov"],
+  factions["ted"],
+  factions["tt"],
   // grand alliance destruction
   factions["gl"],
   factions["bb"],
   factions["dkk"],
   factions["mk"],
+  factions["rs"],
+  factions["hm"],
 ];
 
 function validateCardForPlayFormat(

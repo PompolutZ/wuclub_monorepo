@@ -79,7 +79,8 @@ export const factions = {
         "id": "eotn",
         "abbr": "eotn",
         "name": "eyes-of-the-nine",
-        "displayName": "Eyes of the Nine"
+        "displayName": "Eyes of the Nine",
+        "gaId": 39
     },
     "zg": {
         "id": "zg",
@@ -197,7 +198,8 @@ export const factions = {
         "id": "tdp",
         "abbr": "tdp",
         "name": "the-dread-pageant",
-        "displayName": "The Dread Pageant"
+        "displayName": "The Dread Pageant",
+        "gaId": 39
     },
     "kr": {
         "id": "kr",
@@ -238,7 +240,8 @@ export const factions = {
         "id": "es",
         "abbr": "es",
         "name": "elathains-soulraid",
-        "displayName": "Elathain's Soulraid"
+        "displayName": "Elathain's Soulraid",
+        "gaId": 38
     },
     "soc": {
         "id": "soc",
@@ -494,5 +497,12 @@ export const factions = {
         "name": "blood-of-the-bull",
         "displayName": "Blood of the Bull",
         "gaId": 39
+    },
+    "tt": {
+        "id": "tt",
+        "abbr": "tt",
+        "name": "thanateks-tithe",
+        "displayName": "Thanateks Tithe",
+        "gaId": 40
     },
 } as const;
