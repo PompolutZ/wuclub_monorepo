@@ -97,7 +97,7 @@ export default function FightersInfoList({
           factionName={factionName}
           onClick={() => setZoomed(true)}
         />
-        <div className="flex flex-col lg:flex-row lg:overflow-x-auto lg:items-start">
+        <div className="flex flex-col lg:grid lg:grid-cols-3">
           {factionMembers[factionName].map((fighter, index) => (
             <FlippableFighterCard
               key={fighter}
@@ -132,7 +132,7 @@ function FlippableFighterCard({
   });
   return (
     <div
-      className="grid px-4 sm:px-0 mb-4 lg:w-44 lg:shrink-0 cursor-pointer"
+      className="grid px-2 sm:px-0 mb-4 cursor-pointer"
       onClick={() => set((state) => !state)}
     >
       <a.picture
