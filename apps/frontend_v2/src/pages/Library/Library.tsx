@@ -6,15 +6,21 @@ import {
   NEMESIS_FORMAT,
   wucards,
   wufactions,
+  warbandsValidForOrganisedPlay,
 } from "../../data/wudb";
 import type { Card } from "../../data/wudb";
 import { useBreakpoint } from "../../hooks/useMediaQuery";
 import { LibraryDesktopView } from "./LibraryDesktopView";
 import { LibraryMobileView } from "./LibraryMobileView";
+import type { Warband } from "./LibraryWarbandPicker";
 
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
 const validSetIds = validSets.map((s) => s.id as string);
 const universalFactionId = wufactions["u"].id;
+
+const playableWarbands = warbandsValidForOrganisedPlay.filter(
+  (f) => f.id !== universalFactionId,
+);
 
 const TABS = [
   { name: "Cards", Icon: DeckIcon },
@@ -53,6 +59,9 @@ function Library() {
   const [selectedExpansionIds, setSelectedExpansionIds] =
     useState<string[]>(validSetIds);
   const [searchText, setSearchText] = useState("");
+  const [selectedFaction, setSelectedFaction] = useState<Warband>(
+    playableWarbands[0],
+  );
   const [showFilters, setShowFilters] = useState(false);
   const [zoomedCard, setZoomedCard] = useState<{
     card: Card;
@@ -107,6 +116,9 @@ function Library() {
         activeTabIndex={activeTabIndex}
         setActiveTabIndex={setActiveTabIndex}
         tabs={TABS}
+        selectedFaction={selectedFaction}
+        setSelectedFaction={setSelectedFaction}
+        playableWarbands={playableWarbands}
       />
     );
   }
@@ -125,6 +137,9 @@ function Library() {
       zoomAnimating={zoomAnimating}
       onCardClick={handleCardClick}
       onZoomClose={handleZoomClose}
+      selectedFaction={selectedFaction}
+      setSelectedFaction={setSelectedFaction}
+      playableWarbands={playableWarbands}
     />
   );
 }

@@ -11,14 +11,13 @@ export const WarbandWarscroll: React.FC<WarbandWarscrollProps> = ({
   className,
 }) => {
   return (
-    <picture
-      className={twMerge("flex justify-center w-[95vw] lg:w-5/6", className)}
-    >
+    <picture className={twMerge("block w-[95vw] lg:w-5/6 mx-auto", className)}>
       <source
         srcSet={`/assets/fighters/${factionName}/${factionName}-0.webp`}
         type="image/webp"
       />
       <img
+        className="w-full"
         src={`/assets/fighters/${factionName}/${factionName}-0.png`}
         alt={`${factionName} warscroll`}
       />

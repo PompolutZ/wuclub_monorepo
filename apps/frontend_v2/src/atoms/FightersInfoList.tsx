@@ -50,14 +50,16 @@ export default function FightersInfoList({
   return (
     <div className="flex-1 relative">
       <div className="absolute inset-0 overflow-y-auto p-4 lg:p-12">
-        <WarbandWarscroll className="mb-4" factionName={factionName} />
-        {factionMembers[factionName].map((fighter, index) => (
-          <FlippableFighterCard
-            key={fighter}
-            faction={factionName}
-            index={index + 1}
-          />
-        ))}
+        <WarbandWarscroll className="mb-4 mx-auto" factionName={factionName} />
+        <div className="flex flex-col lg:flex-row lg:overflow-x-auto lg:items-start">
+          {factionMembers[factionName].map((fighter, index) => (
+            <FlippableFighterCard
+              key={fighter}
+              faction={factionName}
+              index={index + 1}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -78,7 +80,7 @@ function FlippableFighterCard({
   });
   return (
     <div
-      className="grid px-4 sm:px-0 mb-4 lg:w-1/3 lg:mx-auto cursor-pointer"
+      className="grid px-4 sm:px-0 mb-4 lg:w-44 lg:shrink-0 cursor-pointer"
       onClick={() => set((state) => !state)}
     >
       <a.picture

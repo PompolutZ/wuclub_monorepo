@@ -1,10 +1,14 @@
 import type { Card } from "../../data/wudb";
+import { factionMembers } from "../../data/wudb";
 import { CardPicture } from "../../shared/components/CardPicture";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
+import FightersInfoList from "../../atoms/FightersInfoList";
 import { ZoomedCard } from "./ZoomedCard";
+import { LibraryWarbandPicker } from "./LibraryWarbandPicker";
+import type { Warband } from "./LibraryWarbandPicker";
 
 interface LibraryDesktopViewProps {
   validSetIds: string[];
@@ -19,6 +23,9 @@ interface LibraryDesktopViewProps {
   zoomAnimating: boolean;
   onCardClick: (card: Card, el: HTMLElement) => void;
   onZoomClose: () => void;
+  selectedFaction: Warband;
+  setSelectedFaction: (faction: Warband) => void;
+  playableWarbands: Warband[];
 }
 
 export function LibraryDesktopView({
@@ -34,6 +41,9 @@ export function LibraryDesktopView({
   zoomAnimating,
   onCardClick,
   onZoomClose,
+  selectedFaction,
+  setSelectedFaction,
+  playableWarbands,
 }: LibraryDesktopViewProps) {
   return (
     <div className="flex-1 flex lg:grid lg:grid-cols-12 p-4 lg:p-0">
@@ -44,18 +54,30 @@ export function LibraryDesktopView({
         orientation="vertical"
       />
       <div className="bg-gray-200 space-y-3 lg:col-span-3">
-        <section className="mx-2 mt-2">
-          <DebouncedInput
-            className="rounded h-10 bg-white box-border w-full py-1 px-2 outline-none border-2 focus:border-purple-700"
-            placeholder="Search for text on a card"
-            onChange={setSearchText}
-          />
-        </section>
-        <GroupedExpansions
-          validSetIds={validSetIds as never[]}
-          selectedExpansions={selectedExpansionIds as never[]}
-          onSelectionChanged={setSelectedExpansionIds as never}
-        />
+        {activeTabIndex === 0 ? (
+          <>
+            <section className="mx-2 mt-2">
+              <DebouncedInput
+                className="rounded h-10 bg-white box-border w-full py-1 px-2 outline-none border-2 focus:border-purple-700"
+                placeholder="Search for text on a card"
+                onChange={setSearchText}
+              />
+            </section>
+            <GroupedExpansions
+              validSetIds={validSetIds as never[]}
+              selectedExpansions={selectedExpansionIds as never[]}
+              onSelectionChanged={setSelectedExpansionIds as never}
+            />
+          </>
+        ) : (
+          <div className="overflow-y-auto">
+            <LibraryWarbandPicker
+              warbands={playableWarbands}
+              selected={selectedFaction}
+              onSelect={setSelectedFaction}
+            />
+          </div>
+        )}
       </div>
       <div className="flex-1 lg:col-span-8 flex flex-col lg:px-2">
         {activeTabIndex === 0 ? (
@@ -104,9 +126,9 @@ export function LibraryDesktopView({
             </div>
           )
         ) : (
-          <div className="flex-1 flex items-center justify-center text-gray-500 text-xl">
-            Coming soon
-          </div>
+          <FightersInfoList
+            factionName={selectedFaction.name as keyof typeof factionMembers}
+          />
         )}
       </div>
       {zoomedCard && (

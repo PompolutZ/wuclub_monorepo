@@ -50,7 +50,10 @@ export const FixedVirtualizedList = <T,>({
     count: rows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => rowHeight,
-    measureElement: variant === "grid" ? (el) => el.getBoundingClientRect().height : undefined,
+    measureElement:
+      variant === "grid"
+        ? (el) => el.getBoundingClientRect().height
+        : undefined,
     overscan: 5,
   });
 

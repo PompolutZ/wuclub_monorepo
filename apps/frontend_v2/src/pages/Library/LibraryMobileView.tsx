@@ -1,13 +1,19 @@
 import CloseIcon from "@icons/x.svg?react";
 import TogglesIcon from "@icons/sliders.svg?react";
+import { useState } from "react";
 import type { Card } from "../../data/wudb";
+import { factionMembers } from "../../data/wudb";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
+import { FactionPicture } from "@components/FactionDeckPicture";
 import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
 import IconButton from "../../shared/components/IconButton";
 import { Overlay } from "../../shared/components/Overlay";
 import { ScrollContainer } from "../../shared/components/ScrollContainer";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
+import FightersInfoList from "../../atoms/FightersInfoList";
 import LibraryCardSection from "./LibraryCardSection";
+import { LibraryWarbandPicker } from "./LibraryWarbandPicker";
+import type { Warband } from "./LibraryWarbandPicker";
 
 interface LibraryMobileViewProps {
   validSetIds: string[];
@@ -22,13 +28,15 @@ interface LibraryMobileViewProps {
   activeTabIndex: number;
   setActiveTabIndex: (index: number) => void;
   tabs: { name: string; Icon: React.ComponentType<{ className?: string }> }[];
+  selectedFaction: Warband;
+  setSelectedFaction: (faction: Warband) => void;
+  playableWarbands: Warband[];
 }
 
 export function LibraryMobileView({
   validSetIds,
   selectedExpansionIds,
   setSelectedExpansionIds,
-  searchText,
   setSearchText,
   showFilters,
   setShowFilters,
@@ -37,22 +45,47 @@ export function LibraryMobileView({
   activeTabIndex,
   setActiveTabIndex,
   tabs,
+  selectedFaction,
+  setSelectedFaction,
+  playableWarbands,
 }: LibraryMobileViewProps) {
+  const [showWarbandPicker, setShowWarbandPicker] = useState(false);
+
+  const handleSelectWarband = (faction: Warband) => {
+    setSelectedFaction(faction);
+    setShowWarbandPicker(false);
+  };
+
   return (
     <div className="flex-1 flex flex-col">
-      <div className="flex items-center p-2 gap-2">
-        <DebouncedInput
-          className="rounded h-12 bg-gray-200 box-border flex-1 py-1 px-2 outline-none border-2 focus:border-purple-700"
-          placeholder="Search for any text on card"
-          onChange={setSearchText}
-        />
-        <IconButton
-          className="rounded-full px-2 w-11 h-11 grid place-content-center relative hover:bg-gray-100 focus:text-purple-700"
-          onClick={() => setShowFilters(true)}
-        >
-          <TogglesIcon />
-        </IconButton>
-      </div>
+      {activeTabIndex === 0 ? (
+        <div className="flex items-center p-2 gap-2 bg-gray-200">
+          <DebouncedInput
+            className="rounded h-12 bg-gray-200 box-border flex-1 py-1 px-2 outline-none border-2 focus:border-purple-700"
+            placeholder="Search for any text on card"
+            onChange={setSearchText}
+          />
+          <IconButton
+            className="rounded-full px-2 w-11 h-11 grid place-content-center relative hover:bg-gray-100 focus:text-purple-700"
+            onClick={() => setShowFilters(true)}
+          >
+            <TogglesIcon />
+          </IconButton>
+        </div>
+      ) : (
+        <div className="flex items-center p-2 gap-2 bg-gray-200">
+          <FactionPicture faction={selectedFaction.name} size="w-11 h-11" />
+          <span className="flex-1 text-gray-900 font-medium">
+            {selectedFaction.displayName}
+          </span>
+          <IconButton
+            className="rounded-full px-2 w-11 h-11 grid place-content-center relative hover:bg-gray-100 focus:text-purple-700"
+            onClick={() => setShowWarbandPicker(true)}
+          >
+            <TogglesIcon />
+          </IconButton>
+        </div>
+      )}
 
       <Overlay visible={showFilters}>
         <div className="flex-1 flex flex-col pt-4 pb-12">
@@ -67,6 +100,19 @@ export function LibraryMobileView({
               validSetIds={validSetIds as never[]}
               selectedExpansions={selectedExpansionIds as never[]}
               onSelectionChanged={setSelectedExpansionIds as never}
+            />
+          </div>
+        </div>
+      </Overlay>
+
+      <Overlay visible={showWarbandPicker}>
+        <div className="flex-1 flex flex-col pt-4 pb-12">
+          <div className="overflow-y-auto">
+            <LibraryWarbandPicker
+              warbands={playableWarbands}
+              selected={selectedFaction}
+              onSelect={handleSelectWarband}
+              onClose={() => setShowWarbandPicker(false)}
             />
           </div>
         </div>
@@ -87,9 +133,9 @@ export function LibraryMobileView({
           )}
         </ScrollContainer>
       ) : (
-        <div className="flex-1 flex items-center justify-center text-gray-500 text-xl">
-          Coming soon
-        </div>
+        <FightersInfoList
+          factionName={selectedFaction.name as keyof typeof factionMembers}
+        />
       )}
       <BottomPanelNavigation
         tabs={tabs}
