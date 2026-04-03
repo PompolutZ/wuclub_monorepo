@@ -125,7 +125,7 @@ export const deckBuilderReducer = (
             const cardWillBeRemoved = deck.find(
                 ({ id }) => id === event.payload.id
             );
-            let nextState = { ...state };
+            const nextState = { ...state };
 
             if (event.payload.type === "Objective") {
                 nextState.selectedObjectives = cardWillBeRemoved
