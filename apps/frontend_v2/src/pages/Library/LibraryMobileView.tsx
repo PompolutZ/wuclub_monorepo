@@ -13,7 +13,7 @@ import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../atoms/FightersInfoList";
 import LibraryCardSection from "./LibraryCardSection";
 import { LibraryWarbandPicker } from "./LibraryWarbandPicker";
-import type { Warband } from "./LibraryWarbandPicker";
+import { Warband } from "../../shared/components/WarbandPicker";
 
 interface LibraryMobileViewProps {
   validSetIds: string[];
