@@ -32,15 +32,20 @@ const getButtonClassName = (
   isVertical: boolean,
 ) => {
   const base = "flex flex-col items-center text-xs";
-  if (disabled) return `${base} text-gray-400`;
   if (isVertical) {
-    return `${base} py-3 px-4 rounded-xl transition-all duration-300 ${
-      isActive
+    const color = disabled
+      ? "text-gray-400"
+      : isActive
         ? "text-purple-700 shadow-[0_0_16px_rgba(126,34,206,0.4)]"
-        : "text-gray-700 hover:shadow-[0_0_12px_rgba(126,34,206,0.25)]"
-    }`;
+        : "text-gray-700 hover:shadow-[0_0_12px_rgba(126,34,206,0.25)]";
+    return `${base} py-3 px-4 rounded-xl transition-all duration-300 ${color}`;
   }
-  return `${base} flex-1 py-2 ${isActive ? "text-purple-700" : "text-gray-700"}`;
+  const color = disabled
+    ? "text-gray-400"
+    : isActive
+      ? "text-purple-700"
+      : "text-gray-700";
+  return `${base} flex-1 py-2 ${color}`;
 };
 
 function BottomPanelNavigation({
