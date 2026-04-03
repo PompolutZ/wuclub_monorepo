@@ -46,6 +46,7 @@ export interface ProcessedDeck {
 export interface CardProps {
   card: DeckCard;
   asImage?: boolean;
+  isAlternate?: boolean;
 }
 
 export interface CardsSectionContentProps {

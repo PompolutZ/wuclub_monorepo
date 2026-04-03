@@ -38,9 +38,9 @@ const MOBILE_TABS = (factionId: string) => [
 
 const CardsSectionContent = memo(function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
   return listView ? (
-    <ul className="px-3">
-      {cards.map((v) => (
-        <Card key={v.id} card={v} />
+    <ul>
+      {cards.map((v, i) => (
+        <Card key={v.id} card={v} isAlternate={i % 2 === 0} />
       ))}
     </ul>
   ) : (

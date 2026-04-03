@@ -1,56 +1,14 @@
 import { memo, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import LockIcon from "@icons/lock.svg?react";
-import NotInterestedIcon from "@icons/no-symbol.svg?react";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import CloseIcon from "@icons/x.svg?react";
-import ObjectiveScoreTypeIcon from "../../../../components/ObjectiveScoreTypeIcon";
 import {
   getCardById,
-  getCardNumberFromId,
-  getSetNameById,
-  RIVALS_DECK_CARDS_TOTAL,
   validateCardForPlayFormat,
 } from "../../../../data/wudb";
-import type { ScoreType } from "../../../../data/wudb";
 import { ModalPresenter } from "../../../../main";
 import CardImage from "../../../../shared/components/CardImage";
-
-interface WUCardInfoProps {
-  scoreType: ScoreType;
-  name: string;
-  id: string;
-  glory: number | null;
-  type: string;
-  onClick: () => void;
-}
-
-const WUCardInfo = memo(function WUCardInfo({ scoreType, name, id, glory, type, onClick }: WUCardInfoProps) {
-  return (
-    <div className="flex-1 min-w-0 self-start cursor-pointer" onClick={onClick}>
-      <div className="flex items-center">
-        {scoreType && scoreType !== "-" && (
-          <ObjectiveScoreTypeIcon
-            type={scoreType}
-            style={{ width: "1rem", height: "1rem" }}
-          />
-        )}
-        <h6 className={`truncate ${scoreType && scoreType !== "-" ? "ml-2" : ""}`}>
-          {name}
-        </h6>
-      </div>
-      <div className="flex items-center">
-        {glory && (
-          <div className="flex items-center font-bold mx-2">
-            <GloryIcon className={`${type === "Upgrade" ? "bg-gray-400" : "bg-objective-gold"} rounded-full w-3 h-3 fill-current mr-1`} />
-            {glory}
-          </div>
-        )}
-        <span className="font-bold text-xs text-gray-500">{`${getCardNumberFromId(id)}/${RIVALS_DECK_CARDS_TOTAL}`}</span>
-      </div>
-    </div>
-  );
-});
+import CardRow from "../../../../shared/components/CardRow";
 
 interface CardInDeckProps {
   cardId: string;
@@ -59,7 +17,6 @@ interface CardInDeckProps {
   inDeck: boolean;
   isNameDuplicate?: boolean;
   ranking?: number;
-  showType?: boolean;
   withAnimation?: boolean;
   isAlter?: boolean;
 }
@@ -72,7 +29,7 @@ const CardInDeck = memo(
 
     if (!card) return null;
 
-    const { type, id, scoreType, glory, name, setId } = card;
+    const { id } = card;
     const isAddDisabled = isNameDuplicate && !inDeck;
 
     return (
@@ -90,36 +47,12 @@ const CardInDeck = memo(
                     : ""
           }`}
         >
-          <div
-            className={`items-center relative ${props.showType ? "ml-2 mr-6" : "mx-2"}`}
-          >
-            {props.showType && (
-              <img
-                className="w-8 h-8 absolute top-0 left-1/2"
-                style={{ zIndex: 0 }}
-                alt={`${type}`}
-                src={`/assets/icons/${type.toLowerCase()}-icon.png`}
-              />
-            )}
-            <img
-              className={`w-8 h-8 ${isRestricted || isBanned ? "opacity-50" : ""}`}
-              alt={`${getSetNameById(setId)}`}
-              src={`/assets/icons/decks/${getSetNameById(setId)}.png`}
-            />
-            {isRestricted && (
-              <LockIcon className="absolute stroke-2 stroke-yellow-600 stroke-[4px] w-8 h-8 top-1/2 -mt-4 left-1/2 -ml-4" />
-            )}
-            {isBanned && (
-              <NotInterestedIcon className="absolute stroke-red-700 stroke-[4px] w-8 h-8 top-1/2 -mt-4 left-1/2 -ml-4" />
-            )}
-          </div>
-          <WUCardInfo
-            name={name}
-            scoreType={scoreType}
-            id={id}
-            glory={glory}
-            type={type}
+          <CardRow
+            card={card}
             onClick={() => setOverlayIsVisible(true)}
+            className="flex-1"
+            isRestricted={isRestricted}
+            isBanned={isBanned}
           />
           <button
             className={`btn m-2 w-8 h-8 py-0 px-1 ${

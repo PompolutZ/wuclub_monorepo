@@ -1,15 +1,10 @@
 import { memo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import GloryIcon from "@icons/wu-glory.svg?react";
-import ObjectiveScoreTypeIcon from "../../components/ObjectiveScoreTypeIcon";
-import {
-  getCardById,
-  getCardNumberFromId,
-  getSetNameById,
-  RIVALS_DECK_CARDS_TOTAL,
-} from "../../data/wudb";
+import { getCardById } from "../../data/wudb";
 import { ModalPresenter } from "../../main";
 import CardImage from "../../shared/components/CardImage";
+import CardRow from "../../shared/components/CardRow";
 
 interface LibraryCardRowProps {
   cardId: string;
@@ -22,46 +17,15 @@ const LibraryCardRow = memo(function LibraryCardRow({ cardId, isAlternate }: Lib
 
   if (!card) return null;
 
-  const { type, id, scoreType, glory, name, setId, rule } = card;
+  const { id, glory, name, rule } = card;
 
   return (
     <>
-      <div
-        className={`flex items-center cursor-pointer ${isAlternate ? "bg-purple-100" : "bg-white"}`}
+      <CardRow
+        card={card}
         onClick={() => setOverlayIsVisible(true)}
-      >
-        <div className="mx-2">
-          <img
-            className="w-8 h-8"
-            alt={`${getSetNameById(setId)}`}
-            src={`/assets/icons/decks/${getSetNameById(setId)}.png`}
-          />
-        </div>
-        <div className="flex-1 min-w-0 self-start py-1">
-          <div className="flex items-center">
-            {scoreType && scoreType !== "-" && (
-              <ObjectiveScoreTypeIcon
-                type={scoreType}
-                style={{ width: "1rem", height: "1rem" }}
-              />
-            )}
-            <h6 className={`truncate ${scoreType && scoreType !== "-" ? "ml-2" : ""}`}>
-              {name}
-            </h6>
-          </div>
-          <div className="flex items-center">
-            {glory && (
-              <div className="flex items-center font-bold mx-2">
-                <GloryIcon
-                  className={`${type === "Upgrade" ? "bg-gray-400" : "bg-objective-gold"} rounded-full w-3 h-3 fill-current mr-1`}
-                />
-                {glory}
-              </div>
-            )}
-            <span className="font-bold text-xs text-gray-500">{`${getCardNumberFromId(id)}/${RIVALS_DECK_CARDS_TOTAL}`}</span>
-          </div>
-        </div>
-      </div>
+        className={isAlternate ? "bg-purple-100" : "bg-white"}
+      />
       {overlayIsVisible && (
         <ModalPresenter>
           <div
