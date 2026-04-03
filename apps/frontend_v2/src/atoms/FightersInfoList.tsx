@@ -1,6 +1,9 @@
+import CloseIcon from "@icons/x.svg?react";
 import { animated as a, useSpring } from "@react-spring/web";
 import { useEffect, useState } from "react";
 import { factionMembers } from "../data/wudb";
+import { ModalPresenter } from "../main";
+import IconButton from "../shared/components/IconButton";
 import { WarbandWarscroll } from "../shared/components/WarbandWarscroll";
 
 function useClickAway() {
@@ -32,6 +35,44 @@ function useClickAway() {
   return clickedAway;
 }
 
+function ZoomedWarscroll({
+  factionName,
+  onClose,
+}: {
+  factionName: string;
+  onClose: () => void;
+}) {
+  return (
+    <ModalPresenter>
+      <div className="fixed inset-0 z-40 flex flex-col items-center justify-center">
+        <div
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+          onClick={onClose}
+        />
+        <div className="relative z-50 overflow-x-auto max-w-full p-4">
+          <picture className="block" style={{ width: "150vw" }}>
+            <source
+              srcSet={`/assets/fighters/${factionName}/${factionName}-0.webp`}
+              type="image/webp"
+            />
+            <img
+              className="w-full"
+              src={`/assets/fighters/${factionName}/${factionName}-0.png`}
+              alt={`${factionName} warscroll`}
+            />
+          </picture>
+        </div>
+        <IconButton
+          onClick={onClose}
+          className="relative z-50 mt-4 rounded-full bg-white/90 w-11 h-11 grid place-content-center shadow-lg"
+        >
+          <CloseIcon />
+        </IconButton>
+      </div>
+    </ModalPresenter>
+  );
+}
+
 export default function FightersInfoList({
   onClose = undefined,
   factionName,
@@ -40,6 +81,7 @@ export default function FightersInfoList({
   factionName: keyof typeof factionMembers;
 }) {
   const clickedAway = useClickAway();
+  const [zoomed, setZoomed] = useState(false);
 
   useEffect(() => {
     if (clickedAway && onClose) {
@@ -50,7 +92,11 @@ export default function FightersInfoList({
   return (
     <div className="flex-1 relative">
       <div className="absolute inset-0 overflow-y-auto p-4 lg:p-12">
-        <WarbandWarscroll className="mb-4 mx-auto" factionName={factionName} />
+        <WarbandWarscroll
+          className="mb-4 mx-auto cursor-pointer"
+          factionName={factionName}
+          onClick={() => setZoomed(true)}
+        />
         <div className="flex flex-col lg:flex-row lg:overflow-x-auto lg:items-start">
           {factionMembers[factionName].map((fighter, index) => (
             <FlippableFighterCard
@@ -61,6 +107,12 @@ export default function FightersInfoList({
           ))}
         </div>
       </div>
+      {zoomed && (
+        <ZoomedWarscroll
+          factionName={factionName}
+          onClose={() => setZoomed(false)}
+        />
+      )}
     </div>
   );
 }
