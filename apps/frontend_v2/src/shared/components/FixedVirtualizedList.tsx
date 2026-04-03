@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useVirtualizer, VirtualItem } from "@tanstack/react-virtual";
 import InView from "react-intersection-observer";
 
-const MAGICK_HEIGHT = 436;
+const GRID_ROW_ESTIMATE = 350;
 const minOptimalWidth = 140;
 const optimalHeight = 16 * 3;
 
@@ -41,7 +41,7 @@ export const FixedVirtualizedList = <T,>({
 
       return result;
     }, [] as T[][]);
-    setRowHeight(MAGICK_HEIGHT);
+    setRowHeight(GRID_ROW_ESTIMATE);
     setRows(updatedRows);
     // row height will be according to card's height based on keeping original aspect ratio
   }, [items, variant]);
@@ -50,6 +50,7 @@ export const FixedVirtualizedList = <T,>({
     count: rows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => rowHeight,
+    measureElement: variant === "grid" ? (el) => el.getBoundingClientRect().height : undefined,
     overscan: 5,
   });
 
@@ -70,9 +71,15 @@ export const FixedVirtualizedList = <T,>({
             transform: `translateY(${virtualItems[0]?.start}px)`,
           }}
         >
-          {virtualItems.map((virtualRow) =>
-            children(rows[virtualRow.index], virtualRow),
-          )}
+          {virtualItems.map((virtualRow) => (
+            <div
+              key={virtualRow.key}
+              data-index={virtualRow.index}
+              ref={virtual.measureElement}
+            >
+              {children(rows[virtualRow.index], virtualRow)}
+            </div>
+          ))}
 
           {lazy && (
             <InView

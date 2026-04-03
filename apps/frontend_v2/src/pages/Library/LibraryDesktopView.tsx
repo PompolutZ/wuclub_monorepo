@@ -36,14 +36,14 @@ export function LibraryDesktopView({
   onZoomClose,
 }: LibraryDesktopViewProps) {
   return (
-    <div className="flex-1 flex lg:grid lg:grid-cols-5 p-4">
+    <div className="flex-1 flex lg:grid lg:grid-cols-12 p-4 lg:p-0">
       <BottomPanelNavigation
         tabs={tabs}
         activeTabIndex={activeTabIndex}
         setActiveTabIndex={setActiveTabIndex}
         orientation="vertical"
       />
-      <div className="bg-gray-200 space-y-3">
+      <div className="bg-gray-200 space-y-3 lg:col-span-3">
         <section className="mx-2 mt-2">
           <DebouncedInput
             className="rounded h-10 bg-white box-border w-full py-1 px-2 outline-none border-2 focus:border-purple-700"
@@ -57,7 +57,7 @@ export function LibraryDesktopView({
           onSelectionChanged={setSelectedExpansionIds as never}
         />
       </div>
-      <div className="flex-1 lg:col-span-3 flex flex-col lg:px-2">
+      <div className="flex-1 lg:col-span-8 flex flex-col lg:px-2">
         {activeTabIndex === 0 ? (
           filteredCards.length === 0 ? (
             <div className="flex-1 flex items-center justify-center text-gray-900 text-xl">
@@ -74,7 +74,7 @@ export function LibraryDesktopView({
               <FixedVirtualizedList items={filteredCards} variant="grid">
                 {(cards, { key }) =>
                   Array.isArray(cards) ? (
-                    <div className="flex h-[436px]" key={key}>
+                    <div className="flex" key={key}>
                       {(cards as Card[]).map((card) => {
                         const isZoomed = zoomedCard?.card.id === card.id;
                         const cardHoverHalo =
