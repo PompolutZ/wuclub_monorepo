@@ -107,7 +107,9 @@ function MainLayout() {
                     />
                     <Route
                       path={ROUTES.PASSWORD_RESET}
-                      render={(props) => <PasswordResetRequest {...(props as any)} />}
+                      render={(props) => (
+                        <PasswordResetRequest {...(props as any)} />
+                      )}
                     />
                     <Route
                       path={ROUTES.MY_DECKS}
@@ -131,7 +133,9 @@ function MainLayout() {
 }
 
 const modalRoot = document.getElementById("modal-root");
-export class ModalPresenter extends React.Component<React.PropsWithChildren<object>> {
+export class ModalPresenter extends React.Component<
+  React.PropsWithChildren<object>
+> {
   private el: HTMLDivElement;
 
   constructor(props: React.PropsWithChildren<object>) {

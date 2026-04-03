@@ -1,3 +1,4 @@
-const sortByIdAsc = (prev: { id: number }, next: { id: number }) => prev.id - next.id;
+const sortByIdAsc = (prev: { id: number }, next: { id: number }) =>
+  prev.id - next.id;
 
-export { sortByIdAsc }
+export { sortByIdAsc };

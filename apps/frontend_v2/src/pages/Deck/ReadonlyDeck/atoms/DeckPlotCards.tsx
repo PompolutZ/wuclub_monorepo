@@ -45,7 +45,10 @@ export const DeckPlotCards = ({ sets }: Props) => {
 
       <Portal>
         <div className="grid w-full h-full place-content-center bg-purple-100/25">
-          <PlotsCarousel setsWithPlots={setsWithPlots} ref={portalClickAwayRef} />
+          <PlotsCarousel
+            setsWithPlots={setsWithPlots}
+            ref={portalClickAwayRef}
+          />
         </div>
       </Portal>
     </div>

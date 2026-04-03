@@ -56,9 +56,11 @@ function Library() {
     useState<string[]>(validSetIds);
   const [searchText, setSearchText] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [zoomedCard, setZoomedCard] = useState<{ card: Card; rect: DOMRect } | null>(null);
+  const [zoomedCard, setZoomedCard] = useState<{
+    card: Card;
+    rect: DOMRect;
+  } | null>(null);
   const [zoomAnimating, setZoomAnimating] = useState(false);
-
   const handleCardClick = useCallback((card: Card, el: HTMLElement) => {
     setZoomedCard({ card, rect: el.getBoundingClientRect() });
   }, []);
@@ -67,6 +69,8 @@ function Library() {
     if (zoomedCard && !zoomAnimating) {
       requestAnimationFrame(() => setZoomAnimating(true));
     }
+    // adding zoomAnimating here breaks animation.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [zoomedCard]);
 
   const handleZoomClose = useCallback(() => {
@@ -83,7 +87,10 @@ function Library() {
       if (!grouped.has(key)) grouped.set(key, []);
       grouped.get(key)!.push(card);
     }
-    return Array.from(grouped.entries()).map(([setId, cards]) => ({ setId, cards }));
+    return Array.from(grouped.entries()).map(([setId, cards]) => ({
+      setId,
+      cards,
+    }));
   }, [filteredCards]);
 
   const expansionsPanel = (
@@ -169,54 +176,87 @@ function Library() {
               {(cards, { key }) =>
                 Array.isArray(cards) ? (
                   <div className="flex h-[436px]" key={key}>
-                    {(cards as Card[]).map((card) => (
-                      <div
-                        key={card.id}
-                        className="flex-1 p-2 flex items-center justify-center cursor-pointer"
-                        style={zoomedCard?.card.id === card.id ? { opacity: 0 } : undefined}
-                        onClick={(e) => handleCardClick(card, e.currentTarget)}
-                      >
-                        <CardPicture card={card} />
-                      </div>
-                    ))}
+                    {(cards as Card[]).map((card) => {
+                      const isZoomed = zoomedCard?.card.id === card.id;
+                      const cardHoverHalo =
+                        card.type === "Objective"
+                          ? "hover:drop-shadow-[0_0_8px_rgba(242,192,63,0.85)]"
+                          : "hover:drop-shadow-[0_0_8px_rgba(142,20,7,0.85)]";
+                      return (
+                        <div
+                          key={card.id}
+                          className="flex-1 p-2 flex items-center justify-center cursor-pointer"
+                          style={isZoomed ? { opacity: 0 } : undefined}
+                          onClick={(e) =>
+                            handleCardClick(card, e.currentTarget)
+                          }
+                        >
+                          <CardPicture
+                            card={card}
+                            imgClassName={`transition-all duration-300 ${cardHoverHalo}`}
+                          />
+                        </div>
+                      );
+                    })}
                   </div>
-                ) : <></>
+                ) : (
+                  <></>
+                )
               }
             </FixedVirtualizedList>
           </div>
         )}
       </div>
-      {zoomedCard && (() => {
-        const { card, rect } = zoomedCard;
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const dx = window.innerWidth / 2 - centerX;
-        const dy = window.innerHeight / 2 - centerY;
-        const transform = zoomAnimating
-          ? `translate(${dx}px, ${dy}px) scale(2)`
-          : "translate(0, 0) scale(1)";
-        return (
-          <ModalPresenter>
-            <div className="fixed inset-0 z-40" onClick={handleZoomClose}>
-              <div className={`absolute inset-0 bg-black/30 backdrop-blur-sm transition-all duration-300 ${zoomAnimating ? "opacity-100" : "opacity-0"}`} />
-            </div>
-            <div
-              className="fixed z-50 p-2 flex items-center justify-center transition-transform duration-300 ease-out pointer-events-none"
-              style={{
-                top: rect.top,
-                left: rect.left,
-                width: rect.width,
-                height: rect.height,
-                transform,
-              }}
-            >
-              <CardPicture card={card} />
-            </div>
-          </ModalPresenter>
-        );
-      })()}
+      {zoomedCard && (
+        <ZoomedCard
+          {...zoomedCard}
+          onClose={() => handleZoomClose()}
+          isZoomAnimating={zoomAnimating}
+        />
+      )}
     </div>
   );
 }
+
+const ZoomedCard = ({
+  card,
+  rect,
+  isZoomAnimating,
+  onClose,
+}: {
+  card: Card;
+  rect: DOMRect;
+  onClose: () => void;
+  isZoomAnimating: boolean;
+}) => {
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const dx = window.innerWidth / 2 - centerX;
+  const dy = window.innerHeight / 2 - centerY;
+  const transform = isZoomAnimating
+    ? `translate(${dx}px, ${dy}px) scale(2)`
+    : "translate(0, 0) scale(1)";
+  return (
+    <ModalPresenter>
+      <div className="fixed inset-0 z-40" onClick={onClose}>
+        <div
+          className={`absolute inset-0 bg-black/30 backdrop-blur-sm transition-all duration-300 ${isZoomAnimating ? "opacity-100" : "opacity-0"}`}
+        />
+      </div>
+      <div
+        className="fixed z-50 p-2 flex items-center justify-center transition-transform duration-300 ease-out pointer-events-none"
+        style={{
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height,
+          transform,
+        }}
+      >
+        <CardPicture card={card} />
+      </div>
+    </ModalPresenter>
+  );
+};
 
 export default Library;

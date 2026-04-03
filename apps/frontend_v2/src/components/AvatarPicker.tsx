@@ -6,7 +6,7 @@ function FactionIcon({ faction }: { faction: Factions }) {
   return (
     <img
       alt={faction}
-      className={`w-8 h-8`}
+      className={"w-8 h-8"}
       src={`/assets/icons/${faction}-icon.png`}
     />
   );
@@ -43,7 +43,7 @@ function AvatarPicker({
   onSelectionChange: (faction: Factions) => void;
 }) {
   const factions = Object.values(wufactions)
-    .filter((f): f is typeof f & { gaId: number } => 'gaId' in f)
+    .filter((f): f is typeof f & { gaId: number } => "gaId" in f)
     .sort((prev, next) => next.gaId - prev.gaId)
     .map((f) => f.name as Factions);
 

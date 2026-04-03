@@ -2,10 +2,10 @@ import { useState } from "react";
 import useMeasure from "react-use-measure";
 
 export function useResizeHeight(config: { open: boolean }) {
-    const [open, setOpen] = useState(config.open);
-    const [ref, { height }] = useMeasure();
+  const [open, setOpen] = useState(config.open);
+  const [ref, { height }] = useMeasure();
 
-    const toggle = () => setOpen((prev) => !prev);
+  const toggle = () => setOpen((prev) => !prev);
 
-    return [ref, open, toggle, height] as const;
+  return [ref, open, toggle, height] as const;
 }

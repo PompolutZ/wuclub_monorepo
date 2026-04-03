@@ -125,10 +125,7 @@ export function AutosuggestSearch({
               style={{ height: rowVirtualizer.getTotalSize() }}
             />
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-              const {
-                item,
-                matches,
-              } = items[virtualRow.index];
+              const { item, matches } = items[virtualRow.index];
 
               const { id, setId } = item;
               const { indices, value } = matches?.[0] ?? {};
@@ -153,7 +150,10 @@ export function AutosuggestSearch({
                   })}
                   onClick={() => onClick(items[virtualRow.index].item)}
                 >
-                  <ExpansionPicture className="w-8 h-8" setName={sets[setId as keyof typeof sets].name} />
+                  <ExpansionPicture
+                    className="w-8 h-8"
+                    setName={sets[setId as keyof typeof sets].name}
+                  />
                   <div>
                     {valueNodes?.map(({ text, highlight }, index) => {
                       return (

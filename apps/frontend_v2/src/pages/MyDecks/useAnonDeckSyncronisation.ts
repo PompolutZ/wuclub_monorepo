@@ -25,7 +25,9 @@ export function useAnonDecksSynchronisation() {
         offlineDB.anonDecks.bulkDelete(idsToDelete);
       })
       .catch((e) => {
-        logger.error("Failed to sync anonymous decks", e as Error, { userId: user?.uid });
+        logger.error("Failed to sync anonymous decks", e as Error, {
+          userId: user?.uid,
+        });
       });
   }, [user, saveDeck]);
 }

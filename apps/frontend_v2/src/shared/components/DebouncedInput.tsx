@@ -2,10 +2,10 @@ import __debounce from "lodash/debounce";
 import React, { ChangeEvent, useCallback, useState } from "react";
 
 type DebouncedInputProps = {
-    wait?: number;
-    value?: string;
-    onChange: (value: string) => void;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
+  wait?: number;
+  value?: string;
+  onChange: (value: string) => void;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
 
 export function DebouncedInput({
   wait,

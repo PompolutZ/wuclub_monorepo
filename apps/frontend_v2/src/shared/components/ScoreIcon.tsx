@@ -8,16 +8,16 @@ interface ScoreIconProps {
 }
 
 function ScoreIcon({ scoreType, classes }: ScoreIconProps) {
-    switch (scoreType) {
-        case "Surge":
-            return <ZapIcon className={`${classes}`} />;
-        case "End":
-            return <ClockIcon className={`${classes}`} />;
-        case "Third":
-            return <HourglassIcon className={`fill-current ${classes}`} />;
-        default:
-            return null;
-    }
+  switch (scoreType) {
+    case "Surge":
+      return <ZapIcon className={`${classes}`} />;
+    case "End":
+      return <ClockIcon className={`${classes}`} />;
+    case "Third":
+      return <HourglassIcon className={`fill-current ${classes}`} />;
+    default:
+      return null;
+  }
 }
 
-export default ScoreIcon
+export default ScoreIcon;

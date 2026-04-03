@@ -23,10 +23,12 @@ export const useSaveDeck = () => {
 
       const token = await Firebase.getTokenId();
       return api.v2.decks.$post(
-        { json: {
-          ...deck,
-          edition: 2, // This is a hack to skip rebuilding all api endpoints for now
-        } },
+        {
+          json: {
+            ...deck,
+            edition: 2, // This is a hack to skip rebuilding all api endpoints for now
+          },
+        },
         {
           headers: {
             authtoken: `${token}`,

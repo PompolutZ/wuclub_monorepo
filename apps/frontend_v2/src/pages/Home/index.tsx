@@ -28,8 +28,7 @@ const Home = () => {
         <AdvRollBtn label="Attack" notation="attack" />
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 min-h-screen">
-      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 min-h-screen"></div>
 
       <Footer />
     </div>

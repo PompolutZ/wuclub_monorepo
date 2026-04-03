@@ -5,7 +5,7 @@ import { useQueryDecks } from "./useDecksQuery";
 import { FactionName } from "@wudb/types";
 
 export default function Deck() {
-  const { faction } = useParams<{ faction: FactionName | "all"}>();
+  const { faction } = useParams<{ faction: FactionName | "all" }>();
   const { data, isFetching, hasNextPage, fetchNextPage } = useQueryDecks(
     faction === "all" ? undefined : faction,
   );
@@ -20,7 +20,12 @@ export default function Deck() {
           onLoadMore={() => !isFetching && hasNextPage && fetchNextPage()}
         >
           {(deck, { key }) => {
-            return <PublicDeckLink key={key} deck={Array.isArray(deck) ? deck[0] : deck} />
+            return (
+              <PublicDeckLink
+                key={key}
+                deck={Array.isArray(deck) ? deck[0] : deck}
+              />
+            );
           }}
         </FixedVirtualizedList>
       )}

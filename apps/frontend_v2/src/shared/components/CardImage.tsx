@@ -1,7 +1,10 @@
 import { cards } from "../../data/wudb/cards";
 import { getCardPathByCardId } from "../../utils/helpers";
 
-interface CardImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'id'> {
+interface CardImageProps extends Omit<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  "id"
+> {
   id: string | number;
 }
 

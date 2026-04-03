@@ -1,7 +1,5 @@
 import { ScrollContainer } from "@components/ScrollContainer";
-import {
-  boards
-} from "../../../../../shared/boards";
+import { boards } from "../../../../../shared/boards";
 
 const BoardPicture = ({ asset, name }: { asset: string; name: string }) => {
   const path = "../../assets/boards/" + asset;

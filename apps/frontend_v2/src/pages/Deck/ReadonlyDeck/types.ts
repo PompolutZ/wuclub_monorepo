@@ -1,5 +1,5 @@
-import { Factions } from '@fxdxpz/schema';
-import { SetId, Card } from '@wudb';
+import { Factions } from "@fxdxpz/schema";
+import { SetId, Card } from "@wudb";
 
 // DeckCard is essentially a Card from the database
 export type DeckCard = Card;
@@ -26,7 +26,6 @@ export interface DeckSummaryProps {
   isPrivate: boolean;
   children?: React.ReactNode;
 }
-
 
 export interface ProcessedDeck {
   id: string;

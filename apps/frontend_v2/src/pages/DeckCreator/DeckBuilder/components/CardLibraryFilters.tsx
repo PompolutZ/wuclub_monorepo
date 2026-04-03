@@ -55,7 +55,12 @@ interface FactionsPickerProps {
   className?: string;
 }
 
-function FactionsPicker({ selected, onChangeWarband, selectableWarbands, className }: FactionsPickerProps) {
+function FactionsPicker({
+  selected,
+  onChangeWarband,
+  selectableWarbands,
+  className,
+}: FactionsPickerProps) {
   const handleSelectWarband = (faction: Faction) => () => {
     onChangeWarband(faction);
   };
@@ -81,7 +86,6 @@ function FactionsPicker({ selected, onChangeWarband, selectableWarbands, classNa
     </div>
   );
 }
-
 
 interface CardLibraryFiltersProps {
   onSearchTextChange: (text: string) => void;

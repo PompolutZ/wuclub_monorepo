@@ -45,7 +45,9 @@ function MyDecksPage() {
       await mutateAsync(confirmDeleteDeckId);
       setConfirmDeleteDeckId(null);
     } catch (e) {
-      logger.error("Failed to delete deck", e as Error, { deckId: confirmDeleteDeckId });
+      logger.error("Failed to delete deck", e as Error, {
+        deckId: confirmDeleteDeckId,
+      });
       setToastContent("Failed to delete deck. Please try again.");
       setShowToast(true);
     }
@@ -58,7 +60,9 @@ function MyDecksPage() {
 
   const filterDecks = (decks: Deck[], filters: string[]) => {
     if (filters.length === 0) return decks;
-    return decks.filter((deck) => deck.sets.some((set) => filters.includes(set)));
+    return decks.filter((deck) =>
+      deck.sets.some((set) => filters.includes(set)),
+    );
   };
 
   const sortDecks = (decks: Deck[], sortOption: SortOption) => {
@@ -114,7 +118,8 @@ function MyDecksPage() {
                 availableSets={Object.keys(sets)}
               />
               <div className="flex-1 overflow-y-auto overflow-x-hidden">
-                {filteredAndSortedDecks.length === 0 && selectedSetFilters.length > 0 ? (
+                {filteredAndSortedDecks.length === 0 &&
+                selectedSetFilters.length > 0 ? (
                   <div className="flex-1 flex items-center justify-center">
                     <p className="text-gray-600">
                       No decks found with selected filters.{" "}
@@ -143,7 +148,8 @@ function MyDecksPage() {
       <DeleteConfirmationDialog
         title="Delete deck"
         description={`Are you sure you want to delete deck: '${
-          userDecks?.decks.find((deck) => deck.deckId === confirmDeleteDeckId)?.name
+          userDecks?.decks.find((deck) => deck.deckId === confirmDeleteDeckId)
+            ?.name
         }'`}
         open={!!confirmDeleteDeckId}
         onCloseDeleteDialog={handleCloseDeleteDialog}

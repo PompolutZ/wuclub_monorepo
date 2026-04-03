@@ -1,4 +1,7 @@
-export function getFormattedDate(updatedUTC?: number, created?: string): string {
+export function getFormattedDate(
+  updatedUTC?: number,
+  created?: string,
+): string {
   if (updatedUTC) {
     return new Date(updatedUTC).toLocaleDateString();
   }
@@ -7,5 +10,5 @@ export function getFormattedDate(updatedUTC?: number, created?: string): string 
     return new Date(created).toLocaleDateString();
   }
 
-  return '';
+  return "";
 }

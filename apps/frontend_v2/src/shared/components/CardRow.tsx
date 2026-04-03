@@ -27,7 +27,14 @@ interface CardRowProps {
   nameStyle?: CSSProperties;
 }
 
-const CardRow = memo(function CardRow({ card, onClick, className, isRestricted, isBanned, nameStyle }: CardRowProps) {
+const CardRow = memo(function CardRow({
+  card,
+  onClick,
+  className,
+  isRestricted,
+  isBanned,
+  nameStyle,
+}: CardRowProps) {
   const { id, name, type, setId, scoreType, glory } = card;
   const setName = getSetNameById(setId as never);
 

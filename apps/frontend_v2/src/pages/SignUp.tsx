@@ -5,7 +5,13 @@ import { MY_DECKS } from "../constants/routes";
 import { FirebaseContext } from "../firebase";
 import { useCreateUser } from "./UserProfile/queries";
 
-function EmailPasswordForm({ purpose, onUseCredentials }: { purpose: string; onUseCredentials: (email: string, password: string) => void }) {
+function EmailPasswordForm({
+  purpose,
+  onUseCredentials,
+}: {
+  purpose: string;
+  onUseCredentials: (email: string, password: string) => void;
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

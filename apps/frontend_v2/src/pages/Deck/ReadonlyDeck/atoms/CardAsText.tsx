@@ -1,15 +1,19 @@
 import { useCallback, useState } from "react";
 import AnimateHeight from "react-animate-height";
 import CardRule from "../../../../atoms/CardRule";
-import {
-  NEMESIS_FORMAT,
-} from "../../../../data/wudb/index";
+import { NEMESIS_FORMAT } from "../../../../data/wudb/index";
 import CardImage from "../../../../shared/components/CardImage";
 import CardRow from "../../../../shared/components/CardRow";
 import { pickCardColor2 } from "../../../../utils/functions";
 import type { DeckCard } from "../types";
 
-export function CardAsText({ card, isAlternate }: { card: DeckCard; isAlternate?: boolean }) {
+export function CardAsText({
+  card,
+  isAlternate,
+}: {
+  card: DeckCard;
+  isAlternate?: boolean;
+}) {
   const [expanded, setExpanded] = useState(false);
   const [useTextFallback, setUseTextFallback] = useState(false);
   const animateHeight = expanded ? "auto" : 0;

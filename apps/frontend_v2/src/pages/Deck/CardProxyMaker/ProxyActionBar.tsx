@@ -34,29 +34,47 @@ export const ProxyActionBar = ({
   onExit,
 }: ProxyActionBarProps) => (
   <div className="bg-gray-300 p-4 flex items-center gap-4">
-    <button className={btnClass} onClick={onDownload}>Download</button>
-    <button className={btnClass} onClick={onToggleAll}>Toggle All</button>
+    <button className={btnClass} onClick={onDownload}>
+      Download
+    </button>
+    <button className={btnClass} onClick={onToggleAll}>
+      Toggle All
+    </button>
     {hasWarband && (
-      <button className={btnClass} onClick={onToggleWarbandCard}>Toggle Warband Card</button>
+      <button className={btnClass} onClick={onToggleWarbandCard}>
+        Toggle Warband Card
+      </button>
     )}
     {hasWarband && (
-      <button className={btnClass} onClick={onToggleWarband}>Toggle Warband</button>
+      <button className={btnClass} onClick={onToggleWarband}>
+        Toggle Warband
+      </button>
     )}
     {totalPlotCards > 0 && (
-      <button className={btnClass} onClick={onTogglePlotCards}>Toggle Plot Cards</button>
+      <button className={btnClass} onClick={onTogglePlotCards}>
+        Toggle Plot Cards
+      </button>
     )}
     <div className="text-sm text-gray-700 flex items-center gap-2">
-      <span>{selectedCardIds.length}/{totalCards} deck cards</span>
+      <span>
+        {selectedCardIds.length}/{totalCards} deck cards
+      </span>
       {hasWarband && (
         <span>· {selectedWarbandCard ? 1 : 0}/1 warband card</span>
       )}
       {hasWarband && (
-        <span>· {selectedFighters.length}/{totalFighters} fighters</span>
+        <span>
+          · {selectedFighters.length}/{totalFighters} fighters
+        </span>
       )}
       {totalPlotCards > 0 && (
-        <span>· {selectedPlotCards.length}/{totalPlotCards} plot cards</span>
+        <span>
+          · {selectedPlotCards.length}/{totalPlotCards} plot cards
+        </span>
       )}
     </div>
-    <button className={`ml-auto ${btnClass}`} onClick={onExit}>Quit</button>
+    <button className={`ml-auto ${btnClass}`} onClick={onExit}>
+      Quit
+    </button>
   </div>
 );

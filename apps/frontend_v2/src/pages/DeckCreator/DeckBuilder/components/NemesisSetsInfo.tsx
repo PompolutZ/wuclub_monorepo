@@ -18,12 +18,16 @@ function NemesisSetsInfo({ selectedSets }: NemesisSetsInfoProps) {
 
   return (
     <div className="mb-4 text-sm">
-      <span className={`font-semibold ${hasIssues ? "text-red-600" : "text-gray-500"}`}>
+      <span
+        className={`font-semibold ${hasIssues ? "text-red-600" : "text-gray-500"}`}
+      >
         {selectedSets.length}/2 sets selected
       </span>
       {hasIssues && (
         <ul className="mt-1 list-disc list-inside text-red-600">
-          {issues.map((issue) => <li key={issue}>{issue}</li>)}
+          {issues.map((issue) => (
+            <li key={issue}>{issue}</li>
+          ))}
         </ul>
       )}
     </div>

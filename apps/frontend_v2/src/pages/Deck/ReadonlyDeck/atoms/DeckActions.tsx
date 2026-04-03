@@ -1,6 +1,17 @@
 import { Menu } from "@headlessui/react";
-import { EditIcon, MoreVerticalIcon, ShareIcon } from "../../../../shared/components/Icons";
-import { Copy, List, Image, Download, ExternalLink, Trash2 } from "lucide-react";
+import {
+  EditIcon,
+  MoreVerticalIcon,
+  ShareIcon,
+} from "../../../../shared/components/Icons";
+import {
+  Copy,
+  List,
+  Image,
+  Download,
+  ExternalLink,
+  Trash2,
+} from "lucide-react";
 import { useDeckContext } from "../context";
 import { DeckPrivacyToggleButton } from "./DeckPrivacyToggle";
 import DropdownMenu from "./DropdownMenu";
@@ -31,7 +42,10 @@ function MobileMenu() {
                 to={{ pathname: `/deck/edit/${deckId}`, state: { deck } }}
                 label="Edit"
               >
-                <EditIcon className="h-5 w-5 mr-2 stroke-current" fill="#C4B5FD" />
+                <EditIcon
+                  className="h-5 w-5 mr-2 stroke-current"
+                  fill="#C4B5FD"
+                />
               </IconLink>
             )}
           </Menu.Item>
@@ -47,7 +61,10 @@ function MobileMenu() {
               } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
               onClick={createShareableLink}
             >
-              <ShareIcon className="h-5 w-5 mr-2 stroke-current" fill="#C4B5FD" />
+              <ShareIcon
+                className="h-5 w-5 mr-2 stroke-current"
+                fill="#C4B5FD"
+              />
               <span className={`${active ? "text-white" : "text-gray-900"}`}>
                 Create shareable link
               </span>
@@ -77,7 +94,9 @@ function MobileMenu() {
       <div>
         {canUpdateOrDelete && (
           <Menu.Item>
-            {({ active }) => <DeleteMenuButton active={active} onClick={onDelete} />}
+            {({ active }) => (
+              <DeleteMenuButton active={active} onClick={onDelete} />
+            )}
           </Menu.Item>
         )}
       </div>
@@ -131,7 +150,10 @@ function DesktopMenu() {
       </button>
 
       {canUpdateOrDelete && (
-        <DeckPrivacyToggleButton isPrivate={isPrivate} onClick={toggleDeckPrivacy} />
+        <DeckPrivacyToggleButton
+          isPrivate={isPrivate}
+          onClick={toggleDeckPrivacy}
+        />
       )}
 
       <DropdownMenu

@@ -12,7 +12,9 @@ interface LibraryCardSectionProps {
 }
 
 function LibraryCardSection({ setId, cards }: LibraryCardSectionProps) {
-  const [measureRef, open, toggle, contentHeight] = useResizeHeight({ open: true });
+  const [measureRef, open, toggle, contentHeight] = useResizeHeight({
+    open: true,
+  });
   const expand = useSpring({
     height: open ? `${contentHeight}px` : "0px",
   });
@@ -24,7 +26,9 @@ function LibraryCardSection({ setId, cards }: LibraryCardSectionProps) {
     <div className="mb-4">
       <div className="flex items-center border-b border-gray-500 pb-2 mx-2">
         <ExpansionPicture setName={setName} className="w-8 h-8 mr-2 shrink-0" />
-        <h1 className="text-gray-900 text-xl mr-2 min-w-0 flex-1 truncate">{set?.displayName ?? setName}</h1>
+        <h1 className="text-gray-900 text-xl mr-2 min-w-0 flex-1 truncate">
+          {set?.displayName ?? setName}
+        </h1>
         <span className="text-gray-500 text-sm mr-2">{cards.length}</span>
         <ExpandCollapseButton
           open={open}

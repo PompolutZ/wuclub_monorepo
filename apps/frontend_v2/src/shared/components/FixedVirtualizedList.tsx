@@ -7,84 +7,84 @@ const minOptimalWidth = 200;
 const optimalHeight = 16 * 3;
 
 interface FixedVirtualizedListProps<T> {
-    items: T[];
-    children: (item: T | T[], row: VirtualItem) => JSX.Element;
-    estimateItemSize?: number;
-    variant?: "list" | "grid";
-    onLoadMore?: () => void;
-    lazy?: boolean;
+  items: T[];
+  children: (item: T | T[], row: VirtualItem) => JSX.Element;
+  estimateItemSize?: number;
+  variant?: "list" | "grid";
+  onLoadMore?: () => void;
+  lazy?: boolean;
 }
 
 export const FixedVirtualizedList = <T,>({
-    items,
-    children,
-    estimateItemSize = optimalHeight,
-    variant = "list",
-    onLoadMore,
-    lazy = false,
+  items,
+  children,
+  estimateItemSize = optimalHeight,
+  variant = "list",
+  onLoadMore,
+  lazy = false,
 }: FixedVirtualizedListProps<T>) => {
-    const parentRef = useRef<HTMLDivElement>(null);
-    const [rowHeight, setRowHeight] = useState(estimateItemSize);
-    const [rows, setRows] = useState<T[] | T[][]>(items);
+  const parentRef = useRef<HTMLDivElement>(null);
+  const [rowHeight, setRowHeight] = useState(estimateItemSize);
+  const [rows, setRows] = useState<T[] | T[][]>(items);
 
-    useEffect(() => {
-        if (variant === "list") {
-            setRows(items);
-            return;
-        }
+  useEffect(() => {
+    if (variant === "list") {
+      setRows(items);
+      return;
+    }
 
-        const itemsPerRow = Math.floor(700 / minOptimalWidth);
-        const updatedRows = items.reduce((result, _, index, array) => {
-          if (index % itemsPerRow === 0) {
-            result.push(array.slice(index, index + itemsPerRow));
-          }
+    const itemsPerRow = Math.floor(700 / minOptimalWidth);
+    const updatedRows = items.reduce((result, _, index, array) => {
+      if (index % itemsPerRow === 0) {
+        result.push(array.slice(index, index + itemsPerRow));
+      }
 
-          return result;
-        }, [] as T[][]);
-        setRowHeight(MAGICK_HEIGHT);
-        setRows(updatedRows);
-        // row height will be according to card's height based on keeping original aspect ratio
-    }, [items, variant]);
+      return result;
+    }, [] as T[][]);
+    setRowHeight(MAGICK_HEIGHT);
+    setRows(updatedRows);
+    // row height will be according to card's height based on keeping original aspect ratio
+  }, [items, variant]);
 
-    const virtual = useVirtualizer({
-        count: rows.length,
-        getScrollElement: () => parentRef.current,
-        estimateSize: () => rowHeight,
-        overscan: 5,
-    });
+  const virtual = useVirtualizer({
+    count: rows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => rowHeight,
+    overscan: 5,
+  });
 
-    const virtualItems = virtual.getVirtualItems();
+  const virtualItems = virtual.getVirtualItems();
 
-    return (
+  return (
+    <div
+      ref={parentRef}
+      className="flex-1 [contain:strict] overflow-y-auto outline-none scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
+    >
+      <div
+        className="w-full relative"
+        style={{ height: virtual.getTotalSize() }}
+      >
         <div
-            ref={parentRef}
-            className="flex-1 [contain:strict] overflow-y-auto outline-none scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
+          className="absolute top-0 left-0 w-full"
+          style={{
+            transform: `translateY(${virtualItems[0]?.start}px)`,
+          }}
         >
-            <div
-                className="w-full relative"
-                style={{ height: virtual.getTotalSize() }}
-            >
-                <div
-                    className="absolute top-0 left-0 w-full"
-                    style={{
-                        transform: `translateY(${virtualItems[0]?.start}px)`,
-                    }}
-                >
-                    {virtualItems.map((virtualRow) =>
-                        children(rows[virtualRow.index], virtualRow)
-                    )}
+          {virtualItems.map((virtualRow) =>
+            children(rows[virtualRow.index], virtualRow),
+          )}
 
-                    {lazy && (
-                        <InView
-                            onChange={(inView) => {
-                                if (inView) {
-                                    onLoadMore?.();
-                                }
-                            }}
-                        />
-                    )}
-                </div>
-            </div>
+          {lazy && (
+            <InView
+              onChange={(inView) => {
+                if (inView) {
+                  onLoadMore?.();
+                }
+              }}
+            />
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };

@@ -16,21 +16,32 @@ interface FilterableCardLibraryProps {
   filter: CardFilter;
 }
 
-type CardListItem = { card: Card & { isBanned: boolean; isRestricted: boolean }; expanded: boolean; isNameDuplicate: boolean };
+type CardListItem = {
+  card: Card & { isBanned: boolean; isRestricted: boolean };
+  expanded: boolean;
+  isNameDuplicate: boolean;
+};
 
 function stringTypeToNumber(type: string): number {
   switch (type) {
-    case "Objective": return 0;
-    case "Ploy": return 1;
-    case "Upgrade": return 2;
-    default: return 3;
+    case "Objective":
+      return 0;
+    case "Ploy":
+      return 1;
+    case "Upgrade":
+      return 2;
+    default:
+      return 3;
   }
 }
 
 const _sort = (card1: Card, card2: Card) =>
   stringTypeToNumber(card1.type) - stringTypeToNumber(card2.type);
 
-function FilterableCardLibrary({ searchText, filter }: FilterableCardLibraryProps) {
+function FilterableCardLibrary({
+  searchText,
+  filter,
+}: FilterableCardLibraryProps) {
   const dispatch = useDeckBuilderDispatcher();
   const state = useDeckBuilderState();
 

@@ -18,11 +18,7 @@ const createExpansionGroups = () => {
     wusets["RG"].id,
   ];
 
-  const season2 = [
-    wusets["HG"].id,
-    wusets["DY"].id,
-    wusets["NP"].id,
-  ];
+  const season2 = [wusets["HG"].id, wusets["DY"].id, wusets["NP"].id];
 
   return [
     {

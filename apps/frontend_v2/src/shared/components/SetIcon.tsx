@@ -14,7 +14,7 @@ export const SetIcon = ({ id, setId }: Props) => (
       srcSet={`/assets/icons/${getSetNameById(setId)}-icon.webp`}
     />
     <img
-      className={`w-4 h-4 -ml-1 mr-2`}
+      className={"w-4 h-4 -ml-1 mr-2"}
       id={id}
       src={`/assets/icons/${getSetNameById(setId)}-icon-24.png`}
       alt="icon"

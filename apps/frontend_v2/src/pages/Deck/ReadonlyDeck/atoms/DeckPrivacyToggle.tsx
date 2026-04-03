@@ -4,7 +4,7 @@ import { PeopleIcon, PersonIcon } from "../../../../shared/components/Icons";
 const DeckPrivacyToggleButton = ({
   onClick,
   isPrivate,
-  className = `text-purple-700 w-32 justify-center group hover:bg-gray-200 flex rounded-md items-center px-2 py-2 text-sm`,
+  className = "text-purple-700 w-32 justify-center group hover:bg-gray-200 flex rounded-md items-center px-2 py-2 text-sm",
 }: {
   onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   isPrivate: boolean;

@@ -6,25 +6,22 @@ interface RankProps {
 }
 
 function Rank({ rank, classes }: RankProps) {
-    const fullStars = new Array(5).fill(1);
-    const emptyStars = new Array(5).fill(0);
+  const fullStars = new Array(5).fill(1);
+  const emptyStars = new Array(5).fill(0);
 
-    return (
-        <div className="flex">
-            {[...fullStars, ...emptyStars]
-                .slice(5 - rank / 2, 10 - rank / 2)
-                .map((star, i) => {
-                    return star ? (
-                        <StarIcon
-                            key={i}
-                            className={`fill-current ${classes}`}
-                        />
-                    ) : (
-                        <StarIcon key={i} className={`opacity-25 ${classes}`} />
-                    );
-                })}
-        </div>
-    );
+  return (
+    <div className="flex">
+      {[...fullStars, ...emptyStars]
+        .slice(5 - rank / 2, 10 - rank / 2)
+        .map((star, i) => {
+          return star ? (
+            <StarIcon key={i} className={`fill-current ${classes}`} />
+          ) : (
+            <StarIcon key={i} className={`opacity-25 ${classes}`} />
+          );
+        })}
+    </div>
+  );
 }
 
-export default Rank
+export default Rank;

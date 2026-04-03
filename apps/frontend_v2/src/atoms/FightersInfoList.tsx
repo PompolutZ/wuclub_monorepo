@@ -32,7 +32,13 @@ function useClickAway() {
   return clickedAway;
 }
 
-export default function FightersInfoList({ onClose = undefined, factionName }: { onClose?: () => void; factionName: keyof typeof factionMembers }) {
+export default function FightersInfoList({
+  onClose = undefined,
+  factionName,
+}: {
+  onClose?: () => void;
+  factionName: keyof typeof factionMembers;
+}) {
   const clickedAway = useClickAway();
 
   useEffect(() => {
@@ -57,7 +63,13 @@ export default function FightersInfoList({ onClose = undefined, factionName }: {
   );
 }
 
-function FlippableFighterCard({ faction, index }: { faction: string; index: number }) {
+function FlippableFighterCard({
+  faction,
+  index,
+}: {
+  faction: string;
+  index: number;
+}) {
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -93,7 +105,9 @@ function FlippableFighterCard({ faction, index }: { faction: string; index: numb
           srcSet={`/assets/fighters/${faction}/${faction}-${index}-inspired.webp`}
           type="image/webp"
         />
-        <img src={`/assets/fighters/${faction}/${faction}-${index}-inspired.png`} />
+        <img
+          src={`/assets/fighters/${faction}/${faction}-${index}-inspired.png`}
+        />
       </a.picture>
     </div>
   );

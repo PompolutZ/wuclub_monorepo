@@ -14,8 +14,14 @@ interface ObjectivesListProps {
   isValid: boolean;
 }
 
-function ObjectivesList({ selectedObjectives, format, isValid }: ObjectivesListProps) {
-  const [measureRef, open, toggle, contentHeight] = useResizeHeight({ open: true });
+function ObjectivesList({
+  selectedObjectives,
+  format,
+  isValid,
+}: ObjectivesListProps) {
+  const [measureRef, open, toggle, contentHeight] = useResizeHeight({
+    open: true,
+  });
   const expand = useSpring({
     height: open ? `${contentHeight}px` : "0px",
   });
@@ -27,16 +33,23 @@ function ObjectivesList({ selectedObjectives, format, isValid }: ObjectivesListP
     const objectiveSummary = { Surge: 0, End: 0, Third: 0 };
 
     for (const c of selectedObjectives) {
-      totalGlory += (c.glory ?? 0);
-      if (c.scoreType === "Surge") { objectiveSummary.Surge++; surge.push(c); }
-      else if (c.scoreType === "End") { objectiveSummary.End++; end.push(c); }
+      totalGlory += c.glory ?? 0;
+      if (c.scoreType === "Surge") {
+        objectiveSummary.Surge++;
+        surge.push(c);
+      } else if (c.scoreType === "End") {
+        objectiveSummary.End++;
+        end.push(c);
+      }
     }
 
     return { surge, end, totalGlory, objectiveSummary };
   }, [selectedObjectives]);
 
   return (
-    <div className={`${isValid ? "bg-green-100" : "bg-red-200"} p-2 mb-4 lg:mb-0`}>
+    <div
+      className={`${isValid ? "bg-green-100" : "bg-red-200"} p-2 mb-4 lg:mb-0`}
+    >
       <CardListSectionHeader
         className="border-none"
         type="Objectives"
@@ -66,7 +79,6 @@ function ObjectivesList({ selectedObjectives, format, isValid }: ObjectivesListP
               <CardsList format={format} cards={end} />
             </section>
           )}
-
         </div>
       </animated.div>
     </div>

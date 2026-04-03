@@ -20,15 +20,18 @@ export const useUserDecksQuery = () => {
 
       const token = await Firebase.getTokenId();
       if (token) {
-        const res = await api.v2.users.decks.$get({
-          query: {
-            edition: "2", // This is a hack to skip rebuilding all api endpoints for now
-          }
-        }, {
-          headers: {
-            authtoken: token,
+        const res = await api.v2.users.decks.$get(
+          {
+            query: {
+              edition: "2", // This is a hack to skip rebuilding all api endpoints for now
+            },
           },
-        });
+          {
+            headers: {
+              authtoken: token,
+            },
+          },
+        );
 
         return res.json() as unknown as {
           decks: Deck[];

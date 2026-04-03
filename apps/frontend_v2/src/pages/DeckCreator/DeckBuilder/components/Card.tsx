@@ -2,10 +2,7 @@ import { memo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import CloseIcon from "@icons/x.svg?react";
-import {
-  getCardById,
-  validateCardForPlayFormat,
-} from "../../../../data/wudb";
+import { getCardById, validateCardForPlayFormat } from "../../../../data/wudb";
 import { ModalPresenter } from "../../../../main";
 import CardImage from "../../../../shared/components/CardImage";
 import CardRow from "../../../../shared/components/CardRow";
@@ -22,10 +19,20 @@ interface CardInDeckProps {
 }
 
 const CardInDeck = memo(
-  ({ cardId, format, toggleCard, inDeck, isNameDuplicate, ...props }: CardInDeckProps) => {
+  ({
+    cardId,
+    format,
+    toggleCard,
+    inDeck,
+    isNameDuplicate,
+    ...props
+  }: CardInDeckProps) => {
     const [overlayIsVisible, setOverlayIsVisible] = useState(false);
     const card = getCardById(cardId as never);
-    const [, isBanned, isRestricted] = validateCardForPlayFormat(cardId as never, format as never);
+    const [, isBanned, isRestricted] = validateCardForPlayFormat(
+      cardId as never,
+      format as never,
+    );
 
     if (!card) return null;
 
@@ -79,10 +86,14 @@ const CardInDeck = memo(
                 <div className="w-4/5 lg:w-1/4">
                   <div className="w-[300px] h-[420px] bg-purple-100 rounded-2xl border-4 border-gray-900 grid grid-cols-1 grid-rows-1">
                     <div className="py-4">
-                      <h1 className="text-center text-xl font-bold">{card.name}</h1>
+                      <h1 className="text-center text-xl font-bold">
+                        {card.name}
+                      </h1>
                       <div className="p-2">
                         {card.rule.split("\\n").map((paragraph, i) => (
-                          <ReactMarkdown key={i}>{paragraph.trim()}</ReactMarkdown>
+                          <ReactMarkdown key={i}>
+                            {paragraph.trim()}
+                          </ReactMarkdown>
                         ))}
                         {card.glory && (
                           <div className="flex items-center justify-center space-x-2 mt-8">
