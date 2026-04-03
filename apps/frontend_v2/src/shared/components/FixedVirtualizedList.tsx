@@ -3,7 +3,7 @@ import { useVirtualizer, VirtualItem } from "@tanstack/react-virtual";
 import InView from "react-intersection-observer";
 
 const MAGICK_HEIGHT = 436;
-const minOptimalWidth = 200;
+const minOptimalWidth = 140;
 const optimalHeight = 16 * 3;
 
 interface FixedVirtualizedListProps<T> {
