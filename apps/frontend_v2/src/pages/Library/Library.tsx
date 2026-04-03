@@ -12,7 +12,7 @@ import type { Card } from "../../data/wudb";
 import { useBreakpoint } from "../../hooks/useMediaQuery";
 import { LibraryDesktopView } from "./LibraryDesktopView";
 import { LibraryMobileView } from "./LibraryMobileView";
-import type { Warband } from "./LibraryWarbandPicker";
+import type { Warband } from "../../shared/components/WarbandPicker";
 
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
 const validSetIds = validSets.map((s) => s.id as string);

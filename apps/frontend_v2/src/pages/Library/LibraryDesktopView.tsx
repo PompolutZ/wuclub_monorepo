@@ -8,7 +8,7 @@ import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../atoms/FightersInfoList";
 import { ZoomedCard } from "./ZoomedCard";
 import { LibraryWarbandPicker } from "./LibraryWarbandPicker";
-import type { Warband } from "./LibraryWarbandPicker";
+import type { Warband } from "../../shared/components/WarbandPicker";
 
 interface LibraryDesktopViewProps {
   validSetIds: string[];
