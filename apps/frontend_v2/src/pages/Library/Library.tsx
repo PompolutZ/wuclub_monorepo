@@ -1,6 +1,6 @@
 import CloseIcon from "@icons/x.svg?react";
 import TogglesIcon from "@icons/sliders.svg?react";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   getAllSetsValidForFormat,
   NEMESIS_FORMAT,
@@ -16,6 +16,7 @@ import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
 import IconButton from "../../shared/components/IconButton";
 import { Overlay } from "../../shared/components/Overlay";
 import { ScrollContainer } from "../../shared/components/ScrollContainer";
+import { ModalPresenter } from "../../main";
 import LibraryCardSection from "./LibraryCardSection";
 
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
@@ -55,6 +56,23 @@ function Library() {
     useState<string[]>(validSetIds);
   const [searchText, setSearchText] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+  const [zoomedCard, setZoomedCard] = useState<{ card: Card; rect: DOMRect } | null>(null);
+  const [zoomAnimating, setZoomAnimating] = useState(false);
+
+  const handleCardClick = useCallback((card: Card, el: HTMLElement) => {
+    setZoomedCard({ card, rect: el.getBoundingClientRect() });
+  }, []);
+
+  useEffect(() => {
+    if (zoomedCard && !zoomAnimating) {
+      requestAnimationFrame(() => setZoomAnimating(true));
+    }
+  }, [zoomedCard]);
+
+  const handleZoomClose = useCallback(() => {
+    setZoomAnimating(false);
+    setTimeout(() => setZoomedCard(null), 300);
+  }, []);
 
   const filteredCards = useLibraryCards(selectedExpansionIds, searchText);
 
@@ -154,7 +172,9 @@ function Library() {
                     {(cards as Card[]).map((card) => (
                       <div
                         key={card.id}
-                        className="flex-1 p-2 flex items-center justify-center"
+                        className="flex-1 p-2 flex items-center justify-center cursor-pointer"
+                        style={zoomedCard?.card.id === card.id ? { opacity: 0 } : undefined}
+                        onClick={(e) => handleCardClick(card, e.currentTarget)}
                       >
                         <CardPicture card={card} />
                       </div>
@@ -166,6 +186,35 @@ function Library() {
           </div>
         )}
       </div>
+      {zoomedCard && (() => {
+        const { card, rect } = zoomedCard;
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dx = window.innerWidth / 2 - centerX;
+        const dy = window.innerHeight / 2 - centerY;
+        const transform = zoomAnimating
+          ? `translate(${dx}px, ${dy}px) scale(2)`
+          : "translate(0, 0) scale(1)";
+        return (
+          <ModalPresenter>
+            <div className="fixed inset-0 z-40" onClick={handleZoomClose}>
+              <div className={`absolute inset-0 bg-black/30 backdrop-blur-sm transition-all duration-300 ${zoomAnimating ? "opacity-100" : "opacity-0"}`} />
+            </div>
+            <div
+              className="fixed z-50 p-2 flex items-center justify-center transition-transform duration-300 ease-out pointer-events-none"
+              style={{
+                top: rect.top,
+                left: rect.left,
+                width: rect.width,
+                height: rect.height,
+                transform,
+              }}
+            >
+              <CardPicture card={card} />
+            </div>
+          </ModalPresenter>
+        );
+      })()}
     </div>
   );
 }
