@@ -8,12 +8,16 @@ import type { EnrichedCard } from "../../reducer";
 import GloryIcon from "@icons/wu-glory.svg?react";
 
 interface UpgradesListProps {
-    selectedUpgrades: EnrichedCard[];
-    format: string;
-    isValid: boolean;
+  selectedUpgrades: EnrichedCard[];
+  format: string;
+  isValid: boolean;
 }
 
-function UpgradesList({ selectedUpgrades, format, isValid }: UpgradesListProps) {
+function UpgradesList({
+  selectedUpgrades,
+  format,
+  isValid,
+}: UpgradesListProps) {
   const [measureRef, open, toggle, contentHeight] = useResizeHeight({
     open: true,
   });

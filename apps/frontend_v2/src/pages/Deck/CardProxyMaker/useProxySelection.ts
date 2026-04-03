@@ -17,7 +17,9 @@ export const useProxySelection = ({
   hasWarband,
   onExit,
 }: UseProxySelectionProps) => {
-  const [selectedCardIds, setSelectedCardIds] = useState(() => cards.map((c) => c.id));
+  const [selectedCardIds, setSelectedCardIds] = useState(() =>
+    cards.map((c) => c.id),
+  );
   const [selectedFighters, setSelectedFighters] = useState(fighters);
   const [selectedPlotCards, setSelectedPlotCards] = useState(plotCards);
   const [selectedWarbandCard, setSelectedWarbandCard] = useState(hasWarband);
@@ -28,15 +30,16 @@ export const useProxySelection = ({
     const w = 64.5;
     const h = 89.9;
 
-    const cardsToPrint = cards.filter((card) => selectedCardIds.includes(card.id));
-
-    const pages = [...cardsToPrint, ...selectedPlotCards].reduce<Array<Array<Card | string>>>(
-      (acc, el, index, array) => {
-        if (index % 9 === 0) acc.push(array.slice(index, index + 9));
-        return acc;
-      },
-      [],
+    const cardsToPrint = cards.filter((card) =>
+      selectedCardIds.includes(card.id),
     );
+
+    const pages = [...cardsToPrint, ...selectedPlotCards].reduce<
+      Array<Array<Card | string>>
+    >((acc, el, index, array) => {
+      if (index % 9 === 0) acc.push(array.slice(index, index + 9));
+      return acc;
+    }, []);
 
     const fighterPages = selectedFighters.reduce<string[][]>(
       (acc, el, index, array) => {
@@ -48,11 +51,16 @@ export const useProxySelection = ({
 
     let firstPage = true;
     const nextPage = () => {
-      if (firstPage) { firstPage = false; } else { doc.addPage(); }
+      if (firstPage) {
+        firstPage = false;
+      } else {
+        doc.addPage();
+      }
     };
 
     for (const [pageIdx, page] of pages.entries()) {
-      if (pageIdx === 0) nextPage(); else doc.addPage();
+      if (pageIdx === 0) nextPage();
+      else doc.addPage();
       let rowIdx = 0;
       let x = 0;
       let y = 0;
@@ -63,7 +71,12 @@ export const useProxySelection = ({
         doc.addImage(
           document.getElementById(`proxy ${id}`) as HTMLImageElement,
           "png",
-          x, y, w, h, "", "SLOW",
+          x,
+          y,
+          w,
+          h,
+          "",
+          "SLOW",
         );
         x += w;
         idx += 1;
@@ -84,12 +97,24 @@ export const useProxySelection = ({
       for (const f of page) {
         doc.addImage(
           document.getElementById(`proxy ${f}`) as HTMLImageElement,
-          "png", x, y, w, h, "", "SLOW",
+          "png",
+          x,
+          y,
+          w,
+          h,
+          "",
+          "SLOW",
         );
         x += w;
         doc.addImage(
           document.getElementById(`proxy ${f}-inspired`) as HTMLImageElement,
-          "png", x, y, w, h, "", "SLOW",
+          "png",
+          x,
+          y,
+          w,
+          h,
+          "",
+          "SLOW",
         );
         rowIdx += 1;
         x = 3;
@@ -98,7 +123,9 @@ export const useProxySelection = ({
     }
 
     if (selectedWarbandCard) {
-      const imgEl = document.getElementById("proxy warband-card") as HTMLImageElement;
+      const imgEl = document.getElementById(
+        "proxy warband-card",
+      ) as HTMLImageElement;
       const canvas = document.createElement("canvas");
       // Rotate 90° clockwise: swap dimensions
       canvas.width = imgEl.naturalHeight;
@@ -133,13 +160,17 @@ export const useProxySelection = ({
 
   const toggleCard = (cardId: string) => () => {
     setSelectedCardIds((prev) =>
-      prev.includes(cardId) ? prev.filter((id) => id !== cardId) : [...prev, cardId],
+      prev.includes(cardId)
+        ? prev.filter((id) => id !== cardId)
+        : [...prev, cardId],
     );
   };
 
   const toggleFighter = (fighter: string) => () => {
     setSelectedFighters((prev) =>
-      prev.includes(fighter) ? prev.filter((f) => f !== fighter) : [...prev, fighter],
+      prev.includes(fighter)
+        ? prev.filter((f) => f !== fighter)
+        : [...prev, fighter],
     );
   };
 

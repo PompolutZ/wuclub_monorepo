@@ -105,7 +105,10 @@ export const FilterDropdown = ({
                             className="w-8 h-8"
                           />
                           {hasPlot && (
-                            <div className="absolute w-4 h-4 bg-purple-700 -bottom-1 left-4 rounded-full text-white" title="Has Plot Card">
+                            <div
+                              className="absolute w-4 h-4 bg-purple-700 -bottom-1 left-4 rounded-full text-white"
+                              title="Has Plot Card"
+                            >
                               <CompassIcon className="stroke-current w-4 h-4" />
                             </div>
                           )}

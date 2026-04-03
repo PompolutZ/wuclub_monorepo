@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 import { useEffectReducer } from "use-effect-reducer";
-import { deckBuilderReducer, INITIAL_STATE, DECK_IN_PROGRESS_KEY } from "./reducer";
+import {
+  deckBuilderReducer,
+  INITIAL_STATE,
+  DECK_IN_PROGRESS_KEY,
+} from "./reducer";
 import type { DeckBuilderAction, DeckBuilderState } from "./reducer";
 import {
   addKeyToLocalStorage,
@@ -16,8 +20,12 @@ import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 
 type Dispatch = (action: DeckBuilderAction) => void;
 
-const DeckBuilderContext = React.createContext<DeckBuilderState | undefined>(undefined);
-const DeckBuilderDispatchContext = React.createContext<Dispatch | undefined>(undefined);
+const DeckBuilderContext = React.createContext<DeckBuilderState | undefined>(
+  undefined,
+);
+const DeckBuilderDispatchContext = React.createContext<Dispatch | undefined>(
+  undefined,
+);
 
 export function useDeckBuilderState(): DeckBuilderState {
   const context = useContext(DeckBuilderContext);
@@ -41,20 +49,28 @@ export function useDeckBuilderDispatcher(): Dispatch {
   return context;
 }
 
-const initialiseState = (deck: DeckBuilderState | null) => (exec: (effect: { type: string; key: string }) => void) => {
-  if (deck) {
-    return deck;
-  }
+const initialiseState =
+  (deck: DeckBuilderState | null) =>
+  (exec: (effect: { type: string; key: string }) => void) => {
+    if (deck) {
+      return deck;
+    }
 
-  exec({
-    type: "initialiseStateFromLocalStorage",
-    key: DECK_IN_PROGRESS_KEY,
-  });
+    exec({
+      type: "initialiseStateFromLocalStorage",
+      key: DECK_IN_PROGRESS_KEY,
+    });
 
-  return INITIAL_STATE;
-};
+    return INITIAL_STATE;
+  };
 
-function DeckBuilderContextProvider({ children, deck }: { children: React.ReactNode; deck: DeckBuilderState | null }) {
+function DeckBuilderContextProvider({
+  children,
+  deck,
+}: {
+  children: React.ReactNode;
+  deck: DeckBuilderState | null;
+}) {
   const { mutateAsync: saveDeck } = useSaveDeck();
   const { mutateAsync: updateDeck } = useUpdateDeck();
   const [state, dispatch] = useEffectReducer(

@@ -33,7 +33,11 @@ const IsGenericFaction = (faction: string): faction is GenericFaction =>
     "grand-aliance-destruction",
   ].includes(faction);
 
-export const FighterCardsPortal = ({ faction }: { faction: FactionName | string }) => {
+export const FighterCardsPortal = ({
+  faction,
+}: {
+  faction: FactionName | string;
+}) => {
   const { Portal, open, portalClickAwayRef } = usePortal();
 
   if (IsGenericFaction(faction as string)) {
@@ -54,7 +58,10 @@ export const FighterCardsPortal = ({ faction }: { faction: FactionName | string 
 
       <Portal>
         <div className="grid w-full h-full place-content-center bg-purple-100/25">
-          <FighterCardsCarousel faction={faction as FactionName} ref={portalClickAwayRef} />
+          <FighterCardsCarousel
+            faction={faction as FactionName}
+            ref={portalClickAwayRef}
+          />
         </div>
       </Portal>
     </div>
@@ -129,10 +136,7 @@ const FighterCardsCarousel = forwardRef<
   }, [api]);
 
   return (
-    <div
-      className="lg:w-[70vw] mx-auto"
-      ref={ref}
-    >
+    <div className="lg:w-[70vw] mx-auto" ref={ref}>
       <Carousel setApi={setApi}>
         <CarouselContent>
           <CarouselItem className="flex justify-center items-center">

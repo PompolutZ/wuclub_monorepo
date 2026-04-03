@@ -19,7 +19,11 @@ import { DeckActions } from "./atoms/DeckActions";
 import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
 import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
-import { exportToUDB, createShareableLink, saveVassalFormat } from "./utils/deckExport";
+import {
+  exportToUDB,
+  createShareableLink,
+  saveVassalFormat,
+} from "./utils/deckExport";
 import { getFormattedDate } from "./utils/displayHelpers";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
@@ -33,10 +37,17 @@ const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 
 const MOBILE_TABS = (factionId: string) => [
   { name: "Deck", Icon: DeckIcon },
-  { name: "Warband", Icon: WarbandIcon, disabled: factionId === factions["u"].id },
+  {
+    name: "Warband",
+    Icon: WarbandIcon,
+    disabled: factionId === factions["u"].id,
+  },
 ];
 
-const CardsSectionContent = memo(function CardsSectionContent({ cards, listView }: CardsSectionContentProps) {
+const CardsSectionContent = memo(function CardsSectionContent({
+  cards,
+  listView,
+}: CardsSectionContentProps) {
   return listView ? (
     <ul>
       {cards.map((v, i) => (
@@ -78,10 +89,26 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   const { mutateAsync: update } = useUpdateDeck();
   const { mutateAsync: deleteUserDeck } = useDeleteDeck();
 
-  const deck = useDeckData({ id, name, factionId, faction, sets, created, createdutc, updatedutc, isPrivate, cards });
+  const deck = useDeckData({
+    id,
+    name,
+    factionId,
+    faction,
+    sets,
+    created,
+    createdutc,
+    updatedutc,
+    isPrivate,
+    cards,
+  });
 
-  const { summary: objectiveSummary, totalGlory } = useObjectiveSummary(deck.objectives);
-  const totalUpgradesGlory = useMemo(() => deck.upgrades.reduce((sum, c) => sum + Number(c.glory ?? 0), 0), [deck.upgrades]);
+  const { summary: objectiveSummary, totalGlory } = useObjectiveSummary(
+    deck.objectives,
+  );
+  const totalUpgradesGlory = useMemo(
+    () => deck.upgrades.reduce((sum, c) => sum + Number(c.glory ?? 0), 0),
+    [deck.upgrades],
+  );
 
   const toggleDeckPrivacy = () => {
     const nextState = !isPrivate;
@@ -168,7 +195,8 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
         onCardsViewChange: () => setCardsView((prev) => !prev),
         exportToUDB: () => exportToUDB(cards),
         createShareableLink: () => createShareableLink(cards, handleShowToast),
-        copyInVassalFormat: () => saveVassalFormat(faction, cards, handleShowToast),
+        copyInVassalFormat: () =>
+          saveVassalFormat(faction, cards, handleShowToast),
         onDownloadProxy: () => setIsProxyPickerVisible(true),
       }}
     >
@@ -199,7 +227,9 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
                 </div>
               </div>
             )}
-            {activeTabIndex === 1 && <FightersInfoList factionName={faction as never} />}
+            {activeTabIndex === 1 && (
+              <FightersInfoList factionName={faction as never} />
+            )}
           </div>
 
           <BottomPanelNavigation

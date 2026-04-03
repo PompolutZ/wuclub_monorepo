@@ -1,14 +1,13 @@
 import React, { useState, useContext } from "react";
 import useAuthUser from "../../hooks/useAuthUser";
 import * as ROUTES from "../../constants/routes";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import { animated, useSpring, useTransition } from "@react-spring/web";
 import MenuIcon from "@icons/menu.svg?react";
 import CoffeeIcon from "@icons/coffee.svg?react";
 import { Divider } from "./Divider";
 import { FirebaseContext } from "../../firebase";
-import { useHistory, useLocation } from "react-router-dom";
 import useMeasure from "react-use-measure";
 
 export default function NavigationPanel() {
@@ -86,12 +85,12 @@ function UserMenu() {
       >
         My Decks
       </AnimatedLink>
-          <AnimatedLink
-            className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-            to={ROUTES.SETTINGS}
-          >
-            Settings
-          </AnimatedLink>
+      <AnimatedLink
+        className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+        to={ROUTES.SETTINGS}
+      >
+        Settings
+      </AnimatedLink>
 
       {auth && (
         <>

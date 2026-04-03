@@ -13,7 +13,12 @@ import useAuthUser from "../../../hooks/useAuthUser";
 import { useBreakpoint } from "../../../hooks/useMediaQuery";
 import BottomPanelNavigation from "../../../shared/components/BottomPanelNavigation";
 import { FighterCardsPortal } from "../../../shared/components/FighterCardsPortal";
-import { resetDeckAction, saveDeckAction, updateDeckAction, STATUS_SAVED } from "../reducer";
+import {
+  resetDeckAction,
+  saveDeckAction,
+  updateDeckAction,
+  STATUS_SAVED,
+} from "../reducer";
 import type { CardFilter } from "../reducer";
 import CardLibraryToggles from "./components/CardLibraryFilters";
 import CardsLibrary from "./components/CardsLibrary";
@@ -40,16 +45,29 @@ function CardsLibraryWithFilters() {
 type TabIconProps = { className?: string };
 
 const tabs = (factionId: string) => [
-  { name: "Library", Icon: ({ className }: TabIconProps) => <AddCardIcon className={className} /> },
-  { name: "Deck", Icon: ({ className }: TabIconProps) => <DeckIcon className={className} /> },
+  {
+    name: "Library",
+    Icon: ({ className }: TabIconProps) => (
+      <AddCardIcon className={className} />
+    ),
+  },
+  {
+    name: "Deck",
+    Icon: ({ className }: TabIconProps) => <DeckIcon className={className} />,
+  },
   {
     name: "Warband",
-    Icon: ({ className }: TabIconProps) => <WarbandIcon className={className} />,
+    Icon: ({ className }: TabIconProps) => (
+      <WarbandIcon className={className} />
+    ),
     disabled: factionId === factions["u"].id,
   },
 ];
 
-interface MobileViewProps { children: React.ReactNode; factionId: string }
+interface MobileViewProps {
+  children: React.ReactNode;
+  factionId: string;
+}
 
 const MobileView = ({ children, factionId }: MobileViewProps) => {
   const isMobile = useBreakpoint("mobile");
@@ -86,10 +104,17 @@ interface DeckBuilderProps {
   isPrivate?: boolean;
 }
 
-function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }: DeckBuilderProps) {
+function DeckBuilder({
+  currentDeckName,
+  existingDeckId,
+  isPrivate,
+}: DeckBuilderProps) {
   const [deckName, setDeckName] = useState(currentDeckName || "");
   const [showConfirmDeckReset, setShowConfirmDeckReset] = useState(false);
-  const { uid, displayName } = (useAuthUser() as { uid?: string; displayName?: string } | null) || {
+  const { uid, displayName } = (useAuthUser() as {
+    uid?: string;
+    displayName?: string;
+  } | null) || {
     uid: "Anonymous",
     displayName: "Anonymous",
   };
@@ -174,7 +199,9 @@ function DeckBuilder({ currentDeckName, existingDeckId, isPrivate }: DeckBuilder
 
       <DeleteConfirmationDialog
         title="Clear current deck"
-        description={`Are you sure you want to clear current deck? Your deck building progress will be lost.`}
+        description={
+          "Are you sure you want to clear current deck? Your deck building progress will be lost."
+        }
         open={showConfirmDeckReset}
         onCloseDeleteDialog={handleCloseConfirmDialog}
         onDeleteConfirmed={handleResetDeck}

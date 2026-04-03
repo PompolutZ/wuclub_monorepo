@@ -34,12 +34,21 @@ type FallbackCallback = () => void;
 interface FirebaseInstance {
   signInWithFacebookProvider: () => Promise<never>;
   signInWithGoogleProvider: () => Promise<UserCredential>;
-  signInWithEmailAndPassword: (email: string, password: string) => Promise<UserCredential>;
-  createUserWithEmailAndPassword: (email: string, password: string) => Promise<UserCredential>;
+  signInWithEmailAndPassword: (
+    email: string,
+    password: string,
+  ) => Promise<UserCredential>;
+  createUserWithEmailAndPassword: (
+    email: string,
+    password: string,
+  ) => Promise<UserCredential>;
   signOut: () => Promise<void>;
   getTokenId: () => Promise<string>;
   getRedirectResult: () => Promise<UserCredential | null>;
-  onAuthUserListener: (next: AuthUserCallback, fallback: FallbackCallback) => Unsubscribe;
+  onAuthUserListener: (
+    next: AuthUserCallback,
+    fallback: FallbackCallback,
+  ) => Unsubscribe;
   sendPasswordResetEmail: (email: string) => Promise<void>;
 }
 
@@ -54,7 +63,10 @@ const Firebase2 = (function (): FirebaseInstance {
       signOut: () => Promise.resolve(),
       getTokenId: () => Promise.resolve(""),
       getRedirectResult: () => Promise.resolve(null),
-      onAuthUserListener: (_next, fallback) => { fallback(); return () => {}; },
+      onAuthUserListener: (_next, fallback) => {
+        fallback();
+        return () => {};
+      },
       sendPasswordResetEmail: () => Promise.resolve(),
     };
   }
@@ -148,7 +160,9 @@ const Firebase2 = (function (): FirebaseInstance {
       );
     },
 
-    sendPasswordResetEmail: function invokeSendPasswordResetEmail(email: string) {
+    sendPasswordResetEmail: function invokeSendPasswordResetEmail(
+      email: string,
+    ) {
       return sendPasswordResetEmail(auth, email);
     },
   };

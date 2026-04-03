@@ -20,7 +20,7 @@ const IconButton = ({
       className={
         className
           ? className
-          : `text-gray-900 bg-white group flex rounded-md items-center w-full px-2 py-2 text-sm`
+          : "text-gray-900 bg-white group flex rounded-md items-center w-full px-2 py-2 text-sm"
       }
       onClick={onClick}
     >

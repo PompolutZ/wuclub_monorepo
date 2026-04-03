@@ -9,7 +9,14 @@ import type { DeckSummaryProps } from "./types";
  * Displays deck summary information including faction, name, date, and privacy status
  * Memoized to prevent re-renders when deck metadata hasn't changed
  */
-const DeckSummary = memo(function DeckSummary({ faction, name, date, sets, children, isPrivate }: DeckSummaryProps) {
+const DeckSummary = memo(function DeckSummary({
+  faction,
+  name,
+  date,
+  sets,
+  children,
+  isPrivate,
+}: DeckSummaryProps) {
   return (
     <div className="flex items-center flex-1 space-x-4 min-w-0">
       <FactionDeckPicture size="large" faction={faction} />

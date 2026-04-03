@@ -9,22 +9,25 @@ interface ObjectiveScoreTypeIconProps {
   style?: React.CSSProperties;
 }
 
-const ObjectiveScoreTypeIcon = ({ type, style }: ObjectiveScoreTypeIconProps) => {
-    switch (type) {
-        case 0:
-        case 'Surge':
-            return <FlashOnIcon style={style} />;
-        case 1:
-        case 'End':
-            return <SheduleIcon style={style} />;
-        case 2:
-            return <HourglassFullIcon style={style} />;
-        case 3:
-        case 'Third':
-            return <HourglassEmptyIcon style={style} />;
-        default:
-            return null;
-    }
+const ObjectiveScoreTypeIcon = ({
+  type,
+  style,
+}: ObjectiveScoreTypeIconProps) => {
+  switch (type) {
+    case 0:
+    case "Surge":
+      return <FlashOnIcon style={style} />;
+    case 1:
+    case "End":
+      return <SheduleIcon style={style} />;
+    case 2:
+      return <HourglassFullIcon style={style} />;
+    case 3:
+    case "Third":
+      return <HourglassEmptyIcon style={style} />;
+    default:
+      return null;
+  }
 };
 
 export default ObjectiveScoreTypeIcon;

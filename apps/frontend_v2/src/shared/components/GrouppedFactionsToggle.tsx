@@ -3,7 +3,10 @@ import { useMultiSelectArray } from "../../hooks/useMultiSelectArray";
 import IconButton from "./IconButton";
 import SectionTitle from "./SectionTitle";
 
-function FactionPicture({ faction, ...rest }: { faction: string } & React.ImgHTMLAttributes<HTMLImageElement>) {
+function FactionPicture({
+  faction,
+  ...rest
+}: { faction: string } & React.ImgHTMLAttributes<HTMLImageElement>) {
   return (
     <picture>
       <source type="image/webp" srcSet={`/assets/icons/${faction}-icon.webp`} />

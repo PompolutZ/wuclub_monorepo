@@ -5,7 +5,13 @@ import SectionTitle from "../shared/components/SectionTitle";
 import { MY_DECKS, PROFILE, SIGN_UP } from "../constants/routes";
 import GoogleButton from "react-google-button";
 
-function EmailPasswordForm({ purpose, onUseCredentials }: { purpose: string; onUseCredentials: (email: string, password: string) => void }) {
+function EmailPasswordForm({
+  purpose,
+  onUseCredentials,
+}: {
+  purpose: string;
+  onUseCredentials: (email: string, password: string) => void;
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -62,7 +68,9 @@ const CreateAccount = () => {
 
 function Login() {
   const history = useHistory();
-  const [loginError, setLoginError] = useState<string | null>(undefined as unknown as null);
+  const [loginError, setLoginError] = useState<string | null>(
+    undefined as unknown as null,
+  );
   const firebase = useContext(FirebaseContext);
 
   React.useEffect(() => {
@@ -82,7 +90,10 @@ function Login() {
     };
   }, [firebase, history]);
 
-  const handleEmailAndPasswordLogin = async (username: string, password: string) => {
+  const handleEmailAndPasswordLogin = async (
+    username: string,
+    password: string,
+  ) => {
     try {
       setLoginError(null);
 

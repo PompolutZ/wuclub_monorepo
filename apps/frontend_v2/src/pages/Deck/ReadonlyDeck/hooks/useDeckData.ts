@@ -1,8 +1,13 @@
-import { useMemo } from 'react';
-import { Factions } from '@fxdxpz/schema';
-import { SetId } from '@wudb';
-import { checkCardIsObjective, checkCardIsPloy, checkCardIsUpgrade, compareObjectivesByScoreType } from '../../../../data/wudb';
-import type { DeckCard, ProcessedDeck } from '../types';
+import { useMemo } from "react";
+import { Factions } from "@fxdxpz/schema";
+import {
+  SetId,
+  checkCardIsObjective,
+  checkCardIsPloy,
+  checkCardIsUpgrade,
+  compareObjectivesByScoreType,
+} from "@wudb";
+import type { DeckCard, ProcessedDeck } from "../types";
 
 interface UseDeckDataParams {
   id: string;
@@ -56,5 +61,16 @@ export function useDeckData({
       upgrades,
       private: isPrivate,
     };
-  }, [id, name, factionId, faction, sets, created, createdutc, updatedutc, isPrivate, cards]);
+  }, [
+    id,
+    name,
+    factionId,
+    faction,
+    sets,
+    created,
+    createdutc,
+    updatedutc,
+    isPrivate,
+    cards,
+  ]);
 }

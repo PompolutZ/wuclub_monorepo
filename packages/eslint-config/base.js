@@ -1,27 +1,50 @@
-// module.exports = {
-//   extends: [
-//     "eslint:recommended",
-//     "plugin:import/recommended",
-//     "plugin:@typescript-eslint/recommended",
-//     "plugin:prettier/recommended",
-//   ],
-//   parser: "@typescript-eslint/parser",
-//   plugins: ["@typescript-eslint", "import"],
-//   rules: {
-//     "no-console": ["error", { allow: ["warn", "error", "info"] }],
-//   },
-// };
 import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
-import eslintConfigPrettier from "eslint-config-prettier";
+import { configs as tslintConfigs, config } from "typescript-eslint";
+import { importX } from "eslint-plugin-import-x";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 
-export default tseslint.config(
+const prettierConfig = {
+  singleQuote: false,
+  trailingComma: "all",
+  tabWidth: 2,
+  useTabs: false,
+  endOfLine: "lf",
+};
+
+export default config(
   eslint.configs.recommended,
-  ...tseslint.configs.recommended,
-  eslintConfigPrettier,
+  tslintConfigs.recommended,
+  importX.flatConfigs.recommended,
+  importX.flatConfigs.typescript,
+  eslintPluginPrettierRecommended,
   {
+    // find rules here: https://eslint.org/docs/latest/rules
     rules: {
-      "no-console": ["error", { allow: ["warn", "error", "info"] }],
+      quotes: [
+        "error",
+        "double",
+        { avoidEscape: true, allowTemplateLiterals: false },
+      ],
+      "prettier/prettier": ["error", prettierConfig],
     },
+  },
+  {
+    settings: {
+      "import-x/resolver-next": [
+        createTypeScriptImportResolver({
+          project: "./tsconfig.json",
+        }),
+      ],
+    },
+  },
+  {
+    ignores: [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      ".yalc/**",
+      "cdk.out/**",
+    ],
   },
 );

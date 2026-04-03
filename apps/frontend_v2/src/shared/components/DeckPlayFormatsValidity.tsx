@@ -27,21 +27,22 @@ export const DeckPlayFormatsValidity = ({ cards }: { cards: Card[] }) => {
 
   return (
     <div className="flex items-center justify-center relative h-7 w-6">
-      {allValidFormats.map(
-        ([format], i: number) => (
-          <div
-            key={format as typeof ACTIVE_FORMATS[number]}
-            className={`absolute w-6 h-7`}
-            style={{
-              zIndex: allValidFormats.length - i,
-              left: `${i * 20}px`,
-              marginLeft: `-${allValidFormats.length * 5}px`,
-            }}
-          >
-            <PlayFormatPicture format={format as typeof ACTIVE_FORMATS[number]} size="sm" />
-          </div>
-        ),
-      )}
+      {allValidFormats.map(([format], i: number) => (
+        <div
+          key={format as (typeof ACTIVE_FORMATS)[number]}
+          className={"absolute w-6 h-7"}
+          style={{
+            zIndex: allValidFormats.length - i,
+            left: `${i * 20}px`,
+            marginLeft: `-${allValidFormats.length * 5}px`,
+          }}
+        >
+          <PlayFormatPicture
+            format={format as (typeof ACTIVE_FORMATS)[number]}
+            size="sm"
+          />
+        </div>
+      ))}
     </div>
   );
 };

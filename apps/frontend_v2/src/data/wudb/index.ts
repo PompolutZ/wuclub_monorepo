@@ -17,8 +17,8 @@ export const latestSeasonStartNumber = 15000;
 export const RIVALS_DECK_CARDS_TOTAL = 32;
 
 export const sortedFactions = Object.values(factions).sort((a, b) => {
-  const aId = 'gaId' in a ? (a as { gaId: number }).gaId : 0;
-  const bId = 'gaId' in b ? (b as { gaId: number }).gaId : 0;
+  const aId = "gaId" in a ? (a as { gaId: number }).gaId : 0;
+  const bId = "gaId" in b ? (b as { gaId: number }).gaId : 0;
   return aId - bId;
 });
 
@@ -81,15 +81,15 @@ function getCardById(cardId: CardId) {
   return cards[cardId];
 }
 
-function checkCardIsObjective({ type }: {type: CardType }) {
+function checkCardIsObjective({ type }: { type: CardType }) {
   return typeof type === "string" && type === "Objective";
 }
 
-function checkCardIsPloy({ type }: {type: CardType }) {
+function checkCardIsPloy({ type }: { type: CardType }) {
   return typeof type === "string" && type === "Ploy";
 }
 
-function checkCardIsUpgrade({ type }: {type: CardType }) {
+function checkCardIsUpgrade({ type }: { type: CardType }) {
   return typeof type === "string" && type === "Upgrade";
 }
 
@@ -102,7 +102,10 @@ const objectiveScoreTypes = [
   THIRD_END_SCORE_TYPE,
 ];
 
-function compareObjectivesByScoreType(scoreTypeOne: string, scoreTypeTwo: string) {
+function compareObjectivesByScoreType(
+  scoreTypeOne: string,
+  scoreTypeTwo: string,
+) {
   return (
     objectiveScoreTypes.indexOf(scoreTypeOne) -
     objectiveScoreTypes.indexOf(scoreTypeTwo)
@@ -325,7 +328,9 @@ function validateDeckForPlayFormat(
 
     const uniqueCardsByName = new Set(deck.map(({ name }) => name));
     if (uniqueCardsByName.size < deck.length) {
-      issues.push("Nemesis deck cannot have more than one card with the same name.");
+      issues.push(
+        "Nemesis deck cannot have more than one card with the same name.",
+      );
     }
 
     return [issues.length === 0, issues];
@@ -334,7 +339,10 @@ function validateDeckForPlayFormat(
   return [true, issues];
 }
 
-function validateObjectivesListForPlayFormat(objectives: Card[], format: string) {
+function validateObjectivesListForPlayFormat(
+  objectives: Card[],
+  format: string,
+) {
   const issues = [];
   let isValid = true;
 
@@ -355,7 +363,11 @@ function validateObjectivesListForPlayFormat(objectives: Card[], format: string)
   return [isValid, issues];
 }
 
-function validatePowerDeckForFormat(gambits: Card[], upgrades: Card[], format: string) {
+function validatePowerDeckForFormat(
+  gambits: Card[],
+  upgrades: Card[],
+  format: string,
+) {
   const issues = [];
   let isValid = true;
 
@@ -400,4 +412,12 @@ export {
   sets as wusets,
 };
 
-export type { Card, SetId, CardId, CardType, ScoreType, Set, FactionName } from "./types";
+export type {
+  Card,
+  SetId,
+  CardId,
+  CardType,
+  ScoreType,
+  Set,
+  FactionName,
+} from "./types";

@@ -7,75 +7,72 @@ interface FactionDeckPictureProps {
 }
 
 const variants: Record<Size, Record<string, string>> = {
-    small: {
-        container: "w-[48px] h-[48px] relative",
-        icon: "absolute w-[28px] h-[28px] bottom-[2px] left-[4px]",
-    },
-    large: {
-        container: "w-[80px] h-[80px] relative",
-        icon: "absolute w-[50px] h-[50px] bottom-[2px] left-[5px]",
-    },
+  small: {
+    container: "w-[48px] h-[48px] relative",
+    icon: "absolute w-[28px] h-[28px] bottom-[2px] left-[4px]",
+  },
+  large: {
+    container: "w-[80px] h-[80px] relative",
+    icon: "absolute w-[50px] h-[50px] bottom-[2px] left-[5px]",
+  },
 };
 
 export function FactionDeckPicture({
-    faction,
-    className,
-    size = "small",
+  faction,
+  className,
+  size = "small",
 }: FactionDeckPictureProps) {
-    return (
-      <div className={className}>
-        <div className={variants[size].container}>
-          <div className={variants[size].icon}>
-            <picture>
-              <source
-                type="image/webp"
-                srcSet={`/assets/warbands/${faction}-icon.webp`}
-              />
-              <img alt={faction} src={`/assets/warbands/${faction}-icon.png`} />
-            </picture>
-          </div>
+  return (
+    <div className={className}>
+      <div className={variants[size].container}>
+        <div className={variants[size].icon}>
           <picture>
             <source
-              type="image/avif"
-              srcSet="/assets/icons/Faction_Ring_with_Cards.avif"
-            />
-            <source
               type="image/webp"
-              srcSet="/assets/icons/Faction_Ring_with_Cards.webp"
+              srcSet={`/assets/warbands/${faction}-icon.webp`}
             />
-            <img
-              alt="deck of cards in hand"
-              className="absolute"
-              src="/assets/icons/Faction_Ring_with_Cards.png"
-            />
+            <img alt={faction} src={`/assets/warbands/${faction}-icon.png`} />
           </picture>
         </div>
+        <picture>
+          <source
+            type="image/avif"
+            srcSet="/assets/icons/Faction_Ring_with_Cards.avif"
+          />
+          <source
+            type="image/webp"
+            srcSet="/assets/icons/Faction_Ring_with_Cards.webp"
+          />
+          <img
+            alt="deck of cards in hand"
+            className="absolute"
+            src="/assets/icons/Faction_Ring_with_Cards.png"
+          />
+        </picture>
       </div>
-    );
+    </div>
+  );
 }
 
 export function FactionPicture({
-    faction,
-    size = "w-20 h-20",
+  faction,
+  size = "w-20 h-20",
 }: {
-    faction: string;
-    size: string;
+  faction: string;
+  size: string;
 }) {
-    return (
-        <picture>
-            <source
-                type="image/avif"
-                srcSet={`/assets/warbands/${faction}-icon.avif`}
-            />
-            <source
-                type="image/webp"
-                srcSet={`/assets/warbands/${faction}-icon.webp`}
-            />
+  return (
+    <picture>
+      <source
+        type="image/avif"
+        srcSet={`/assets/warbands/${faction}-icon.avif`}
+      />
+      <source
+        type="image/webp"
+        srcSet={`/assets/warbands/${faction}-icon.webp`}
+      />
 
-            <img
-                className={`${size}`}
-                src={`/assets/warbands/${faction}-icon.png`}
-            />
-        </picture>
-    );
+      <img className={`${size}`} src={`/assets/warbands/${faction}-icon.png`} />
+    </picture>
+  );
 }

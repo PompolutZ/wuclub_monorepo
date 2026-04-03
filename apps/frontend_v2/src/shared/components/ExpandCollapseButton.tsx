@@ -2,7 +2,9 @@ import { animated, useSpring } from "@react-spring/web";
 import IconButton from "./IconButton";
 import type { ComponentPropsWithoutRef } from "react";
 
-interface ExpandCollapseButtonProps extends ComponentPropsWithoutRef<typeof IconButton> {
+interface ExpandCollapseButtonProps extends ComponentPropsWithoutRef<
+  typeof IconButton
+> {
   open: boolean;
 }
 

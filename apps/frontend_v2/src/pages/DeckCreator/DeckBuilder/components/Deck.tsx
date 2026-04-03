@@ -16,7 +16,10 @@ import ObjectivesList from "./ObjectivesList";
 import UpgradesList from "./UpgradesList";
 
 function enrichCard(c: Card, format: string): EnrichedCard {
-  const [, isForsaken, isRestricted] = validateCardForPlayFormat(c, format as never);
+  const [, isForsaken, isRestricted] = validateCardForPlayFormat(
+    c,
+    format as never,
+  );
   return { ...c, isBanned: isForsaken, isRestricted };
 }
 
@@ -54,7 +57,11 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
   );
 
   const [isValid, issues] = useMemo(
-    () => validateDeckForPlayFormat({ objectives, gambits, upgrades }, format as never),
+    () =>
+      validateDeckForPlayFormat(
+        { objectives, gambits, upgrades },
+        format as never,
+      ),
     [objectives, gambits, upgrades, format],
   );
 

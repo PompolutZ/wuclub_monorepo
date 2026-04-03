@@ -13,7 +13,6 @@ import {
   NEMESIS_FORMAT,
   RIVALS_FORMAT,
   warbandsValidForOrganisedPlay,
-  wufactions,
 } from "../../../../data/wudb";
 import type { Faction } from "../../reducer";
 import type { Set as WuSet } from "../../../../data/wudb";
@@ -23,12 +22,12 @@ import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormat
 import { DeckPlayFormatToggle } from "../../../../shared/components/DeckPlayFormatToggle";
 import IconButton from "../../../../shared/components/IconButton";
 import SectionTitle from "../../../../shared/components/SectionTitle";
+import { WarbandPicker } from "../../../../shared/components/WarbandPicker";
 
 interface SelectedFactionProps {
   faction: Faction;
   className?: string;
 }
-
 function SelectedFaction({ faction, className }: SelectedFactionProps) {
   return (
     <div className={`flex flex-grow ${className ?? ""}`}>
@@ -39,49 +38,6 @@ function SelectedFaction({ faction, className }: SelectedFactionProps) {
     </div>
   );
 }
-
-const notPlayableFactionIds = [
-  wufactions["u"].id,
-  wufactions["gao"].id,
-  wufactions["gad"].id,
-  wufactions["gads"].id,
-  wufactions["gac"].id,
-];
-
-interface FactionsPickerProps {
-  selected: Faction;
-  onChangeWarband: (faction: Faction) => void;
-  selectableWarbands: Faction[];
-  className?: string;
-}
-
-function FactionsPicker({ selected, onChangeWarband, selectableWarbands, className }: FactionsPickerProps) {
-  const handleSelectWarband = (faction: Faction) => () => {
-    onChangeWarband(faction);
-  };
-
-  return (
-    <div className={`flex flex-wrap align-middle ${className ?? ""}`}>
-      {selectableWarbands
-        .filter(
-          (faction) =>
-            faction.id != selected.id &&
-            !notPlayableFactionIds.includes(faction.id as never),
-        )
-        .reverse()
-        .map((faction) => (
-          <button
-            key={faction.id}
-            className="[all:unset] [cursor:pointer]"
-            onClick={handleSelectWarband(faction)}
-          >
-            <FactionPicture size="w-12 h-12" faction={faction.name} />
-          </button>
-        ))}
-    </div>
-  );
-}
-
 
 interface CardLibraryFiltersProps {
   onSearchTextChange: (text: string) => void;
@@ -165,14 +121,13 @@ function CardLibraryFilters({ onSearchTextChange }: CardLibraryFiltersProps) {
             <CloseIcon />
           </IconButton>
           <section className="overflow-y-auto px-4 pb-8">
-            <SectionTitle className="mb-8" title="Warband" />
-
+            <SectionTitle title="Warband" />
             <SelectedFaction faction={warband} />
-
-            <FactionsPicker
+            <WarbandPicker
+              warbands={warbandsValidForOrganisedPlay as Faction[]}
               selected={warband}
-              onChangeWarband={setWarband}
-              selectableWarbands={warbandsValidForOrganisedPlay}
+              onSelect={(w) => setWarband(w as Faction)}
+              iconSize="w-12 h-12"
             />
 
             <SectionTitle title="Format" className="my-8" />

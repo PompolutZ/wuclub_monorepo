@@ -1,10 +1,9 @@
-type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+type LogLevel = "debug" | "info" | "warn" | "error";
 
 interface LogContext {
   [key: string]: unknown;
 }
 
-/* eslint-disable no-console */
 class Logger {
   private isDevelopment = import.meta.env.DEV;
 
@@ -37,6 +36,5 @@ class Logger {
     // TODO: Send to error tracking service (Sentry, LogRocket, etc.)
   }
 }
-/* eslint-enable no-console */
 
 export const logger = new Logger();

@@ -3,10 +3,10 @@ import { cardTypes } from "../../data/wudb";
 import toLower from "lodash/toLower";
 
 type CardListSectionHeaderProps = {
-    type: "Objectives" | "Gambits" | "Upgrades";
-    amount: number;
-    children?: React.ReactNode;
-    className?: string;
+  type: "Objectives" | "Gambits" | "Upgrades";
+  amount: number;
+  children?: React.ReactNode;
+  className?: string;
 };
 
 export function CardListSectionHeader({
@@ -20,9 +20,7 @@ export function CardListSectionHeader({
       case "Objectives":
         return cardTypes.filter((t) => t === "Objective").map(toLower);
       case "Gambits":
-        return cardTypes
-          .filter((t) => t === "Ploy")
-          .map(toLower);
+        return cardTypes.filter((t) => t === "Ploy").map(toLower);
       case "Upgrades":
         return cardTypes.filter((t) => t === "Upgrade").map(toLower);
     }

@@ -17,10 +17,18 @@ const cardImgClass = (selected: boolean) =>
     selected ? "grayscale-0 drop-shadow-lg" : "grayscale"
   }`;
 
-const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) => {
-  const fighters = [...((factionMembers as Record<string, readonly string[]>)[factionId] ?? [])];
+const CardProxyMaker = ({
+  cards = [],
+  factionId,
+  onExit,
+}: CardProxyMakerProps) => {
+  const fighters = [
+    ...((factionMembers as Record<string, readonly string[]>)[factionId] ?? []),
+  ];
   const hasWarband = fighters.length > 0;
-  const plotCards = getPlotSetIds([...new Set(cards.map((card) => card.setId))]);
+  const plotCards = getPlotSetIds([
+    ...new Set(cards.map((card) => card.setId)),
+  ]);
 
   const {
     selectedCardIds,
@@ -35,14 +43,25 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
     toggleAll,
     toggleWarband,
     togglePlotCards,
-  } = useProxySelection({ cards, factionId, fighters, plotCards, hasWarband, onExit });
+  } = useProxySelection({
+    cards,
+    factionId,
+    fighters,
+    plotCards,
+    hasWarband,
+    onExit,
+  });
 
   return (
     <div className="fixed inset-0 z-10 p-8 backdrop-blur">
       <div className="flex w-full h-full flex-col">
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
           {plotCards.length > 0 && (
-            <ProxyCardSection title="Plot Cards" selected={selectedPlotCards.length} total={plotCards.length}>
+            <ProxyCardSection
+              title="Plot Cards"
+              selected={selectedPlotCards.length}
+              total={plotCards.length}
+            >
               {plotCards.map((card: string) => (
                 <img
                   id={`proxy ${card}`}
@@ -57,12 +76,16 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
 
           {hasWarband && (
             <section>
-              <h3 className="text-sm font-bold text-gray-700 mb-2">Warband Card</h3>
+              <h3 className="text-sm font-bold text-gray-700 mb-2">
+                Warband Card
+              </h3>
               <img
                 id="proxy warband-card"
                 src={`/assets/fighters/${factionId}/${factionId}-0.png`}
                 className={`w-1/2 md:w-1/3 aspect-[5.6/4.1] object-cover cursor-pointer filter transition-all duration-150 ${
-                  selectedWarbandCard ? "grayscale-0 drop-shadow-lg" : "grayscale"
+                  selectedWarbandCard
+                    ? "grayscale-0 drop-shadow-lg"
+                    : "grayscale"
                 }`}
                 onClick={toggleWarbandCard}
               />
@@ -70,7 +93,11 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
           )}
 
           {hasWarband && (
-            <ProxyCardSection title="Fighter Cards" selected={selectedFighters.length} total={fighters.length}>
+            <ProxyCardSection
+              title="Fighter Cards"
+              selected={selectedFighters.length}
+              total={fighters.length}
+            >
               {fighters.map((fighter: string, index: number) => (
                 <>
                   <img
@@ -92,7 +119,11 @@ const CardProxyMaker = ({ cards = [], factionId, onExit }: CardProxyMakerProps) 
             </ProxyCardSection>
           )}
 
-          <ProxyCardSection title="Deck Cards" selected={selectedCardIds.length} total={cards.length}>
+          <ProxyCardSection
+            title="Deck Cards"
+            selected={selectedCardIds.length}
+            total={cards.length}
+          >
             {cards.map((card) => (
               <img
                 id={`proxy ${card.id}`}

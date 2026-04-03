@@ -11,7 +11,10 @@ interface LibraryCardRowProps {
   isAlternate: boolean;
 }
 
-const LibraryCardRow = memo(function LibraryCardRow({ cardId, isAlternate }: LibraryCardRowProps) {
+const LibraryCardRow = memo(function LibraryCardRow({
+  cardId,
+  isAlternate,
+}: LibraryCardRowProps) {
   const [overlayIsVisible, setOverlayIsVisible] = useState(false);
   const card = getCardById(cardId as never);
 
@@ -40,7 +43,9 @@ const LibraryCardRow = memo(function LibraryCardRow({ cardId, isAlternate }: Lib
                     <h1 className="text-center text-xl font-bold">{name}</h1>
                     <div className="p-2">
                       {rule.split("\\n").map((paragraph, i) => (
-                        <ReactMarkdown key={i}>{paragraph.trim()}</ReactMarkdown>
+                        <ReactMarkdown key={i}>
+                          {paragraph.trim()}
+                        </ReactMarkdown>
                       ))}
                       {glory && (
                         <div className="flex items-center justify-center space-x-2 mt-8">
