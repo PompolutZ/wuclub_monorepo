@@ -10,27 +10,34 @@ type BottomPanelNavigationProps = {
   activeTabIndex: number;
   setActiveTabIndex: (activeIndex: number) => void;
   tabs: Tab[];
+  orientation?: "horizontal" | "vertical";
 };
 
-function getGradientClass(activeTabIndex: number, tabCount: number): string {
-  if (tabCount === 2) {
-    return activeTabIndex === 0
-      ? "from-purple-200 to-gray-100"
-      : "from-gray-100 to-purple-200";
-  }
-  if (activeTabIndex === 0) return "from-purple-200 via-gray-100 to-gray-100";
-  if (activeTabIndex === 1) return "from-gray-100 via-purple-200 to-gray-100";
-  return "from-gray-100 via-gray-100 to-purple-200";
+function getGradientStyle(
+  activeTabIndex: number,
+  tabCount: number,
+  orientation: "horizontal" | "vertical",
+): React.CSSProperties {
+  if (tabCount === 0) return {};
+  const pos = tabCount === 1 ? 50 : (activeTabIndex / (tabCount - 1)) * 100;
+  const spread = Math.min(30, 100 / tabCount);
+  const dir = orientation === "horizontal" ? "to right" : "to bottom";
+  return {
+    background: `linear-gradient(${dir}, #f3f4f6 ${pos - spread}%, #e9d5ff ${pos}%, #f3f4f6 ${pos + spread}%)`,
+    transition: "background 500ms",
+  };
 }
 
 function BottomPanelNavigation({
   activeTabIndex,
   setActiveTabIndex,
   tabs,
+  orientation = "horizontal",
 }: BottomPanelNavigationProps) {
   return (
     <div
-      className={`flex transition-colors duration-500 bg-gradient-to-r ${getGradientClass(activeTabIndex, tabs.length)}`}
+      className={`flex ${orientation === "vertical" ? "flex-col" : ""}`}
+      style={getGradientStyle(activeTabIndex, tabs.length, orientation)}
     >
       {tabs.map(({ name, Icon, disabled }: Tab, index: number) => (
         <button
