@@ -5,6 +5,7 @@ import { factionMembers } from "../data/wudb";
 import { ModalPresenter } from "../main";
 import IconButton from "../shared/components/IconButton";
 import { WarbandWarscroll } from "../shared/components/WarbandWarscroll";
+import { useBreakpoint } from "@/hooks/useMediaQuery";
 
 function useClickAway() {
   const [clickedAway, setClickedAway] = useState(false);
@@ -82,6 +83,7 @@ export default function FightersInfoList({
 }) {
   const clickedAway = useClickAway();
   const [zoomed, setZoomed] = useState(false);
+  const isMobile = useBreakpoint("mobile");
 
   useEffect(() => {
     if (clickedAway && onClose) {
@@ -93,9 +95,9 @@ export default function FightersInfoList({
     <div className="flex-1 relative">
       <div className="absolute inset-0 overflow-y-auto p-4 lg:p-12">
         <WarbandWarscroll
-          className="mb-4 mx-auto cursor-pointer"
+          className={`mb-4 mx-auto ${isMobile ? "cursor-pointer" : ""}`}
           factionName={factionName}
-          onClick={() => setZoomed(true)}
+          onClick={isMobile ? () => setZoomed(true) : undefined}
         />
         <div className="flex flex-col lg:grid lg:grid-cols-3">
           {factionMembers[factionName].map((fighter, index) => (
