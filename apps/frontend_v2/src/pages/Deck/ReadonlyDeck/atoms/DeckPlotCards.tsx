@@ -23,6 +23,8 @@ export const DeckPlotCards = ({ sets }: Props) => {
   const { Portal, open, portalClickAwayRef } = usePortal();
   const setsWithPlots = checkDeckHasPlots(sets);
 
+  if (setsWithPlots.length === 0) return null;
+
   return (
     <div>
       <div className="flex space-x-2 items-center">

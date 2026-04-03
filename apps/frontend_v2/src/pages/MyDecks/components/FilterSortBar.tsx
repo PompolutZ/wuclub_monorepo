@@ -19,7 +19,7 @@ export const FilterSortBar = ({
   availableSets,
 }: FilterSortBarProps) => {
   return (
-    <div className="mb-4 flex flex-wrap gap-2 items-center">
+    <div className="mb-4 flex flex-wrap gap-2 items-center lg:mx-auto lg:w-2/5">
       <SortDropdown currentSort={sortBy} onSortChange={onSortChange} />
       <FilterDropdown
         selectedSets={selectedSets}

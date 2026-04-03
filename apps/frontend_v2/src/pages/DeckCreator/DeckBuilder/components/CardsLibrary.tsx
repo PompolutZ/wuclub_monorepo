@@ -100,7 +100,6 @@ function FilterableCardLibrary({ searchText, filter }: FilterableCardLibraryProp
               }`}
             >
               <CardInDeck
-                showType
                 key={card.id}
                 cardId={card.id}
                 inDeck={!!deck.find(({ id }) => id === card.id)}
