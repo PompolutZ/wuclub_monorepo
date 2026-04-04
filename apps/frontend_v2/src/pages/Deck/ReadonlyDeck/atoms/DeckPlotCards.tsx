@@ -78,14 +78,16 @@ const PlotsCarousel = forwardRef<HTMLDivElement, { setsWithPlots: Set[] }>(
 
     return (
       <div
-        className="flex flex-col items-center w-5/6 lg:w-72 mx-auto"
+        className="flex flex-col items-center w-5/6 lg:w-full lg:max-w-[700px] mx-auto"
         ref={ref}
       >
         <Carousel setApi={setApi}>
           <CarouselContent>
             {sets.map((set) => (
               <CarouselItem key={set}>
-                <PlotCard set={set} />
+                <div className="w-full lg:w-[min(40vh,_40vw)] lg:mx-auto">
+                  <PlotCard set={set} />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
