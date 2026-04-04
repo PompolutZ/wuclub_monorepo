@@ -5,7 +5,7 @@ import {
 } from "@components/FactionDeckPicture";
 import TogglesIcon from "@icons/sliders.svg?react";
 import CloseIcon from "@icons/x.svg?react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
 import ExpansionsToggle from "../../../../components/ExpansionsToggle";
 import {
@@ -56,11 +56,17 @@ function CardLibraryFilters({ onSearchTextChange }: CardLibraryFiltersProps) {
     [selectedFormat],
   );
   const [warband, setWarband] = useState(state.faction);
-  const [selectedSets, setSelectedSets] = useState<WuSet[]>(
-    selectedFormat === NEMESIS_FORMAT
-      ? validSets.slice(0, 2)
-      : validSets.slice(0, 1),
-  );
+  const [selectedSets, setSelectedSets] = useState<WuSet[]>(state.sets);
+
+  const [prevFormat, setPrevFormat] = useState(selectedFormat);
+  if (selectedFormat !== prevFormat) {
+    setPrevFormat(selectedFormat);
+    setSelectedSets(
+      selectedFormat === NEMESIS_FORMAT
+        ? validSets.slice(0, 2)
+        : validSets.slice(0, 1),
+    );
+  }
 
   const handleFormatChange = (format: string) => {
     setSelectedFormat(format);
@@ -77,17 +83,6 @@ function CardLibraryFilters({ onSearchTextChange }: CardLibraryFiltersProps) {
       },
     });
   };
-
-  // meh, but for now...
-  useEffect(() => {
-    setSelectedSets(() => {
-      if (selectedFormat === NEMESIS_FORMAT) {
-        return validSets.slice(0, 2);
-      } else {
-        return validSets.slice(0, 1);
-      }
-    });
-  }, [selectedFormat, validSets]);
 
   return (
     <>
