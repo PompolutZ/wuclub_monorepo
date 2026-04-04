@@ -6,16 +6,14 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { Factions } from "@fxdxpz/schema";
 import CompassIcon from "@icons/compass.svg?react";
 import { checkDeckHasPlots, SetId } from "@wudb";
 import { Set } from "@wudb/types";
 import { forwardRef, useEffect, useState } from "react";
-import { usePortal } from "../../../../hooks/usePortal";
-import { PlotCard } from "../../../../shared/components/PlotCard";
+import { usePortal } from "../../hooks/usePortal";
+import { PlotCard } from "./PlotCard";
 
 type Props = {
-  factionId: Factions;
   sets: SetId[];
 };
 

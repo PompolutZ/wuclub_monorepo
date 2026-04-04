@@ -11,7 +11,7 @@ import DeleteConfirmationDialog from "../../../atoms/DeleteConfirmationDialog";
 import { logger } from "@/utils/logger";
 import Card from "./atoms/Card";
 import { Toast } from "./atoms/Toast";
-import { DeckPlotCards } from "./atoms/DeckPlotCards";
+import { DeckPlotCards } from "@components/DeckPlotCards";
 import DeckSummary from "./DeckSummary";
 import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
 import { DeckProvider } from "./context";
@@ -221,7 +221,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
                     <DeckActions />
                   </div>
                   <div className="p-4">
-                    <DeckPlotCards factionId={faction} sets={sets} />
+                    <DeckPlotCards sets={sets} />
                   </div>
                   {cardSections}
                 </div>
@@ -256,7 +256,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           </div>
 
           <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
-            <DeckPlotCards factionId={faction} sets={sets} />
+            <DeckPlotCards sets={sets} />
             <FighterCardsPortal faction={faction} />
           </div>
 

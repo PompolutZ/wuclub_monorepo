@@ -1,3 +1,4 @@
+import { DeckPlotCards } from "@components/DeckPlotCards";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import SaveIcon from "@icons/save.svg?react";
 import CloseIcon from "@icons/x.svg?react";
@@ -33,6 +34,7 @@ interface DeckProps {
 function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
   const {
     faction,
+    sets,
     selectedObjectives,
     selectedGambits,
     selectedUpgrades,
@@ -68,7 +70,7 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
   const isSaving = status === STATUS_SAVING;
 
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <div className="flex items-center">
         <div className="flex flex-1 items-center m-2 space-x-2">
           <FactionDeckPicture faction={faction.name} />
@@ -104,6 +106,8 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
           </ul>
         )}
       </section>
+
+      <DeckPlotCards sets={sets.map((s) => s.id as never)} />
 
       <div className="flex flex-col xl:grid xl:grid-cols-3 xl:gap-2">
         <ObjectivesList
