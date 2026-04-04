@@ -1,3 +1,4 @@
+import { DeckIssues } from "@components/DeckIssues";
 import { DeckPlotCards } from "@components/DeckPlotCards";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import SaveIcon from "@icons/save.svg?react";
@@ -97,15 +98,7 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
         <p className="text-red-600 text-sm px-4 py-1">{saveError}</p>
       )}
 
-      <section className="my-4 text-accent3-700 text-sm p-4">
-        {!isValid && (
-          <ul>
-            {issues.map((issue, i) => (
-              <li key={i}>{issue}</li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <DeckIssues issues={issues} />
 
       <DeckPlotCards sets={sets.map((s) => s.id as never)} />
 

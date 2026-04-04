@@ -1,6 +1,7 @@
 import { LazyLoading } from "@/components/LazyLoading";
 import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 import { useDeleteDeck } from "@/shared/hooks/useDeleteDeck";
+import { DeckIssues } from "@components/DeckIssues";
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
 import { lazy, memo, Suspense, useState, useMemo } from "react";
 import { useHistory } from "react-router-dom";
@@ -26,6 +27,11 @@ import {
 } from "./utils/deckExport";
 import { getFormattedDate } from "./utils/displayHelpers";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
+import {
+  NEMESIS_FORMAT,
+  RIVALS_FORMAT,
+  validateDeckForPlayFormat,
+} from "@wudb";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../../atoms/FightersInfoList";
 import DeckIcon from "@icons/deck.svg?react";
@@ -101,6 +107,19 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
     isPrivate,
     cards,
   });
+
+  const deckIssues = useMemo(() => {
+    const format = sets.length <= 1 ? RIVALS_FORMAT : NEMESIS_FORMAT;
+    const [, issues] = validateDeckForPlayFormat(
+      {
+        objectives: deck.objectives,
+        gambits: deck.gambits,
+        upgrades: deck.upgrades,
+      },
+      format,
+    );
+    return issues;
+  }, [sets, deck.objectives, deck.gambits, deck.upgrades]);
 
   const { summary: objectiveSummary, totalGlory } = useObjectiveSummary(
     deck.objectives,
@@ -213,15 +232,14 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
                       date={createdDate}
                       sets={sets}
                       isPrivate={isPrivate}
-                    >
-                      <div className="ml-4">
-                        <DeckPlayFormatsValidity cards={cards} />
-                      </div>
-                    </DeckSummary>
+                    ></DeckSummary>
                     <DeckActions />
                   </div>
                   <div className="p-4">
                     <DeckPlotCards sets={sets} />
+                  </div>
+                  <div className="px-4">
+                    <DeckIssues issues={deckIssues} />
                   </div>
                   {cardSections}
                 </div>
@@ -258,6 +276,10 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
             <DeckPlotCards sets={sets} />
             <FighterCardsPortal faction={faction} />
+          </div>
+
+          <div className="px-4">
+            <DeckIssues issues={deckIssues} />
           </div>
 
           {cardSections}
