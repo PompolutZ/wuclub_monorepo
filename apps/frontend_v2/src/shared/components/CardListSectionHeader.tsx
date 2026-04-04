@@ -27,9 +27,7 @@ export function CardListSectionHeader({
   }, [type]);
 
   return (
-    <div
-      className={`flex items-center border-b border-gray-500 pb-2 ${className}`}
-    >
+    <div className={`flex items-center bg-gray-100 pb-2 ${className}`}>
       <div className="mr-2 flex">
         {listTypes.map((t) => (
           <img

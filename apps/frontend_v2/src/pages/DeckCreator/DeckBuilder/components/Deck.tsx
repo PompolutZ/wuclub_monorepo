@@ -13,9 +13,9 @@ import type { Card } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { STATUS_SAVING } from "../../reducer";
 import type { EnrichedCard } from "../../reducer";
-import GambitsList from "./GambitsList";
-import ObjectivesList from "./ObjectivesList";
-import UpgradesList from "./UpgradesList";
+import { GambitsList } from "./GambitsList";
+import { ObjectivesList } from "./ObjectivesList";
+import { UpgradesList } from "./UpgradesList";
 
 function enrichCard(c: Card, format: string): EnrichedCard {
   const [, isForsaken, isRestricted] = validateCardForPlayFormat(
