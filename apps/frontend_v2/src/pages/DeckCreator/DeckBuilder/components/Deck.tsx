@@ -1,3 +1,5 @@
+import { DeckIssues } from "@components/DeckIssues";
+import { DeckPlotCards } from "@components/DeckPlotCards";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import SaveIcon from "@icons/save.svg?react";
 import CloseIcon from "@icons/x.svg?react";
@@ -11,9 +13,9 @@ import type { Card } from "../../../../data/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { STATUS_SAVING } from "../../reducer";
 import type { EnrichedCard } from "../../reducer";
-import GambitsList from "./GambitsList";
-import ObjectivesList from "./ObjectivesList";
-import UpgradesList from "./UpgradesList";
+import { GambitsList } from "./GambitsList";
+import { ObjectivesList } from "./ObjectivesList";
+import { UpgradesList } from "./UpgradesList";
 
 function enrichCard(c: Card, format: string): EnrichedCard {
   const [, isForsaken, isRestricted] = validateCardForPlayFormat(
@@ -33,6 +35,7 @@ interface DeckProps {
 function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
   const {
     faction,
+    sets,
     selectedObjectives,
     selectedGambits,
     selectedUpgrades,
@@ -68,7 +71,7 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
   const isSaving = status === STATUS_SAVING;
 
   return (
-    <div>
+    <div className="flex flex-col gap-2 p-2">
       <div className="flex items-center">
         <div className="flex flex-1 items-center m-2 space-x-2">
           <FactionDeckPicture faction={faction.name} />
@@ -95,15 +98,9 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
         <p className="text-red-600 text-sm px-4 py-1">{saveError}</p>
       )}
 
-      <section className="my-4 text-accent3-700 text-sm p-4">
-        {!isValid && (
-          <ul>
-            {issues.map((issue, i) => (
-              <li key={i}>{issue}</li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <DeckIssues issues={issues} />
+
+      <DeckPlotCards sets={sets.map((s) => s.id as never)} />
 
       <div className="flex flex-col xl:grid xl:grid-cols-3 xl:gap-2">
         <ObjectivesList

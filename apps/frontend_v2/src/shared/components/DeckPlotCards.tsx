@@ -6,16 +6,14 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { Factions } from "@fxdxpz/schema";
 import CompassIcon from "@icons/compass.svg?react";
 import { checkDeckHasPlots, SetId } from "@wudb";
 import { Set } from "@wudb/types";
 import { forwardRef, useEffect, useState } from "react";
-import { usePortal } from "../../../../hooks/usePortal";
-import { PlotCard } from "../../../../shared/components/PlotCard";
+import { usePortal } from "../../hooks/usePortal";
+import { PlotCard } from "./PlotCard";
 
 type Props = {
-  factionId: Factions;
   sets: SetId[];
 };
 
@@ -78,14 +76,16 @@ const PlotsCarousel = forwardRef<HTMLDivElement, { setsWithPlots: Set[] }>(
 
     return (
       <div
-        className="flex flex-col items-center w-5/6 lg:w-72 mx-auto"
+        className="flex flex-col items-center w-5/6 lg:w-full lg:max-w-[700px] mx-auto"
         ref={ref}
       >
         <Carousel setApi={setApi}>
           <CarouselContent>
             {sets.map((set) => (
               <CarouselItem key={set}>
-                <PlotCard set={set} />
+                <div className="w-full lg:w-[min(40vh,_40vw)] lg:mx-auto">
+                  <PlotCard set={set} />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>

@@ -1,4 +1,3 @@
-import { setHasPlot } from "../../../../data/wudb";
 import type { Set as WuSet } from "../../../../data/wudb";
 
 interface NemesisSetsInfoProps {
@@ -7,12 +6,9 @@ interface NemesisSetsInfoProps {
 
 function NemesisSetsInfo({ selectedSets }: NemesisSetsInfoProps) {
   const tooManySets = selectedSets.length > 2;
-  const setsWithPlot = selectedSets.filter((s) => setHasPlot(s.id as never));
-  const tooManyPlotSets = setsWithPlot.length > 1;
 
   const issues: string[] = [];
   if (tooManySets) issues.push("max 2 sets allowed");
-  if (tooManyPlotSets) issues.push("only 1 set with plot cards allowed");
 
   const hasIssues = issues.length > 0;
 

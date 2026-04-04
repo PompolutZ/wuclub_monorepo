@@ -12,7 +12,7 @@ export const PlotCard = ({ set }: { set: string }) => {
       <img
         src={`/assets/cards/${set}/${set}Plot.png`}
         alt="Plot card"
-        className="rounded-xl"
+        className="rounded-xl w-full"
       />
     </picture>
   );
