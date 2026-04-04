@@ -71,7 +71,7 @@ function Deck({ deckName, onDeckNameChange, onSave, onReset }: DeckProps) {
   const isSaving = status === STATUS_SAVING;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 p-2">
       <div className="flex items-center">
         <div className="flex flex-1 items-center m-2 space-x-2">
           <FactionDeckPicture faction={faction.name} />

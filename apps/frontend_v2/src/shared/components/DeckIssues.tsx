@@ -15,7 +15,7 @@ export const DeckIssues = ({ issues }: DeckIssuesProps) => {
       <ul>
         {issues.map((issue, i) => (
           <li key={i} className="flex items-center space-x-1">
-            <Logo className="fill-current text-accent3-900 text-3xl lg:text-base" />
+            <Logo className="fill-current text-accent3-900 text-base" />
             <span className="font-semibold">{issue}</span>
           </li>
         ))}
