@@ -8,7 +8,11 @@ interface GambitsListProps {
   isValid: boolean;
 }
 
-export function GambitsList({ selectedGambits, format, isValid }: GambitsListProps) {
+export function GambitsList({
+  selectedGambits,
+  format,
+  isValid,
+}: GambitsListProps) {
   return (
     <CardSectionPanel
       type="Gambits"
@@ -19,4 +23,3 @@ export function GambitsList({ selectedGambits, format, isValid }: GambitsListPro
     </CardSectionPanel>
   );
 }
-

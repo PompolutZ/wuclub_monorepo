@@ -21,6 +21,7 @@ export function CardSectionPanel({
 }: CardSectionPanelProps) {
   const [measureRef, open, toggle, contentHeight] = useResizeHeight({
     open: amount > 0,
+    syncWith: amount,
   });
   const expand = useSpring({
     height: open ? `${contentHeight}px` : "0px",
