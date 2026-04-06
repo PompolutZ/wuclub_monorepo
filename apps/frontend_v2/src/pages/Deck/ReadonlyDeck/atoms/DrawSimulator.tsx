@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { CardBack } from "@components/CardBack";
 import { CardPicture } from "@components/CardPicture";
@@ -28,7 +28,7 @@ function CardItem({
   return (
     <FlippableCard
       flipped={sc.faceUp}
-      onFlip={sc.drawn ? onToggle : undefined}
+      onFlip={onToggle}
       back={<CardBack type={backType} />}
       front={<CardPicture card={sc.card} />}
     />
@@ -53,10 +53,14 @@ function MobileSection({
       <h2 className="text-gray-900 text-xl px-4 pb-2 font-medium">{label}</h2>
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto gap-3 px-4 pb-4 snap-x snap-mandatory"
+        className="flex overflow-x-auto gap-3 mx-4 pb-4 snap-x snap-mandatory"
       >
         {cards.map((sc) => (
-          <div key={sc.card.id} className="snap-start shrink-0 w-32">
+          <div
+            key={sc.card.id}
+            className="snap-start shrink-0 w-32"
+            style={{ touchAction: "manipulation" }}
+          >
             <CardItem sc={sc} backType={backType} onToggle={() => onToggle(sc.card.id)} />
           </div>
         ))}
@@ -93,6 +97,9 @@ export default function DrawSimulator({ objectives, gambits, upgrades }: Props) 
   const powerPool = [...gambits, ...upgrades];
   const objScrollRef = useRef<HTMLDivElement>(null);
   const powerScrollRef = useRef<HTMLDivElement>(null);
+  const [scrollResetKey, setScrollResetKey] = useState(0);
+  const [resetObj, setResetObj] = useState(0);
+  const [resetPower, setResetPower] = useState(0);
 
   const {
     objectiveCards,
@@ -104,29 +111,40 @@ export default function DrawSimulator({ objectives, gambits, upgrades }: Props) 
     toggleCard,
   } = useDrawSimulator(objectives, powerPool);
 
-  const resetScrolls = useCallback(() => {
-    if (objScrollRef.current) objScrollRef.current.scrollLeft = 0;
-    if (powerScrollRef.current) powerScrollRef.current.scrollLeft = 0;
-  }, []);
+  // Reset after re-render via useEffect
+  useEffect(() => {
+    if (scrollResetKey > 0) {
+      if (objScrollRef.current) objScrollRef.current.scrollLeft = 0;
+      if (powerScrollRef.current) powerScrollRef.current.scrollLeft = 0;
+    }
+  }, [scrollResetKey]);
+
+  useEffect(() => {
+    if (resetObj > 0 && objScrollRef.current) objScrollRef.current.scrollLeft = 0;
+  }, [resetObj]);
+
+  useEffect(() => {
+    if (resetPower > 0 && powerScrollRef.current) powerScrollRef.current.scrollLeft = 0;
+  }, [resetPower]);
 
   const handleShuffleAndRedraw = useCallback(() => {
     shuffleAndRedraw();
-    resetScrolls();
-  }, [shuffleAndRedraw, resetScrolls]);
+    setScrollResetKey((k) => k + 1);
+  }, [shuffleAndRedraw]);
 
   const handleMulliganBoth = useCallback(() => {
     mulliganBoth();
-    resetScrolls();
-  }, [mulliganBoth, resetScrolls]);
+    setScrollResetKey((k) => k + 1);
+  }, [mulliganBoth]);
 
   const handleMulliganObjectives = useCallback(() => {
     mulliganObjectives();
-    if (objScrollRef.current) objScrollRef.current.scrollLeft = 0;
+    setResetObj((k) => k + 1);
   }, [mulliganObjectives]);
 
   const handleMulliganPowers = useCallback(() => {
     mulliganPowers();
-    if (powerScrollRef.current) powerScrollRef.current.scrollLeft = 0;
+    setResetPower((k) => k + 1);
   }, [mulliganPowers]);
 
   const drawnObjectives = objectiveCards.filter((c) => c.drawn).length;

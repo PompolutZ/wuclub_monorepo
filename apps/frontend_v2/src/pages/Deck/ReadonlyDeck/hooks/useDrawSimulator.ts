@@ -70,7 +70,7 @@ export function useDrawSimulator(objectives: DeckCard[], powerCards: DeckCard[])
     const setter = type === "objective" ? setObjectiveCards : setSimPowerCards;
     setter((cards) =>
       cards.map((c) =>
-        c.card.id === cardId && c.drawn ? { ...c, faceUp: !c.faceUp } : c,
+        c.card.id === cardId ? { ...c, faceUp: !c.faceUp } : c,
       ),
     );
   }, []);
