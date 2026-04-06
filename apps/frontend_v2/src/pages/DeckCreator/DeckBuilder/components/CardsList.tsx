@@ -1,5 +1,5 @@
 import { useDeckBuilderDispatcher } from "../..";
-import { CHAMPIONSHIP_FORMAT } from "../../../../data/wudb";
+import { CHAMPIONSHIP_FORMAT } from "@fxdxpz/wudb";
 import { toggleCardAction } from "../../reducer";
 import type { EnrichedCard } from "../../reducer";
 import CardInDeck from "./Card";

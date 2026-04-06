@@ -5,8 +5,8 @@ import {
   validateCardForPlayFormat,
   wucards,
   wufactions,
-} from "../../../../data/wudb";
-import type { Card } from "../../../../data/wudb";
+} from "@fxdxpz/wudb";
+import type { Card } from "@fxdxpz/wudb";
 import { toggleCardAction } from "../../reducer";
 import type { CardFilter } from "../../reducer";
 import CardInDeck from "./Card";

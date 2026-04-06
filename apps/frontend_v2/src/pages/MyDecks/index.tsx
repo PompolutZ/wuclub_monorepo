@@ -13,7 +13,7 @@ import { logger } from "@/utils/logger";
 import { Toast } from "../Deck/ReadonlyDeck/atoms/Toast";
 import { FilterSortBar } from "./components/FilterSortBar";
 import { SortOption } from "./components/SortDropdown";
-import { sets } from "@wudb/sets";
+import { sets } from "@fxdxpz/wudb";
 import { Deck } from "@fxdxpz/schema";
 
 function MyDecksPage() {

@@ -1,5 +1,5 @@
-import { getSetNameById } from "../data/wudb";
-import { SetId } from "../data/wudb/types";
+import { getSetNameById } from "@fxdxpz/wudb";
+import { SetId } from "@fxdxpz/wudb";
 import { ExpansionPicture } from "../shared/components/ExpansionPicture";
 
 type SetsListProps = {

@@ -1,4 +1,4 @@
-import { cards } from "../../data/wudb/cards";
+import { cards } from "@fxdxpz/wudb";
 import { getCardPathByCardId } from "../../utils/helpers";
 
 interface CardImageProps extends Omit<

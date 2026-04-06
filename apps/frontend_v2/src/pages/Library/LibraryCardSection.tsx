@@ -2,8 +2,8 @@ import { animated, useSpring } from "@react-spring/web";
 import { ExpandCollapseButton } from "../../shared/components/ExpandCollapseButton";
 import { ExpansionPicture } from "../../shared/components/ExpansionPicture";
 import { useResizeHeight } from "../../hooks/useResizeHeight";
-import { getSetById, getSetNameById } from "../../data/wudb";
-import type { Card } from "../../data/wudb";
+import { getSetById, getSetNameById } from "@fxdxpz/wudb";
+import type { Card } from "@fxdxpz/wudb";
 import LibraryCardRow from "./LibraryCardRow";
 
 interface LibraryCardSectionProps {

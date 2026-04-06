@@ -1,6 +1,6 @@
-import { getSetNameById } from "@/data/wudb";
+import { getSetNameById } from "@fxdxpz/wudb";
 
-import type { SetId } from "@/data/wudb";
+import type { SetId } from "@fxdxpz/wudb";
 
 type Props = {
   id: string;

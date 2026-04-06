@@ -7,8 +7,8 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import CompassIcon from "@icons/compass.svg?react";
-import { checkDeckHasPlots, SetId } from "@wudb";
-import { Set } from "@wudb/types";
+import { checkDeckHasPlots, SetId } from "@fxdxpz/wudb";
+import { Set } from "@fxdxpz/wudb";
 import { forwardRef, useEffect, useState } from "react";
 import { usePortal } from "../../hooks/usePortal";
 import { PlotCard } from "./PlotCard";

@@ -1,4 +1,4 @@
-import { FactionName } from "../../data/wudb/types";
+import { FactionName } from "@fxdxpz/wudb";
 import { twMerge } from "tailwind-merge";
 
 type WarbandWarscrollProps = {

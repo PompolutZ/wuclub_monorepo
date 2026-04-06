@@ -1,5 +1,5 @@
-import { validateCardForPlayFormat } from "../data/wudb";
-import type { CardId } from "../data/wudb";
+import { validateCardForPlayFormat } from "@fxdxpz/wudb";
+import type { CardId } from "@fxdxpz/wudb";
 
 export const checkStandalone = () => {
   return (

@@ -1,4 +1,4 @@
-import { FactionName } from "../../data/wudb/types";
+import { FactionName } from "@fxdxpz/wudb";
 
 type Props = {
   faction: FactionName;

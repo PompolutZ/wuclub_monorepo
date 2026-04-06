@@ -1,7 +1,7 @@
 import CloseIcon from "@icons/x.svg?react";
 import { animated as a, useSpring } from "@react-spring/web";
 import { useEffect, useState } from "react";
-import { factionMembers } from "../data/wudb";
+import { factionMembers } from "@fxdxpz/wudb";
 import { ModalPresenter } from "../main";
 import IconButton from "../shared/components/IconButton";
 import { WarbandWarscroll } from "../shared/components/WarbandWarscroll";

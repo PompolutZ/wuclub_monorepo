@@ -1,4 +1,4 @@
-import { Card } from "../../data/wudb/types";
+import { Card } from "@fxdxpz/wudb";
 import { getCardPathByCardId } from "../../utils/helpers";
 
 type CardPictureProps = {

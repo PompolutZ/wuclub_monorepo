@@ -8,8 +8,8 @@ import { useDeckBuilderState } from "../..";
 import {
   validateCardForPlayFormat,
   validateDeckForPlayFormat,
-} from "../../../../data/wudb";
-import type { Card } from "../../../../data/wudb";
+} from "@fxdxpz/wudb";
+import type { Card } from "@fxdxpz/wudb";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { STATUS_SAVING } from "../../reducer";
 import type { EnrichedCard } from "../../reducer";

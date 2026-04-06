@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { InferResponseType } from "hono/client";
-import { Deck, FactionName } from "../../data/wudb/types";
+import { Deck, FactionName } from "@fxdxpz/wudb";
 import { api } from "../../services/api";
 
 const IsDecksResponse = (

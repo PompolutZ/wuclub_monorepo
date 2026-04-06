@@ -4,8 +4,8 @@ import {
   checkCardIsPloy,
   checkCardIsUpgrade,
   validateDeckForPlayFormat,
-} from "@wudb";
-import { Card } from "../../data/wudb/types";
+} from "@fxdxpz/wudb";
+import { Card } from "@fxdxpz/wudb";
 import { PlayFormatPicture } from "./PlayFormatPicture";
 
 export const DeckPlayFormatsValidity = ({ cards }: { cards: Card[] }) => {

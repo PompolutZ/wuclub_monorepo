@@ -1,4 +1,4 @@
-import { Card } from "../../data/wudb";
+import { Card } from "@fxdxpz/wudb";
 import { ModalPresenter } from "../../main";
 import { CardPicture } from "../../shared/components/CardPicture";
 

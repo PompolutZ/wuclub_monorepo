@@ -13,9 +13,9 @@ import {
   NEMESIS_FORMAT,
   RIVALS_FORMAT,
   warbandsValidForOrganisedPlay,
-} from "../../../../data/wudb";
+} from "@fxdxpz/wudb";
 import type { Faction } from "../../reducer";
-import type { Set as WuSet } from "../../../../data/wudb";
+import type { Set as WuSet } from "@fxdxpz/wudb";
 import NemesisSetsInfo from "./NemesisSetsInfo";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormatInfo";

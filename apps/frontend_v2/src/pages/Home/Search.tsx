@@ -3,9 +3,9 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCombobox } from "downshift";
 import Fuse, { FuseResult, RangeTuple } from "fuse.js";
 import { useRef, useState } from "react";
-import { Card } from "../../data/wudb/types";
+import { Card } from "@fxdxpz/wudb";
 import { ExpansionPicture } from "../../shared/components/ExpansionPicture";
-import { sets } from "../../data/wudb/sets";
+import { sets } from "@fxdxpz/wudb";
 
 function estimateSize() {
   return 40;
@@ -72,7 +72,7 @@ export function AutosuggestSearch({
   } = useCombobox({
     items: items,
     onInputValueChange: async ({ inputValue }) => {
-      const { wucards } = await import("@wudb");
+      const { wucards } = await import("@fxdxpz/wudb");
       const fuse = new Fuse(Object.values<Card>(wucards), {
         keys: ["name"],
         threshold: 0.05,

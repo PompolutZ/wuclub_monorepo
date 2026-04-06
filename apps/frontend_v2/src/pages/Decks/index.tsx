@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import PublicDeckLink from "./PublicDeckLink";
 import { useQueryDecks } from "./useDecksQuery";
-import { FactionName } from "@wudb/types";
+import { FactionName } from "@fxdxpz/wudb";
 
 export default function Deck() {
   const { faction } = useParams<{ faction: FactionName | "all" }>();

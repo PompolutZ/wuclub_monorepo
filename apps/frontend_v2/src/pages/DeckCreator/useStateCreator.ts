@@ -9,8 +9,8 @@ import {
   getFactionById,
   getFactionByName,
   getSetById,
-} from "../../data/wudb";
-import type { Card, SetId, FactionName } from "../../data/wudb";
+} from "@fxdxpz/wudb";
+import type { Card, SetId, FactionName } from "@fxdxpz/wudb";
 import { INITIAL_STATE } from "./reducer";
 import type { DeckBuilderState, Faction } from "./reducer";
 import { logger } from "@/utils/logger";

@@ -69,6 +69,7 @@
     "@fxdxpz/eslint-config": "workspace:*",
     "@fxdxpz/prettier-config": "workspace:*",
     "@fxdxpz/schema": "workspace:*",
+    "@fxdxpz/wudb": "workspace:*",
     "@playwright/test": "^1.57.0",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20.12.7",

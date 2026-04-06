@@ -1,4 +1,4 @@
-import type { Card } from "../../../../../../data/wudb";
+import type { Card } from "@fxdxpz/wudb";
 
 export type FilterConfig = {
   label: string;

@@ -31,13 +31,13 @@ import {
   NEMESIS_FORMAT,
   RIVALS_FORMAT,
   validateDeckForPlayFormat,
-} from "@wudb";
+} from "@fxdxpz/wudb";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../../atoms/FightersInfoList";
 import DeckIcon from "@icons/deck.svg?react";
 import WarbandIcon from "@icons/warband.svg?react";
 import GloryIcon from "@icons/wu-glory.svg?react";
-import { factions } from "@wudb/factions";
+import { factions } from "@fxdxpz/wudb";
 
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 

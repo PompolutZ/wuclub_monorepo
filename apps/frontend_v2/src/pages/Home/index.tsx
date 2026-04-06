@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import Footer from "../../components/Footer";
-import { Card } from "../../data/wudb/types";
+import { Card } from "@fxdxpz/wudb";
 import { AutosuggestSearch } from "./Search";
 import { AdvRollBtn } from "../../shared/components/DiceBox";
 

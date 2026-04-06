@@ -7,8 +7,8 @@ import {
   getCardNumberFromId,
   getSetNameById,
   RIVALS_DECK_CARDS_TOTAL,
-} from "../../data/wudb";
-import type { ScoreType } from "../../data/wudb";
+} from "@fxdxpz/wudb";
+import type { ScoreType } from "@fxdxpz/wudb";
 import { ExpansionPicture } from "./ExpansionPicture";
 
 interface CardRowProps {

@@ -1,5 +1,5 @@
-import { wusets } from "../../data/wudb";
-import type { SetId } from "../../data/wudb";
+import { wusets } from "@fxdxpz/wudb";
+import type { SetId } from "@fxdxpz/wudb";
 import { useMultiSelectArray } from "../../hooks/useMultiSelectArray";
 import IconButton from "./IconButton";
 import SectionTitle from "./SectionTitle";
