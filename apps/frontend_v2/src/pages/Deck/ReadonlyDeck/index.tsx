@@ -36,10 +36,12 @@ import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../../atoms/FightersInfoList";
 import DeckIcon from "@icons/deck.svg?react";
 import WarbandIcon from "@icons/warband.svg?react";
+import ShuffleIcon from "@icons/rotate-ccw.svg?react";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import { factions } from "@fxdxpz/wudb";
 
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
+const DrawSimulator = lazy(() => import("./atoms/DrawSimulator"));
 
 const TABS = (factionId: string) => [
   { name: "Deck", Icon: DeckIcon },
@@ -48,6 +50,7 @@ const TABS = (factionId: string) => [
     Icon: WarbandIcon,
     disabled: factionId === factions["u"].id,
   },
+  { name: "Draw", Icon: ShuffleIcon },
 ];
 
 const CardsSectionContent = memo(function CardsSectionContent({
@@ -248,6 +251,15 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
             {activeTabIndex === 1 && (
               <FightersInfoList factionName={faction as never} />
             )}
+            {activeTabIndex === 2 && (
+              <Suspense fallback={<LazyLoading />}>
+                <DrawSimulator
+                  objectives={deck.objectives}
+                  gambits={deck.gambits}
+                  upgrades={deck.upgrades}
+                />
+              </Suspense>
+            )}
           </div>
 
           <BottomPanelNavigation
@@ -295,6 +307,15 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
             )}
             {activeTabIndex === 1 && (
               <FightersInfoList factionName={faction as never} />
+            )}
+            {activeTabIndex === 2 && (
+              <Suspense fallback={<LazyLoading />}>
+                <DrawSimulator
+                  objectives={deck.objectives}
+                  gambits={deck.gambits}
+                  upgrades={deck.upgrades}
+                />
+              </Suspense>
             )}
           </div>
         </div>
