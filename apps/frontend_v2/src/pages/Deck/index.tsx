@@ -16,7 +16,7 @@ const Deck2 = () => {
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="flex-1">
+      <div className="flex-1 flex flex-col">
         <ReadonlyDeck
           id={deck.deckId}
           name={deck.name}

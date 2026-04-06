@@ -95,7 +95,7 @@ export default function FightersInfoList({
     <div className="flex-1 relative">
       <div className="absolute inset-0 overflow-y-auto p-4 lg:p-12">
         <WarbandWarscroll
-          className={`mb-4 mx-auto ${isMobile ? "cursor-pointer" : ""}`}
+          className={`mb-4 mx-auto ${isMobile ? "cursor-pointer" : "lg:max-w-2xl"}`}
           factionName={factionName}
           onClick={isMobile ? () => setZoomed(true) : undefined}
         />

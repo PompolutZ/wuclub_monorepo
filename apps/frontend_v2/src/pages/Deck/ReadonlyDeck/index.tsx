@@ -41,7 +41,7 @@ import { factions } from "@fxdxpz/wudb";
 
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 
-const MOBILE_TABS = (factionId: string) => [
+const TABS = (factionId: string) => [
   { name: "Deck", Icon: DeckIcon },
   {
     name: "Warband",
@@ -251,38 +251,52 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           </div>
 
           <BottomPanelNavigation
-            tabs={MOBILE_TABS(factionId)}
+            tabs={TABS(factionId)}
             activeTabIndex={activeTabIndex}
             setActiveTabIndex={setActiveTabIndex}
           />
         </div>
       ) : (
-        <div className="flex-1 w-screen">
-          <div className="flex px-4">
-            <DeckSummary
-              faction={faction}
-              name={name}
-              date={createdDate}
-              sets={sets}
-              isPrivate={isPrivate}
-            >
-              <div className="ml-4">
-                <DeckPlayFormatsValidity cards={cards} />
+        <div className="flex-1 flex w-screen">
+          <BottomPanelNavigation
+            tabs={TABS(factionId)}
+            activeTabIndex={activeTabIndex}
+            setActiveTabIndex={setActiveTabIndex}
+            orientation="vertical"
+          />
+          <div className="flex-1 flex flex-col">
+            {activeTabIndex === 0 && (
+              <div className="flex-1 overflow-y-auto">
+                <div className="flex px-4">
+                  <DeckSummary
+                    faction={faction}
+                    name={name}
+                    date={createdDate}
+                    sets={sets}
+                    isPrivate={isPrivate}
+                  >
+                    <div className="ml-4">
+                      <DeckPlayFormatsValidity cards={cards} />
+                    </div>
+                  </DeckSummary>
+                  <DeckActions />
+                </div>
+
+                <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
+                  <DeckPlotCards sets={sets} />
+                </div>
+
+                <div className="px-4">
+                  <DeckIssues issues={deckIssues} />
+                </div>
+
+                {cardSections}
               </div>
-            </DeckSummary>
-            <DeckActions />
+            )}
+            {activeTabIndex === 1 && (
+              <FightersInfoList factionName={faction as never} />
+            )}
           </div>
-
-          <div className="p-4 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
-            <DeckPlotCards sets={sets} />
-            <FighterCardsPortal faction={faction} />
-          </div>
-
-          <div className="px-4">
-            <DeckIssues issues={deckIssues} />
-          </div>
-
-          {cardSections}
         </div>
       )}
 
