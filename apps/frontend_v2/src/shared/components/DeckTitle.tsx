@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import CompassIcon from "@icons/compass.svg?react";
-import { checkDeckHasPlots } from "../../data/wudb";
-import { SetId } from "../../data/wudb/types";
+import { checkDeckHasPlots } from "@fxdxpz/wudb";
+import { SetId } from "@fxdxpz/wudb";
 
 export interface DeckTitleProps {
   sets: SetId[];

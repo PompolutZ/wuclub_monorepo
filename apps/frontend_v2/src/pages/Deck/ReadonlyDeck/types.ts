@@ -1,5 +1,5 @@
 import { Factions } from "@fxdxpz/schema";
-import { SetId, Card } from "@wudb";
+import { SetId, Card } from "@fxdxpz/wudb";
 
 // DeckCard is essentially a Card from the database
 export type DeckCard = Card;

@@ -8,8 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../../components/ui/carousel";
-import { factionMembers } from "../../data/wudb";
-import { FactionName } from "../../data/wudb/types";
+import { factionMembers } from "@fxdxpz/wudb";
+import { FactionName } from "@fxdxpz/wudb";
 import { usePortal } from "../../hooks/usePortal";
 import { FighterCard } from "./FighterCard";
 import { Svgs } from "./Svgs";

@@ -1,4 +1,4 @@
-import { sortedFactions } from "../../data/wudb";
+import { sortedFactions } from "@fxdxpz/wudb";
 import { useMultiSelectArray } from "../../hooks/useMultiSelectArray";
 import IconButton from "./IconButton";
 import SectionTitle from "./SectionTitle";

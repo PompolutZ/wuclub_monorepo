@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import GloryIcon from "@icons/wu-glory.svg?react";
-import { getCardById } from "../../data/wudb";
+import { getCardById } from "@fxdxpz/wudb";
 import { ModalPresenter } from "../../main";
 import CardImage from "../../shared/components/CardImage";
 import CardRow from "../../shared/components/CardRow";

@@ -1,7 +1,7 @@
 import CompassIcon from "@icons/compass.svg?react";
 import ReactTooltip from "react-tooltip";
-import { setHasPlot } from "../data/wudb";
-import type { Set, SetId } from "../data/wudb";
+import { setHasPlot } from "@fxdxpz/wudb";
+import type { Set, SetId } from "@fxdxpz/wudb";
 import { ToggableExpansionIcon } from "@/shared/components/ToggableExpansionIcon";
 
 interface ExpansionsToggleProps {

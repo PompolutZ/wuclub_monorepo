@@ -1,7 +1,7 @@
 import { Deck } from "@fxdxpz/schema";
 import { useLocation } from "react-router-dom";
-import { getCardById } from "../../data/wudb";
-import type { CardId } from "../../data/wudb";
+import { getCardById } from "@fxdxpz/wudb";
+import type { CardId } from "@fxdxpz/wudb";
 import ReadonlyDeck from "./ReadonlyDeck";
 
 const Deck2 = () => {
@@ -16,7 +16,7 @@ const Deck2 = () => {
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="flex-1">
+      <div className="flex-1 flex flex-col">
         <ReadonlyDeck
           id={deck.deckId}
           name={deck.name}

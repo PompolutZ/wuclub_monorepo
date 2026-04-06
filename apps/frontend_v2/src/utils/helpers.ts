@@ -1,4 +1,4 @@
-import { Card } from "../data/wudb/types";
+import { Card } from "@fxdxpz/wudb";
 
 export const getCardPathByCardId = (
   card: Card,

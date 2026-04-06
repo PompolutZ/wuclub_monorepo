@@ -7,8 +7,8 @@ import {
   wucards,
   wufactions,
   warbandsValidForOrganisedPlay,
-} from "../../data/wudb";
-import type { Card } from "../../data/wudb";
+} from "@fxdxpz/wudb";
+import type { Card } from "@fxdxpz/wudb";
 import { useBreakpoint } from "../../hooks/useMediaQuery";
 import { LibraryDesktopView } from "./LibraryDesktopView";
 import { LibraryMobileView } from "./LibraryMobileView";

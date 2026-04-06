@@ -1,5 +1,5 @@
-import type { Card } from "../../data/wudb";
-import { factionMembers } from "../../data/wudb";
+import type { Card } from "@fxdxpz/wudb";
+import { factionMembers } from "@fxdxpz/wudb";
 import { CardPicture } from "../../shared/components/CardPicture";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";

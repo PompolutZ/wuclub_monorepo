@@ -7,7 +7,7 @@ import { CARD_TYPE_FILTERS } from "./constants/cardTypeFilters";
 import type { FilterConfig } from "./constants/cardTypeFilters";
 import FiltersGroupToggles from "./FilterGroupToggles";
 import useMeasure from "react-use-measure";
-import type { Card } from "../../../../../data/wudb";
+import type { Card } from "@fxdxpz/wudb";
 import type { CardFilter } from "../../../reducer";
 
 type FilterFn = (card: Card) => boolean;

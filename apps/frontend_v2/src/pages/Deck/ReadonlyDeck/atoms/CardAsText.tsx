@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import AnimateHeight from "react-animate-height";
 import CardRule from "../../../../atoms/CardRule";
-import { NEMESIS_FORMAT } from "../../../../data/wudb/index";
+import { NEMESIS_FORMAT } from "@fxdxpz/wudb";
 import CardImage from "../../../../shared/components/CardImage";
 import CardRow from "../../../../shared/components/CardRow";
 import { pickCardColor2 } from "../../../../utils/functions";

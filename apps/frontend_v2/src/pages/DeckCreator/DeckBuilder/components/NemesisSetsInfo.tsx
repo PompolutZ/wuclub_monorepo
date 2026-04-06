@@ -1,4 +1,4 @@
-import type { Set as WuSet } from "../../../../data/wudb";
+import type { Set as WuSet } from "@fxdxpz/wudb";
 
 interface NemesisSetsInfoProps {
   selectedSets: WuSet[];

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Card } from "../../../data/wudb/types";
+import type { Card } from "@fxdxpz/wudb";
 
 interface UseProxySelectionProps {
   cards: Card[];

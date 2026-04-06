@@ -1,0 +1,13 @@
+{
+  "name": "@fxdxpz/wudb",
+  "version": "0.1.0",
+  "description": "Warhammer Underworlds game data and validation logic",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@fxdxpz/eslint-config": "workspace:*",
+    "@fxdxpz/prettier-config": "workspace:*",
+    "typescript": "^5.4.3"
+  },
+  "prettier": "@fxdxpz/prettier-config"
+}

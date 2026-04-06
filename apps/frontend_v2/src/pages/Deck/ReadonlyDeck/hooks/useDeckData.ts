@@ -6,7 +6,7 @@ import {
   checkCardIsPloy,
   checkCardIsUpgrade,
   compareObjectivesByScoreType,
-} from "@wudb";
+} from "@fxdxpz/wudb";
 import type { DeckCard, ProcessedDeck } from "../types";
 
 interface UseDeckDataParams {

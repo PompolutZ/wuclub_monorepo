@@ -14,7 +14,7 @@ interface CardsTabProps {
 import {
   NEMESIS_FORMAT,
   validateCardForPlayFormat,
-} from "../../../../../data/wudb";
+} from "@fxdxpz/wudb";
 import IconButton from "../../../../../shared/components/IconButton";
 import ToggleButton from "../ToggleButton";
 

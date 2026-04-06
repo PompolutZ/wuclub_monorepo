@@ -1,5 +1,5 @@
 import React from "react";
-import { NEMESIS_FORMAT, RIVALS_FORMAT } from "../../data/wudb";
+import { NEMESIS_FORMAT, RIVALS_FORMAT } from "@fxdxpz/wudb";
 
 const formatDescriptions: Record<string, string> = {
   [NEMESIS_FORMAT]:

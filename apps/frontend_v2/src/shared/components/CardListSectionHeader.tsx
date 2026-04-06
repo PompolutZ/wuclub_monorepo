@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { cardTypes } from "../../data/wudb";
+import { cardTypes } from "@fxdxpz/wudb";
 import toLower from "lodash/toLower";
 
 type CardListSectionHeaderProps = {

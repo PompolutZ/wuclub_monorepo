@@ -57,8 +57,8 @@ function BottomPanelNavigation({
   const isVertical = orientation === "vertical";
 
   const containerClassName = isVertical
-    ? "flex flex-col items-center justify-center gap-4 bg-zinc-300"
-    : "flex";
+    ? "flex flex-col items-center justify-center gap-4 bg-zinc-300 shrink-0"
+    : "flex shrink-0";
 
   const containerStyle = isVertical
     ? undefined

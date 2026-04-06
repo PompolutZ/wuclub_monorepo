@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { wufactions } from "../data/wudb";
+import { wufactions } from "@fxdxpz/wudb";
 import { Factions } from "@fxdxpz/schema";
 
 function FactionIcon({ faction }: { faction: Factions }) {

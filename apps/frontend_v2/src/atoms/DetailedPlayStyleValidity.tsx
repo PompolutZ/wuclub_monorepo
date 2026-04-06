@@ -7,8 +7,8 @@ import {
   getCardById,
   RELIC_FORMAT,
   validateDeckForPlayFormat,
-} from "../data/wudb";
-import type { CardId } from "../data/wudb";
+} from "@fxdxpz/wudb";
+import type { CardId } from "@fxdxpz/wudb";
 import ChampionshipLogo from "@icons/championship_logo.svg?react";
 import RelicLogo from "@icons/relic_logo.svg?react";
 import VanguardLogo from "@icons/vanguard_logo.svg?react";

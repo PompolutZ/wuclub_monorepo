@@ -1,6 +1,6 @@
-import { factionMembers } from "@wudb/index";
+import { factionMembers } from "@fxdxpz/wudb";
 import { getCardPathByCardId } from "../../../utils/helpers";
-import type { Card } from "../../../data/wudb/types";
+import type { Card } from "@fxdxpz/wudb";
 import { getPlotSetIds } from "./utils";
 import { useProxySelection } from "./useProxySelection";
 import { ProxyCardSection } from "./ProxyCardSection";

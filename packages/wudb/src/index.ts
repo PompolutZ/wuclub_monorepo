@@ -407,6 +407,9 @@ export {
   validateObjectivesListForPlayFormat,
   validatePowerDeckForFormat,
   factionMembers,
+  cards,
+  factions,
+  sets,
   cards as wucards,
   factions as wufactions,
   sets as wusets,
@@ -414,10 +417,12 @@ export {
 
 export type {
   Card,
+  Deck,
   SetId,
   CardId,
   CardType,
   ScoreType,
   Set,
   FactionName,
+  FactionAbbr,
 } from "./types";

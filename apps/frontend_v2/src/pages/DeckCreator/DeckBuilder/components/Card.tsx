@@ -2,7 +2,7 @@ import { memo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import CloseIcon from "@icons/x.svg?react";
-import { getCardById, validateCardForPlayFormat } from "../../../../data/wudb";
+import { getCardById, validateCardForPlayFormat } from "@fxdxpz/wudb";
 import { ModalPresenter } from "../../../../main";
 import CardImage from "../../../../shared/components/CardImage";
 import CardRow from "../../../../shared/components/CardRow";

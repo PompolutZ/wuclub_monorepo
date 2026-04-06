@@ -1,8 +1,8 @@
 import CloseIcon from "@icons/x.svg?react";
 import TogglesIcon from "@icons/sliders.svg?react";
 import { useState } from "react";
-import type { Card } from "../../data/wudb";
-import { factionMembers } from "../../data/wudb";
+import type { Card } from "@fxdxpz/wudb";
+import { factionMembers } from "@fxdxpz/wudb";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
 import { FactionPicture } from "@components/FactionDeckPicture";
 import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";

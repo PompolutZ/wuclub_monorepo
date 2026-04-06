@@ -8,7 +8,7 @@ import useMeasure from "react-use-measure";
 import { generateDeckId } from "shared/helpers";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "..";
 import FightersInfoList from "../../../atoms/FightersInfoList";
-import { factions } from "../../../data/wudb/factions";
+import { factions } from "@fxdxpz/wudb";
 import useAuthUser from "../../../hooks/useAuthUser";
 import { useBreakpoint } from "../../../hooks/useMediaQuery";
 import BottomPanelNavigation from "../../../shared/components/BottomPanelNavigation";

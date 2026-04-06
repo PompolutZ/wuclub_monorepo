@@ -3,8 +3,8 @@ import {
   getAllSetsValidForFormat,
   NEMESIS_FORMAT,
   wufactions,
-} from "../../data/wudb";
-import type { Card, Set as WuSet } from "../../data/wudb";
+} from "@fxdxpz/wudb";
+import type { Card, Set as WuSet } from "@fxdxpz/wudb";
 
 export const DECK_IN_PROGRESS_KEY = "wunderworlds_deck_in_progress";
 
