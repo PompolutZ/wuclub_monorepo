@@ -1,7 +1,14 @@
 import { useState, useCallback } from "react";
 import type { DeckCard } from "../types";
 
-export type DrawnCard = { card: DeckCard; flipped: boolean };
+const OBJECTIVE_DRAW = 3;
+const POWER_DRAW = 5;
+
+export type SimulatorCard = {
+  card: DeckCard;
+  drawn: boolean;
+  faceUp: boolean;
+};
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -12,70 +19,65 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-function draw(pool: DeckCard[], count = 5): DrawnCard[] {
-  return shuffle(pool)
-    .slice(0, Math.min(count, pool.length))
-    .map((card) => ({ card, flipped: false }));
+function buildHand(pool: DeckCard[], count: number): SimulatorCard[] {
+  const shuffled = shuffle(pool);
+  const drawCount = Math.min(count, pool.length);
+  return [
+    ...shuffled.slice(0, drawCount).map((card) => ({ card, drawn: true, faceUp: true })),
+    ...shuffled.slice(drawCount).map((card) => ({ card, drawn: false, faceUp: false })),
+  ];
 }
 
-export function useDrawSimulator(
-  objectives: DeckCard[],
-  powerCards: DeckCard[],
-) {
-  const [objectiveHand, setObjectiveHand] = useState<DrawnCard[]>(() =>
-    draw(objectives),
+function mulliganHand(cards: SimulatorCard[], count: number): SimulatorCard[] {
+  const kept = cards.filter((c) => c.drawn && c.faceUp);
+  const keptIds = new Set(kept.map((c) => c.card.id));
+  const available = shuffle(cards.filter((c) => !keptIds.has(c.card.id)).map((c) => c.card));
+  const drawCount = Math.min(count - kept.length, available.length);
+  return [
+    ...kept,
+    ...available.slice(0, drawCount).map((card) => ({ card, drawn: true, faceUp: true })),
+    ...available.slice(drawCount).map((card) => ({ card, drawn: false, faceUp: false })),
+  ];
+}
+
+export function useDrawSimulator(objectives: DeckCard[], powerCards: DeckCard[]) {
+  const [objectiveCards, setObjectiveCards] = useState<SimulatorCard[]>(() =>
+    buildHand(objectives, OBJECTIVE_DRAW),
   );
-  const [powerHand, setPowerHand] = useState<DrawnCard[]>(() =>
-    draw(powerCards),
+  const [simPowerCards, setSimPowerCards] = useState<SimulatorCard[]>(() =>
+    buildHand(powerCards, POWER_DRAW),
   );
 
   const shuffleAndRedraw = useCallback(() => {
-    setObjectiveHand(draw(objectives));
-    setPowerHand(draw(powerCards));
+    setObjectiveCards(buildHand(objectives, OBJECTIVE_DRAW));
+    setSimPowerCards(buildHand(powerCards, POWER_DRAW));
   }, [objectives, powerCards]);
 
   const mulliganObjectives = useCallback(() => {
-    setObjectiveHand((hand) => {
-      const kept = hand.filter((c) => c.flipped);
-      const returned = hand.filter((c) => !c.flipped).map((c) => c.card);
-      const pool = objectives.filter(
-        (c) => !kept.some((k) => k.card.id === c.id),
-      );
-      const replacement = draw(pool, returned.length);
-      return [...kept, ...replacement];
-    });
-  }, [objectives]);
+    setObjectiveCards((cards) => mulliganHand(cards, OBJECTIVE_DRAW));
+  }, []);
 
   const mulliganPowers = useCallback(() => {
-    setPowerHand((hand) => {
-      const kept = hand.filter((c) => c.flipped);
-      const returned = hand.filter((c) => !c.flipped).map((c) => c.card);
-      const pool = powerCards.filter(
-        (c) => !kept.some((k) => k.card.id === c.id),
-      );
-      const replacement = draw(pool, returned.length);
-      return [...kept, ...replacement];
-    });
-  }, [powerCards]);
+    setSimPowerCards((cards) => mulliganHand(cards, POWER_DRAW));
+  }, []);
 
   const mulliganBoth = useCallback(() => {
     mulliganObjectives();
     mulliganPowers();
   }, [mulliganObjectives, mulliganPowers]);
 
-  const toggleCard = useCallback(
-    (type: "objective" | "power", index: number) => {
-      const setter = type === "objective" ? setObjectiveHand : setPowerHand;
-      setter((hand) =>
-        hand.map((c, i) => (i === index ? { ...c, flipped: !c.flipped } : c)),
-      );
-    },
-    [],
-  );
+  const toggleCard = useCallback((type: "objective" | "power", cardId: string) => {
+    const setter = type === "objective" ? setObjectiveCards : setSimPowerCards;
+    setter((cards) =>
+      cards.map((c) =>
+        c.card.id === cardId && c.drawn ? { ...c, faceUp: !c.faceUp } : c,
+      ),
+    );
+  }, []);
 
   return {
-    objectiveHand,
-    powerHand,
+    objectiveCards,
+    powerCards: simPowerCards,
     shuffleAndRedraw,
     mulliganObjectives,
     mulliganPowers,

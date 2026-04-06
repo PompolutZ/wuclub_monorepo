@@ -5,7 +5,7 @@ type FlippableCardProps = {
   front: ReactNode;
   back: ReactNode;
   flipped: boolean;
-  onFlip: () => void;
+  onFlip?: () => void;
 };
 
 export const FlippableCard = ({
@@ -21,7 +21,7 @@ export const FlippableCard = ({
   });
 
   return (
-    <div className="grid cursor-pointer" onClick={onFlip}>
+    <div className={`grid ${onFlip ? "cursor-pointer" : ""}`} onClick={onFlip}>
       <a.div
         className="row-start-1 col-start-1"
         style={{ opacity: opacity.to((o) => 1 - o), transform }}

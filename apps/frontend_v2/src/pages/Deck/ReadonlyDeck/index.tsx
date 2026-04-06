@@ -36,7 +36,7 @@ import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../../atoms/FightersInfoList";
 import DeckIcon from "@icons/deck.svg?react";
 import WarbandIcon from "@icons/warband.svg?react";
-import ShuffleIcon from "@icons/rotate-ccw.svg?react";
+import { Bot as DrawIcon } from "lucide-react";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import { factions } from "@fxdxpz/wudb";
 
@@ -50,7 +50,7 @@ const TABS = (factionId: string) => [
     Icon: WarbandIcon,
     disabled: factionId === factions["u"].id,
   },
-  { name: "Draw", Icon: ShuffleIcon },
+  { name: "Assistant", Icon: DrawIcon },
 ];
 
 const CardsSectionContent = memo(function CardsSectionContent({
