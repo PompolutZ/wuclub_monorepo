@@ -14,7 +14,7 @@ type Props = {
 };
 
 const btnClass =
-  "px-3 py-1.5 rounded-md text-sm font-medium bg-purple-700 text-white hover:bg-purple-800 active:bg-purple-900 transition-colors";
+  "px-3 py-1.5 rounded-md text-sm font-medium bg-purple-700 text-white hover:bg-purple-800 active:bg-purple-900 transition-colors disabled:opacity-40 disabled:cursor-not-allowed";
 
 function CardItem({
   sc,
@@ -61,7 +61,11 @@ function MobileSection({
             className="snap-start shrink-0 w-32"
             style={{ touchAction: "manipulation" }}
           >
-            <CardItem sc={sc} backType={backType} onToggle={() => onToggle(sc.card.id)} />
+            <CardItem
+              sc={sc}
+              backType={backType}
+              onToggle={() => onToggle(sc.card.id)}
+            />
           </div>
         ))}
       </div>
@@ -85,14 +89,23 @@ function DesktopSection({
       <h2 className="text-gray-900 text-xl px-4 pb-3 font-medium">{label}</h2>
       <div className="grid grid-cols-3 gap-3 px-4 pb-6">
         {cards.map((sc) => (
-          <CardItem key={sc.card.id} sc={sc} backType={backType} onToggle={() => onToggle(sc.card.id)} />
+          <CardItem
+            key={sc.card.id}
+            sc={sc}
+            backType={backType}
+            onToggle={() => onToggle(sc.card.id)}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-export default function DrawSimulator({ objectives, gambits, upgrades }: Props) {
+export default function DrawSimulator({
+  objectives,
+  gambits,
+  upgrades,
+}: Props) {
   const isMobile = useBreakpoint("mobile");
   const powerPool = [...gambits, ...upgrades];
   const objScrollRef = useRef<HTMLDivElement>(null);
@@ -104,6 +117,7 @@ export default function DrawSimulator({ objectives, gambits, upgrades }: Props) 
   const {
     objectiveCards,
     powerCards,
+    mulliganed,
     shuffleAndRedraw,
     mulliganBoth,
     mulliganObjectives,
@@ -120,11 +134,13 @@ export default function DrawSimulator({ objectives, gambits, upgrades }: Props) 
   }, [scrollResetKey]);
 
   useEffect(() => {
-    if (resetObj > 0 && objScrollRef.current) objScrollRef.current.scrollLeft = 0;
+    if (resetObj > 0 && objScrollRef.current)
+      objScrollRef.current.scrollLeft = 0;
   }, [resetObj]);
 
   useEffect(() => {
-    if (resetPower > 0 && powerScrollRef.current) powerScrollRef.current.scrollLeft = 0;
+    if (resetPower > 0 && powerScrollRef.current)
+      powerScrollRef.current.scrollLeft = 0;
   }, [resetPower]);
 
   const handleShuffleAndRedraw = useCallback(() => {
@@ -157,13 +173,25 @@ export default function DrawSimulator({ objectives, gambits, upgrades }: Props) 
           <button className={btnClass} onClick={handleShuffleAndRedraw}>
             Shuffle &amp; Redraw
           </button>
-          <button className={btnClass} onClick={handleMulliganBoth}>
+          <button
+            className={btnClass}
+            onClick={handleMulliganBoth}
+            disabled={mulliganed}
+          >
             Mulligan Both
           </button>
-          <button className={btnClass} onClick={handleMulliganObjectives}>
+          <button
+            className={btnClass}
+            onClick={handleMulliganObjectives}
+            disabled={mulliganed}
+          >
             Mulligan Objectives
           </button>
-          <button className={btnClass} onClick={handleMulliganPowers}>
+          <button
+            className={btnClass}
+            onClick={handleMulliganPowers}
+            disabled={mulliganed}
+          >
             Mulligan Powers
           </button>
         </div>
