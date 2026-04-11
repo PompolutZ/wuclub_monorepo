@@ -3,9 +3,9 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCombobox } from "downshift";
 import Fuse, { FuseResult, RangeTuple } from "fuse.js";
 import { useRef, useState } from "react";
-import { Card } from "@fxdxpz/wudb";
+import { Card, sets } from "@fxdxpz/wudb";
 import { ExpansionPicture } from "../../shared/components/ExpansionPicture";
-import { sets } from "@fxdxpz/wudb";
+import { FactionPicture } from "@components/FactionDeckPicture";
 
 function estimateSize() {
   return 40;
@@ -16,6 +16,17 @@ type SubstringInfo = {
   highlight: boolean;
 };
 
+type WarbandHit = {
+  kind: "warband";
+  id: string;
+  name: string;
+  displayName: string;
+};
+
+type CardHit = Card & { kind: "card" };
+
+type SearchItem = CardHit | WarbandHit;
+
 function highlightSubstrings(
   value: string,
   indices: readonly RangeTuple[],
@@ -24,7 +35,6 @@ function highlightSubstrings(
   let lastIndex = 0;
 
   indices.forEach(([start, end]) => {
-    // Add the text before the highlight
     if (start > lastIndex) {
       substrings.push({
         text: value.substring(lastIndex, start),
@@ -32,7 +42,6 @@ function highlightSubstrings(
       });
     }
     const inclusiveEnd = end + 1;
-    // Add the highlighted text
     substrings.push({
       text: value.substring(start, inclusiveEnd),
       highlight: true,
@@ -40,7 +49,6 @@ function highlightSubstrings(
     lastIndex = inclusiveEnd;
   });
 
-  // Add any remaining text after the last highlight
   if (lastIndex < value.length) {
     substrings.push({ text: value.substring(lastIndex), highlight: false });
   }
@@ -51,9 +59,9 @@ function highlightSubstrings(
 export function AutosuggestSearch({
   onClick,
 }: {
-  onClick: (card: Card) => void;
+  onClick: (item: SearchItem) => void;
 }) {
-  const [items, setItems] = useState<FuseResult<Card>[]>([]);
+  const [items, setItems] = useState<FuseResult<SearchItem>[]>([]);
   const listRef = useRef(null);
   const rowVirtualizer = useVirtualizer({
     count: items.length,
@@ -72,9 +80,31 @@ export function AutosuggestSearch({
   } = useCombobox({
     items: items,
     onInputValueChange: async ({ inputValue }) => {
-      const { wucards } = await import("@fxdxpz/wudb");
-      const fuse = new Fuse(Object.values<Card>(wucards), {
-        keys: ["name"],
+      const { wucards, warbandsValidForOrganisedPlay } =
+        await import("@fxdxpz/wudb");
+
+      const warbandItems: WarbandHit[] = warbandsValidForOrganisedPlay
+        .filter((f) => f.id !== "u")
+        .map((f) => ({
+          kind: "warband" as const,
+          id: f.id,
+          name: f.name,
+          displayName: f.displayName,
+        }));
+
+      const cardItems: CardHit[] = Object.values<Card>(wucards).map((c) => ({
+        ...c,
+        kind: "card" as const,
+      }));
+
+      const fuse = new Fuse<SearchItem>([...warbandItems, ...cardItems], {
+        keys: [
+          {
+            name: "name",
+            getFn: (item) => (item.kind === "warband" ? "" : item.name),
+          },
+          "displayName",
+        ],
         threshold: 0.05,
         includeMatches: true,
         minMatchCharLength: 2,
@@ -82,15 +112,22 @@ export function AutosuggestSearch({
       });
 
       const searchResults = inputValue
-        ? fuse
-            .search(inputValue)
-            .toSorted((prev, next) => next.item.id.localeCompare(prev.item.id))
+        ? fuse.search(inputValue).toSorted((prev, next) => {
+            // warbands first, then cards by id desc
+            const aIsWarband = prev.item.kind === "warband" ? 0 : 1;
+            const bIsWarband = next.item.kind === "warband" ? 0 : 1;
+            if (aIsWarband !== bIsWarband) return aIsWarband - bIsWarband;
+            return next.item.id.localeCompare(prev.item.id);
+          })
         : [];
 
       setItems(searchResults);
     },
-    itemToString: (item: FuseResult<Card> | null) => {
-      return item ? item.item.name : "";
+    itemToString: (item: FuseResult<SearchItem> | null) => {
+      if (!item) return "";
+      return item.item.kind === "warband"
+        ? item.item.displayName
+        : item.item.name;
     },
   });
 
@@ -127,14 +164,13 @@ export function AutosuggestSearch({
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const { item, matches } = items[virtualRow.index];
 
-              const { id, setId } = item;
               const { indices, value } = matches?.[0] ?? {};
               const valueNodes =
                 indices && highlightSubstrings(value ?? "", indices);
 
               return (
                 <li
-                  key={id}
+                  key={item.id + (item.kind === "warband" ? "-wb" : "")}
                   className={`absolute inset-0 flex items-center gap-6 px-2 ${
                     highlightedIndex === virtualRow.index
                       ? "bg-purple-100 cursor-pointer"
@@ -150,10 +186,14 @@ export function AutosuggestSearch({
                   })}
                   onClick={() => onClick(items[virtualRow.index].item)}
                 >
-                  <ExpansionPicture
-                    className="w-8 h-8"
-                    setName={sets[setId as keyof typeof sets].name}
-                  />
+                  {item.kind === "warband" ? (
+                    <FactionPicture faction={item.name} size="w-8 h-8" />
+                  ) : (
+                    <ExpansionPicture
+                      className="w-8 h-8"
+                      setName={sets[item.setId as keyof typeof sets].name}
+                    />
+                  )}
                   <div>
                     {valueNodes?.map(({ text, highlight }, index) => {
                       return (
