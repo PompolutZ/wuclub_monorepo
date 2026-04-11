@@ -12,7 +12,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       "@icons": path.resolve(__dirname, "./src/svgs"),
       "@components": path.resolve(__dirname, "./src/shared/components"),
-"@services": path.resolve(__dirname, "./src/services"),
+      "@services": path.resolve(__dirname, "./src/services"),
     },
   },
   plugins: [react(), svgr()],
@@ -21,6 +21,14 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           if (id.includes("wudb/db")) return "db";
+          if (id.includes("node_modules/firebase")) return "firebase";
+          if (id.includes("node_modules/@tanstack")) return "tanstack";
+          if (
+            id.includes("node_modules/react-router-dom") ||
+            id.includes("node_modules/react-router/") ||
+            id.includes("node_modules/history")
+          )
+            return "router";
         },
       },
     },

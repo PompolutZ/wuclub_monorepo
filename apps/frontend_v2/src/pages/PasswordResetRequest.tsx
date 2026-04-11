@@ -16,6 +16,7 @@ function PasswordResetRequest() {
       clearInterval(intervalRef.current);
       history.replace("/login");
     }
+    return () => clearInterval(intervalRef.current);
   }, [redirectCountdown, history]);
 
   const handleClick = async () => {

@@ -4,6 +4,7 @@ import Firebase from "../../firebase";
 import { api } from "../../services/api";
 import { offlineDB } from "../../services/db";
 import { DeckPayload } from "@fxdxpz/schema";
+import { USER_DECKS_KEY } from "../../services/queryKeys";
 
 export const useSaveDeck = () => {
   const queryClient = useQueryClient();
@@ -38,7 +39,7 @@ export const useSaveDeck = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["userDecks", { user: user?.fuid ?? "anon" }],
+        queryKey: [USER_DECKS_KEY, { user: user?.fuid ?? "anon" }],
       });
     },
   });

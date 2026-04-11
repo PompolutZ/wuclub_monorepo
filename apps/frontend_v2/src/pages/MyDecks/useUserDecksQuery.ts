@@ -4,11 +4,12 @@ import { api } from "../../services/api";
 import { offlineDB } from "../../services/db";
 import useAuthUser from "../../hooks/useAuthUser";
 import { Deck } from "@fxdxpz/schema";
+import { USER_DECKS_KEY } from "../../services/queryKeys";
 
 export const useUserDecksQuery = () => {
   const user = useAuthUser() as { fuid?: string; uid?: string } | null;
   return useQuery({
-    queryKey: ["userDecks2", { user: user?.fuid ?? "anon" }],
+    queryKey: [USER_DECKS_KEY, { user: user?.fuid ?? "anon" }],
     queryFn: async () => {
       if (!user) {
         const offlineDecks = await offlineDB.anonDecks.toArray();
@@ -48,7 +49,7 @@ export const useUserDeck = (deckId: string) => {
   const { getQueryCache } = useQueryClient();
 
   const user = fuid ?? "anon";
-  const decksQueryKey = ["userDecks", { user }];
+  const decksQueryKey = [USER_DECKS_KEY, { user }];
   const deckQueryKey = ["userDeck", { deckId }];
   let initialData: Deck;
   const isDeckInCache =

@@ -7,8 +7,6 @@ module.exports = {
         "1/2": "50%",
       },
       colors: {
-        // bulgarian-rose
-        accent: "#501408",
         // warhammer underworlds logo red
         accent2: "#920104",
         // frontend-masters red
