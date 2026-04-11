@@ -7,8 +7,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import CompassIcon from "@icons/compass.svg?react";
-import { checkDeckHasPlots, SetId } from "@fxdxpz/wudb";
-import { Set } from "@fxdxpz/wudb";
+import { checkDeckHasPlots, SetId, Set } from "@fxdxpz/wudb";
 import { forwardRef, useEffect, useState } from "react";
 import { usePortal } from "../../hooks/usePortal";
 import { PlotCard } from "./PlotCard";
@@ -69,9 +68,11 @@ const PlotsCarousel = forwardRef<HTMLDivElement, { setsWithPlots: Set[] }>(
 
       setCurrent(api.selectedScrollSnap() + 1);
 
-      api.on("select", () => {
-        setCurrent(api.selectedScrollSnap() + 1);
-      });
+      const onSelect = () => setCurrent(api.selectedScrollSnap() + 1);
+      api.on("select", onSelect);
+      return () => {
+        api.off("select", onSelect);
+      };
     }, [api]);
 
     return (

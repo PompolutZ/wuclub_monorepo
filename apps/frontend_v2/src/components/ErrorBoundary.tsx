@@ -1,4 +1,5 @@
 import React from "react";
+import { logger } from "../utils/logger";
 
 class ErrorPresenter extends React.Component<{
   error?: string;
@@ -19,6 +20,12 @@ class ErrorPresenter extends React.Component<{
             height="50%"
           />
           Worry not though! Help is on its way. Or you can ask on Discord :)
+          <a
+            href="/"
+            className="mt-4 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+          >
+            Go Home
+          </a>
         </div>
       </div>
     );
@@ -44,8 +51,8 @@ class ErrorBoundary extends React.Component<
     return { hasError: true, error: String(error) };
   }
 
-  componentDidCatch(_error: Error, _info: React.ErrorInfo) {
-    //this.setState({ error: error, info: info });
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    logger.error(error.message, error, { componentStack: info.componentStack });
   }
 
   render() {

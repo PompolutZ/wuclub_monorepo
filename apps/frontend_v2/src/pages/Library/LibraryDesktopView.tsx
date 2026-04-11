@@ -64,6 +64,7 @@ export function LibraryDesktopView({
               />
             </section>
             <GroupedExpansions
+              key={selectedExpansionIds.join(",")}
               validSetIds={validSetIds as never[]}
               selectedExpansions={selectedExpansionIds as never[]}
               onSelectionChanged={setSelectedExpansionIds as never}

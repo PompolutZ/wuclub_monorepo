@@ -8,8 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../../components/ui/carousel";
-import { factionMembers } from "@fxdxpz/wudb";
-import { FactionName } from "@fxdxpz/wudb";
+import { factionMembers, FactionName } from "@fxdxpz/wudb";
 import { usePortal } from "../../hooks/usePortal";
 import { FighterCard } from "./FighterCard";
 import { Svgs } from "./Svgs";
@@ -130,9 +129,11 @@ const FighterCardsCarousel = forwardRef<
 
     setCurrent(api.selectedScrollSnap() + 1);
 
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
+    const onSelect = () => setCurrent(api.selectedScrollSnap() + 1);
+    api.on("select", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api]);
 
   return (

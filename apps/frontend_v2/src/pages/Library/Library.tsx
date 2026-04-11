@@ -12,7 +12,7 @@ import type { Card } from "@fxdxpz/wudb";
 import { useBreakpoint } from "../../hooks/useMediaQuery";
 import { LibraryDesktopView } from "./LibraryDesktopView";
 import { LibraryMobileView } from "./LibraryMobileView";
-import type { Warband } from "../../shared/components/WarbandPicker";
+import { useLibrarySearchParams } from "./useLibrarySearchParams";
 
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
 const validSetIds = validSets.map((s) => s.id as string);
@@ -55,13 +55,15 @@ function useLibraryCards(selectedExpansionIds: string[], searchText: string) {
 
 function Library() {
   const isMobile = useBreakpoint("mobile");
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const [selectedExpansionIds, setSelectedExpansionIds] =
-    useState<string[]>(validSetIds);
+  const {
+    activeTabIndex,
+    setActiveTabIndex,
+    selectedExpansionIds,
+    setSelectedExpansionIds,
+    selectedFaction,
+    setSelectedFaction,
+  } = useLibrarySearchParams({ validSetIds, playableWarbands });
   const [searchText, setSearchText] = useState("");
-  const [selectedFaction, setSelectedFaction] = useState<Warband>(
-    playableWarbands[0],
-  );
   const [showFilters, setShowFilters] = useState(false);
   const [zoomedCard, setZoomedCard] = useState<{
     card: Card;

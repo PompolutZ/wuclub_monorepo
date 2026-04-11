@@ -2,6 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import {
   CHAMPIONSHIP_FORMAT,
   NEMESIS_FORMAT,
+  RIVALS_FORMAT,
   checkCardIsObjective,
   checkCardIsPloy,
   checkCardIsUpgrade,
@@ -18,6 +19,7 @@ import { logger } from "@/utils/logger";
 type DeckRouteState = {
   deck?: {
     faction?: string;
+    sets?: SetId[];
     objectives?: DeckBuilderState["selectedObjectives"];
     gambits?: DeckBuilderState["selectedGambits"];
     upgrades?: DeckBuilderState["selectedUpgrades"];
@@ -44,11 +46,22 @@ export function useStateCreator(): StateCreatorResult {
     case "create":
       return { action, state: null };
 
-    case "edit":
+    case "edit": {
+      const deckSets = (state?.deck?.sets ?? [])
+        .map((setId) => getSetById(setId as never)!)
+        .filter(Boolean);
+      const editFormat =
+        deckSets.length === 1
+          ? RIVALS_FORMAT
+          : deckSets.length === 2
+            ? NEMESIS_FORMAT
+            : INITIAL_STATE.format;
       return {
         action,
         state: {
           ...INITIAL_STATE,
+          format: editFormat,
+          sets: deckSets.length > 0 ? deckSets : INITIAL_STATE.sets,
           faction: (getFactionByName(state?.deck?.faction as FactionName) ??
             INITIAL_STATE.faction) as Faction,
           selectedObjectives: state?.deck?.objectives ?? [],
@@ -61,6 +74,7 @@ export function useStateCreator(): StateCreatorResult {
           private: state?.deck?.private,
         },
       };
+    }
 
     case "transfer": {
       const [transferFormat, ...cardIds] = data.split(",");

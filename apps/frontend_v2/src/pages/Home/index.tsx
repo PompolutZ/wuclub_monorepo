@@ -1,14 +1,18 @@
 import { useHistory } from "react-router-dom";
 import Footer from "../../components/Footer";
-import { Card } from "@fxdxpz/wudb";
 import { AutosuggestSearch } from "./Search";
 import { AdvRollBtn } from "../../shared/components/DiceBox";
 
 const Home = () => {
   const history = useHistory();
-  // const { data: stats } = useDeckStats();
-  const handleGlobalSearchClick = (payload: Card) => {
-    history.push(`/view/card/${payload.id}`);
+  const handleGlobalSearchClick = (
+    payload: { kind: "warband"; id: string } | { kind: "card"; id: string },
+  ) => {
+    if (payload.kind === "warband") {
+      history.push(`/library?view=warbands&selected=${payload.id}`);
+    } else {
+      history.push(`/view/card/${payload.id}`);
+    }
   };
 
   return (

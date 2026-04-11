@@ -97,6 +97,7 @@ export function LibraryMobileView({
           </IconButton>
           <div className="overflow-y-auto">
             <GroupedExpansions
+              key={selectedExpansionIds.join(",")}
               validSetIds={validSetIds as never[]}
               selectedExpansions={selectedExpansionIds as never[]}
               onSelectionChanged={setSelectedExpansionIds as never}
