@@ -89,21 +89,19 @@ export function LibraryMobileView({
       )}
 
       <Overlay visible={showFilters}>
-        <div className="flex-1 flex flex-col pt-4 pb-12">
+        <div className="flex-1 flex flex-col pt-4 px-4">
           <IconButton
             onClick={() => setShowFilters(false)}
             className="rounded-full ml-3 px-2 w-11 h-11 grid place-content-center relative hover:bg-gray-100 self-end"
           >
             <CloseIcon />
           </IconButton>
-          <div className="overflow-y-auto">
-            <SectionTitle title="Expansions" />
-            <ExpansionSeasonToggle
-              expansions={validSets}
-              selectedIds={selectedExpansionIds as SetId[]}
-              onToggle={onExpansionToggle}
-            />
-          </div>
+          <SectionTitle title="Expansions" />
+          <ExpansionSeasonToggle
+            expansions={validSets}
+            selectedIds={selectedExpansionIds as SetId[]}
+            onToggle={onExpansionToggle}
+          />
         </div>
       </Overlay>
 

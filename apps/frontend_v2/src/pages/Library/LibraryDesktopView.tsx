@@ -54,7 +54,7 @@ export function LibraryDesktopView({
         setActiveTabIndex={setActiveTabIndex}
         orientation="vertical"
       />
-      <div className="bg-gray-200 space-y-3 lg:col-span-3">
+      <div className="bg-gray-200 space-y-3 lg:col-span-3 px-4">
         {activeTabIndex === 0 ? (
           <>
             <section className="mx-2 mt-2">
