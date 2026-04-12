@@ -1,10 +1,18 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import type { Card, Set, SetId } from "@fxdxpz/wudb";
 import { factionMembers } from "@fxdxpz/wudb";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import CompassIcon from "@icons/compass.svg?react";
 import { CardPicture } from "../../shared/components/CardPicture";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
 import { RivalsDeckIcon } from "../../shared/components/RivalsDeckIcon";
+import { PlotCard } from "../../shared/components/PlotCard";
 import { ExpansionSeasonToggle } from "../../shared/components/ExpansionSeasonToggle";
 import SectionTitle from "../../shared/components/SectionTitle";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
@@ -60,6 +68,11 @@ export function LibraryDesktopView({
     (VirtualRow & { type: "header" }) | null
   >(null);
   const activeIdxRef = useRef(-1);
+  const [viewingPlotSetId, setViewingPlotSetId] = useState<string | null>(null);
+
+  const handleViewPlot = useCallback((setId: string) => {
+    setViewingPlotSetId(setId);
+  }, []);
 
   const virtualizer = useVirtualizer({
     count: virtualRows.length,
@@ -103,11 +116,17 @@ export function LibraryDesktopView({
       if (row?.type === "header") setActiveHeader(row);
     }
 
+    // Use measured height from the overlay DOM (avoids hardcoded constants drifting).
+    // Only read offsetHeight — never set margin/layout props here (causes reflow → infinite loop).
+    const headerHeight = overlayRef.current.children[0]
+      ? (overlayRef.current.children[0] as HTMLElement).offsetHeight
+      : HEADER_HEIGHT;
+
     if (nextStart !== undefined) {
       const distanceToNext = nextStart - scrollTop;
       overlayRef.current.style.transform =
-        distanceToNext < HEADER_HEIGHT
-          ? `translateY(${distanceToNext - HEADER_HEIGHT}px)`
+        distanceToNext < headerHeight
+          ? `translateY(${distanceToNext - headerHeight}px)`
           : "";
     } else {
       overlayRef.current.style.transform = "";
@@ -180,19 +199,19 @@ export function LibraryDesktopView({
               ref={parentRef}
               className="flex-1 [contain:strict] overflow-y-auto outline-none scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200 relative"
             >
-              <div
-                ref={overlayRef}
-                className="sticky top-0 z-10"
-                style={{ marginBottom: -HEADER_HEIGHT, opacity: 0 }}
-              >
-                {activeHeader && (
-                  <SetHeader
-                    setId={activeHeader.setId}
-                    setName={activeHeader.setName}
-                    displayName={activeHeader.displayName}
-                    count={activeHeader.count}
-                  />
-                )}
+              <div className="sticky top-0 z-10 h-0">
+                <div ref={overlayRef} style={{ opacity: 0 }}>
+                  {activeHeader && (
+                    <SetHeader
+                      setId={activeHeader.setId}
+                      setName={activeHeader.setName}
+                      displayName={activeHeader.displayName}
+                      count={activeHeader.count}
+                      hasPlot={activeHeader.hasPlot}
+                      onViewPlot={handleViewPlot}
+                    />
+                  )}
+                </div>
               </div>
               <div
                 className="w-full relative"
@@ -219,6 +238,8 @@ export function LibraryDesktopView({
                           setName={row.setName}
                           displayName={row.displayName}
                           count={row.count}
+                          hasPlot={row.hasPlot}
+                          onViewPlot={handleViewPlot}
                         />
                       ) : (
                         <div className="grid grid-cols-5">
@@ -265,6 +286,16 @@ export function LibraryDesktopView({
           isZoomAnimating={zoomAnimating}
         />
       )}
+      {viewingPlotSetId && (
+        <div
+          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center cursor-pointer"
+          onClick={() => setViewingPlotSetId(null)}
+        >
+          <div className="w-80 lg:w-96">
+            <PlotCard set={viewingPlotSetId} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -274,9 +305,18 @@ interface SetHeaderProps {
   setName: string;
   displayName: string;
   count: number;
+  hasPlot: boolean;
+  onViewPlot: (setId: string) => void;
 }
 
-function SetHeader({ setId, setName, displayName, count }: SetHeaderProps) {
+function SetHeader({
+  setId,
+  setName,
+  displayName,
+  count,
+  hasPlot,
+  onViewPlot,
+}: SetHeaderProps) {
   return (
     <div className="flex items-center bg-white border-b border-gray-300 px-2 py-2">
       <RivalsDeckIcon
@@ -284,9 +324,20 @@ function SetHeader({ setId, setName, displayName, count }: SetHeaderProps) {
         setId={setId}
         className="w-8 h-8 mr-2"
       />
-      <h2 className="text-gray-900 text-base font-medium flex-1 truncate">
-        {displayName}
-      </h2>
+      <div className="flex-1 min-w-0">
+        <h2 className="text-gray-900 text-base font-medium truncate">
+          {displayName}
+        </h2>
+        {hasPlot && (
+          <button
+            onClick={() => onViewPlot(setId)}
+            className="text-xs text-purple-700 hover:underline flex items-center gap-1"
+          >
+            <CompassIcon className="w-3 h-3 stroke-purple-700" />
+            View plot card
+          </button>
+        )}
+      </div>
       <span className="text-gray-500 text-sm ml-2">{count}</span>
     </div>
   );

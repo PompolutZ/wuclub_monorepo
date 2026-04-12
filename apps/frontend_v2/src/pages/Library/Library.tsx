@@ -9,6 +9,7 @@ import {
   wucards,
   wufactions,
   warbandsValidForOrganisedPlay,
+  setHasPlot,
 } from "@fxdxpz/wudb";
 import type { Card, SetId } from "@fxdxpz/wudb";
 import { useBreakpoint } from "../../hooks/useMediaQuery";
@@ -28,6 +29,7 @@ export type VirtualRow =
       setName: string;
       displayName: string;
       count: number;
+      hasPlot: boolean;
     }
   | { type: "cardRow"; cards: Card[] };
 const universalFactionId = wufactions["u"].id;
@@ -149,6 +151,7 @@ function Library() {
         setName: getSetNameById(setId as SetId) ?? setId,
         displayName: set?.displayName ?? setId,
         count: cards.length,
+        hasPlot: setHasPlot(setId as SetId),
       });
       for (let i = 0; i < cards.length; i += CARDS_PER_ROW) {
         rows.push({
