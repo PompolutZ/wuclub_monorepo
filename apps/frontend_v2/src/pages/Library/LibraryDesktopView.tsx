@@ -221,7 +221,7 @@ export function LibraryDesktopView({
                           count={row.count}
                         />
                       ) : (
-                        <div className="flex">
+                        <div className="grid grid-cols-5">
                           {row.cards.map((card) => {
                             const isZoomed = zoomedCard?.card.id === card.id;
                             const cardHoverHalo =
@@ -231,7 +231,7 @@ export function LibraryDesktopView({
                             return (
                               <div
                                 key={card.id}
-                                className="flex-1 p-2 flex items-center justify-center cursor-pointer"
+                                className="p-2 flex items-center justify-center cursor-pointer"
                                 style={isZoomed ? { opacity: 0 } : undefined}
                                 onClick={(e) =>
                                   onCardClick(card, e.currentTarget)
