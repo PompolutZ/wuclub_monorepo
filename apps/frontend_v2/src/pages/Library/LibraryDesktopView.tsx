@@ -1,22 +1,30 @@
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Card, Set, SetId } from "@fxdxpz/wudb";
 import { factionMembers } from "@fxdxpz/wudb";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { CardPicture } from "../../shared/components/CardPicture";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
-import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
+import { ExpansionPicture } from "../../shared/components/ExpansionPicture";
 import { ExpansionSeasonToggle } from "../../shared/components/ExpansionSeasonToggle";
 import SectionTitle from "../../shared/components/SectionTitle";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../atoms/FightersInfoList";
 import { ZoomedCard } from "./ZoomedCard";
 import { LibraryWarbandPicker } from "./LibraryWarbandPicker";
+import type { VirtualRow } from "./Library";
 import type { Warband } from "../../shared/components/WarbandPicker";
+
+const HEADER_HEIGHT = 52;
+const CARD_ROW_HEIGHT_ESTIMATE = 350;
+
 
 interface LibraryDesktopViewProps {
   validSets: Set[];
   selectedExpansionIds: string[];
   onExpansionToggle: (setId: SetId) => void;
   setSearchText: (text: string) => void;
-  filteredCards: Card[];
+  virtualRows: VirtualRow[];
+  stickyIndices: number[];
   activeTabIndex: number;
   setActiveTabIndex: (index: number) => void;
   tabs: { name: string; Icon: React.ComponentType<{ className?: string }> }[];
@@ -34,7 +42,8 @@ export function LibraryDesktopView({
   selectedExpansionIds,
   onExpansionToggle,
   setSearchText,
-  filteredCards,
+  virtualRows,
+  stickyIndices,
   activeTabIndex,
   setActiveTabIndex,
   tabs,
@@ -46,6 +55,80 @@ export function LibraryDesktopView({
   setSelectedFaction,
   playableWarbands,
 }: LibraryDesktopViewProps) {
+  const parentRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const [activeHeader, setActiveHeader] = useState<
+    (VirtualRow & { type: "header" }) | null
+  >(null);
+  const activeIdxRef = useRef(-1);
+
+  const virtualizer = useVirtualizer({
+    count: virtualRows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: (i) =>
+      virtualRows[i]?.type === "header"
+        ? HEADER_HEIGHT
+        : CARD_ROW_HEIGHT_ESTIMATE,
+    measureElement: (el) => el.getBoundingClientRect().height,
+    overscan: 5,
+  });
+
+  // Ref holds the latest update fn — avoids stale closures in the scroll listener
+  const stickyUpdateRef = useRef<() => void>(() => {});
+  stickyUpdateRef.current = () => {
+    const el = parentRef.current;
+    if (!el || !overlayRef.current || stickyIndices.length === 0) return;
+
+    const scrollTop = el.scrollTop;
+    const measurements = virtualizer.measurementsCache;
+
+    let newActiveIdx = stickyIndices[0];
+    let activeStart = measurements[newActiveIdx]?.start ?? 0;
+    let nextStart: number | undefined;
+
+    for (let i = 0; i < stickyIndices.length; i++) {
+      const m = measurements[stickyIndices[i]];
+      if (m && m.start <= scrollTop + 1) {
+        newActiveIdx = stickyIndices[i];
+        activeStart = m.start;
+        nextStart =
+          i + 1 < stickyIndices.length
+            ? measurements[stickyIndices[i + 1]]?.start
+            : undefined;
+      }
+    }
+
+    if (newActiveIdx !== activeIdxRef.current) {
+      activeIdxRef.current = newActiveIdx;
+      const row = virtualRows[newActiveIdx];
+      if (row?.type === "header") setActiveHeader(row);
+    }
+
+    if (nextStart !== undefined) {
+      const distanceToNext = nextStart - scrollTop;
+      overlayRef.current.style.transform =
+        distanceToNext < HEADER_HEIGHT
+          ? `translateY(${distanceToNext - HEADER_HEIGHT}px)`
+          : "";
+    } else {
+      overlayRef.current.style.transform = "";
+    }
+
+    overlayRef.current.style.opacity = scrollTop >= activeStart ? "1" : "0";
+  };
+
+  // Sync after virtualizer re-measures items
+  useLayoutEffect(() => stickyUpdateRef.current());
+
+  // Per-pixel smooth updates via native scroll
+  useEffect(() => {
+    const el = parentRef.current;
+    if (!el) return;
+    const onScroll = () => stickyUpdateRef.current();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  });
+
   return (
     <div className="flex-1 flex lg:grid lg:grid-cols-12 p-4 lg:p-0">
       <BottomPanelNavigation
@@ -83,7 +166,7 @@ export function LibraryDesktopView({
       </div>
       <div className="flex-1 lg:col-span-8 flex flex-col lg:px-2">
         {activeTabIndex === 0 ? (
-          filteredCards.length === 0 ? (
+          virtualRows.length === 0 ? (
             <div className="flex-1 flex items-center justify-center text-gray-900 text-xl">
               <div>
                 <img
@@ -94,37 +177,78 @@ export function LibraryDesktopView({
               </div>
             </div>
           ) : (
-            <div className="flex-1 flex">
-              <FixedVirtualizedList items={filteredCards} variant="grid">
-                {(cards, { key }) =>
-                  Array.isArray(cards) ? (
-                    <div className="flex" key={key}>
-                      {(cards as Card[]).map((card) => {
-                        const isZoomed = zoomedCard?.card.id === card.id;
-                        const cardHoverHalo =
-                          card.type === "Objective"
-                            ? "hover:drop-shadow-[0_0_8px_rgba(242,192,63,0.85)]"
-                            : "hover:drop-shadow-[0_0_8px_rgba(142,20,7,0.85)]";
-                        return (
-                          <div
-                            key={card.id}
-                            className="flex-1 p-2 flex items-center justify-center cursor-pointer"
-                            style={isZoomed ? { opacity: 0 } : undefined}
-                            onClick={(e) => onCardClick(card, e.currentTarget)}
-                          >
-                            <CardPicture
-                              card={card}
-                              imgClassName={`transition-all duration-300 ${cardHoverHalo}`}
-                            />
-                          </div>
-                        );
-                      })}
+            <div
+              ref={parentRef}
+              className="flex-1 [contain:strict] overflow-y-auto outline-none scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200 relative"
+            >
+              <div
+                ref={overlayRef}
+                className="sticky top-0 z-10"
+                style={{ marginBottom: -HEADER_HEIGHT, opacity: 0 }}
+              >
+                {activeHeader && (
+                  <SetHeader
+                    setName={activeHeader.setName}
+                    displayName={activeHeader.displayName}
+                    count={activeHeader.count}
+                  />
+                )}
+              </div>
+              <div
+                className="w-full relative"
+                style={{ height: virtualizer.getTotalSize() }}
+              >
+                {virtualizer.getVirtualItems().map((virtualRow) => {
+                  const row = virtualRows[virtualRow.index];
+                  return (
+                    <div
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={virtualizer.measureElement}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        transform: `translateY(${virtualRow.start}px)`,
+                      }}
+                    >
+                      {row.type === "header" ? (
+                        <SetHeader
+                          setName={row.setName}
+                          displayName={row.displayName}
+                          count={row.count}
+                        />
+                      ) : (
+                        <div className="flex">
+                          {row.cards.map((card) => {
+                            const isZoomed = zoomedCard?.card.id === card.id;
+                            const cardHoverHalo =
+                              card.type === "Objective"
+                                ? "hover:drop-shadow-[0_0_8px_rgba(242,192,63,0.85)]"
+                                : "hover:drop-shadow-[0_0_8px_rgba(142,20,7,0.85)]";
+                            return (
+                              <div
+                                key={card.id}
+                                className="flex-1 p-2 flex items-center justify-center cursor-pointer"
+                                style={isZoomed ? { opacity: 0 } : undefined}
+                                onClick={(e) =>
+                                  onCardClick(card, e.currentTarget)
+                                }
+                              >
+                                <CardPicture
+                                  card={card}
+                                  imgClassName={`transition-all duration-300 ${cardHoverHalo}`}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <></>
-                  )
-                }
-              </FixedVirtualizedList>
+                  );
+                })}
+              </div>
             </div>
           )
         ) : (
@@ -140,6 +264,24 @@ export function LibraryDesktopView({
           isZoomAnimating={zoomAnimating}
         />
       )}
+    </div>
+  );
+}
+
+interface SetHeaderProps {
+  setName: string;
+  displayName: string;
+  count: number;
+}
+
+function SetHeader({ setName, displayName, count }: SetHeaderProps) {
+  return (
+    <div className="flex items-center bg-white border-b border-gray-300 px-2 py-2">
+      <ExpansionPicture setName={setName} className="w-8 h-8 mr-2 shrink-0" />
+      <h2 className="text-gray-900 text-base font-medium flex-1 truncate">
+        {displayName}
+      </h2>
+      <span className="text-gray-500 text-sm ml-2">{count}</span>
     </div>
   );
 }

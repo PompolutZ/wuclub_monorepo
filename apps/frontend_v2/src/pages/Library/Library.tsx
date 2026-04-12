@@ -3,6 +3,8 @@ import WarbandIcon from "@icons/warband.svg?react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   getAllSetsValidForFormat,
+  getSetById,
+  getSetNameById,
   NEMESIS_FORMAT,
   wucards,
   wufactions,
@@ -16,6 +18,18 @@ import { useLibrarySearchParams } from "./useLibrarySearchParams";
 
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
 const validSetIds = validSets.map((s) => s.id);
+
+const CARDS_PER_ROW = 5;
+
+export type VirtualRow =
+  | {
+      type: "header";
+      setId: string;
+      setName: string;
+      displayName: string;
+      count: number;
+    }
+  | { type: "cardRow"; cards: Card[] };
 const universalFactionId = wufactions["u"].id;
 
 const playableWarbands = warbandsValidForOrganisedPlay.filter(
@@ -125,6 +139,32 @@ function Library() {
     }));
   }, [filteredCards]);
 
+  const virtualRows = useMemo((): VirtualRow[] => {
+    const rows: VirtualRow[] = [];
+    for (const { setId, cards } of cardsBySet) {
+      const set = getSetById(setId as SetId);
+      rows.push({
+        type: "header",
+        setId,
+        setName: getSetNameById(setId as SetId) ?? setId,
+        displayName: set?.displayName ?? setId,
+        count: cards.length,
+      });
+      for (let i = 0; i < cards.length; i += CARDS_PER_ROW) {
+        rows.push({
+          type: "cardRow",
+          cards: cards.slice(i, i + CARDS_PER_ROW),
+        });
+      }
+    }
+    return rows;
+  }, [cardsBySet]);
+
+  const stickyIndices = useMemo(
+    () => virtualRows.flatMap((r, i) => (r.type === "header" ? [i] : [])),
+    [virtualRows],
+  );
+
   if (isMobile) {
     return (
       <LibraryMobileView
@@ -153,7 +193,8 @@ function Library() {
       selectedExpansionIds={selectedExpansionIds}
       onExpansionToggle={handleExpansionToggle}
       setSearchText={setSearchText}
-      filteredCards={filteredCards}
+      virtualRows={virtualRows}
+      stickyIndices={stickyIndices}
       activeTabIndex={activeTabIndex}
       setActiveTabIndex={setActiveTabIndex}
       tabs={TABS}
