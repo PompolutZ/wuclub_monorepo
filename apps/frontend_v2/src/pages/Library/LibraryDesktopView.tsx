@@ -4,7 +4,7 @@ import { factionMembers } from "@fxdxpz/wudb";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { CardPicture } from "../../shared/components/CardPicture";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
-import { ExpansionPicture } from "../../shared/components/ExpansionPicture";
+import { RivalsDeckIcon } from "../../shared/components/RivalsDeckIcon";
 import { ExpansionSeasonToggle } from "../../shared/components/ExpansionSeasonToggle";
 import SectionTitle from "../../shared/components/SectionTitle";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
@@ -16,7 +16,6 @@ import type { Warband } from "../../shared/components/WarbandPicker";
 
 const HEADER_HEIGHT = 52;
 const CARD_ROW_HEIGHT_ESTIMATE = 350;
-
 
 interface LibraryDesktopViewProps {
   validSets: Set[];
@@ -188,6 +187,7 @@ export function LibraryDesktopView({
               >
                 {activeHeader && (
                   <SetHeader
+                    setId={activeHeader.setId}
                     setName={activeHeader.setName}
                     displayName={activeHeader.displayName}
                     count={activeHeader.count}
@@ -215,6 +215,7 @@ export function LibraryDesktopView({
                     >
                       {row.type === "header" ? (
                         <SetHeader
+                          setId={row.setId}
                           setName={row.setName}
                           displayName={row.displayName}
                           count={row.count}
@@ -269,15 +270,20 @@ export function LibraryDesktopView({
 }
 
 interface SetHeaderProps {
+  setId: string;
   setName: string;
   displayName: string;
   count: number;
 }
 
-function SetHeader({ setName, displayName, count }: SetHeaderProps) {
+function SetHeader({ setId, setName, displayName, count }: SetHeaderProps) {
   return (
     <div className="flex items-center bg-white border-b border-gray-300 px-2 py-2">
-      <ExpansionPicture setName={setName} className="w-8 h-8 mr-2 shrink-0" />
+      <RivalsDeckIcon
+        setName={setName}
+        setId={setId}
+        className="w-8 h-8 mr-2"
+      />
       <h2 className="text-gray-900 text-base font-medium flex-1 truncate">
         {displayName}
       </h2>

@@ -1,7 +1,6 @@
-import CompassIcon from "@icons/compass.svg?react";
-import { getSetsBySeason, setHasPlot } from "@fxdxpz/wudb";
+import { getSetsBySeason } from "@fxdxpz/wudb";
 import type { Set, SetId } from "@fxdxpz/wudb";
-import { ExpansionPicture } from "./ExpansionPicture";
+import { RivalsDeckIcon } from "./RivalsDeckIcon";
 
 interface ExpansionSeasonToggleProps {
   expansions: Set[];
@@ -89,19 +88,15 @@ function ExpansionToggleItem({
 }: ExpansionToggleItemProps) {
   return (
     <div
-      className={`relative cursor-pointer ${isDisabled ? "grayscale pointer-events-none" : ""} ${isSelected ? "opacity-100" : "opacity-30"}`}
+      className={`cursor-pointer ${isDisabled ? "grayscale pointer-events-none" : ""} ${isSelected ? "opacity-100" : "opacity-30"}`}
       title={set.displayName}
       onClick={() => !isDisabled && onToggle(set.id as SetId)}
     >
-      <ExpansionPicture
+      <RivalsDeckIcon
         setName={set.name}
+        setId={set.id}
         className="w-12 h-12 drop-shadow-md hover:scale-105 transition-transform"
       />
-      {setHasPlot(set.id as SetId) && (
-        <div className="absolute w-4 h-4 bg-purple-700 -bottom-1 left-4 rounded-full text-white">
-          <CompassIcon className="stroke-current w-4 h-4" />
-        </div>
-      )}
     </div>
   );
 }
