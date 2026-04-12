@@ -1,7 +1,3 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository. Never use word comprehensive.
-
 ## Project Overview
 
 This is a pnpm monorepo for Wunderworlds Club, a web application for the Warhammer Underworlds community. The project consists of:
@@ -108,14 +104,6 @@ The parser tool:
 3. Generates TypeScript constant files in `apps/parser/dist/`
 4. Files should be manually copied to `apps/frontend_v2/src/db/` (via `pnpm db:copy` - note: path may need updating)
 
-## Environment & Tooling
-
-- **Node Version**: 20.13.0 (managed via Volta)
-- **Package Manager**: pnpm 8.15.8 (workspace configuration in `pnpm-workspace.yaml`)
-- **TypeScript**: Used throughout the monorepo
-- **ESLint**: Shared config in `packages/eslint-config/`, uses ESLint v9 flat config
-- **Prettier**: Shared config in `packages/prettier-config/`
-
 ## AWS Deployment
 
 The API is deployed to AWS Lambda using CDK:
@@ -134,34 +122,14 @@ The API is deployed to AWS Lambda using CDK:
 ### Verifying Refactoring and New Implementations
 When implementing new features or refactoring based on a plan, ALWAYS verify changes with:
 ```bash
-# 1. Type check
-cd apps/frontend_v2
-pnpm tsc                        # Verify TypeScript compilation
+# run prettier and check eslint with one command
+pnpm lint:fix
 
-# 2. Build the project
+# Build the project
 pnpm build                      # Ensure production build succeeds
-
-# 3. Run end-to-end tests
-pnpm test:e2e                   # Verify all e2e tests pass
 ```
 
 All three steps must succeed before considering the work complete. If any step fails, fix the issues before proceeding.
-
-### After Backend API Changes
-When you modify API routes or schemas:
-```bash
-cd apps/apiv2
-pnpm build:client               # Regenerate type definitions for frontend
-```
-
-### Working with Game Data
-When updating card/faction data:
-```bash
-cd apps/parser
-# Update TSV files in sheets/
-pnpm wudb                       # Parse and generate TypeScript files
-# Manually copy generated files from dist/ to apps/frontend_v2/src/db/
-```
 
 ## Firebase Integration
 

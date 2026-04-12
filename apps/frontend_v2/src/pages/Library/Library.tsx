@@ -3,19 +3,33 @@ import WarbandIcon from "@icons/warband.svg?react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   getAllSetsValidForFormat,
+  getSetById,
+  getSetNameById,
   NEMESIS_FORMAT,
   wucards,
   wufactions,
   warbandsValidForOrganisedPlay,
+  setHasPlot,
 } from "@fxdxpz/wudb";
-import type { Card } from "@fxdxpz/wudb";
+import type { Card, SetId } from "@fxdxpz/wudb";
 import { useBreakpoint } from "../../hooks/useMediaQuery";
 import { LibraryDesktopView } from "./LibraryDesktopView";
 import { LibraryMobileView } from "./LibraryMobileView";
 import { useLibrarySearchParams } from "./useLibrarySearchParams";
 
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
-const validSetIds = validSets.map((s) => s.id as string);
+const validSetIds = validSets.map((s) => s.id);
+
+export type VirtualRow =
+  | {
+      type: "header";
+      setId: string;
+      setName: string;
+      displayName: string;
+      count: number;
+      hasPlot: boolean;
+    }
+  | { type: "cardRow"; cards: Card[] };
 const universalFactionId = wufactions["u"].id;
 
 const playableWarbands = warbandsValidForOrganisedPlay.filter(
@@ -55,6 +69,7 @@ function useLibraryCards(selectedExpansionIds: string[], searchText: string) {
 
 function Library() {
   const isMobile = useBreakpoint("mobile");
+  const cardsPerRow = isMobile ? 1 : 5;
   const {
     activeTabIndex,
     setActiveTabIndex,
@@ -88,6 +103,28 @@ function Library() {
     setTimeout(() => setZoomedCard(null), 300);
   }, []);
 
+  const handleExpansionToggle = useCallback(
+    (setId: SetId) => {
+      const sid = setId as string;
+      if (selectedExpansionIds.length === validSetIds.length) {
+        setSelectedExpansionIds([sid]);
+      } else if (
+        selectedExpansionIds.length === 1 &&
+        selectedExpansionIds[0] === sid
+      ) {
+        setSelectedExpansionIds(validSetIds);
+      } else {
+        const isSelected = selectedExpansionIds.includes(sid);
+        setSelectedExpansionIds(
+          isSelected
+            ? selectedExpansionIds.filter((id) => id !== sid)
+            : [...selectedExpansionIds, sid],
+        );
+      }
+    },
+    [selectedExpansionIds, setSelectedExpansionIds],
+  );
+
   const filteredCards = useLibraryCards(selectedExpansionIds, searchText);
 
   const cardsBySet = useMemo(() => {
@@ -103,18 +140,45 @@ function Library() {
     }));
   }, [filteredCards]);
 
+  const virtualRows = useMemo((): VirtualRow[] => {
+    const rows: VirtualRow[] = [];
+    for (const { setId, cards } of cardsBySet) {
+      const set = getSetById(setId as SetId);
+      rows.push({
+        type: "header",
+        setId,
+        setName: getSetNameById(setId as SetId) ?? setId,
+        displayName: set?.displayName ?? setId,
+        count: cards.length,
+        hasPlot: setHasPlot(setId as SetId),
+      });
+      for (let i = 0; i < cards.length; i += cardsPerRow) {
+        rows.push({
+          type: "cardRow",
+          cards: cards.slice(i, i + cardsPerRow),
+        });
+      }
+    }
+    return rows;
+  }, [cardsBySet, cardsPerRow]);
+
+  const stickyIndices = useMemo(
+    () => virtualRows.flatMap((r, i) => (r.type === "header" ? [i] : [])),
+    [virtualRows],
+  );
+
   if (isMobile) {
     return (
       <LibraryMobileView
-        validSetIds={validSetIds}
+        validSets={validSets}
         selectedExpansionIds={selectedExpansionIds}
-        setSelectedExpansionIds={setSelectedExpansionIds}
-        searchText={searchText}
+        onExpansionToggle={handleExpansionToggle}
         setSearchText={setSearchText}
         showFilters={showFilters}
         setShowFilters={setShowFilters}
-        cardsBySet={cardsBySet}
-        filteredCards={filteredCards}
+        virtualRows={virtualRows}
+        stickyIndices={stickyIndices}
+        hasCards={filteredCards.length > 0}
         activeTabIndex={activeTabIndex}
         setActiveTabIndex={setActiveTabIndex}
         tabs={TABS}
@@ -127,11 +191,12 @@ function Library() {
 
   return (
     <LibraryDesktopView
-      validSetIds={validSetIds}
+      validSets={validSets}
       selectedExpansionIds={selectedExpansionIds}
-      setSelectedExpansionIds={setSelectedExpansionIds}
+      onExpansionToggle={handleExpansionToggle}
       setSearchText={setSearchText}
-      filteredCards={filteredCards}
+      virtualRows={virtualRows}
+      stickyIndices={stickyIndices}
       activeTabIndex={activeTabIndex}
       setActiveTabIndex={setActiveTabIndex}
       tabs={TABS}

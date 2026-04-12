@@ -2,8 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Filter, X } from "lucide-react";
 import { Fragment, useState } from "react";
 import { ExpansionPicture } from "@components/ExpansionPicture";
-import { sets } from "@fxdxpz/wudb";
-import { setHasPlot } from "@fxdxpz/wudb";
+import { sets, setHasPlot } from "@fxdxpz/wudb";
 import CompassIcon from "@icons/compass.svg?react";
 
 interface FilterDropdownProps {

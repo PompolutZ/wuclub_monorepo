@@ -1,6 +1,6 @@
 import { animated, useSpring } from "@react-spring/web";
 import { ExpandCollapseButton } from "../../shared/components/ExpandCollapseButton";
-import { ExpansionPicture } from "../../shared/components/ExpansionPicture";
+import { RivalsDeckIcon } from "../../shared/components/RivalsDeckIcon";
 import { useResizeHeight } from "../../hooks/useResizeHeight";
 import { getSetById, getSetNameById } from "@fxdxpz/wudb";
 import type { Card } from "@fxdxpz/wudb";
@@ -25,7 +25,11 @@ function LibraryCardSection({ setId, cards }: LibraryCardSectionProps) {
   return (
     <div className="mb-4">
       <div className="flex items-center border-b border-gray-500 pb-2 mx-2">
-        <ExpansionPicture setName={setName} className="w-8 h-8 mr-2 shrink-0" />
+        <RivalsDeckIcon
+          setName={setName}
+          setId={setId}
+          className="w-8 h-8 mr-2"
+        />
         <h1 className="text-gray-900 text-xl mr-2 min-w-0 flex-1 truncate">
           {set?.displayName ?? setName}
         </h1>

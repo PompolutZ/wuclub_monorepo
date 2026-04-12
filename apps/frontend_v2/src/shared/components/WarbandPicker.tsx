@@ -56,6 +56,7 @@ export function WarbandPicker({
               <button
                 key={faction.id}
                 className="[all:unset] [cursor:pointer]"
+                title={faction.displayName}
                 onClick={() => onSelect(faction)}
               >
                 <div

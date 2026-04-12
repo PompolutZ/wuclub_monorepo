@@ -1,7 +1,10 @@
 import { useParams } from "react-router-dom";
-import { getSetById, validateCardForPlayFormat } from "@fxdxpz/wudb";
-import { cards } from "@fxdxpz/wudb";
-import { sets } from "@fxdxpz/wudb";
+import {
+  getSetById,
+  validateCardForPlayFormat,
+  cards,
+  sets,
+} from "@fxdxpz/wudb";
 import { CardPicture } from "../shared/components/CardPicture";
 import { ExpansionPicture } from "../shared/components/ExpansionPicture";
 

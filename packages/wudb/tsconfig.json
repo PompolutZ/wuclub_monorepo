@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "ES2016",
+    "target": "es2025",
     "module": "CommonJS",
-    "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

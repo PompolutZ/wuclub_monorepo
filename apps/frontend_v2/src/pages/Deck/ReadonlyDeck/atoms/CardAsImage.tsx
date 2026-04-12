@@ -1,9 +1,6 @@
 import LockIcon from "@icons/lock.svg?react";
 import ForsakenIcon from "@icons/no-symbol.svg?react";
-import {
-  getSetById,
-  validateCardForPlayFormat,
-} from "@fxdxpz/wudb";
+import { getSetById, validateCardForPlayFormat } from "@fxdxpz/wudb";
 import CardImage from "../../../../shared/components/CardImage";
 import { ExpansionPicture } from "../../../../shared/components/ExpansionPicture";
 import type { DeckCard } from "../types";

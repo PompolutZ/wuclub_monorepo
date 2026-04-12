@@ -15,6 +15,8 @@ export const CardPicture = ({ card, imgClassName }: CardPictureProps) => {
         className={`relative object-contain cursor-pointer ${imgClassName ?? ""}`}
         alt={card.name}
         src={getCardPathByCardId(card, "png")}
+        width={300}
+        height={420}
       />
     </picture>
   );

@@ -11,10 +11,7 @@ interface CardsTabProps {
   onToggleType: (type: string) => () => void;
   onToggleShowFilters: () => void;
 }
-import {
-  NEMESIS_FORMAT,
-  validateCardForPlayFormat,
-} from "@fxdxpz/wudb";
+import { NEMESIS_FORMAT, validateCardForPlayFormat } from "@fxdxpz/wudb";
 import IconButton from "../../../../../shared/components/IconButton";
 import ToggleButton from "../ToggleButton";
 
@@ -36,7 +33,7 @@ function CardsTab({
       const [, , isRestricted] = validateCardForPlayFormat(card);
       return isRestricted;
     });
-  }, [selectedObjectives, selectedUpgrades, selectedGambits, format]);
+  }, [selectedObjectives, selectedUpgrades, selectedGambits]);
 
   const surgeCount = useMemo(() => {
     return selectedObjectives.filter(
