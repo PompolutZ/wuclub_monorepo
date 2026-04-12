@@ -1,17 +1,9 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useRef, useState } from "react";
 import type { Card, Set, SetId } from "@fxdxpz/wudb";
 import { factionMembers } from "@fxdxpz/wudb";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import CompassIcon from "@icons/compass.svg?react";
 import { CardPicture } from "../../shared/components/CardPicture";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
-import { RivalsDeckIcon } from "../../shared/components/RivalsDeckIcon";
 import { PlotCard } from "../../shared/components/PlotCard";
 import { ExpansionSeasonToggle } from "../../shared/components/ExpansionSeasonToggle";
 import SectionTitle from "../../shared/components/SectionTitle";
@@ -19,6 +11,8 @@ import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../atoms/FightersInfoList";
 import { ZoomedCard } from "./ZoomedCard";
 import { LibraryWarbandPicker } from "./LibraryWarbandPicker";
+import { SetHeader } from "./SetHeader";
+import { useStickyVirtualHeader } from "./useStickyVirtualHeader";
 import type { VirtualRow } from "./Library";
 import type { Warband } from "../../shared/components/WarbandPicker";
 
@@ -64,10 +58,6 @@ export function LibraryDesktopView({
 }: LibraryDesktopViewProps) {
   const parentRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [activeHeader, setActiveHeader] = useState<
-    (VirtualRow & { type: "header" }) | null
-  >(null);
-  const activeIdxRef = useRef(-1);
   const [viewingPlotSetId, setViewingPlotSetId] = useState<string | null>(null);
 
   const handleViewPlot = useCallback((setId: string) => {
@@ -85,72 +75,13 @@ export function LibraryDesktopView({
     overscan: 5,
   });
 
-  // Ref holds the latest update fn — avoids stale closures in the scroll listener
-  const stickyUpdateRef = useRef<() => void>(() => {});
-  stickyUpdateRef.current = () => {
-    const el = parentRef.current;
-    if (!el || !overlayRef.current || stickyIndices.length === 0) return;
-
-    const scrollTop = el.scrollTop;
-    const measurements = virtualizer.measurementsCache;
-
-    let newActiveIdx = stickyIndices[0];
-    let activeStart = measurements[newActiveIdx]?.start ?? 0;
-    let nextStart: number | undefined;
-
-    for (let i = 0; i < stickyIndices.length; i++) {
-      const m = measurements[stickyIndices[i]];
-      if (m && m.start <= scrollTop + 1) {
-        newActiveIdx = stickyIndices[i];
-        activeStart = m.start;
-        nextStart =
-          i + 1 < stickyIndices.length
-            ? measurements[stickyIndices[i + 1]]?.start
-            : undefined;
-      }
-    }
-
-    if (newActiveIdx !== activeIdxRef.current) {
-      activeIdxRef.current = newActiveIdx;
-      const row = virtualRows[newActiveIdx];
-      if (row?.type === "header") setActiveHeader(row);
-    }
-
-    // Use measured height from the overlay DOM (avoids hardcoded constants drifting).
-    // Only read offsetHeight — never set margin/layout props here (causes reflow → infinite loop).
-    const headerHeight = overlayRef.current.children[0]
-      ? (overlayRef.current.children[0] as HTMLElement).offsetHeight
-      : HEADER_HEIGHT;
-
-    if (nextStart !== undefined) {
-      const distanceToNext = nextStart - scrollTop;
-      overlayRef.current.style.transform =
-        distanceToNext < headerHeight
-          ? `translateY(${distanceToNext - headerHeight}px)`
-          : "";
-    } else {
-      overlayRef.current.style.transform = "";
-    }
-
-    overlayRef.current.style.opacity = scrollTop >= activeStart ? "1" : "0";
-  };
-
-  // Reset active header when data changes (expansion toggle, search)
-  useLayoutEffect(() => {
-    activeIdxRef.current = -1;
-  }, [stickyIndices]);
-
-  // Sync after virtualizer re-measures items
-  useLayoutEffect(() => stickyUpdateRef.current());
-
-  // Per-pixel smooth updates via native scroll
-  useEffect(() => {
-    const el = parentRef.current;
-    if (!el) return;
-    const onScroll = () => stickyUpdateRef.current();
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  });
+  const { activeHeader } = useStickyVirtualHeader(
+    virtualRows,
+    stickyIndices,
+    virtualizer,
+    parentRef,
+    overlayRef,
+  );
 
   return (
     <div className="flex-1 flex lg:grid lg:grid-cols-12 p-4 lg:p-0">
@@ -301,49 +232,6 @@ export function LibraryDesktopView({
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-interface SetHeaderProps {
-  setId: string;
-  setName: string;
-  displayName: string;
-  count: number;
-  hasPlot: boolean;
-  onViewPlot: (setId: string) => void;
-}
-
-function SetHeader({
-  setId,
-  setName,
-  displayName,
-  count,
-  hasPlot,
-  onViewPlot,
-}: SetHeaderProps) {
-  return (
-    <div className="flex items-center bg-white border-b border-gray-300 px-2 py-2">
-      <RivalsDeckIcon
-        setName={setName}
-        setId={setId}
-        className="w-8 h-8 mr-2"
-      />
-      <div className="flex-1 min-w-0">
-        <h2 className="text-gray-900 text-base font-medium truncate">
-          {displayName}
-        </h2>
-        {hasPlot && (
-          <button
-            onClick={() => onViewPlot(setId)}
-            className="text-xs text-purple-700 hover:underline flex items-center gap-1"
-          >
-            <CompassIcon className="w-3 h-3 stroke-purple-700" />
-            View plot card
-          </button>
-        )}
-      </div>
-      <span className="text-gray-500 text-sm ml-2">{count}</span>
     </div>
   );
 }

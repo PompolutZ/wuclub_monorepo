@@ -20,8 +20,6 @@ import { useLibrarySearchParams } from "./useLibrarySearchParams";
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
 const validSetIds = validSets.map((s) => s.id);
 
-const CARDS_PER_ROW = 5;
-
 export type VirtualRow =
   | {
       type: "header";
@@ -71,6 +69,7 @@ function useLibraryCards(selectedExpansionIds: string[], searchText: string) {
 
 function Library() {
   const isMobile = useBreakpoint("mobile");
+  const cardsPerRow = isMobile ? 1 : 5;
   const {
     activeTabIndex,
     setActiveTabIndex,
@@ -153,15 +152,15 @@ function Library() {
         count: cards.length,
         hasPlot: setHasPlot(setId as SetId),
       });
-      for (let i = 0; i < cards.length; i += CARDS_PER_ROW) {
+      for (let i = 0; i < cards.length; i += cardsPerRow) {
         rows.push({
           type: "cardRow",
-          cards: cards.slice(i, i + CARDS_PER_ROW),
+          cards: cards.slice(i, i + cardsPerRow),
         });
       }
     }
     return rows;
-  }, [cardsBySet]);
+  }, [cardsBySet, cardsPerRow]);
 
   const stickyIndices = useMemo(
     () => virtualRows.flatMap((r, i) => (r.type === "header" ? [i] : [])),
@@ -174,12 +173,12 @@ function Library() {
         validSets={validSets}
         selectedExpansionIds={selectedExpansionIds}
         onExpansionToggle={handleExpansionToggle}
-        searchText={searchText}
         setSearchText={setSearchText}
         showFilters={showFilters}
         setShowFilters={setShowFilters}
-        cardsBySet={cardsBySet}
-        filteredCards={filteredCards}
+        virtualRows={virtualRows}
+        stickyIndices={stickyIndices}
+        hasCards={filteredCards.length > 0}
         activeTabIndex={activeTabIndex}
         setActiveTabIndex={setActiveTabIndex}
         tabs={TABS}
