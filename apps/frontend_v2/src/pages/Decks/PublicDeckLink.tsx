@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
 import { VIEW_DECK } from "../../constants/routes";
-import { checkCardIsObjective, getCardById } from "@fxdxpz/wudb";
-import { Deck, SetId } from "@fxdxpz/wudb";
+import { checkCardIsObjective, getCardById, Deck, SetId } from "@fxdxpz/wudb";
 
 type PublicDeckLinkProps = {
   deck: Deck;

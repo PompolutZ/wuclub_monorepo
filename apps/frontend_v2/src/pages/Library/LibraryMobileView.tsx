@@ -1,11 +1,12 @@
 import CloseIcon from "@icons/x.svg?react";
 import TogglesIcon from "@icons/sliders.svg?react";
 import { useState } from "react";
-import type { Card } from "@fxdxpz/wudb";
+import type { Card, Set, SetId } from "@fxdxpz/wudb";
 import { factionMembers } from "@fxdxpz/wudb";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
 import { FactionPicture } from "@components/FactionDeckPicture";
-import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
+import { ExpansionSeasonToggle } from "../../shared/components/ExpansionSeasonToggle";
+import SectionTitle from "../../shared/components/SectionTitle";
 import IconButton from "../../shared/components/IconButton";
 import { Overlay } from "../../shared/components/Overlay";
 import { ScrollContainer } from "../../shared/components/ScrollContainer";
@@ -16,9 +17,9 @@ import { LibraryWarbandPicker } from "./LibraryWarbandPicker";
 import { Warband } from "../../shared/components/WarbandPicker";
 
 interface LibraryMobileViewProps {
-  validSetIds: string[];
+  validSets: Set[];
   selectedExpansionIds: string[];
-  setSelectedExpansionIds: (ids: string[]) => void;
+  onExpansionToggle: (setId: SetId) => void;
   searchText: string;
   setSearchText: (text: string) => void;
   showFilters: boolean;
@@ -34,9 +35,9 @@ interface LibraryMobileViewProps {
 }
 
 export function LibraryMobileView({
-  validSetIds,
+  validSets,
   selectedExpansionIds,
-  setSelectedExpansionIds,
+  onExpansionToggle,
   setSearchText,
   showFilters,
   setShowFilters,
@@ -96,11 +97,11 @@ export function LibraryMobileView({
             <CloseIcon />
           </IconButton>
           <div className="overflow-y-auto">
-            <GroupedExpansions
-              key={selectedExpansionIds.join(",")}
-              validSetIds={validSetIds as never[]}
-              selectedExpansions={selectedExpansionIds as never[]}
-              onSelectionChanged={setSelectedExpansionIds as never}
+            <SectionTitle title="Expansions" />
+            <ExpansionSeasonToggle
+              expansions={validSets}
+              selectedIds={selectedExpansionIds as SetId[]}
+              onToggle={onExpansionToggle}
             />
           </div>
         </div>

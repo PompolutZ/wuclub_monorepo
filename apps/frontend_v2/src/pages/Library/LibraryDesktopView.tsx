@@ -1,9 +1,10 @@
-import type { Card } from "@fxdxpz/wudb";
+import type { Card, Set, SetId } from "@fxdxpz/wudb";
 import { factionMembers } from "@fxdxpz/wudb";
 import { CardPicture } from "../../shared/components/CardPicture";
 import { DebouncedInput } from "../../shared/components/DebouncedInput";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
-import { GroupedExpansions } from "../../shared/components/GrouppedExpansions";
+import { ExpansionSeasonToggle } from "../../shared/components/ExpansionSeasonToggle";
+import SectionTitle from "../../shared/components/SectionTitle";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../atoms/FightersInfoList";
 import { ZoomedCard } from "./ZoomedCard";
@@ -11,9 +12,9 @@ import { LibraryWarbandPicker } from "./LibraryWarbandPicker";
 import type { Warband } from "../../shared/components/WarbandPicker";
 
 interface LibraryDesktopViewProps {
-  validSetIds: string[];
+  validSets: Set[];
   selectedExpansionIds: string[];
-  setSelectedExpansionIds: (ids: string[]) => void;
+  onExpansionToggle: (setId: SetId) => void;
   setSearchText: (text: string) => void;
   filteredCards: Card[];
   activeTabIndex: number;
@@ -29,9 +30,9 @@ interface LibraryDesktopViewProps {
 }
 
 export function LibraryDesktopView({
-  validSetIds,
+  validSets,
   selectedExpansionIds,
-  setSelectedExpansionIds,
+  onExpansionToggle,
   setSearchText,
   filteredCards,
   activeTabIndex,
@@ -63,11 +64,11 @@ export function LibraryDesktopView({
                 onChange={setSearchText}
               />
             </section>
-            <GroupedExpansions
-              key={selectedExpansionIds.join(",")}
-              validSetIds={validSetIds as never[]}
-              selectedExpansions={selectedExpansionIds as never[]}
-              onSelectionChanged={setSelectedExpansionIds as never}
+            <SectionTitle title="Expansions" />
+            <ExpansionSeasonToggle
+              expansions={validSets}
+              selectedIds={selectedExpansionIds as SetId[]}
+              onToggle={onExpansionToggle}
             />
           </>
         ) : (

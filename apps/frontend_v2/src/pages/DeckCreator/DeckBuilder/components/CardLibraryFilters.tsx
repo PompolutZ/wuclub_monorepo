@@ -7,7 +7,7 @@ import TogglesIcon from "@icons/sliders.svg?react";
 import CloseIcon from "@icons/x.svg?react";
 import { useMemo, useState } from "react";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
-import ExpansionsToggle from "../../../../components/ExpansionsToggle";
+import { ExpansionSeasonToggle } from "../../../../shared/components/ExpansionSeasonToggle";
 import {
   getAllSetsValidForFormat,
   NEMESIS_FORMAT,
@@ -15,7 +15,7 @@ import {
   warbandsValidForOrganisedPlay,
 } from "@fxdxpz/wudb";
 import type { Faction } from "../../reducer";
-import type { Set as WuSet } from "@fxdxpz/wudb";
+import type { Set as WuSet, SetId } from "@fxdxpz/wudb";
 import NemesisSetsInfo from "./NemesisSetsInfo";
 import { DebouncedInput } from "../../../../shared/components/DebouncedInput";
 import { DeckPlayFormatInfo } from "../../../../shared/components/DeckPlayFormatInfo";
@@ -70,6 +70,21 @@ function CardLibraryFilters({ onSearchTextChange }: CardLibraryFiltersProps) {
 
   const handleFormatChange = (format: string) => {
     setSelectedFormat(format);
+  };
+
+  const handleExpansionToggle = (setId: SetId) => {
+    if (selectedFormat === RIVALS_FORMAT) {
+      const set = validSets.find((s) => s.id === setId);
+      if (set) setSelectedSets([set]);
+    } else {
+      const isSelected = selectedSets.some((s) => s.id === setId);
+      if (isSelected) {
+        setSelectedSets(selectedSets.filter((s) => s.id !== setId));
+      } else {
+        const set = validSets.find((s) => s.id === setId);
+        if (set) setSelectedSets([...selectedSets, set]);
+      }
+    }
   };
 
   const closeAndUpdateFilters = () => {
@@ -145,11 +160,10 @@ function CardLibraryFilters({ onSearchTextChange }: CardLibraryFiltersProps) {
               <NemesisSetsInfo selectedSets={selectedSets} />
             )}
 
-            <ExpansionsToggle
-              singleSet={selectedFormat === RIVALS_FORMAT}
-              expansions={validSets as never[]}
-              selectedExpansions={selectedSets as never[]}
-              onExpansionsChange={setSelectedSets as never}
+            <ExpansionSeasonToggle
+              expansions={validSets}
+              selectedIds={selectedSets.map((s) => s.id as SetId)}
+              onToggle={handleExpansionToggle}
             />
           </section>
         </div>

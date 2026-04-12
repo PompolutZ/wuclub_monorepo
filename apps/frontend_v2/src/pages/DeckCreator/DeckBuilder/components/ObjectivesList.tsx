@@ -60,4 +60,3 @@ export function ObjectivesList({
     </CardSectionPanel>
   );
 }
-

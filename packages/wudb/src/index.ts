@@ -129,6 +129,29 @@ function getAllSetsValidForFormat(format: (typeof ACTIVE_FORMATS)[number]) {
   }
 }
 
+function getSetsBySeason(): { season: string; sets: Set[] }[] {
+  return [
+    {
+      season: "Season 2",
+      sets: [sets.HG, sets.DY, sets.NP],
+    },
+    {
+      season: "Season 1",
+      sets: [
+        sets.BL,
+        sets.ES,
+        sets.PL,
+        sets.CC,
+        sets.RF,
+        sets.WR,
+        sets.EK,
+        sets.RS,
+        sets.RG,
+      ],
+    },
+  ];
+}
+
 export const warbandsValidForOrganisedPlay = [
   // very reasonable in 2nd edition
   factions["u"],
@@ -395,6 +418,7 @@ export {
   checkCardIsUpgrade,
   compareObjectivesByScoreType,
   getAllSetsValidForFormat,
+  getSetsBySeason,
   getCardById,
   getCardNumberFromId,
   getFactionByAbbr,

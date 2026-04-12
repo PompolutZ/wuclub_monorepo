@@ -31,6 +31,7 @@ import {
   NEMESIS_FORMAT,
   RIVALS_FORMAT,
   validateDeckForPlayFormat,
+  factions,
 } from "@fxdxpz/wudb";
 import BottomPanelNavigation from "@components/BottomPanelNavigation";
 import FightersInfoList from "../../../atoms/FightersInfoList";
@@ -38,7 +39,6 @@ import DeckIcon from "@icons/deck.svg?react";
 import WarbandIcon from "@icons/warband.svg?react";
 import { Bot as DrawIcon } from "lucide-react";
 import GloryIcon from "@icons/wu-glory.svg?react";
-import { factions } from "@fxdxpz/wudb";
 
 const CardProxyMaker = lazy(() => import("../CardProxyMaker"));
 const DrawSimulator = lazy(() => import("./atoms/DrawSimulator"));

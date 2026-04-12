@@ -1,11 +1,7 @@
 import { FixedVirtualizedList } from "@components/FixedVirtualizedList";
 import { useMemo } from "react";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "../..";
-import {
-  validateCardForPlayFormat,
-  wucards,
-  wufactions,
-} from "@fxdxpz/wudb";
+import { validateCardForPlayFormat, wucards, wufactions } from "@fxdxpz/wudb";
 import type { Card } from "@fxdxpz/wudb";
 import { toggleCardAction } from "../../reducer";
 import type { CardFilter } from "../../reducer";

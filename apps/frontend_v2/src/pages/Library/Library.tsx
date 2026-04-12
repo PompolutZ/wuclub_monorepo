@@ -8,14 +8,14 @@ import {
   wufactions,
   warbandsValidForOrganisedPlay,
 } from "@fxdxpz/wudb";
-import type { Card } from "@fxdxpz/wudb";
+import type { Card, SetId } from "@fxdxpz/wudb";
 import { useBreakpoint } from "../../hooks/useMediaQuery";
 import { LibraryDesktopView } from "./LibraryDesktopView";
 import { LibraryMobileView } from "./LibraryMobileView";
 import { useLibrarySearchParams } from "./useLibrarySearchParams";
 
 const validSets = getAllSetsValidForFormat(NEMESIS_FORMAT);
-const validSetIds = validSets.map((s) => s.id as string);
+const validSetIds = validSets.map((s) => s.id);
 const universalFactionId = wufactions["u"].id;
 
 const playableWarbands = warbandsValidForOrganisedPlay.filter(
@@ -88,6 +88,28 @@ function Library() {
     setTimeout(() => setZoomedCard(null), 300);
   }, []);
 
+  const handleExpansionToggle = useCallback(
+    (setId: SetId) => {
+      const sid = setId as string;
+      if (selectedExpansionIds.length === validSetIds.length) {
+        setSelectedExpansionIds([sid]);
+      } else if (
+        selectedExpansionIds.length === 1 &&
+        selectedExpansionIds[0] === sid
+      ) {
+        setSelectedExpansionIds(validSetIds);
+      } else {
+        const isSelected = selectedExpansionIds.includes(sid);
+        setSelectedExpansionIds(
+          isSelected
+            ? selectedExpansionIds.filter((id) => id !== sid)
+            : [...selectedExpansionIds, sid],
+        );
+      }
+    },
+    [selectedExpansionIds, setSelectedExpansionIds],
+  );
+
   const filteredCards = useLibraryCards(selectedExpansionIds, searchText);
 
   const cardsBySet = useMemo(() => {
@@ -106,9 +128,9 @@ function Library() {
   if (isMobile) {
     return (
       <LibraryMobileView
-        validSetIds={validSetIds}
+        validSets={validSets}
         selectedExpansionIds={selectedExpansionIds}
-        setSelectedExpansionIds={setSelectedExpansionIds}
+        onExpansionToggle={handleExpansionToggle}
         searchText={searchText}
         setSearchText={setSearchText}
         showFilters={showFilters}
@@ -127,9 +149,9 @@ function Library() {
 
   return (
     <LibraryDesktopView
-      validSetIds={validSetIds}
+      validSets={validSets}
       selectedExpansionIds={selectedExpansionIds}
-      setSelectedExpansionIds={setSelectedExpansionIds}
+      onExpansionToggle={handleExpansionToggle}
       setSearchText={setSearchText}
       filteredCards={filteredCards}
       activeTabIndex={activeTabIndex}
