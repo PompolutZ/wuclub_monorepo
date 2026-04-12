@@ -135,6 +135,11 @@ export function LibraryDesktopView({
     overlayRef.current.style.opacity = scrollTop >= activeStart ? "1" : "0";
   };
 
+  // Reset active header when data changes (expansion toggle, search)
+  useLayoutEffect(() => {
+    activeIdxRef.current = -1;
+  }, [stickyIndices]);
+
   // Sync after virtualizer re-measures items
   useLayoutEffect(() => stickyUpdateRef.current());
 
