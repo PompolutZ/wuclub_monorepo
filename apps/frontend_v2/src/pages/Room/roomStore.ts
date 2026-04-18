@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from "react";
 import type { Card, SetId } from "@fxdxpz/wudb";
 import { initialSetupStep, type SetupStepId } from "./setupSteps";
 
@@ -39,6 +40,31 @@ const INDEX_KEY = "wuclub:rooms-by-host-deck";
 
 const rooms = new Map<string, Room>();
 const hostDeckIndex = new Map<string, string>();
+const listeners = new Map<string, Set<() => void>>();
+
+function notify(roomId: string) {
+  listeners.get(roomId)?.forEach((l) => l());
+}
+
+function subscribe(roomId: string, listener: () => void) {
+  let set = listeners.get(roomId);
+  if (!set) {
+    set = new Set();
+    listeners.set(roomId, set);
+  }
+  set.add(listener);
+  return () => {
+    set!.delete(listener);
+    if (set!.size === 0) listeners.delete(roomId);
+  };
+}
+
+export function useRoom(roomId: string): Room | undefined {
+  return useSyncExternalStore(
+    (listener) => subscribe(roomId, listener),
+    () => getRoom(roomId),
+  );
+}
 
 function roomKey(roomId: string) {
   return `${ROOM_PREFIX}${roomId}`;
@@ -132,4 +158,33 @@ export function getRoom(roomId: string): Room | undefined {
   const restored = readRoomFromStorage(roomId);
   if (restored) rooms.set(roomId, restored);
   return restored;
+}
+
+type FactionLike = {
+  id: string;
+  name: string;
+  abbr: string;
+  displayName: string;
+};
+
+export function setHostWarband(roomId: string, faction: FactionLike) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const next: Room = {
+    ...room,
+    host: {
+      ...room.host,
+      warband: {
+        id: faction.id,
+        name: faction.name,
+        abbr: faction.abbr,
+        displayName: faction.displayName,
+        fighters: [],
+      },
+    },
+    setupStep: "starting-hand",
+  };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
 }

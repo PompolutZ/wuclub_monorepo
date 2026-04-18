@@ -1,14 +1,17 @@
 import { getRouteApi, Link } from "@tanstack/react-router";
+import { FactionPicture } from "@components/FactionDeckPicture";
+import { FighterCardsPortal } from "@components/FighterCardsPortal";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
-import { getRoom, type RoomPlayer } from "./roomStore";
+import { useRoom, type RoomPlayer } from "./roomStore";
 import { SetupStepper } from "./SetupStepper";
+import { WarbandStep } from "./WarbandStep";
 
 const route = getRouteApi("/room/$id");
 
 const RoomPage = () => {
   const { id } = route.useParams();
   const isMobile = useBreakpoint("mobile");
-  const room = getRoom(id);
+  const room = useRoom(id);
 
   if (isMobile) {
     return (
@@ -40,10 +43,14 @@ const RoomPage = () => {
 
       <SetupStepper current={room.setupStep} />
 
-      <div className="grid grid-cols-2 gap-6">
-        <PlayerCard role="Host" player={room.host} />
-        <PlayerCard role="Guest" player={room.guest} />
-      </div>
+      {room.setupStep === "warband" ? (
+        <WarbandStep roomId={id} current={room.host.warband} />
+      ) : (
+        <div className="grid grid-cols-2 gap-6">
+          <PlayerCard role="Host" player={room.host} />
+          <PlayerCard role="Guest" player={room.host} mirror />
+        </div>
+      )}
     </div>
   );
 };
@@ -53,17 +60,32 @@ export default RoomPage;
 const PlayerCard = ({
   role,
   player,
+  mirror,
 }: {
   role: string;
   player: RoomPlayer | null;
+  mirror?: boolean;
 }) => {
   return (
-    <section className="border rounded-md p-4 space-y-2">
-      <h2 className="text-xs uppercase text-gray-500">{role}</h2>
+    <section className="border rounded-md p-4 space-y-3">
+      <div className="flex items-center justify-between">
+        <h2 className="text-xs uppercase text-gray-500">{role}</h2>
+        {mirror && (
+          <span className="text-[10px] uppercase text-gray-400">
+            mirroring host
+          </span>
+        )}
+      </div>
       {player ? (
         <>
-          <p className="font-semibold">{player.deck.name}</p>
-          <p className="text-sm text-gray-600">{player.warband.displayName}</p>
+          <div className="flex items-center gap-3">
+            <FactionPicture faction={player.warband.name} size="w-12 h-12" />
+            <div className="flex-1">
+              <p className="font-semibold">{player.warband.displayName}</p>
+              <p className="text-sm text-gray-600">{player.deck.name}</p>
+              <FighterCardsPortal faction={player.warband.name} />
+            </div>
+          </div>
           <p className="text-xs text-gray-500">
             {player.deck.cards.length} cards · hand {player.hand.length}
           </p>
