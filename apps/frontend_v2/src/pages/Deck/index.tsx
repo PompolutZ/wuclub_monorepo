@@ -12,11 +12,13 @@ const Deck2 = () => {
         | undefined,
   });
 
-  if (!state?.deck) return null;
+  // During navigation away from this route, TanStack Router briefly re-renders
+  // with the incoming location's state, which may not match our shape.
+  if (!state?.deck?.deck || !Array.isArray(state.deck.deck)) return null;
 
   const deck = state.deck;
   const cards = state.deck.deck.map((id) => getCardById(id as CardId));
-  const factionId = state.deck && state.deck.deckId.split("-")[0];
+  const factionId = state.deck.deckId.split("-")[0];
   const canUpdateOrDelete = state.canUpdateOrDelete;
 
   return (
