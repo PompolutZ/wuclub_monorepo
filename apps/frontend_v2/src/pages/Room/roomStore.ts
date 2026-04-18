@@ -167,6 +167,19 @@ type FactionLike = {
   displayName: string;
 };
 
+export function setHostHand(roomId: string, hand: Card[]) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const next: Room = {
+    ...room,
+    host: { ...room.host, hand },
+    setupStep: "initiative",
+  };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
 export function setHostWarband(roomId: string, faction: FactionLike) {
   const room = getRoom(roomId);
   if (!room) return;

@@ -11,6 +11,7 @@ type Props = {
   objectives: DeckCard[];
   gambits: DeckCard[];
   upgrades: DeckCard[];
+  onHandChange?: (hand: DeckCard[]) => void;
 };
 
 const btnClass =
@@ -105,6 +106,7 @@ export default function DrawSimulator({
   objectives,
   gambits,
   upgrades,
+  onHandChange,
 }: Props) {
   const isMobile = useBreakpoint("mobile");
   const powerPool = [...gambits, ...upgrades];
@@ -123,7 +125,7 @@ export default function DrawSimulator({
     mulliganObjectives,
     mulliganPowers,
     toggleCard,
-  } = useDrawSimulator(objectives, powerPool);
+  } = useDrawSimulator(objectives, powerPool, onHandChange);
 
   // Reset after re-render via useEffect
   useEffect(() => {

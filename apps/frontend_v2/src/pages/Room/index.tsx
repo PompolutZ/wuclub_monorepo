@@ -1,10 +1,12 @@
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { FactionPicture } from "@components/FactionDeckPicture";
 import { FighterCardsPortal } from "@components/FighterCardsPortal";
+import { CardPicture } from "@components/CardPicture";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { useRoom, type RoomPlayer } from "./roomStore";
 import { SetupStepper } from "./SetupStepper";
 import { WarbandStep } from "./WarbandStep";
+import { DrawCardsStep } from "./DrawCardsStep";
 
 const route = getRouteApi("/room/$id");
 
@@ -45,6 +47,8 @@ const RoomPage = () => {
 
       {room.setupStep === "warband" ? (
         <WarbandStep roomId={id} current={room.host.warband} />
+      ) : room.setupStep === "starting-hand" ? (
+        <DrawCardsStep roomId={id} deckCards={room.host.deck.cards} />
       ) : (
         <div className="grid grid-cols-2 gap-6">
           <PlayerCard role="Host" player={room.host} />
@@ -89,10 +93,23 @@ const PlayerCard = ({
           <p className="text-xs text-gray-500">
             {player.deck.cards.length} cards · hand {player.hand.length}
           </p>
+          {player.hand.length > 0 && <HandStrip hand={player.hand} />}
         </>
       ) : (
         <p className="text-gray-400 italic">Waiting…</p>
       )}
     </section>
+  );
+};
+
+const HandStrip = ({ hand }: { hand: RoomPlayer["hand"] }) => {
+  return (
+    <div className="flex gap-2 overflow-x-auto py-2">
+      {hand.map((card) => (
+        <div key={card.id} className="shrink-0 w-28">
+          <CardPicture card={card} />
+        </div>
+      ))}
+    </div>
   );
 };
