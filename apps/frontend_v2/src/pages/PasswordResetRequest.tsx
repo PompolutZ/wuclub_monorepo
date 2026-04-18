@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import { FirebaseContext } from "../firebase";
 
 function PasswordResetRequest() {
@@ -9,15 +9,15 @@ function PasswordResetRequest() {
   const [errorMessage, setErrorMessage] = useState("");
   const firebase = useContext(FirebaseContext);
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (redirectCountdown <= 0) {
       clearInterval(intervalRef.current);
-      history.replace("/login");
+      navigate({ to: "/login", replace: true });
     }
     return () => clearInterval(intervalRef.current);
-  }, [redirectCountdown, history]);
+  }, [redirectCountdown, navigate]);
 
   const handleClick = async () => {
     try {

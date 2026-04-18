@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 interface IconLinkProps {
   active?: boolean;
@@ -18,7 +18,8 @@ function IconLink({ children, label, to, active, className }: IconLinkProps) {
       className={`${
         active ? "bg-purple-500 text-white" : "text-purple-900"
       } group flex rounded-md items-center px-2 py-2 text-sm ${className}`}
-      to={to}
+      to={to.pathname}
+      state={to.state as never}
     >
       {children}
       <span className={`${active ? "text-white" : "text-gray-900"}`}>

@@ -1,17 +1,20 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import Footer from "../../components/Footer";
 import { AutosuggestSearch } from "./Search";
 import { AdvRollBtn } from "../../shared/components/DiceBox";
 
 const Home = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleGlobalSearchClick = (
     payload: { kind: "warband"; id: string } | { kind: "card"; id: string },
   ) => {
     if (payload.kind === "warband") {
-      history.push(`/library?view=warbands&selected=${payload.id}`);
+      navigate({
+        to: "/library",
+        search: { view: "warbands", selected: payload.id },
+      });
     } else {
-      history.push(`/view/card/${payload.id}`);
+      navigate({ to: "/view/card/$id", params: { id: payload.id } });
     }
   };
 

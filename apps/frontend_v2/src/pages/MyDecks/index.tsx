@@ -1,7 +1,7 @@
 import { DeleteConfirmationDialog } from "@components/DeleteConfirmationDialog";
 import { ScrollContainer } from "@components/ScrollContainer";
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import useAuthUser from "../../hooks/useAuthUser";
 import { useDeleteDeck } from "../../shared/hooks/useDeleteDeck";
 import { AnonymousUserDecksStorageInfo } from "./AnonymousUserDeckStorageInfo";
@@ -100,7 +100,11 @@ function MyDecksPage() {
             <div className="flex-1 flex items-center justify-center">
               <p>
                 You don't have any decks yet.{" "}
-                <Link className="text-purple-700 font-bold" to="/deck/create">
+                <Link
+                  className="text-purple-700 font-bold"
+                  to="/deck/$action"
+                  params={{ action: "create" }}
+                >
                   Let's make one!
                 </Link>
               </p>

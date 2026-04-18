@@ -1,11 +1,15 @@
-import { useParams } from "react-router-dom";
+import { getRouteApi } from "@tanstack/react-router";
 import { FixedVirtualizedList } from "../../shared/components/FixedVirtualizedList";
 import PublicDeckLink from "./PublicDeckLink";
 import { useQueryDecks } from "./useDecksQuery";
 import { FactionName } from "@fxdxpz/wudb";
 
+const route = getRouteApi("/decks/$faction");
+
 export default function Deck() {
-  const { faction } = useParams<{ faction: FactionName | "all" }>();
+  const { faction } = route.useParams() as {
+    faction: FactionName | "all";
+  };
   const { data, isFetching, hasNextPage, fetchNextPage } = useQueryDecks(
     faction === "all" ? undefined : faction,
   );

@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import AvatarPicker from "../components/AvatarPicker";
-import { MY_DECKS } from "../constants/routes";
 import { FirebaseContext } from "../firebase";
 import { useCreateUser } from "./UserProfile/queries";
 
@@ -48,7 +47,7 @@ function EmailPasswordForm({
 }
 
 function SignUp() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const firebase = useContext(FirebaseContext);
   const { mutateAsync: create } = useCreateUser();
   const [signUpError, setError] = useState<string | null>(null);
@@ -68,7 +67,7 @@ function SignUp() {
 
       await create(payload as never);
 
-      history.push(MY_DECKS);
+      navigate({ to: "/mydecks" });
     } catch (err) {
       setError((err as { message?: string }).message ?? "An error occurred");
     }

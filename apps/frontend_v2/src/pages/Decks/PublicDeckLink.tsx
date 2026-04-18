@@ -1,10 +1,9 @@
 import { DeckTitle } from "@/shared/components/DeckTitle";
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
-import { VIEW_DECK } from "../../constants/routes";
 import { checkCardIsObjective, getCardById, Deck, SetId } from "@fxdxpz/wudb";
 
 type PublicDeckLinkProps = {
@@ -38,16 +37,17 @@ export default function PublicDeckLink({ deck }: PublicDeckLinkProps) {
         <DeckTitle sets={sets}>
           <Link
             className="text-xl truncate hover:text-purple-700"
-            to={{
-              pathname: `${VIEW_DECK}/${deckId}`,
-              state: {
+            to="/view/deck/$id"
+            params={{ id: deckId }}
+            state={
+              {
                 deck: {
                   ...deck,
                   id: deckId,
                 },
                 canUpdateOrDelete: false,
-              },
-            }}
+              } as never
+            }
           >
             {name}
           </Link>

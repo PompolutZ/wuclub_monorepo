@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import svgr from "vite-plugin-svgr";
 import path from "path";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +16,16 @@ export default defineConfig({
       "@services": path.resolve(__dirname, "./src/services"),
     },
   },
-  plugins: [react(), svgr()],
+  plugins: [
+    tanstackRouter({
+      target: "react",
+      autoCodeSplitting: true,
+      routesDirectory: "./src/routes",
+      generatedRouteTree: "./src/routeTree.gen.ts",
+    }),
+    react(),
+    svgr(),
+  ],
   build: {
     rollupOptions: {
       output: {
@@ -23,12 +33,6 @@ export default defineConfig({
           if (id.includes("wudb/db")) return "db";
           if (id.includes("node_modules/firebase")) return "firebase";
           if (id.includes("node_modules/@tanstack")) return "tanstack";
-          if (
-            id.includes("node_modules/react-router-dom") ||
-            id.includes("node_modules/react-router/") ||
-            id.includes("node_modules/history")
-          )
-            return "router";
         },
       },
     },

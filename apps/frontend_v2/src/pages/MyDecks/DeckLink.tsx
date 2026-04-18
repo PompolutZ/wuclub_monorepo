@@ -1,10 +1,9 @@
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import { Deck } from "@fxdxpz/schema";
 import { TrashIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import ScoringOverview from "../../atoms/ScoringOverview";
 import SetsList from "../../atoms/SetsList";
-import { VIEW_DECK } from "../../constants/routes";
 import { checkCardIsObjective, getCardById } from "@fxdxpz/wudb";
 import type { CardId, SetId } from "@fxdxpz/wudb";
 import { DeckTitle } from "@/shared/components/DeckTitle";
@@ -39,13 +38,14 @@ export const DeckLink = ({ onDelete, deck }: Props) => {
         <DeckTitle sets={deck.sets as SetId[]}>
           <Link
             className="text-xl block truncate"
-            to={{
-              pathname: `${VIEW_DECK}/${deck.deckId}`,
-              state: {
+            to="/view/deck/$id"
+            params={{ id: deck.deckId }}
+            state={
+              {
                 deck,
                 canUpdateOrDelete: true,
-              },
-            }}
+              } as never
+            }
           >
             {deck.name}
           </Link>
