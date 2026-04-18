@@ -128,25 +128,35 @@ const Firebase2 = (function (): FirebaseInstance {
         auth,
         async (user) => {
           if (user) {
-            const token = await user.getIdToken();
-            const response = await api.v2.users.$get(undefined, {
-              headers: {
-                authtoken: token,
-              },
-            });
-            const userInfo = await response.json();
+            try {
+              const token = await user.getIdToken();
+              const response = await api.v2.users.$get(undefined, {
+                headers: {
+                  authtoken: token,
+                },
+              });
+              const userInfo = await response.json();
 
-            if (userInfo) {
-              next({
-                ...userInfo,
-                uid: user.uid,
-                isNew: false,
-              });
-            } else {
-              next({
-                uid: user.uid,
-                isNew: true,
-              });
+              if (userInfo) {
+                next({
+                  ...userInfo,
+                  uid: user.uid,
+                  isNew: false,
+                });
+              } else {
+                next({
+                  uid: user.uid,
+                  isNew: true,
+                });
+              }
+            } catch (error) {
+              // API unreachable (e.g. apiv2 not running locally) or token
+              // failure — treat as logged-out rather than crashing.
+              logger.error(
+                "Failed to resolve user info from API",
+                error as Error,
+              );
+              fallback();
             }
           } else {
             logger.info("No authenticated user, using fallback");
