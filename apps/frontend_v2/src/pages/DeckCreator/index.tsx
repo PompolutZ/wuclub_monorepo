@@ -15,7 +15,7 @@ import {
 } from "./effects";
 import DeckBuilder from "./DeckBuilder";
 import { useStateCreator } from "./useStateCreator";
-import { useSaveDeck } from "@/shared/hooks/useSaveDeck";
+import { useCreateDeck } from "@/shared/hooks/useCreateDeck";
 import { useUpdateDeck } from "@/shared/hooks/useUpdateDeck";
 
 type Dispatch = (action: DeckBuilderAction) => void;
@@ -71,13 +71,13 @@ function DeckBuilderContextProvider({
   children: React.ReactNode;
   deck: DeckBuilderState | null;
 }) {
-  const { mutateAsync: saveDeck } = useSaveDeck();
+  const { mutateAsync: createDeck } = useCreateDeck();
   const { mutateAsync: updateDeck } = useUpdateDeck();
   const [state, dispatch] = useEffectReducer(
     deckBuilderReducer,
     initialiseState(deck) as never,
     {
-      saveDeck: apiSaveDeckAsync(saveDeck as never) as never,
+      saveDeck: apiSaveDeckAsync(createDeck as never) as never,
       updateDeck: apiUpdateDeckAsync(updateDeck as never) as never,
       addKeyToLocalStorage,
       removeKeyFromLocalStorage,

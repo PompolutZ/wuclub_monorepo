@@ -33,7 +33,7 @@ function buildPipeline({ faction, edition, fuid }: GetAllDecksQuery) {
     // missing edition means that deck was created for the first edition
     // but since we share db, we do not want to include decks with edition in
     // the requests made by the frontend
-    edition: edition ? edition : { $exists: false }
+    edition: edition ? edition : { $exists: false },
   };
 
   if (fuid) {

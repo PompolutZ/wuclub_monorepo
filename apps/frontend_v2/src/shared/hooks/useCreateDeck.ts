@@ -4,9 +4,9 @@ import Firebase from "../../firebase";
 import { api } from "../../services/api";
 import { offlineDB } from "../../services/db";
 import { DeckPayload } from "@fxdxpz/schema";
-import { USER_DECKS_KEY } from "../../services/queryKeys";
+import { PUBLIC_DECKS_KEY, USER_DECKS_KEY } from "../../services/queryKeys";
 
-export const useSaveDeck = () => {
+export const useCreateDeck = () => {
   const queryClient = useQueryClient();
   const user = useAuthUser();
   return useMutation({
@@ -41,6 +41,7 @@ export const useSaveDeck = () => {
       queryClient.invalidateQueries({
         queryKey: [USER_DECKS_KEY, { user: user?.fuid ?? "anon" }],
       });
+      queryClient.invalidateQueries({ queryKey: [PUBLIC_DECKS_KEY] });
     },
   });
 };

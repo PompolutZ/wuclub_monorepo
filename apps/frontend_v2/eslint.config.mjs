@@ -1,6 +1,11 @@
 import config from "@fxdxpz/eslint-config/react.js";
 
 export default [
+  {
+    // Auto-generated — overwritten on every `apiv2 build:client` /
+    // `tanstack-router-plugin` vite run, so linting/formatting them churns.
+    ignores: ["src/routeTree.gen.ts", "src/services/app.ts"],
+  },
   ...config,
   {
     rules: {

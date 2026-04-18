@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import type { Warband } from "../../shared/components/WarbandPicker";
 
 const VIEW_KEY = "view";
@@ -15,10 +15,15 @@ export function useLibrarySearchParams({
   validSetIds,
   playableWarbands,
 }: Options) {
-  const { search, pathname } = useLocation();
-  const history = useHistory();
+  const { searchStr, pathname } = useLocation({
+    select: (loc) => ({ searchStr: loc.searchStr, pathname: loc.pathname }),
+  });
+  const navigate = useNavigate();
 
-  const params = useMemo(() => new URLSearchParams(search), [search]);
+  const params = useMemo(
+    () => new URLSearchParams(searchStr ?? ""),
+    [searchStr],
+  );
 
   const isWarbands = params.get(VIEW_KEY) === VIEW_WARBANDS;
   const activeTabIndex = isWarbands ? 1 : 0;
@@ -40,14 +45,18 @@ export function useLibrarySearchParams({
 
   const replaceParams = useCallback(
     (updater: (p: URLSearchParams) => void) => {
-      const next = new URLSearchParams(search);
+      const next = new URLSearchParams(searchStr ?? "");
       updater(next);
       // view=decks is default — omit it
       if (next.get(VIEW_KEY) !== VIEW_WARBANDS) next.delete(VIEW_KEY);
-      const qs = next.toString();
-      history.replace({ pathname, search: qs ? `?${qs}` : "" });
+      const nextSearch = Object.fromEntries(next.entries());
+      navigate({
+        to: pathname,
+        search: nextSearch as never,
+        replace: true,
+      });
     },
-    [history, pathname, search],
+    [navigate, pathname, searchStr],
   );
 
   const setActiveTabIndex = useCallback(

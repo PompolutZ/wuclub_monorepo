@@ -4,7 +4,7 @@ import { useDeleteDeck } from "@/shared/hooks/useDeleteDeck";
 import { DeckIssues } from "@components/DeckIssues";
 import { DeckPlayFormatsValidity } from "@components/DeckPlayFormatsValidity";
 import { lazy, memo, Suspense, useState, useMemo } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import ScoringOverview from "../../../atoms/ScoringOverview";
 import { ModalPresenter } from "../../../main";
 import { CardListSectionHeader } from "../../../shared/components/CardListSectionHeader";
@@ -85,7 +85,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
     updatedutc,
   } = props;
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const isMobile = useBreakpoint("mobile");
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isPrivate, setIsPrivate] = useState(props.private);
@@ -152,9 +152,13 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
     try {
       await deleteUserDeck(id);
       setIsDeleteDialogVisible(false);
-      history.replace({
-        pathname: "/mydecks",
-        state: { deck: { deckId: id, name }, status: "DELETED" },
+      navigate({
+        to: "/mydecks",
+        replace: true,
+        state: {
+          deck: { deckId: id, name },
+          status: "DELETED",
+        } as never,
       });
     } catch (e) {
       logger.error("Failed to delete deck", e as Error, { deckId: id });

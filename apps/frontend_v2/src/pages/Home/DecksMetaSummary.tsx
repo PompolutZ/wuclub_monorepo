@@ -1,6 +1,6 @@
 import { FactionDeckPicture } from "@components/FactionDeckPicture";
 import { DeckStat } from "@fxdxpz/schema";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 const DecksCount = ({ count }: { count: number }) => {
   if (count > 0) {
@@ -15,7 +15,8 @@ function DeckMetaSummary({ faction, count }: DeckStat) {
     <div className="flex justify-center items-center p-6 group">
       <Link
         className="relative text-center bg-accent3-700 rounded w-full h-32 lg:w-32 text-6xl flex justify-end items-end p-2 transition-transform duration-200 transform group-hover:scale-105"
-        to={`/decks/${faction}`}
+        to="/decks/$faction"
+        params={{ faction }}
       >
         <FactionDeckPicture
           size="large"

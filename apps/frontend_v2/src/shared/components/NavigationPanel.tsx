@@ -1,7 +1,12 @@
 import React, { useState, useContext } from "react";
-import useAuthUser from "../../hooks/useAuthUser";
-import * as ROUTES from "../../constants/routes";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import useAuthUser, { useAuthState } from "../../hooks/useAuthUser";
+import {
+  createLink,
+  Link,
+  useLocation,
+  useNavigate,
+  type LinkComponent,
+} from "@tanstack/react-router";
 import Logo from "./Logo";
 import { animated, useSpring, useTransition } from "@react-spring/web";
 import MenuIcon from "@icons/menu.svg?react";
@@ -42,61 +47,80 @@ export default function NavigationPanel() {
   );
 }
 
-function AnimatedLink(
-  props: React.ComponentPropsWithoutRef<typeof Link> & { container?: string },
-) {
+// Use createLink so AnimatedLink accepts the same typed `to`/`params` that
+// TanStack's Link does — wrapping Link in a plain component collapses the
+// discriminated prop union and breaks parameterized routes.
+type AnimatedLinkBaseProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  container?: string;
+};
+
+const AnimatedLinkBase = React.forwardRef<
+  HTMLAnchorElement,
+  AnimatedLinkBaseProps
+>(({ container, children, ...rest }, ref) => {
   const [hovering, setHovering] = useState(false);
-  const [ref, { width }] = useMeasure();
+  const [spanRef, { width }] = useMeasure();
   const spring = useSpring({
     width: hovering ? width * 0.33 : 0,
-    config: {
-      duration: 175,
-    },
+    config: { duration: 175 },
   });
   return (
-    <div className={`relative ${props.container ?? ""}`}>
-      <Link {...props}>
+    <div className={`relative ${container ?? ""}`}>
+      <a ref={ref} {...rest}>
         <span
-          ref={ref}
+          ref={spanRef}
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
         >
-          {props.children}
+          {children}
         </span>
-      </Link>
+      </a>
       <animated.div
         className="absolute h-[2px] -mb-1 bg-purple-500"
         style={spring}
       ></animated.div>
     </div>
   );
-}
+});
+
+const AnimatedLink: LinkComponent<typeof AnimatedLinkBase> =
+  createLink(AnimatedLinkBase);
 
 function UserMenu() {
   const auth = useAuthUser();
+  const { isAdmin } = useAuthState();
   const firebase = useContext(FirebaseContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <>
       <AnimatedLink
         className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-        to={ROUTES.MY_DECKS}
+        to="/mydecks"
       >
         My Decks
       </AnimatedLink>
       <AnimatedLink
         className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-        to={ROUTES.SETTINGS}
+        to="/settings"
       >
         Settings
       </AnimatedLink>
+
+      {isAdmin && (
+        <AnimatedLink
+          className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+          to="/admin"
+        >
+          Admin
+        </AnimatedLink>
+      )}
 
       {auth && (
         <>
           <AnimatedLink
             className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-            to={ROUTES.PROFILE}
+            to="/profile"
           >
             Profile
           </AnimatedLink>
@@ -111,7 +135,9 @@ function UserMenu() {
           <a
             href="#"
             className="block lg:ml-auto mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-            onClick={() => firebase.signOut?.().then(() => history.push("/"))}
+            onClick={() =>
+              firebase.signOut?.().then(() => navigate({ to: "/" }))
+            }
           >
             Sign Out
           </a>
@@ -130,7 +156,7 @@ function UserMenu() {
           <AnimatedLink
             className="cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
             container="block mr-8 lg:ml-auto"
-            to={ROUTES.SIGN_IN}
+            to="/login"
           >
             Sign In
           </AnimatedLink>
@@ -138,7 +164,8 @@ function UserMenu() {
       )}
       <Link
         className="hidden lg:block focus:bg-purple-500 hover:bg-purple-500 btn btn-purple mr-8 cursor-pointer px-4 py-2 font-bold"
-        to="/deck/create"
+        to="/deck/$action"
+        params={{ action: "create" }}
       >
         + New Deck
       </Link>
@@ -221,26 +248,28 @@ const Menu = ({
       )}
       <Link
         className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700 lg:hidden text-purple-900"
-        to="/deck/create"
+        to="/deck/$action"
+        params={{ action: "create" }}
       >
         Create New Deck
       </Link>
 
       <AnimatedLink
         className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-        to={ROUTES.BROWSE_ALL_DECKS}
+        to="/decks/$faction"
+        params={{ faction: "all" }}
       >
         Public decks
       </AnimatedLink>
       <AnimatedLink
         className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-        to={`${ROUTES.BOARDS_BASE}`}
+        to="/boards"
       >
         Boards
       </AnimatedLink>
       <AnimatedLink
         className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
-        to={ROUTES.CARDS_LIBRARY}
+        to="/library"
       >
         Library
       </AnimatedLink>

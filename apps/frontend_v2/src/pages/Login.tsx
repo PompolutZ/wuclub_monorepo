@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { FirebaseContext } from "../firebase";
 import SectionTitle from "../shared/components/SectionTitle";
-import { MY_DECKS, PROFILE, SIGN_UP } from "../constants/routes";
 import GoogleButton from "react-google-button";
 
 function EmailPasswordForm({
@@ -59,7 +58,7 @@ const CreateAccount = () => {
   return (
     <div className="flex space-x-2">
       <div>New to the WUnderworlds?</div>
-      <Link className="text-purple-700 font-bold" to={SIGN_UP}>
+      <Link className="text-purple-700 font-bold" to="/user/signup">
         Sign Up
       </Link>
     </div>
@@ -67,7 +66,7 @@ const CreateAccount = () => {
 };
 
 function Login() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [loginError, setLoginError] = useState<string | null>(
     undefined as unknown as null,
   );
@@ -77,9 +76,13 @@ function Login() {
     const unsubscribe = firebase.onAuthUserListener(
       async (user) => {
         if ((user as { isNew?: boolean }).isNew) {
-          history.replace({ pathname: PROFILE, state: user });
+          navigate({
+            to: "/profile",
+            replace: true,
+            state: user as never,
+          });
         } else {
-          history.replace(MY_DECKS);
+          navigate({ to: "/mydecks", replace: true });
         }
       },
       () => {},
@@ -88,7 +91,7 @@ function Login() {
     return () => {
       unsubscribe();
     };
-  }, [firebase, history]);
+  }, [firebase, navigate]);
 
   const handleEmailAndPasswordLogin = async (
     username: string,
@@ -103,7 +106,7 @@ function Login() {
       );
 
       if (credentials?.user) {
-        history.replace(MY_DECKS);
+        navigate({ to: "/mydecks", replace: true });
       }
     } catch (err) {
       const error = err as { code?: string; message?: string };

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { getRouteApi } from "@tanstack/react-router";
 import {
   getSetById,
   validateCardForPlayFormat,
@@ -8,8 +8,10 @@ import {
 import { CardPicture } from "../shared/components/CardPicture";
 import { ExpansionPicture } from "../shared/components/ExpansionPicture";
 
+const route = getRouteApi("/view/card/$id");
+
 function Card() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = route.useParams();
   const card = cards[id as keyof typeof cards];
   const [isValid, isForsakenNemesis, isRestrictedNemesis] =
     validateCardForPlayFormat(card);

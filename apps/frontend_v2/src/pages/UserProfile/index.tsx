@@ -79,7 +79,9 @@ function UserProfile() {
           disabled={
             !avatar ||
             !username ||
-            (data && data.displayName === username && data.avatar === avatar)
+            Boolean(
+              data && data.displayName === username && data.avatar === avatar,
+            )
           }
           onClick={save}
         >

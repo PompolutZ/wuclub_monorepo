@@ -1,3 +1,4 @@
+import { app as admin } from "@/app/routes/admin";
 import { app as decks } from "@/app/routes/decks";
 import { app as users } from "@/app/routes/users";
 import { app as stats } from "@/app/routes/stats";
@@ -11,7 +12,7 @@ export const app = new Hono()
   .use(logger())
   .route("/users", users)
   .route("/decks", decks)
-  .route("/stats", stats);
+  .route("/stats", stats)
+  .route("/admin", admin);
 
 export type AppRoutes = typeof app;
-

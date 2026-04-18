@@ -21,7 +21,7 @@
       "@services/*": ["./src/services/*"]
     }
   },
-  "include": ["src", "postcss.config.js"],
+  "include": ["src", "postcss.config.js", "src/routeTree.gen.ts"],
   "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

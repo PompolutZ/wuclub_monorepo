@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "@tanstack/react-router";
 import {
   CHAMPIONSHIP_FORMAT,
   NEMESIS_FORMAT,
@@ -39,8 +39,13 @@ type StateCreatorResult =
   | { action: string; state: DeckBuilderState; previous?: PreviousDeck };
 
 export function useStateCreator(): StateCreatorResult {
-  const { action, data } = useParams<{ action: string; data: string }>();
-  const { state } = useLocation<DeckRouteState | null>();
+  const { action, data } = useParams({ strict: false }) as {
+    action?: string;
+    data?: string;
+  };
+  const state = useLocation({
+    select: (loc) => loc.state as unknown as DeckRouteState | null,
+  });
 
   switch (action) {
     case "create":
@@ -77,7 +82,7 @@ export function useStateCreator(): StateCreatorResult {
     }
 
     case "transfer": {
-      const [transferFormat, ...cardIds] = data.split(",");
+      const [transferFormat, ...cardIds] = (data ?? "").split(",");
       const decode = getDecodingFunction(transferFormat);
       const decodedCards = cardIds
         .map((foreignId) => {

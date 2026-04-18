@@ -3,7 +3,7 @@ import AddCardIcon from "@icons/add-card.svg?react";
 import DeckIcon from "@icons/deck.svg?react";
 import WarbandIcon from "@icons/warband.svg?react";
 import React, { Children, useMemo, useState } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Navigate, useParams } from "@tanstack/react-router";
 import useMeasure from "react-use-measure";
 import { generateDeckId } from "shared/helpers";
 import { useDeckBuilderDispatcher, useDeckBuilderState } from "..";
@@ -71,7 +71,7 @@ interface MobileViewProps {
 
 const MobileView = ({ children, factionId }: MobileViewProps) => {
   const isMobile = useBreakpoint("mobile");
-  const { action } = useParams<{ action: string }>();
+  const { action } = useParams({ strict: false }) as { action?: string };
   const childrenArray = Children.toArray(children);
   const [activeTabIndex, setActiveTabIndex] = useState(
     action && action !== "create" ? 1 : 0,
@@ -161,7 +161,7 @@ function DeckBuilder({
   };
 
   if (status === STATUS_SAVED) {
-    return <Redirect to="/mydecks" />;
+    return <Navigate to="/mydecks" />;
   }
 
   return (

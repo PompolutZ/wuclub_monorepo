@@ -1,85 +1,39 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import Firebase from "../../firebase";
 import { api } from "../../services/api";
 import { offlineDB } from "../../services/db";
-import useAuthUser from "../../hooks/useAuthUser";
+import useAuthUser, { type AuthUser } from "../../hooks/useAuthUser";
 import { Deck } from "@fxdxpz/schema";
 import { USER_DECKS_KEY } from "../../services/queryKeys";
 
-export const useUserDecksQuery = () => {
-  const user = useAuthUser() as { fuid?: string; uid?: string } | null;
-  return useQuery({
+type UserDecksResult = { decks: Deck[]; total: number };
+
+// auth is passed in rather than read from context because loaders run
+// outside React. For component use, pass the result of useAuthUser().
+export const userDecksQueryOptions = (user: AuthUser | null) =>
+  queryOptions<UserDecksResult>({
     queryKey: [USER_DECKS_KEY, { user: user?.fuid ?? "anon" }],
     queryFn: async () => {
       if (!user) {
         const offlineDecks = await offlineDB.anonDecks.toArray();
         return {
-          decks: offlineDecks.toSorted((x, y) => y.updatedutc - x.updatedutc),
+          decks: offlineDecks.toSorted(
+            (x, y) => y.updatedutc - x.updatedutc,
+          ) as unknown as Deck[],
           total: offlineDecks.length,
         };
       }
 
       const token = await Firebase.getTokenId();
-      if (token) {
-        const res = await api.v2.users.decks.$get(
-          {
-            query: {
-              edition: "2", // This is a hack to skip rebuilding all api endpoints for now
-            },
-          },
-          {
-            headers: {
-              authtoken: token,
-            },
-          },
-        );
-
-        return res.json() as unknown as {
-          decks: Deck[];
-          total: number;
-        };
-      }
-    },
-  });
-};
-
-// I am not sure if we even need this hook at all.
-export const useUserDeck = (deckId: string) => {
-  const { fuid } = (useAuthUser() as { fuid?: string } | null) ?? {};
-  const { getQueryCache } = useQueryClient();
-
-  const user = fuid ?? "anon";
-  const decksQueryKey = [USER_DECKS_KEY, { user }];
-  const deckQueryKey = ["userDeck", { deckId }];
-  let initialData: Deck;
-  const isDeckInCache =
-    getQueryCache().find<Deck>({ queryKey: deckQueryKey }) !== undefined;
-
-  if (!isDeckInCache) {
-    const cachedDecksQuery = getQueryCache().find<Deck[]>({
-      queryKey: decksQueryKey,
-    });
-    if (typeof cachedDecksQuery !== "undefined") {
-      const cachedDeck = cachedDecksQuery.state.data?.find(
-        (d) => d.deckId === deckId,
+      const res = await api.v2.users.decks.$get(
+        { query: { edition: "2" } },
+        { headers: { authtoken: token } },
       );
-      if (typeof cachedDeck !== "undefined") {
-        initialData = cachedDeck;
-      }
-    }
-  }
-
-  return useQuery({
-    queryKey: deckQueryKey,
-    queryFn: async () => {
-      if (!user) {
-        return await offlineDB.anonDecks.where("deckId").equals(deckId).first();
-      }
-
-      // const token = await Firebase.getTokenId();
-
-      return initialData;
+      return (await res.json()) as unknown as UserDecksResult;
     },
-    initialData: () => initialData,
   });
+
+export const useUserDecksQuery = () => {
+  const user = useAuthUser() as AuthUser | null;
+  return useSuspenseQuery(userDecksQueryOptions(user));
 };

@@ -1,18 +1,23 @@
-import { Deck } from "@fxdxpz/schema";
-import { useLocation } from "react-router-dom";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { getRouteApi } from "@tanstack/react-router";
 import { getCardById } from "@fxdxpz/wudb";
 import type { CardId } from "@fxdxpz/wudb";
+import useAuthUser from "../../hooks/useAuthUser";
 import ReadonlyDeck from "./ReadonlyDeck";
+import { deckQueryOptions } from "./queries";
+
+const route = getRouteApi("/view/deck/$id");
 
 const Deck2 = () => {
-  const { state } = useLocation<{ deck: Deck; canUpdateOrDelete: boolean }>();
+  const { id } = route.useParams();
+  const { data: deck } = useSuspenseQuery(deckQueryOptions(id));
+  const user = useAuthUser() as { uid?: string } | null;
 
-  const deck = state.deck;
-  const cards = state.deck.deck.map((id) => getCardById(id as CardId));
-  const factionId = state.deck && state.deck.deckId.split("-")[0];
-  const canUpdateOrDelete = state.canUpdateOrDelete;
-
-  if (!deck) return null;
+  const cards = deck.deck.map((cardId) => getCardById(cardId as CardId));
+  const factionId = deck.deckId.split("-")[0];
+  // Anon-owned decks (no fuid) are always editable by the device that holds
+  // them; server-owned decks need uid match.
+  const canUpdateOrDelete = deck.fuid ? user?.uid === deck.fuid : true;
 
   return (
     <div className="flex-1 flex flex-col">
@@ -21,9 +26,9 @@ const Deck2 = () => {
           id={deck.deckId}
           name={deck.name}
           factionId={factionId}
-          faction={deck.faction as any}
+          faction={deck.faction as never}
           cards={cards}
-          sets={deck.sets as any[]}
+          sets={deck.sets as never[]}
           createdutc={deck.createdutc}
           updatedutc={deck.updatedutc}
           private={deck.private}
