@@ -20,6 +20,7 @@ import { Route as BoardsRouteImport } from './routes/boards'
 import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UserSignupRouteImport } from './routes/user.signup'
+import { Route as RoomIdRouteImport } from './routes/room.$id'
 import { Route as DecksFactionRouteImport } from './routes/decks.$faction'
 import { Route as DeckActionRouteImport } from './routes/deck.$action'
 import { Route as AdminAdminRouteImport } from './routes/_admin/admin'
@@ -81,6 +82,11 @@ const UserSignupRoute = UserSignupRouteImport.update({
   path: '/user/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoomIdRoute = RoomIdRouteImport.update({
+  id: '/room/$id',
+  path: '/room/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DecksFactionRoute = DecksFactionRouteImport.update({
   id: '/decks/$faction',
   path: '/decks/$faction',
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
+  '/room/$id': typeof RoomIdRoute
   '/user/signup': typeof UserSignupRoute
   '/deck/$action/$data': typeof DeckActionDataRoute
   '/view/card/$id': typeof ViewCardIdRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
+  '/room/$id': typeof RoomIdRoute
   '/user/signup': typeof UserSignupRoute
   '/deck/$action/$data': typeof DeckActionDataRoute
   '/view/card/$id': typeof ViewCardIdRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/_admin/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
+  '/room/$id': typeof RoomIdRoute
   '/user/signup': typeof UserSignupRoute
   '/deck/$action/$data': typeof DeckActionDataRoute
   '/view/card/$id': typeof ViewCardIdRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/deck/$action'
     | '/decks/$faction'
+    | '/room/$id'
     | '/user/signup'
     | '/deck/$action/$data'
     | '/view/card/$id'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/deck/$action'
     | '/decks/$faction'
+    | '/room/$id'
     | '/user/signup'
     | '/deck/$action/$data'
     | '/view/card/$id'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '/_admin/admin'
     | '/deck/$action'
     | '/decks/$faction'
+    | '/room/$id'
     | '/user/signup'
     | '/deck/$action/$data'
     | '/view/card/$id'
@@ -239,6 +251,7 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   DeckActionRoute: typeof DeckActionRouteWithChildren
   DecksFactionRoute: typeof DecksFactionRoute
+  RoomIdRoute: typeof RoomIdRoute
   UserSignupRoute: typeof UserSignupRoute
   ViewCardIdRoute: typeof ViewCardIdRoute
   ViewDeckIdRoute: typeof ViewDeckIdRoute
@@ -323,6 +336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserSignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/room/$id': {
+      id: '/room/$id'
+      path: '/room/$id'
+      fullPath: '/room/$id'
+      preLoaderRoute: typeof RoomIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/decks/$faction': {
       id: '/decks/$faction'
       path: '/decks/$faction'
@@ -403,6 +423,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   DeckActionRoute: DeckActionRouteWithChildren,
   DecksFactionRoute: DecksFactionRoute,
+  RoomIdRoute: RoomIdRoute,
   UserSignupRoute: UserSignupRoute,
   ViewCardIdRoute: ViewCardIdRoute,
   ViewDeckIdRoute: ViewDeckIdRoute,

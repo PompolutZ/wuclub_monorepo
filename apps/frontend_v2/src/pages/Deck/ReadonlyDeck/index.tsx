@@ -17,6 +17,7 @@ import DeckSummary from "./DeckSummary";
 import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
 import { DeckProvider } from "./context";
 import { DeckActions } from "./atoms/DeckActions";
+import { createRoom } from "@/pages/Room/roomStore";
 import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
 import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
@@ -148,6 +149,18 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
     setToastContent(null);
   };
 
+  const handleSpawnRoom = () => {
+    const roomId = createRoom({
+      deckId: id,
+      name,
+      factionId,
+      faction,
+      sets,
+      cards,
+    });
+    navigate({ to: "/room/$id", params: { id: roomId } });
+  };
+
   const handleDeleteDeck = async () => {
     try {
       await deleteUserDeck(id);
@@ -224,6 +237,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
         copyInVassalFormat: () =>
           saveVassalFormat(faction, cards, handleShowToast),
         onDownloadProxy: () => setIsProxyPickerVisible(true),
+        onSpawnRoom: handleSpawnRoom,
       }}
     >
       {isMobile ? (
