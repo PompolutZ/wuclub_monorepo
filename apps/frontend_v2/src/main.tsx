@@ -4,7 +4,11 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import "./index.css";
 import Firebase, { FirebaseContext } from "./firebase";
-import { AuthContextProvider } from "./hooks/useAuthUser";
+import {
+  AuthContextProvider,
+  INITIAL_AUTH_STATE,
+  useAuthState,
+} from "./hooks/useAuthUser";
 import { queryClient, persister } from "@services/queryClient";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { routeTree } from "./routeTree.gen";
@@ -13,6 +17,7 @@ const router = createRouter({
   routeTree,
   defaultPreload: "intent",
   defaultPreloadDelay: 50,
+  context: { auth: INITIAL_AUTH_STATE },
 });
 
 declare module "@tanstack/react-router" {
@@ -45,6 +50,15 @@ export class ModalPresenter extends React.Component<
   }
 }
 
+// Pass fresh auth into router context on every change so React consumers
+// (NavigationPanel, etc.) see updates. Gated routes don't read context.auth
+// from beforeLoad — they await the module-level `authReady` promise and then
+// call `getAuthState()` so public routes don't pay any auth-wait tax.
+function InnerApp() {
+  const auth = useAuthState();
+  return <RouterProvider router={router} context={{ auth }} />;
+}
+
 const Root = () => (
   <FirebaseContext.Provider value={Firebase}>
     <PersistQueryClientProvider
@@ -52,7 +66,7 @@ const Root = () => (
       persistOptions={{ persister }}
     >
       <AuthContextProvider>
-        <RouterProvider router={router} />
+        <InnerApp />
       </AuthContextProvider>
     </PersistQueryClientProvider>
   </FirebaseContext.Provider>

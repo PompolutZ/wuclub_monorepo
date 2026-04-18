@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import useAuthUser from "../../hooks/useAuthUser";
+import useAuthUser, { useAuthState } from "../../hooks/useAuthUser";
 import {
   createLink,
   Link,
@@ -88,6 +88,7 @@ const AnimatedLink: LinkComponent<typeof AnimatedLinkBase> =
 
 function UserMenu() {
   const auth = useAuthUser();
+  const { isAdmin } = useAuthState();
   const firebase = useContext(FirebaseContext);
   const navigate = useNavigate();
 
@@ -105,6 +106,15 @@ function UserMenu() {
       >
         Settings
       </AnimatedLink>
+
+      {isAdmin && (
+        <AnimatedLink
+          className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+          to="/admin"
+        >
+          Admin
+        </AnimatedLink>
+      )}
 
       {auth && (
         <>

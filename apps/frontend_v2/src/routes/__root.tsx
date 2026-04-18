@@ -1,11 +1,20 @@
 import { Suspense } from "react";
-import { Outlet, createRootRoute, useLocation } from "@tanstack/react-router";
+import {
+  Outlet,
+  createRootRouteWithContext,
+  useLocation,
+} from "@tanstack/react-router";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { LazyLoading } from "../components/LazyLoading";
 import HeroImage from "../shared/components/HeroImage";
 import NavigationPanel from "../shared/components/NavigationPanel";
+import type { AuthState } from "../hooks/useAuthUser";
 
-export const Route = createRootRoute({
+export interface RouterContext {
+  auth: AuthState;
+}
+
+export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootLayout,
 });
 

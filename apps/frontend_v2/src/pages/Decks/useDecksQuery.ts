@@ -16,7 +16,10 @@ export const useQueryDecks = (faction?: FactionName | "all") => {
     queryFn: async ({ pageParam: { limit, skip, faction } }) => {
       const res = await api.v2.decks.$get({
         query: {
-          faction,
+          // FactionName (@fxdxpz/wudb) and factionsSchema (@fxdxpz/schema)
+          // have drifted (e.g. "eyes-of-the-nine" vs "the-eyes-of-the-nine");
+          // the backend accepts the string either way. Cast until reconciled.
+          faction: (faction === "all" ? undefined : faction) as never,
           limit: limit?.toString(),
           skip: skip?.toString(),
           edition: "2",

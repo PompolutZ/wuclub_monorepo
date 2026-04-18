@@ -47,3 +47,6 @@ staging.env
 /tests/.auth/
 .env.test
 playwright/.cache/
+
+# TanStack Router plugin scratch dir
+.tanstack/

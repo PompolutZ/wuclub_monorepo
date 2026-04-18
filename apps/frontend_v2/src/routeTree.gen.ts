@@ -17,10 +17,12 @@ import { Route as MydecksRouteImport } from './routes/mydecks'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LibraryRouteImport } from './routes/library'
 import { Route as BoardsRouteImport } from './routes/boards'
+import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UserSignupRouteImport } from './routes/user.signup'
 import { Route as DecksFactionRouteImport } from './routes/decks.$faction'
 import { Route as DeckActionRouteImport } from './routes/deck.$action'
+import { Route as AdminAdminRouteImport } from './routes/_admin/admin'
 import { Route as ViewDeckIdRouteImport } from './routes/view.deck.$id'
 import { Route as ViewCardIdRouteImport } from './routes/view.card.$id'
 import { Route as DeckActionDataRouteImport } from './routes/deck.$action.$data'
@@ -65,6 +67,10 @@ const BoardsRoute = BoardsRouteImport.update({
   path: '/boards',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/_admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -84,6 +90,11 @@ const DeckActionRoute = DeckActionRouteImport.update({
   id: '/deck/$action',
   path: '/deck/$action',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAdminRoute = AdminAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AdminRoute,
 } as any)
 const ViewDeckIdRoute = ViewDeckIdRouteImport.update({
   id: '/view/deck/$id',
@@ -111,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
   '/user/signup': typeof UserSignupRoute
@@ -128,6 +140,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
   '/user/signup': typeof UserSignupRoute
@@ -138,6 +151,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_admin': typeof AdminRouteWithChildren
   '/boards': typeof BoardsRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
@@ -146,6 +160,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/_admin/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
   '/user/signup': typeof UserSignupRoute
@@ -165,6 +180,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/admin'
     | '/deck/$action'
     | '/decks/$faction'
     | '/user/signup'
@@ -182,6 +198,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/admin'
     | '/deck/$action'
     | '/decks/$faction'
     | '/user/signup'
@@ -191,6 +208,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_admin'
     | '/boards'
     | '/library'
     | '/login'
@@ -199,6 +217,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/_admin/admin'
     | '/deck/$action'
     | '/decks/$faction'
     | '/user/signup'
@@ -209,6 +228,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   BoardsRoute: typeof BoardsRoute
   LibraryRoute: typeof LibraryRoute
   LoginRoute: typeof LoginRoute
@@ -282,6 +302,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoardsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_admin': {
+      id: '/_admin'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -310,6 +337,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeckActionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_admin/admin': {
+      id: '/_admin/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminAdminRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/view/deck/$id': {
       id: '/view/deck/$id'
       path: '/view/deck/$id'
@@ -334,6 +368,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminAdminRoute: typeof AdminAdminRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAdminRoute: AdminAdminRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface DeckActionRouteChildren {
   DeckActionDataRoute: typeof DeckActionDataRoute
 }
@@ -348,6 +392,7 @@ const DeckActionRouteWithChildren = DeckActionRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   BoardsRoute: BoardsRoute,
   LibraryRoute: LibraryRoute,
   LoginRoute: LoginRoute,
