@@ -1,19 +1,36 @@
 import type { Card, SetId } from "@fxdxpz/wudb";
 
-export interface RoomPlayer {
-  deckId: string;
-  deckName: string;
-  factionId: string;
+type Fighter = {
+  name: string;
+};
+
+type Deck = {
+  id: string;
+  name: string;
   sets: SetId[];
   cards: Card[];
-}
+};
 
-export interface Room {
+type Warband = {
+  id: string;
+  name: string;
+  abbr: string;
+  displayName: string;
+  fighters: Fighter[];
+};
+
+export type RoomPlayer = {
+  deck: Deck;
+  warband: Warband;
+  hand: Card[];
+};
+
+export type Room = {
   id: string;
   createdAt: number;
   host: RoomPlayer;
   guest: RoomPlayer | null;
-}
+};
 
 const ROOM_PREFIX = "wuclub:room:";
 const INDEX_KEY = "wuclub:rooms-by-host-deck";
@@ -89,14 +106,14 @@ export function findRoomIdByHostDeckId(deckId: string): string | undefined {
 
 export function createRoom(host: RoomPlayer): string {
   hydrateIndex();
-  const existing = hostDeckIndex.get(host.deckId);
+  const existing = hostDeckIndex.get(host.deck.id);
   if (existing && getRoom(existing)) return existing;
 
   const id = shortId();
   const room: Room = { id, createdAt: Date.now(), host, guest: null };
   rooms.set(id, room);
   writeRoomToStorage(room);
-  hostDeckIndex.set(host.deckId, id);
+  hostDeckIndex.set(host.deck.id, id);
   writeIndexToStorage();
   return id;
 }

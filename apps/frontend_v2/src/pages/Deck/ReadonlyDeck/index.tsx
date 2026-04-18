@@ -149,15 +149,23 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   };
 
   const handleSpawnRoom = () => {
-    const roomId =
-      findRoomIdByHostDeckId(id) ??
-      createRoom({
-        deckId: id,
-        deckName: name,
-        factionId,
-        sets,
-        cards,
-      });
+    const existing = findRoomIdByHostDeckId(id);
+    if (existing) {
+      navigate({ to: "/room/$id", params: { id: existing } });
+      return;
+    }
+    const f = factions[factionId as keyof typeof factions];
+    const roomId = createRoom({
+      deck: { id, name, sets, cards },
+      warband: {
+        id: f.id,
+        name: f.name,
+        abbr: f.abbr,
+        displayName: f.displayName,
+        fighters: [],
+      },
+      hand: [],
+    });
     navigate({ to: "/room/$id", params: { id: roomId } });
   };
 

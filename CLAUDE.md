@@ -137,3 +137,6 @@ Both frontend and backend use Firebase:
 - Frontend: Firebase JS SDK for client authentication (`apps/frontend_v2/src/firebase/`)
 - Backend: Firebase Admin SDK for token verification
 - Auth context provider in `apps/frontend_v2/src/hooks/useAuthUser`
+
+## Using Typescript
+Always prefer types over interfaces, unless required functionality requires interface specific implementation. In that case always confirm and explain why interface is better or only possible option.

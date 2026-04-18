@@ -1,5 +1,4 @@
 import { getRouteApi, Link } from "@tanstack/react-router";
-import { factions } from "@fxdxpz/wudb";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { getRoom, type RoomPlayer } from "./roomStore";
 
@@ -60,12 +59,11 @@ const PlayerCard = ({
       <h2 className="text-xs uppercase text-gray-500">{role}</h2>
       {player ? (
         <>
-          <p className="font-semibold">{player.deckName}</p>
-          <p className="text-sm text-gray-600">
-            {factions[player.factionId as keyof typeof factions]?.displayName ??
-              player.factionId}
+          <p className="font-semibold">{player.deck.name}</p>
+          <p className="text-sm text-gray-600">{player.warband.displayName}</p>
+          <p className="text-xs text-gray-500">
+            {player.deck.cards.length} cards · hand {player.hand.length}
           </p>
-          <p className="text-xs text-gray-500">{player.cards.length} cards</p>
         </>
       ) : (
         <p className="text-gray-400 italic">Waiting…</p>
