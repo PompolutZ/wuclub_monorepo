@@ -4,6 +4,7 @@ import {
   createRootRouteWithContext,
   useLocation,
 } from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { LazyLoading } from "../components/LazyLoading";
 import HeroImage from "../shared/components/HeroImage";
@@ -12,6 +13,7 @@ import type { AuthState } from "../hooks/useAuthUser";
 
 export interface RouterContext {
   auth: AuthState;
+  queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({

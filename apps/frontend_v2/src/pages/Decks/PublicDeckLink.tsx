@@ -39,15 +39,6 @@ export default function PublicDeckLink({ deck }: PublicDeckLinkProps) {
             className="text-xl truncate hover:text-purple-700"
             to="/view/deck/$id"
             params={{ id: deckId }}
-            state={
-              {
-                deck: {
-                  ...deck,
-                  id: deckId,
-                },
-                canUpdateOrDelete: false,
-              } as never
-            }
           >
             {name}
           </Link>

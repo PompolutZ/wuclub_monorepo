@@ -40,12 +40,6 @@ export const DeckLink = ({ onDelete, deck }: Props) => {
             className="text-xl block truncate"
             to="/view/deck/$id"
             params={{ id: deck.deckId }}
-            state={
-              {
-                deck,
-                canUpdateOrDelete: true,
-              } as never
-            }
           >
             {deck.name}
           </Link>

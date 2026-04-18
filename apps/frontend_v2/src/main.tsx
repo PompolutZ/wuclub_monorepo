@@ -17,7 +17,7 @@ const router = createRouter({
   routeTree,
   defaultPreload: "intent",
   defaultPreloadDelay: 50,
-  context: { auth: INITIAL_AUTH_STATE },
+  context: { auth: INITIAL_AUTH_STATE, queryClient },
 });
 
 declare module "@tanstack/react-router" {
@@ -56,7 +56,7 @@ export class ModalPresenter extends React.Component<
 // call `getAuthState()` so public routes don't pay any auth-wait tax.
 function InnerApp() {
   const auth = useAuthState();
-  return <RouterProvider router={router} context={{ auth }} />;
+  return <RouterProvider router={router} context={{ auth, queryClient }} />;
 }
 
 const Root = () => (
