@@ -1,12 +1,18 @@
+import { lazy, Suspense } from "react";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { FactionPicture } from "@components/FactionDeckPicture";
 import { FighterCardsPortal } from "@components/FighterCardsPortal";
 import { CardPicture } from "@components/CardPicture";
+import { LazyLoading } from "@/components/LazyLoading";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { useRoom, type RoomPlayer } from "./roomStore";
 import { SetupStepper } from "./SetupStepper";
 import { WarbandStep } from "./WarbandStep";
 import { DrawCardsStep } from "./DrawCardsStep";
+
+const InitiativeStep = lazy(() =>
+  import("./InitiativeStep").then((m) => ({ default: m.InitiativeStep })),
+);
 
 const route = getRouteApi("/room/$id");
 
@@ -49,6 +55,10 @@ const RoomPage = () => {
         <WarbandStep roomId={id} current={room.host.warband} />
       ) : room.setupStep === "starting-hand" ? (
         <DrawCardsStep roomId={id} deckCards={room.host.deck.cards} />
+      ) : room.setupStep === "initiative" ? (
+        <Suspense fallback={<LazyLoading />}>
+          <InitiativeStep roomId={id} rolls={room.initiativeRolls} />
+        </Suspense>
       ) : (
         <div className="grid grid-cols-2 gap-6">
           <PlayerCard role="Host" player={room.host} />

@@ -27,12 +27,25 @@ export type RoomPlayer = {
   hand: Card[];
 };
 
+export type AttackFace =
+  | "swords"
+  | "critical"
+  | "surrounded"
+  | "hammer"
+  | "flanked";
+
+export type InitiativeRolls = {
+  host: AttackFace | null;
+  guest: AttackFace | null;
+};
+
 export type Room = {
   id: string;
   createdAt: number;
   host: RoomPlayer;
   guest: RoomPlayer | null;
   setupStep: SetupStepId;
+  initiativeRolls: InitiativeRolls;
 };
 
 const ROOM_PREFIX = "wuclub:room:";
@@ -73,7 +86,12 @@ function roomKey(roomId: string) {
 function readRoomFromStorage(roomId: string): Room | undefined {
   try {
     const raw = sessionStorage.getItem(roomKey(roomId));
-    return raw ? (JSON.parse(raw) as Room) : undefined;
+    if (!raw) return undefined;
+    const parsed = JSON.parse(raw) as Partial<Room> & { id: string };
+    return {
+      ...(parsed as Room),
+      initiativeRolls: parsed.initiativeRolls ?? { host: null, guest: null },
+    };
   } catch {
     return undefined;
   }
@@ -144,6 +162,7 @@ export function createRoom(host: RoomPlayer): string {
     host,
     guest: null,
     setupStep: initialSetupStep(host.warband.id),
+    initiativeRolls: { host: null, guest: null },
   };
   rooms.set(id, room);
   writeRoomToStorage(room);
@@ -166,6 +185,24 @@ type FactionLike = {
   abbr: string;
   displayName: string;
 };
+
+export function setInitiativeRolls(roomId: string, rolls: InitiativeRolls) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const next: Room = { ...room, initiativeRolls: rolls };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+export function advanceFromInitiative(roomId: string) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const next: Room = { ...room, setupStep: "territories" };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
 
 export function setHostHand(roomId: string, hand: Card[]) {
   const room = getRoom(roomId);
