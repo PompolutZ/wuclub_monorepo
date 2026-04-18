@@ -1,6 +1,7 @@
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { getRoom, type RoomPlayer } from "./roomStore";
+import { SetupStepper } from "./SetupStepper";
 
 const route = getRouteApi("/room/$id");
 
@@ -36,6 +37,8 @@ const RoomPage = () => {
         <p className="text-xs uppercase text-gray-500">Room</p>
         <h1 className="text-2xl font-bold font-mono">{id}</h1>
       </header>
+
+      <SetupStepper current={room.setupStep} />
 
       <div className="grid grid-cols-2 gap-6">
         <PlayerCard role="Host" player={room.host} />

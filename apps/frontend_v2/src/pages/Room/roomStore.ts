@@ -1,4 +1,5 @@
 import type { Card, SetId } from "@fxdxpz/wudb";
+import { initialSetupStep, type SetupStepId } from "./setupSteps";
 
 type Fighter = {
   name: string;
@@ -30,6 +31,7 @@ export type Room = {
   createdAt: number;
   host: RoomPlayer;
   guest: RoomPlayer | null;
+  setupStep: SetupStepId;
 };
 
 const ROOM_PREFIX = "wuclub:room:";
@@ -110,7 +112,13 @@ export function createRoom(host: RoomPlayer): string {
   if (existing && getRoom(existing)) return existing;
 
   const id = shortId();
-  const room: Room = { id, createdAt: Date.now(), host, guest: null };
+  const room: Room = {
+    id,
+    createdAt: Date.now(),
+    host,
+    guest: null,
+    setupStep: initialSetupStep(host.warband.id),
+  };
   rooms.set(id, room);
   writeRoomToStorage(room);
   hostDeckIndex.set(host.deck.id, id);
