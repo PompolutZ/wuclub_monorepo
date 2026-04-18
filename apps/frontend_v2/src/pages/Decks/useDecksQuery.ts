@@ -2,6 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { InferResponseType } from "hono/client";
 import { Deck, FactionName } from "@fxdxpz/wudb";
 import { api } from "../../services/api";
+import { PUBLIC_DECKS_KEY } from "../../services/queryKeys";
 
 const IsDecksResponse = (
   data: InferResponseType<typeof api.v2.decks.$get>,
@@ -11,7 +12,7 @@ const DECKS_BATCH_SIZE = 30;
 
 export const useQueryDecks = (faction?: FactionName | "all") => {
   return useInfiniteQuery({
-    queryKey: ["decks2", { faction: faction ?? "all" }],
+    queryKey: [PUBLIC_DECKS_KEY, { faction: faction ?? "all" }],
     queryFn: async ({ pageParam: { limit, skip, faction } }) => {
       const res = await api.v2.decks.$get({
         query: {

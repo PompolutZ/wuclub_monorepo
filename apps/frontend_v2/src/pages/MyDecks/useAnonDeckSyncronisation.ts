@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import useAuthUser from "../../hooks/useAuthUser";
 import { offlineDB } from "../../services/db";
-import { useSaveDeck } from "../../shared/hooks/useSaveDeck";
+import { useCreateDeck } from "../../shared/hooks/useCreateDeck";
 import { logger } from "@/utils/logger";
 
 // TODO: https://github.com/PompolutZ/wuclub_monorepo/issues/3
 export function useAnonDecksSynchronisation() {
   const user = useAuthUser();
-  const { mutateAsync: saveDeck } = useSaveDeck();
+  const { mutateAsync: createDeck } = useCreateDeck();
 
   useEffect(() => {
     if (!user) return;
@@ -16,7 +16,7 @@ export function useAnonDecksSynchronisation() {
       .then((anonDecks) => {
         return Promise.all(
           anonDecks.map(async (d) => {
-            await saveDeck(d as never);
+            await createDeck(d as never);
             return (d as unknown as { id: number }).id;
           }),
         );
@@ -29,5 +29,5 @@ export function useAnonDecksSynchronisation() {
           userId: user?.uid,
         });
       });
-  }, [user, saveDeck]);
+  }, [user, createDeck]);
 }

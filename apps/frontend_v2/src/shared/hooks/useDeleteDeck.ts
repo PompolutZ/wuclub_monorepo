@@ -3,7 +3,7 @@ import useAuthUser from "../../hooks/useAuthUser";
 import { offlineDB } from "@services/db";
 import { api } from "@services/api";
 import Firebase from "../../firebase";
-import { USER_DECKS_KEY } from "@services/queryKeys";
+import { PUBLIC_DECKS_KEY, USER_DECKS_KEY } from "@services/queryKeys";
 
 export const useDeleteDeck = () => {
   const queryClient = useQueryClient();
@@ -28,6 +28,7 @@ export const useDeleteDeck = () => {
       queryClient.invalidateQueries({
         queryKey: [USER_DECKS_KEY, { user: user?.fuid ?? "anon" }],
       });
+      queryClient.invalidateQueries({ queryKey: [PUBLIC_DECKS_KEY] });
     },
   });
 };
