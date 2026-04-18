@@ -1,6 +1,7 @@
 import { getRouteApi, Link } from "@tanstack/react-router";
+import { factions } from "@fxdxpz/wudb";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
-import { getRoom } from "./roomStore";
+import { getRoom, type RoomPlayer } from "./roomStore";
 
 const route = getRouteApi("/room/$id");
 
@@ -30,24 +31,45 @@ const RoomPage = () => {
     );
   }
 
-  const { deck } = room;
-
   return (
-    <div className="flex-1 flex flex-col p-6 space-y-4">
+    <div className="flex-1 flex flex-col p-6 space-y-6">
       <header>
         <p className="text-xs uppercase text-gray-500">Room</p>
-        <h1 className="text-2xl font-bold break-all">{id}</h1>
+        <h1 className="text-2xl font-bold font-mono">{id}</h1>
       </header>
 
-      <section className="space-y-1">
-        <h2 className="text-lg font-semibold">Deck</h2>
-        <p>
-          {deck.name} <span className="text-gray-500">({deck.faction})</span>
-        </p>
-        <p className="text-sm text-gray-600">{deck.cards.length} cards</p>
-      </section>
+      <div className="grid grid-cols-2 gap-6">
+        <PlayerCard role="Host" player={room.host} />
+        <PlayerCard role="Guest" player={room.guest} />
+      </div>
     </div>
   );
 };
 
 export default RoomPage;
+
+const PlayerCard = ({
+  role,
+  player,
+}: {
+  role: string;
+  player: RoomPlayer | null;
+}) => {
+  return (
+    <section className="border rounded-md p-4 space-y-2">
+      <h2 className="text-xs uppercase text-gray-500">{role}</h2>
+      {player ? (
+        <>
+          <p className="font-semibold">{player.deckName}</p>
+          <p className="text-sm text-gray-600">
+            {factions[player.factionId as keyof typeof factions]?.displayName ??
+              player.factionId}
+          </p>
+          <p className="text-xs text-gray-500">{player.cards.length} cards</p>
+        </>
+      ) : (
+        <p className="text-gray-400 italic">Waiting…</p>
+      )}
+    </section>
+  );
+};

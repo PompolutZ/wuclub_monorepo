@@ -14,10 +14,9 @@ import Card from "./atoms/Card";
 import { Toast } from "./atoms/Toast";
 import { DeckPlotCards } from "@components/DeckPlotCards";
 import DeckSummary from "./DeckSummary";
-import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
 import { DeckProvider } from "./context";
 import { DeckActions } from "./atoms/DeckActions";
-import { createRoom } from "@/pages/Room/roomStore";
+import { createRoom, findRoomIdByHostDeckId } from "@/pages/Room/roomStore";
 import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
 import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
@@ -150,14 +149,15 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   };
 
   const handleSpawnRoom = () => {
-    const roomId = createRoom({
-      deckId: id,
-      name,
-      factionId,
-      faction,
-      sets,
-      cards,
-    });
+    const roomId =
+      findRoomIdByHostDeckId(id) ??
+      createRoom({
+        deckId: id,
+        deckName: name,
+        factionId,
+        sets,
+        cards,
+      });
     navigate({ to: "/room/$id", params: { id: roomId } });
   };
 
@@ -238,6 +238,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
           saveVassalFormat(faction, cards, handleShowToast),
         onDownloadProxy: () => setIsProxyPickerVisible(true),
         onSpawnRoom: handleSpawnRoom,
+        hasActiveRoom: Boolean(findRoomIdByHostDeckId(id)),
       }}
     >
       {isMobile ? (

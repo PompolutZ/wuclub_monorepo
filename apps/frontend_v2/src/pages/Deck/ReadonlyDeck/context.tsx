@@ -15,6 +15,7 @@ interface DeckContextValue {
   copyInVassalFormat: () => void;
   onDownloadProxy: () => void;
   onSpawnRoom: () => void;
+  hasActiveRoom: boolean;
 }
 
 const DeckContext = createContext<DeckContextValue | null>(null);

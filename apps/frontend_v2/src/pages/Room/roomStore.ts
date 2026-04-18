@@ -1,11 +1,9 @@
-import type { Factions } from "@fxdxpz/schema";
 import type { Card, SetId } from "@fxdxpz/wudb";
 
-export interface RoomDeck {
+export interface RoomPlayer {
   deckId: string;
-  name: string;
+  deckName: string;
   factionId: string;
-  faction: Factions;
   sets: SetId[];
   cards: Card[];
 }
@@ -13,45 +11,100 @@ export interface RoomDeck {
 export interface Room {
   id: string;
   createdAt: number;
-  deck: RoomDeck;
+  host: RoomPlayer;
+  guest: RoomPlayer | null;
 }
 
-const STORAGE_PREFIX = "wuclub:room:";
-const memory = new Map<string, Room>();
+const ROOM_PREFIX = "wuclub:room:";
+const INDEX_KEY = "wuclub:rooms-by-host-deck";
 
-function storageKey(roomId: string) {
-  return `${STORAGE_PREFIX}${roomId}`;
+const rooms = new Map<string, Room>();
+const hostDeckIndex = new Map<string, string>();
+
+function roomKey(roomId: string) {
+  return `${ROOM_PREFIX}${roomId}`;
 }
 
-function readFromStorage(roomId: string): Room | undefined {
+function readRoomFromStorage(roomId: string): Room | undefined {
   try {
-    const raw = sessionStorage.getItem(storageKey(roomId));
+    const raw = sessionStorage.getItem(roomKey(roomId));
     return raw ? (JSON.parse(raw) as Room) : undefined;
   } catch {
     return undefined;
   }
 }
 
-function writeToStorage(room: Room) {
+function writeRoomToStorage(room: Room) {
   try {
-    sessionStorage.setItem(storageKey(room.id), JSON.stringify(room));
+    sessionStorage.setItem(roomKey(room.id), JSON.stringify(room));
   } catch {
-    // sessionStorage may be unavailable (private mode, quota) — memory still holds it
+    // sessionStorage may be unavailable (private mode, quota) — in-memory still holds it
   }
 }
 
-export function createRoom(deck: RoomDeck): string {
-  const id = crypto.randomUUID();
-  const room: Room = { id, createdAt: Date.now(), deck };
-  memory.set(id, room);
-  writeToStorage(room);
+function readIndexFromStorage(): Map<string, string> {
+  try {
+    const raw = sessionStorage.getItem(INDEX_KEY);
+    if (!raw) return new Map();
+    return new Map(Object.entries(JSON.parse(raw) as Record<string, string>));
+  } catch {
+    return new Map();
+  }
+}
+
+function writeIndexToStorage() {
+  try {
+    sessionStorage.setItem(
+      INDEX_KEY,
+      JSON.stringify(Object.fromEntries(hostDeckIndex)),
+    );
+  } catch {
+    // ignore
+  }
+}
+
+function hydrateIndex() {
+  if (hostDeckIndex.size > 0) return;
+  const stored = readIndexFromStorage();
+  stored.forEach((roomId, deckId) => hostDeckIndex.set(deckId, roomId));
+}
+
+function shortId() {
+  return crypto.randomUUID().split("-")[0];
+}
+
+export function findRoomIdByHostDeckId(deckId: string): string | undefined {
+  hydrateIndex();
+  const roomId = hostDeckIndex.get(deckId);
+  if (!roomId) return undefined;
+  // Verify the room still exists — stale index entries shouldn't leak back.
+  const room = getRoom(roomId);
+  if (!room) {
+    hostDeckIndex.delete(deckId);
+    writeIndexToStorage();
+    return undefined;
+  }
+  return roomId;
+}
+
+export function createRoom(host: RoomPlayer): string {
+  hydrateIndex();
+  const existing = hostDeckIndex.get(host.deckId);
+  if (existing && getRoom(existing)) return existing;
+
+  const id = shortId();
+  const room: Room = { id, createdAt: Date.now(), host, guest: null };
+  rooms.set(id, room);
+  writeRoomToStorage(room);
+  hostDeckIndex.set(host.deckId, id);
+  writeIndexToStorage();
   return id;
 }
 
 export function getRoom(roomId: string): Room | undefined {
-  const cached = memory.get(roomId);
+  const cached = rooms.get(roomId);
   if (cached) return cached;
-  const restored = readFromStorage(roomId);
-  if (restored) memory.set(roomId, restored);
+  const restored = readRoomFromStorage(roomId);
+  if (restored) rooms.set(roomId, restored);
   return restored;
 }

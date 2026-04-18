@@ -120,6 +120,7 @@ function DesktopMenu() {
     createShareableLink,
     onDownloadProxy,
     onSpawnRoom,
+    hasActiveRoom,
   } = useDeckContext();
 
   return (
@@ -239,7 +240,9 @@ function DesktopMenu() {
         onClick={onSpawnRoom}
       >
         <Swords className="h-5 w-5 mr-2" />
-        <span className="text-gray-900">Spawn a new room</span>
+        <span className="text-gray-900">
+          {hasActiveRoom ? "Return to room" : "Spawn a new room"}
+        </span>
       </button>
 
       {canUpdateOrDelete && (
