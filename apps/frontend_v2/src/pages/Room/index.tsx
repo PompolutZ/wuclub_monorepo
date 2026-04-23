@@ -13,6 +13,9 @@ import { DrawCardsStep } from "./DrawCardsStep";
 const InitiativeStep = lazy(() =>
   import("./InitiativeStep").then((m) => ({ default: m.InitiativeStep })),
 );
+const TerritoriesStep = lazy(() =>
+  import("./TerritoriesStep").then((m) => ({ default: m.TerritoriesStep })),
+);
 
 const route = getRouteApi("/room/$id");
 
@@ -58,6 +61,10 @@ const RoomPage = () => {
       ) : room.setupStep === "initiative" ? (
         <Suspense fallback={<LazyLoading />}>
           <InitiativeStep roomId={id} rolls={room.initiativeRolls} />
+        </Suspense>
+      ) : room.setupStep === "territories" ? (
+        <Suspense fallback={<LazyLoading />}>
+          <TerritoriesStep roomId={id} />
         </Suspense>
       ) : (
         <div className="grid grid-cols-2 gap-6">
