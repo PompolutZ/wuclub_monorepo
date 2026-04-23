@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { ADMIN_ROLE } from "@fxdxpz/schema";
+import { ADMIN_ROLE, PLAYER_ROLE } from "@fxdxpz/schema";
 import { FirebaseContext } from "../firebase";
 
 export type AuthUser = Record<string, unknown> & {
@@ -12,12 +12,14 @@ export type AuthState = {
   isInitialized: boolean;
   user: AuthUser | null;
   isAdmin: boolean;
+  isPlayer: boolean;
 };
 
 const INITIAL_STATE: AuthState = {
   isInitialized: false,
   user: null,
   isAdmin: false,
+  isPlayer: false,
 };
 
 // Module-level mirror of the latest auth state so non-React consumers
@@ -48,6 +50,7 @@ function AuthContextProvider({ children }: { children: React.ReactNode }) {
       isInitialized: false,
       user: cached,
       isAdmin: Boolean(cached?.role?.includes(ADMIN_ROLE)),
+      isPlayer: Boolean(cached?.role?.includes(PLAYER_ROLE)),
     };
     latestState = initial;
     return initial;
@@ -70,6 +73,7 @@ function AuthContextProvider({ children }: { children: React.ReactNode }) {
           isInitialized: true,
           user,
           isAdmin: Boolean(user?.role?.includes(ADMIN_ROLE)),
+          isPlayer: Boolean(user?.role?.includes(PLAYER_ROLE)),
         };
         latestState = next;
         setState(next);
@@ -81,6 +85,7 @@ function AuthContextProvider({ children }: { children: React.ReactNode }) {
           isInitialized: true,
           user: null,
           isAdmin: false,
+          isPlayer: false,
         };
         latestState = next;
         setState(next);

@@ -119,6 +119,7 @@ function DesktopMenu() {
     exportToUDB,
     createShareableLink,
     onDownloadProxy,
+    canSpawnRoom,
     onSpawnRoom,
     hasActiveRoom,
   } = useDeckContext();
@@ -235,15 +236,17 @@ function DesktopMenu() {
         <ExportMenu exportToUDB={exportToUDB} />
       </DropdownMenu>
 
-      <button
-        className="text-purple-700 group hover:bg-gray-200 flex rounded-md items-center px-2 py-2 text-sm"
-        onClick={onSpawnRoom}
-      >
-        <Swords className="h-5 w-5 mr-2" />
-        <span className="text-gray-900">
-          {hasActiveRoom ? "Return to room" : "Spawn a new room"}
-        </span>
-      </button>
+      {canSpawnRoom && (
+        <button
+          className="text-purple-700 group hover:bg-gray-200 flex rounded-md items-center px-2 py-2 text-sm"
+          onClick={onSpawnRoom}
+        >
+          <Swords className="h-5 w-5 mr-2" />
+          <span className="text-gray-900">
+            {hasActiveRoom ? "Return to room" : "Spawn a new room"}
+          </span>
+        </button>
+      )}
 
       {canUpdateOrDelete && (
         <button

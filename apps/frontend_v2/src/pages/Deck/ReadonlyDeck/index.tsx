@@ -27,6 +27,7 @@ import {
 } from "./utils/deckExport";
 import { getFormattedDate } from "./utils/displayHelpers";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
+import { useAuthState } from "@/hooks/useAuthUser";
 import {
   NEMESIS_FORMAT,
   RIVALS_FORMAT,
@@ -87,6 +88,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
 
   const navigate = useNavigate();
   const isMobile = useBreakpoint("mobile");
+  const { isPlayer } = useAuthState();
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isPrivate, setIsPrivate] = useState(props.private);
   const [isProxyPickerVisible, setIsProxyPickerVisible] = useState(false);
@@ -149,6 +151,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   };
 
   const handleSpawnRoom = () => {
+    if (!isPlayer) return;
     const existing = findRoomIdByHostDeckId(id);
     if (existing) {
       navigate({ to: "/room/$id", params: { id: existing } });
@@ -245,8 +248,9 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
         copyInVassalFormat: () =>
           saveVassalFormat(faction, cards, handleShowToast),
         onDownloadProxy: () => setIsProxyPickerVisible(true),
+        canSpawnRoom: isPlayer,
         onSpawnRoom: handleSpawnRoom,
-        hasActiveRoom: Boolean(findRoomIdByHostDeckId(id)),
+        hasActiveRoom: isPlayer && Boolean(findRoomIdByHostDeckId(id)),
       }}
     >
       {isMobile ? (
