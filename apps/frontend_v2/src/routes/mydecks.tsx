@@ -5,12 +5,14 @@ import { userDecksQueryOptions } from "../pages/MyDecks/useUserDecksQuery";
 
 export const Route = createFileRoute("/mydecks")({
   loader: async ({ context }) => {
-    // Need to know whether we're fetching the user's decks from the API or
-    // IndexedDB before firing, so wait for Firebase's first emit. On repeat
-    // visits this is already resolved, so it's effectively free.
+    // Wait for Firebase's first emit so the query fires with the right user
+    // (prevents an anon→signed-in flicker). On repeat visits this is already
+    // resolved, so it's effectively free. The data prefetch itself does NOT
+    // block navigation — useSuspenseQuery in the component suspends into the
+    // root Suspense boundary if the cache is still cold.
     await authReady;
     const user = getAuthState().user;
-    return context.queryClient.ensureQueryData(userDecksQueryOptions(user));
+    void context.queryClient.prefetchQuery(userDecksQueryOptions(user));
   },
   component: MyDecks,
 });

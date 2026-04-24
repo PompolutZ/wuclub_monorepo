@@ -12,11 +12,18 @@ import {
 import { queryClient, persister } from "@services/queryClient";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { routeTree } from "./routeTree.gen";
+import { LazyLoading } from "./components/LazyLoading";
 
 const router = createRouter({
   routeTree,
   defaultPreload: "intent",
   defaultPreloadDelay: 50,
+  // Show pending component immediately so cold-Lambda navigations swap the
+  // old page for a loading shell instead of freezing on stale content.
+  defaultPendingMs: 0,
+  // Once shown, hold at least this long to avoid sub-frame flashes on fast loads.
+  defaultPendingMinMs: 300,
+  defaultPendingComponent: LazyLoading,
   context: { auth: INITIAL_AUTH_STATE, queryClient },
 });
 
