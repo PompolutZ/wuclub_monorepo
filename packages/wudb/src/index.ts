@@ -196,6 +196,7 @@ export const warbandsValidForOrganisedPlay = [
   factions["god"],
   factions["gp"],
   factions["tw"],
+  factions["skc"],
   // grand alliance death
   factions["thc"],
   factions["tcc"],
