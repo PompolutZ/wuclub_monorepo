@@ -10,16 +10,28 @@ import {
 
 export type BoardRotation = 0 | 90 | 180 | 270;
 
+export type PlacedToken = {
+  id: number;
+  col: number;
+  row: number;
+};
+
 type BoardOverlayProps = {
   board: Board;
   config?: BoardOverlayConfig;
   rotation: BoardRotation;
+  placed?: PlacedToken[];
 };
+
+// Token image has padding around its hex shape; this multiplier on
+// the hex radius makes the visible token roughly fill the board hex.
+const PLACED_TOKEN_SCALE = 3.7;
 
 export const BoardOverlay = ({
   board,
   config,
   rotation,
+  placed,
 }: BoardOverlayProps) => {
   const hexPath = useMemo(() => (config ? buildHexPath(config) : []), [config]);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
@@ -65,6 +77,23 @@ export const BoardOverlay = ({
             onHoverChange={setHoveredKey}
           />
         ))}
+        {config &&
+          placed?.map((p) => {
+            const hex = hexPath.find((h) => h.col === p.col && h.row === p.row);
+            if (!hex) return null;
+            const size = config.size * PLACED_TOKEN_SCALE;
+            return (
+              <image
+                key={p.id}
+                href="/assets/room/tokens/feature_token_cover.png"
+                x={hex.cx - size / 2}
+                y={hex.cy - size / 2}
+                width={size}
+                height={size}
+                style={{ pointerEvents: "none" }}
+              />
+            );
+          })}
       </g>
     </svg>
   );
@@ -93,6 +122,8 @@ const HexCell = ({ hex, isHovered, rotation, onHoverChange }: HexCellProps) => {
     <g>
       <polygon
         points={hex.points}
+        data-col={hex.col}
+        data-row={hex.row}
         fill={
           isHovered ? "rgba(147, 51, 234, 0.55)" : "rgba(147, 51, 234, 0.2)"
         }
