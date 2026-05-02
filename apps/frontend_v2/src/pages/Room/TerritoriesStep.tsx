@@ -57,6 +57,7 @@ const FLAT_CONFIG: GridConfig = {
 
 // Board placed vertically (image rotated 90°) → pointy-top hexes.
 // Placeholder values — tune offsets and disabled list for your image.
+// maybe we won't need this after all, if everything will be just based on transform
 const POINTY_CONFIG: GridConfig = {
   ...baseConfig,
   disabled: new Set<string>([
