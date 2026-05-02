@@ -16,6 +16,9 @@ const InitiativeStep = lazy(() =>
 const TerritoriesStep = lazy(() =>
   import("./TerritoriesStep").then((m) => ({ default: m.TerritoriesStep })),
 );
+const TreasuresStep = lazy(() =>
+  import("./TreasuresStep").then((m) => ({ default: m.TreasuresStep })),
+);
 
 const route = getRouteApi("/room/$id");
 
@@ -65,6 +68,10 @@ const RoomPage = () => {
       ) : room.setupStep === "territories" ? (
         <Suspense fallback={<LazyLoading />}>
           <TerritoriesStep roomId={id} />
+        </Suspense>
+      ) : room.setupStep === "treasures" && room.boardSetup ? (
+        <Suspense fallback={<LazyLoading />}>
+          <TreasuresStep boardSetup={room.boardSetup} />
         </Suspense>
       ) : (
         <div className="grid grid-cols-2 gap-6">
