@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { defineHex, Grid, rectangle } from "honeycomb-grid";
+import { BoardPicture } from "@components/BoardPicture";
 import type { Board } from "../../../../../shared/boards";
 import {
   BOARD_IMAGE_HEIGHT,
@@ -47,11 +48,14 @@ export const BoardOverlay = ({
       preserveAspectRatio="xMidYMid meet"
     >
       <g transform={rotationTransform}>
-        <image
-          href={`/assets/boards/${board.asset}.png`}
+        <foreignObject
+          x={0}
+          y={0}
           width={BOARD_IMAGE_WIDTH}
           height={BOARD_IMAGE_HEIGHT}
-        />
+        >
+          <BoardPicture board={board} imgClassName="block w-full h-full" />
+        </foreignObject>
         {hexPath.map((hex) => (
           <HexCell
             key={`${hex.col},${hex.row}`}
