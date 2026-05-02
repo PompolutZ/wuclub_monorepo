@@ -1,5 +1,9 @@
 import { Orientation, type HexOffset } from "honeycomb-grid";
 
+type BoardDisabledHexes = {
+  disabled: Set<string>; // overlay hexes with no underlying hex on the board image
+};
+
 export type BoardOverlayConfig = {
   cols: number;
   rows: number;
@@ -7,8 +11,7 @@ export type BoardOverlayConfig = {
   gridOffset: { x: number; y: number };
   orientation: Orientation;
   hexOffset: HexOffset; // stagger direction: 1 | -1
-  disabled: Set<string>; // overlay hexes with no underlying hex on the board image
-};
+} & BoardDisabledHexes;
 
 // Underlying image dimensions for a 2nd-ed board.
 export const BOARD_IMAGE_WIDTH = 1887;
@@ -23,26 +26,42 @@ const baseConfig = {
   hexOffset: 1 satisfies HexOffset,
 } as const;
 
+const disabledHexes: BoardDisabledHexes = {
+  disabled: new Set([
+    "0,0",
+    "1,0",
+    "9,0",
+    "10,0",
+    "0,7",
+    "10,7",
+    "0,8",
+    "1,8",
+    "2,8",
+    "4,8",
+    "6,8",
+    "8,8",
+    "9,8",
+    "10,8",
+  ]),
+};
+
 // Keyed by `Board.id`. Boards without a tuned config are absent.
 export const boardOverlayConfigs: Partial<Record<number, BoardOverlayConfig>> =
   {
     1: {
       ...baseConfig,
-      disabled: new Set([
-        "0,0",
-        "1,0",
-        "9,0",
-        "10,0",
-        "0,7",
-        "10,7",
-        "0,8",
-        "1,8",
-        "2,8",
-        "4,8",
-        "6,8",
-        "8,8",
-        "9,8",
-        "10,8",
-      ]),
+      ...disabledHexes,
+    },
+    2: {
+      ...baseConfig,
+      ...disabledHexes,
+    },
+    3: {
+      ...baseConfig,
+      ...disabledHexes,
+    },
+    4: {
+      ...baseConfig,
+      ...disabledHexes,
     },
   };

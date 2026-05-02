@@ -11,7 +11,7 @@ export type BoardRotation = 0 | 90 | 180 | 270;
 
 type BoardOverlayProps = {
   board: Board;
-  config: BoardOverlayConfig;
+  config?: BoardOverlayConfig;
   rotation: BoardRotation;
 };
 
@@ -20,7 +20,7 @@ export const BoardOverlay = ({
   config,
   rotation,
 }: BoardOverlayProps) => {
-  const hexPath = useMemo(() => buildHexPath(config), [config]);
+  const hexPath = useMemo(() => (config ? buildHexPath(config) : []), [config]);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
   const isQuarterTurn = rotation === 90 || rotation === 270;

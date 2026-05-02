@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { boards } from "../../../../../shared/boards";
 import { BoardOverlay, type BoardRotation } from "./BoardOverlay";
 import { boardOverlayConfigs } from "./boardOverlayConfigs";
@@ -9,13 +10,19 @@ type TerritoriesStepProps = {
 
 export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
   // TODO: replace with selection driven by the priority winner.
-  const board = boards[0];
-  const config = boardOverlayConfigs[board.id];
+  const [boardIndex, setBoardIndex] = useState(0);
   const [rotation, setRotation] = useState<BoardRotation>(0);
+
+  const board = boards[boardIndex];
+  const config = boardOverlayConfigs[board.id];
 
   const rotateCw = () => setRotation((r) => ((r + 90) % 360) as BoardRotation);
   const rotateCcw = () =>
     setRotation((r) => ((r + 270) % 360) as BoardRotation);
+
+  const prevBoard = () =>
+    setBoardIndex((i) => (i - 1 + boards.length) % boards.length);
+  const nextBoard = () => setBoardIndex((i) => (i + 1) % boards.length);
 
   return (
     <section className="flex flex-col items-center space-y-4 max-w-4xl mx-auto w-full">
@@ -38,10 +45,26 @@ export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
           Rotate clockwise
         </button>
       </div>
-      <div className="relative w-full max-w-xl">
-        {config && (
+      <div className="flex items-center justify-center gap-3 w-full">
+        <button
+          type="button"
+          onClick={prevBoard}
+          aria-label="Previous board"
+          className="shrink-0 grid place-items-center w-9 h-9 rounded-full border border-gray-300 hover:bg-gray-100"
+        >
+          <ChevronLeft className="w-5 h-5" aria-hidden />
+        </button>
+        <div className="relative w-full max-w-xl">
           <BoardOverlay board={board} config={config} rotation={rotation} />
-        )}
+        </div>
+        <button
+          type="button"
+          onClick={nextBoard}
+          aria-label="Next board"
+          className="shrink-0 grid place-items-center w-9 h-9 rounded-full border border-gray-300 hover:bg-gray-100"
+        >
+          <ChevronRight className="w-5 h-5" aria-hidden />
+        </button>
       </div>
     </section>
   );
