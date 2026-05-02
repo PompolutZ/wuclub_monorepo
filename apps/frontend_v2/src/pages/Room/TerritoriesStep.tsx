@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   defineHex,
   Grid,
@@ -12,24 +12,31 @@ import { boards } from "../../../../../shared/boards";
 const BOARD_WIDTH = 1887;
 const BOARD_HEIGHT = 1730;
 
-type GridConfig = {
+type GridConfingBase = {
   cols: number;
   rows: number;
   size: number; // hex radius, in board-image px
   gridOffset: { x: number; y: number };
   orientation: Orientation;
   hexOffset: HexOffset; // stagger direction: 1 | -1
-  disabled: Set<string>; // "col,row" offsets to skip
 };
 
-// Board placed horizontally → flat-top hexes.
-const FLAT_CONFIG: GridConfig = {
+type GridConfig = GridConfingBase & {
+  disabled: Set<string>; // overlay hexes that do not have underlying hex on the board image.
+};
+
+const baseConfig: GridConfingBase = {
   cols: 11,
   rows: 9,
   size: 110,
   gridOffset: { x: 9, y: 103 },
   orientation: Orientation.FLAT,
   hexOffset: 1,
+};
+
+// Board placed horizontally → flat-top hexes.
+const FLAT_CONFIG: GridConfig = {
+  ...baseConfig,
   disabled: new Set([
     "0,0",
     "1,0",
@@ -51,13 +58,23 @@ const FLAT_CONFIG: GridConfig = {
 // Board placed vertically (image rotated 90°) → pointy-top hexes.
 // Placeholder values — tune offsets and disabled list for your image.
 const POINTY_CONFIG: GridConfig = {
-  cols: 9,
-  rows: 11,
-  size: 110,
-  gridOffset: { x: 103, y: 9 },
-  orientation: Orientation.POINTY,
-  hexOffset: 1,
-  disabled: new Set<string>([]),
+  ...baseConfig,
+  disabled: new Set<string>([
+    "0,0",
+    "0,1",
+    "0,9",
+    "0,10",
+    "7,0",
+    "8,0",
+    "8,1",
+    "8,2",
+    "8,4",
+    "8,6",
+    "8,8",
+    "8,9",
+    "8,10",
+    "7,10",
+  ]),
 };
 
 // Flip this to tune the pointy map. When "pointy", the board image is
@@ -72,14 +89,36 @@ type TerritoriesStepProps = {
 export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
   const board = boards[0];
   const hexPath = useMemo(() => buildHexPath(CONFIG), []);
+  const [rotation, setRotation] = useState<0 | 90 | 180 | 270>(0);
 
   const isPointy = CONFIG.orientation === Orientation.POINTY;
-  const viewBoxW = isPointy ? BOARD_HEIGHT : BOARD_WIDTH;
-  const viewBoxH = isPointy ? BOARD_WIDTH : BOARD_HEIGHT;
-  // Rotate image 90° CW around (0,0), then shift back into the visible area.
+  const baseW = isPointy ? BOARD_HEIGHT : BOARD_WIDTH;
+  const baseH = isPointy ? BOARD_WIDTH : BOARD_HEIGHT;
+  const isQuarterTurn = rotation === 90 || rotation === 270;
+  const viewBoxW = isQuarterTurn ? baseH : baseW;
+  const viewBoxH = isQuarterTurn ? baseW : baseH;
+
   const imageTransform = isPointy
     ? `translate(${BOARD_HEIGHT} 0) rotate(90)`
     : undefined;
+
+  const rotationTransform = (() => {
+    switch (rotation) {
+      case 90:
+        return `translate(${baseH} 0) rotate(90)`;
+      case 180:
+        return `translate(${baseW} ${baseH}) rotate(180)`;
+      case 270:
+        return `translate(0 ${baseW}) rotate(-90)`;
+      default:
+        return undefined;
+    }
+  })();
+
+  const rotateCw = () =>
+    setRotation((r) => ((r + 90) % 360) as 0 | 90 | 180 | 270);
+  const rotateCcw = () =>
+    setRotation((r) => ((r + 270) % 360) as 0 | 90 | 180 | 270);
 
   return (
     <section className="flex flex-col items-center space-y-4 max-w-4xl mx-auto w-full">
@@ -88,27 +127,45 @@ export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
         <span className="font-semibold">{board.name}</span> (
         {ACTIVE === "flat" ? "flat-top" : "pointy-top"}).
       </p>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={rotateCcw}
+          className="px-3 py-1 rounded border border-gray-300 text-sm hover:bg-gray-100"
+        >
+          Rotate counter-clockwise
+        </button>
+        <button
+          type="button"
+          onClick={rotateCw}
+          className="px-3 py-1 rounded border border-gray-300 text-sm hover:bg-gray-100"
+        >
+          Rotate clockwise
+        </button>
+      </div>
       <div className="relative w-full max-w-xl">
         <svg
           className="block w-full h-auto"
           viewBox={`0 0 ${viewBoxW} ${viewBoxH}`}
           preserveAspectRatio="xMidYMid meet"
         >
-          <image
-            href={`/assets/boards/${board.asset}.png`}
-            width={BOARD_WIDTH}
-            height={BOARD_HEIGHT}
-            transform={imageTransform}
-          />
-          {hexPath.map((hex) => (
-            <polygon
-              key={`${hex.q},${hex.r}`}
-              points={hex.points}
-              fill="rgba(147, 51, 234, 0.2)"
-              stroke="rgba(147, 51, 234, .5)"
-              strokeWidth={2}
+          <g transform={rotationTransform}>
+            <image
+              href={`/assets/boards/${board.asset}.png`}
+              width={BOARD_WIDTH}
+              height={BOARD_HEIGHT}
+              transform={imageTransform}
             />
-          ))}
+            {hexPath.map((hex) => (
+              <polygon
+                key={`${hex.q},${hex.r}`}
+                points={hex.points}
+                fill="rgba(147, 51, 234, 0.2)"
+                stroke="rgba(147, 51, 234, .5)"
+                strokeWidth={2}
+              />
+            ))}
+          </g>
         </svg>
       </div>
     </section>
