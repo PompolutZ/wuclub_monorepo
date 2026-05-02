@@ -39,6 +39,11 @@ export type InitiativeRolls = {
   guest: AttackFace | null;
 };
 
+export type BoardSetup = {
+  boardId: number;
+  rotation: 0 | 90 | 180 | 270;
+};
+
 export type Room = {
   id: string;
   createdAt: number;
@@ -46,6 +51,7 @@ export type Room = {
   guest: RoomPlayer | null;
   setupStep: SetupStepId;
   initiativeRolls: InitiativeRolls;
+  boardSetup: BoardSetup | null;
 };
 
 const ROOM_PREFIX = "wuclub:room:";
@@ -91,6 +97,7 @@ function readRoomFromStorage(roomId: string): Room | undefined {
     return {
       ...(parsed as Room),
       initiativeRolls: parsed.initiativeRolls ?? { host: null, guest: null },
+      boardSetup: parsed.boardSetup ?? null,
     };
   } catch {
     return undefined;
@@ -163,6 +170,7 @@ export function createRoom(host: RoomPlayer): string {
     guest: null,
     setupStep: initialSetupStep(host.warband.id),
     initiativeRolls: { host: null, guest: null },
+    boardSetup: null,
   };
   rooms.set(id, room);
   writeRoomToStorage(room);
@@ -199,6 +207,15 @@ export function advanceFromInitiative(roomId: string) {
   const room = getRoom(roomId);
   if (!room) return;
   const next: Room = { ...room, setupStep: "territories" };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+export function setBoardSetup(roomId: string, boardSetup: BoardSetup) {
+  const room = getRoom(roomId);
+  if (!room || room.boardSetup) return;
+  const next: Room = { ...room, boardSetup, setupStep: "treasures" };
   rooms.set(roomId, next);
   writeRoomToStorage(next);
   notify(roomId);

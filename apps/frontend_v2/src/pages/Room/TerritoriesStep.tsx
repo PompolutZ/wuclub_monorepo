@@ -3,18 +3,21 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { boards } from "../../../../../shared/boards";
 import { BoardOverlay, type BoardRotation } from "./BoardOverlay";
 import { boardOverlayConfigs } from "./boardOverlayConfigs";
+import { setBoardSetup } from "./roomStore";
 
 type TerritoriesStepProps = {
   roomId: string;
 };
 
-export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
+export const TerritoriesStep = ({ roomId }: TerritoriesStepProps) => {
   // TODO: replace with selection driven by the priority winner.
   const [boardIndex, setBoardIndex] = useState(0);
   const [rotation, setRotation] = useState<BoardRotation>(0);
 
   const board = boards[boardIndex];
   const config = boardOverlayConfigs[board.id];
+
+  const confirm = () => setBoardSetup(roomId, { boardId: board.id, rotation });
 
   const rotateCw = () => setRotation((r) => ((r + 90) % 360) as BoardRotation);
   const rotateCcw = () =>
@@ -66,6 +69,13 @@ export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
           <ChevronRight className="w-5 h-5" aria-hidden />
         </button>
       </div>
+      <button
+        type="button"
+        onClick={confirm}
+        className="px-4 py-2 rounded bg-purple-600 text-white text-sm font-medium hover:bg-purple-700"
+      >
+        Confirm board
+      </button>
     </section>
   );
 };
