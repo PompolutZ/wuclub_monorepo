@@ -1,30 +1,36 @@
 import { useMemo, useState, type PointerEvent } from "react";
 import { shuffle } from "@/utils/functions";
 import { boards } from "../../../../../shared/boards";
-import {
-  BoardOverlay,
-  type BoardRotation,
-  type PlacedToken,
-} from "./BoardOverlay";
+import { BoardOverlay, type BoardRotation } from "./BoardOverlay";
 import { boardOverlayConfigs } from "./boardOverlayConfigs";
-import type { BoardSetup } from "./roomStore";
+import {
+  flipTreasure,
+  placeTreasure,
+  type BoardSetup,
+  type Treasure,
+} from "./roomStore";
 
 type TreasuresStepProps = {
+  roomId: string;
   boardSetup: BoardSetup;
+  treasures: Treasure[];
 };
 
 type DragState = { id: number; x: number; y: number };
 
-export const TreasuresStep = ({ boardSetup }: TreasuresStepProps) => {
+export const TreasuresStep = ({
+  roomId,
+  boardSetup,
+  treasures,
+}: TreasuresStepProps) => {
   const board = boards.find((b) => b.id === boardSetup.boardId);
   const config = board ? boardOverlayConfigs[board.id] : undefined;
   const deck = useMemo(() => shuffle(TREASURE_TOKENS), []);
-  const [placed, setPlaced] = useState<PlacedToken[]>([]);
   const [drag, setDrag] = useState<DragState | null>(null);
 
   if (!board) return null;
 
-  const remaining = deck.filter((id) => !placed.some((p) => p.id === id));
+  const remaining = deck.filter((id) => !treasures.some((t) => t.id === id));
 
   const handlePointerDown = (e: PointerEvent<HTMLImageElement>, id: number) => {
     e.currentTarget.setPointerCapture(e.pointerId);
@@ -42,10 +48,12 @@ export const TreasuresStep = ({ boardSetup }: TreasuresStepProps) => {
     if (polygon) {
       const col = Number(polygon.dataset.col);
       const row = Number(polygon.dataset.row);
-      setPlaced((prev) => [...prev, { id: drag.id, col, row }]);
+      placeTreasure(roomId, { id: drag.id, col, row, faceUp: false });
     }
     setDrag(null);
   };
+
+  const handleFlip = (id: number) => flipTreasure(roomId, id);
 
   return (
     <section className="flex flex-col items-center space-y-4 max-w-4xl mx-auto w-full">
@@ -58,7 +66,8 @@ export const TreasuresStep = ({ boardSetup }: TreasuresStepProps) => {
             board={board}
             config={config}
             rotation={boardSetup.rotation}
-            placed={placed}
+            placed={treasures}
+            onFlip={handleFlip}
           />
         </div>
         <TreasureDrawPile

@@ -44,6 +44,13 @@ export type BoardSetup = {
   rotation: 0 | 90 | 180 | 270;
 };
 
+export type Treasure = {
+  id: number;
+  col: number;
+  row: number;
+  faceUp: boolean;
+};
+
 export type Room = {
   id: string;
   createdAt: number;
@@ -52,6 +59,7 @@ export type Room = {
   setupStep: SetupStepId;
   initiativeRolls: InitiativeRolls;
   boardSetup: BoardSetup | null;
+  treasures: Treasure[];
 };
 
 const ROOM_PREFIX = "wuclub:room:";
@@ -98,6 +106,7 @@ function readRoomFromStorage(roomId: string): Room | undefined {
       ...(parsed as Room),
       initiativeRolls: parsed.initiativeRolls ?? { host: null, guest: null },
       boardSetup: parsed.boardSetup ?? null,
+      treasures: parsed.treasures ?? [],
     };
   } catch {
     return undefined;
@@ -171,6 +180,7 @@ export function createRoom(host: RoomPlayer): string {
     setupStep: initialSetupStep(host.warband.id),
     initiativeRolls: { host: null, guest: null },
     boardSetup: null,
+    treasures: [],
   };
   rooms.set(id, room);
   writeRoomToStorage(room);
@@ -216,6 +226,34 @@ export function setBoardSetup(roomId: string, boardSetup: BoardSetup) {
   const room = getRoom(roomId);
   if (!room || room.boardSetup) return;
   const next: Room = { ...room, boardSetup, setupStep: "treasures" };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+const TREASURE_COUNT = 5;
+
+export function placeTreasure(roomId: string, treasure: Treasure) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  if (room.treasures.some((t) => t.id === treasure.id)) return;
+  let treasures: Treasure[] = [...room.treasures, treasure];
+  if (treasures.length === TREASURE_COUNT) {
+    treasures = treasures.map((t) => ({ ...t, faceUp: true }));
+  }
+  const next: Room = { ...room, treasures };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+export function flipTreasure(roomId: string, id: number) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const treasures = room.treasures.map((t) =>
+    t.id === id ? { ...t, faceUp: !t.faceUp } : t,
+  );
+  const next: Room = { ...room, treasures };
   rooms.set(roomId, next);
   writeRoomToStorage(next);
   notify(roomId);

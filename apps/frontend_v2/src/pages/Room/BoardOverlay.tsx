@@ -14,6 +14,7 @@ export type PlacedToken = {
   id: number;
   col: number;
   row: number;
+  faceUp: boolean;
 };
 
 type BoardOverlayProps = {
@@ -21,6 +22,7 @@ type BoardOverlayProps = {
   config?: BoardOverlayConfig;
   rotation: BoardRotation;
   placed?: PlacedToken[];
+  onFlip?: (id: number) => void;
 };
 
 // Token image has padding around its hex shape; this multiplier on
@@ -32,6 +34,7 @@ export const BoardOverlay = ({
   config,
   rotation,
   placed,
+  onFlip,
 }: BoardOverlayProps) => {
   const hexPath = useMemo(() => (config ? buildHexPath(config) : []), [config]);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
@@ -82,15 +85,22 @@ export const BoardOverlay = ({
             const hex = hexPath.find((h) => h.col === p.col && h.row === p.row);
             if (!hex) return null;
             const size = config.size * PLACED_TOKEN_SCALE;
+            const href = p.faceUp
+              ? `/assets/room/tokens/treasure_token_${p.id}.png`
+              : "/assets/room/tokens/feature_token_cover.png";
             return (
               <image
                 key={p.id}
-                href="/assets/room/tokens/feature_token_cover.png"
+                href={href}
                 x={hex.cx - size / 2}
                 y={hex.cy - size / 2}
                 width={size}
                 height={size}
-                style={{ pointerEvents: "none" }}
+                onClick={onFlip ? () => onFlip(p.id) : undefined}
+                style={{
+                  pointerEvents: onFlip ? "auto" : "none",
+                  cursor: onFlip ? "pointer" : undefined,
+                }}
               />
             );
           })}

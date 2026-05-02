@@ -71,7 +71,11 @@ const RoomPage = () => {
         </Suspense>
       ) : room.setupStep === "treasures" && room.boardSetup ? (
         <Suspense fallback={<LazyLoading />}>
-          <TreasuresStep boardSetup={room.boardSetup} />
+          <TreasuresStep
+            roomId={id}
+            boardSetup={room.boardSetup}
+            treasures={room.treasures}
+          />
         </Suspense>
       ) : (
         <div className="grid grid-cols-2 gap-6">
