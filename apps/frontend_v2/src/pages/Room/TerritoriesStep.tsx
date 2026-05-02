@@ -91,6 +91,7 @@ export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
   const board = boards[0];
   const hexPath = useMemo(() => buildHexPath(CONFIG), []);
   const [rotation, setRotation] = useState<0 | 90 | 180 | 270>(0);
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
   const isPointy = CONFIG.orientation === Orientation.POINTY;
   const baseW = isPointy ? BOARD_HEIGHT : BOARD_WIDTH;
@@ -157,15 +158,43 @@ export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
               height={BOARD_HEIGHT}
               transform={imageTransform}
             />
-            {hexPath.map((hex) => (
-              <polygon
-                key={`${hex.q},${hex.r}`}
-                points={hex.points}
-                fill="rgba(147, 51, 234, 0.2)"
-                stroke="rgba(147, 51, 234, .5)"
-                strokeWidth={2}
-              />
-            ))}
+            {hexPath.map((hex) => {
+              const key = `${hex.col},${hex.row}`;
+              const isHovered = hoveredKey === key;
+              return (
+                <g key={key}>
+                  <polygon
+                    points={hex.points}
+                    fill={
+                      isHovered
+                        ? "rgba(147, 51, 234, 0.55)"
+                        : "rgba(147, 51, 234, 0.2)"
+                    }
+                    stroke="rgba(147, 51, 234, .5)"
+                    strokeWidth={2}
+                    onMouseEnter={() => setHoveredKey(key)}
+                    onMouseLeave={() =>
+                      setHoveredKey((prev) => (prev === key ? null : prev))
+                    }
+                  />
+                  {isHovered && (
+                    <text
+                      x={hex.cx}
+                      y={hex.cy}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      fontSize={48}
+                      fontWeight="bold"
+                      fill="white"
+                      pointerEvents="none"
+                      transform={`rotate(${-rotation} ${hex.cx} ${hex.cy})`}
+                    >
+                      {key}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
           </g>
         </svg>
       </div>
@@ -176,6 +205,10 @@ export const TerritoriesStep = ({ roomId: _roomId }: TerritoriesStepProps) => {
 type PaintedHex = {
   q: number;
   r: number;
+  col: number;
+  row: number;
+  cx: number;
+  cy: number;
   points: string;
 };
 
@@ -196,7 +229,15 @@ function buildHexPath(config: GridConfig): PaintedHex[] {
     const points = hex.corners
       .map((c) => `${c.x + config.gridOffset.x},${c.y + config.gridOffset.y}`)
       .join(" ");
-    painted.push({ q: hex.q, r: hex.r, points });
+    painted.push({
+      q: hex.q,
+      r: hex.r,
+      col: hex.col,
+      row: hex.row,
+      cx: hex.x + config.gridOffset.x,
+      cy: hex.y + config.gridOffset.y,
+      points,
+    });
   });
   return painted;
 }
