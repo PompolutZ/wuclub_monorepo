@@ -1,7 +1,11 @@
 import { useMemo, useState, type PointerEvent } from "react";
 import { shuffle } from "@/utils/functions";
 import { boards } from "../../../../../shared/boards";
-import { BoardOverlay, type BoardRotation } from "./BoardOverlay";
+import {
+  BoardOverlay,
+  type BoardRotation,
+  type PlacedToken,
+} from "./BoardOverlay";
 import { boardOverlayConfigs } from "./boardOverlayConfigs";
 import {
   flipTreasure,
@@ -53,7 +57,16 @@ export const TreasuresStep = ({
     setDrag(null);
   };
 
-  const handleFlip = (id: number) => flipTreasure(roomId, id);
+  const handleFlip = (id: string | number) => flipTreasure(roomId, Number(id));
+
+  const placed: PlacedToken[] = treasures.map((t) => ({
+    id: t.id,
+    col: t.col,
+    row: t.row,
+    imageHref: t.faceUp
+      ? `/assets/room/tokens/treasure_token_${t.id}.png`
+      : "/assets/room/tokens/feature_token_cover.png",
+  }));
 
   return (
     <section className="flex flex-col items-center space-y-4 max-w-4xl mx-auto w-full">
@@ -66,7 +79,7 @@ export const TreasuresStep = ({
             board={board}
             config={config}
             rotation={boardSetup.rotation}
-            placed={treasures}
+            placed={placed}
             onFlip={handleFlip}
           />
         </div>
