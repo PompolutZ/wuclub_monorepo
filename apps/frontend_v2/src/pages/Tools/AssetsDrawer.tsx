@@ -31,7 +31,7 @@ export const AssetsDrawer = ({
   return (
     <aside
       data-drawer
-      className="w-80 shrink-0 border-l border-gray-200 bg-white p-4 overflow-y-auto"
+      className="w-80 h-full border-l border-gray-200 bg-white p-4 overflow-y-auto"
     >
       <Section title="Tokens">
         <div className="flex flex-wrap gap-2">

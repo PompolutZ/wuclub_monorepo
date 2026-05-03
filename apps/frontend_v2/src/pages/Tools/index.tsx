@@ -4,6 +4,7 @@ import {
   useState,
   type PointerEvent as ReactPointerEvent,
 } from "react";
+import { Minus, Plus } from "lucide-react";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { warbandsValidForOrganisedPlay } from "@fxdxpz/wudb";
 import { FIGHTER_TOKEN_SCALE, FighterToken } from "@components/FighterToken";
@@ -87,6 +88,9 @@ const DEFAULT_WARBAND =
   PICKABLE_WARBANDS[0];
 
 const CARD_CLAMP_PADDING = 24;
+const ZOOM_MIN = 0.5;
+const ZOOM_MAX = 2;
+const ZOOM_STEP = 0.1;
 
 type DropTarget =
   | { kind: "drawer" }
@@ -103,6 +107,7 @@ const ToolsPage = () => {
   });
   const [items, setItems] = useState<CanvasItem[]>([]);
   const [activeWarband, setActiveWarband] = useState<Warband>(DEFAULT_WARBAND);
+  const [zoom, setZoom] = useState(1);
   const [drag, setDrag] = useState<DragState | null>(null);
   const dragRef = useRef<DragState | null>(null);
   const itemsRef = useRef<CanvasItem[]>(items);
@@ -253,9 +258,36 @@ const ToolsPage = () => {
       : null;
 
   return (
-    <div className="flex flex-1 h-full">
-      <main className="flex-1 relative overflow-hidden flex flex-col">
-        <header className="flex items-center justify-end gap-2 px-4 py-2 border-b border-gray-200">
+    <div className="flex-1 relative">
+      <div className="absolute inset-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr]">
+        <header className="col-start-1 row-start-1 flex items-center justify-end gap-2 px-4 py-2 border-b border-gray-200">
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() =>
+                setZoom((z) => Math.max(ZOOM_MIN, +(z - ZOOM_STEP).toFixed(2)))
+              }
+              disabled={zoom <= ZOOM_MIN}
+              aria-label="Zoom out"
+              className="grid place-items-center w-8 h-8 rounded border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Minus className="w-4 h-4" aria-hidden />
+            </button>
+            <span className="w-12 text-center text-sm tabular-nums">
+              {Math.round(zoom * 100)}%
+            </span>
+            <button
+              type="button"
+              onClick={() =>
+                setZoom((z) => Math.min(ZOOM_MAX, +(z + ZOOM_STEP).toFixed(2)))
+              }
+              disabled={zoom >= ZOOM_MAX}
+              aria-label="Zoom in"
+              className="grid place-items-center w-8 h-8 rounded border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Plus className="w-4 h-4" aria-hidden />
+            </button>
+          </div>
           <button
             type="button"
             onClick={() => setItems([])}
@@ -265,57 +297,64 @@ const ToolsPage = () => {
             Clear canvas
           </button>
         </header>
-        <div className="flex-1 grid place-items-center">
-          <BoardArea
-            boardId={boardSetting.boardId}
-            rotation={boardSetting.rotation}
-            modifying={boardSetting.modifying}
-            placed={placed}
-            boardRef={boardRef}
-            onPrevBoard={() => cycleBoard(-1)}
-            onNextBoard={() => cycleBoard(1)}
-            onRotateCw={() => rotateBy(90)}
-            onRotateCcw={() => rotateBy(270)}
-            onToggleModify={() =>
-              setBoardSetting((s) => ({ ...s, modifying: !s.modifying }))
-            }
+        <div className="col-start-1 row-start-2 relative min-h-0 min-w-0">
+          <div className="absolute inset-0 overflow-auto">
+            <div className="min-w-full min-h-full grid place-items-center p-4">
+              <BoardArea
+                boardId={boardSetting.boardId}
+                rotation={boardSetting.rotation}
+                modifying={boardSetting.modifying}
+                placed={placed}
+                boardRef={boardRef}
+                zoom={zoom}
+                onPrevBoard={() => cycleBoard(-1)}
+                onNextBoard={() => cycleBoard(1)}
+                onRotateCw={() => rotateBy(90)}
+                onRotateCcw={() => rotateBy(270)}
+                onToggleModify={() =>
+                  setBoardSetting((s) => ({ ...s, modifying: !s.modifying }))
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div className="col-start-2 row-start-1 row-span-2 min-h-0 overflow-hidden">
+          <AssetsDrawer
+            warbands={PICKABLE_WARBANDS}
+            activeWarband={activeWarband}
+            onSelectWarband={setActiveWarband}
+            onTemplatePointerDown={handleTemplatePointerDown}
           />
         </div>
-        {canvasChildren.map((item) => (
-          <CanvasItemView
-            key={item.id}
-            item={item}
-            isDragging={false}
-            onPointerDown={handleItemPointerDown}
-          />
-        ))}
-        {draggingItem && drag?.source === "canvas" && (
-          <CanvasItemView
-            key={`drag-${draggingItem.id}`}
-            item={{
-              ...draggingItem,
-              x: drag.clientX - drag.offsetX,
-              y: drag.clientY - drag.offsetY,
-            }}
-            isDragging
-            onPointerDown={handleItemPointerDown}
-          />
-        )}
-        {ghostFromTemplate && (
-          <CanvasItemView
-            key="ghost"
-            item={ghostFromTemplate}
-            isDragging
-            onPointerDown={() => undefined}
-          />
-        )}
-      </main>
-      <AssetsDrawer
-        warbands={PICKABLE_WARBANDS}
-        activeWarband={activeWarband}
-        onSelectWarband={setActiveWarband}
-        onTemplatePointerDown={handleTemplatePointerDown}
-      />
+      </div>
+      {canvasChildren.map((item) => (
+        <CanvasItemView
+          key={item.id}
+          item={item}
+          isDragging={false}
+          onPointerDown={handleItemPointerDown}
+        />
+      ))}
+      {draggingItem && drag?.source === "canvas" && (
+        <CanvasItemView
+          key={`drag-${draggingItem.id}`}
+          item={{
+            ...draggingItem,
+            x: drag.clientX - drag.offsetX,
+            y: drag.clientY - drag.offsetY,
+          }}
+          isDragging
+          onPointerDown={handleItemPointerDown}
+        />
+      )}
+      {ghostFromTemplate && (
+        <CanvasItemView
+          key="ghost"
+          item={ghostFromTemplate}
+          isDragging
+          onPointerDown={() => undefined}
+        />
+      )}
     </div>
   );
 };
