@@ -15,7 +15,14 @@ import { boards } from "../../../../../shared/boards";
 import type { BoardRotation, PlacedToken } from "../Room/BoardOverlay";
 import { BoardArea } from "./BoardArea";
 import { AssetsDrawer } from "./AssetsDrawer";
-import { Canvas, STAGE_CENTER_X, STAGE_CENTER_Y } from "./Canvas";
+import {
+  Canvas,
+  STAGE_CENTER_X,
+  STAGE_CENTER_Y,
+  ZOOM_MAX,
+  ZOOM_MIN,
+  ZOOM_STEP,
+} from "./Canvas";
 import { CanvasItemView } from "./CanvasItem";
 import { isTokenKind } from "./itemHelpers";
 import type {
@@ -90,9 +97,6 @@ const DEFAULT_WARBAND =
   PICKABLE_WARBANDS[0];
 
 const CARD_CLAMP_PADDING = 24;
-const ZOOM_MIN = 0.5;
-const ZOOM_MAX = 2;
-const ZOOM_STEP = 0.1;
 
 type DropTarget =
   | { kind: "drawer" }
@@ -323,6 +327,7 @@ const ToolsPage = () => {
         <Canvas
           className="col-start-1 row-start-2"
           zoom={zoom}
+          setZoom={setZoom}
           stageRef={stageRef}
         >
           <div
