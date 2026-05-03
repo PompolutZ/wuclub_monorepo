@@ -3,6 +3,7 @@ import {
   useRef,
   useState,
   type PointerEvent as ReactPointerEvent,
+  type ReactNode,
 } from "react";
 import { Minus, Plus } from "lucide-react";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
@@ -255,7 +256,7 @@ const ToolsPage = () => {
   const placed: PlacedToken[] = items
     .filter(hasHex)
     .filter((it) => it.id !== draggingCanvasId)
-    .map((it) => buildPlacedToken(it));
+    .map((it) => buildPlacedToken(it, boardSetting.modifying));
 
   const canvasChildren = items.filter(
     (it) => !hasHex(it) && it.id !== draggingCanvasId,
@@ -325,7 +326,7 @@ const ToolsPage = () => {
           stageRef={stageRef}
         >
           <div
-            className="absolute"
+            className="absolute z-10"
             style={{
               left: STAGE_CENTER_X,
               top: STAGE_CENTER_Y,
@@ -350,6 +351,7 @@ const ToolsPage = () => {
               item={item}
               isDragging={false}
               position="absolute"
+              dimmed={boardSetting.modifying}
               onPointerDown={handleItemPointerDown}
             />
           ))}
@@ -403,37 +405,46 @@ function hasHex(item: CanvasItem): item is TokenItem & { hex: HexCoord } {
   return item.hex !== undefined;
 }
 
-function buildPlacedToken(item: TokenItem & { hex: HexCoord }): PlacedToken {
+function buildPlacedToken(
+  item: TokenItem & { hex: HexCoord },
+  dimmed: boolean,
+): PlacedToken {
   const common = { id: item.id, col: item.hex.col, row: item.hex.row };
   const fill = "block w-full h-full";
+  const wrap = (node: ReactNode) =>
+    dimmed ? (
+      <div className="w-full h-full opacity-40 grayscale">{node}</div>
+    ) : (
+      node
+    );
   switch (item.kind) {
     case "treasure-cover":
       return {
         ...common,
         scale: TREASURE_TOKEN_SCALE,
-        content: (
-          <TreasureToken face="cover" className={fill} draggable={false} />
+        content: wrap(
+          <TreasureToken face="cover" className={fill} draggable={false} />,
         ),
       };
     case "treasure":
       return {
         ...common,
         scale: TREASURE_TOKEN_SCALE,
-        content: (
-          <TreasureToken face={item.n} className={fill} draggable={false} />
+        content: wrap(
+          <TreasureToken face={item.n} className={fill} draggable={false} />,
         ),
       };
     case "fighter-token":
       return {
         ...common,
         scale: FIGHTER_TOKEN_SCALE,
-        content: (
+        content: wrap(
           <FighterToken
             warband={item.warband}
             fighter={item.fighter}
             className={fill}
             draggable={false}
-          />
+          />,
         ),
       };
   }

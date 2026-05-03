@@ -38,47 +38,45 @@ export const BoardArea = ({
   const config = boardOverlayConfigs[board.id];
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <p className="text-sm text-gray-700">
+    <div
+      ref={boardRef as RefObject<HTMLDivElement>}
+      data-board-area
+      className="relative"
+      style={{ width: BOARD_WIDTH }}
+    >
+      <BoardOverlay
+        board={board}
+        config={config}
+        rotation={rotation}
+        placed={placed}
+      />
+      <p className="absolute left-1/2 -top-7 -translate-x-1/2 text-sm text-gray-700 whitespace-nowrap">
         <span className="font-semibold">{board.name}</span>
       </p>
-      <div className="flex items-center gap-3">
-        {modifying && (
-          <RoundButton onClick={onPrevBoard} aria-label="Previous board">
-            <ChevronLeft className="w-5 h-5" aria-hidden />
-          </RoundButton>
-        )}
-        <div
-          ref={boardRef as RefObject<HTMLDivElement>}
-          data-board-area
-          className="relative"
-          style={{ width: BOARD_WIDTH }}
-        >
-          <BoardOverlay
-            board={board}
-            config={config}
-            rotation={rotation}
-            placed={placed}
-          />
-        </div>
-        {modifying && (
-          <RoundButton onClick={onNextBoard} aria-label="Next board">
-            <ChevronRight className="w-5 h-5" aria-hidden />
-          </RoundButton>
-        )}
-      </div>
       {modifying && (
-        <div className="flex items-center gap-3">
-          <RoundButton
-            onClick={onRotateCcw}
-            aria-label="Rotate counter-clockwise"
-          >
-            <RotateCcw className="w-5 h-5" aria-hidden />
-          </RoundButton>
-          <RoundButton onClick={onRotateCw} aria-label="Rotate clockwise">
-            <RotateCw className="w-5 h-5" aria-hidden />
-          </RoundButton>
-        </div>
+        <>
+          <div className="absolute top-1/2 -left-12 -translate-y-1/2">
+            <RoundButton onClick={onPrevBoard} aria-label="Previous board">
+              <ChevronLeft className="w-5 h-5" aria-hidden />
+            </RoundButton>
+          </div>
+          <div className="absolute top-1/2 -right-12 -translate-y-1/2">
+            <RoundButton onClick={onNextBoard} aria-label="Next board">
+              <ChevronRight className="w-5 h-5" aria-hidden />
+            </RoundButton>
+          </div>
+          <div className="absolute left-1/2 -bottom-12 -translate-x-1/2 flex items-center gap-3">
+            <RoundButton
+              onClick={onRotateCcw}
+              aria-label="Rotate counter-clockwise"
+            >
+              <RotateCcw className="w-5 h-5" aria-hidden />
+            </RoundButton>
+            <RoundButton onClick={onRotateCw} aria-label="Rotate clockwise">
+              <RotateCw className="w-5 h-5" aria-hidden />
+            </RoundButton>
+          </div>
+        </>
       )}
     </div>
   );

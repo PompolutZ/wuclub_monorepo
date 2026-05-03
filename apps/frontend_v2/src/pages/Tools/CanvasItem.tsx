@@ -14,6 +14,7 @@ type Props = {
   isDragging: boolean;
   position?: "fixed" | "absolute";
   scale?: number;
+  dimmed?: boolean;
   onPointerDown: (e: ReactPointerEvent<HTMLElement>, id: string) => void;
 };
 
@@ -22,6 +23,7 @@ export const CanvasItemView = ({
   isDragging,
   position = "fixed",
   scale = 1,
+  dimmed = false,
   onPointerDown,
 }: Props) => {
   const baseStyle: React.CSSProperties = {
@@ -30,7 +32,8 @@ export const CanvasItemView = ({
     top: item.y,
     transform: `translate(-50%, -50%) scale(${scale})`,
     cursor: isDragging ? "grabbing" : "grab",
-    opacity: isDragging ? 0.3 : 1,
+    opacity: isDragging ? 0.3 : dimmed ? 0.4 : 1,
+    filter: dimmed && !isDragging ? "grayscale(1)" : undefined,
     touchAction: "none",
     userSelect: "none",
     pointerEvents: isDragging ? "none" : "auto",
