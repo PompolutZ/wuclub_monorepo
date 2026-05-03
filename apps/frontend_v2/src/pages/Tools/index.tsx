@@ -14,6 +14,7 @@ import { boards } from "../../../../../shared/boards";
 import type { BoardRotation, PlacedToken } from "../Room/BoardOverlay";
 import { BoardArea } from "./BoardArea";
 import { AssetsDrawer } from "./AssetsDrawer";
+import { Canvas } from "./Canvas";
 import { CanvasItemView } from "./CanvasItem";
 import { isTokenKind } from "./itemHelpers";
 import type {
@@ -306,24 +307,20 @@ const ToolsPage = () => {
             Clear canvas
           </button>
         </header>
-        <div className="col-start-1 row-start-2 relative min-h-0 min-w-0">
-          <div className="absolute inset-0 overflow-auto">
-            <div className="min-w-full min-h-full grid place-items-center p-4">
-              <BoardArea
-                boardId={boardSetting.boardId}
-                rotation={boardSetting.rotation}
-                modifying={boardSetting.modifying}
-                placed={placed}
-                boardRef={boardRef}
-                zoom={zoom}
-                onPrevBoard={() => cycleBoard(-1)}
-                onNextBoard={() => cycleBoard(1)}
-                onRotateCw={() => rotateBy(90)}
-                onRotateCcw={() => rotateBy(270)}
-              />
-            </div>
-          </div>
-        </div>
+        <Canvas className="col-start-1 row-start-2">
+          <BoardArea
+            boardId={boardSetting.boardId}
+            rotation={boardSetting.rotation}
+            modifying={boardSetting.modifying}
+            placed={placed}
+            boardRef={boardRef}
+            zoom={zoom}
+            onPrevBoard={() => cycleBoard(-1)}
+            onNextBoard={() => cycleBoard(1)}
+            onRotateCw={() => rotateBy(90)}
+            onRotateCcw={() => rotateBy(270)}
+          />
+        </Canvas>
         <div className="col-start-2 row-start-1 row-span-2 min-h-0 overflow-hidden">
           <AssetsDrawer
             warbands={PICKABLE_WARBANDS}
