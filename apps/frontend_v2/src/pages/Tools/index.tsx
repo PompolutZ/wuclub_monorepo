@@ -290,6 +290,15 @@ const ToolsPage = () => {
           </div>
           <button
             type="button"
+            onClick={() =>
+              setBoardSetting((s) => ({ ...s, modifying: !s.modifying }))
+            }
+            className="px-3 py-1 rounded border border-gray-300 text-sm font-medium hover:bg-gray-100"
+          >
+            {boardSetting.modifying ? "Save" : "Modify board"}
+          </button>
+          <button
+            type="button"
             onClick={() => setItems([])}
             disabled={items.length === 0}
             className="px-3 py-1 rounded border border-gray-300 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -311,9 +320,6 @@ const ToolsPage = () => {
                 onNextBoard={() => cycleBoard(1)}
                 onRotateCw={() => rotateBy(90)}
                 onRotateCcw={() => rotateBy(270)}
-                onToggleModify={() =>
-                  setBoardSetting((s) => ({ ...s, modifying: !s.modifying }))
-                }
               />
             </div>
           </div>

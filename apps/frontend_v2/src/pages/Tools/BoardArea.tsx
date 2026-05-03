@@ -19,7 +19,6 @@ type Props = {
   onNextBoard: () => void;
   onRotateCw: () => void;
   onRotateCcw: () => void;
-  onToggleModify: () => void;
 };
 
 const BASE_BOARD_WIDTH = 600;
@@ -35,7 +34,6 @@ export const BoardArea = ({
   onNextBoard,
   onRotateCw,
   onRotateCcw,
-  onToggleModify,
 }: Props) => {
   const board = boards.find((b) => b.id === boardId);
   if (!board) return null;
@@ -71,28 +69,19 @@ export const BoardArea = ({
           </RoundButton>
         )}
       </div>
-      <div className="flex items-center gap-3">
-        {modifying && (
-          <>
-            <RoundButton
-              onClick={onRotateCcw}
-              aria-label="Rotate counter-clockwise"
-            >
-              <RotateCcw className="w-5 h-5" aria-hidden />
-            </RoundButton>
-            <RoundButton onClick={onRotateCw} aria-label="Rotate clockwise">
-              <RotateCw className="w-5 h-5" aria-hidden />
-            </RoundButton>
-          </>
-        )}
-        <button
-          type="button"
-          onClick={onToggleModify}
-          className="px-4 py-1.5 rounded border border-gray-300 text-sm font-medium hover:bg-gray-100"
-        >
-          {modifying ? "Save" : "Modify board"}
-        </button>
-      </div>
+      {modifying && (
+        <div className="flex items-center gap-3">
+          <RoundButton
+            onClick={onRotateCcw}
+            aria-label="Rotate counter-clockwise"
+          >
+            <RotateCcw className="w-5 h-5" aria-hidden />
+          </RoundButton>
+          <RoundButton onClick={onRotateCw} aria-label="Rotate clockwise">
+            <RotateCw className="w-5 h-5" aria-hidden />
+          </RoundButton>
+        </div>
+      )}
     </div>
   );
 };
