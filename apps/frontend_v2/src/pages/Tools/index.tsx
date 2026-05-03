@@ -14,7 +14,7 @@ import { boards } from "../../../../../shared/boards";
 import type { BoardRotation, PlacedToken } from "../Room/BoardOverlay";
 import { BoardArea } from "./BoardArea";
 import { AssetsDrawer } from "./AssetsDrawer";
-import { Canvas } from "./Canvas";
+import { Canvas, STAGE_CENTER_X, STAGE_CENTER_Y } from "./Canvas";
 import { CanvasItemView } from "./CanvasItem";
 import { isTokenKind } from "./itemHelpers";
 import type {
@@ -113,6 +113,7 @@ const ToolsPage = () => {
   const dragRef = useRef<DragState | null>(null);
   const itemsRef = useRef<CanvasItem[]>(items);
   const boardRef = useRef<HTMLDivElement | null>(null);
+  const stageRef = useRef<HTMLDivElement | null>(null);
 
   const commitDropRef = useRef<
     (current: DragState, clientX: number, clientY: number) => void
@@ -124,6 +125,7 @@ const ToolsPage = () => {
     clientY: number,
   ) => {
     const target = resolveDropTarget(clientX, clientY);
+    const toStage = makeViewportToStage(stageRef.current, zoom);
 
     if (current.source === "canvas") {
       if (target.kind === "drawer") {
@@ -140,6 +142,7 @@ const ToolsPage = () => {
         current.offsetX,
         current.offsetY,
         boardRef.current,
+        toStage,
       );
       setItems((prev) =>
         prev.map((it) => (it.id === current.itemId ? updated : it)),
@@ -154,6 +157,7 @@ const ToolsPage = () => {
       clientX,
       clientY,
       boardRef.current,
+      toStage,
     );
     setItems((prev) => [...prev, created]);
   };
@@ -214,11 +218,19 @@ const ToolsPage = () => {
   ) => {
     const item = itemsRef.current.find((it) => it.id === itemId);
     if (!item) return;
+    const stage = stageRef.current;
+    let offsetX = 0;
+    let offsetY = 0;
+    if (stage) {
+      const rect = stage.getBoundingClientRect();
+      offsetX = e.clientX - (rect.left + item.x * zoom);
+      offsetY = e.clientY - (rect.top + item.y * zoom);
+    }
     setDrag({
       source: "canvas",
       itemId,
-      offsetX: e.clientX - item.x,
-      offsetY: e.clientY - item.y,
+      offsetX,
+      offsetY,
       clientX: e.clientX,
       clientY: e.clientY,
     });
@@ -307,19 +319,40 @@ const ToolsPage = () => {
             Clear canvas
           </button>
         </header>
-        <Canvas className="col-start-1 row-start-2">
-          <BoardArea
-            boardId={boardSetting.boardId}
-            rotation={boardSetting.rotation}
-            modifying={boardSetting.modifying}
-            placed={placed}
-            boardRef={boardRef}
-            zoom={zoom}
-            onPrevBoard={() => cycleBoard(-1)}
-            onNextBoard={() => cycleBoard(1)}
-            onRotateCw={() => rotateBy(90)}
-            onRotateCcw={() => rotateBy(270)}
-          />
+        <Canvas
+          className="col-start-1 row-start-2"
+          zoom={zoom}
+          stageRef={stageRef}
+        >
+          <div
+            className="absolute"
+            style={{
+              left: STAGE_CENTER_X,
+              top: STAGE_CENTER_Y,
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <BoardArea
+              boardId={boardSetting.boardId}
+              rotation={boardSetting.rotation}
+              modifying={boardSetting.modifying}
+              placed={placed}
+              boardRef={boardRef}
+              onPrevBoard={() => cycleBoard(-1)}
+              onNextBoard={() => cycleBoard(1)}
+              onRotateCw={() => rotateBy(90)}
+              onRotateCcw={() => rotateBy(270)}
+            />
+          </div>
+          {canvasChildren.map((item) => (
+            <CanvasItemView
+              key={item.id}
+              item={item}
+              isDragging={false}
+              position="absolute"
+              onPointerDown={handleItemPointerDown}
+            />
+          ))}
         </Canvas>
         <div className="col-start-2 row-start-1 row-span-2 min-h-0 overflow-hidden">
           <AssetsDrawer
@@ -330,14 +363,6 @@ const ToolsPage = () => {
           />
         </div>
       </div>
-      {canvasChildren.map((item) => (
-        <CanvasItemView
-          key={item.id}
-          item={item}
-          isDragging={false}
-          onPointerDown={handleItemPointerDown}
-        />
-      ))}
       {draggingItem && drag?.source === "canvas" && (
         <CanvasItemView
           key={`drag-${draggingItem.id}`}
@@ -501,23 +526,41 @@ function buildItem(
   }
 }
 
+type ToStage = (vx: number, vy: number) => { x: number; y: number };
+
+function makeViewportToStage(
+  stageEl: HTMLElement | null,
+  zoom: number,
+): ToStage {
+  if (!stageEl) return (vx, vy) => ({ x: vx, y: vy });
+  const rect = stageEl.getBoundingClientRect();
+  return (vx, vy) => ({
+    x: (vx - rect.left) / zoom,
+    y: (vy - rect.top) / zoom,
+  });
+}
+
 function createItemFromTemplate(
   template: DragTemplate,
   target: DropTarget,
   clientX: number,
   clientY: number,
   boardEl: HTMLElement | null,
+  toStage: ToStage,
 ): CanvasItem {
   const id = crypto.randomUUID();
   const isToken = isTokenKind(template.kind);
   if (isToken && target.kind === "hex") {
-    return buildItem(template, id, target.centerX, target.centerY, target.hex);
+    const { x, y } = toStage(target.centerX, target.centerY);
+    return buildItem(template, id, x, y, target.hex);
   }
   if (!isToken && (target.kind === "hex" || target.kind === "board")) {
-    const { x, y } = clampOutsideBoard(clientX, clientY, boardEl);
+    const clamped = clampOutsideBoard(clientX, clientY, boardEl);
+    const { x, y } = toStage(clamped.x, clamped.y);
     return buildItem(template, id, x, y, undefined);
   }
-  return buildItem(template, id, clientX, clientY, undefined);
+  const { x, y } = toStage(clientX, clientY);
+  return buildItem(template, id, x, y, undefined);
 }
 
 function applyDropToItem(
@@ -528,29 +571,24 @@ function applyDropToItem(
   offsetX: number,
   offsetY: number,
   boardEl: HTMLElement | null,
+  toStage: ToStage,
 ): CanvasItem {
   const isToken = isTokenKind(item.kind);
-  const proposedX = clientX - offsetX;
-  const proposedY = clientY - offsetY;
+  const proposedVX = clientX - offsetX;
+  const proposedVY = clientY - offsetY;
   if (isToken && target.kind === "hex") {
-    return {
-      ...item,
-      x: target.centerX,
-      y: target.centerY,
-      hex: target.hex,
-    } as CanvasItem;
+    const { x, y } = toStage(target.centerX, target.centerY);
+    return { ...item, x, y, hex: target.hex } as CanvasItem;
   }
   if (isToken) {
-    return {
-      ...item,
-      x: proposedX,
-      y: proposedY,
-      hex: undefined,
-    } as CanvasItem;
+    const { x, y } = toStage(proposedVX, proposedVY);
+    return { ...item, x, y, hex: undefined } as CanvasItem;
   }
   if (target.kind === "hex" || target.kind === "board") {
-    const { x, y } = clampOutsideBoard(proposedX, proposedY, boardEl);
+    const clamped = clampOutsideBoard(proposedVX, proposedVY, boardEl);
+    const { x, y } = toStage(clamped.x, clamped.y);
     return { ...item, x, y } as CanvasItem;
   }
-  return { ...item, x: proposedX, y: proposedY } as CanvasItem;
+  const { x, y } = toStage(proposedVX, proposedVY);
+  return { ...item, x, y } as CanvasItem;
 }

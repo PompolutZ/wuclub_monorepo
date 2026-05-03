@@ -14,14 +14,13 @@ type Props = {
   modifying: boolean;
   placed: PlacedToken[];
   boardRef: RefObject<HTMLDivElement | null>;
-  zoom: number;
   onPrevBoard: () => void;
   onNextBoard: () => void;
   onRotateCw: () => void;
   onRotateCcw: () => void;
 };
 
-const BASE_BOARD_WIDTH = 600;
+export const BOARD_WIDTH = 600;
 
 export const BoardArea = ({
   boardId,
@@ -29,7 +28,6 @@ export const BoardArea = ({
   modifying,
   placed,
   boardRef,
-  zoom,
   onPrevBoard,
   onNextBoard,
   onRotateCw,
@@ -54,7 +52,7 @@ export const BoardArea = ({
           ref={boardRef as RefObject<HTMLDivElement>}
           data-board-area
           className="relative"
-          style={{ width: BASE_BOARD_WIDTH * zoom }}
+          style={{ width: BOARD_WIDTH }}
         >
           <BoardOverlay
             board={board}

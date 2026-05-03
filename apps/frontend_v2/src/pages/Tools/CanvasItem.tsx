@@ -12,12 +12,18 @@ const SCROLL_WIDTH = 360;
 type Props = {
   item: CanvasItem;
   isDragging: boolean;
+  position?: "fixed" | "absolute";
   onPointerDown: (e: ReactPointerEvent<HTMLElement>, id: string) => void;
 };
 
-export const CanvasItemView = ({ item, isDragging, onPointerDown }: Props) => {
+export const CanvasItemView = ({
+  item,
+  isDragging,
+  position = "fixed",
+  onPointerDown,
+}: Props) => {
   const baseStyle: React.CSSProperties = {
-    position: "fixed",
+    position,
     left: item.x,
     top: item.y,
     transform: "translate(-50%, -50%)",
