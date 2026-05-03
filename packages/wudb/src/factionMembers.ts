@@ -210,7 +210,7 @@ export const factionMembers = {
   "brethren-of-the-bolt": ["arcus", "galvic", "pater-filius", "tazat", "yakob"],
   "the-skinnerkin": ["the-carnskyr", "kretch", "seddrik", "pewdrig", "gristla"],
 
-  "the-emberwatch": ["1", "2", "3"],
+  "the-emberwatch": ["ardorn", "farasa", "yurik"],
   "zikkits-tunnelpack": ["zikkit", "krittatok", "tiktik", "rittak", "nitch"],
   "grandfathers-gardeners": [
     "phleghmus",
@@ -228,7 +228,13 @@ export const factionMembers = {
     "rigg-and-shamm",
   ],
   "knives-of-the-crone": ["azphel", "kaerna-vix", "tazari", "krieta"],
-  "kamandoras-blades": ["kamandora", "ghalista", "antro-krast", "kannat"],
+  "kamandoras-blades": [
+    "kamandora",
+    "ghalista",
+    "antro-krast",
+    "kannat",
+    "throkk",
+  ],
   "kurnoths-heralds": ["ylarin", "lenwythe", "cullon"],
   "blood-of-the-bull": ["tokkor", "morudok", "imnidrin", "grisk", "zuldrakka"],
   "thanateks-tithe": [

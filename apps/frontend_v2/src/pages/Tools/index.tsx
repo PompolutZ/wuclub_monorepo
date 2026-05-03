@@ -60,6 +60,7 @@ const MIGRATED_WARBANDS = new Set([
   "thanateks-tithe",
   "the-crimson-court",
   "the-dread-pageant",
+  "the-emberwatch",
   "the-exiled-dead",
   "the-farstriders",
   "the-grymwatch",
