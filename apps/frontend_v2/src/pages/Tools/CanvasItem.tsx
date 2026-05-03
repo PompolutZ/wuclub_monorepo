@@ -58,7 +58,7 @@ export const CanvasItemView = ({ item, isDragging, onPointerDown }: Props) => {
     return (
       <FighterToken
         warband={item.warband}
-        fighterIdx={item.fighterIdx}
+        fighter={item.fighter}
         draggable={false}
         width={TOKEN_SIZE}
         height={TOKEN_SIZE}
@@ -76,7 +76,7 @@ export const CanvasItemView = ({ item, isDragging, onPointerDown }: Props) => {
       >
         <FighterCard
           faction={item.warband as FactionName}
-          index={item.fighterIdx}
+          fighter={item.fighter}
           isInspired={item.isInspired}
           className="block w-full pointer-events-none"
         />
@@ -92,10 +92,10 @@ export const CanvasItemView = ({ item, isDragging, onPointerDown }: Props) => {
       <picture className="block w-full pointer-events-none">
         <source
           type="image/webp"
-          srcSet={`/assets/fighters/${item.warband}/${item.warband}-0.webp`}
+          srcSet={`/assets/fighters/${item.warband}/${item.warband}-warscroll.webp`}
         />
         <img
-          src={`/assets/fighters/${item.warband}/${item.warband}-0.png`}
+          src={`/assets/fighters/${item.warband}/${item.warband}-warscroll.png`}
           alt={`${item.warband} warscroll`}
         />
       </picture>

@@ -23,8 +23,45 @@ import type {
   HexCoord,
 } from "./types";
 
-const PICKABLE_WARBANDS: Warband[] = warbandsValidForOrganisedPlay.filter(
-  (w) => w.id !== "u",
+// Warbands whose fighter assets have been migrated to slug-based filenames.
+// Tools restricts the dropdown to these so we don't render broken images for
+// older warbands that still use numeric (`-1.png`, `-2.png`) asset paths.
+const MIGRATED_WARBANDS = new Set([
+  "cyrenis-razors",
+  "da-kunnin-krew",
+  "daggoks-stab-ladz",
+  "ephilims-pandaemonium",
+  "gorechosen-of-dromm",
+  "grandfathers-gardeners",
+  "grinkraks-looncourt",
+  "hexbanes-hunters",
+  "ironsouls-condemners",
+  "jaws-of-itzl",
+  "kainans-reapers",
+  "khagras-ravagers",
+  "knives-of-the-crone",
+  "mollogs-mob",
+  "morgoks-krushas",
+  "myaris-purifiers",
+  "sepulchral-guard",
+  "spiteclaws-swarm",
+  "the-crimson-court",
+  "the-dread-pageant",
+  "the-farstriders",
+  "the-grymwatch",
+  "the-headsmens-curse",
+  "the-skinnerkin",
+  "the-thricefold-discord",
+  "thorns-of-the-briar-queen",
+  "thundriks-profiteers",
+  "yltharis-guardians",
+  "zarbags-gitz",
+  "zikkits-tunnelpack",
+  "zondaras-gravebreakers",
+]);
+
+const PICKABLE_WARBANDS: Warband[] = warbandsValidForOrganisedPlay.filter((w) =>
+  MIGRATED_WARBANDS.has(w.name),
 );
 const DEFAULT_WARBAND =
   PICKABLE_WARBANDS.find((w) => w.name === "cyrenis-razors") ??
@@ -305,7 +342,7 @@ function buildPlacedToken(item: TokenItem & { hex: HexCoord }): PlacedToken {
         content: (
           <FighterToken
             warband={item.warband}
-            fighterIdx={item.fighterIdx}
+            fighter={item.fighter}
             className={fill}
             draggable={false}
           />
@@ -377,7 +414,7 @@ function buildItem(
         kind: "fighter-token",
         id,
         warband: template.warband,
-        fighterIdx: template.fighterIdx,
+        fighter: template.fighter,
         x,
         y,
         hex,
@@ -387,7 +424,7 @@ function buildItem(
         kind: "fighter-card",
         id,
         warband: template.warband,
-        fighterIdx: template.fighterIdx,
+        fighter: template.fighter,
         isInspired: template.isInspired,
         x,
         y,

@@ -8,7 +8,6 @@ import { WarbandDropdown } from "./WarbandDropdown";
 import type { DragTemplate, TreasureNumber } from "./types";
 
 const TREASURES: TreasureNumber[] = [1, 2, 3, 4, 5];
-const WARBANDS_WITH_FIGHTER_TOKENS = new Set(["cyrenis-razors"]);
 
 type Props = {
   warbands: Warband[];
@@ -28,9 +27,6 @@ export const AssetsDrawer = ({
 }: Props) => {
   const fighters =
     factionMembers[activeWarband.name as keyof typeof factionMembers] ?? [];
-  const showFighterTokens = WARBANDS_WITH_FIGHTER_TOKENS.has(
-    activeWarband.name,
-  );
 
   return (
     <aside
@@ -81,61 +77,53 @@ export const AssetsDrawer = ({
 
       <Section title="Fighter cards">
         <div className="grid grid-cols-2 gap-2">
-          {fighters.map((_, i) => {
-            const fighterIdx = i + 1;
-            return (
-              <DrawerCard
-                key={fighterIdx}
-                onPointerDown={(e) =>
-                  onTemplatePointerDown(e, {
-                    kind: "fighter-card",
-                    warband: activeWarband.name,
-                    fighterIdx,
-                    isInspired: false,
-                  })
-                }
-              >
-                <FighterCard
-                  faction={activeWarband.name as FactionName}
-                  index={fighterIdx}
-                  className="block w-full pointer-events-none"
-                />
-              </DrawerCard>
-            );
-          })}
+          {fighters.map((fighter) => (
+            <DrawerCard
+              key={fighter}
+              onPointerDown={(e) =>
+                onTemplatePointerDown(e, {
+                  kind: "fighter-card",
+                  warband: activeWarband.name,
+                  fighter,
+                  isInspired: false,
+                })
+              }
+            >
+              <FighterCard
+                faction={activeWarband.name as FactionName}
+                fighter={fighter}
+                className="block w-full pointer-events-none"
+              />
+            </DrawerCard>
+          ))}
         </div>
       </Section>
 
-      {showFighterTokens && (
-        <Section title="Fighter tokens">
-          <div className="flex flex-wrap gap-2">
-            {fighters.map((_, i) => {
-              const fighterIdx = i + 1;
-              return (
-                <DrawerSlot
-                  key={fighterIdx}
-                  onPointerDown={(e) =>
-                    onTemplatePointerDown(e, {
-                      kind: "fighter-token",
-                      warband: activeWarband.name,
-                      fighterIdx,
-                    })
-                  }
-                >
-                  <FighterToken
-                    warband={activeWarband.name}
-                    fighterIdx={fighterIdx}
-                    draggable={false}
-                    width={56}
-                    height={56}
-                    className="select-none"
-                  />
-                </DrawerSlot>
-              );
-            })}
-          </div>
-        </Section>
-      )}
+      <Section title="Fighter tokens">
+        <div className="flex flex-wrap gap-2">
+          {fighters.map((fighter) => (
+            <DrawerSlot
+              key={fighter}
+              onPointerDown={(e) =>
+                onTemplatePointerDown(e, {
+                  kind: "fighter-token",
+                  warband: activeWarband.name,
+                  fighter,
+                })
+              }
+            >
+              <FighterToken
+                warband={activeWarband.name}
+                fighter={fighter}
+                draggable={false}
+                width={56}
+                height={56}
+                className="select-none"
+              />
+            </DrawerSlot>
+          ))}
+        </div>
+      </Section>
 
       <Section title="Warscroll">
         <DrawerCard
@@ -149,10 +137,10 @@ export const AssetsDrawer = ({
           <picture className="block w-full pointer-events-none">
             <source
               type="image/webp"
-              srcSet={`/assets/fighters/${activeWarband.name}/${activeWarband.name}-0.webp`}
+              srcSet={`/assets/fighters/${activeWarband.name}/${activeWarband.name}-warscroll.webp`}
             />
             <img
-              src={`/assets/fighters/${activeWarband.name}/${activeWarband.name}-0.png`}
+              src={`/assets/fighters/${activeWarband.name}/${activeWarband.name}-warscroll.png`}
               alt={`${activeWarband.displayName} warscroll`}
             />
           </picture>

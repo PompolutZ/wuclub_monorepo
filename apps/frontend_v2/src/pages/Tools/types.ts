@@ -23,7 +23,7 @@ export type CanvasItem =
       kind: "fighter-token";
       id: string;
       warband: string;
-      fighterIdx: number;
+      fighter: string;
       x: number;
       y: number;
       hex?: HexCoord;
@@ -32,7 +32,7 @@ export type CanvasItem =
       kind: "fighter-card";
       id: string;
       warband: string;
-      fighterIdx: number;
+      fighter: string;
       isInspired: boolean;
       x: number;
       y: number;
@@ -56,11 +56,11 @@ export type BoardSetting = {
 export type DragTemplate =
   | { kind: "treasure-cover" }
   | { kind: "treasure"; n: TreasureNumber }
-  | { kind: "fighter-token"; warband: string; fighterIdx: number }
+  | { kind: "fighter-token"; warband: string; fighter: string }
   | {
       kind: "fighter-card";
       warband: string;
-      fighterIdx: number;
+      fighter: string;
       isInspired: boolean;
     }
   | { kind: "warband-scroll"; warband: string };
