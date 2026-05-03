@@ -2,6 +2,11 @@ import type { PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import { factionMembers, type FactionName } from "@fxdxpz/wudb";
 import { FighterCard } from "@components/FighterCard";
 import type { Warband } from "@components/WarbandPicker";
+import {
+  TREASURE_COVER_HREF,
+  fighterTokenHref,
+  treasureFaceHref,
+} from "@/shared/tokens";
 import { WarbandDropdown } from "./WarbandDropdown";
 import type { DragTemplate, TreasureNumber } from "./types";
 
@@ -38,7 +43,7 @@ export const AssetsDrawer = ({
       <Section title="Tokens">
         <div className="flex flex-wrap gap-2">
           <DrawerToken
-            src="/assets/room/tokens/feature_token_cover.png"
+            src={TREASURE_COVER_HREF}
             alt="Treasure cover"
             onPointerDown={(e) =>
               onTemplatePointerDown(e, { kind: "treasure-cover" })
@@ -47,7 +52,7 @@ export const AssetsDrawer = ({
           {TREASURES.map((n) => (
             <DrawerToken
               key={n}
-              src={`/assets/room/tokens/treasure_token_${n}.png`}
+              src={treasureFaceHref(n)}
               alt={`Treasure ${n}`}
               onPointerDown={(e) =>
                 onTemplatePointerDown(e, { kind: "treasure", n })
@@ -100,7 +105,7 @@ export const AssetsDrawer = ({
               return (
                 <DrawerToken
                   key={fighterIdx}
-                  src={`/assets/fighters/${activeWarband.name}/${activeWarband.name}-${fighterIdx}-token.png`}
+                  src={fighterTokenHref(activeWarband.name, fighterIdx)}
                   alt={`${activeWarband.displayName} fighter ${fighterIdx} token`}
                   onPointerDown={(e) =>
                     onTemplatePointerDown(e, {

@@ -1,7 +1,8 @@
 import { FighterCard } from "@components/FighterCard";
 import type { FactionName } from "@fxdxpz/wudb";
 import type { PointerEvent as ReactPointerEvent } from "react";
-import { imageHrefFor, type CanvasItem } from "./types";
+import { imageHrefFor } from "./itemHelpers";
+import type { CanvasItem } from "./types";
 
 const TOKEN_SIZE = 80;
 const CARD_WIDTH = 220;
@@ -23,6 +24,7 @@ export const CanvasItemView = ({ item, isDragging, onPointerDown }: Props) => {
     opacity: isDragging ? 0.3 : 1,
     touchAction: "none",
     userSelect: "none",
+    pointerEvents: isDragging ? "none" : "auto",
   };
 
   if (

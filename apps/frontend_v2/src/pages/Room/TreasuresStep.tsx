@@ -1,5 +1,10 @@
 import { useMemo, useState, type PointerEvent } from "react";
 import { shuffle } from "@/utils/functions";
+import {
+  TREASURE_COVER_HREF,
+  TREASURE_TOKEN_SCALE,
+  treasureFaceHref,
+} from "@/shared/tokens";
 import { boards } from "../../../../../shared/boards";
 import {
   BoardOverlay,
@@ -63,9 +68,8 @@ export const TreasuresStep = ({
     id: t.id,
     col: t.col,
     row: t.row,
-    imageHref: t.faceUp
-      ? `/assets/room/tokens/treasure_token_${t.id}.png`
-      : "/assets/room/tokens/feature_token_cover.png",
+    imageHref: t.faceUp ? treasureFaceHref(t.id) : TREASURE_COVER_HREF,
+    scale: TREASURE_TOKEN_SCALE,
   }));
 
   return (
@@ -94,7 +98,7 @@ export const TreasuresStep = ({
       </div>
       {drag && (
         <img
-          src="/assets/room/tokens/feature_token_cover.png"
+          src={TREASURE_COVER_HREF}
           alt=""
           aria-hidden
           draggable={false}
@@ -148,7 +152,7 @@ const TreasureDrawPile = ({
         return (
           <img
             key={id}
-            src="/assets/room/tokens/feature_token_cover.png"
+            src={TREASURE_COVER_HREF}
             alt="Treasure token"
             draggable={false}
             className="absolute inset-0 w-full h-full select-none"

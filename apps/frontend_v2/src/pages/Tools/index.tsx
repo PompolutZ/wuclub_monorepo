@@ -12,14 +12,13 @@ import type { BoardRotation, PlacedToken } from "../Room/BoardOverlay";
 import { BoardArea } from "./BoardArea";
 import { AssetsDrawer } from "./AssetsDrawer";
 import { CanvasItemView } from "./CanvasItem";
-import {
-  imageHrefFor,
-  isTokenKind,
-  type BoardSetting,
-  type CanvasItem,
-  type DragState,
-  type DragTemplate,
-  type HexCoord,
+import { boardScaleFor, imageHrefFor, isTokenKind } from "./itemHelpers";
+import type {
+  BoardSetting,
+  CanvasItem,
+  DragState,
+  DragTemplate,
+  HexCoord,
 } from "./types";
 
 const PICKABLE_WARBANDS: Warband[] = warbandsValidForOrganisedPlay.filter(
@@ -185,6 +184,7 @@ const ToolsPage = () => {
       col: it.hex.col,
       row: it.hex.row,
       imageHref: imageHrefFor(it),
+      scale: boardScaleFor(it.kind),
     }));
 
   const canvasChildren = items.filter(

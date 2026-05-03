@@ -15,6 +15,7 @@ export type PlacedToken = {
   col: number;
   row: number;
   imageHref: string;
+  scale: number;
 };
 
 type BoardOverlayProps = {
@@ -24,10 +25,6 @@ type BoardOverlayProps = {
   placed?: PlacedToken[];
   onFlip?: (id: string | number) => void;
 };
-
-// Token image has padding around its hex shape; this multiplier on
-// the hex radius makes the visible token roughly fill the board hex.
-const PLACED_TOKEN_SCALE = 3.7;
 
 export const BoardOverlay = ({
   board,
@@ -84,7 +81,7 @@ export const BoardOverlay = ({
           placed?.map((p) => {
             const hex = hexPath.find((h) => h.col === p.col && h.row === p.row);
             if (!hex) return null;
-            const size = config.size * PLACED_TOKEN_SCALE;
+            const size = config.size * p.scale;
             return (
               <image
                 key={p.id}

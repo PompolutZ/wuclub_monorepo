@@ -80,24 +80,3 @@ export type DragState =
       clientX: number;
       clientY: number;
     };
-
-export function isTokenKind(kind: CanvasItemKind): boolean {
-  return (
-    kind === "treasure-cover" || kind === "treasure" || kind === "fighter-token"
-  );
-}
-
-export function imageHrefFor(item: CanvasItem): string {
-  switch (item.kind) {
-    case "treasure-cover":
-      return "/assets/room/tokens/feature_token_cover.png";
-    case "treasure":
-      return `/assets/room/tokens/treasure_token_${item.n}.png`;
-    case "fighter-token":
-      return `/assets/fighters/${item.warband}/${item.warband}-${item.fighterIdx}-token.png`;
-    case "fighter-card":
-      return `/assets/fighters/${item.warband}/${item.warband}-${item.fighterIdx}${item.isInspired ? "-inspired" : ""}.png`;
-    case "warband-scroll":
-      return `/assets/fighters/${item.warband}/${item.warband}-0.png`;
-  }
-}
