@@ -13,6 +13,7 @@ type Props = {
   item: CanvasItem;
   isDragging: boolean;
   position?: "fixed" | "absolute";
+  scale?: number;
   onPointerDown: (e: ReactPointerEvent<HTMLElement>, id: string) => void;
 };
 
@@ -20,13 +21,14 @@ export const CanvasItemView = ({
   item,
   isDragging,
   position = "fixed",
+  scale = 1,
   onPointerDown,
 }: Props) => {
   const baseStyle: React.CSSProperties = {
     position,
     left: item.x,
     top: item.y,
-    transform: "translate(-50%, -50%)",
+    transform: `translate(-50%, -50%) scale(${scale})`,
     cursor: isDragging ? "grabbing" : "grab",
     opacity: isDragging ? 0.3 : 1,
     touchAction: "none",

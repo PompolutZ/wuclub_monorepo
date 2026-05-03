@@ -372,6 +372,7 @@ const ToolsPage = () => {
             y: drag.clientY - drag.offsetY,
           }}
           isDragging
+          scale={zoom}
           onPointerDown={handleItemPointerDown}
         />
       )}
@@ -380,6 +381,7 @@ const ToolsPage = () => {
           key="ghost"
           item={ghostFromTemplate}
           isDragging
+          scale={zoom}
           onPointerDown={() => undefined}
         />
       )}
