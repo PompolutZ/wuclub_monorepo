@@ -81,7 +81,7 @@ const CardProxyMaker = ({
               </h3>
               <img
                 id="proxy warband-card"
-                src={`/assets/fighters/${factionId}/${factionId}-0.png`}
+                src={`/assets/fighters/${factionId}/${factionId}-warscroll.png`}
                 className={`w-1/2 md:w-1/3 aspect-[5.6/4.1] object-cover cursor-pointer filter transition-all duration-150 ${
                   selectedWarbandCard
                     ? "grayscale-0 drop-shadow-lg"

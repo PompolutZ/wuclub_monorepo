@@ -53,12 +53,12 @@ function ZoomedWarscroll({
         <div className="relative z-50 overflow-x-auto max-w-full p-4">
           <picture className="block" style={{ width: "150vw" }}>
             <source
-              srcSet={`/assets/fighters/${factionName}/${factionName}-0.webp`}
+              srcSet={`/assets/fighters/${factionName}/${factionName}-warscroll.webp`}
               type="image/webp"
             />
             <img
               className="w-full"
-              src={`/assets/fighters/${factionName}/${factionName}-0.png`}
+              src={`/assets/fighters/${factionName}/${factionName}-warscroll.png`}
               alt={`${factionName} warscroll`}
             />
           </picture>
