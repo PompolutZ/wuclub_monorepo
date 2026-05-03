@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RequestPasswordResetRouteImport } from './routes/requestPasswordReset'
 import { Route as ProfileRouteImport } from './routes/profile'
@@ -28,6 +29,11 @@ import { Route as ViewDeckIdRouteImport } from './routes/view.deck.$id'
 import { Route as ViewCardIdRouteImport } from './routes/view.card.$id'
 import { Route as DeckActionDataRouteImport } from './routes/deck.$action.$data'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/tools': typeof ToolsRoute
   '/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/tools': typeof ToolsRoute
   '/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/tools': typeof ToolsRoute
   '/_admin/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/tools'
     | '/admin'
     | '/deck/$action'
     | '/decks/$faction'
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/tools'
     | '/admin'
     | '/deck/$action'
     | '/decks/$faction'
@@ -228,6 +239,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/tools'
     | '/_admin/admin'
     | '/deck/$action'
     | '/decks/$faction'
@@ -249,6 +261,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   RequestPasswordResetRoute: typeof RequestPasswordResetRoute
   SettingsRoute: typeof SettingsRoute
+  ToolsRoute: typeof ToolsRoute
   DeckActionRoute: typeof DeckActionRouteWithChildren
   DecksFactionRoute: typeof DecksFactionRoute
   RoomIdRoute: typeof RoomIdRoute
@@ -259,6 +272,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -421,6 +441,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   RequestPasswordResetRoute: RequestPasswordResetRoute,
   SettingsRoute: SettingsRoute,
+  ToolsRoute: ToolsRoute,
   DeckActionRoute: DeckActionRouteWithChildren,
   DecksFactionRoute: DecksFactionRoute,
   RoomIdRoute: RoomIdRoute,
