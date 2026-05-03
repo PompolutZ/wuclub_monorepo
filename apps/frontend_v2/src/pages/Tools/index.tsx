@@ -202,21 +202,33 @@ const ToolsPage = () => {
 
   return (
     <div className="flex flex-1 h-full">
-      <main className="flex-1 relative overflow-hidden grid place-items-center">
-        <BoardArea
-          boardId={boardSetting.boardId}
-          rotation={boardSetting.rotation}
-          modifying={boardSetting.modifying}
-          placed={placed}
-          boardRef={boardRef}
-          onPrevBoard={() => cycleBoard(-1)}
-          onNextBoard={() => cycleBoard(1)}
-          onRotateCw={() => rotateBy(90)}
-          onRotateCcw={() => rotateBy(270)}
-          onToggleModify={() =>
-            setBoardSetting((s) => ({ ...s, modifying: !s.modifying }))
-          }
-        />
+      <main className="flex-1 relative overflow-hidden flex flex-col">
+        <header className="flex items-center justify-end gap-2 px-4 py-2 border-b border-gray-200">
+          <button
+            type="button"
+            onClick={() => setItems([])}
+            disabled={items.length === 0}
+            className="px-3 py-1 rounded border border-gray-300 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Clear canvas
+          </button>
+        </header>
+        <div className="flex-1 grid place-items-center">
+          <BoardArea
+            boardId={boardSetting.boardId}
+            rotation={boardSetting.rotation}
+            modifying={boardSetting.modifying}
+            placed={placed}
+            boardRef={boardRef}
+            onPrevBoard={() => cycleBoard(-1)}
+            onNextBoard={() => cycleBoard(1)}
+            onRotateCw={() => rotateBy(90)}
+            onRotateCcw={() => rotateBy(270)}
+            onToggleModify={() =>
+              setBoardSetting((s) => ({ ...s, modifying: !s.modifying }))
+            }
+          />
+        </div>
         {canvasChildren.map((item) => (
           <CanvasItemView
             key={item.id}
