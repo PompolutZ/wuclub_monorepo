@@ -98,19 +98,19 @@ const CardProxyMaker = ({
               selected={selectedFighters.length}
               total={fighters.length}
             >
-              {fighters.map((fighter: string, index: number) => (
+              {fighters.map((fighter: string) => (
                 <>
                   <img
                     id={`proxy ${fighter}`}
                     key={fighter}
-                    src={`/assets/fighters/${factionId}/${factionId}-${index + 1}.png`}
+                    src={`/assets/fighters/${factionId}/${factionId}-${fighter}.png`}
                     className={cardImgClass(selectedFighters.includes(fighter))}
                     onClick={toggleFighter(fighter)}
                   />
                   <img
                     id={`proxy ${fighter}-inspired`}
                     key={`${fighter}-inspired`}
-                    src={`/assets/fighters/${factionId}/${factionId}-${index + 1}-inspired.png`}
+                    src={`/assets/fighters/${factionId}/${factionId}-${fighter}-inspired.png`}
                     className={cardImgClass(selectedFighters.includes(fighter))}
                     onClick={toggleFighter(fighter)}
                   />
