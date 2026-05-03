@@ -1,7 +1,8 @@
 import { FighterCard } from "@components/FighterCard";
+import { FighterToken } from "@components/FighterToken";
+import { TreasureToken } from "@components/TreasureToken";
 import type { FactionName } from "@fxdxpz/wudb";
 import type { PointerEvent as ReactPointerEvent } from "react";
-import { imageHrefFor } from "./itemHelpers";
 import type { CanvasItem } from "./types";
 
 const TOKEN_SIZE = 80;
@@ -27,15 +28,37 @@ export const CanvasItemView = ({ item, isDragging, onPointerDown }: Props) => {
     pointerEvents: isDragging ? "none" : "auto",
   };
 
-  if (
-    item.kind === "treasure-cover" ||
-    item.kind === "treasure" ||
-    item.kind === "fighter-token"
-  ) {
+  if (item.kind === "treasure-cover") {
     return (
-      <img
-        src={imageHrefFor(item)}
-        alt=""
+      <TreasureToken
+        face="cover"
+        draggable={false}
+        width={TOKEN_SIZE}
+        height={TOKEN_SIZE}
+        onPointerDown={(e) => onPointerDown(e, item.id)}
+        style={baseStyle}
+      />
+    );
+  }
+
+  if (item.kind === "treasure") {
+    return (
+      <TreasureToken
+        face={item.n}
+        draggable={false}
+        width={TOKEN_SIZE}
+        height={TOKEN_SIZE}
+        onPointerDown={(e) => onPointerDown(e, item.id)}
+        style={baseStyle}
+      />
+    );
+  }
+
+  if (item.kind === "fighter-token") {
+    return (
+      <FighterToken
+        warband={item.warband}
+        fighterIdx={item.fighterIdx}
         draggable={false}
         width={TOKEN_SIZE}
         height={TOKEN_SIZE}

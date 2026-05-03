@@ -1,12 +1,9 @@
 import type { PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import { factionMembers, type FactionName } from "@fxdxpz/wudb";
 import { FighterCard } from "@components/FighterCard";
+import { FighterToken } from "@components/FighterToken";
+import { TreasureToken } from "@components/TreasureToken";
 import type { Warband } from "@components/WarbandPicker";
-import {
-  TREASURE_COVER_HREF,
-  fighterTokenHref,
-  treasureFaceHref,
-} from "@/shared/tokens";
 import { WarbandDropdown } from "./WarbandDropdown";
 import type { DragTemplate, TreasureNumber } from "./types";
 
@@ -42,22 +39,34 @@ export const AssetsDrawer = ({
     >
       <Section title="Tokens">
         <div className="flex flex-wrap gap-2">
-          <DrawerToken
-            src={TREASURE_COVER_HREF}
-            alt="Treasure cover"
+          <DrawerSlot
             onPointerDown={(e) =>
               onTemplatePointerDown(e, { kind: "treasure-cover" })
             }
-          />
+          >
+            <TreasureToken
+              face="cover"
+              draggable={false}
+              width={56}
+              height={56}
+              className="select-none"
+            />
+          </DrawerSlot>
           {TREASURES.map((n) => (
-            <DrawerToken
+            <DrawerSlot
               key={n}
-              src={treasureFaceHref(n)}
-              alt={`Treasure ${n}`}
               onPointerDown={(e) =>
                 onTemplatePointerDown(e, { kind: "treasure", n })
               }
-            />
+            >
+              <TreasureToken
+                face={n}
+                draggable={false}
+                width={56}
+                height={56}
+                className="select-none"
+              />
+            </DrawerSlot>
           ))}
         </div>
       </Section>
@@ -103,10 +112,8 @@ export const AssetsDrawer = ({
             {fighters.map((_, i) => {
               const fighterIdx = i + 1;
               return (
-                <DrawerToken
+                <DrawerSlot
                   key={fighterIdx}
-                  src={fighterTokenHref(activeWarband.name, fighterIdx)}
-                  alt={`${activeWarband.displayName} fighter ${fighterIdx} token`}
                   onPointerDown={(e) =>
                     onTemplatePointerDown(e, {
                       kind: "fighter-token",
@@ -114,7 +121,16 @@ export const AssetsDrawer = ({
                       fighterIdx,
                     })
                   }
-                />
+                >
+                  <FighterToken
+                    warband={activeWarband.name}
+                    fighterIdx={fighterIdx}
+                    draggable={false}
+                    width={56}
+                    height={56}
+                    className="select-none"
+                  />
+                </DrawerSlot>
               );
             })}
           </div>
@@ -161,23 +177,20 @@ const Section = ({
   </section>
 );
 
-type DrawerTokenProps = {
-  src: string;
-  alt: string;
-  onPointerDown: (e: ReactPointerEvent<HTMLImageElement>) => void;
-};
-
-const DrawerToken = ({ src, alt, onPointerDown }: DrawerTokenProps) => (
-  <img
-    src={src}
-    alt={alt}
-    draggable={false}
-    width={56}
-    height={56}
-    className="cursor-grab select-none"
+const DrawerSlot = ({
+  children,
+  onPointerDown,
+}: {
+  children: ReactNode;
+  onPointerDown: (e: ReactPointerEvent<HTMLDivElement>) => void;
+}) => (
+  <div
+    className="cursor-grab"
     style={{ touchAction: "none" }}
     onPointerDown={onPointerDown}
-  />
+  >
+    {children}
+  </div>
 );
 
 const DrawerCard = ({

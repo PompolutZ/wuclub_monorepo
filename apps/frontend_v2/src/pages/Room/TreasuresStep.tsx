@@ -1,10 +1,10 @@
 import { useMemo, useState, type PointerEvent } from "react";
 import { shuffle } from "@/utils/functions";
 import {
-  TREASURE_COVER_HREF,
   TREASURE_TOKEN_SCALE,
-  treasureFaceHref,
-} from "@/shared/tokens";
+  TreasureToken,
+  type TreasureFace,
+} from "@components/TreasureToken";
 import { boards } from "../../../../../shared/boards";
 import {
   BoardOverlay,
@@ -68,8 +68,14 @@ export const TreasuresStep = ({
     id: t.id,
     col: t.col,
     row: t.row,
-    imageHref: t.faceUp ? treasureFaceHref(t.id) : TREASURE_COVER_HREF,
     scale: TREASURE_TOKEN_SCALE,
+    content: (
+      <TreasureToken
+        face={t.faceUp ? (t.id as TreasureFace) : "cover"}
+        className="block w-full h-full"
+        draggable={false}
+      />
+    ),
   }));
 
   return (
@@ -97,9 +103,8 @@ export const TreasuresStep = ({
         />
       </div>
       {drag && (
-        <img
-          src={TREASURE_COVER_HREF}
-          alt=""
+        <TreasureToken
+          face="cover"
           aria-hidden
           draggable={false}
           className="fixed top-0 left-0 w-28 h-28 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-50"
@@ -150,10 +155,9 @@ const TreasureDrawPile = ({
         const isDragging = id === draggingId;
         const { rotate, x, y } = PILE_OFFSETS[i];
         return (
-          <img
+          <TreasureToken
             key={id}
-            src={TREASURE_COVER_HREF}
-            alt="Treasure token"
+            face="cover"
             draggable={false}
             className="absolute inset-0 w-full h-full select-none"
             onPointerDown={isTop ? (e) => onPointerDown(e, id) : undefined}

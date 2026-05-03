@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { defineHex, Grid, rectangle } from "honeycomb-grid";
 import { BoardPicture } from "@components/BoardPicture";
 import type { Board } from "../../../../../shared/boards";
@@ -14,8 +14,11 @@ export type PlacedToken = {
   id: string | number;
   col: number;
   row: number;
-  imageHref: string;
+  // Multiplier of hex radius — the foreignObject is sized to (config.size * scale).
   scale: number;
+  // Pre-rendered token (e.g. <TreasureToken/> or <FighterToken/>). The caller
+  // owns asset path + naming; BoardOverlay only positions and sizes it.
+  content: ReactNode;
 };
 
 type BoardOverlayProps = {
@@ -83,9 +86,8 @@ export const BoardOverlay = ({
             if (!hex) return null;
             const size = config.size * p.scale;
             return (
-              <image
+              <foreignObject
                 key={p.id}
-                href={p.imageHref}
                 x={hex.cx - size / 2}
                 y={hex.cy - size / 2}
                 width={size}
@@ -95,7 +97,9 @@ export const BoardOverlay = ({
                   pointerEvents: onFlip ? "auto" : "none",
                   cursor: onFlip ? "pointer" : undefined,
                 }}
-              />
+              >
+                {p.content}
+              </foreignObject>
             );
           })}
       </g>

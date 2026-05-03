@@ -6,13 +6,15 @@ import {
 } from "react";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { warbandsValidForOrganisedPlay } from "@fxdxpz/wudb";
+import { FIGHTER_TOKEN_SCALE, FighterToken } from "@components/FighterToken";
+import { TREASURE_TOKEN_SCALE, TreasureToken } from "@components/TreasureToken";
 import type { Warband } from "@components/WarbandPicker";
 import { boards } from "../../../../../shared/boards";
 import type { BoardRotation, PlacedToken } from "../Room/BoardOverlay";
 import { BoardArea } from "./BoardArea";
 import { AssetsDrawer } from "./AssetsDrawer";
 import { CanvasItemView } from "./CanvasItem";
-import { boardScaleFor, imageHrefFor, isTokenKind } from "./itemHelpers";
+import { isTokenKind } from "./itemHelpers";
 import type {
   BoardSetting,
   CanvasItem,
@@ -179,13 +181,7 @@ const ToolsPage = () => {
   const placed: PlacedToken[] = items
     .filter(hasHex)
     .filter((it) => it.id !== draggingCanvasId)
-    .map((it) => ({
-      id: it.id,
-      col: it.hex.col,
-      row: it.hex.row,
-      imageHref: imageHrefFor(it),
-      scale: boardScaleFor(it.kind),
-    }));
+    .map((it) => buildPlacedToken(it));
 
   const canvasChildren = items.filter(
     (it) => !hasHex(it) && it.id !== draggingCanvasId,
@@ -270,8 +266,52 @@ const ToolsPage = () => {
 
 export default ToolsPage;
 
-function hasHex(item: CanvasItem): item is CanvasItem & { hex: HexCoord } {
-  return "hex" in item && item.hex !== undefined;
+type TokenItem = Extract<
+  CanvasItem,
+  { kind: "treasure-cover" | "treasure" | "fighter-token" }
+>;
+
+function hasHex(item: CanvasItem): item is TokenItem & { hex: HexCoord } {
+  if (item.kind === "fighter-card" || item.kind === "warband-scroll") {
+    return false;
+  }
+  return item.hex !== undefined;
+}
+
+function buildPlacedToken(item: TokenItem & { hex: HexCoord }): PlacedToken {
+  const common = { id: item.id, col: item.hex.col, row: item.hex.row };
+  const fill = "block w-full h-full";
+  switch (item.kind) {
+    case "treasure-cover":
+      return {
+        ...common,
+        scale: TREASURE_TOKEN_SCALE,
+        content: (
+          <TreasureToken face="cover" className={fill} draggable={false} />
+        ),
+      };
+    case "treasure":
+      return {
+        ...common,
+        scale: TREASURE_TOKEN_SCALE,
+        content: (
+          <TreasureToken face={item.n} className={fill} draggable={false} />
+        ),
+      };
+    case "fighter-token":
+      return {
+        ...common,
+        scale: FIGHTER_TOKEN_SCALE,
+        content: (
+          <FighterToken
+            warband={item.warband}
+            fighterIdx={item.fighterIdx}
+            className={fill}
+            draggable={false}
+          />
+        ),
+      };
+  }
 }
 
 function resolveDropTarget(clientX: number, clientY: number): DropTarget {
