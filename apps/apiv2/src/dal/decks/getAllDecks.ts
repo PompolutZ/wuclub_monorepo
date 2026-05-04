@@ -40,6 +40,12 @@ function buildPipeline({ faction, edition, fuid }: GetAllDecksQuery) {
     matchConditions.fuid = fuid;
   } else {
     matchConditions.private = false;
+    if (edition === 2) {
+      // A Rivals-legal deck (32 cards from a single set) is also Nemesis-legal,
+      // but we don't want bare Rivals decks cluttering the public Nemesis feed.
+      matchConditions["validity.nemesis"] = true;
+      matchConditions["validity.rivals"] = { $ne: true };
+    }
   }
 
   pipe.push({

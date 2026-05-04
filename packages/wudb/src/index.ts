@@ -434,6 +434,22 @@ function validatePowerDeckForFormat(
   return [isValid, issues];
 }
 
+export function computeDeckValidity(
+  cardIds: ReadonlyArray<string | number>,
+): { nemesis: boolean; rivals: boolean } {
+  const resolved = cardIds
+    .map((id) => cards[String(id) as keyof typeof cards] as Card | undefined)
+    .filter((c): c is Card => c !== undefined);
+  const cardsByType = {
+    objectives: resolved.filter(checkCardIsObjective),
+    gambits: resolved.filter(checkCardIsPloy),
+    upgrades: resolved.filter(checkCardIsUpgrade),
+  };
+  const [nemesis] = validateDeckForPlayFormat(cardsByType, NEMESIS_FORMAT);
+  const [rivals] = validateDeckForPlayFormat(cardsByType, RIVALS_FORMAT);
+  return { nemesis, rivals };
+}
+
 export {
   cardTypes,
   checkCardIsObjective,
