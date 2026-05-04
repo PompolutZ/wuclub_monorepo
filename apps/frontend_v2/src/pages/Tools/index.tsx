@@ -413,7 +413,7 @@ const ToolsPage = () => {
             y: drag.clientY - drag.offsetY,
           }}
           isDragging
-          scale={zoom}
+          zoomScale={zoom}
           onPointerDown={handleItemPointerDown}
         />
       )}
@@ -422,7 +422,7 @@ const ToolsPage = () => {
           key="ghost"
           item={ghostFromTemplate}
           isDragging
-          scale={zoom}
+          zoomScale={zoom}
           onPointerDown={() => undefined}
         />
       )}
@@ -521,7 +521,7 @@ function buildPlacedToken(
     case "treasure-cover":
       return {
         ...common,
-        scale: TREASURE_TOKEN_SCALE,
+        scale: TREASURE_TOKEN_SCALE * item.scale,
         layer: "feature",
         content: wrap(
           <TreasureToken face="cover" className={fill} draggable={false} />,
@@ -530,7 +530,7 @@ function buildPlacedToken(
     case "treasure":
       return {
         ...common,
-        scale: TREASURE_TOKEN_SCALE,
+        scale: TREASURE_TOKEN_SCALE * item.scale,
         layer: "feature",
         content: wrap(
           <TreasureToken face={item.n} className={fill} draggable={false} />,
@@ -539,7 +539,7 @@ function buildPlacedToken(
     case "fighter-token":
       return {
         ...common,
-        scale: FIGHTER_TOKEN_SCALE,
+        scale: FIGHTER_TOKEN_SCALE * item.scale,
         layer: "fighter",
         content: wrap(
           <FighterToken
@@ -599,6 +599,17 @@ function buildGhostFromTemplate(
   return buildItem(template, "__ghost__", x, y, undefined);
 }
 
+// Per-kind default instance scale. Stored on each item so a future override
+// can resize a single instance without touching siblings.
+const DEFAULT_ITEM_SCALE: Record<CanvasItem["kind"], number> = {
+  "treasure-cover": 1,
+  treasure: 1,
+  "fighter-token": 1,
+  marker: 1,
+  "fighter-card": 1,
+  "warband-scroll": 1,
+};
+
 function buildItem(
   template: DragTemplate,
   id: string,
@@ -608,9 +619,24 @@ function buildItem(
 ): CanvasItem {
   switch (template.kind) {
     case "treasure-cover":
-      return { kind: "treasure-cover", id, x, y, hex };
+      return {
+        kind: "treasure-cover",
+        id,
+        x,
+        y,
+        hex,
+        scale: DEFAULT_ITEM_SCALE["treasure-cover"],
+      };
     case "treasure":
-      return { kind: "treasure", id, n: template.n, x, y, hex };
+      return {
+        kind: "treasure",
+        id,
+        n: template.n,
+        x,
+        y,
+        hex,
+        scale: DEFAULT_ITEM_SCALE.treasure,
+      };
     case "fighter-token":
       return {
         kind: "fighter-token",
@@ -620,6 +646,7 @@ function buildItem(
         x,
         y,
         hex,
+        scale: DEFAULT_ITEM_SCALE["fighter-token"],
       };
     case "marker":
       return {
@@ -629,6 +656,7 @@ function buildItem(
         x,
         y,
         hex,
+        scale: DEFAULT_ITEM_SCALE.marker,
       };
     case "fighter-card":
       return {
@@ -639,6 +667,7 @@ function buildItem(
         isInspired: template.isInspired,
         x,
         y,
+        scale: DEFAULT_ITEM_SCALE["fighter-card"],
       };
     case "warband-scroll":
       return {
@@ -647,6 +676,7 @@ function buildItem(
         warband: template.warband,
         x,
         y,
+        scale: DEFAULT_ITEM_SCALE["warband-scroll"],
       };
   }
 }
