@@ -29,7 +29,7 @@ class WunderworldsApiLambda extends NodejsFunction {
   constructor(scope: App | Construct, id: string) {
     super(scope, id, {
       functionName: WUNDERWORLDS_API_LAMBDA,
-      runtime: Runtime.NODEJS_20_X,
+      runtime: Runtime.NODEJS_24_X,
       entry: path.join(__dirname, "../src/lambdas/api.ts"),
       environment: {
         DATABASE_NAME: dbName!,
