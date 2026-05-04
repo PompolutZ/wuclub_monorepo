@@ -7,12 +7,17 @@ import {
 } from "react";
 import { Minus, Plus } from "lucide-react";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
+import { DiceRoller } from "@components/DiceRoller";
 import { warbandsValidForOrganisedPlay } from "@fxdxpz/wudb";
 import { FIGHTER_TOKEN_SCALE, FighterToken } from "@components/FighterToken";
 import { TREASURE_TOKEN_SCALE, TreasureToken } from "@components/TreasureToken";
 import type { Warband } from "@components/WarbandPicker";
 import { boards } from "../../../../../shared/boards";
-import type { BoardRotation, PlacedToken } from "../Room/BoardOverlay";
+import type {
+  BoardLayer,
+  BoardRotation,
+  PlacedToken,
+} from "../Room/BoardOverlay";
 import { BoardArea } from "./BoardArea";
 import { AssetsDrawer } from "./AssetsDrawer";
 import {
@@ -150,7 +155,9 @@ const ToolsPage = () => {
         toStage,
       );
       setItems((prev) =>
-        prev.map((it) => (it.id === current.itemId ? updated : it)),
+        prev
+          .filter((it) => !sameHexSameLayer(it, updated))
+          .map((it) => (it.id === current.itemId ? updated : it)),
       );
       return;
     }
@@ -164,7 +171,10 @@ const ToolsPage = () => {
       boardRef.current,
       toStage,
     );
-    setItems((prev) => [...prev, created]);
+    setItems((prev) => [
+      ...prev.filter((it) => !sameHexSameLayer(it, created)),
+      created,
+    ]);
   };
 
   useEffect(() => {
@@ -278,7 +288,8 @@ const ToolsPage = () => {
   return (
     <div className="flex-1 relative">
       <div className="absolute inset-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr]">
-        <header className="col-start-1 row-start-1 flex items-center justify-end gap-2 px-4 py-2 border-b border-gray-200">
+        <header className="col-start-1 row-start-1 flex items-center justify-end gap-3 px-4 py-2 border-b border-gray-200">
+          <DiceRoller />
           <div className="flex items-center gap-1">
             <button
               type="button"
@@ -410,6 +421,25 @@ function hasHex(item: CanvasItem): item is TokenItem & { hex: HexCoord } {
   return item.hex !== undefined;
 }
 
+function sameHexSameLayer(a: CanvasItem, b: CanvasItem): boolean {
+  if (a.id === b.id) return false;
+  if (!hasHex(a) || !hasHex(b)) return false;
+  if (a.hex.col !== b.hex.col || a.hex.row !== b.hex.row) return false;
+  return layerOf(a) === layerOf(b);
+}
+
+function layerOf(item: CanvasItem): BoardLayer | null {
+  switch (item.kind) {
+    case "treasure-cover":
+    case "treasure":
+      return "feature";
+    case "fighter-token":
+      return "fighter";
+    default:
+      return null;
+  }
+}
+
 function buildPlacedToken(
   item: TokenItem & { hex: HexCoord },
   dimmed: boolean,
@@ -427,6 +457,7 @@ function buildPlacedToken(
       return {
         ...common,
         scale: TREASURE_TOKEN_SCALE,
+        layer: "feature",
         content: wrap(
           <TreasureToken face="cover" className={fill} draggable={false} />,
         ),
@@ -435,6 +466,7 @@ function buildPlacedToken(
       return {
         ...common,
         scale: TREASURE_TOKEN_SCALE,
+        layer: "feature",
         content: wrap(
           <TreasureToken face={item.n} className={fill} draggable={false} />,
         ),
@@ -443,6 +475,7 @@ function buildPlacedToken(
       return {
         ...common,
         scale: FIGHTER_TOKEN_SCALE,
+        layer: "fighter",
         content: wrap(
           <FighterToken
             warband={item.warband}

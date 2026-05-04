@@ -10,6 +10,10 @@ import {
 
 export type BoardRotation = 0 | 90 | 180 | 270;
 
+// Stacking order of token layers, bottom to top. New layers go here.
+export const BOARD_LAYERS = ["feature", "fighter", "marker"] as const;
+export type BoardLayer = (typeof BOARD_LAYERS)[number];
+
 export type PlacedToken = {
   id: string | number;
   col: number;
@@ -19,6 +23,7 @@ export type PlacedToken = {
   // Pre-rendered token (e.g. <TreasureToken/> or <FighterToken/>). The caller
   // owns asset path + naming; BoardOverlay only positions and sizes it.
   content: ReactNode;
+  layer: BoardLayer;
 };
 
 type BoardOverlayProps = {
@@ -26,7 +31,7 @@ type BoardOverlayProps = {
   config?: BoardOverlayConfig;
   rotation: BoardRotation;
   placed?: PlacedToken[];
-  onFlip?: (id: string | number) => void;
+  onHexClick?: (col: number, row: number) => void;
 };
 
 export const BoardOverlay = ({
@@ -34,7 +39,7 @@ export const BoardOverlay = ({
   config,
   rotation,
   placed,
-  onFlip,
+  onHexClick,
 }: BoardOverlayProps) => {
   const hexPath = useMemo(() => (config ? buildHexPath(config) : []), [config]);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
@@ -71,6 +76,32 @@ export const BoardOverlay = ({
         >
           <BoardPicture board={board} imgClassName="block w-full h-full" />
         </foreignObject>
+        {config &&
+          BOARD_LAYERS.map((layer) => (
+            <g key={layer} data-layer={layer}>
+              {placed
+                ?.filter((p) => p.layer === layer)
+                .map((p) => {
+                  const hex = hexPath.find(
+                    (h) => h.col === p.col && h.row === p.row,
+                  );
+                  if (!hex) return null;
+                  const size = config.size * p.scale;
+                  return (
+                    <foreignObject
+                      key={p.id}
+                      x={hex.cx - size / 2}
+                      y={hex.cy - size / 2}
+                      width={size}
+                      height={size}
+                      style={{ pointerEvents: "none" }}
+                    >
+                      {p.content}
+                    </foreignObject>
+                  );
+                })}
+            </g>
+          ))}
         {hexPath.map((hex) => (
           <HexCell
             key={`${hex.col},${hex.row}`}
@@ -78,30 +109,9 @@ export const BoardOverlay = ({
             isHovered={hoveredKey === `${hex.col},${hex.row}`}
             rotation={rotation}
             onHoverChange={setHoveredKey}
+            onClick={onHexClick}
           />
         ))}
-        {config &&
-          placed?.map((p) => {
-            const hex = hexPath.find((h) => h.col === p.col && h.row === p.row);
-            if (!hex) return null;
-            const size = config.size * p.scale;
-            return (
-              <foreignObject
-                key={p.id}
-                x={hex.cx - size / 2}
-                y={hex.cy - size / 2}
-                width={size}
-                height={size}
-                onClick={onFlip ? () => onFlip(p.id) : undefined}
-                style={{
-                  pointerEvents: onFlip ? "auto" : "none",
-                  cursor: onFlip ? "pointer" : undefined,
-                }}
-              >
-                {p.content}
-              </foreignObject>
-            );
-          })}
       </g>
     </svg>
   );
@@ -122,9 +132,16 @@ type HexCellProps = {
   isHovered: boolean;
   rotation: BoardRotation;
   onHoverChange: (key: string | null) => void;
+  onClick?: (col: number, row: number) => void;
 };
 
-const HexCell = ({ hex, isHovered, rotation, onHoverChange }: HexCellProps) => {
+const HexCell = ({
+  hex,
+  isHovered,
+  rotation,
+  onHoverChange,
+  onClick,
+}: HexCellProps) => {
   const key = `${hex.col},${hex.row}`;
   return (
     <g>
@@ -137,8 +154,10 @@ const HexCell = ({ hex, isHovered, rotation, onHoverChange }: HexCellProps) => {
         }
         stroke="rgba(147, 51, 234, .5)"
         strokeWidth={2}
+        style={{ cursor: onClick ? "pointer" : undefined }}
         onMouseEnter={() => onHoverChange(key)}
         onMouseLeave={() => onHoverChange(null)}
+        onClick={onClick ? () => onClick(hex.col, hex.row) : undefined}
       />
       {isHovered && (
         <text

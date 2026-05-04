@@ -62,13 +62,17 @@ export const TreasuresStep = ({
     setDrag(null);
   };
 
-  const handleFlip = (id: string | number) => flipTreasure(roomId, Number(id));
+  const handleHexClick = (col: number, row: number) => {
+    const t = treasures.find((tt) => tt.col === col && tt.row === row);
+    if (t) flipTreasure(roomId, t.id);
+  };
 
   const placed: PlacedToken[] = treasures.map((t) => ({
     id: t.id,
     col: t.col,
     row: t.row,
     scale: TREASURE_TOKEN_SCALE,
+    layer: "feature",
     content: (
       <TreasureToken
         face={t.faceUp ? (t.id as TreasureFace) : "cover"}
@@ -90,7 +94,7 @@ export const TreasuresStep = ({
             config={config}
             rotation={boardSetup.rotation}
             placed={placed}
-            onFlip={handleFlip}
+            onHexClick={handleHexClick}
           />
         </div>
         <TreasureDrawPile
