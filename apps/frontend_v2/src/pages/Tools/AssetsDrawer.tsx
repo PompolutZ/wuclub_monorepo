@@ -2,6 +2,7 @@ import type { PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import { factionMembers, type FactionName } from "@fxdxpz/wudb";
 import { FighterCard } from "@components/FighterCard";
 import { FighterToken } from "@components/FighterToken";
+import { MARKER_KINDS, MarkerToken } from "@components/MarkerToken";
 import { TreasureToken } from "@components/TreasureToken";
 import type { Warband } from "@components/WarbandPicker";
 import { WarbandDropdown } from "./WarbandDropdown";
@@ -58,6 +59,27 @@ export const AssetsDrawer = ({
                 draggable={false}
                 width={56}
                 height={56}
+                className="select-none"
+              />
+            </DrawerSlot>
+          ))}
+        </div>
+      </Section>
+
+      <Section title="Markers">
+        <div className="flex flex-wrap gap-2">
+          {MARKER_KINDS.map((marker) => (
+            <DrawerSlot
+              key={marker}
+              onPointerDown={(e) =>
+                onTemplatePointerDown(e, { kind: "marker", marker })
+              }
+            >
+              <MarkerToken
+                kind={marker}
+                draggable={false}
+                width={40}
+                height={40}
                 className="select-none"
               />
             </DrawerSlot>

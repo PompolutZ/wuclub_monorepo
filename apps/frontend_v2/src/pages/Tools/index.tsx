@@ -386,6 +386,7 @@ const ToolsPage = () => {
 
 export default ToolsPage;
 
+// Tokens that snap to hexes. Markers are excluded — they're free-placed.
 type TokenItem = Extract<
   CanvasItem,
   { kind: "treasure-cover" | "treasure" | "fighter-token" }
@@ -433,6 +434,8 @@ function layerOf(item: CanvasItem): BoardLayer | null {
       return "feature";
     case "fighter-token":
       return "fighter";
+    case "marker":
+      return "marker";
     default:
       return null;
   }
@@ -554,6 +557,15 @@ function buildItem(
         y,
         hex,
       };
+    case "marker":
+      return {
+        kind: "marker",
+        id,
+        marker: template.marker,
+        x,
+        y,
+        hex,
+      };
     case "fighter-card":
       return {
         kind: "fighter-card",
@@ -598,6 +610,11 @@ function createItemFromTemplate(
   toStage: ToStage,
 ): CanvasItem {
   const id = crypto.randomUUID();
+  // Markers are free-placed: no hex snap, no board clamp, can overlap.
+  if (template.kind === "marker") {
+    const { x, y } = toStage(clientX, clientY);
+    return buildItem(template, id, x, y, undefined);
+  }
   const isToken = isTokenKind(template.kind);
   if (isToken && target.kind === "hex") {
     const { x, y } = toStage(target.centerX, target.centerY);
@@ -622,9 +639,14 @@ function applyDropToItem(
   boardEl: HTMLElement | null,
   toStage: ToStage,
 ): CanvasItem {
-  const isToken = isTokenKind(item.kind);
   const proposedVX = clientX - offsetX;
   const proposedVY = clientY - offsetY;
+  // Markers are free-placed: no hex snap, no board clamp, can overlap.
+  if (item.kind === "marker") {
+    const { x, y } = toStage(proposedVX, proposedVY);
+    return { ...item, x, y, hex: undefined } as CanvasItem;
+  }
+  const isToken = isTokenKind(item.kind);
   if (isToken && target.kind === "hex") {
     const { x, y } = toStage(target.centerX, target.centerY);
     return { ...item, x, y, hex: target.hex } as CanvasItem;

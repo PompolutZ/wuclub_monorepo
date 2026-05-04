@@ -1,3 +1,4 @@
+import type { MarkerKind } from "@components/MarkerToken";
 import type { BoardRotation } from "../Room/BoardOverlay";
 
 export type HexCoord = { col: number; row: number };
@@ -24,6 +25,14 @@ export type CanvasItem =
       id: string;
       warband: string;
       fighter: string;
+      x: number;
+      y: number;
+      hex?: HexCoord;
+    }
+  | {
+      kind: "marker";
+      id: string;
+      marker: MarkerKind;
       x: number;
       y: number;
       hex?: HexCoord;
@@ -57,6 +66,7 @@ export type DragTemplate =
   | { kind: "treasure-cover" }
   | { kind: "treasure"; n: TreasureNumber }
   | { kind: "fighter-token"; warband: string; fighter: string }
+  | { kind: "marker"; marker: MarkerKind }
   | {
       kind: "fighter-card";
       warband: string;

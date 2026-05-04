@@ -1,11 +1,13 @@
 import { FighterCard } from "@components/FighterCard";
 import { FighterToken } from "@components/FighterToken";
+import { MARKER_TOKEN_SCALE, MarkerToken } from "@components/MarkerToken";
 import { TreasureToken } from "@components/TreasureToken";
 import type { FactionName } from "@fxdxpz/wudb";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import type { CanvasItem } from "./types";
 
 const TOKEN_SIZE = 80;
+const MARKER_SIZE = TOKEN_SIZE * MARKER_TOKEN_SCALE;
 const CARD_WIDTH = 220;
 const SCROLL_WIDTH = 360;
 
@@ -75,6 +77,19 @@ export const CanvasItemView = ({
         height={TOKEN_SIZE}
         onPointerDown={(e) => onPointerDown(e, item.id)}
         style={baseStyle}
+      />
+    );
+  }
+
+  if (item.kind === "marker") {
+    return (
+      <MarkerToken
+        kind={item.marker}
+        draggable={false}
+        width={MARKER_SIZE}
+        height={MARKER_SIZE}
+        onPointerDown={(e) => onPointerDown(e, item.id)}
+        style={{ ...baseStyle, zIndex: 20 }}
       />
     );
   }
