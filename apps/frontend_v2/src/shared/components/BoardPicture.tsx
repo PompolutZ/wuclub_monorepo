@@ -11,7 +11,12 @@ export const BoardPicture = ({ board, imgClassName }: BoardPictureProps) => {
     <picture>
       <source type="image/avif" srcSet={`${path}.avif`} />
       <source type="image/webp" srcSet={`${path}.webp`} />
-      <img alt={board.name} src={`${path}.png`} className={imgClassName} />
+      <img
+        alt={board.name}
+        src={`${path}.png`}
+        className={imgClassName}
+        draggable={false}
+      />
     </picture>
   );
 };

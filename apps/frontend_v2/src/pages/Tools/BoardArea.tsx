@@ -49,7 +49,7 @@ export const BoardArea = ({
     <div
       ref={boardRef as RefObject<HTMLDivElement>}
       data-board-area
-      className="relative"
+      className="relative select-none"
       style={{ width: BOARD_WIDTH }}
     >
       <BoardOverlay

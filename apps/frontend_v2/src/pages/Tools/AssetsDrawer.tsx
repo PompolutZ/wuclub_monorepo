@@ -189,6 +189,7 @@ const DrawerSlot = ({
   onPointerDown: (e: ReactPointerEvent<HTMLDivElement>) => void;
 }) => (
   <div
+    data-template=""
     className="cursor-grab"
     style={{ touchAction: "none" }}
     onPointerDown={onPointerDown}
@@ -205,6 +206,7 @@ const DrawerCard = ({
   onPointerDown: (e: ReactPointerEvent<HTMLDivElement>) => void;
 }) => (
   <div
+    data-template=""
     className="cursor-grab w-full"
     style={{ touchAction: "none" }}
     onPointerDown={onPointerDown}

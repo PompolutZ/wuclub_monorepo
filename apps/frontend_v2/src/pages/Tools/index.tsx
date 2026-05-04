@@ -58,6 +58,7 @@ const ToolsPage = () => {
   const [activeWarband, setActiveWarband] = useState<Warband>(DEFAULT_WARBAND);
   const [zoom, setZoom] = useState(1);
   const [hexesVisible, setHexesVisible] = useState(true);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(() => new Set());
   const [drag, setDrag] = useState<DragState | null>(null);
   const dragRef = useRef<DragState | null>(null);
   const itemsRef = useRef<CanvasItem[]>(items);
@@ -126,6 +127,23 @@ const ToolsPage = () => {
     itemsRef.current = items;
   }, [items]);
 
+  useEffect(() => {
+    const onDown = (e: PointerEvent) => {
+      const t = e.target as Element | null;
+      if (!t) return;
+      if (
+        t.closest("[data-canvas-item]") ||
+        t.closest("polygon[data-col]") ||
+        t.closest("[data-template]")
+      ) {
+        return;
+      }
+      if (!e.shiftKey) setSelectedIds(new Set());
+    };
+    window.addEventListener("pointerdown", onDown);
+    return () => window.removeEventListener("pointerdown", onDown);
+  }, []);
+
   const dragging = !!drag;
   useEffect(() => {
     if (!dragging) return;
@@ -161,6 +179,7 @@ const ToolsPage = () => {
     e: ReactPointerEvent<HTMLElement>,
     template: DragTemplate,
   ) => {
+    setSelectedIds(new Set());
     setDrag({
       source: "drawer",
       template,
@@ -175,6 +194,11 @@ const ToolsPage = () => {
   ) => {
     const item = itemsRef.current.find((it) => it.id === itemId);
     if (!item) return;
+    if (e.shiftKey) {
+      setSelectedIds((prev) => toggleSelection(prev, itemId));
+      return;
+    }
+    setSelectedIds((prev) => (prev.has(itemId) ? prev : new Set([itemId])));
     const stage = stageRef.current;
     let offsetX = 0;
     let offsetY = 0;
@@ -200,7 +224,15 @@ const ToolsPage = () => {
   ) => {
     if (boardSetting.modifying) return;
     const item = topmostItemAtHex(itemsRef.current, col, row);
-    if (!item) return;
+    if (!item) {
+      if (!e.shiftKey) setSelectedIds(new Set());
+      return;
+    }
+    if (e.shiftKey) {
+      setSelectedIds((prev) => toggleSelection(prev, item.id));
+      return;
+    }
+    setSelectedIds((prev) => (prev.has(item.id) ? prev : new Set([item.id])));
     const rect = e.currentTarget.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
@@ -233,7 +265,9 @@ const ToolsPage = () => {
   const placed: PlacedToken[] = items
     .filter(hasHex)
     .filter((it) => it.id !== draggingCanvasId)
-    .map((it) => buildPlacedToken(it, boardSetting.modifying));
+    .map((it) =>
+      buildPlacedToken(it, boardSetting.modifying, selectedIds.has(it.id)),
+    );
 
   const canvasChildren = items.filter(
     (it) => !hasHex(it) && it.id !== draggingCanvasId,
@@ -304,11 +338,22 @@ const ToolsPage = () => {
           </button>
           <button
             type="button"
-            onClick={() => setItems([])}
+            onClick={() => {
+              if (selectedIds.size > 0) {
+                setItems((prev) =>
+                  prev.filter((it) => !selectedIds.has(it.id)),
+                );
+                setSelectedIds(new Set());
+              } else {
+                setItems([]);
+              }
+            }}
             disabled={items.length === 0}
             className="px-3 py-1 rounded border border-gray-300 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Clear canvas
+            {selectedIds.size > 0
+              ? `Delete ${selectedIds.size} selected ${selectedIds.size === 1 ? "item" : "items"}`
+              : "Clear canvas"}
           </button>
         </header>
         <Canvas
@@ -346,6 +391,7 @@ const ToolsPage = () => {
               isDragging={false}
               position="absolute"
               dimmed={boardSetting.modifying}
+              selected={selectedIds.has(item.id)}
               onPointerDown={handleItemPointerDown}
             />
           ))}
@@ -385,6 +431,13 @@ const ToolsPage = () => {
 };
 
 export default ToolsPage;
+
+function toggleSelection(prev: Set<string>, id: string): Set<string> {
+  const next = new Set(prev);
+  if (next.has(id)) next.delete(id);
+  else next.add(id);
+  return next;
+}
 
 // Tokens that snap to hexes. Markers are excluded — they're free-placed.
 type TokenItem = Extract<
@@ -444,15 +497,26 @@ function layerOf(item: CanvasItem): BoardLayer | null {
 function buildPlacedToken(
   item: TokenItem & { hex: HexCoord },
   dimmed: boolean,
+  selected: boolean,
 ): PlacedToken {
   const common = { id: item.id, col: item.hex.col, row: item.hex.row };
   const fill = "block w-full h-full";
-  const wrap = (node: ReactNode) =>
-    dimmed ? (
-      <div className="w-full h-full opacity-40 grayscale">{node}</div>
-    ) : (
-      node
-    );
+  const wrap = (node: ReactNode) => {
+    if (dimmed) {
+      return <div className="w-full h-full opacity-40 grayscale">{node}</div>;
+    }
+    if (selected) {
+      return (
+        <div
+          className="w-full h-full"
+          style={{ filter: "drop-shadow(0 0 6px rgba(147, 51, 234, 0.95))" }}
+        >
+          {node}
+        </div>
+      );
+    }
+    return node;
+  };
   switch (item.kind) {
     case "treasure-cover":
       return {

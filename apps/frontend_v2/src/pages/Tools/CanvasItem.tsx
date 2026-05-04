@@ -17,8 +17,11 @@ type Props = {
   position?: "fixed" | "absolute";
   scale?: number;
   dimmed?: boolean;
+  selected?: boolean;
   onPointerDown: (e: ReactPointerEvent<HTMLElement>, id: string) => void;
 };
+
+const SELECTED_FILTER = "drop-shadow(0 0 6px rgba(147, 51, 234, 0.95))";
 
 export const CanvasItemView = ({
   item,
@@ -26,8 +29,15 @@ export const CanvasItemView = ({
   position = "fixed",
   scale = 1,
   dimmed = false,
+  selected = false,
   onPointerDown,
 }: Props) => {
+  const filter =
+    dimmed && !isDragging
+      ? "grayscale(1)"
+      : selected && !isDragging
+        ? SELECTED_FILTER
+        : undefined;
   const baseStyle: React.CSSProperties = {
     position,
     left: item.x,
@@ -35,7 +45,7 @@ export const CanvasItemView = ({
     transform: `translate(-50%, -50%) scale(${scale})`,
     cursor: isDragging ? "grabbing" : "grab",
     opacity: isDragging ? 0.3 : dimmed ? 0.4 : 1,
-    filter: dimmed && !isDragging ? "grayscale(1)" : undefined,
+    filter,
     touchAction: "none",
     userSelect: "none",
     pointerEvents: isDragging ? "none" : "auto",
@@ -44,6 +54,7 @@ export const CanvasItemView = ({
   if (item.kind === "treasure-cover") {
     return (
       <TreasureToken
+        data-canvas-item=""
         face="cover"
         draggable={false}
         width={TOKEN_SIZE}
@@ -57,6 +68,7 @@ export const CanvasItemView = ({
   if (item.kind === "treasure") {
     return (
       <TreasureToken
+        data-canvas-item=""
         face={item.n}
         draggable={false}
         width={TOKEN_SIZE}
@@ -70,6 +82,7 @@ export const CanvasItemView = ({
   if (item.kind === "fighter-token") {
     return (
       <FighterToken
+        data-canvas-item=""
         warband={item.warband}
         fighter={item.fighter}
         draggable={false}
@@ -84,6 +97,7 @@ export const CanvasItemView = ({
   if (item.kind === "marker") {
     return (
       <MarkerToken
+        data-canvas-item=""
         kind={item.marker}
         draggable={false}
         width={MARKER_SIZE}
@@ -97,6 +111,7 @@ export const CanvasItemView = ({
   if (item.kind === "fighter-card") {
     return (
       <div
+        data-canvas-item=""
         onPointerDown={(e) => onPointerDown(e, item.id)}
         style={{ ...baseStyle, width: CARD_WIDTH }}
       >
@@ -112,6 +127,7 @@ export const CanvasItemView = ({
 
   return (
     <div
+      data-canvas-item=""
       onPointerDown={(e) => onPointerDown(e, item.id)}
       style={{ ...baseStyle, width: SCROLL_WIDTH }}
     >
