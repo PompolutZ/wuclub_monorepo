@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fxdxpz/schema": "workspace:*",
+    "@fxdxpz/wudb": "workspace:*",
     "@hono/zod-validator": "^0.7.6",
     "firebase-admin": "11.11.1",
     "hono": "^4.4.4",

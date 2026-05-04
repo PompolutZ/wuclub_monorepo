@@ -4,3 +4,5 @@ export { getDeckById } from "./decks/getDeckById";
 export { deleteDeckById } from "./decks/deleteDeckById";
 export { createNewDeck } from "./decks/createNewDeck";
 export { updateDeck } from "./decks/updateDeck";
+export { recomputeDecksValidity } from "./decks/recomputeDecksValidity";
+export { getDecksValidityStats } from "./decks/getDecksValidityStats";

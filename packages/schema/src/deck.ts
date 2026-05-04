@@ -18,10 +18,18 @@ export const deckPayloadSchema = z
   );
 
 export type DeckPayload = z.infer<typeof deckPayloadSchema>;
+
+export const deckValiditySchema = z.object({
+  nemesis: z.boolean(),
+  rivals: z.boolean(),
+});
+export type DeckValidity = z.infer<typeof deckValiditySchema>;
+
 export const deckSchema = deckPayloadSchema.extend({
   fuid: z.string(),
   createdutc: z.number(),
   updatedutc: z.number(),
+  validity: deckValiditySchema.optional(),
 });
 
 export type DeckStat = {
