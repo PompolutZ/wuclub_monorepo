@@ -1,4 +1,4 @@
-import { type RefObject } from "react";
+import { type PointerEvent as ReactPointerEvent, type RefObject } from "react";
 import { ChevronLeft, ChevronRight, RotateCcw, RotateCw } from "lucide-react";
 import { boards } from "../../../../../shared/boards";
 import {
@@ -14,10 +14,16 @@ type Props = {
   modifying: boolean;
   placed: PlacedToken[];
   boardRef: RefObject<HTMLDivElement | null>;
+  hexesVisible: boolean;
   onPrevBoard: () => void;
   onNextBoard: () => void;
   onRotateCw: () => void;
   onRotateCcw: () => void;
+  onHexPointerDown?: (
+    e: ReactPointerEvent<SVGPolygonElement>,
+    col: number,
+    row: number,
+  ) => void;
 };
 
 export const BOARD_WIDTH = 600;
@@ -28,10 +34,12 @@ export const BoardArea = ({
   modifying,
   placed,
   boardRef,
+  hexesVisible,
   onPrevBoard,
   onNextBoard,
   onRotateCw,
   onRotateCcw,
+  onHexPointerDown,
 }: Props) => {
   const board = boards.find((b) => b.id === boardId);
   if (!board) return null;
@@ -49,6 +57,8 @@ export const BoardArea = ({
         config={config}
         rotation={rotation}
         placed={placed}
+        hexesVisible={hexesVisible}
+        onHexPointerDown={onHexPointerDown}
       />
       <p className="absolute left-1/2 -top-7 -translate-x-1/2 text-sm text-gray-700 whitespace-nowrap">
         <span className="font-semibold">{board.name}</span>

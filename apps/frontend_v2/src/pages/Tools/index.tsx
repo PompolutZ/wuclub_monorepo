@@ -5,7 +5,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from "react";
-import { Minus, Plus } from "lucide-react";
+import { Grid3x3, Minus, Plus } from "lucide-react";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { DiceRoller } from "@components/DiceRoller";
 import { warbandsValidForOrganisedPlay } from "@fxdxpz/wudb";
@@ -13,10 +13,11 @@ import { FIGHTER_TOKEN_SCALE, FighterToken } from "@components/FighterToken";
 import { TREASURE_TOKEN_SCALE, TreasureToken } from "@components/TreasureToken";
 import type { Warband } from "@components/WarbandPicker";
 import { boards } from "../../../../../shared/boards";
-import type {
-  BoardLayer,
-  BoardRotation,
-  PlacedToken,
+import {
+  BOARD_LAYERS,
+  type BoardLayer,
+  type BoardRotation,
+  type PlacedToken,
 } from "../Room/BoardOverlay";
 import { BoardArea } from "./BoardArea";
 import { AssetsDrawer } from "./AssetsDrawer";
@@ -119,6 +120,7 @@ const ToolsPage = () => {
   const [items, setItems] = useState<CanvasItem[]>([]);
   const [activeWarband, setActiveWarband] = useState<Warband>(DEFAULT_WARBAND);
   const [zoom, setZoom] = useState(1);
+  const [hexesVisible, setHexesVisible] = useState(true);
   const [drag, setDrag] = useState<DragState | null>(null);
   const dragRef = useRef<DragState | null>(null);
   const itemsRef = useRef<CanvasItem[]>(items);
@@ -154,10 +156,12 @@ const ToolsPage = () => {
         boardRef.current,
         toStage,
       );
+      const blocked = itemsRef.current.some(
+        (it) => it.id !== current.itemId && sameHexSameLayer(it, updated),
+      );
+      if (blocked) return;
       setItems((prev) =>
-        prev
-          .filter((it) => !sameHexSameLayer(it, updated))
-          .map((it) => (it.id === current.itemId ? updated : it)),
+        prev.map((it) => (it.id === current.itemId ? updated : it)),
       );
       return;
     }
@@ -171,10 +175,11 @@ const ToolsPage = () => {
       boardRef.current,
       toStage,
     );
-    setItems((prev) => [
-      ...prev.filter((it) => !sameHexSameLayer(it, created)),
-      created,
-    ]);
+    const blocked = itemsRef.current.some((it) =>
+      sameHexSameLayer(it, created),
+    );
+    if (blocked) return;
+    setItems((prev) => [...prev, created]);
   };
 
   useEffect(() => {
@@ -251,6 +256,27 @@ const ToolsPage = () => {
     });
   };
 
+  const handleHexPointerDown = (
+    e: ReactPointerEvent<SVGPolygonElement>,
+    col: number,
+    row: number,
+  ) => {
+    if (boardSetting.modifying) return;
+    const item = topmostItemAtHex(itemsRef.current, col, row);
+    if (!item) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    setDrag({
+      source: "canvas",
+      itemId: item.id,
+      offsetX: e.clientX - cx,
+      offsetY: e.clientY - cy,
+      clientX: e.clientX,
+      clientY: e.clientY,
+    });
+  };
+
   const cycleBoard = (delta: number) => {
     const idx = boards.findIndex((b) => b.id === boardSetting.boardId);
     const next = boards[(idx + delta + boards.length) % boards.length];
@@ -319,6 +345,19 @@ const ToolsPage = () => {
           </div>
           <button
             type="button"
+            onClick={() => setHexesVisible((v) => !v)}
+            aria-label={hexesVisible ? "Hide hex grid" : "Show hex grid"}
+            aria-pressed={hexesVisible}
+            className={`grid place-items-center w-8 h-8 rounded border text-sm hover:bg-gray-100 ${
+              hexesVisible
+                ? "border-purple-500 text-purple-700 bg-purple-50"
+                : "border-gray-300 text-gray-500"
+            }`}
+          >
+            <Grid3x3 className="w-4 h-4" aria-hidden />
+          </button>
+          <button
+            type="button"
             onClick={() =>
               setBoardSetting((s) => ({ ...s, modifying: !s.modifying }))
             }
@@ -355,10 +394,12 @@ const ToolsPage = () => {
               modifying={boardSetting.modifying}
               placed={placed}
               boardRef={boardRef}
+              hexesVisible={hexesVisible}
               onPrevBoard={() => cycleBoard(-1)}
               onNextBoard={() => cycleBoard(1)}
               onRotateCw={() => rotateBy(90)}
               onRotateCcw={() => rotateBy(270)}
+              onHexPointerDown={handleHexPointerDown}
             />
           </div>
           {canvasChildren.map((item) => (
@@ -419,6 +460,27 @@ function hasHex(item: CanvasItem): item is TokenItem & { hex: HexCoord } {
     return false;
   }
   return item.hex !== undefined;
+}
+
+function topmostItemAtHex(
+  items: CanvasItem[],
+  col: number,
+  row: number,
+): CanvasItem | null {
+  let best: CanvasItem | null = null;
+  let bestRank = -1;
+  for (const it of items) {
+    if (!hasHex(it)) continue;
+    if (it.hex.col !== col || it.hex.row !== row) continue;
+    const layer = layerOf(it);
+    if (!layer) continue;
+    const rank = BOARD_LAYERS.indexOf(layer);
+    if (rank > bestRank) {
+      best = it;
+      bestRank = rank;
+    }
+  }
+  return best;
 }
 
 function sameHexSameLayer(a: CanvasItem, b: CanvasItem): boolean {

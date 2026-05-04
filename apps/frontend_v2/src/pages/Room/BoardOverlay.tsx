@@ -1,4 +1,9 @@
-import { useMemo, useState, type ReactNode } from "react";
+import {
+  useMemo,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+} from "react";
 import { defineHex, Grid, rectangle } from "honeycomb-grid";
 import { BoardPicture } from "@components/BoardPicture";
 import type { Board } from "../../../../../shared/boards";
@@ -31,7 +36,13 @@ type BoardOverlayProps = {
   config?: BoardOverlayConfig;
   rotation: BoardRotation;
   placed?: PlacedToken[];
+  hexesVisible?: boolean;
   onHexClick?: (col: number, row: number) => void;
+  onHexPointerDown?: (
+    e: ReactPointerEvent<SVGPolygonElement>,
+    col: number,
+    row: number,
+  ) => void;
 };
 
 export const BoardOverlay = ({
@@ -39,7 +50,9 @@ export const BoardOverlay = ({
   config,
   rotation,
   placed,
+  hexesVisible = true,
   onHexClick,
+  onHexPointerDown,
 }: BoardOverlayProps) => {
   const hexPath = useMemo(() => (config ? buildHexPath(config) : []), [config]);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
@@ -107,9 +120,11 @@ export const BoardOverlay = ({
             key={`${hex.col},${hex.row}`}
             hex={hex}
             isHovered={hoveredKey === `${hex.col},${hex.row}`}
+            visible={hexesVisible}
             rotation={rotation}
             onHoverChange={setHoveredKey}
             onClick={onHexClick}
+            onPointerDown={onHexPointerDown}
           />
         ))}
       </g>
@@ -130,34 +145,51 @@ type PaintedHex = {
 type HexCellProps = {
   hex: PaintedHex;
   isHovered: boolean;
+  visible: boolean;
   rotation: BoardRotation;
   onHoverChange: (key: string | null) => void;
   onClick?: (col: number, row: number) => void;
+  onPointerDown?: (
+    e: ReactPointerEvent<SVGPolygonElement>,
+    col: number,
+    row: number,
+  ) => void;
 };
 
 const HexCell = ({
   hex,
   isHovered,
+  visible,
   rotation,
   onHoverChange,
   onClick,
+  onPointerDown,
 }: HexCellProps) => {
   const key = `${hex.col},${hex.row}`;
+  const fill = isHovered
+    ? "rgba(147, 51, 234, 0.55)"
+    : visible
+      ? "rgba(147, 51, 234, 0.2)"
+      : "transparent";
+  const stroke =
+    visible || isHovered ? "rgba(147, 51, 234, .5)" : "transparent";
   return (
     <g>
       <polygon
         points={hex.points}
         data-col={hex.col}
         data-row={hex.row}
-        fill={
-          isHovered ? "rgba(147, 51, 234, 0.55)" : "rgba(147, 51, 234, 0.2)"
-        }
-        stroke="rgba(147, 51, 234, .5)"
+        fill={fill}
+        stroke={stroke}
         strokeWidth={2}
-        style={{ cursor: onClick ? "pointer" : undefined }}
+        pointerEvents="all"
+        style={{ cursor: onClick || onPointerDown ? "pointer" : undefined }}
         onMouseEnter={() => onHoverChange(key)}
         onMouseLeave={() => onHoverChange(null)}
         onClick={onClick ? () => onClick(hex.col, hex.row) : undefined}
+        onPointerDown={
+          onPointerDown ? (e) => onPointerDown(e, hex.col, hex.row) : undefined
+        }
       />
       {isHovered && (
         <text
