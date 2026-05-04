@@ -2,26 +2,26 @@ import { FactionName } from "@fxdxpz/wudb";
 
 type Props = {
   faction: FactionName;
+  fighter: string;
   isInspired?: boolean;
-  index: number;
   style?: React.CSSProperties;
   className?: string;
 };
 
 export const FighterCard = ({
   faction,
-  index,
+  fighter,
   style,
   className,
   isInspired = false,
 }: Props) => {
-  const assetWithoutExtension = `/assets/fighters/${faction}/${faction}-${index}${isInspired ? "-inspired" : ""}`;
+  const assetWithoutExtension = `/assets/fighters/${faction}/${faction}-${fighter}${isInspired ? "-inspired" : ""}`;
   return (
     <picture className={className} style={style}>
       <source type="image/webp" srcSet={`${assetWithoutExtension}.webp`} />
       <img
         src={`${assetWithoutExtension}.png`}
-        alt={`${faction} fighter ${index} ${isInspired ? "inspired side" : ""}`}
+        alt={`${faction} ${fighter}${isInspired ? " inspired side" : ""}`}
         className="rounded-xl"
       />
     </picture>

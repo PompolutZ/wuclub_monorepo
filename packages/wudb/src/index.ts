@@ -22,6 +22,28 @@ export const sortedFactions = Object.values(factions).sort((a, b) => {
   return aId - bId;
 });
 
+export const GRAND_ALLIANCE_NAMES: Record<number, string> = {
+  38: "Order",
+  39: "Chaos",
+  40: "Death",
+  41: "Destruction",
+};
+
+export function groupWarbandsByGrandAlliance<T extends { gaId?: number }>(
+  warbands: T[],
+): { gaId: number; warbands: T[] }[] {
+  const groups = new Map<number, T[]>();
+  for (const w of warbands) {
+    const gaId = w.gaId ?? 0;
+    if (!groups.has(gaId)) groups.set(gaId, []);
+    groups.get(gaId)!.push(w);
+  }
+  return Array.from(groups.entries()).map(([gaId, ws]) => ({
+    gaId,
+    warbands: ws,
+  }));
+}
+
 function getCardNumberFromId(cardId: string) {
   const match = cardId.match(/(\d+)/);
   return match ? +match[1] : null;

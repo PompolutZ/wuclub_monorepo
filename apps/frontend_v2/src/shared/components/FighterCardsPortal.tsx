@@ -71,10 +71,10 @@ const AnimatedFighterCard = animated(FighterCard);
 
 const FlippableFighterCard = ({
   faction,
-  index,
+  fighter,
 }: {
   faction: FactionName;
-  index: number;
+  fighter: string;
 }) => {
   const [flipped, setFlipped] = useState(false);
   const { transform, opacity } = useSpring({
@@ -90,7 +90,7 @@ const FlippableFighterCard = ({
     >
       <AnimatedFighterCard
         faction={faction}
-        index={index}
+        fighter={fighter}
         className="rounded-sm row-start-1 col-start-1 row-end-1 col-end-1 flex justify-center items-center"
         style={{
           opacity: opacity.to((o) => 1 - o),
@@ -99,7 +99,7 @@ const FlippableFighterCard = ({
       />
       <AnimatedFighterCard
         faction={faction}
-        index={index}
+        fighter={fighter}
         className="rounded-sm row-start-1 col-start-1 row-end-1 col-end-1 flex justify-center items-center"
         isInspired
         style={{
@@ -144,9 +144,9 @@ const FighterCardsCarousel = forwardRef<
             {/* Show warband warscroll */}
             <WarbandWarscroll factionName={faction} />
           </CarouselItem>
-          {fighterCards.map((fighter, index) => (
+          {fighterCards.map((fighter) => (
             <CarouselItem key={fighter}>
-              <FlippableFighterCard faction={faction} index={index + 1} />
+              <FlippableFighterCard faction={faction} fighter={fighter} />
             </CarouselItem>
           ))}
         </CarouselContent>

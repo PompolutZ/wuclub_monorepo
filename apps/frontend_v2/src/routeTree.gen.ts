@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RequestPasswordResetRouteImport } from './routes/requestPasswordReset'
 import { Route as ProfileRouteImport } from './routes/profile'
@@ -20,6 +21,7 @@ import { Route as BoardsRouteImport } from './routes/boards'
 import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UserSignupRouteImport } from './routes/user.signup'
+import { Route as RoomIdRouteImport } from './routes/room.$id'
 import { Route as DecksFactionRouteImport } from './routes/decks.$faction'
 import { Route as DeckActionRouteImport } from './routes/deck.$action'
 import { Route as AdminAdminRouteImport } from './routes/_admin/admin'
@@ -27,6 +29,11 @@ import { Route as ViewDeckIdRouteImport } from './routes/view.deck.$id'
 import { Route as ViewCardIdRouteImport } from './routes/view.card.$id'
 import { Route as DeckActionDataRouteImport } from './routes/deck.$action.$data'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -81,6 +88,11 @@ const UserSignupRoute = UserSignupRouteImport.update({
   path: '/user/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoomIdRoute = RoomIdRouteImport.update({
+  id: '/room/$id',
+  path: '/room/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DecksFactionRoute = DecksFactionRouteImport.update({
   id: '/decks/$faction',
   path: '/decks/$faction',
@@ -122,9 +134,11 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/tools': typeof ToolsRoute
   '/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
+  '/room/$id': typeof RoomIdRoute
   '/user/signup': typeof UserSignupRoute
   '/deck/$action/$data': typeof DeckActionDataRoute
   '/view/card/$id': typeof ViewCardIdRoute
@@ -140,9 +154,11 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/tools': typeof ToolsRoute
   '/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
+  '/room/$id': typeof RoomIdRoute
   '/user/signup': typeof UserSignupRoute
   '/deck/$action/$data': typeof DeckActionDataRoute
   '/view/card/$id': typeof ViewCardIdRoute
@@ -160,9 +176,11 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/requestPasswordReset': typeof RequestPasswordResetRoute
   '/settings': typeof SettingsRoute
+  '/tools': typeof ToolsRoute
   '/_admin/admin': typeof AdminAdminRoute
   '/deck/$action': typeof DeckActionRouteWithChildren
   '/decks/$faction': typeof DecksFactionRoute
+  '/room/$id': typeof RoomIdRoute
   '/user/signup': typeof UserSignupRoute
   '/deck/$action/$data': typeof DeckActionDataRoute
   '/view/card/$id': typeof ViewCardIdRoute
@@ -180,9 +198,11 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/tools'
     | '/admin'
     | '/deck/$action'
     | '/decks/$faction'
+    | '/room/$id'
     | '/user/signup'
     | '/deck/$action/$data'
     | '/view/card/$id'
@@ -198,9 +218,11 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/tools'
     | '/admin'
     | '/deck/$action'
     | '/decks/$faction'
+    | '/room/$id'
     | '/user/signup'
     | '/deck/$action/$data'
     | '/view/card/$id'
@@ -217,9 +239,11 @@ export interface FileRouteTypes {
     | '/profile'
     | '/requestPasswordReset'
     | '/settings'
+    | '/tools'
     | '/_admin/admin'
     | '/deck/$action'
     | '/decks/$faction'
+    | '/room/$id'
     | '/user/signup'
     | '/deck/$action/$data'
     | '/view/card/$id'
@@ -237,8 +261,10 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   RequestPasswordResetRoute: typeof RequestPasswordResetRoute
   SettingsRoute: typeof SettingsRoute
+  ToolsRoute: typeof ToolsRoute
   DeckActionRoute: typeof DeckActionRouteWithChildren
   DecksFactionRoute: typeof DecksFactionRoute
+  RoomIdRoute: typeof RoomIdRoute
   UserSignupRoute: typeof UserSignupRoute
   ViewCardIdRoute: typeof ViewCardIdRoute
   ViewDeckIdRoute: typeof ViewDeckIdRoute
@@ -246,6 +272,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -321,6 +354,13 @@ declare module '@tanstack/react-router' {
       path: '/user/signup'
       fullPath: '/user/signup'
       preLoaderRoute: typeof UserSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/room/$id': {
+      id: '/room/$id'
+      path: '/room/$id'
+      fullPath: '/room/$id'
+      preLoaderRoute: typeof RoomIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/decks/$faction': {
@@ -401,8 +441,10 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   RequestPasswordResetRoute: RequestPasswordResetRoute,
   SettingsRoute: SettingsRoute,
+  ToolsRoute: ToolsRoute,
   DeckActionRoute: DeckActionRouteWithChildren,
   DecksFactionRoute: DecksFactionRoute,
+  RoomIdRoute: RoomIdRoute,
   UserSignupRoute: UserSignupRoute,
   ViewCardIdRoute: ViewCardIdRoute,
   ViewDeckIdRoute: ViewDeckIdRoute,

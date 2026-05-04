@@ -14,9 +14,9 @@ import Card from "./atoms/Card";
 import { Toast } from "./atoms/Toast";
 import { DeckPlotCards } from "@components/DeckPlotCards";
 import DeckSummary from "./DeckSummary";
-import { FighterCardsPortal } from "@/shared/components/FighterCardsPortal";
 import { DeckProvider } from "./context";
 import { DeckActions } from "./atoms/DeckActions";
+import { createRoom, findRoomIdByHostDeckId } from "@/pages/Room/roomStore";
 import type { ReadonlyDeckProps, CardsSectionContentProps } from "./types";
 import { useDeckData } from "./hooks/useDeckData";
 import { useObjectiveSummary } from "./hooks/useObjectiveSummary";
@@ -27,6 +27,7 @@ import {
 } from "./utils/deckExport";
 import { getFormattedDate } from "./utils/displayHelpers";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
+import { useAuthState } from "@/hooks/useAuthUser";
 import {
   NEMESIS_FORMAT,
   RIVALS_FORMAT,
@@ -87,6 +88,7 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
 
   const navigate = useNavigate();
   const isMobile = useBreakpoint("mobile");
+  const { isPlayer } = useAuthState();
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isPrivate, setIsPrivate] = useState(props.private);
   const [isProxyPickerVisible, setIsProxyPickerVisible] = useState(false);
@@ -146,6 +148,28 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
   const resetToast = () => {
     setShowToast(false);
     setToastContent(null);
+  };
+
+  const handleSpawnRoom = () => {
+    if (!isPlayer) return;
+    const existing = findRoomIdByHostDeckId(id);
+    if (existing) {
+      navigate({ to: "/room/$id", params: { id: existing } });
+      return;
+    }
+    const f = factions[factionId as keyof typeof factions];
+    const roomId = createRoom({
+      deck: { id, name, sets, cards },
+      warband: {
+        id: f.id,
+        name: f.name,
+        abbr: f.abbr,
+        displayName: f.displayName,
+        fighters: [],
+      },
+      hand: [],
+    });
+    navigate({ to: "/room/$id", params: { id: roomId } });
   };
 
   const handleDeleteDeck = async () => {
@@ -224,6 +248,9 @@ function ReadonlyDeck(props: ReadonlyDeckProps) {
         copyInVassalFormat: () =>
           saveVassalFormat(faction, cards, handleShowToast),
         onDownloadProxy: () => setIsProxyPickerVisible(true),
+        canSpawnRoom: isPlayer,
+        onSpawnRoom: handleSpawnRoom,
+        hasActiveRoom: isPlayer && Boolean(findRoomIdByHostDeckId(id)),
       }}
     >
       {isMobile ? (

@@ -1,0 +1,295 @@
+import { useSyncExternalStore } from "react";
+import type { Card, SetId } from "@fxdxpz/wudb";
+import { initialSetupStep, type SetupStepId } from "./setupSteps";
+
+type Fighter = {
+  name: string;
+};
+
+type Deck = {
+  id: string;
+  name: string;
+  sets: SetId[];
+  cards: Card[];
+};
+
+type Warband = {
+  id: string;
+  name: string;
+  abbr: string;
+  displayName: string;
+  fighters: Fighter[];
+};
+
+export type RoomPlayer = {
+  deck: Deck;
+  warband: Warband;
+  hand: Card[];
+};
+
+export type AttackFace =
+  | "swords"
+  | "critical"
+  | "surrounded"
+  | "hammer"
+  | "flanked";
+
+export type InitiativeRolls = {
+  host: AttackFace | null;
+  guest: AttackFace | null;
+};
+
+export type BoardSetup = {
+  boardId: number;
+  rotation: 0 | 90 | 180 | 270;
+};
+
+export type Treasure = {
+  id: number;
+  col: number;
+  row: number;
+  faceUp: boolean;
+};
+
+export type Room = {
+  id: string;
+  createdAt: number;
+  host: RoomPlayer;
+  guest: RoomPlayer | null;
+  setupStep: SetupStepId;
+  initiativeRolls: InitiativeRolls;
+  boardSetup: BoardSetup | null;
+  treasures: Treasure[];
+};
+
+const ROOM_PREFIX = "wuclub:room:";
+const INDEX_KEY = "wuclub:rooms-by-host-deck";
+
+const rooms = new Map<string, Room>();
+const hostDeckIndex = new Map<string, string>();
+const listeners = new Map<string, Set<() => void>>();
+
+function notify(roomId: string) {
+  listeners.get(roomId)?.forEach((l) => l());
+}
+
+function subscribe(roomId: string, listener: () => void) {
+  let set = listeners.get(roomId);
+  if (!set) {
+    set = new Set();
+    listeners.set(roomId, set);
+  }
+  set.add(listener);
+  return () => {
+    set!.delete(listener);
+    if (set!.size === 0) listeners.delete(roomId);
+  };
+}
+
+export function useRoom(roomId: string): Room | undefined {
+  return useSyncExternalStore(
+    (listener) => subscribe(roomId, listener),
+    () => getRoom(roomId),
+  );
+}
+
+function roomKey(roomId: string) {
+  return `${ROOM_PREFIX}${roomId}`;
+}
+
+function readRoomFromStorage(roomId: string): Room | undefined {
+  try {
+    const raw = sessionStorage.getItem(roomKey(roomId));
+    if (!raw) return undefined;
+    const parsed = JSON.parse(raw) as Partial<Room> & { id: string };
+    return {
+      ...(parsed as Room),
+      initiativeRolls: parsed.initiativeRolls ?? { host: null, guest: null },
+      boardSetup: parsed.boardSetup ?? null,
+      treasures: parsed.treasures ?? [],
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+function writeRoomToStorage(room: Room) {
+  try {
+    sessionStorage.setItem(roomKey(room.id), JSON.stringify(room));
+  } catch {
+    // sessionStorage may be unavailable (private mode, quota) — in-memory still holds it
+  }
+}
+
+function readIndexFromStorage(): Map<string, string> {
+  try {
+    const raw = sessionStorage.getItem(INDEX_KEY);
+    if (!raw) return new Map();
+    return new Map(Object.entries(JSON.parse(raw) as Record<string, string>));
+  } catch {
+    return new Map();
+  }
+}
+
+function writeIndexToStorage() {
+  try {
+    sessionStorage.setItem(
+      INDEX_KEY,
+      JSON.stringify(Object.fromEntries(hostDeckIndex)),
+    );
+  } catch {
+    // ignore
+  }
+}
+
+function hydrateIndex() {
+  if (hostDeckIndex.size > 0) return;
+  const stored = readIndexFromStorage();
+  stored.forEach((roomId, deckId) => hostDeckIndex.set(deckId, roomId));
+}
+
+function shortId() {
+  return crypto.randomUUID().split("-")[0];
+}
+
+export function findRoomIdByHostDeckId(deckId: string): string | undefined {
+  hydrateIndex();
+  const roomId = hostDeckIndex.get(deckId);
+  if (!roomId) return undefined;
+  // Verify the room still exists — stale index entries shouldn't leak back.
+  const room = getRoom(roomId);
+  if (!room) {
+    hostDeckIndex.delete(deckId);
+    writeIndexToStorage();
+    return undefined;
+  }
+  return roomId;
+}
+
+export function createRoom(host: RoomPlayer): string {
+  hydrateIndex();
+  const existing = hostDeckIndex.get(host.deck.id);
+  if (existing && getRoom(existing)) return existing;
+
+  const id = shortId();
+  const room: Room = {
+    id,
+    createdAt: Date.now(),
+    host,
+    guest: null,
+    setupStep: initialSetupStep(host.warband.id),
+    initiativeRolls: { host: null, guest: null },
+    boardSetup: null,
+    treasures: [],
+  };
+  rooms.set(id, room);
+  writeRoomToStorage(room);
+  hostDeckIndex.set(host.deck.id, id);
+  writeIndexToStorage();
+  return id;
+}
+
+export function getRoom(roomId: string): Room | undefined {
+  const cached = rooms.get(roomId);
+  if (cached) return cached;
+  const restored = readRoomFromStorage(roomId);
+  if (restored) rooms.set(roomId, restored);
+  return restored;
+}
+
+type FactionLike = {
+  id: string;
+  name: string;
+  abbr: string;
+  displayName: string;
+};
+
+export function setInitiativeRolls(roomId: string, rolls: InitiativeRolls) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const next: Room = { ...room, initiativeRolls: rolls };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+export function advanceFromInitiative(roomId: string) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const next: Room = { ...room, setupStep: "territories" };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+export function setBoardSetup(roomId: string, boardSetup: BoardSetup) {
+  const room = getRoom(roomId);
+  if (!room || room.boardSetup) return;
+  const next: Room = { ...room, boardSetup, setupStep: "treasures" };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+const TREASURE_COUNT = 5;
+
+export function placeTreasure(roomId: string, treasure: Treasure) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  if (room.treasures.some((t) => t.id === treasure.id)) return;
+  let treasures: Treasure[] = [...room.treasures, treasure];
+  if (treasures.length === TREASURE_COUNT) {
+    treasures = treasures.map((t) => ({ ...t, faceUp: true }));
+  }
+  const next: Room = { ...room, treasures };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+export function flipTreasure(roomId: string, id: number) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const treasures = room.treasures.map((t) =>
+    t.id === id ? { ...t, faceUp: !t.faceUp } : t,
+  );
+  const next: Room = { ...room, treasures };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+export function setHostHand(roomId: string, hand: Card[]) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const next: Room = {
+    ...room,
+    host: { ...room.host, hand },
+    setupStep: "initiative",
+  };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}
+
+export function setHostWarband(roomId: string, faction: FactionLike) {
+  const room = getRoom(roomId);
+  if (!room) return;
+  const next: Room = {
+    ...room,
+    host: {
+      ...room.host,
+      warband: {
+        id: faction.id,
+        name: faction.name,
+        abbr: faction.abbr,
+        displayName: faction.displayName,
+        fighters: [],
+      },
+    },
+    setupStep: "starting-hand",
+  };
+  rooms.set(roomId, next);
+  writeRoomToStorage(next);
+  notify(roomId);
+}

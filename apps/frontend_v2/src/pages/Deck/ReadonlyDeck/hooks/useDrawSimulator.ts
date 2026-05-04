@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { shuffle } from "@/utils/functions";
 import type { DeckCard } from "../types";
 
 const OBJECTIVE_DRAW = 3;
@@ -9,15 +10,6 @@ export type SimulatorCard = {
   drawn: boolean;
   faceUp: boolean;
 };
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 function buildHand(pool: DeckCard[], count: number): SimulatorCard[] {
   const shuffled = shuffle(pool);
@@ -47,9 +39,20 @@ function mulliganHand(cards: SimulatorCard[], count: number): SimulatorCard[] {
   ];
 }
 
+function extractDrawn(
+  objectives: SimulatorCard[],
+  powers: SimulatorCard[],
+): DeckCard[] {
+  return [
+    ...objectives.filter((c) => c.drawn).map((c) => c.card),
+    ...powers.filter((c) => c.drawn).map((c) => c.card),
+  ];
+}
+
 export function useDrawSimulator(
   objectives: DeckCard[],
   powerCards: DeckCard[],
+  onHandChange?: (hand: DeckCard[]) => void,
 ) {
   const [objectiveCards, setObjectiveCards] = useState<SimulatorCard[]>(() =>
     buildHand(objectives, OBJECTIVE_DRAW),
@@ -59,27 +62,44 @@ export function useDrawSimulator(
   );
   const [mulliganed, setMulliganed] = useState(false);
 
+  // One-time notification of the initial draw. Subsequent changes are
+  // broadcast imperatively from each action below.
+  useEffect(() => {
+    onHandChange?.(extractDrawn(objectiveCards, simPowerCards));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const shuffleAndRedraw = useCallback(() => {
-    setObjectiveCards(buildHand(objectives, OBJECTIVE_DRAW));
-    setSimPowerCards(buildHand(powerCards, POWER_DRAW));
+    const nextObj = buildHand(objectives, OBJECTIVE_DRAW);
+    const nextPow = buildHand(powerCards, POWER_DRAW);
+    setObjectiveCards(nextObj);
+    setSimPowerCards(nextPow);
     setMulliganed(false);
-  }, [objectives, powerCards]);
+    onHandChange?.(extractDrawn(nextObj, nextPow));
+  }, [objectives, powerCards, onHandChange]);
 
   const mulliganObjectives = useCallback(() => {
-    setObjectiveCards((cards) => mulliganHand(cards, OBJECTIVE_DRAW));
+    const nextObj = mulliganHand(objectiveCards, OBJECTIVE_DRAW);
+    setObjectiveCards(nextObj);
     setMulliganed(true);
-  }, []);
+    onHandChange?.(extractDrawn(nextObj, simPowerCards));
+  }, [objectiveCards, simPowerCards, onHandChange]);
 
   const mulliganPowers = useCallback(() => {
-    setSimPowerCards((cards) => mulliganHand(cards, POWER_DRAW));
+    const nextPow = mulliganHand(simPowerCards, POWER_DRAW);
+    setSimPowerCards(nextPow);
     setMulliganed(true);
-  }, []);
+    onHandChange?.(extractDrawn(objectiveCards, nextPow));
+  }, [objectiveCards, simPowerCards, onHandChange]);
 
   const mulliganBoth = useCallback(() => {
-    setObjectiveCards((cards) => mulliganHand(cards, OBJECTIVE_DRAW));
-    setSimPowerCards((cards) => mulliganHand(cards, POWER_DRAW));
+    const nextObj = mulliganHand(objectiveCards, OBJECTIVE_DRAW);
+    const nextPow = mulliganHand(simPowerCards, POWER_DRAW);
+    setObjectiveCards(nextObj);
+    setSimPowerCards(nextPow);
     setMulliganed(true);
-  }, []);
+    onHandChange?.(extractDrawn(nextObj, nextPow));
+  }, [objectiveCards, simPowerCards, onHandChange]);
 
   const toggleCard = useCallback(
     (type: "objective" | "power", cardId: string) => {

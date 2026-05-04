@@ -1,65 +1,47 @@
 // Singleton instance and initialization promise
+type RollItem = {
+  value: string | number;
+  sides?: string | number;
+  [key: string]: unknown;
+};
+type RollGroup = {
+  rolls: RollItem[];
+  [key: string]: unknown;
+};
+
 type DiceBoxInstance = {
   init: () => Promise<void>;
-  clear: () => void;
+  clear: () => DiceBoxInstance;
   show: () => DiceBoxInstance;
   roll: (notation: string) => void;
   hide: () => DiceBoxInstance;
-  onRollComplete: (callback: (results: unknown) => void) => void;
+  onRollComplete: (results: unknown) => void;
 };
 
 let diceInstance: DiceBoxInstance | null = null;
 let initPromise: Promise<DiceBoxInstance> | null = null;
 let isEventListenerAdded = false;
 
-export async function init() {
-  // If already initialized, return the existing instance
-  if (diceInstance) {
-    return {
-      roll: (notation: string) => {
-        if (!diceInstance) return;
-        diceInstance.clear();
-        const diceCount = Math.floor(Math.random() * 4) + 1;
-        diceInstance.show().roll(`${diceCount}d${notation}`);
-      },
-    };
-  }
+async function ensureInitialized(): Promise<DiceBoxInstance> {
+  if (diceInstance) return diceInstance;
+  if (initPromise) return initPromise;
 
-  // If initialization is in progress, wait for it
-  if (initPromise) {
-    await initPromise;
-    return {
-      roll: (notation: string) => {
-        if (!diceInstance) return;
-        diceInstance.clear();
-        const diceCount = Math.floor(Math.random() * 4) + 1;
-        diceInstance.show().roll(`${diceCount}d${notation}`);
-      },
-    };
-  }
-
-  // Start initialization
   initPromise = (async () => {
     const DiceBox = await import("@3d-dice/dice-box");
-    diceInstance = new DiceBox.default(
-      "#dice-box", // target DOM element to inject the canvas for rendering
-      {
-        id: "dice-canvas", // canvas element id
-        assetPath: "/assets/dice-box/",
-        startingHeight: 10,
-        throwForce: 6,
-        spinForce: 6,
-        lightIntensity: 0.9,
-        mass: 1,
-        theme: "underworlds", // default theme
-        scale: 0.4,
-      },
-    ) as DiceBoxInstance;
+    const instance = new DiceBox.default("#dice-box", {
+      id: "dice-canvas",
+      assetPath: "/assets/dice-box/",
+      startingHeight: 10,
+      throwForce: 6,
+      spinForce: 6,
+      lightIntensity: 0.9,
+      mass: 1,
+      theme: "underworlds",
+      scale: 0.4,
+    }) as DiceBoxInstance;
 
-    // Initialize the Dice Box
-    await diceInstance.init();
+    await instance.init();
 
-    // Add event listener only once
     if (!isEventListenerAdded) {
       document.addEventListener("mousedown", () => {
         const diceBoxCanvas = document.getElementById("dice-canvas");
@@ -71,20 +53,39 @@ export async function init() {
       isEventListenerAdded = true;
     }
 
-    diceInstance.onRollComplete = () => {};
-
-    return diceInstance;
+    instance.onRollComplete = () => {};
+    diceInstance = instance;
+    return instance;
   })();
 
-  await initPromise;
+  return initPromise;
+}
 
+export async function init() {
+  await ensureInitialized();
   return {
     roll: (notation: string) => {
       if (!diceInstance) return;
       diceInstance.clear();
-      // trigger the dice roll using the parser
-      const diceCount = Math.floor(Math.random() * 4) + 1; // randomize number of dice
+      const diceCount = Math.floor(Math.random() * 4) + 1;
       diceInstance.show().roll(`${diceCount}d${notation}`);
     },
   };
+}
+
+export async function preload() {
+  await ensureInitialized();
+}
+
+export async function rollOnce(notation: string): Promise<RollItem[]> {
+  const instance = await ensureInitialized();
+  return new Promise<RollItem[]>((resolve) => {
+    instance.onRollComplete = (results: unknown) => {
+      const groups = (results ?? []) as RollGroup[];
+      resolve(groups.flatMap((g) => g.rolls ?? []));
+    };
+    instance.clear();
+    instance.show();
+    instance.roll(notation);
+  });
 }

@@ -14,6 +14,9 @@ interface DeckContextValue {
   createShareableLink: () => void;
   copyInVassalFormat: () => void;
   onDownloadProxy: () => void;
+  canSpawnRoom: boolean;
+  onSpawnRoom: () => void;
+  hasActiveRoom: boolean;
 }
 
 const DeckContext = createContext<DeckContextValue | null>(null);

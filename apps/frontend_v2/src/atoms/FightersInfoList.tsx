@@ -53,12 +53,12 @@ function ZoomedWarscroll({
         <div className="relative z-50 overflow-x-auto max-w-full p-4">
           <picture className="block" style={{ width: "150vw" }}>
             <source
-              srcSet={`/assets/fighters/${factionName}/${factionName}-0.webp`}
+              srcSet={`/assets/fighters/${factionName}/${factionName}-warscroll.webp`}
               type="image/webp"
             />
             <img
               className="w-full"
-              src={`/assets/fighters/${factionName}/${factionName}-0.png`}
+              src={`/assets/fighters/${factionName}/${factionName}-warscroll.png`}
               alt={`${factionName} warscroll`}
             />
           </picture>
@@ -100,11 +100,11 @@ export default function FightersInfoList({
           onClick={isMobile ? () => setZoomed(true) : undefined}
         />
         <div className="flex flex-col lg:grid lg:grid-cols-3">
-          {factionMembers[factionName].map((fighter, index) => (
+          {factionMembers[factionName].map((fighter) => (
             <FlippableFighterCard
               key={fighter}
               faction={factionName}
-              index={index + 1}
+              fighter={fighter}
             />
           ))}
         </div>
@@ -121,10 +121,10 @@ export default function FightersInfoList({
 
 function FlippableFighterCard({
   faction,
-  index,
+  fighter,
 }: {
   faction: string;
-  index: number;
+  fighter: string;
 }) {
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
@@ -145,10 +145,10 @@ function FlippableFighterCard({
         }}
       >
         <source
-          srcSet={`/assets/fighters/${faction}/${faction}-${index}.webp`}
+          srcSet={`/assets/fighters/${faction}/${faction}-${fighter}.webp`}
           type="image/webp"
         />
-        <img src={`/assets/fighters/${faction}/${faction}-${index}.png`} />
+        <img src={`/assets/fighters/${faction}/${faction}-${fighter}.png`} />
       </a.picture>
       <a.picture
         className="w-full rounded-sm sm:w-3/4 row-start-1 col-start-1 sm:mx-auto cursor-pointer hover:shadow-lg"
@@ -158,11 +158,11 @@ function FlippableFighterCard({
         }}
       >
         <source
-          srcSet={`/assets/fighters/${faction}/${faction}-${index}-inspired.webp`}
+          srcSet={`/assets/fighters/${faction}/${faction}-${fighter}-inspired.webp`}
           type="image/webp"
         />
         <img
-          src={`/assets/fighters/${faction}/${faction}-${index}-inspired.png`}
+          src={`/assets/fighters/${faction}/${faction}-${fighter}-inspired.png`}
         />
       </a.picture>
     </div>

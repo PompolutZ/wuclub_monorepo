@@ -106,6 +106,12 @@ function UserMenu() {
       >
         Settings
       </AnimatedLink>
+      <AnimatedLink
+        className="block mr-8 cursor-pointer uppercase font-bold lg:text-xs hover:text-purple-700"
+        to="/tools"
+      >
+        Tools
+      </AnimatedLink>
 
       {isAdmin && (
         <AnimatedLink

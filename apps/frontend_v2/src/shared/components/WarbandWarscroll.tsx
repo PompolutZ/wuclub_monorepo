@@ -18,12 +18,12 @@ export const WarbandWarscroll: React.FC<WarbandWarscrollProps> = ({
       onClick={onClick}
     >
       <source
-        srcSet={`/assets/fighters/${factionName}/${factionName}-0.webp`}
+        srcSet={`/assets/fighters/${factionName}/${factionName}-warscroll.webp`}
         type="image/webp"
       />
       <img
         className="w-full"
-        src={`/assets/fighters/${factionName}/${factionName}-0.png`}
+        src={`/assets/fighters/${factionName}/${factionName}-warscroll.png`}
         alt={`${factionName} warscroll`}
       />
     </picture>

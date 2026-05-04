@@ -81,7 +81,7 @@ const CardProxyMaker = ({
               </h3>
               <img
                 id="proxy warband-card"
-                src={`/assets/fighters/${factionId}/${factionId}-0.png`}
+                src={`/assets/fighters/${factionId}/${factionId}-warscroll.png`}
                 className={`w-1/2 md:w-1/3 aspect-[5.6/4.1] object-cover cursor-pointer filter transition-all duration-150 ${
                   selectedWarbandCard
                     ? "grayscale-0 drop-shadow-lg"
@@ -98,19 +98,19 @@ const CardProxyMaker = ({
               selected={selectedFighters.length}
               total={fighters.length}
             >
-              {fighters.map((fighter: string, index: number) => (
+              {fighters.map((fighter: string) => (
                 <>
                   <img
                     id={`proxy ${fighter}`}
                     key={fighter}
-                    src={`/assets/fighters/${factionId}/${factionId}-${index + 1}.png`}
+                    src={`/assets/fighters/${factionId}/${factionId}-${fighter}.png`}
                     className={cardImgClass(selectedFighters.includes(fighter))}
                     onClick={toggleFighter(fighter)}
                   />
                   <img
                     id={`proxy ${fighter}-inspired`}
                     key={`${fighter}-inspired`}
-                    src={`/assets/fighters/${factionId}/${factionId}-${index + 1}-inspired.png`}
+                    src={`/assets/fighters/${factionId}/${factionId}-${fighter}-inspired.png`}
                     className={cardImgClass(selectedFighters.includes(fighter))}
                     onClick={toggleFighter(fighter)}
                   />
