@@ -1,4 +1,4 @@
-import { App, Stack, StackProps } from "aws-cdk-lib";
+import { App, Duration, Stack, StackProps } from "aws-cdk-lib";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
@@ -31,6 +31,8 @@ class WunderworldsApiLambda extends NodejsFunction {
       functionName: WUNDERWORLDS_API_LAMBDA,
       runtime: Runtime.NODEJS_24_X,
       entry: path.join(__dirname, "../src/lambdas/api.ts"),
+      timeout: Duration.seconds(30),
+      memorySize: 512,
       environment: {
         DATABASE_NAME: dbName!,
         DB_PASSWORD: dbPassword!,

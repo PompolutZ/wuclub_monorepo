@@ -51,13 +51,13 @@ importers:
         specifier: ^24.12.2
         version: 24.12.2
       aws-cdk:
-        specifier: ^2.136.0
+        specifier: 2.1120.0
         version: 2.1120.0
       aws-cdk-lib:
-        specifier: ^2.136.0
+        specifier: 2.252.0
         version: 2.252.0(constructs@10.6.0)
       constructs:
-        specifier: ^10.3.0
+        specifier: 10.6.0
         version: 10.6.0
       dotenv:
         specifier: ^16.0.0
