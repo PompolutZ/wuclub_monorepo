@@ -10,7 +10,6 @@ import type { DragTemplate, TreasureNumber } from "./types";
 const TREASURES: TreasureNumber[] = [1, 2, 3, 4, 5];
 
 type Props = {
-  warbands: Warband[];
   activeWarband: Warband;
   onSelectWarband: (w: Warband) => void;
   onTemplatePointerDown: (
@@ -20,7 +19,6 @@ type Props = {
 };
 
 export const AssetsDrawer = ({
-  warbands,
   activeWarband,
   onSelectWarband,
   onTemplatePointerDown,
@@ -68,11 +66,7 @@ export const AssetsDrawer = ({
       </Section>
 
       <Section title="Warband">
-        <WarbandDropdown
-          warbands={warbands}
-          selected={activeWarband}
-          onSelect={onSelectWarband}
-        />
+        <WarbandDropdown selected={activeWarband} onSelect={onSelectWarband} />
       </Section>
 
       <Section title="Fighter cards">

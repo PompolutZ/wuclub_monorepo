@@ -8,7 +8,6 @@ import {
 import { Grid3x3, Minus, Plus } from "lucide-react";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
 import { DiceRoller } from "@components/DiceRoller";
-import { warbandsValidForOrganisedPlay } from "@fxdxpz/wudb";
 import { FIGHTER_TOKEN_SCALE, FighterToken } from "@components/FighterToken";
 import { TREASURE_TOKEN_SCALE, TreasureToken } from "@components/TreasureToken";
 import type { Warband } from "@components/WarbandPicker";
@@ -21,6 +20,7 @@ import {
 } from "../Room/BoardOverlay";
 import { BoardArea } from "./BoardArea";
 import { AssetsDrawer } from "./AssetsDrawer";
+import { DEFAULT_WARBAND } from "./WarbandDropdown";
 import {
   Canvas,
   STAGE_CENTER_X,
@@ -38,69 +38,6 @@ import type {
   DragTemplate,
   HexCoord,
 } from "./types";
-
-// Warbands whose fighter assets have been migrated to slug-based filenames.
-// Tools restricts the dropdown to these so we don't render broken images for
-// older warbands that still use numeric (`-1.png`, `-2.png`) asset paths.
-const MIGRATED_WARBANDS = new Set([
-  "blackpowders-buccaneers",
-  "blood-of-the-bull",
-  "borgits-beastgrabbaz",
-  "brethren-of-the-bolt",
-  "cyrenis-razors",
-  "da-kunnin-krew",
-  "daggoks-stab-ladz",
-  "elathains-soulraid",
-  "ephilims-pandaemonium",
-  "gnarlspirit-pack",
-  "gorechosen-of-dromm",
-  "grandfathers-gardeners",
-  "grinkraks-looncourt",
-  "hexbanes-hunters",
-  "hrothgorns-mantrappers",
-  "ironsouls-condemners",
-  "jaws-of-itzl",
-  "kainans-reapers",
-  "kamandoras-blades",
-  "khagras-ravagers",
-  "knives-of-the-crone",
-  "kurnoths-heralds",
-  "mollogs-mob",
-  "morgoks-krushas",
-  "myaris-purifiers",
-  "rippas-snarlfangs",
-  "sepulchral-guard",
-  "skittershanks-clawpack",
-  "sons-of-velmorn",
-  "spiteclaws-swarm",
-  "thanateks-tithe",
-  "the-crimson-court",
-  "the-dread-pageant",
-  "the-emberwatch",
-  "the-exiled-dead",
-  "the-farstriders",
-  "the-grymwatch",
-  "the-headsmens-curse",
-  "the-shadeborn",
-  "the-skinnerkin",
-  "the-starblood-stalkers",
-  "the-thricefold-discord",
-  "the-wurmspat",
-  "thorns-of-the-briar-queen",
-  "thundriks-profiteers",
-  "xandires-truthseekers",
-  "yltharis-guardians",
-  "zarbags-gitz",
-  "zikkits-tunnelpack",
-  "zondaras-gravebreakers",
-]);
-
-const PICKABLE_WARBANDS: Warband[] = warbandsValidForOrganisedPlay.filter((w) =>
-  MIGRATED_WARBANDS.has(w.name),
-);
-const DEFAULT_WARBAND =
-  PICKABLE_WARBANDS.find((w) => w.name === "cyrenis-razors") ??
-  PICKABLE_WARBANDS[0];
 
 const CARD_CLAMP_PADDING = 24;
 
@@ -415,7 +352,6 @@ const ToolsPage = () => {
         </Canvas>
         <div className="col-start-2 row-start-1 row-span-2 min-h-0 overflow-hidden">
           <AssetsDrawer
-            warbands={PICKABLE_WARBANDS}
             activeWarband={activeWarband}
             onSelectWarband={setActiveWarband}
             onTemplatePointerDown={handleTemplatePointerDown}

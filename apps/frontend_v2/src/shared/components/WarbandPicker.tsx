@@ -1,12 +1,9 @@
+import {
+  GRAND_ALLIANCE_NAMES,
+  groupWarbandsByGrandAlliance,
+} from "@fxdxpz/wudb";
 import { FactionPicture } from "@components/FactionDeckPicture";
 import SectionTitle from "./SectionTitle";
-
-const GA_LABELS: Record<number, string> = {
-  38: "Order",
-  39: "Chaos",
-  40: "Death",
-  41: "Destruction",
-};
 
 export type Warband = {
   id: string;
@@ -14,19 +11,6 @@ export type Warband = {
   displayName: string;
   gaId?: number;
 };
-
-function groupByGA(warbands: Warband[]) {
-  const groups = new Map<number, Warband[]>();
-  for (const w of warbands) {
-    const gaId = w.gaId ?? 0;
-    if (!groups.has(gaId)) groups.set(gaId, []);
-    groups.get(gaId)!.push(w);
-  }
-  return Array.from(groups.entries()).map(([gaId, factions]) => ({
-    gaId,
-    factions,
-  }));
-}
 
 interface WarbandPickerProps {
   warbands: Warband[];
@@ -41,14 +25,14 @@ export function WarbandPicker({
   onSelect,
   iconSize = "w-10 h-10",
 }: WarbandPickerProps) {
-  const groups = groupByGA(warbands);
+  const groups = groupWarbandsByGrandAlliance(warbands);
 
   return (
     <>
-      {groups.map(({ gaId, factions }) => (
+      {groups.map(({ gaId, warbands: factions }) => (
         <div key={gaId}>
           <SectionTitle
-            title={GA_LABELS[gaId] ?? "Other"}
+            title={GRAND_ALLIANCE_NAMES[gaId] ?? "Other"}
             className="my-4 text-xs"
           />
           <div className="flex flex-wrap gap-1 mt-1">
