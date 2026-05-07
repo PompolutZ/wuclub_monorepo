@@ -2,7 +2,11 @@ import { memo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import GloryIcon from "@icons/wu-glory.svg?react";
 import CloseIcon from "@icons/x.svg?react";
-import { getCardById, validateCardForPlayFormat } from "@fxdxpz/wudb";
+import {
+  getCardById,
+  RIVALS_FORMAT,
+  validateCardForPlayFormat,
+} from "@fxdxpz/wudb";
 import { ModalPresenter } from "../../../../main";
 import CardImage from "../../../../shared/components/CardImage";
 import CardRow from "../../../../shared/components/CardRow";
@@ -37,7 +41,8 @@ const CardInDeck = memo(
     if (!card) return null;
 
     const { id } = card;
-    const isAddDisabled = isNameDuplicate && !inDeck;
+    const isAddDisabled =
+      (isNameDuplicate && !inDeck) || format === RIVALS_FORMAT;
 
     return (
       <>

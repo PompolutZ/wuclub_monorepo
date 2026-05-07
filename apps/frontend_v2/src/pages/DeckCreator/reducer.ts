@@ -2,6 +2,8 @@ import {
   getFactionByName,
   getAllSetsValidForFormat,
   NEMESIS_FORMAT,
+  RIVALS_FORMAT,
+  wucards,
   wufactions,
 } from "@fxdxpz/wudb";
 import type { Card, Set as WuSet } from "@fxdxpz/wudb";
@@ -106,6 +108,39 @@ export const deckBuilderReducer = (
         ...state,
         ...event.payload,
       };
+
+      const enteringRivals =
+        nextState.format === RIVALS_FORMAT && state.format !== RIVALS_FORMAT;
+      const rivalsSetChanged =
+        state.format === RIVALS_FORMAT &&
+        nextState.format === RIVALS_FORMAT &&
+        state.sets[0]?.id !== nextState.sets[0]?.id;
+      const leavingRivals =
+        state.format === RIVALS_FORMAT && nextState.format !== RIVALS_FORMAT;
+
+      if (
+        nextState.format === RIVALS_FORMAT &&
+        nextState.sets[0] &&
+        (enteringRivals || rivalsSetChanged)
+      ) {
+        const setId = nextState.sets[0].id;
+        const cardsInSet = Object.values(wucards).filter(
+          (c) => c.setId === setId && c.factionId === wufactions["u"].id,
+        ) as unknown as Card[];
+        nextState.selectedObjectives = cardsInSet.filter(
+          (c) => c.type === "Objective",
+        );
+        nextState.selectedGambits = cardsInSet.filter(
+          (c) => c.type === "Ploy",
+        );
+        nextState.selectedUpgrades = cardsInSet.filter(
+          (c) => c.type === "Upgrade",
+        );
+      } else if (leavingRivals) {
+        nextState.selectedObjectives = [];
+        nextState.selectedGambits = [];
+        nextState.selectedUpgrades = [];
+      }
 
       exec({
         type: "addKeyToLocalStorage",
