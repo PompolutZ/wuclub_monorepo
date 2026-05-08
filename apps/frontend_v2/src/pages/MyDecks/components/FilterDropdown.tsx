@@ -31,7 +31,7 @@ export const FilterDropdown = ({
 
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button className="inline-flex items-center justify-between w-full lg:w-auto px-4 py-2 text-sm font-medium text-purple-700 bg-white border-2 border-purple-700 rounded-md hover:bg-purple-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 shadow-md">
+      <Menu.Button className="inline-flex items-center justify-center w-32 lg:w-auto px-4 py-2 text-sm font-medium text-purple-700 bg-white border-2 border-purple-700 rounded-md hover:bg-purple-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 shadow-md">
         <Filter className="w-4 h-4 mr-2" />
         <span className="hidden lg:inline">Filter by Sets</span>
         <span className="lg:hidden">Filter</span>
