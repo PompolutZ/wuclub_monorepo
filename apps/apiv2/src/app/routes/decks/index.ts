@@ -72,6 +72,9 @@ export const app = new Hono<{
       }
 
       const result = await updateDeck(deckId, uid, c.req.valid("json"));
+      if (!result) {
+        throw new HTTPException(404, { message: "Deck not found" });
+      }
       return c.json(result);
     },
   )

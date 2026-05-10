@@ -37,7 +37,8 @@ export const useUpdateDeck = () => {
         },
       );
     },
-    onSuccess: () => {
+    onSuccess: (_data, { deckId }) => {
+      queryClient.invalidateQueries({ queryKey: ["deck", deckId] });
       queryClient.invalidateQueries({
         queryKey: [USER_DECKS_KEY, { user: user?.fuid ?? "anon" }],
       });
