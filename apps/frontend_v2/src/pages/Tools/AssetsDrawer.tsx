@@ -10,6 +10,12 @@ import type { DragTemplate, TreasureNumber } from "./types";
 
 const TREASURES: TreasureNumber[] = [1, 2, 3, 4, 5];
 
+// Tokens that exist as models in a warband but have no fighter card
+// (e.g. summoned creatures, companions). Keyed by warband slug.
+const EXTRA_TOKENS: Record<string, readonly string[]> = {
+  "thyrielles-zephyrites": ["tzul"],
+};
+
 type Props = {
   activeWarband: Warband;
   onSelectWarband: (w: Warband) => void;
@@ -118,6 +124,27 @@ export const AssetsDrawer = ({
       <Section title="Fighter tokens">
         <div className="flex flex-wrap gap-2">
           {fighters.map((fighter) => (
+            <DrawerSlot
+              key={fighter}
+              onPointerDown={(e) =>
+                onTemplatePointerDown(e, {
+                  kind: "fighter-token",
+                  warband: activeWarband.name,
+                  fighter,
+                })
+              }
+            >
+              <FighterToken
+                warband={activeWarband.name}
+                fighter={fighter}
+                draggable={false}
+                width={56}
+                height={56}
+                className="select-none"
+              />
+            </DrawerSlot>
+          ))}
+          {EXTRA_TOKENS[activeWarband.name]?.map((fighter) => (
             <DrawerSlot
               key={fighter}
               onPointerDown={(e) =>

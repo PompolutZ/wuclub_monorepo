@@ -203,6 +203,7 @@ export const warbandsValidForOrganisedPlay = [
   factions["toftbq"],
   factions["zg"],
   // grand alliance order
+  factions["tz"],
   factions["hh"],
   factions["mp"],
   factions["tp"],

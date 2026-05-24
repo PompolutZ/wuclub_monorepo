@@ -505,4 +505,11 @@ export const factions = {
     displayName: "Thanateks Tithe",
     gaId: 40,
   },
+  tz: {
+    id: "tz",
+    abbr: "tz",
+    name: "thyrielles-zephyrites",
+    displayName: "Thyrielle's Zephyrites",
+    gaId: 38,
+  },
 } as const;
