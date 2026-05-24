@@ -244,5 +244,5 @@ export const factionMembers = {
     "sekhmor",
     "tukhar",
   ],
-  "thyrielles-zephyrites": ["anara", "orieth", "sikrith", "thyrielle"],
+  "thyrielles-zephyrites": ["anara", "orieth", "sirikith", "thyrielle"],
 } as const;
